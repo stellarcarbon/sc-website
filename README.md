@@ -43,3 +43,10 @@ Two flows:
 - SEO compatibility (i.e. project detail page is indexed)
 - CI/CD push to deploy (GitHub actions?)
 - Hosting TBD: Cloudflare, Digital Ocean, ...
+
+## multirepo setup
+
+https://github.com/stellarcarbon/sc-website
+Development/vercel fork: https://github.com/hlgrondijs/sc-website
+
+https://jeffkreeftmeijer.com/git-multiple-remotes/
