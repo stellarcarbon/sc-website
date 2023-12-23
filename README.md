@@ -60,3 +60,7 @@ Iterate on the look, feel, and static content.
 - page stubs
 - sink form (aka checkout)
 - explainer + audit
+
+## misc
+[SCF project](https://communityfund.stellar.org/project/drafts.recEJspjbO9LaMl3R) (UX designs)
+[Checkout prototype](http://offset-gui.surge.sh/)
