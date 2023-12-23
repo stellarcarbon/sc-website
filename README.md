@@ -51,3 +51,12 @@ https://github.com/stellarcarbon/sc-website
 Development/vercel fork: https://github.com/hlgrondijs/sc-website
 
 https://jeffkreeftmeijer.com/git-multiple-remotes/
+
+## timeline
+Iterate on the look, feel, and static content.
+
+- dev setup
+- wallet connection
+- page stubs
+- sink form (aka checkout)
+- explainer + audit
