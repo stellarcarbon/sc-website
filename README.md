@@ -25,7 +25,7 @@ Needs to work on mobile & desktop devices
 
 - dashboard
     - connect wallet
-    - list retirements
+    - list retirements (Stellar Horizon queries)
         - (phase 2: finalize fractions)
     - sink carbon
 
@@ -40,6 +40,7 @@ Two flows:
 - Next.js?
 - https://creit-tech.github.io/Stellar-Wallets-Kit/ (see https://github.com/stellarcarbon/sc-checkout)
 - https://api-beta.stellarcarbon.io/openapi.json (see https://github.com/stellarcarbon/sc-checkout)
+- [Stellar Horizon](https://developers.stellar.org/api/horizon)
 - SEO compatibility (i.e. project detail page is indexed)
 - CI/CD push to deploy (GitHub actions?)
 - Hosting TBD: Cloudflare, Digital Ocean, ...
