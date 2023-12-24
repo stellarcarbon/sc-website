@@ -15,9 +15,7 @@ export default function WalletPage() {
   const [selectedWalletType, setSelectedWalletType] =
     useState<WalletType | null>(null);
 
-  const connectWallet = async () => {
-    let userWallet = WalletType.ALBEDO;
-
+  const connectWallet = async (userWallet: WalletType) => {
     let kit = new StellarWalletsKit({
       selectedWallet: userWallet,
       network: WalletNetwork.PUBLIC,
@@ -64,7 +62,9 @@ export default function WalletPage() {
           {selectedWalletType !== null ? (
             <div className={`flex flex-col items-center gap-4 mt-16 w-80`}>
               <b>{`${selectedWalletType} selected.`}</b>
-              <Button onClick={connectWallet}>Connect</Button>
+              <Button onClick={() => connectWallet(selectedWalletType)}>
+                Connect
+              </Button>
             </div>
           ) : (
             <div></div>
