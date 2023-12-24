@@ -3,6 +3,8 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import type { PropsWithChildren } from "react";
 
+// A global app context used to store & read state everywhere.
+
 type AppContext = {
   walletId?: string;
   setWalletId: React.Dispatch<React.SetStateAction<string | undefined>>;
