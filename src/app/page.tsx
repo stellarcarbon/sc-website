@@ -3,7 +3,7 @@ export default function Home() {
     // <main className="flex flex-col min-h-screen items-center justify-start ">
     <div className="flex flex-col items-center min-h-screen">
       <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full min-h-[1200px] top-0 left-0 z-0 block absolute" />
-      <div className="z-10 relative mt-[10vh] text-white text-center max-w-[75%]">
+      <div className="z-10 relative mt-[10vh] text-white text-center max-w-[75%] min-h-[1200px]">
         <h1>
           <span className="text-7xl font-noto">Sinking CARBON</span>
           <br />
