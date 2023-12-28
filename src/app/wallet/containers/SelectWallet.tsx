@@ -58,7 +58,10 @@ export default function SelectWallet() {
           disabled={selectedWalletType === null || !tncAccepted}
           onClick={() => {
             connectWallet(selectedWalletType!);
+
+            // TODO: move this form-reset to after completing the pop-up
             setSelectedWalletType(null);
+            setTncAccepted(false);
           }}
         >
           Connect

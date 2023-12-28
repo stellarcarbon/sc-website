@@ -12,7 +12,6 @@ import {
 
 type AppContext = {
   stellarPubKey?: string;
-  wallet?: StellarWalletsKit;
   connectionError: string | null;
   connectWallet: (walletType: WalletType) => void;
   disconnectWallet: () => void;
@@ -30,45 +29,59 @@ export const useAppContext = () => {
 
 export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [stellarPubKey, setStellarPubKey] = useState<string | undefined>();
-  const [wallet, setWallet] = useState<StellarWalletsKit | undefined>();
   const [connectionError, setConnectionError] = useState<string | null>(null);
 
   const connectWallet = async (userWalletType: WalletType) => {
     setConnectionError(null);
-    let kit = new StellarWalletsKit({
-      selectedWallet: userWalletType,
-      network: WalletNetwork.PUBLIC,
-    });
 
-    let stellarPubKey = await kit.getPublicKey().catch((error) => {
+    try {
+      const pubKey = await window.walletDialog(userWalletType);
+      setStellarPubKey(pubKey);
+    } catch (error) {
       setConnectionError(
         "Something went wrong connecting your wallet. Try again."
       );
-      return "";
-    });
-
-    if (stellarPubKey === "") return;
-
-    setStellarPubKey(stellarPubKey);
-    setWallet(kit);
+    }
   };
 
   const disconnectWallet = () => {
     setStellarPubKey(undefined);
-    setWallet(undefined);
   };
 
   const providerValue = useMemo(() => {
     return {
       stellarPubKey,
-      wallet,
       connectionError,
       connectWallet,
       disconnectWallet,
     };
-  }, [stellarPubKey, wallet, connectionError]);
+  }, [stellarPubKey, connectionError]);
 
   return (
     <AppContext.Provider value={providerValue}>{children}</AppContext.Provider>
   );
 };
+
+// Attach the walletDialog function to the window so we can mock it during test.
+declare global {
+  interface Window {
+    walletDialog: (userWalletType: WalletType) => Promise<string>;
+  }
+}
+
+export const walletDialog = async (
+  userWalletType: WalletType
+): Promise<string> => {
+  let kit = new StellarWalletsKit({
+    selectedWallet: userWalletType,
+    network: WalletNetwork.PUBLIC,
+  });
+
+  let stellarPubKey = await kit.getPublicKey(); // will throw on error
+
+  return stellarPubKey;
+};
+
+if (typeof window !== "undefined") {
+  (window as any).walletDialog = walletDialog;
+}

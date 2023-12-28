@@ -20,6 +20,7 @@ export default function SelectWalletButton({
 
   return (
     <img
+      id={`${walletType}_SelectWalletButton`}
       onClick={onClick}
       className={`h-20 rounded-full p-3 hover:border hover:border-black cursor-pointer ${
         isSelected ? "bg-slate-400 border border-black" : "bg-white"
