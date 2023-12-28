@@ -1,12 +1,36 @@
-import Link from "next/link";
-
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start p-8">
-      Home
-      <Link className="underline" href="/wallet">
-        Wallet Page
-      </Link>
-    </main>
+    // <main className="flex flex-col min-h-screen items-center justify-start ">
+    <div className="flex flex-col items-center min-h-screen">
+      <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full min-h-[1200px] top-0 left-0 z-0 block absolute" />
+      <div className="z-10 relative mt-60 text-white text-center max-w-[75%]">
+        <h1>
+          <span className="text-9xl font-noto">Sinking CARBON</span>
+          <br />
+          <span className="text-9xl font-noto">with Stellar</span>
+        </h1>
+        <h2 className="mt-20 uppercase text-2xl tracking-[.4em] font-bold">
+          Under development
+        </h2>
+        <h2 className="mt-20 uppercase text-2xl tracking-[.4em] font-bold">
+          Stellar Offsets
+        </h2>
+        <p className="m-6 leading-8">
+          We provide a simple way to make voluntary, negative emissions
+          contributions,
+          <br /> via high integrity nature based projects on the blockchain.
+        </p>
+        <p className="m-6 leading-8">
+          Each CARBON token represents 1 tonne of carbon dioxide-equivalent
+          emissions that have
+          <br /> been reduced, avoided, or sequestered by a verified carbon
+          offset project, and which will not
+          <br /> be released into the atmosphere.
+        </p>
+      </div>
+      <div className="h-[800px] text-black pt-80"> Other stuff</div>
+    </div>
+
+    // </main>
   );
 }
