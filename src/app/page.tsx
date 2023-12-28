@@ -3,16 +3,16 @@ export default function Home() {
     // <main className="flex flex-col min-h-screen items-center justify-start ">
     <div className="flex flex-col items-center min-h-screen">
       <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full min-h-[1200px] top-0 left-0 z-0 block absolute" />
-      <div className="z-10 relative mt-60 text-white text-center max-w-[75%]">
+      <div className="z-10 relative mt-[10vh] text-white text-center max-w-[75%]">
         <h1>
-          <span className="text-9xl font-noto">Sinking CARBON</span>
+          <span className="text-7xl font-noto">Sinking CARBON</span>
           <br />
-          <span className="text-9xl font-noto">with Stellar</span>
+          <span className="text-7xl font-noto">with Stellar</span>
         </h1>
-        <h2 className="mt-20 uppercase text-2xl tracking-[.4em] font-bold">
+        <h2 className="mt-[5vh] uppercase text-2xl tracking-[.4em] font-bold">
           Under development
         </h2>
-        <h2 className="mt-20 uppercase text-2xl tracking-[.4em] font-bold">
+        <h2 className="mt-[5vh] uppercase text-2xl tracking-[.4em] font-bold">
           Stellar Offsets
         </h2>
         <p className="m-6 leading-8">
