@@ -70,7 +70,9 @@ export default function SelectWallet() {
 
       <div className="flex flex-col items-center text-center gap-4 mt-16 w-80">
         {connectionError && (
-          <span className="text-red-500">{connectionError}</span>
+          <span id="SelectWalletError" className="text-red-500">
+            {connectionError}
+          </span>
         )}
       </div>
     </div>
