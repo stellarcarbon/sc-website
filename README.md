@@ -14,6 +14,7 @@ Staging: https://sc-website-eosin.vercel.app/
   - terms of use
   - call to action!
   - social links
+  - about us
 
 - explainer + audit
 
@@ -67,10 +68,22 @@ Iterate on the look, feel, and static content.
 - dev setup
 - wallet connection
 - page stubs
+  - Explainer/Audit (op homepage)
+  - Hamburger (indented in [], alleen op mobile): Home [Project list (staat op homepage, naartoe scrollen), Explainer/Audit], Dashboard, About us
+  - Footer: PP & ToU, Contact gegevens, Social links
 - sink form (aka checkout)
 - explainer + audit
+- finally: make the UX good
 
 ## misc
 
 [SCF project](https://communityfund.stellar.org/project/drafts.recEJspjbO9LaMl3R) (UX designs)
 [Checkout prototype](http://offset-gui.surge.sh/)
+
+## ideeen
+
+- Share my retirements link
+
+  - Shared retirements list lijkt op de lijst op dashboard, maar "read only".
+
+- Retirements list item knopje: "doe deze transactie nog een keer".
