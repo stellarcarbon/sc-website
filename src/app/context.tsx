@@ -1,8 +1,9 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { PropsWithChildren } from "react";
 import {
+  ISupportedWallet,
   StellarWalletsKit,
   WalletNetwork,
   WalletType,
@@ -13,6 +14,8 @@ import {
 type AppContext = {
   stellarPubKey?: string;
   connectionError: string | null;
+  supportedWallets: ISupportedWallet[];
+  isWalletConnected: boolean;
   connectWallet: (walletType: WalletType) => void;
   disconnectWallet: () => void;
 };
@@ -30,6 +33,21 @@ export const useAppContext = () => {
 export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [stellarPubKey, setStellarPubKey] = useState<string | undefined>();
   const [connectionError, setConnectionError] = useState<string | null>(null);
+  const [supportedWallets, setSupportedWallets] = useState<ISupportedWallet[]>(
+    []
+  );
+  const [isWalletConnected, setIsWalletConnected] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Load supported wallets
+    const loadAvailableWallets = async () => {
+      const wallets = await StellarWalletsKit.getSupportedWallets();
+      setSupportedWallets(wallets);
+    };
+    loadAvailableWallets();
+
+    // Load local storage if available
+  }, []);
 
   const connectWallet = async (userWalletType: WalletType) => {
     setConnectionError(null);
@@ -38,6 +56,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       const pubKey = await window.walletDialog(userWalletType);
       setStellarPubKey(pubKey);
     } catch (error) {
+      console.log(error);
       setConnectionError(
         "Something went wrong connecting your wallet. Try again."
       );
@@ -52,10 +71,12 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     return {
       stellarPubKey,
       connectionError,
+      supportedWallets,
+      isWalletConnected,
       connectWallet,
       disconnectWallet,
     };
-  }, [stellarPubKey, connectionError]);
+  }, [stellarPubKey, connectionError, supportedWallets]);
 
   return (
     <AppContext.Provider value={providerValue}>{children}</AppContext.Provider>

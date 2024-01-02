@@ -7,7 +7,7 @@ import { useState } from "react";
 import Button from "../components/Button";
 
 export default function SelectWallet() {
-  const { connectWallet, connectionError } = useAppContext();
+  const { connectWallet, connectionError, supportedWallets } = useAppContext();
   const [selectedWalletType, setSelectedWalletType] =
     useState<WalletType | null>(null);
   const [tncAccepted, setTncAccepted] = useState<boolean>(false);
@@ -28,18 +28,22 @@ export default function SelectWallet() {
         ) : (
           <p>Choose a wallet</p>
         )}
-        <div className="flex justify-center gap-8 mt-4">
-          <SelectWalletButton
-            walletType={WalletType.ALBEDO}
-            isSelected={selectedWalletType === WalletType.ALBEDO}
-            onClick={() => selectWallet(WalletType.ALBEDO)}
-          />
-          <SelectWalletButton
-            walletType={WalletType.XBULL}
-            isSelected={selectedWalletType === WalletType.XBULL}
-            onClick={() => selectWallet(WalletType.XBULL)}
-          />
-        </div>
+        {supportedWallets.length > 0 ? (
+          <div className="flex justify-center gap-8 mt-4">
+            {supportedWallets.map((supportedWallet) => {
+              return (
+                <SelectWalletButton
+                  key={`selectWalletButton_${supportedWallet.type}`}
+                  wallet={supportedWallet}
+                  isSelected={selectedWalletType === supportedWallet.type}
+                  onClick={() => selectWallet(supportedWallet.type)}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
         <div className="mt-4 gap-2">
           <input
             type="checkbox"

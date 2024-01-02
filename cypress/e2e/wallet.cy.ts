@@ -3,6 +3,9 @@ describe("Connect & disconnect a wallet.", () => {
     cy.visit("/wallet");
     cy.get("h1").contains("Wallet Kit Page");
 
+    // Wallet list should load within 5000ms
+    cy.get("#ALBEDO_SelectWalletButton", { timeout: 5000 });
+
     cy.get("#ALBEDO_SelectWalletButton").click();
     cy.get("#checkbox_policy").click();
 
@@ -26,6 +29,7 @@ describe("Connect & disconnect a wallet.", () => {
     cy.get("#checkbox_policy").should("not.be.checked");
     cy.get("button").should("be.disabled");
   });
+
   it("Resets the form and displays an error if the wallet kit part fails", () => {
     cy.visit("/wallet");
 
