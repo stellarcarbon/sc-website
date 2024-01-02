@@ -7,12 +7,14 @@ export default function PersonalDetailsDisplay() {
   }
 
   return (
-    <div>
-      {!walletConnection.isAnonymous && (
+    <div className="mb-8 font-bold">
+      {!walletConnection.isAnonymous ? (
         <>
           <p>Username: {walletConnection.personalDetails?.username}</p>
           <p>Email: {walletConnection.personalDetails?.useremail}</p>
         </>
+      ) : (
+        <p>Anonymous connection</p>
       )}
     </div>
   );

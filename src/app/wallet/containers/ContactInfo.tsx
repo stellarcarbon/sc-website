@@ -58,7 +58,7 @@ export default function ContactInfo() {
         <input
           className="w-full"
           type="text"
-          defaultValue="test_useremail@stellarcarbon"
+          defaultValue="test_useremail@stellarcarbon.io"
           {...register("useremail", {
             required: "Email address is required",
             pattern: {
