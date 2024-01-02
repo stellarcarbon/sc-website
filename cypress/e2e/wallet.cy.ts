@@ -1,10 +1,12 @@
-describe("Connect & disconnect a wallet.", () => {
-  it("Happy flow", () => {
-    cy.visit("/wallet");
-    cy.get("h1").contains("Wallet Kit Page");
+import { WalletConnection } from "../../src/app/context";
 
-    // Wallet list should load within 5000ms
-    cy.get("#ALBEDO_SelectWalletButton", { timeout: 5000 });
+describe("Connect & disconnect a wallet.", () => {
+  it("Happy flow new user", () => {
+    cy.visit("/wallet");
+    // Wallet page should load within 5000ms
+    cy.get("h1", { timeout: 5000 });
+
+    cy.get("h1").contains("Wallet Kit Page");
 
     cy.get("#ALBEDO_SelectWalletButton").click();
     cy.get("#checkbox_policy").click();
@@ -12,7 +14,10 @@ describe("Connect & disconnect a wallet.", () => {
     // Mock the stellar wallet kit part
     cy.window().then((win) =>
       cy.stub(win, "walletDialog").callsFake(() => {
-        return "1234";
+        return {
+          stellarPubKey: "1234",
+          walletType: "ALBEDO",
+        } as WalletConnection;
       })
     );
 
@@ -30,8 +35,37 @@ describe("Connect & disconnect a wallet.", () => {
     cy.get("button").should("be.disabled");
   });
 
-  it("Resets the form and displays an error if the wallet kit part fails", () => {
+  it("Happy flow existing user", () => {
+    // Prepare localstorage
+    cy.window().then((win) => {
+      win.localStorage.setItem(
+        "wallet",
+        JSON.stringify({
+          stellarPubKey: "6666",
+          walletType: "ALBEDO",
+        } as WalletConnection)
+      );
+    });
+
+    // Test
     cy.visit("/wallet");
+    cy.get("h1", { timeout: 5000 });
+
+    cy.get("#stellarPubKey").contains("6666");
+    cy.get("button")
+      .contains("Disconnect & choose another STELLAR account")
+      .click();
+
+    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-white");
+
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem("wallet")).to.be.null;
+    });
+  });
+
+  it("Resets the form and displays an error if connecting new wallet fails", () => {
+    cy.visit("/wallet");
+    cy.get("h1", { timeout: 5000 });
 
     cy.get("#ALBEDO_SelectWalletButton").click();
     cy.get("#checkbox_policy").click();

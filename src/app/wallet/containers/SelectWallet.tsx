@@ -28,22 +28,20 @@ export default function SelectWallet() {
         ) : (
           <p>Choose a wallet</p>
         )}
-        {supportedWallets.length > 0 ? (
-          <div className="flex justify-center gap-8 mt-4">
-            {supportedWallets.map((supportedWallet) => {
-              return (
-                <SelectWalletButton
-                  key={`selectWalletButton_${supportedWallet.type}`}
-                  wallet={supportedWallet}
-                  isSelected={selectedWalletType === supportedWallet.type}
-                  onClick={() => selectWallet(supportedWallet.type)}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div>Loading...</div>
-        )}
+
+        <div className="flex justify-center gap-8 mt-4">
+          {supportedWallets.map((supportedWallet) => {
+            return (
+              <SelectWalletButton
+                key={`selectWalletButton_${supportedWallet.type}`}
+                wallet={supportedWallet}
+                isSelected={selectedWalletType === supportedWallet.type}
+                onClick={() => selectWallet(supportedWallet.type)}
+              />
+            );
+          })}
+        </div>
+
         <div className="mt-4 gap-2">
           <input
             type="checkbox"

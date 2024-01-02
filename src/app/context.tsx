@@ -10,12 +10,17 @@ import {
 } from "stellar-wallets-kit";
 
 // A global app context used to store & read state everywhere.
+export type WalletConnection = {
+  stellarPubKey: string;
+  walletType: WalletType;
+  name?: string;
+  email?: string;
+};
 
 type AppContext = {
-  stellarPubKey?: string;
   connectionError: string | null;
   supportedWallets: ISupportedWallet[];
-  isWalletConnected: boolean;
+  walletConnection: WalletConnection | null;
   connectWallet: (walletType: WalletType) => void;
   disconnectWallet: () => void;
 };
@@ -31,30 +36,36 @@ export const useAppContext = () => {
 };
 
 export const AppContextProvider = ({ children }: PropsWithChildren) => {
-  const [stellarPubKey, setStellarPubKey] = useState<string | undefined>();
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const [supportedWallets, setSupportedWallets] = useState<ISupportedWallet[]>(
     []
   );
-  const [isWalletConnected, setIsWalletConnected] = useState<boolean>(false);
+  const [walletConnection, setWalletConnection] =
+    useState<WalletConnection | null>(null);
 
   useEffect(() => {
+    // Load local storage if available
+    const storedWalletConnectionJSONString = localStorage.getItem("wallet");
+    if (storedWalletConnectionJSONString) {
+      const wc: WalletConnection = JSON.parse(storedWalletConnectionJSONString);
+      setWalletConnection(wc);
+    }
+
     // Load supported wallets
     const loadAvailableWallets = async () => {
       const wallets = await StellarWalletsKit.getSupportedWallets();
       setSupportedWallets(wallets);
     };
     loadAvailableWallets();
-
-    // Load local storage if available
   }, []);
 
   const connectWallet = async (userWalletType: WalletType) => {
     setConnectionError(null);
 
     try {
-      const pubKey = await window.walletDialog(userWalletType);
-      setStellarPubKey(pubKey);
+      const walletConnection = await window.walletDialog(userWalletType);
+      localStorage.setItem("wallet", JSON.stringify(walletConnection));
+      setWalletConnection(walletConnection);
     } catch (error) {
       console.log(error);
       setConnectionError(
@@ -64,19 +75,20 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   const disconnectWallet = () => {
-    setStellarPubKey(undefined);
+    localStorage.removeItem("wallet");
+    setWalletConnection(null);
+    console.log("removed wallet item");
   };
 
   const providerValue = useMemo(() => {
     return {
-      stellarPubKey,
       connectionError,
       supportedWallets,
-      isWalletConnected,
+      walletConnection,
       connectWallet,
       disconnectWallet,
     };
-  }, [stellarPubKey, connectionError, supportedWallets]);
+  }, [connectionError, supportedWallets, walletConnection]);
 
   return (
     <AppContext.Provider value={providerValue}>{children}</AppContext.Provider>
@@ -86,13 +98,13 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 // Attach the walletDialog function to the window so we can mock it during test.
 declare global {
   interface Window {
-    walletDialog: (userWalletType: WalletType) => Promise<string>;
+    walletDialog: (userWalletType: WalletType) => Promise<WalletConnection>;
   }
 }
 
 export const walletDialog = async (
   userWalletType: WalletType
-): Promise<string> => {
+): Promise<WalletConnection> => {
   let kit = new StellarWalletsKit({
     selectedWallet: userWalletType,
     network: WalletNetwork.PUBLIC,
@@ -100,7 +112,10 @@ export const walletDialog = async (
 
   let stellarPubKey = await kit.getPublicKey(); // will throw on error
 
-  return stellarPubKey;
+  return {
+    stellarPubKey,
+    walletType: userWalletType,
+  };
 };
 
 if (typeof window !== "undefined") {
