@@ -29,7 +29,7 @@ export default function SelectWallet() {
           <p>Choose a wallet</p>
         )}
 
-        <div className="flex justify-center gap-8 mt-4">
+        <div className="flex flex-wrap justify-center gap-8 mt-4">
           {supportedWallets.map((supportedWallet) => {
             return (
               <SelectWalletButton
