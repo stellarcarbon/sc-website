@@ -9,12 +9,17 @@ import {
   WalletType,
 } from "stellar-wallets-kit";
 
-// A global app context used to store & read state everywhere.
+// A global app context used to write & read state everywhere.
 export type WalletConnection = {
   stellarPubKey: string;
   walletType: WalletType;
-  name?: string;
-  email?: string;
+  personalDetails?: PersonalDetails;
+  isAnonymous: boolean;
+};
+
+export type PersonalDetails = {
+  username: string;
+  useremail: string;
 };
 
 type AppContext = {
@@ -23,6 +28,8 @@ type AppContext = {
   walletConnection: WalletConnection | null;
   connectWallet: (walletType: WalletType) => void;
   disconnectWallet: () => void;
+  setAnonymous: () => void;
+  setPersonalDetails: (personalDetails: PersonalDetails) => void;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -80,6 +87,29 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     console.log("removed wallet item");
   };
 
+  const setAnonymous = () => {
+    console.log("set as anonymouss");
+    const updatedWalletConnection = {
+      ...walletConnection,
+      isAnonymous: true,
+      personalDetails: undefined,
+    } as WalletConnection;
+
+    localStorage.setItem("wallet", JSON.stringify(updatedWalletConnection));
+    setWalletConnection(updatedWalletConnection);
+  };
+
+  const setPersonalDetails = (personalDetails: PersonalDetails) => {
+    console.log("set personal details");
+    const updatedWalletConnection = {
+      ...walletConnection,
+      isAnonymous: false,
+      personalDetails,
+    } as WalletConnection;
+    localStorage.setItem("wallet", JSON.stringify(updatedWalletConnection));
+    setWalletConnection(updatedWalletConnection);
+  };
+
   const providerValue = useMemo(() => {
     return {
       connectionError,
@@ -87,6 +117,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       walletConnection,
       connectWallet,
       disconnectWallet,
+      setAnonymous,
+      setPersonalDetails,
     };
   }, [connectionError, supportedWallets, walletConnection]);
 
@@ -115,6 +147,7 @@ export const walletDialog = async (
   return {
     stellarPubKey,
     walletType: userWalletType,
+    isAnonymous: false,
   };
 };
 

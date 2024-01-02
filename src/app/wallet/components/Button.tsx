@@ -13,6 +13,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
+      type="button"
       disabled={disabled}
       onClick={onClick}
       className={`rounded-lg border border-white px-5 py-4  ${

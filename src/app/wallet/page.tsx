@@ -2,6 +2,10 @@
 import { useAppContext } from "../context";
 import Button from "@/app/wallet/components/Button";
 import SelectWallet from "./containers/SelectWallet";
+import ContactInfo from "./containers/ContactInfo";
+import PubKeyDisplay from "./components/PubKeyDisplay";
+import DisconnectWalletButton from "./components/DisconnectWalletButton";
+import PersonalDetailsDisplay from "./components/PersonalDetailsDisplay";
 
 export default function WalletPage() {
   const { walletConnection, supportedWallets, disconnectWallet } =
@@ -9,28 +13,20 @@ export default function WalletPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-8">
-      {supportedWallets.length > 0 ? (
-        <>
-          <h1 className="text-2xl">Wallet Kit Page</h1>
-          <div id="content">
-            {!walletConnection?.stellarPubKey ? (
-              <SelectWallet />
-            ) : (
-              <div className="flex flex-col justify-start items-center w-full flex-1 mt-8">
-                <p>Connected with Stellar PubKey:</p>
-                <span
-                  id="stellarPubKey"
-                  className="text-2xl break-all mt-4 mb-12"
-                >
-                  {walletConnection!.stellarPubKey}
-                </span>
-                <Button onClick={disconnectWallet}>
-                  Disconnect & choose another STELLAR account
-                </Button>
-              </div>
-            )}
-          </div>
-        </>
+      <h1 className="text-2xl">Wallet Page</h1>
+      {walletConnection ? (
+        walletConnection.isAnonymous || walletConnection.personalDetails ? (
+          <>
+            <p>Wallet setup succesful!</p>
+            <PubKeyDisplay />
+            <PersonalDetailsDisplay />
+            <DisconnectWalletButton />
+          </>
+        ) : (
+          <ContactInfo />
+        )
+      ) : supportedWallets.length > 0 ? (
+        <SelectWallet />
       ) : (
         <div>Loading...</div>
       )}

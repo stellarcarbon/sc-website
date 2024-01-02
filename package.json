@@ -11,10 +11,12 @@
     "e2e:headless": "next build && start-server-and-test start http://localhost:3000 \"cypress run --e2e\""
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "google-fonts-plugin": "^5.0.2",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.49.2",
     "stellar-wallets-kit": "github:Creit-Tech/Stellar-Wallets-Kit"
   },
   "devDependencies": {

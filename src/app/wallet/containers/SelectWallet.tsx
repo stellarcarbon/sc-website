@@ -21,7 +21,7 @@ export default function SelectWallet() {
   };
 
   return (
-    <div className="flex flex-col justify-start items-center w-full flex-1 mt-8">
+    <>
       <div className="flex flex-col items-center">
         {selectedWalletType ? (
           <b>{`${selectedWalletType}`}</b>
@@ -77,6 +77,6 @@ export default function SelectWallet() {
           </span>
         )}
       </div>
-    </div>
+    </>
   );
 }
