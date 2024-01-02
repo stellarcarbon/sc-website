@@ -1,15 +1,12 @@
-import { ReactNode } from "react";
+import { HTMLProps, ReactNode } from "react";
 
-type ButtonProps = {
-  onClick: () => void;
-  disabled?: boolean;
-  children: ReactNode;
-};
+interface ButtonProps extends HTMLProps<HTMLButtonElement> {}
 
 export default function Button({
   onClick,
   disabled = false,
   children,
+  className,
 }: ButtonProps) {
   return (
     <button
@@ -20,7 +17,7 @@ export default function Button({
         disabled
           ? "bg-transparent text-gray-500"
           : "  bg-white text-black transition-colors hover:border-gray-300 hover:bg-transparent hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-      }`}
+      } + ${className}`}
     >
       {children}
     </button>
