@@ -1,0 +1,57 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+import AirTravelIcon from "../icons/AirTravelIcon";
+import EnvironmentIcon from "../icons/EnvironmentIcon";
+import HouseholdIcon from "../icons/HouseholdIcon";
+import RoadTravelIcon from "../icons/RoadTravelIcon";
+import { CheckoutFormData, ReasonOptions } from "../page";
+import SelectReasonButton from "./SelectReasonButton";
+
+interface ReasonSelectProps {
+  setValue: (name: keyof CheckoutFormData, value: any) => void;
+  watch: (name: string) => string;
+}
+
+export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
+  const reason = watch("reason");
+
+  const selectReason = (selectedReason: ReasonOptions) => {
+    if (selectedReason === reason) {
+      setValue("reason", null);
+    } else {
+      setValue("reason", selectedReason);
+    }
+  };
+
+  return (
+    <div className="flex flex-col p-4">
+      <span className="font-bold mb-2">Select a reason</span>
+      <div className="flex gap-2">
+        <SelectReasonButton
+          isSelected={reason === ReasonOptions.ENVIRONMENT}
+          onClick={() => selectReason(ReasonOptions.ENVIRONMENT)}
+        >
+          <EnvironmentIcon />
+        </SelectReasonButton>
+        <SelectReasonButton
+          isSelected={reason === ReasonOptions.HOUSEHOLD}
+          onClick={() => selectReason(ReasonOptions.HOUSEHOLD)}
+        >
+          <HouseholdIcon />
+        </SelectReasonButton>
+        <SelectReasonButton
+          isSelected={reason === ReasonOptions.AIRTRAVEL}
+          onClick={() => selectReason(ReasonOptions.AIRTRAVEL)}
+        >
+          <AirTravelIcon />
+        </SelectReasonButton>
+        <SelectReasonButton
+          isSelected={reason === ReasonOptions.ROADTRAVEL}
+          onClick={() => selectReason(ReasonOptions.ROADTRAVEL)}
+        >
+          <RoadTravelIcon />
+        </SelectReasonButton>
+      </div>
+      <span className="text-xs mt-2">Selected reason: {reason}</span>
+    </div>
+  );
+}
