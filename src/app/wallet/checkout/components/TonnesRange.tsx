@@ -1,5 +1,5 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import { CheckoutFormData } from "../page";
+import { CheckoutFormData } from "../types";
 
 interface TonnesRangeProps {
   register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;

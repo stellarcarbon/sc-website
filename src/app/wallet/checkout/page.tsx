@@ -5,24 +5,7 @@ import TonnesRange from "./components/TonnesRange";
 import Button from "../components/Button";
 import CurrencySelect from "./components/CurrencySelect";
 import ReasonSelect from "./components/ReasonSelect";
-
-export interface CheckoutFormData {
-  tonnes: number;
-  currency: CurrencyOptions;
-  reason: ReasonOptions;
-}
-
-export enum CurrencyOptions {
-  XLM = "XLM",
-  USDC = "USDC",
-}
-
-export enum ReasonOptions {
-  ENVIRONMENT = "ENVIRONMENT",
-  HOUSEHOLD = "HOUSEHOLD",
-  AIRTRAVEL = "AIRTRAVEL",
-  ROADTRAVEL = "ROADTRAVEL",
-}
+import { CheckoutFormData } from "./types";
 
 export default function Checkout() {
   const { register, handleSubmit, watch, setValue } =

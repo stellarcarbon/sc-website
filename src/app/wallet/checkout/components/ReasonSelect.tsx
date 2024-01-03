@@ -3,7 +3,7 @@ import AirTravelIcon from "../icons/AirTravelIcon";
 import EnvironmentIcon from "../icons/EnvironmentIcon";
 import HouseholdIcon from "../icons/HouseholdIcon";
 import RoadTravelIcon from "../icons/RoadTravelIcon";
-import { CheckoutFormData, ReasonOptions } from "../page";
+import { CheckoutFormData, ReasonOptions } from "../types";
 import SelectReasonButton from "./SelectReasonButton";
 
 interface ReasonSelectProps {
