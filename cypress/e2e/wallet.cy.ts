@@ -1,4 +1,15 @@
+import { WalletType } from "stellar-wallets-kit";
 import { WalletConnection } from "../../src/app/context";
+
+// declare global {
+//   namespace Cypress {
+//     interface Chainable {
+//       fetchDataStub: () => Chainable<Promise<any>>;
+//     }
+//   }
+// }
+
+// Cypress.Commands.add("fetchDataStub", () => {});
 
 // Helper function to select & (mock-)connect wallet.
 const connectWallet = () => {
@@ -30,6 +41,8 @@ describe("New user", () => {
   });
 
   it("Can connect wallet.", () => {
+    cy.visit("/wallet");
+
     connectWallet();
 
     cy.get("main").contains("Connected with Stellar PubKey:");

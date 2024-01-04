@@ -26,30 +26,15 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
     <div className="flex flex-col p-4">
       <span className="font-bold mb-2">Select a reason</span>
       <div className="flex gap-2">
-        <SelectReasonButton
-          isSelected={reason === ReasonOptions.ENVIRONMENT}
-          onClick={() => selectReason(ReasonOptions.ENVIRONMENT)}
-        >
-          <EnvironmentIcon />
-        </SelectReasonButton>
-        <SelectReasonButton
-          isSelected={reason === ReasonOptions.HOUSEHOLD}
-          onClick={() => selectReason(ReasonOptions.HOUSEHOLD)}
-        >
-          <HouseholdIcon />
-        </SelectReasonButton>
-        <SelectReasonButton
-          isSelected={reason === ReasonOptions.AIRTRAVEL}
-          onClick={() => selectReason(ReasonOptions.AIRTRAVEL)}
-        >
-          <AirTravelIcon />
-        </SelectReasonButton>
-        <SelectReasonButton
-          isSelected={reason === ReasonOptions.ROADTRAVEL}
-          onClick={() => selectReason(ReasonOptions.ROADTRAVEL)}
-        >
-          <RoadTravelIcon />
-        </SelectReasonButton>
+        {Object.values(ReasonOptions).map((option) => {
+          return (
+            <SelectReasonButton
+              isSelected={reason === option}
+              onClick={() => selectReason(option)}
+              reason={option}
+            />
+          );
+        })}
       </div>
       <span className="text-xs mt-2">Selected reason: {reason}</span>
     </div>
