@@ -12,7 +12,10 @@ type TopBarLinkProps = {
 export default function TopBarLink({ children, href }: TopBarLinkProps) {
   const pathname = usePathname();
   // Define a function to check if the given path is the current route
-  const isCurrentRoute = () => pathname === href;
+  const isCurrentRoute = () => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <Link

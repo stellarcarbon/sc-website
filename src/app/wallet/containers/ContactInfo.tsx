@@ -33,15 +33,13 @@ export default function ContactInfo() {
     <>
       <PubKeyDisplay />
 
-      <form className="flex flex-col gap-2 pb-10 w-[60%] items-center">
-        <p>
-          Add your contact details to receive email confirmation of your
-          transactions.
-        </p>
+      <form className="flex flex-col gap-2 pb-10 items-center">
+        <p>We can send you an email confirmation of your transactions.</p>
         <input
-          className="w-full"
+          className="w-full bg-gray-100 p-2 rounded-sm border border-black"
           type="text"
-          defaultValue="test_username"
+          // defaultValue="test_username"
+          placeholder="Your name"
           {...register("username", { required: "Username is required" })}
         />
         <ErrorMessage
@@ -56,9 +54,10 @@ export default function ContactInfo() {
         />
 
         <input
-          className="w-full"
+          className="w-full bg-gray-100 p-2 rounded-sm"
           type="text"
-          defaultValue="test_useremail@stellarcarbon.io"
+          // defaultValue="test_useremail@stellarcarbon.io"
+          placeholder="Your email address"
           {...register("useremail", {
             required: "Email address is required",
             pattern: {
@@ -82,7 +81,7 @@ export default function ContactInfo() {
             onClick={() => handleSubmit(onSubmit)()}
             disabled={Object.keys(errors).length > 0}
           >
-            Submit & Continue
+            Submit
           </Button>
           <span>or</span>
           <Button onClick={skipSubmit}>Continue anonymous</Button>

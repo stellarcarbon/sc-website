@@ -1,5 +1,8 @@
-import { ReactNode } from "react";
+import { HTMLProps, ReactNode } from "react";
 
-export default function FormError({ children }: { children: ReactNode }) {
-  return <p className="text-red-500">{children}</p>;
+export default function FormError({
+  children,
+  className,
+}: HTMLProps<HTMLParagraphElement>) {
+  return <p className={`text-red-500 ${className}`}>{children}</p>;
 }

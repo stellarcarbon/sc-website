@@ -95,3 +95,4 @@ Iterate on the look, feel, and static content.
 - Wallet Connect/Dashboard/Checkout moet een aparte page worden voor de gebruiker, dus zonder top-bar. Echt eigen page met een knop om terug te keren naar main website.
 - Ook beginnen met typewriting. Dan kunnen we alvast itereren.
 - Nog eens spreken over deployment opties.
+- Idee van form-pages overleggen

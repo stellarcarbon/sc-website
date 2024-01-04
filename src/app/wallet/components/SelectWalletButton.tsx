@@ -18,8 +18,8 @@ export default function SelectWalletButton({
         onClick={onClick}
         className={`h-20 w-20 rounded-full p-3 ${
           wallet.isAvailable
-            ? `hover:border hover:border-black cursor-pointer ${
-                isSelected ? "bg-slate-400 border border-black" : "bg-white"
+            ? ` hover:border hover:border-black cursor-pointer ${
+                isSelected ? "bg-white border border-black" : "bg-gray-700"
               } `
             : "opacity-30"
         } `}

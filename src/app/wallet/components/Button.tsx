@@ -15,8 +15,8 @@ export default function Button({
       onClick={onClick}
       className={`rounded-lg border border-gray-300 px-5 py-4 ${
         disabled
-          ? "bg-transparent text-gray-500"
-          : "bg-white text-black transition-colors hover:border-gray-300 hover:bg-transparent hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          ? "bg-gray-50"
+          : "bg-gray-700 text-white transition-colors hover:border-gray-300 hover:bg-transparent hover:text-black hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
       } ${className}`}
     >
       {children}
