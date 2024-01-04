@@ -29,6 +29,7 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
         {Object.values(ReasonOptions).map((option) => {
           return (
             <SelectReasonButton
+              key={`${option}_button`}
               isSelected={reason === option}
               onClick={() => selectReason(option)}
               reason={option}
