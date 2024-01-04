@@ -87,3 +87,11 @@ Iterate on the look, feel, and static content.
   - Shared retirements list lijkt op de lijst op dashboard, maar "read only".
 
 - Retirements list item knopje: "doe deze transactie nog een keer".
+
+## Meeting 5 jan
+
+- Werk prioriteiten beter definieren, wat zijn de minimum eisen voor een go live.
+- Nu beginnen met "designen": zoeken naar templates of voorbeelden om te imiteren. Voor wallet connect/dashboard/checkout mainly. Verder main website uitwerken voor mobile & desktop.
+- Wallet Connect/Dashboard/Checkout moet een aparte page worden voor de gebruiker, dus zonder top-bar. Echt eigen page met een knop om terug te keren naar main website.
+- Ook beginnen met typewriting. Dan kunnen we alvast itereren.
+- Nog eens spreken over deployment opties.

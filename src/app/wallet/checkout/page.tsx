@@ -14,19 +14,11 @@ export default function Checkout() {
     useForm<CheckoutFormData>();
 
   useEffect(() => {
-    console.log("mount Checkout");
     setValue("tonnes", 60);
   }, []);
 
   const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
     console.log(data);
-    const config = new Configuration({
-      basePath: "https://api-beta.stellarcarbon.io",
-    });
-    const api = new CARBONApi(config);
-    api.getCarbonQuoteCarbonQuoteGet().then((result) => {
-      console.log(result);
-    });
   };
 
   return (
