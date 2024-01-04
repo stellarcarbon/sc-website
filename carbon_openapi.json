@@ -1,0 +1,357 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Stellarcarbon API",
+    "version": "0.4.3"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["documentation"],
+        "summary": "Gives pointers to the API documentation.",
+        "operationId": "read_root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carbon-quote": {
+      "get": {
+        "tags": ["CARBON"],
+        "summary": "Get a quote of the current CARBON price in USD.",
+        "description": "Request a price quote for any amount of CARBON.\n\nThe response includes the total cost of the requested amount, as well as the average price\nper CARBON. Both are denominated in USD.\n\nThis quote is non-binding and does not take into account the amount of CARBON that we are\ncurrently able to provide from our pool.",
+        "operationId": "get_carbon_quote_carbon_quote_get",
+        "parameters": [
+          {
+            "name": "carbon_amount",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "default": "1",
+              "title": "Carbon Amount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sink-carbon/xdr": {
+      "post": {
+        "tags": ["CARBON"],
+        "summary": "Build the XDR for a new CARBON sinking transaction.",
+        "description": "An offset is done by atomically swapping CARBON for CarbonSINK. This endpoint can be used to\nbuild the XDR for such a sinking transaction.\n\n- *funder*: public key of the account that pays for the transaction\n- *recipient*: public key of the account that will receive CarbonSINK (default: funder)\n- *carbon_amount*: the amount of CARBON to sink\n- *payment_asset*: the preferred asset to pay with when the funder does not have a sufficient CARBON balance\n- *vcs_project_id*: carbon project from which credits will be retired\n- *memo_type*: the kind of memo that will be attached to the transaction\n- *memo_value*: description of the reason for offsetting\n- *email*: email address that will receive the Verra certificate\n(also supports `Your Name <account@domain.xyz>` format)\n\nIf the funder does not have a sufficient balance of CARBON, a path payment will be used to\npurchase the exact amount of CARBON to be retired. The most favorable rate will be selected\nfrom the possible paths. The USDC value of this payment is included in the response for\nconvenience, but it is advisable to always check the generated XDR before signing and\nsubmitting it to the network.",
+        "operationId": "build_sink_carbon_xdr_sink_carbon_xdr_post",
+        "parameters": [
+          {
+            "name": "funder",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Funder"
+            }
+          },
+          {
+            "name": "recipient",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Recipient"
+            }
+          },
+          {
+            "name": "carbon_amount",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "default": "1",
+              "title": "Carbon Amount"
+            }
+          },
+          {
+            "name": "payment_asset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/PaymentAsset"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": "any",
+              "title": "Payment Asset"
+            }
+          },
+          {
+            "name": "vcs_project_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/VcsProject"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": "1360",
+              "title": "Vcs Project Id"
+            }
+          },
+          {
+            "name": "memo_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/MemoType"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": "text",
+              "title": "Memo Type"
+            }
+          },
+          {
+            "name": "memo_value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": "",
+              "title": "Memo Value"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "name-email"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Email"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SinkingResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MemoType": {
+        "type": "string",
+        "enum": ["text", "hash"],
+        "title": "MemoType"
+      },
+      "PaymentAsset": {
+        "type": "string",
+        "enum": ["XLM", "USDC", "any"],
+        "title": "PaymentAsset"
+      },
+      "QuoteResponse": {
+        "properties": {
+          "carbon_amount": {
+            "type": "string",
+            "title": "Carbon Amount"
+          },
+          "total_cost": {
+            "type": "string",
+            "title": "Total Cost"
+          },
+          "average_price": {
+            "type": "string",
+            "title": "Average Price"
+          }
+        },
+        "type": "object",
+        "required": ["carbon_amount", "total_cost", "average_price"],
+        "title": "QuoteResponse"
+      },
+      "SinkingResponse": {
+        "properties": {
+          "funder": {
+            "type": "string",
+            "title": "Funder"
+          },
+          "recipient": {
+            "type": "string",
+            "title": "Recipient"
+          },
+          "carbon_amount": {
+            "type": "string",
+            "title": "Carbon Amount"
+          },
+          "usdc_amount": {
+            "type": "string",
+            "title": "Usdc Amount"
+          },
+          "vcs_project_id": {
+            "type": "integer",
+            "title": "Vcs Project Id"
+          },
+          "tx_xdr": {
+            "type": "string",
+            "title": "Tx Xdr"
+          },
+          "txrep": {
+            "type": "string",
+            "title": "Txrep"
+          }
+        },
+        "type": "object",
+        "required": [
+          "funder",
+          "recipient",
+          "carbon_amount",
+          "usdc_amount",
+          "vcs_project_id",
+          "tx_xdr",
+          "txrep"
+        ],
+        "title": "SinkingResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "VcsProject": {
+        "type": "string",
+        "const": "1360",
+        "title": "VcsProject"
+      }
+    }
+  }
+}

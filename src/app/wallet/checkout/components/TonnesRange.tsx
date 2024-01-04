@@ -1,5 +1,8 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { CheckoutFormData } from "../types";
+import { useEffect, useState } from "react";
+import carbonApi from "@/app/carbonApi";
+import { debounce } from "@/app/utils";
 
 interface TonnesRangeProps {
   register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
@@ -7,7 +10,32 @@ interface TonnesRangeProps {
 }
 
 export default function TonnesRange({ register, watch }: TonnesRangeProps) {
+  const [quote, setQuote] = useState<string>();
   const tonnes = watch("tonnes");
+
+  const { call: fetchQuote, cancel: cancelFetchQuote } = debounce(
+    (tonnes: number) => {
+      setQuote(undefined);
+      carbonApi
+        .getCarbonQuoteCarbonQuoteGet({
+          carbonAmount: tonnes,
+        })
+        .then((result) => {
+          console.log(result);
+          setQuote(result.totalCost);
+        });
+    },
+    500
+  );
+
+  useEffect(() => {
+    if (tonnes) {
+      fetchQuote(tonnes);
+    }
+    return () => {
+      cancelFetchQuote();
+    };
+  }, [tonnes]);
 
   return (
     <div className="flex flex-col p-4">
@@ -34,7 +62,9 @@ export default function TonnesRange({ register, watch }: TonnesRangeProps) {
         </div>
       </div>
       <div>
-        <span>That is $10</span>
+        <span>
+          {quote !== undefined ? `That is $${quote}` : `Calculating price...`}
+        </span>
       </div>
     </div>
   );

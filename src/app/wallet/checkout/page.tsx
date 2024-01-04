@@ -6,13 +6,27 @@ import Button from "../components/Button";
 import CurrencySelect from "./components/CurrencySelect";
 import ReasonSelect from "./components/ReasonSelect";
 import { CheckoutFormData } from "./types";
+import { CARBONApi, Configuration } from "@/app/carbon_api";
+import { useEffect } from "react";
 
 export default function Checkout() {
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
 
+  useEffect(() => {
+    console.log("mount Checkout");
+    setValue("tonnes", 60);
+  }, []);
+
   const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
     console.log(data);
+    const config = new Configuration({
+      basePath: "https://api-beta.stellarcarbon.io",
+    });
+    const api = new CARBONApi(config);
+    api.getCarbonQuoteCarbonQuoteGet().then((result) => {
+      console.log(result);
+    });
   };
 
   return (
