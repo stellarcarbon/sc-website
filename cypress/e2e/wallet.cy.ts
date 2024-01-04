@@ -56,7 +56,7 @@ describe("New user", () => {
       .contains("Disconnect & choose another STELLAR account")
       .click();
 
-    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-white");
+    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-gray-700");
     cy.get("#checkbox_policy").should("not.be.checked");
     cy.get("button").should("be.disabled");
   });
@@ -70,7 +70,7 @@ describe("New user", () => {
       .contains("Disconnect & choose another STELLAR account")
       .click();
 
-    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-white");
+    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-gray-700");
     cy.get("#checkbox_policy").should("not.be.checked");
     cy.get("button").should("be.disabled");
   });
@@ -82,7 +82,7 @@ describe("New user", () => {
     cy.get("input[name=username]").type("testusername");
     cy.get("input[name=useremail]").clear();
     cy.get("input[name=useremail]").type("testuseremail@stellarcarbon.io");
-    cy.get("button").contains("Submit & Continue").click();
+    cy.get("button").contains("Submit").click();
 
     cy.get("p").contains("Wallet setup succesful!");
     cy.get("#stellarPubKey").contains("1234");
@@ -148,7 +148,7 @@ describe("Existing user (anonymous)", () => {
     cy.get("button")
       .contains("Disconnect & choose another STELLAR account")
       .click();
-    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-white");
+    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-gray-700");
     cy.get("#checkbox_policy").should("not.be.checked");
     cy.get("button").should("be.disabled");
   });
@@ -184,7 +184,7 @@ describe("Existing user (personal details)", () => {
     cy.get("button")
       .contains("Disconnect & choose another STELLAR account")
       .click();
-    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-white");
+    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-gray-700");
     cy.get("#checkbox_policy").should("not.be.checked");
     cy.get("button").should("be.disabled");
   });
@@ -206,7 +206,7 @@ describe("Connect wallet error handling.", () => {
 
     cy.get("button").click();
 
-    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-white");
+    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-gray-700");
     cy.get("#checkbox_policy").should("not.be.checked");
     cy.get("button").should("be.disabled");
     cy.get("#SelectWalletError").contains(
@@ -221,8 +221,8 @@ describe("Connect wallet error handling.", () => {
     cy.get("input[name=username]").type("testusername");
     cy.get("input[name=useremail]").clear();
     cy.get("input[name=useremail]").type("testuseremail@stellarcarbo"); // invalid email
-    cy.get("button").contains("Submit & Continue").click();
-    cy.get("button").contains("Submit & Continue").should("be.disabled");
+    cy.get("button").contains("Submit").click();
+    cy.get("button").contains("Submit").should("be.disabled");
 
     cy.get("p")
       .contains("Invalid email format")
