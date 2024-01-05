@@ -12,7 +12,7 @@ import {
 } from "@/app/carbon_api";
 import { useEffect, useState } from "react";
 import carbonApi from "@/app/carbonApi";
-import { useAppContext } from "@/app/context";
+import { useAppContext } from "@/app/context/appContext";
 import FormError from "../components/FormError";
 
 export default function Checkout() {

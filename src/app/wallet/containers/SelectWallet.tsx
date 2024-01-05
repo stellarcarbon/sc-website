@@ -2,7 +2,7 @@
 
 import { WalletType } from "stellar-wallets-kit";
 import SelectWalletButton from "../components/SelectWalletButton";
-import { useAppContext } from "@/app/context";
+import { useAppContext } from "@/app/context/appContext";
 import { useState } from "react";
 import Button from "../components/Button";
 

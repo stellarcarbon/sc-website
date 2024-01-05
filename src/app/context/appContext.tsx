@@ -8,19 +8,10 @@ import {
   WalletNetwork,
   WalletType,
 } from "stellar-wallets-kit";
+import { PersonalDetails, WalletConnection } from "./types";
+import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
 
 // A global app context used to write & read state everywhere.
-export type WalletConnection = {
-  stellarPubKey: string;
-  walletType: WalletType;
-  personalDetails?: PersonalDetails;
-  isAnonymous: boolean;
-};
-
-export type PersonalDetails = {
-  username: string;
-  useremail: string;
-};
 
 type AppContext = {
   connectionError: string | null;
@@ -59,18 +50,21 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     }
 
     // Load supported wallets
-    const loadAvailableWallets = async () => {
-      const wallets = await StellarWalletsKit.getSupportedWallets();
+    // const loadAvailableWallets = async () => {
+    //   const wallets = await StellarWalletsKit.getSupportedWallets();
+    //   setSupportedWallets(wallets);
+    // };
+    loadAvailableWallets().then((wallets) => {
       setSupportedWallets(wallets);
-    };
-    loadAvailableWallets();
+      return;
+    });
   }, []);
 
   const connectWallet = async (userWalletType: WalletType) => {
     setConnectionError(null);
 
     try {
-      const walletConnection = await window.walletDialog(userWalletType);
+      const walletConnection = await walletConnectDialog(userWalletType);
       localStorage.setItem("wallet", JSON.stringify(walletConnection));
       setWalletConnection(walletConnection);
     } catch (error) {
@@ -126,31 +120,3 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     <AppContext.Provider value={providerValue}>{children}</AppContext.Provider>
   );
 };
-
-// Attach the walletDialog function to the window so we can mock it during test.
-declare global {
-  interface Window {
-    walletDialog: (userWalletType: WalletType) => Promise<WalletConnection>;
-  }
-}
-
-export const walletDialog = async (
-  userWalletType: WalletType
-): Promise<WalletConnection> => {
-  let kit = new StellarWalletsKit({
-    selectedWallet: userWalletType,
-    network: WalletNetwork.PUBLIC,
-  });
-
-  let stellarPubKey = await kit.getPublicKey(); // will throw on error
-
-  return {
-    stellarPubKey,
-    walletType: userWalletType,
-    isAnonymous: false,
-  };
-};
-
-if (typeof window !== "undefined") {
-  (window as any).walletDialog = walletDialog;
-}

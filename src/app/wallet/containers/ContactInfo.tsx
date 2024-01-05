@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import FormError from "../components/FormError";
 import Button from "../components/Button";
-import { useAppContext } from "@/app/context";
+import { useAppContext } from "@/app/context/appContext";
 import DisconnectWalletButton from "../components/DisconnectWalletButton";
 import PubKeyDisplay from "../components/PubKeyDisplay";
 

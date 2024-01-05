@@ -1,4 +1,4 @@
-import { AppContextProvider } from "@/app/context";
+import { AppContextProvider } from "@/app/context/appContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return <AppContextProvider>{children}</AppContextProvider>;

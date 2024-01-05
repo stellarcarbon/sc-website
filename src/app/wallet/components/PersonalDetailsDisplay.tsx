@@ -1,4 +1,4 @@
-import { useAppContext } from "@/app/context";
+import { useAppContext } from "@/app/context/appContext";
 
 export default function PersonalDetailsDisplay() {
   const { walletConnection } = useAppContext();

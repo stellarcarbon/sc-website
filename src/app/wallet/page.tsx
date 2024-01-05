@@ -1,5 +1,5 @@
 "use client";
-import { useAppContext } from "../context";
+import { useAppContext } from "../context/appContext";
 import Button from "@/app/wallet/components/Button";
 import SelectWallet from "./containers/SelectWallet";
 import ContactInfo from "./containers/ContactInfo";
