@@ -61,7 +61,7 @@ export default function SelectWallet() {
         </div>
 
         {/* Desktop buttons */}
-        <div className="md:flex flex-col hidden gap-4 my-4 w-[90%]">
+        <div className="md:flex flex-col hidden gap-1 my-4 w-[90%]">
           {supportedWallets.map((supportedWallet) => {
             return (
               <SelectWalletButtonDesktop

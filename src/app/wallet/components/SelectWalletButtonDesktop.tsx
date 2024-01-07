@@ -9,7 +9,7 @@ export default function SelectWalletButtonDesktop({
   return (
     <button
       id={`${wallet.type}_SelectWalletButtonDesktop`}
-      className={`h-16 flex items-center shadow-md rounded-md mx-16 justify-start gap-6 px-4 border border-gray w-100
+      className={`h-16 flex items-center shadow-sm rounded-md mx-8 justify-start gap-6 px-4 border border-gray w-100
       
        ${
          wallet.isAvailable
