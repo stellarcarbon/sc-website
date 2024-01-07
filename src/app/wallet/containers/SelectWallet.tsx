@@ -23,7 +23,7 @@ export default function SelectWallet() {
 
   return (
     <>
-      <div className="flex flex-col flex-1 items-start md:min-w-[600px] md:max-w-[650px] py-10 p-6 border rounded-sm border-gray shadow-lg">
+      <div className="flex flex-col items-start bg-white md:min-w-[600px] md:max-w-[650px] py-10 p-6 border rounded-md border-gray shadow-lg">
         {/* <p className="px-8">
           Select a wallet that will be used for signing the Stellarcarbon
           transaction.

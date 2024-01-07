@@ -22,7 +22,7 @@ export default function WalletPage() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-start md:py-6 min-h-[calc(100vh-80px)]">
+    <main className="flex flex-col bg-rainforest bg-cover bg-top bg-fixed items-center justify-start md:py-6 min-h-[calc(100vh-80px)]">
       {/* <h1 className="text-2xl">Wallet Page</h1> */}
       {walletConnection ? (
         walletConnection.isAnonymous || walletConnection.personalDetails ? (

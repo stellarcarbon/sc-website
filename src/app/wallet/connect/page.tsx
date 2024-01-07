@@ -15,7 +15,7 @@ export default function Connect() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-start md:py-6 min-h-[calc(100vh-80px)] md:min-h-0">
+    <main className="flex flex-col bg-rainforest bg-no-repeat bg-cover bg-top bg-fixed items-center justify-start md:py-6 min-h-[calc(100vh-80px)]">
       {supportedWallets.length === 0 && <div>Loading...</div>}
       {supportedWallets.length > 0 && !walletConnection && <SelectWallet />}
       {walletConnection && <ContactInfo />}
