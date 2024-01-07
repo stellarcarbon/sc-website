@@ -78,12 +78,11 @@ describe("Connect wallet error handling.", () => {
     });
     cy.get("h1", { timeout: 5000 });
 
-    cy.get("#ALBEDO_SelectWalletButton").click();
+    cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
     cy.get("#checkbox_policy").click();
 
-    cy.get("button").click();
+    cy.get("button").contains("Connect wallet").click();
 
-    cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-gray-700");
     cy.get("#checkbox_policy").should("not.be.checked");
     cy.get("button").should("be.disabled");
     cy.get("#SelectWalletError").contains(

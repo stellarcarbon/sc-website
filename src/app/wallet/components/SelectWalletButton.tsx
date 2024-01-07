@@ -1,10 +1,10 @@
-import { ISupportedWallet, WalletType } from "stellar-wallets-kit";
+import { HTMLProps } from "react";
+import { ISupportedWallet } from "stellar-wallets-kit";
 
-type SelectWalletButtonProps = {
+export interface SelectWalletButtonProps extends HTMLProps<HTMLButtonElement> {
   wallet: ISupportedWallet;
   isSelected: boolean;
-  onClick: () => void;
-};
+}
 
 export default function SelectWalletButton({
   wallet,
@@ -12,10 +12,9 @@ export default function SelectWalletButton({
   onClick,
 }: SelectWalletButtonProps) {
   return (
-    <div className="relative">
+    <button className="relative" onClick={onClick}>
       <img
         id={`${wallet.type}_SelectWalletButton`}
-        onClick={onClick}
         className={`h-20 w-20 rounded-full p-3 ${
           wallet.isAvailable
             ? ` hover:border hover:border-black cursor-pointer ${
@@ -28,6 +27,6 @@ export default function SelectWalletButton({
       {!wallet.isAvailable && (
         <div className="rounded-full absolute inset-0 bg-slate-400 opacity-50"></div>
       )}
-    </div>
+    </button>
   );
 }

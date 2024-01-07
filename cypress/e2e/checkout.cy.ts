@@ -12,7 +12,7 @@ describe("Connected user visiting checkout", () => {
         } as WalletConnection)
       );
     });
-    cy.visit("/wallet/checkout");
+    cy.visit("/checkout");
   });
 
   it("Can fill in form and submit", () => {

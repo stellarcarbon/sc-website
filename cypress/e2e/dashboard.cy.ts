@@ -26,7 +26,7 @@ describe("Anonymous user visiting dashboard", () => {
 
   it("Can continue to checkout", () => {
     cy.get("button").contains("Continue to checkout").click();
-    cy.location("pathname").should("eq", "/wallet/checkout");
+    cy.location("pathname").should("eq", "/checkout");
   });
 
   it("Can disconnect wallet", () => {
@@ -64,7 +64,7 @@ describe("User with personal details visiting dashboard", () => {
 
   it("Can continue to checkout", () => {
     cy.get("button").contains("Continue to checkout").click();
-    cy.location("pathname").should("eq", "/wallet/checkout");
+    cy.location("pathname").should("eq", "/checkout");
   });
 
   it("Can disconnect wallet", () => {

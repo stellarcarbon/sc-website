@@ -3,14 +3,12 @@ export const connectWallet = () => {
   cy.visit("/wallet");
 
   // Wallet page should load within 5000ms
-  cy.get("h1", { timeout: 5000 });
+  cy.location("pathname").should("eq", "/wallet/connect");
 
-  cy.get("h1").contains("Wallet Page");
-
-  cy.get("#ALBEDO_SelectWalletButton").click();
+  cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
   cy.get("#checkbox_policy").click();
 
-  cy.get("button").click();
+  cy.get("button").contains("Connect wallet").click();
 
   // Assert if we are on contact info setup page
   cy.get("main").contains("Connected with Stellar PubKey:");
@@ -26,12 +24,10 @@ export const canDisconnect = () => {
     .click();
 
   // Assert if we are back on wallet connection setup page
-  cy.location("pathname").should("eq", "/wallet");
+  cy.location("pathname").should("eq", "/wallet/connect");
+  cy.get("#ALBEDO_SelectWalletButtonDesktop");
   cy.window().then((win) => {
     const wallet = win.localStorage.getItem("wallet");
     expect(wallet).to.be.null;
   });
-  cy.get("#ALBEDO_SelectWalletButton").should("have.class", "bg-gray-700");
-  cy.get("#checkbox_policy").should("not.be.checked");
-  cy.get("button").should("be.disabled");
 };

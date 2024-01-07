@@ -10,6 +10,7 @@ import {
 } from "stellar-wallets-kit";
 import { PersonalDetails, WalletConnection } from "./types";
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
+import { useRouter } from "next/navigation";
 
 // A global app context used to write & read state everywhere.
 
@@ -41,6 +42,13 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [walletConnection, setWalletConnection] =
     useState<WalletConnection | null>(null);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (walletConnection?.isAnonymous || walletConnection?.personalDetails)
+      router.push("/wallet");
+  }, [walletConnection]);
+
   useEffect(() => {
     // Load local storage if available
     const storedWalletConnectionJSONString = localStorage.getItem("wallet");
@@ -50,10 +58,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     }
 
     // Load supported wallets
-    // const loadAvailableWallets = async () => {
-    //   const wallets = await StellarWalletsKit.getSupportedWallets();
-    //   setSupportedWallets(wallets);
-    // };
     loadAvailableWallets().then((wallets) => {
       setSupportedWallets(wallets);
       return;
