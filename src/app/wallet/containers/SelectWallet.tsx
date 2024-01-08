@@ -158,8 +158,12 @@ export default function SelectWallet() {
 
         <div className="mx-8 ">
           <div
-            className={`px-4 gap-2 flex items-center border border-transparent rounded-md shadow-md
-        ${tncAccepted ? "bg-accent text-black  !border-black" : "bg-primary "}
+            className={`!cursor:pointer px-4 gap-2 flex items-center font-bold border  border-transparent rounded-md 
+        ${
+          tncAccepted
+            ? "bg-primary text-white  !border-accentSecondary"
+            : "bg-secondary "
+        }
         `}
           >
             <input
@@ -184,7 +188,7 @@ export default function SelectWallet() {
           )}
         </div>
 
-        <Button className="ml-8 mt-8" onClick={submitForm}>
+        <Button className="mt-8 my-4 self-center" onClick={submitForm}>
           Connect wallet
         </Button>
 
