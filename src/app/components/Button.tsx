@@ -13,7 +13,7 @@ export default function Button({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`rounded-2xl shadow-md px-5 py-4 
+      className={`rounded-md shadow-md px-5 py-4 
       ${
         disabled
           ? "bg-gray-100 text-gray-300"
