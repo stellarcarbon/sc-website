@@ -17,7 +17,7 @@ export default function Button({
       ${
         disabled
           ? "bg-gray-100 text-gray-300"
-          : "bg-accent text-black transition-colors hover:border-gray-300 hover:bg-accentSecondary hover:text-white hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          : "bg-accent text-black transition-colors active:bg-primary active:text-white hover:border-gray-300 hover:bg-accentSecondary hover:text-white hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
       } ${className}`}
     >
       {children}
