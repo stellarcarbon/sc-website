@@ -61,11 +61,14 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       console.log("swc");
     }
 
-    // Load supported wallets
-    loadAvailableWallets().then((wallets) => {
-      setSupportedWallets(wallets);
-      return;
-    });
+    // Load supported wallets if not loaded yet.
+    if (supportedWallets.length === 0) {
+      console.log("no wallets");
+      loadAvailableWallets().then((wallets) => {
+        setSupportedWallets(wallets);
+        return;
+      });
+    }
   }, []);
 
   const connectWallet = async (
