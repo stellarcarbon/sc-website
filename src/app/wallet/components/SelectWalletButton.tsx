@@ -25,7 +25,7 @@ export default function SelectWalletButton({
         src={wallet.icon}
       />
       {!wallet.isAvailable && (
-        <div className="rounded-full absolute inset-0 bg-slate-400 opacity-50"></div>
+        <div className="rounded-full absolute inset-0 bg-slate-400 opacity-50" />
       )}
     </button>
   );
