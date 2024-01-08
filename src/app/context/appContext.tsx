@@ -46,8 +46,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (walletConnection === null) {
+      router.push("/wallet/connect");
+    }
+
     if (walletConnection?.isAnonymous || walletConnection?.personalDetails) {
-      console.log("push!", walletConnection);
       router.push("/wallet");
     }
   }, [walletConnection]);
