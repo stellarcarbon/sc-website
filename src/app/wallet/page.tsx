@@ -8,6 +8,7 @@ import PersonalDetailsDisplay from "./components/PersonalDetailsDisplay";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { time } from "console";
+import Dashboard from "./containers/Dashboard";
 
 export default function WalletPage() {
   const { walletConnection, supportedWallets } = useAppContext();
@@ -39,20 +40,7 @@ export default function WalletPage() {
     <main className="flex flex-col bg-primary items-center justify-start md:py-6 min-h-[calc(100vh-80px)]">
       {/* <h1 className="text-2xl">Wallet Page</h1> */}
       {walletConnection ? (
-        <>
-          <p>Wallet setup succesful!</p>
-          <PubKeyDisplay />
-          <PersonalDetailsDisplay />
-          <Button
-            className="mb-8"
-            onClick={() => {
-              router.push("/checkout");
-            }}
-          >
-            Continue to checkout
-          </Button>
-          <DisconnectWalletButton />
-        </>
+        <Dashboard />
       ) : supportedWallets.length > 0 ? (
         <SelectWallet />
       ) : (
