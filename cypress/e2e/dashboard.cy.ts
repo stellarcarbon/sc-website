@@ -57,7 +57,7 @@ describe("User with personal details visiting dashboard", () => {
     cy.get("span").contains("6666");
   });
 
-  it("Can see that the connection is anonymous", () => {
+  it("Can see that the connection is NOT anonymous", () => {
     cy.get("p").contains("Username: testusername");
     cy.get("p").contains("Email: testuseremail@stellarcarbon.io");
   });

@@ -9,6 +9,7 @@ import { WalletConnection } from "./types";
 export const walletConnectDialog = async (
   userWalletType: WalletType
 ): Promise<WalletConnection> => {
+  console.log("hi", window.walletConnectDialogError);
   if (window.Cypress) {
     if (window.walletConnectDialogError) {
       throw Error();

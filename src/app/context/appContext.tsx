@@ -18,10 +18,11 @@ type AppContext = {
   connectionError: string | null;
   supportedWallets: ISupportedWallet[];
   walletConnection: WalletConnection | null;
-  connectWallet: (walletType: WalletType) => void;
+  connectWallet: (
+    walletType: WalletType,
+    personalDetails: PersonalDetails
+  ) => void;
   disconnectWallet: () => void;
-  setAnonymous: () => void;
-  setPersonalDetails: (personalDetails: PersonalDetails) => void;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -45,8 +46,10 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (walletConnection?.isAnonymous || walletConnection?.personalDetails)
+    if (walletConnection?.isAnonymous || walletConnection?.personalDetails) {
+      console.log("push!", walletConnection);
       router.push("/wallet");
+    }
   }, [walletConnection]);
 
   useEffect(() => {
@@ -55,6 +58,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     if (storedWalletConnectionJSONString) {
       const wc: WalletConnection = JSON.parse(storedWalletConnectionJSONString);
       setWalletConnection(wc);
+      console.log("swc");
     }
 
     // Load supported wallets
@@ -64,15 +68,26 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     });
   }, []);
 
-  const connectWallet = async (userWalletType: WalletType) => {
+  const connectWallet = async (
+    userWalletType: WalletType,
+    personalDetails: PersonalDetails
+  ) => {
     setConnectionError(null);
 
     try {
       const walletConnection = await walletConnectDialog(userWalletType);
+
+      if (personalDetails.useremail !== "") {
+        walletConnection.personalDetails = personalDetails;
+        walletConnection.isAnonymous = false;
+      } else {
+        walletConnection.isAnonymous = true;
+      }
+
       localStorage.setItem("wallet", JSON.stringify(walletConnection));
       setWalletConnection(walletConnection);
     } catch (error) {
-      console.log(error);
+      console.log("connect wallet error", error);
       setConnectionError(
         "Something went wrong connecting your wallet. Try again."
       );
@@ -85,29 +100,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     console.log("removed wallet item");
   };
 
-  const setAnonymous = () => {
-    console.log("set as anonymouss");
-    const updatedWalletConnection = {
-      ...walletConnection,
-      isAnonymous: true,
-      personalDetails: undefined,
-    } as WalletConnection;
-
-    localStorage.setItem("wallet", JSON.stringify(updatedWalletConnection));
-    setWalletConnection(updatedWalletConnection);
-  };
-
-  const setPersonalDetails = (personalDetails: PersonalDetails) => {
-    console.log("set personal details");
-    const updatedWalletConnection = {
-      ...walletConnection,
-      isAnonymous: false,
-      personalDetails,
-    } as WalletConnection;
-    localStorage.setItem("wallet", JSON.stringify(updatedWalletConnection));
-    setWalletConnection(updatedWalletConnection);
-  };
-
   const providerValue = useMemo(() => {
     return {
       connectionError,
@@ -115,8 +107,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       walletConnection,
       connectWallet,
       disconnectWallet,
-      setAnonymous,
-      setPersonalDetails,
     };
   }, [connectionError, supportedWallets, walletConnection]);
 

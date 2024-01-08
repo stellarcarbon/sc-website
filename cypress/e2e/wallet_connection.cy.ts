@@ -14,19 +14,8 @@ describe("Setup wallet connection", () => {
     localStorage.removeItem("wallet");
   });
 
-  it("Can select a wallet and get stellar pub key from it.", () => {
-    connectWallet();
-  });
-
-  it("Can disconnect on personal details form", () => {
-    connectWallet();
-    canDisconnect();
-  });
-
-  it("Can continue as anonymous", () => {
-    connectWallet();
-    cy.get("button").contains("Continue anonymous").click();
-    cy.get("p").contains("Wallet setup succesful!");
+  it("Can connect a wallet anonymously.", () => {
+    connectWallet(true);
 
     cy.window().then((win) => {
       const localStorageWallet = JSON.parse(
@@ -39,17 +28,13 @@ describe("Setup wallet connection", () => {
     });
   });
 
-  it("Can add personal details after connecting wallet", () => {
-    connectWallet();
+  it("Can disconnect after connecting", () => {
+    connectWallet(true);
+    canDisconnect();
+  });
 
-    cy.get("input[name=username]").clear();
-    cy.get("input[name=username]").type("testusername");
-    cy.get("input[name=useremail]").clear();
-    cy.get("input[name=useremail]").type("testuseremail@stellarcarbon.io");
-    cy.get("button").contains("Submit").click();
-
-    cy.get("p").contains("Wallet setup succesful!");
-    cy.get("#stellarPubKey").contains("1234");
+  it("Can connect a wallet with contact details", () => {
+    connectWallet(false);
 
     cy.window().then((win) => {
       const localStorageWallet = JSON.parse(
@@ -71,7 +56,7 @@ describe("Setup wallet connection", () => {
 
 describe("Connect wallet error handling.", () => {
   it("Resets the form and displays an error if connecting new wallet fails", () => {
-    cy.visit("/wallet", {
+    cy.visit("/wallet/connect", {
       onBeforeLoad(win) {
         (win as any).walletConnectDialogError = true;
       },
@@ -84,24 +69,28 @@ describe("Connect wallet error handling.", () => {
     cy.get("button").contains("Connect wallet").click();
 
     cy.get("#checkbox_policy").should("not.be.checked");
-    cy.get("button").should("be.disabled");
-    cy.get("#SelectWalletError").contains(
+    cy.get("p").contains(
       "Something went wrong connecting your wallet. Try again."
     );
   });
 
   it("has form validation on personal details form", () => {
-    connectWallet();
+    cy.visit("/wallet");
+    cy.location("pathname").should("eq", "/wallet/connect");
+
+    cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
 
     cy.get("input[name=username]").clear();
     cy.get("input[name=username]").type("testusername");
     cy.get("input[name=useremail]").clear();
     cy.get("input[name=useremail]").type("testuseremail@stellarcarbo"); // invalid email
-    cy.get("button").contains("Submit").click();
-    cy.get("button").contains("Submit").should("be.disabled");
+
+    cy.get("#checkbox_policy").click();
+
+    cy.get("button").contains("Connect wallet").click();
 
     cy.get("p")
-      .contains("Invalid email format")
+      .contains("Invalid email address")
       .should("have.class", "text-red-500");
   });
 });

@@ -1,5 +1,5 @@
 // Helper function to select & (mock-)connect wallet.
-export const connectWallet = () => {
+export const connectWallet = (anonymous: boolean) => {
   cy.visit("/wallet");
 
   // Wallet page should load within 5000ms
@@ -8,14 +8,19 @@ export const connectWallet = () => {
   cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
   cy.get("#checkbox_policy").click();
 
+  if (!anonymous) {
+    cy.get("input[name=username]").clear();
+    cy.get("input[name=username]").type("testusername");
+    cy.get("input[name=useremail]").clear();
+    cy.get("input[name=useremail]").type("testuseremail@stellarcarbon.io");
+  }
+
   cy.get("button").contains("Connect wallet").click();
 
-  // Assert if we are on contact info setup page
+  // Assert if we are dashboard
   cy.get("main").contains("Connected with Stellar PubKey:");
-  cy.get("#stellarPubKey").contains("1234");
-
-  cy.get("button").contains("Submit");
-  cy.get("button").contains("Continue anonymous");
+  cy.get("#stellarPubKey");
+  cy.location("pathname").should("eq", "/wallet");
 };
 
 export const canDisconnect = () => {

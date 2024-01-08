@@ -2,15 +2,13 @@
 import { useAppContext } from "../context/appContext";
 import Button from "@/app/components/Button";
 import SelectWallet from "./containers/SelectWallet";
-import ContactInfo from "./containers/ContactInfo";
 import PubKeyDisplay from "./components/PubKeyDisplay";
 import DisconnectWalletButton from "./components/DisconnectWalletButton";
 import PersonalDetailsDisplay from "./components/PersonalDetailsDisplay";
 import { redirect, useRouter } from "next/navigation";
 
 export default function WalletPage() {
-  const { walletConnection, supportedWallets, disconnectWallet } =
-    useAppContext();
+  const { walletConnection, supportedWallets } = useAppContext();
 
   const router = useRouter();
 
@@ -18,7 +16,12 @@ export default function WalletPage() {
     !walletConnection ||
     (!walletConnection?.isAnonymous && !walletConnection?.personalDetails)
   ) {
-    redirect("/wallet/connect");
+    console.log(walletConnection);
+
+    if (typeof window !== "undefined")
+      // redirect() does not play nice with Cypress
+      // redirect("/wallet/connect");
+      window.location.replace("/wallet/connect");
   }
 
   return (
@@ -41,7 +44,7 @@ export default function WalletPage() {
             <DisconnectWalletButton />
           </>
         ) : (
-          <ContactInfo />
+          <></>
         )
       ) : supportedWallets.length > 0 ? (
         <SelectWallet />

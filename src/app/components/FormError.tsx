@@ -4,5 +4,5 @@ export default function FormError({
   children,
   className,
 }: HTMLProps<HTMLParagraphElement>) {
-  return <p className={`text-red-500 ${className}`}>{children}</p>;
+  return <p className={`text-red-500 py-2 ${className}`}>{children}</p>;
 }

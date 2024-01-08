@@ -1,92 +1,58 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import FormError from "../../components/FormError";
-import Button from "../../components/Button";
-import { useAppContext } from "@/app/context/appContext";
-import DisconnectWalletButton from "../components/DisconnectWalletButton";
-import PubKeyDisplay from "../components/PubKeyDisplay";
 
-type Inputs = {
+interface ContactInfoProps {
   username: string;
+  setUsername: (name: string) => void;
   useremail: string;
-};
+  setUseremail: (name: string) => void;
+  emailError: boolean;
+}
 
-export default function ContactInfo() {
-  const { setPersonalDetails, setAnonymous } = useAppContext();
-  const {
-    register,
-    handleSubmit,
-    clearErrors,
-    formState: { errors },
-  } = useForm<Inputs>({ criteriaMode: "all" });
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    setPersonalDetails(data);
+export default function ContactInfo({
+  username,
+  useremail,
+  setUsername,
+  setUseremail,
+  emailError,
+}: ContactInfoProps) {
+  const usernameOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value);
   };
 
-  const skipSubmit = () => {
-    setAnonymous();
+  const useremailOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUseremail(event.target.value);
   };
 
   return (
-    <>
-      <PubKeyDisplay />
+    <div className="flex flex-col gap-1 pl-8 mt-2 items-start w-[85%]">
+      <label className="text-xs" htmlFor="username">
+        Username
+      </label>
+      <input
+        className="w-full bg-gray-100 p-2 rounded-sm border border-black text-black"
+        type="text"
+        name="username"
+        // defaultValue="test_username"
+        placeholder="Your name"
+        value={username}
+        onChange={usernameOnChange}
+      />
 
-      <form className="flex flex-col gap-2 pb-10 items-center">
-        <p>We can send you an email confirmation of your transactions.</p>
-        <input
-          className="w-full bg-gray-100 p-2 rounded-sm border border-black"
-          type="text"
-          // defaultValue="test_username"
-          placeholder="Your name"
-          {...register("username", { required: "Username is required" })}
-        />
-        <ErrorMessage
-          errors={errors}
-          name="username"
-          render={({ messages }) =>
-            messages &&
-            Object.entries(messages).map(([type, message]) => (
-              <FormError key={type}>{message}</FormError>
-            ))
-          }
-        />
-
-        <input
-          className="w-full bg-gray-100 p-2 rounded-sm"
-          type="text"
-          // defaultValue="test_useremail@stellarcarbon.io"
-          placeholder="Your email address"
-          {...register("useremail", {
-            required: "Email address is required",
-            pattern: {
-              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-              message: "Invalid email format",
-            },
-          })}
-        />
-        <ErrorMessage
-          errors={errors}
-          name="useremail"
-          render={({ messages }) =>
-            messages &&
-            Object.entries(messages).map(([type, message]) => (
-              <FormError key={type}>{message}</FormError>
-            ))
-          }
-        />
-        <div className="flex gap-2 items-center">
-          <Button
-            onClick={() => handleSubmit(onSubmit)()}
-            disabled={Object.keys(errors).length > 0}
-          >
-            Submit
-          </Button>
-          <span>or</span>
-          <Button onClick={skipSubmit}>Continue anonymous</Button>
-        </div>
-      </form>
-      <DisconnectWalletButton />
-    </>
+      <label className="text-xs" htmlFor="useremail">
+        Email
+      </label>
+      <input
+        className="w-full bg-gray-100 p-2 rounded-sm border border-black text-black"
+        type="text"
+        name="useremail"
+        // defaultValue="test_useremail@stellarcarbon.io"
+        placeholder="Your email address"
+        value={useremail}
+        onChange={useremailOnChange}
+      />
+      {emailError && (
+        <FormError className="ml-4 !py-1">{"Invalid email address"}</FormError>
+      )}
+    </div>
   );
 }

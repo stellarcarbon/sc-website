@@ -14,6 +14,14 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         rainforest: "url('/rainforest_mist_carbonbank_1920x784.jpg')",
       },
+      colors: {
+        primary: "#2D3250",
+        secondary: "#424769",
+        tertiary: "#7077A1",
+        accent: "#d8def2",
+        // accentSecondary: "#596FB7",
+        accentSecondary: "#8b9dd9",
+      },
       fontFamily: {
         noto: ["Noto Serif", "sans-serif"],
       },

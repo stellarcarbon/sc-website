@@ -6,12 +6,23 @@ import { useAppContext } from "@/app/context/appContext";
 import { useState } from "react";
 import Button from "../../components/Button";
 import SelectWalletButtonDesktop from "../components/SelectWalletButtonDesktop";
+import ContactInfo from "./ContactInfo";
+import FormError from "@/app/components/FormError";
+import { PersonalDetails } from "@/app/context/types";
+import LoadingWallets from "../components/LoadingWallets";
 
 export default function SelectWallet() {
   const { connectWallet, connectionError, supportedWallets } = useAppContext();
   const [selectedWalletType, setSelectedWalletType] =
     useState<WalletType | null>(null);
   const [tncAccepted, setTncAccepted] = useState<boolean>(false);
+
+  const [username, setUsername] = useState<string>("");
+  const [useremail, setUseremail] = useState<string>("");
+
+  const [selectWalletError, setSelectWalletError] = useState<boolean>(false);
+  const [tncError, setTncError] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
 
   const selectWallet = (wType: WalletType) => {
     if (selectedWalletType === wType) {
@@ -21,16 +32,43 @@ export default function SelectWallet() {
     }
   };
 
+  const isValidEmail = (addr: string) => {
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    return regex.test(addr);
+  };
+
+  const submitForm = () => {
+    setTncError(!tncAccepted);
+    setSelectWalletError(selectedWalletType === null);
+    setEmailError(useremail !== "" && !isValidEmail(useremail));
+
+    if (
+      selectedWalletType === null ||
+      !tncAccepted ||
+      (useremail !== "" && !isValidEmail(useremail))
+    )
+      return;
+
+    const personalDetails: PersonalDetails = {
+      username,
+      useremail,
+    };
+
+    connectWallet(selectedWalletType!, personalDetails);
+
+    // TODO: move this form-reset to after completing the pop-up
+    setSelectedWalletType(null);
+    setTncAccepted(false);
+  };
+
   return (
     <>
-      <div className="flex flex-col items-start bg-white md:min-w-[600px] md:max-w-[650px] py-10 p-6 border rounded-md border-gray shadow-lg">
+      <div className="flex flex-col items-start bg-secondary text-white md:min-w-[600px] md:max-w-[800px] py-10 md:p-6 rounded-md border-gray shadow-lg">
         {/* <p className="px-8">
           Select a wallet that will be used for signing the Stellarcarbon
           transaction.
         </p> */}
-        <h1 className="text-2xl font-bold mx-8 my-1">
-          First connect your wallet
-        </h1>
+        <h1 className="text-2xl font-bold mx-8 my-1">Select a wallet</h1>
         <p className="text-sm mx-8 my-1 max-w-[80%]">
           To continue you will need a wallet to sign the sinking transaction.
           Connect a wallet to be able to create new transactions and access your
@@ -41,90 +79,121 @@ export default function SelectWallet() {
           from occuring :)
         </p>
         {selectedWalletType ? (
-          <b className="md:hidden">{`${selectedWalletType}`}</b>
+          <b className="hidden">{`${selectedWalletType}`}</b>
         ) : (
           <></>
         )}
 
         {/* Mobile buttons */}
-        <div className="flex flex-wrap justify-center gap-8 mt-4 md:hidden">
-          {supportedWallets.map((supportedWallet) => {
-            return (
-              <SelectWalletButton
-                key={`selectWalletButton_${supportedWallet.type}`}
-                wallet={supportedWallet}
-                isSelected={selectedWalletType === supportedWallet.type}
-                onClick={() => selectWallet(supportedWallet.type)}
-              />
-            );
-          })}
+        <div className="mt-4 md:hidden min-w-full">
+          {supportedWallets.length === 0 ? (
+            <LoadingWallets />
+          ) : (
+            <div className="flex flex-wrap justify-center gap-6 px-2">
+              {supportedWallets.map((supportedWallet) => {
+                return (
+                  <SelectWalletButton
+                    key={`selectWalletButton_${supportedWallet.type}`}
+                    wallet={supportedWallet}
+                    isSelected={selectedWalletType === supportedWallet.type}
+                    onClick={() => selectWallet(supportedWallet.type)}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Desktop buttons */}
-        <div className="md:flex flex-col hidden gap-1 my-4 w-[90%]">
-          {supportedWallets.map((supportedWallet) => {
-            return (
-              <SelectWalletButtonDesktop
-                key={`swbd_${supportedWallet.type}`}
-                wallet={supportedWallet}
-                isSelected={selectedWalletType === supportedWallet.type}
-                onClick={() => selectWallet(supportedWallet.type)}
-              >
-                {supportedWallet.name}
-              </SelectWalletButtonDesktop>
-            );
-          })}
-        </div>
+        <div className="md:block hidden my-4 min-w-full px-8">
+          {supportedWallets.length === 0 ? (
+            <LoadingWallets />
+          ) : (
+            <div className="flex flex-wrap gap-1 justify-start">
+              {supportedWallets.map((supportedWallet) => {
+                return (
+                  <SelectWalletButtonDesktop
+                    key={`swbd_${supportedWallet.type}`}
+                    wallet={supportedWallet}
+                    isSelected={selectedWalletType === supportedWallet.type}
+                    onClick={() => selectWallet(supportedWallet.type)}
+                  >
+                    {supportedWallet.name}
+                  </SelectWalletButtonDesktop>
+                );
+              })}
+            </div>
+          )}
 
-        <div className="mx-8 my-2 gap-2">
-          <input
-            type="checkbox"
-            checked={tncAccepted}
-            onChange={() => setTncAccepted(!tncAccepted)}
-            id="checkbox_policy"
-          />
-          <label className="p-4 mb-4 cursor-pointer" htmlFor="checkbox_policy">
-            I agree with privacy policy.
-          </label>
-        </div>
-
-        <div className="flex self-center mt-4 mb-2">
-          <Button
-            disabled={selectedWalletType === null || !tncAccepted}
-            onClick={() => {
-              connectWallet(selectedWalletType!);
-
-              // TODO: move this form-reset to after completing the pop-up
-              setSelectedWalletType(null);
-              setTncAccepted(false);
-            }}
-          >
-            Connect wallet
-          </Button>
-        </div>
-        <div className="flex flex-col items-center text-center gap-4 w-80">
-          {connectionError && (
-            <span id="SelectWalletError" className="text-red-500">
-              {connectionError}
-            </span>
+          {selectWalletError && (
+            <FormError>{"Select a wallet to continue"}</FormError>
           )}
         </div>
-      </div>
 
-      {/* <div className="flex flex-col items-center gap-4 mt-16 w-80">
-        <Button
-          disabled={selectedWalletType === null || !tncAccepted}
-          onClick={() => {
-            connectWallet(selectedWalletType!);
+        <h1 className="text-2xl font-bold mx-8 my-1 mt-4">
+          Contact details (optional)
+        </h1>
 
-            // TODO: move this form-reset to after completing the pop-up
-            setSelectedWalletType(null);
-            setTncAccepted(false);
-          }}
-        >
-          Connect
+        <p className="text-sm mx-8 mb-1 max-w-[80%]">
+          Your contact details will be used to send you a confirmation of your
+          purchases. This step is optional.
+        </p>
+
+        <ContactInfo
+          username={username}
+          setUsername={setUsername}
+          useremail={useremail}
+          setUseremail={setUseremail}
+          emailError={emailError}
+        />
+
+        <div className="h-1 w-full my-6" />
+
+        <h1 className="text-2xl font-bold mx-8 my-1">
+          Accept terms & conditions
+        </h1>
+        <p className="text-sm mx-8 mb-4 max-w-[80%]">
+          Read about our terms & conditions and privacy policy <u>here</u>.
+        </p>
+
+        <div className="mx-8 ">
+          <div
+            className={`px-4 gap-2 flex items-center border border-transparent rounded-md shadow-md
+        ${tncAccepted ? "bg-accent text-black  !border-black" : "bg-primary "}
+        `}
+          >
+            <input
+              className="w-5 h-5"
+              type="checkbox"
+              checked={tncAccepted}
+              onChange={() => setTncAccepted(!tncAccepted)}
+              id="checkbox_policy"
+            />
+            <label
+              className="p-2 cursor-pointer text-sm "
+              htmlFor="checkbox_policy"
+            >
+              I have read and agree with the terms & conditions and the privacy
+              policy.
+            </label>
+          </div>
+          {tncError && (
+            <FormError className="ml-4">
+              {"You have to accept the terms and conditions."}
+            </FormError>
+          )}
+        </div>
+
+        <Button className="ml-8 mt-8" onClick={submitForm}>
+          Connect wallet
         </Button>
-      </div> */}
+
+        {connectionError && (
+          <FormError id="SelectWalletError" className="ml-8">
+            {connectionError}
+          </FormError>
+        )}
+      </div>
     </>
   );
 }
