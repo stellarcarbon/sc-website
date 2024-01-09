@@ -63,7 +63,10 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       router.push("/wallet/connect");
     }
 
-    if (walletConnection?.isAnonymous || walletConnection?.personalDetails) {
+    if (
+      (walletConnection?.isAnonymous || walletConnection?.personalDetails) &&
+      pathname === "/wallet/connect"
+    ) {
       router.push("/wallet");
     }
   }, [walletConnection]);
