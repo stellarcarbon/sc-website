@@ -122,11 +122,11 @@ export default function SelectWallet() {
           )}
 
           {/* Mobile buttons */}
-          <div className="mt-4 md:hidden min-w-full">
+          <div className="mt-4 md:hidden">
             {supportedWallets.length === 0 ? (
               <LoadingWallets />
             ) : (
-              <div className="flex flex-wrap justify-center gap-6 px-2">
+              <div className="flex flex-wrap justify-center gap-6 px-4">
                 {supportedWallets.map((supportedWallet) => {
                   return (
                     <SelectWalletButton
