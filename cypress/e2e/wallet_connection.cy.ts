@@ -61,7 +61,7 @@ describe("Connect wallet error handling.", () => {
         (win as any).walletConnectDialogError = true;
       },
     });
-    cy.get("h1", { timeout: 5000 });
+    cy.get("button").contains("Connect wallet").click();
 
     cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
     cy.get("#checkbox_policy").click();
@@ -77,6 +77,7 @@ describe("Connect wallet error handling.", () => {
   it("has form validation on personal details form", () => {
     cy.visit("/wallet");
     cy.location("pathname").should("eq", "/wallet/connect");
+    cy.get("button").contains("Connect wallet").click();
 
     cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
 

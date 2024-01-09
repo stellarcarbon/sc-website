@@ -1,9 +1,9 @@
 // Helper function to select & (mock-)connect wallet.
 export const connectWallet = (anonymous: boolean) => {
   cy.visit("/wallet");
-
-  // Wallet page should load within 5000ms
   cy.location("pathname").should("eq", "/wallet/connect");
+
+  cy.get("button").contains("Connect wallet").click();
 
   cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
   cy.get("#checkbox_policy").click();
@@ -30,7 +30,7 @@ export const canDisconnect = () => {
 
   // Assert if we are back on wallet connection setup page
   cy.location("pathname").should("eq", "/wallet/connect");
-  cy.get("#ALBEDO_SelectWalletButtonDesktop");
+  cy.get("button").contains("Connect wallet");
   cy.window().then((win) => {
     const wallet = win.localStorage.getItem("wallet");
     expect(wallet).to.be.null;
