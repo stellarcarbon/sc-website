@@ -14,6 +14,9 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         rainforest: "url('/rainforest_mist_carbonbank_1920x784.jpg')",
       },
+      boxShadow: {
+        "md-inverted": "-2px 2px 15px -10px rgba(0,0,0,0.75)",
+      },
       colors: {
         primary: "#2D3250",
         secondary: "#424769",
