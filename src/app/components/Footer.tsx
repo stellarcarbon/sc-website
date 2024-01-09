@@ -5,7 +5,7 @@ export default function Footer() {
 
   return (
     <div
-      className={`flex flex-col items-center  shadow-md-inverted
+      className={`h-24 flex flex-col justify-center items-center shadow-md-inverted
     ${pathname.includes("/wallet") ? "bg-primary text-accent" : ""}
     `}
     >
@@ -14,7 +14,7 @@ export default function Footer() {
       ${pathname.includes("/wallet") ? "border-secondary" : "border-gray-50"}
       `}
       />
-      <div className="flex flex-wrap items-center justify-center my-6 gap-4 gap-x-8 md:gap-x-12">
+      <div className=" py-4 grow flex flex-wrap items-center justify-center gap-2 gap-x-8 md:gap-x-12">
         <span className="text-gray-500">© 2023 Stellarcarbon</span>
 
         <span>Terms of services</span>

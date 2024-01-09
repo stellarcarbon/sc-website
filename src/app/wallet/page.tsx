@@ -31,7 +31,7 @@ export default function WalletPage() {
   }, [walletConnection]);
 
   return (
-    <main className="flex flex-col bg-primary items-center justify-start md:py-6 min-h-[calc(100vh-80px)]">
+    <main className="flex flex-col bg-primary items-center justify-start md:py-6 min-h-[calc(100vh-176px)]">
       {/* <h1 className="text-2xl">Wallet Page</h1> */}
       {walletConnection ? (
         <Dashboard />

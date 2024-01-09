@@ -32,11 +32,16 @@ export default function Drawer() {
         `}
       >
         <img className="h-10" src="/stellarcarbon-heading.png" />
-        <button onClick={closeDrawer}>
+        <button
+          className={`${
+            pathname.includes("/wallet") ? "text-accent" : "text-black"
+          }`}
+          onClick={closeDrawer}
+        >
           <CloseIcon />
         </button>
       </div>
-      <div className={`flex flex-col mt-4`}>
+      <div className={`flex flex-col mt-4 `}>
         <DrawerLink href="/">Home</DrawerLink>
         <DrawerLink href="/explain">What is Stellarcarbon?</DrawerLink>
         <DrawerLink href="/projects">Current projects</DrawerLink>
@@ -51,8 +56,12 @@ export default function Drawer() {
       />
       <Button
         className="w-[50%] self-center"
-        onClick={() => {
-          router.push("/wallet");
+        onClick={async () => {
+          await router.push("/wallet");
+          if (pathname === "/wallet") {
+            // In case already on that path, have to close ourselves.
+            closeDrawer();
+          }
         }}
       >
         Action

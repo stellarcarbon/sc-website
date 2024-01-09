@@ -23,7 +23,11 @@ export default function DrawerLink({ children, href }: DrawerLinkProps) {
     ${
       isCurrentRoute()
         ? "text-yellow-400"
-        : `${pathname.includes("/wallet") ? "text-accent" : "text-gray-500"}`
+        : `${
+            pathname.includes("/wallet") || pathname.includes("/checkout")
+              ? "text-accent"
+              : "text-gray-500"
+          }`
     }
     `}
       onClick={() => {
