@@ -69,7 +69,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     ) {
       router.push("/wallet");
     }
-  }, [walletConnection]);
+  }, [walletConnection, pathname, router]);
 
   useEffect(() => {
     // Load local storage if available
