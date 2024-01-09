@@ -66,9 +66,9 @@ export default function SelectWallet() {
   return (
     <>
       {showSplash ? (
-        <div className="flex flex-col items-start bg-secondary text-white min-h-[calc(100vh-80px)] md:min-h-0 md:min-w-[600px] md:max-w-[650px] py-10 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">
-          <h1 className="text-3xl font-bold mx-8 my-1">Sinking carbon</h1>
-          <p className="text-sm mx-8 my-1 mb-10 md:max-w-[80%]">
+        <div className="flex flex-col items-start bg-secondary text-white min-h-[calc(100vh-80px)] md:min-h-0 md:min-w-[600px] md:max-w-[650px] py-4 md:py-10 md:p-0 md:pt-6 md:rounded-md border-gray shadow-lg">
+          <h1 className="text-3xl font-bold mx-6 my-1">Sinking carbon</h1>
+          <p className="text-sm mx-6 my-1 mb-10 md:max-w-[80%]">
             To create a carbonsink transaction you will need a wallet. We
             support various wallets that are well-known in the Stellar
             ecosystem.
@@ -88,7 +88,7 @@ export default function SelectWallet() {
           </Button>
         </div>
       ) : (
-        <div className="flex flex-col items-start bg-secondary text-white md:min-w-[600px] md:max-w-[650px] py-10 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">
+        <div className="flex flex-col items-start bg-secondary text-white md:min-w-[600px] md:max-w-[650px] py-4 md:py-10 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">
           {/* <p className="px-8">
           Select a wallet that will be used for signing the Stellarcarbon
           transaction.
@@ -104,13 +104,13 @@ export default function SelectWallet() {
             By sinking CARBON tokens you are helping prevent more CO2 emissions
             from occuring :)
           </p> */}
-          <h1 className="text-2xl font-bold mx-8 my-1">Select a wallet</h1>
+          <h1 className="text-2xl font-bold mx-6 my-1">Select a wallet</h1>
 
-          <p className="text-xs mx-8 mb-1 max-w-[80%] hidden md:block">
+          <p className="text-xs mx-6 mb-1 max-w-[80%] hidden md:block">
             Connect a wallet to be able to create new transactions and access
             your sinking history.
           </p>
-          <p className="text-xs mx-8 mb-1 max-w-[80%] md:hidden">
+          <p className="text-xs mx-6 mb-1 max-w-[80%] md:hidden">
             Tap your wallet to use it to connect.
           </p>
           {selectedWalletType ? (
@@ -171,11 +171,11 @@ export default function SelectWallet() {
             )}
           </div>
 
-          <h1 className="text-2xl font-bold mx-8 my-1 mt-4">
+          <h1 className="text-2xl font-bold mx-6 my-1 mt-4">
             Contact details (optional)
           </h1>
 
-          <p className="text-xs mx-8 mb-1 max-w-[80%]">
+          <p className="text-xs mx-6 mb-1 max-w-[80%]">
             Your contact details will be used to send you a confirmation of your
             purchases. This step is optional.
           </p>
@@ -190,14 +190,14 @@ export default function SelectWallet() {
 
           <div className="h-1 w-full my-6" />
 
-          <h1 className="text-2xl font-bold mx-8 my-1">
+          <h1 className="text-2xl font-bold mx-6 my-1">
             Accept terms & conditions
           </h1>
-          <p className="text-xs mx-8 mb-4 max-w-[80%]">
+          <p className="text-xs mx-6 mb-4 max-w-[80%]">
             Read about our terms & conditions and privacy policy <u>here</u>.
           </p>
 
-          <div className="mx-8 ">
+          <div className="mx-6 ">
             <div
               className={`!cursor:pointer pl-2 gap-2 flex items-center font-bold border  border-transparent rounded-md 
         ${

@@ -10,7 +10,7 @@ import {
 } from "stellar-wallets-kit";
 import { PersonalDetails, WalletConnection } from "./types";
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 // A global app context used to write & read state everywhere.
 
@@ -23,6 +23,9 @@ type AppContext = {
     personalDetails: PersonalDetails
   ) => void;
   disconnectWallet: () => void;
+  isDrawerOpen: boolean;
+  openDrawer: () => void;
+  closeDrawer: () => void;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -43,10 +46,20 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [walletConnection, setWalletConnection] =
     useState<WalletConnection | null>(null);
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const openDrawer = () => setIsDrawerOpen(true);
+  const closeDrawer = () => setIsDrawerOpen(false);
+
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (walletConnection === null) {
+    console.log("ola");
+    closeDrawer();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (walletConnection === null && pathname === "/wallet") {
       router.push("/wallet/connect");
     }
 
@@ -113,8 +126,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       walletConnection,
       connectWallet,
       disconnectWallet,
+      isDrawerOpen,
+      openDrawer,
+      closeDrawer,
     };
-  }, [connectionError, supportedWallets, walletConnection]);
+  }, [connectionError, supportedWallets, walletConnection, isDrawerOpen]);
 
   return (
     <AppContext.Provider value={providerValue}>{children}</AppContext.Provider>

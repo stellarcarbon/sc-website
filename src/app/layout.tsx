@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 import TopBar from "@/app/components/TopBar";
+import App from "./App";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} min-h-screen`}>
         <Providers>
-          <TopBar />
-          {children}
+          <App>{children}</App>
         </Providers>
       </body>
     </html>

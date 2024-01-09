@@ -5,19 +5,23 @@ import SelectWallet from "./containers/SelectWallet";
 import PubKeyDisplay from "./components/PubKeyDisplay";
 import DisconnectWalletButton from "./components/DisconnectWalletButton";
 import PersonalDetailsDisplay from "./components/PersonalDetailsDisplay";
-import { redirect, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { time } from "console";
 import Dashboard from "./containers/Dashboard";
 
 export default function WalletPage() {
-  const { walletConnection, supportedWallets } = useAppContext();
+  const { walletConnection, supportedWallets, closeDrawer } = useAppContext();
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // Scroll to top on mount
+    window.scroll({ top: 0 });
+
     // Redirect to /connect if no wallet connection is found in localStorage within 3000ms
     if (!walletConnection && typeof window !== "undefined") {
       timeoutIdRef.current = setTimeout(() => {

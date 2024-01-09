@@ -10,7 +10,7 @@ export default function Dashboard() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col flex-1 md:flex-none items-start bg-secondary text-white md:min-w-[600px] md:max-w-[800px] py-10 p-6 rounded-md border-gray shadow-lg">
+    <div className="flex flex-col flex-1 md:flex-none items-start bg-secondary text-white md:min-w-[600px] md:max-w-[800px] py-10 p-6 md:rounded-md border-gray shadow-lg">
       <p>Wallet setup succesful!</p>
       <PubKeyDisplay />
       <PersonalDetailsDisplay />
