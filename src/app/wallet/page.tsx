@@ -21,16 +21,6 @@ export default function WalletPage() {
   useEffect(() => {
     // Scroll to top on mount
     window.scroll({ top: 0 });
-
-    // Redirect to /connect if no wallet connection is found in localStorage within 3000ms
-    if (!walletConnection && typeof window !== "undefined") {
-      timeoutIdRef.current = setTimeout(() => {
-        window.location.replace("/wallet/connect");
-      }, 3000);
-    }
-    return () => {
-      if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
-    };
   }, []);
 
   useEffect(() => {
