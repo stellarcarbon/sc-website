@@ -173,7 +173,7 @@ export default function SelectWallet() {
             )}
           </div>
 
-          <h1 className="text-2xl font-bold mx-6 my-1 mt-4">
+          <h1 className="text-2xl font-bold mx-6 my-1 mt-12">
             Contact details (optional)
           </h1>
 
@@ -190,48 +190,44 @@ export default function SelectWallet() {
             emailError={emailError}
           />
 
-          <div className="h-1 w-full my-6" />
-
-          <h1 className="text-2xl font-bold mx-6 my-1">
+          <h1 className="text-2xl font-bold mx-6 my-1 mt-14">
             Accept terms & conditions
           </h1>
-          <p className="text-xs mx-6 mb-4 max-w-[80%]">
+          <p className="text-xs mx-6 mb-2 max-w-[80%]">
             Read about our terms & conditions and privacy policy <u>here</u>.
           </p>
 
-          <div className="mx-6 ">
-            <div
-              className={`!cursor:pointer pl-2 gap-2 flex items-center font-bold border  border-transparent rounded-md 
+          <div
+            className={`mx-6 !cursor:pointer pl-2 gap-2 flex items-center font-bold border  border-transparent rounded-md 
         ${
           tncAccepted
             ? "bg-primary text-white  !border-accentSecondary"
             : "bg-secondary "
         }
         `}
+          >
+            <input
+              className="w-5 h-5"
+              type="checkbox"
+              checked={tncAccepted}
+              onChange={() => setTncAccepted(!tncAccepted)}
+              id="checkbox_policy"
+            />
+            <label
+              className="p-2 cursor-pointer text-sm "
+              htmlFor="checkbox_policy"
             >
-              <input
-                className="w-5 h-5"
-                type="checkbox"
-                checked={tncAccepted}
-                onChange={() => setTncAccepted(!tncAccepted)}
-                id="checkbox_policy"
-              />
-              <label
-                className="p-2 cursor-pointer text-sm "
-                htmlFor="checkbox_policy"
-              >
-                I have read and agree with the terms & conditions and the
-                privacy policy.
-              </label>
-            </div>
-            {tncError && (
-              <FormError className="ml-4">
-                {"You have to accept the terms and conditions."}
-              </FormError>
-            )}
+              I have read and agree with the terms & conditions and the privacy
+              policy.
+            </label>
           </div>
+          {tncError && (
+            <FormError className="ml-4">
+              {"You have to accept the terms and conditions."}
+            </FormError>
+          )}
 
-          <Button className="mt-8 my-4 self-center" onClick={submitForm}>
+          <Button className="my-10 self-center" onClick={submitForm}>
             Connect wallet
           </Button>
 
