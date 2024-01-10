@@ -10,6 +10,7 @@
   --background-end-rgb: 235, 235, 235;
 }
 
+/* TODO: BUGGED */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
