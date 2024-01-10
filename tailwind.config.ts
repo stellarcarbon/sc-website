@@ -13,6 +13,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         rainforest: "url('/rainforest_mist_carbonbank_1920x784.jpg')",
+        dalle: "url('/dalle.png')",
       },
       boxShadow: {
         "md-inverted": "-2px 2px 15px -10px rgba(0,0,0,0.75)",

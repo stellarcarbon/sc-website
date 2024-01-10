@@ -66,7 +66,7 @@ export default function SelectWallet() {
   return (
     <>
       {showSplash ? (
-        <div className="flex flex-col items-start bg-secondary text-white min-h-[calc(100vh-176px)] md:min-h-0 md:min-w-[600px] md:max-w-[650px] py-4 md:py-6 md:p-0 pt-8 md:rounded-md border-gray shadow-lg">
+        <div className="flex flex-col items-start bg-secondary md:border border-tertiary text-white min-h-[calc(100vh-176px)] md:min-h-0 md:min-w-[600px] md:max-w-[650px] py-4 md:py-6 md:p-0 pt-8 md:rounded-md border-gray shadow-lg">
           <div className="mt-0">
             <h1 className="text-3xl font-bold mx-6 my-0">Sinking carbon</h1>
             <p className="text-sm mx-6 my-8  md:max-w-[80%]">
@@ -90,7 +90,7 @@ export default function SelectWallet() {
           </Button>
         </div>
       ) : (
-        <div className="flex flex-col items-start bg-secondary text-white md:min-w-[600px] md:max-w-[650px] py-4 md:py-6 pt-8 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">
+        <div className="flex flex-col items-start bg-secondary md:border border-tertiary text-white md:min-w-[600px] md:max-w-[650px] py-4 md:py-6 pt-8 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">
           {/* <p className="px-8">
           Select a wallet that will be used for signing the Stellarcarbon
           transaction.
