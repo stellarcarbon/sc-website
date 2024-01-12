@@ -73,8 +73,8 @@ export default function PaymentList() {
         payments.length === 0 ? (
           <div className="flex flex-col items-center m-4 gap-2">
             <span className=" text-sm text-center">
-              Looks like you don't have any transactions yet. After sinking
-              carbon you can view your history here.
+              {`Looks like you don't have any transactions yet. After sinking
+              carbon you can view your history here.`}
             </span>
           </div>
         ) : (
