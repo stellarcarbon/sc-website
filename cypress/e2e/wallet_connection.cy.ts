@@ -1,4 +1,4 @@
-import { WalletConnection } from "../../src/app/context/types";
+import { WalletConnection } from "../../src/app/types";
 import { canDisconnect, connectWallet } from "./flows";
 
 declare global {

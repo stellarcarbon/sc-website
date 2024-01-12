@@ -18,8 +18,7 @@ export const connectWallet = (anonymous: boolean) => {
   cy.get("button").contains("Connect wallet").click();
 
   // Assert if we are dashboard
-  cy.get("main").contains("Connected with Stellar PubKey:");
-  cy.get("#stellarPubKey");
+  cy.get("main").contains("Transaction history");
   cy.location("pathname").should("eq", "/wallet");
 };
 

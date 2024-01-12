@@ -8,7 +8,7 @@ import PersonalDetailsDisplay from "./components/PersonalDetailsDisplay";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { time } from "console";
-import Dashboard from "./containers/Dashboard";
+import Dashboard2 from "./containers/Dashboard2";
 
 export default function WalletPage() {
   const { walletConnection, supportedWallets, closeDrawer } = useAppContext();
@@ -34,7 +34,7 @@ export default function WalletPage() {
     <main className="flex flex-col bg-primary items-center justify-start md:py-6 min-h-[calc(100vh-176px)]">
       {/* <h1 className="text-2xl">Wallet Page</h1> */}
       {walletConnection ? (
-        <Dashboard />
+        <Dashboard2 />
       ) : supportedWallets.length > 0 ? (
         <SelectWallet />
       ) : (

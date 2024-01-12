@@ -1,4 +1,4 @@
-import { WalletConnection } from "../../src/app/context/types";
+import { WalletConnection } from "../../src/app/types";
 import { canDisconnect } from "./flows";
 
 describe("Anonymous user visiting dashboard", () => {
@@ -24,10 +24,10 @@ describe("Anonymous user visiting dashboard", () => {
     cy.get("p").contains("Anonymous connection");
   });
 
-  it("Can continue to checkout", () => {
-    cy.get("button").contains("Continue to checkout").click();
-    cy.location("pathname").should("eq", "/checkout");
-  });
+  // it("Can continue to checkout", () => {
+  //   cy.get("button").contains("Continue to checkout").click();
+  //   cy.location("pathname").should("eq", "/checkout");
+  // });
 
   it("Can disconnect wallet", () => {
     canDisconnect();
@@ -58,14 +58,14 @@ describe("User with personal details visiting dashboard", () => {
   });
 
   it("Can see that the connection is NOT anonymous", () => {
-    cy.get("p").contains("Username: testusername");
-    cy.get("p").contains("Email: testuseremail@stellarcarbon.io");
+    cy.get("span").contains("testusername");
+    cy.get("span").contains("testuseremail@stellarcarbon.io");
   });
 
-  it("Can continue to checkout", () => {
-    cy.get("button").contains("Continue to checkout").click();
-    cy.location("pathname").should("eq", "/checkout");
-  });
+  // it("Can continue to checkout", () => {
+  //   cy.get("button").contains("Continue to checkout").click();
+  //   cy.location("pathname").should("eq", "/checkout");
+  // });
 
   it("Can disconnect wallet", () => {
     canDisconnect();

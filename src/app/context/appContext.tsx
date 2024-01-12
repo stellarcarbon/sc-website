@@ -8,7 +8,7 @@ import {
   WalletNetwork,
   WalletType,
 } from "stellar-wallets-kit";
-import { PersonalDetails, WalletConnection } from "./types";
+import { PersonalDetails, WalletConnection } from "../types";
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
 import { useRouter, usePathname } from "next/navigation";
 

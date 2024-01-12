@@ -1,4 +1,4 @@
-import { WalletConnection } from "@/app/context/types";
+import { WalletConnection } from "@/app/types";
 
 describe("Connected user visiting checkout", () => {
   beforeEach(() => {

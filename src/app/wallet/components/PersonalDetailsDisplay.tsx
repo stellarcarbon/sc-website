@@ -7,12 +7,18 @@ export default function PersonalDetailsDisplay() {
   }
 
   return (
-    <div className="mb-8 font-bold">
+    <div className="">
       {!walletConnection.isAnonymous ? (
-        <>
-          <p>Username: {walletConnection.personalDetails?.username}</p>
-          <p>Email: {walletConnection.personalDetails?.useremail}</p>
-        </>
+        <div className="">
+          <div className="flex justify-between">
+            <span>Username</span>
+            <span>{walletConnection.personalDetails?.username}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Email</span>
+            <span>{walletConnection.personalDetails?.useremail}</span>
+          </div>
+        </div>
       ) : (
         <p>Anonymous connection</p>
       )}

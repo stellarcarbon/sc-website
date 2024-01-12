@@ -11,3 +11,16 @@ export type PersonalDetails = {
   username: string;
   useremail: string;
 };
+
+export type Payment = {
+  hash: string;
+  createdAt: Date;
+  transactionSuccesful: boolean;
+  transaction?: Transaction;
+};
+
+export type Transaction = {
+  paymentAsset: string;
+  paymentAmount: number;
+  memo: string;
+};

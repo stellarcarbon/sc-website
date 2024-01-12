@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 import SelectWalletButtonDesktop from "../components/SelectWalletButtonDesktop";
 import ContactInfo from "./ContactInfo";
 import FormError from "@/app/components/FormError";
-import { PersonalDetails } from "@/app/context/types";
+import { PersonalDetails } from "@/app/types";
 import LoadingWallets from "../components/LoadingWallets";
 
 export default function SelectWallet() {
