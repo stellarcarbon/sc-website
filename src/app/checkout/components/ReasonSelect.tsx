@@ -24,8 +24,9 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
 
   return (
     <div className="flex flex-col p-4">
-      <span className="font-bold mb-2">Select a reason</span>
-      <div className="flex gap-2">
+      <span className="font-bold mb-0">Tell us why (optional)</span>
+      <span className="text-xs mt-1">Select a reason</span>
+      <div className="flex gap-2 my-2">
         {Object.values(ReasonOptions).map((option) => {
           return (
             <SelectReasonButton
@@ -37,7 +38,8 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
           );
         })}
       </div>
-      <span className="text-xs mt-2">Selected reason: {reason}</span>
+      <span className="text-xs">or write your own message</span>
+      <textarea value={reason} className="my-2 text-black p-1" />
     </div>
   );
 }

@@ -40,7 +40,7 @@ export default function TonnesRange({ register, watch }: TonnesRangeProps) {
   return (
     <div className="flex flex-col p-4">
       <span className="font-bold">How much would you like to offset?</span>
-      <span className="text-xs mb-2">
+      <span className="text-xs mb-2 mt-1">
         Amount CARBON (in tonnes CO2-equivalent: tCO₂-e)
       </span>
       <div className="flex gap-2">
