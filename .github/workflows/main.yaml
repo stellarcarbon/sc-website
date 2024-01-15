@@ -21,7 +21,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Tests
+      - name: Run unit tests
+        run: npm test
+
+      - name: Run Cypress Tests
         run: npm run e2e:headless
 
   deploy:

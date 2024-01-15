@@ -4,8 +4,11 @@ import Button from "@/app/components/Button";
 import { Payment } from "@/app/types";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context/appContext";
 
 export default function PaymentList() {
+  const { myTransactions } = useAppContext();
+
   const [payments, setPayments] = useState<Payment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -14,6 +17,22 @@ export default function PaymentList() {
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 2000);
   }, []);
+
+  useEffect(() => {
+    const ps: Payment[] = myTransactions.map((mt) => {
+      return {
+        hash: mt.id,
+        createdAt: new Date(mt.createdAt),
+        transactionSuccesful: true,
+        transaction: {
+          paymentAmount: mt.amount,
+          paymentAsset: mt.asset,
+          memo: mt.memo,
+        },
+      };
+    });
+    setPayments(ps);
+  }, [myTransactions]);
 
   const mockPayments = () => {
     const mockedPayments: Payment[] = [
@@ -68,7 +87,10 @@ export default function PaymentList() {
 
   return (
     <div className="text-accent m-2 flex flex-col gap-2">
-      <h1 className="text-lg font-bold text-center">Transaction history</h1>
+      <h1 className="flex flex-col text-lg font-bold text-center">
+        <span>Transaction history</span>
+        <span className="text-xs break-words w-[80%] self-center">{`For account (dev-mode): GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y`}</span>
+      </h1>
       {!isLoading ? (
         payments.length === 0 ? (
           <div className="flex flex-col items-center m-4 gap-2">
@@ -124,9 +146,10 @@ export default function PaymentList() {
       ) : (
         <div className="text-center py-4">Loading blockchain data...</div>
       )}
-      <Button onClick={mockPayments} className="!p-2">
+
+      {/* <Button onClick={mockPayments} className="!p-2">
         Swap state (dev only)
-      </Button>
+      </Button> */}
     </div>
   );
 }

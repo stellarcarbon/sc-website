@@ -37,10 +37,8 @@ export const walletConnectDialog = async (
 
 export const loadAvailableWallets = async (): Promise<ISupportedWallet[]> => {
   if (window.Cypress) {
-    console.log("load fake");
     return await loadAvailableWalletsMock();
   } else {
-    console.log("load real");
     const wallets = await StellarWalletsKit.getSupportedWallets();
     return wallets;
   }

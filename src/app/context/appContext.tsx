@@ -11,6 +11,9 @@ import {
 import { PersonalDetails, WalletConnection } from "../types";
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
 import { useRouter, usePathname } from "next/navigation";
+import TransactionHistoryService, {
+  MyTransactionRecord,
+} from "../wallet/TransactionHistoryService";
 
 // A global app context used to write & read state everywhere.
 
@@ -26,6 +29,7 @@ type AppContext = {
   isDrawerOpen: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;
+  myTransactions: MyTransactionRecord[];
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -45,6 +49,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   );
   const [walletConnection, setWalletConnection] =
     useState<WalletConnection | null>(null);
+  const [myTransactions, setMyTransactions] = useState<MyTransactionRecord[]>(
+    []
+  );
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const openDrawer = () => setIsDrawerOpen(true);
@@ -54,7 +61,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log("ola");
     closeDrawer();
   }, [pathname]);
 
@@ -77,17 +83,21 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     if (storedWalletConnectionJSONString) {
       const wc: WalletConnection = JSON.parse(storedWalletConnectionJSONString);
       setWalletConnection(wc);
-      console.log("swc");
     }
 
     // Load supported wallets if not loaded yet.
     if (supportedWallets.length === 0) {
-      console.log("no wallets");
       loadAvailableWallets().then((wallets) => {
         setSupportedWallets(wallets);
         return;
       });
     }
+
+    // Start loading transactions.
+    const transactionHistoryService = new TransactionHistoryService(
+      setMyTransactions
+    );
+    transactionHistoryService.fetchHistory();
   }, []);
 
   const connectWallet = async (
@@ -132,8 +142,15 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       isDrawerOpen,
       openDrawer,
       closeDrawer,
+      myTransactions,
     };
-  }, [connectionError, supportedWallets, walletConnection, isDrawerOpen]);
+  }, [
+    connectionError,
+    supportedWallets,
+    walletConnection,
+    isDrawerOpen,
+    myTransactions,
+  ]);
 
   return (
     <AppContext.Provider value={providerValue}>{children}</AppContext.Provider>

@@ -10,7 +10,7 @@ import CheckoutForm from "./CheckoutForm";
 
 export default function Dashboard2() {
   const { walletConnection } = useAppContext();
-  const [isCheckoutExpanded, setIsCheckoutExpanded] = useState<boolean>(true);
+  const [isCheckoutExpanded, setIsCheckoutExpanded] = useState<boolean>(false);
 
   return (
     <div className="flex flex-col bg-secondary w-full min-h-[calc(100vh-176px)] md:max-w-[800px] md:p-4 md:rounded-md">

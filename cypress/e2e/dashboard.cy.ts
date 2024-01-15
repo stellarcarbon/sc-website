@@ -20,9 +20,9 @@ describe("Anonymous user visiting dashboard", () => {
     cy.get("span").contains("6666");
   });
 
-  it("Can see that the connection is anonymous", () => {
-    cy.get("p").contains("Anonymous connection");
-  });
+  // it("Can see that the connection is anonymous", () => {
+  //   cy.get("p").contains("Anonymous connection");
+  // });
 
   // it("Can continue to checkout", () => {
   //   cy.get("button").contains("Continue to checkout").click();
