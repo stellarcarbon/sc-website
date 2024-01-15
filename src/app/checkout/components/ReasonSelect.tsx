@@ -22,6 +22,12 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
     }
   };
 
+  const onReasonTextChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setValue("reason", event.target.value);
+  };
+
   return (
     <div className="flex flex-col p-4">
       <span className="font-bold mb-0">Tell us why (optional)</span>
@@ -39,7 +45,11 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
         })}
       </div>
       <span className="text-xs">or write your own message</span>
-      <textarea value={reason} className="my-2 text-black p-1" />
+      <textarea
+        onChange={onReasonTextChange}
+        value={reason}
+        className="my-2 text-black p-1"
+      />
     </div>
   );
 }

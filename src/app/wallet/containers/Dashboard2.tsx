@@ -25,11 +25,11 @@ export default function Dashboard2() {
             <EditIcon />
           </button>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <span>Wallet</span>
-          <span>{walletConnection?.walletType}</span>
+          <span className="text-xs">{walletConnection?.walletType}</span>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <span>Stellar PubKey</span>
           <span className="text-xs break-words max-w-[50%]">
             {walletConnection?.stellarPubKey}

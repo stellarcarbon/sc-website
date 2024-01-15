@@ -8,7 +8,7 @@ export default function PersonalDetailsDisplay() {
 
   return (
     <div className="">
-      {!walletConnection.isAnonymous ? (
+      {!walletConnection.isAnonymous && (
         <div className="">
           <div className="flex justify-between">
             <span>Username</span>
@@ -19,8 +19,6 @@ export default function PersonalDetailsDisplay() {
             <span>{walletConnection.personalDetails?.useremail}</span>
           </div>
         </div>
-      ) : (
-        <p>Anonymous connection</p>
       )}
     </div>
   );

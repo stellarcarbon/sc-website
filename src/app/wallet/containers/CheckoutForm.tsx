@@ -48,7 +48,7 @@ export default function CheckoutForm() {
   };
 
   return (
-    <form className="flex flex-col">
+    <form className="flex flex-col min-w-[80%]">
       <TonnesRange register={register} watch={watch} />
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
