@@ -2,7 +2,20 @@ import { MyTransactionRecord } from "@/app/wallet/TransactionHistoryService";
 import IndexedDBService from "../src/app/wallet/IndexedDBService";
 import { describe, expect, test, beforeAll } from "@jest/globals";
 
-const testTransactions: MyTransactionRecord[] = [{ id: "000" }, { id: "111" }];
+const makeTransactionRecord = (id: string): MyTransactionRecord => {
+  return {
+    id,
+    createdAt: "datestring",
+    memo: "memo",
+    amount: 1,
+    asset: "xlm",
+  };
+};
+
+const testTransactions: MyTransactionRecord[] = [
+  makeTransactionRecord("0"),
+  makeTransactionRecord("1"),
+];
 
 describe("IndexedDBService", () => {
   let idbService: IndexedDBService;
@@ -30,22 +43,22 @@ describe("IndexedDBService", () => {
     const loadedTransactions = await idbService.loadTransactions();
 
     expect(loadedTransactions.length).toEqual(2);
-    expect(loadedTransactions[0].id).toEqual("000");
-    expect(loadedTransactions[1].id).toEqual("111");
+    expect(loadedTransactions[0].id).toEqual("0");
+    expect(loadedTransactions[1].id).toEqual("1");
   });
 
   test("Saving more transactions appends them", async () => {
     const additionalTransactions: MyTransactionRecord[] = [
-      { id: "222" },
-      { id: "333" },
+      makeTransactionRecord("2"),
+      makeTransactionRecord("3"),
     ];
     await idbService.saveTransactions(additionalTransactions);
     const moreTransactions = await idbService.loadTransactions();
 
     expect(moreTransactions.length).toEqual(4);
-    expect(moreTransactions[0].id).toEqual("000");
-    expect(moreTransactions[1].id).toEqual("111");
-    expect(moreTransactions[2].id).toEqual("222");
-    expect(moreTransactions[3].id).toEqual("333");
+    expect(moreTransactions[0].id).toEqual("0");
+    expect(moreTransactions[1].id).toEqual("1");
+    expect(moreTransactions[2].id).toEqual("2");
+    expect(moreTransactions[3].id).toEqual("3");
   });
 });
