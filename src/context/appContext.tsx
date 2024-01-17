@@ -130,8 +130,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const disconnectWallet = () => {
     localStorage.removeItem("wallet");
     setWalletConnection(null);
+    setMyTransactions([]);
     router.push("/wallet/connect");
-    console.log("removed wallet item");
   };
 
   const providerValue = useMemo(() => {
