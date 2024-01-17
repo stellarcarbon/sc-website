@@ -11,7 +11,7 @@ import Button from "@/components/Button";
 import TransactionHistoryService from "@/app/wallet/TransactionHistoryService";
 import { DEV_ACCOUNT } from "@/app/types";
 
-export default function Dashboard2() {
+export default function Dashboard() {
   const { walletConnection, myTransactions, setMyTransactions } =
     useAppContext();
   const [isCheckoutExpanded, setIsCheckoutExpanded] = useState<boolean>(false);

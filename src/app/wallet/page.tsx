@@ -1,14 +1,8 @@
 "use client";
 import { useAppContext } from "../../context/appContext";
 import Button from "@/components/Button";
-import SelectWallet from "../../containers/SelectWallet";
-import PubKeyDisplay from "../../components/wallet/PubKeyDisplay";
-import DisconnectWalletButton from "../../components/wallet/DisconnectWalletButton";
-import PersonalDetailsDisplay from "../../components/wallet/PersonalDetailsDisplay";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { time } from "console";
-import Dashboard2 from "../../containers/Dashboard2";
+import { useRouter } from "next/navigation";
+import Dashboard from "../../containers/Dashboard";
 
 export default function WalletPage() {
   const { walletConnection, supportedWallets, closeDrawer } = useAppContext();
@@ -43,7 +37,7 @@ export default function WalletPage() {
           </Button>
         </div>
       ) : (
-        <Dashboard2 />
+        <Dashboard />
       )}
     </main>
   );
