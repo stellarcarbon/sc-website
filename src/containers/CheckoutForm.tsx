@@ -2,14 +2,14 @@ import carbonApi from "@/app/carbonApi";
 import {
   BuildSinkCarbonXdrSinkCarbonXdrPostRequest,
   SinkingResponse,
-} from "@/app/carbon_api";
-import CurrencySelect from "@/app/checkout/components/CurrencySelect";
-import ReasonSelect from "@/app/checkout/components/ReasonSelect";
-import TonnesRange from "@/app/checkout/components/TonnesRange";
-import { CheckoutFormData } from "@/app/checkout/types";
-import Button from "@/app/components/Button";
-import FormError from "@/app/components/FormError";
-import { useAppContext } from "@/app/context/appContext";
+} from "@/carbon_api";
+import CurrencySelect from "@/components/checkout/CurrencySelect";
+import ReasonSelect from "@/components/checkout/ReasonSelect";
+import TonnesRange from "@/components/checkout/TonnesRange";
+import { CheckoutFormData } from "@/app/types";
+import Button from "@/components/Button";
+import FormError from "@/components/FormError";
+import { useAppContext } from "@/context/appContext";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 

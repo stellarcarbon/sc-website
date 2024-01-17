@@ -3,7 +3,7 @@
 import Link from "next/link";
 import TopBarLink from "./TopBarLink";
 import { usePathname } from "next/navigation";
-import { useAppContext } from "../context/appContext";
+import { useAppContext } from "@/context/appContext";
 import HamburgerButton from "./HamburgerButton";
 
 export default function TopBar() {

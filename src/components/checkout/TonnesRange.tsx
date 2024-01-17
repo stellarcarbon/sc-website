@@ -1,5 +1,5 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import { CheckoutFormData } from "../types";
+import { CheckoutFormData } from "@/app/types";
 import { useEffect, useState } from "react";
 import carbonApi from "@/app/carbonApi";
 import { debounce } from "@/app/utils";
@@ -20,7 +20,7 @@ export default function TonnesRange({ register, watch }: TonnesRangeProps) {
         .getCarbonQuoteCarbonQuoteGet({
           carbonAmount: tonnes,
         })
-        .then((result) => {
+        .then((result: any) => {
           console.log(result);
           setQuote(result.totalCost);
         });

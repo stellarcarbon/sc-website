@@ -1,4 +1,4 @@
-import { useAppContext } from "@/app/context/appContext";
+import { useAppContext } from "@/context/appContext";
 
 export default function PubKeyDisplay() {
   const { walletConnection } = useAppContext();

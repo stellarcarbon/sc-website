@@ -1,7 +1,7 @@
 "use client";
 
-import { useAppContext } from "../context/appContext";
-import CloseIcon from "../icons/CloseIcon";
+import { useAppContext } from "@/context/appContext";
+import CloseIcon from "./icons/CloseIcon";
 import Button from "./Button";
 import DrawerLink from "./DrawerLink";
 import TopBarLink from "./TopBarLink";

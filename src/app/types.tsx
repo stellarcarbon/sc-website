@@ -12,15 +12,30 @@ export type PersonalDetails = {
   useremail: string;
 };
 
-// export type Payment = {
-//   hash: string;
-//   createdAt: Date;
-//   transactionSuccesful: boolean;
-//   transaction?: Transaction;
-// };
+export interface CheckoutFormData {
+  tonnes: number;
+  currency: CurrencyOptions;
+  reason: ReasonOptions;
+}
 
-// export type Transaction = {
-//   paymentAsset: string;
-//   paymentAmount: number;
-//   memo: string;
-// };
+export enum CurrencyOptions {
+  XLM = "XLM",
+  USDC = "USDC",
+}
+
+export enum ReasonOptions {
+  ENVIRONMENT = "ENVIRONMENT",
+  HOUSEHOLD = "HOUSEHOLD",
+  AIRTRAVEL = "AIRTRAVEL",
+  ROADTRAVEL = "ROADTRAVEL",
+}
+
+export interface MyTransactionRecord {
+  id: string;
+  createdAt: string;
+  memo: string;
+  assetAmount: number;
+  asset: string;
+  sinkAmount: number;
+  // Add other relevant transaction properties here
+}

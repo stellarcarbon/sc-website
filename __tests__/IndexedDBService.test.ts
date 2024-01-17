@@ -1,4 +1,4 @@
-import { MyTransactionRecord } from "@/app/wallet/TransactionHistoryService";
+import { MyTransactionRecord } from "@/app/types";
 import IndexedDBService from "../src/app/wallet/IndexedDBService";
 import { describe, expect, test, beforeAll } from "@jest/globals";
 

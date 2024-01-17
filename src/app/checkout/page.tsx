@@ -1,19 +1,19 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import TonnesRange from "./components/TonnesRange";
-import Button from "../components/Button";
-import CurrencySelect from "./components/CurrencySelect";
-import ReasonSelect from "./components/ReasonSelect";
-import { CheckoutFormData } from "./types";
+import TonnesRange from "../../components/checkout/TonnesRange";
+import Button from "../../components/Button";
+import CurrencySelect from "../../components/checkout/CurrencySelect";
+import ReasonSelect from "../../components/checkout/ReasonSelect";
+import { CheckoutFormData } from "../../types/types";
 import {
   BuildSinkCarbonXdrSinkCarbonXdrPostRequest,
   SinkingResponse,
 } from "@/app/carbon_api";
 import { useEffect, useState } from "react";
 import carbonApi from "@/app/carbonApi";
-import { useAppContext } from "@/app/context/appContext";
-import FormError from "../components/FormError";
+import { useAppContext } from "@/context/appContext";
+import FormError from "../../components/FormError";
 
 export default function Checkout() {
   const { register, handleSubmit, watch, setValue } =

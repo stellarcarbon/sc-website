@@ -1,5 +1,5 @@
 import { HTMLProps } from "react";
-import HamburgerIcon from "../icons/HamburgerIcon";
+import HamburgerIcon from "./icons/HamburgerIcon";
 
 interface HamburgerButtonProps extends HTMLProps<HTMLButtonElement> {}
 

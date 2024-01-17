@@ -1,5 +1,5 @@
-import { useAppContext } from "@/app/context/appContext";
-import Button from "../../components/Button";
+import { useAppContext } from "@/context/appContext";
+import Button from "../Button";
 
 export default function DisconnectWalletButton() {
   const { disconnectWallet } = useAppContext();

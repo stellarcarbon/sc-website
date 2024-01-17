@@ -1,11 +1,11 @@
-import CaretUpIcon from "@/app/icons/CaretUpIcon";
-import DisconnectWalletButton from "../components/DisconnectWalletButton";
-import PersonalDetailsDisplay from "../components/PersonalDetailsDisplay";
+import CaretUpIcon from "@/components/icons/CaretUpIcon";
+import DisconnectWalletButton from "@/components/wallet/DisconnectWalletButton";
+import PersonalDetailsDisplay from "@/components/wallet/PersonalDetailsDisplay";
 import { useState } from "react";
-import CaretDownIcon from "@/app/icons/CaretDownIcon";
-import EditIcon from "@/app/icons/EditIcon";
+import CaretDownIcon from "@/components/icons/CaretDownIcon";
+import EditIcon from "@/components/icons/EditIcon";
 import PaymentList from "./PaymentList";
-import { useAppContext } from "@/app/context/appContext";
+import { useAppContext } from "@/context/appContext";
 import CheckoutForm from "./CheckoutForm";
 
 export default function Dashboard2() {

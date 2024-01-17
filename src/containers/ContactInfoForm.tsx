@@ -1,6 +1,6 @@
-import FormError from "../../components/FormError";
+import FormError from "../components/FormError";
 
-interface ContactInfoProps {
+interface ContactInfoFormProps {
   username: string;
   setUsername: (name: string) => void;
   useremail: string;
@@ -8,13 +8,13 @@ interface ContactInfoProps {
   emailError: boolean;
 }
 
-export default function ContactInfo({
+export default function ContactInfoForm({
   username,
   useremail,
   setUsername,
   setUseremail,
   emailError,
-}: ContactInfoProps) {
+}: ContactInfoFormProps) {
   const usernameOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };

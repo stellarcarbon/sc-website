@@ -1,15 +1,15 @@
 "use client";
 
 import { WalletType } from "stellar-wallets-kit";
-import SelectWalletButton from "../components/SelectWalletButton";
-import { useAppContext } from "@/app/context/appContext";
+import SelectWalletButton from "../components/wallet/SelectWalletButton";
+import { useAppContext } from "@/context/appContext";
 import { useState } from "react";
-import Button from "../../components/Button";
-import SelectWalletButtonDesktop from "../components/SelectWalletButtonDesktop";
-import ContactInfo from "./ContactInfo";
-import FormError from "@/app/components/FormError";
+import Button from "../components/Button";
+import SelectWalletButtonDesktop from "../components/wallet/SelectWalletButtonDesktop";
+import ContactInfoForm from "./ContactInfoForm";
+import FormError from "../components/FormError";
 import { PersonalDetails } from "@/app/types";
-import LoadingWallets from "../components/LoadingWallets";
+import LoadingWallets from "../components/wallet/LoadingWallets";
 import { useRouter } from "next/navigation";
 
 export default function SelectWallet() {
@@ -66,6 +66,8 @@ export default function SelectWallet() {
       setTncAccepted(false);
     });
   };
+
+  console.log(supportedWallets);
 
   return (
     <>
@@ -146,7 +148,7 @@ export default function SelectWallet() {
           purchases. This step is optional.
         </p>
 
-        <ContactInfo
+        <ContactInfoForm
           username={username}
           setUsername={setUsername}
           useremail={useremail}

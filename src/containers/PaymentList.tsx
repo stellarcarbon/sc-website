@@ -1,10 +1,9 @@
 "use client";
 
-import Button from "@/app/components/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "@/app/context/appContext";
-import { MyTransactionRecord } from "../TransactionHistoryService";
+import { useAppContext } from "@/context/appContext";
+import { MyTransactionRecord } from "@/app/types";
 
 export default function PaymentList() {
   const { myTransactions } = useAppContext();

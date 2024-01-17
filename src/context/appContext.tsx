@@ -8,12 +8,14 @@ import {
   WalletNetwork,
   WalletType,
 } from "stellar-wallets-kit";
-import { PersonalDetails, WalletConnection } from "../types";
+import {
+  MyTransactionRecord,
+  PersonalDetails,
+  WalletConnection,
+} from "../app/types";
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
 import { useRouter, usePathname } from "next/navigation";
-import TransactionHistoryService, {
-  MyTransactionRecord,
-} from "../wallet/TransactionHistoryService";
+import TransactionHistoryService from "../app/wallet/TransactionHistoryService";
 
 const DEV_ACCOUNT = "GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y";
 

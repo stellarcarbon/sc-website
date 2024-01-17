@@ -1,4 +1,3 @@
-import IndexedDBService from "../src/app/wallet/IndexedDBService";
 import TransactionHistoryService from "../src/app/wallet/TransactionHistoryService";
 import { describe, expect, test, beforeAll } from "@jest/globals";
 

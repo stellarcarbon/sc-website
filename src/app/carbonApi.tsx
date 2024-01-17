@@ -1,4 +1,4 @@
-import { CARBONApi, Configuration } from "./carbon_api";
+import { CARBONApi, Configuration } from "../carbon_api";
 
 const config = new Configuration({
   basePath: "https://api-beta.stellarcarbon.io",

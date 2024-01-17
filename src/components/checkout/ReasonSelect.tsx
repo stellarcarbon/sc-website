@@ -1,9 +1,4 @@
-import { UseFormRegisterReturn } from "react-hook-form";
-import AirTravelIcon from "../../icons/AirTravelIcon";
-import EnvironmentIcon from "../../icons/EnvironmentIcon";
-import HouseholdIcon from "../../icons/HouseholdIcon";
-import RoadTravelIcon from "../../icons/RoadTravelIcon";
-import { CheckoutFormData, ReasonOptions } from "../types";
+import { CheckoutFormData, ReasonOptions } from "@/app/types";
 import SelectReasonButton from "./SelectReasonButton";
 
 interface ReasonSelectProps {

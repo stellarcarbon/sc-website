@@ -1,4 +1,4 @@
-import { MyTransactionRecord } from "./TransactionHistoryService";
+import { MyTransactionRecord } from "../types";
 
 export default class IndexedDBService {
   private db: IDBDatabase | null = null;

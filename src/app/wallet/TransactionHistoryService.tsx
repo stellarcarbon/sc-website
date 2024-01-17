@@ -1,17 +1,8 @@
-export interface MyTransactionRecord {
-  id: string;
-  createdAt: string;
-  memo: string;
-  assetAmount: number;
-  asset: string;
-  sinkAmount: number;
-  // Add other relevant transaction properties here
-}
-
 import { HorizonApi, Server, ServerApi } from "stellar-sdk/lib/horizon";
 
 import { Networks, TransactionBuilder } from "stellar-sdk/lib/index";
 import IndexedDBService from "./IndexedDBService";
+import { MyTransactionRecord } from "../types";
 
 export default class TransactionHistoryService {
   private userAccount: string;

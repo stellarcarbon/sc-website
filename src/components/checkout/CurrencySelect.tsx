@@ -1,5 +1,5 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import { CheckoutFormData, CurrencyOptions } from "../types";
+import { CheckoutFormData, CurrencyOptions } from "@/app/types";
 
 interface CurrencySelectProps {
   register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
