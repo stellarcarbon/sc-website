@@ -103,7 +103,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       localStorage.setItem("wallet", JSON.stringify(walletConnection));
       setWalletConnection(walletConnection);
-      console.log("load txs");
 
       return true;
     } catch (error) {
