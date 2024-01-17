@@ -7,8 +7,9 @@ const makeTransactionRecord = (id: string): MyTransactionRecord => {
     id,
     createdAt: "datestring",
     memo: "memo",
-    amount: 1,
+    assetAmount: 1,
     asset: "xlm",
+    sinkAmount: 1,
   };
 };
 

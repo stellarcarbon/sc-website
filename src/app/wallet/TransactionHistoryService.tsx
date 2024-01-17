@@ -2,23 +2,31 @@ export interface MyTransactionRecord {
   id: string;
   createdAt: string;
   memo: string;
-  amount: number;
+  assetAmount: number;
   asset: string;
+  sinkAmount: number;
   // Add other relevant transaction properties here
 }
 
-import { Server, ServerApi } from "stellar-sdk/lib/horizon";
+import { HorizonApi, Server, ServerApi } from "stellar-sdk/lib/horizon";
+
+import { Networks, TransactionBuilder } from "stellar-sdk/lib/index";
 import IndexedDBService from "./IndexedDBService";
 
 export default class TransactionHistoryService {
+  private userAccount: string;
+
   constructor(
-    private updateContextState: (transaction: MyTransactionRecord[]) => void
-  ) {}
+    private updateContextState: (transaction: MyTransactionRecord[]) => void,
+    userAccount: string
+  ) {
+    this.userAccount = userAccount;
+  }
 
   public async fetchHistory(): Promise<void> {
     const server = new Server("https://horizon.stellar.org");
 
-    const idbService = await IndexedDBService.create();
+    // const idbService = await IndexedDBService.create();
 
     // const transactionStream = server
     //   .transactions()
@@ -37,53 +45,65 @@ export default class TransactionHistoryService {
     //     },
     //   });
 
-    const transactions = await server
-      .transactions()
-      .forAccount("GC7CDWMCWNCY7JYUW5UBEOLNBSTNDKKZSFTHKGZNPPSOXLFYFX3CSINK") // CarbonSINK account
+    const CARBON_SINK_ACCOUNT =
+      "GC7CDWMCWNCY7JYUW5UBEOLNBSTNDKKZSFTHKGZNPPSOXLFYFX3CSINK";
+
+    const CARBON_ACCOUNT =
+      "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";
+
+    // All payments to CarbonSINK account
+    const payments = await server
+      .payments()
+      .forAccount(CARBON_SINK_ACCOUNT)
       .limit(200)
       .call();
 
-    const filteredRecords = transactions.records.filter((record: any) => {
-      return (
-        record.source_account ===
-        "GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y" // Some account that actually has transactions
-      );
-    });
-
-    // async
-    const mrs: MyTransactionRecord[] = await Promise.all(
-      filteredRecords.map(async (record: any) => {
-        const ops = await record.operations();
-
-        const realOp: any = ops.records.find(
-          (op: any) => op.type === "path_payment_strict_receive"
-        );
-
-        const mr = {
-          id: record.id,
-          createdAt: record.created_at,
-          memo: record.memo,
-          amount: realOp?.amount ?? 0,
-          asset: realOp?.asset_code ?? "",
-        };
-        idbService.saveTransaction(mr);
-        return mr;
-      })
+    // Payments to CarbonSINK account from user
+    const userPayments = payments.records.filter(
+      (record: any) =>
+        record.asset_issuer === CARBON_SINK_ACCOUNT &&
+        record.to === this.userAccount
     );
 
-    // Map to MyTransactionRecord and store in IndexedDB
-    // const mrs: MyTransactionRecord[] = filteredRecords.map((record: any) => {
-    //   console.log(record);
-    //   const mr = {
-    //     id: record.id,
-    //     createdAt: record.created_at,
-    //     memo: record.memo,
-    //     amount: record.amount,
-    //     asset: "xlm",
-    //   };
-    //   idbService.saveTransaction(mr);
-    //   return mr;
-    // });
+    const mrs: MyTransactionRecord[] = await Promise.all(
+      userPayments.map(async (userPayment: any) => {
+        const transaction = (await userPayment.transaction()) as any;
+        const xdrPayload = TransactionBuilder.fromXDR(
+          transaction.envelope_xdr,
+          Networks.PUBLIC
+        ) as any;
+        const operations = xdrPayload._operations;
+
+        let asset = "";
+        let assetAmount = 0;
+
+        // De klant koopt CARBON met XLM of USDC of any.
+        let paymentOperation = operations.find(
+          (op: any) => op.type === "pathPaymentStrictReceive"
+        );
+
+        if (paymentOperation !== undefined) {
+          asset = paymentOperation.sendAsset.code;
+          assetAmount = paymentOperation.destAmount;
+        } else {
+          // Als iemand met CARBON direct betaalt.
+          paymentOperation = operations.find(
+            (op: any) => op.destination === CARBON_ACCOUNT
+          );
+          asset = paymentOperation.asset.code;
+          assetAmount = paymentOperation.amount;
+        }
+
+        return {
+          id: transaction.hash,
+          createdAt: transaction.created_at,
+          memo: transaction.memo,
+          assetAmount: Number(assetAmount),
+          asset,
+          sinkAmount: Number(userPayment.amount),
+        } as MyTransactionRecord;
+      })
+    );
 
     this.updateContextState(mrs);
   }

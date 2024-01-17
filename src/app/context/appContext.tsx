@@ -15,8 +15,9 @@ import TransactionHistoryService, {
   MyTransactionRecord,
 } from "../wallet/TransactionHistoryService";
 
-// A global app context used to write & read state everywhere.
+const DEV_ACCOUNT = "GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y";
 
+// A global app context used to write & read state everywhere.
 type AppContext = {
   connectionError: string | null;
   supportedWallets: ISupportedWallet[];
@@ -95,7 +96,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
     // Start loading transactions.
     const transactionHistoryService = new TransactionHistoryService(
-      setMyTransactions
+      setMyTransactions,
+      DEV_ACCOUNT
     );
     transactionHistoryService.fetchHistory();
   }, []);

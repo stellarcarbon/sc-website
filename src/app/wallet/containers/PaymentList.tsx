@@ -1,15 +1,17 @@
 "use client";
 
 import Button from "@/app/components/Button";
-import { Payment } from "@/app/types";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context/appContext";
+import { MyTransactionRecord } from "../TransactionHistoryService";
 
 export default function PaymentList() {
   const { myTransactions } = useAppContext();
 
-  const [payments, setPayments] = useState<Payment[]>([]);
+  const [transactionRecords, setTransactionRecords] = useState<
+    MyTransactionRecord[]
+  >([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const router = useRouter();
@@ -18,73 +20,6 @@ export default function PaymentList() {
     setTimeout(() => setIsLoading(false), 2000);
   }, []);
 
-  useEffect(() => {
-    const ps: Payment[] = myTransactions.map((mt) => {
-      return {
-        hash: mt.id,
-        createdAt: new Date(mt.createdAt),
-        transactionSuccesful: true,
-        transaction: {
-          paymentAmount: mt.amount,
-          paymentAsset: mt.asset,
-          memo: mt.memo,
-        },
-      };
-    });
-    setPayments(ps);
-  }, [myTransactions]);
-
-  const mockPayments = () => {
-    const mockedPayments: Payment[] = [
-      {
-        hash: "63f55c3ff92b239ecdb774c336cb91e896a3e4906a81cbeb23a60f20563c198f",
-        transactionSuccesful: true,
-        createdAt: new Date(),
-        transaction: {
-          paymentAmount: 10,
-          paymentAsset: "XLM",
-          memo: "My memo",
-        },
-      },
-      {
-        hash: "20dbafdc604fc1a48eafc4ce0df2b6151dfa5a5241c307f811a99ce4ddf2fb7f",
-        transactionSuccesful: true,
-        createdAt: new Date(2001),
-        transaction: {
-          paymentAmount: 1,
-          paymentAsset: "USDC",
-          memo: "Another very long memo containing all kinds of text. Lorem ipsum dolor sit amet.",
-        },
-      },
-      {
-        hash: "20dbafdc604fc1a48eafc4ce0df2b6151dfa5a5241c307f811a99ce4ddf2fb71",
-        transactionSuccesful: true,
-        createdAt: new Date(2001),
-        transaction: {
-          paymentAmount: 1,
-          paymentAsset: "USDC",
-          memo: "Another very long memo containing all kinds of text. Lorem ipsum dolor sit amet.",
-        },
-      },
-      {
-        hash: "20dbafdc604fc1a48eafc4ce0df2b6151dfa5a5241c307f811a99ce4ddf2fb72",
-        transactionSuccesful: true,
-        createdAt: new Date(2001),
-        transaction: {
-          paymentAmount: 1,
-          paymentAsset: "USDC",
-          memo: "Another very long memo containing all kinds of text. Lorem ipsum dolor sit amet.",
-        },
-      },
-    ];
-
-    if (payments.length === 0) {
-      setPayments(mockedPayments);
-    } else {
-      setPayments([]);
-    }
-  };
-
   return (
     <div className="text-accent m-2 flex flex-col gap-2">
       <h1 className="flex flex-col text-lg font-bold text-center">
@@ -92,7 +27,7 @@ export default function PaymentList() {
         <span className="text-xs break-words w-[80%] self-center">{`For account (dev-mode): GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y`}</span>
       </h1>
       {!isLoading ? (
-        payments.length === 0 ? (
+        myTransactions.length === 0 ? (
           <div className="flex flex-col items-center m-4 gap-2">
             <span className=" text-sm text-center">
               {`Looks like you don't have any transactions yet. After sinking
@@ -100,45 +35,46 @@ export default function PaymentList() {
             </span>
           </div>
         ) : (
-          payments.map((payment) => {
+          myTransactions.map((transaction) => {
             return (
               <div
                 onClick={() => {
-                  router.push(`/wallet/transaction/${payment.hash}`);
+                  router.push(`/wallet/transaction/${transaction.id}`);
                 }}
                 className="flex flex-col text-sm text-accent bg-tertiary rounded-md border border-accentSecondary p-2 "
-                key={`payment_${payment.hash}`}
+                key={`payment_${transaction.id}`}
               >
                 <div className="flex justify-between">
                   <span>Hash</span>
                   <span className="text-xs truncate max-w-[60%]">
-                    {payment.hash}
+                    {transaction.id}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Date</span>
-                  <span>{payment.createdAt.toDateString()}</span>
+                  <span>{new Date(transaction.createdAt).toDateString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Amount</span>
+                  <span>Amount sinked</span>
 
-                  <span>{payment.transaction?.paymentAmount}</span>
+                  <span>{transaction.sinkAmount?.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Asset used</span>
+                  <span>Price</span>
 
-                  <span>{payment.transaction?.paymentAsset}</span>
+                  <div className="flex gap-1">
+                    <span>{transaction.assetAmount?.toFixed(2)}</span>
+                    <span>{transaction.asset}</span>
+                  </div>
                 </div>
+
                 <div className="flex justify-between">
                   <span>Memo</span>
 
                   <span className="text-xs truncate max-w-[60%]">
-                    {payment.transaction?.memo}
+                    {transaction.memo}
                   </span>
                 </div>
-                {/* <span>
-                {payment.transactionSuccesful ? "Succesful" : "Failed"}
-              </span> */}
               </div>
             );
           })
@@ -146,10 +82,6 @@ export default function PaymentList() {
       ) : (
         <div className="text-center py-4">Loading blockchain data...</div>
       )}
-
-      {/* <Button onClick={mockPayments} className="!p-2">
-        Swap state (dev only)
-      </Button> */}
     </div>
   );
 }
