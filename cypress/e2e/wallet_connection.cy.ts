@@ -56,11 +56,21 @@ describe("Setup wallet connection", () => {
 
 describe("Connect wallet error handling.", () => {
   it("Resets the form and displays an error if connecting new wallet fails", () => {
-    cy.visit("/wallet/connect", {
+    // cy.visit("/wallet/connect", {
+    //   onBeforeLoad(win) {
+    //     (win as any).walletConnectDialogError = true;
+    //   },
+    // });
+
+    cy.visit("/wallet", {
       onBeforeLoad(win) {
         (win as any).walletConnectDialogError = true;
       },
     });
+
+    cy.get("button").contains("Connect wallet").click();
+    cy.location("pathname").should("eq", "/wallet/connect");
+
     cy.get("button").contains("Connect wallet").click();
 
     cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
@@ -76,8 +86,9 @@ describe("Connect wallet error handling.", () => {
 
   it("has form validation on personal details form", () => {
     cy.visit("/wallet");
-    cy.location("pathname").should("eq", "/wallet/connect");
+
     cy.get("button").contains("Connect wallet").click();
+    cy.location("pathname").should("eq", "/wallet/connect");
 
     cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
 

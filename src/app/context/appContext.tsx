@@ -25,7 +25,7 @@ type AppContext = {
   connectWallet: (
     walletType: WalletType,
     personalDetails: PersonalDetails
-  ) => void;
+  ) => Promise<boolean>;
   disconnectWallet: () => void;
   isDrawerOpen: boolean;
   openDrawer: () => void;
@@ -66,19 +66,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   }, [pathname]);
 
   useEffect(() => {
-    if (walletConnection === null && pathname === "/wallet") {
-      router.push("/wallet/connect");
-    }
-
-    if (
-      (walletConnection?.isAnonymous || walletConnection?.personalDetails) &&
-      pathname === "/wallet/connect"
-    ) {
-      router.push("/wallet");
-    }
-  }, [walletConnection, pathname, router]);
-
-  useEffect(() => {
     // Load local storage if available
     const storedWalletConnectionJSONString = localStorage.getItem("wallet");
     if (storedWalletConnectionJSONString) {
@@ -105,7 +92,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const connectWallet = async (
     userWalletType: WalletType,
     personalDetails: PersonalDetails
-  ) => {
+  ): Promise<boolean> => {
     setConnectionError(null);
 
     try {
@@ -120,17 +107,20 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       localStorage.setItem("wallet", JSON.stringify(walletConnection));
       setWalletConnection(walletConnection);
+      return true;
     } catch (error) {
       console.log("connect wallet error", error);
       setConnectionError(
         "Something went wrong connecting your wallet. Try again."
       );
+      return false;
     }
   };
 
   const disconnectWallet = () => {
     localStorage.removeItem("wallet");
     setWalletConnection(null);
+    router.push("/wallet/connect");
     console.log("removed wallet item");
   };
 

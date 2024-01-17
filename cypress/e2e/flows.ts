@@ -1,10 +1,10 @@
 // Helper function to select & (mock-)connect wallet.
 export const connectWallet = (anonymous: boolean) => {
   cy.visit("/wallet");
-  cy.location("pathname").should("eq", "/wallet/connect");
 
   cy.get("button").contains("Connect wallet").click();
 
+  cy.location("pathname").should("eq", "/wallet/connect");
   cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
   cy.get("#checkbox_policy").click();
 

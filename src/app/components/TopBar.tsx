@@ -27,11 +27,7 @@ export default function TopBar() {
         <TopBarLink href="/explain">Explain</TopBarLink>
         <TopBarLink href="/projects">Projects</TopBarLink>
         <TopBarLink href="/about">About us</TopBarLink>
-        <TopBarLink
-          href={`${walletConnection ? "/wallet" : "/wallet/connect"}`}
-        >
-          Wallet
-        </TopBarLink>
+        <TopBarLink href="/wallet">Wallet</TopBarLink>
       </div>
       <HamburgerButton className="mr-[5vw] md:hidden" onClick={openDrawer} />
     </header>
