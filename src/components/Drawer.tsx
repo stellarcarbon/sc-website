@@ -13,47 +13,20 @@ export default function Drawer() {
   const pathname = usePathname();
 
   return (
-    <div
-      className={`flex flex-col min-w-screen min-h-screen
-    ${
-      pathname.includes("/wallet") || pathname.includes("/checkout")
-        ? "!bg-primary border-secondary"
-        : "bg-white border-gray-50"
-    }
-    `}
-    >
-      <div
-        className={`flex justify-between items-center px-[5vw] h-20 border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]
-        ${
-          pathname.includes("/wallet") || pathname.includes("/checkout")
-            ? "border-secondary"
-            : "border-gray-200"
-        }
-        `}
-      >
+    <div className="flex flex-col min-w-screen min-h-screen bg-primary border-secondary">
+      <div className="flex justify-between items-center px-[5vw] h-20 border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)] border-secondary">
         <img className="h-10" src="/stellarcarbon-heading.png" />
-        <button
-          className={`${
-            pathname.includes("/wallet") ? "text-accent" : "text-black"
-          }`}
-          onClick={closeDrawer}
-        >
+        <button className={`text-accent`} onClick={closeDrawer}>
           <CloseIcon />
         </button>
       </div>
-      <div className={`flex flex-col mt-4 `}>
+      <div className="flex flex-col mt-4">
         <DrawerLink href="/">Home</DrawerLink>
         <DrawerLink href="/explain">What is Stellarcarbon?</DrawerLink>
         <DrawerLink href="/projects">Current projects</DrawerLink>
         <DrawerLink href="/about">About us</DrawerLink>
       </div>
-      <hr
-        className={`w-full my-4 mb-8         ${
-          pathname.includes("/wallet") || pathname.includes("/checkout")
-            ? "border-secondary"
-            : "border-gray-200"
-        }`}
-      />
+      <hr className="w-full my-4 mb-8 border-secondary" />
       <Button
         className="w-[50%] self-center"
         onClick={async () => {

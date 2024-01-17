@@ -7,6 +7,7 @@ import EditIcon from "@/components/icons/EditIcon";
 import PaymentList from "./PaymentList";
 import { useAppContext } from "@/context/appContext";
 import CheckoutForm from "./CheckoutForm";
+import Button from "@/components/Button";
 
 export default function Dashboard2() {
   const { walletConnection } = useAppContext();
@@ -17,13 +18,19 @@ export default function Dashboard2() {
       {/* <h1 className="self-center text-lg font-bold">My Stellarcarbon</h1> */}
 
       {/* Connection info */}
-      <div className="flex flex-col m-2 p-4 bg-tertiary border border-accentSecondary rounded-md">
-        <div className="flex justify-between w-full">
-          <h1 className="text-lg font-bold">Connection info</h1>
-          <button className="flex items-center gap-1 text-sm text-accent">
+      <div className="flex flex-col m-2 p-4 bg-tertiary border border-accentSecondary rounded-md text-accent">
+        <div className="flex justify-between items-center w-full">
+          <h1 className="text-lg font-bold text-white">Connection info</h1>
+          {/* <button className="flex items-center gap-1 text-sm text-white rounded-md border border-accent p-1 px-2">
             <span>Edit</span>
             <EditIcon />
-          </button>
+          </button> */}
+          <Button className="w-none !p-2">
+            <div className="flex items-center justify-between">
+              {/* <span>Edit</span> */}
+              <EditIcon />
+            </div>
+          </Button>
         </div>
         <div className="flex justify-between items-center">
           <span>Wallet</span>

@@ -5,15 +5,15 @@ import TonnesRange from "../../components/checkout/TonnesRange";
 import Button from "../../components/Button";
 import CurrencySelect from "../../components/checkout/CurrencySelect";
 import ReasonSelect from "../../components/checkout/ReasonSelect";
-import { CheckoutFormData } from "../../types/types";
 import {
   BuildSinkCarbonXdrSinkCarbonXdrPostRequest,
   SinkingResponse,
-} from "@/app/carbon_api";
+} from "@/carbon_api";
 import { useEffect, useState } from "react";
 import carbonApi from "@/app/carbonApi";
 import { useAppContext } from "@/context/appContext";
 import FormError from "../../components/FormError";
+import { CheckoutFormData } from "../types";
 
 export default function Checkout() {
   const { register, handleSubmit, watch, setValue } =
@@ -52,10 +52,6 @@ export default function Checkout() {
         console.log("sink carbon xdr post error\n", error);
       });
   };
-
-  // useEffect(() => {
-  //   if (signResponse.)
-  // }, [signResponse])
 
   return (
     <main className="flex flex-col items-center p-2 max-w-[1000px] m-auto h-[calc(100vh-80px)]">

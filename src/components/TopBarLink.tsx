@@ -19,9 +19,7 @@ export default function TopBarLink({ children, href }: TopBarLinkProps) {
 
   return (
     <Link
-      className={`${
-        isCurrentRoute() ? "text-yellow-400" : "text-accentSecondary"
-      }`}
+      className={`${isCurrentRoute() ? "text-yellow-400" : "text-accent"}`}
       href={href}
     >
       {children}

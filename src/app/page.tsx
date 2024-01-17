@@ -28,7 +28,7 @@ export default function Home() {
           <br /> be released into the atmosphere.
         </p>
       </div>
-      <div className="h-[800px] text-black pt-80"> Other stuff</div>
+      <div className="h-[800px] pt-80"> Other stuff</div>
     </div>
 
     // </main>

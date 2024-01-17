@@ -9,7 +9,6 @@ import { WalletConnection } from "../app/types";
 export const walletConnectDialog = async (
   userWalletType: WalletType
 ): Promise<WalletConnection> => {
-  console.log("hi", window.walletConnectDialogError);
   if (window.Cypress) {
     if (window.walletConnectDialogError) {
       throw Error();
@@ -19,7 +18,6 @@ export const walletConnectDialog = async (
       walletType: "ALBEDO",
     } as WalletConnection;
   } else {
-    console.log("dialog real");
     let kit = new StellarWalletsKit({
       selectedWallet: userWalletType,
       network: WalletNetwork.PUBLIC,

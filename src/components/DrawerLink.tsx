@@ -20,15 +20,7 @@ export default function DrawerLink({ children, href }: DrawerLinkProps) {
   return (
     <div
       className={`p-4 font-bold 
-    ${
-      isCurrentRoute()
-        ? "text-yellow-400"
-        : `${
-            pathname.includes("/wallet") || pathname.includes("/checkout")
-              ? "text-accent"
-              : "text-gray-500"
-          }`
-    }
+    ${isCurrentRoute() ? "text-yellow-400" : "text-accent"}
     `}
       onClick={() => {
         router.push(href);
