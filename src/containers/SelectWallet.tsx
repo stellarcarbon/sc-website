@@ -67,8 +67,6 @@ export default function SelectWallet() {
     });
   };
 
-  console.log(supportedWallets);
-
   return (
     <>
       <div className="flex flex-col items-start bg-secondary md:border border-tertiary text-white md:min-w-[600px] md:max-w-[650px] py-4 md:py-6 pt-8 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import type { PropsWithChildren } from "react";
+import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
 import {
   ISupportedWallet,
   StellarWalletsKit,
@@ -17,8 +17,6 @@ import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
 import { useRouter, usePathname } from "next/navigation";
 import TransactionHistoryService from "../app/wallet/TransactionHistoryService";
 
-const DEV_ACCOUNT = "GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y";
-
 // A global app context used to write & read state everywhere.
 type AppContext = {
   connectionError: string | null;
@@ -32,8 +30,8 @@ type AppContext = {
   isDrawerOpen: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;
-  myTransactions: MyTransactionRecord[];
-  transactionsLoaded: boolean;
+  myTransactions: MyTransactionRecord[] | null;
+  setMyTransactions: Dispatch<SetStateAction<MyTransactionRecord[] | null>>;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -53,10 +51,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   );
   const [walletConnection, setWalletConnection] =
     useState<WalletConnection | null>(null);
-  const [myTransactions, setMyTransactions] = useState<MyTransactionRecord[]>(
-    []
-  );
-  const [transactionsLoaded, setTransactionsLoaded] = useState<boolean>(false);
+  const [myTransactions, setMyTransactions] = useState<
+    MyTransactionRecord[] | null
+  >(null);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const openDrawer = () => setIsDrawerOpen(true);
@@ -70,6 +67,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   }, [pathname]);
 
   useEffect(() => {
+    console.log("On mount AppContext");
+
     // Load local storage if available
     const storedWalletConnectionJSONString = localStorage.getItem("wallet");
     if (storedWalletConnectionJSONString) {
@@ -84,20 +83,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         return;
       });
     }
-
-    // Start loading transactions.
-    const transactionHistoryService = new TransactionHistoryService(
-      loadTransactions,
-      DEV_ACCOUNT
-    );
-    transactionHistoryService.fetchHistory();
   }, []);
-
-  const loadTransactions = (transactions: MyTransactionRecord[]) => {
-    console.log("loaded txs");
-    setMyTransactions(transactions);
-    setTransactionsLoaded(true);
-  };
 
   const connectWallet = async (
     userWalletType: WalletType,
@@ -117,6 +103,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       localStorage.setItem("wallet", JSON.stringify(walletConnection));
       setWalletConnection(walletConnection);
+      console.log("load txs");
+
       return true;
     } catch (error) {
       console.log("connect wallet error", error);
@@ -131,7 +119,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     localStorage.removeItem("wallet");
     setWalletConnection(null);
     setMyTransactions([]);
-    router.push("/wallet/connect");
   };
 
   const providerValue = useMemo(() => {
@@ -145,7 +132,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       openDrawer,
       closeDrawer,
       myTransactions,
-      transactionsLoaded,
+      setMyTransactions,
     };
   }, [
     connectionError,
@@ -153,7 +140,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     walletConnection,
     isDrawerOpen,
     myTransactions,
-    transactionsLoaded,
   ]);
 
   return (

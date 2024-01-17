@@ -28,7 +28,7 @@ export const canDisconnect = () => {
     .click();
 
   // Assert if we are back on wallet connection setup page
-  cy.location("pathname").should("eq", "/wallet/connect");
+  cy.location("pathname").should("eq", "/wallet");
   cy.get("button").contains("Connect wallet");
   cy.window().then((win) => {
     const wallet = win.localStorage.getItem("wallet");

@@ -7,14 +7,11 @@ import { MyTransactionRecord } from "../types";
 export default class TransactionHistoryService {
   private userAccount: string;
 
-  constructor(
-    private updateContextState: (transaction: MyTransactionRecord[]) => void,
-    userAccount: string
-  ) {
+  constructor(userAccount: string) {
     this.userAccount = userAccount;
   }
 
-  public async fetchHistory(): Promise<void> {
+  public async fetchHistory(): Promise<MyTransactionRecord[]> {
     const server = new Server("https://horizon.stellar.org");
 
     // const idbService = await IndexedDBService.create();
@@ -96,6 +93,6 @@ export default class TransactionHistoryService {
       })
     );
 
-    this.updateContextState(mrs);
+    return mrs;
   }
 }

@@ -39,3 +39,6 @@ export interface MyTransactionRecord {
   sinkAmount: number;
   // Add other relevant transaction properties here
 }
+
+export const DEV_ACCOUNT =
+  "GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y";

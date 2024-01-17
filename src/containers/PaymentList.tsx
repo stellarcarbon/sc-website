@@ -6,7 +6,7 @@ import { useAppContext } from "@/context/appContext";
 import { MyTransactionRecord } from "@/app/types";
 
 export default function PaymentList() {
-  const { myTransactions, transactionsLoaded } = useAppContext();
+  const { myTransactions } = useAppContext();
 
   const router = useRouter();
 
@@ -16,7 +16,7 @@ export default function PaymentList() {
         <span>Transaction history</span>
         <span className="text-xs break-words w-[80%] self-center">{`For account (dev-mode): GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y`}</span>
       </h1>
-      {transactionsLoaded ? (
+      {myTransactions !== null ? (
         myTransactions.length === 0 ? (
           <div className="flex flex-col items-center m-4 gap-2">
             <span className=" text-sm text-center">
@@ -27,50 +27,54 @@ export default function PaymentList() {
         ) : (
           myTransactions.map((transaction) => {
             return (
-              <div
-                onClick={() => {
-                  router.push(`/wallet/transaction/${transaction.id}`);
-                }}
+              <a
+                href={`https://stellar.expert/explorer/public/tx/${transaction.id}`}
+                target="_blank"
+                // onClick={() => {
+                //   router.push(`/wallet/transaction/${transaction.id}`);
+                // }}
                 className="flex flex-col text-sm text-accent bg-tertiary rounded-md border border-accentSecondary p-2 "
                 key={`payment_${transaction.id}`}
               >
-                <div className="flex justify-between">
-                  <span>Hash</span>
-                  <span className="text-xs truncate max-w-[60%]">
+                <div className="flex justify-start items-center">
+                  <span className="w-24 md:w-32">Hash</span>
+                  <span className=" truncate max-w-[60%]">
                     {transaction.id}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Date</span>
-                  <span>{new Date(transaction.createdAt).toDateString()}</span>
+                <div className="flex justify-start items-center">
+                  <span className="w-24 md:w-32">Date</span>
+                  <span className="">
+                    {new Date(transaction.createdAt).toDateString()}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Amount sinked</span>
+                <div className="flex justify-start items-center">
+                  <span className="w-24 md:w-32">Sinked</span>
 
-                  <span>{transaction.sinkAmount?.toFixed(2)}</span>
+                  <span className="">{transaction.sinkAmount?.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Price</span>
+                <div className="flex justify-start items-center">
+                  <span className="w-24 md:w-32">Price</span>
 
-                  <div className="flex gap-1">
+                  <div className="flex gap-1 ">
                     <span>{transaction.assetAmount?.toFixed(2)}</span>
                     <span>{transaction.asset}</span>
                   </div>
                 </div>
 
-                <div className="flex justify-between">
-                  <span>Memo</span>
+                <div className="flex justify-start items-center">
+                  <span className="w-24 md:w-32">Memo</span>
 
-                  <span className="text-xs truncate max-w-[60%]">
+                  <span className=" truncate max-w-[60%]">
                     {transaction.memo}
                   </span>
                 </div>
-              </div>
+              </a>
             );
           })
         )
       ) : (
-        <div className="text-center py-4">Loading blockchain data...</div>
+        <div className="text-center py-4">Loading data from blockchain...</div>
       )}
     </div>
   );

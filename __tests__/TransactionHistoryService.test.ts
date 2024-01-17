@@ -4,10 +4,9 @@ import { describe, expect, test, beforeAll } from "@jest/globals";
 const DEV_ACCOUNT = "GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y";
 describe("TransactionHistoryService", () => {
   let thService: TransactionHistoryService;
-  const mockUpdateContext = jest.fn();
 
   beforeAll(() => {
-    thService = new TransactionHistoryService(mockUpdateContext, DEV_ACCOUNT);
+    thService = new TransactionHistoryService(DEV_ACCOUNT);
   });
 
   test("Can create a new instance", async () => {
@@ -15,10 +14,9 @@ describe("TransactionHistoryService", () => {
   });
 
   test("Can fetch transaction history, convert to MyTransactionRecord array and update app context", async () => {
-    // Depends on DEV_ACCOUNT transaction history
-    await thService.fetchHistory();
-    expect(mockUpdateContext).toHaveBeenCalledTimes(1);
-    expect(mockUpdateContext).toHaveBeenCalledWith([
+    // Uses the actual blockchain, should mock each http request to horizon for a more maintainable test.
+    const result = await thService.fetchHistory();
+    expect(result).toEqual([
       {
         asset: "AQUA",
         assetAmount: 15.0999867,
