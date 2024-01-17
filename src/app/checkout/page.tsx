@@ -57,7 +57,7 @@ export default function Checkout() {
     <main className="flex flex-col items-center p-2 max-w-[1000px] m-auto h-[calc(100vh-80px)]">
       <form className="flex flex-col gap-2 w-full flex-grow justify-around">
         <h1 className="text-xl font-bold text-center mt-4">Checkout</h1>
-        <TonnesRange register={register} watch={watch} />
+        {/* <TonnesRange register={register} watch={watch} /> */}
         <CurrencySelect register={register} />
         <ReasonSelect watch={watch} setValue={setValue} />
         <FormError className="min-h-20">{formErr}</FormError>

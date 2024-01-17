@@ -58,21 +58,32 @@ export default function Dashboard2() {
       </div>
 
       {/* Checkout form */}
-      <div
-        className="flex items-center m-2 min-h-9 border border-tertiary text-accent relative cursor-pointer"
-        onClick={() => {
-          setIsCheckoutExpanded(!isCheckoutExpanded);
-        }}
-      >
-        <div className="absolute right-0 top-0 py-1 px-2">
-          {isCheckoutExpanded ? <CaretDownIcon /> : <CaretUpIcon />}
-        </div>
+      <div className=" m-2 border border-tertiary text-accent relative">
+        <button
+          className={`flex items-center w-full min-h-9 ${
+            isCheckoutExpanded && "hidden"
+          }`}
+          onClick={() => {
+            setIsCheckoutExpanded(!isCheckoutExpanded);
+          }}
+        >
+          {isCheckoutExpanded ? (
+            <></>
+          ) : (
+            <span className="w-full">Click to sink carbon</span>
+          )}
+        </button>
 
-        {isCheckoutExpanded ? (
-          <CheckoutForm />
-        ) : (
-          <span className="ml-2 ">Click to sink carbon</span>
-        )}
+        <button
+          className="absolute right-0 top-0 py-1 px-2"
+          onClick={() => {
+            setIsCheckoutExpanded(!isCheckoutExpanded);
+          }}
+        >
+          {isCheckoutExpanded ? <CaretDownIcon /> : <CaretUpIcon />}
+        </button>
+
+        {isCheckoutExpanded && <CheckoutForm />}
       </div>
 
       <hr className="w-[calc(100%-32px)] m-2 self-center border-accentSecondary" />

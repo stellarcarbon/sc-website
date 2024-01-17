@@ -10,7 +10,7 @@ import { CheckoutFormData } from "@/app/types";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
 import { useAppContext } from "@/context/appContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export default function CheckoutForm() {
@@ -24,6 +24,10 @@ export default function CheckoutForm() {
   const tonnes = watch("tonnes");
   const currency = watch("currency");
   const reason = watch("reason");
+
+  useEffect(() => {
+    setValue("tonnes", 1);
+  }, []);
 
   const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
     let payload: BuildSinkCarbonXdrSinkCarbonXdrPostRequest = {
@@ -49,7 +53,7 @@ export default function CheckoutForm() {
 
   return (
     <form className="flex flex-col min-w-[80%]">
-      <TonnesRange register={register} watch={watch} />
+      <TonnesRange register={register} watch={watch} setValue={setValue} />
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
       <FormError className="py-0">{formErr}</FormError>
