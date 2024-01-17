@@ -6,18 +6,9 @@ import { useAppContext } from "@/context/appContext";
 import { MyTransactionRecord } from "@/app/types";
 
 export default function PaymentList() {
-  const { myTransactions } = useAppContext();
-
-  const [transactionRecords, setTransactionRecords] = useState<
-    MyTransactionRecord[]
-  >([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { myTransactions, transactionsLoaded } = useAppContext();
 
   const router = useRouter();
-
-  useEffect(() => {
-    setTimeout(() => setIsLoading(false), 2000);
-  }, []);
 
   return (
     <div className="text-accent m-2 flex flex-col gap-2">
@@ -25,7 +16,7 @@ export default function PaymentList() {
         <span>Transaction history</span>
         <span className="text-xs break-words w-[80%] self-center">{`For account (dev-mode): GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y`}</span>
       </h1>
-      {!isLoading ? (
+      {transactionsLoaded ? (
         myTransactions.length === 0 ? (
           <div className="flex flex-col items-center m-4 gap-2">
             <span className=" text-sm text-center">

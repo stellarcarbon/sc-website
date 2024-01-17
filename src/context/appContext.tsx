@@ -33,6 +33,7 @@ type AppContext = {
   openDrawer: () => void;
   closeDrawer: () => void;
   myTransactions: MyTransactionRecord[];
+  transactionsLoaded: boolean;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -55,6 +56,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [myTransactions, setMyTransactions] = useState<MyTransactionRecord[]>(
     []
   );
+  const [transactionsLoaded, setTransactionsLoaded] = useState<boolean>(false);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const openDrawer = () => setIsDrawerOpen(true);
@@ -85,11 +87,17 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
     // Start loading transactions.
     const transactionHistoryService = new TransactionHistoryService(
-      setMyTransactions,
+      loadTransactions,
       DEV_ACCOUNT
     );
     transactionHistoryService.fetchHistory();
   }, []);
+
+  const loadTransactions = (transactions: MyTransactionRecord[]) => {
+    console.log("loaded txs");
+    setMyTransactions(transactions);
+    setTransactionsLoaded(true);
+  };
 
   const connectWallet = async (
     userWalletType: WalletType,
@@ -137,6 +145,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       openDrawer,
       closeDrawer,
       myTransactions,
+      transactionsLoaded,
     };
   }, [
     connectionError,
@@ -144,6 +153,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     walletConnection,
     isDrawerOpen,
     myTransactions,
+    transactionsLoaded,
   ]);
 
   return (

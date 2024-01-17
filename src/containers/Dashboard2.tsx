@@ -21,11 +21,7 @@ export default function Dashboard2() {
       <div className="flex flex-col m-2 p-4 bg-tertiary border border-accentSecondary rounded-md text-accent">
         <div className="flex justify-between items-center w-full">
           <h1 className="text-lg font-bold text-white">Connection info</h1>
-          {/* <button className="flex items-center gap-1 text-sm text-white rounded-md border border-accent p-1 px-2">
-            <span>Edit</span>
-            <EditIcon />
-          </button> */}
-          <Button className="w-none !p-2">
+          <Button className="!p-2">
             <div className="flex items-center justify-between">
               {/* <span>Edit</span> */}
               <EditIcon />
