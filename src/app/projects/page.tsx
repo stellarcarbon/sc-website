@@ -62,7 +62,7 @@ export default function ProjectsPage() {
             <p>
               <strong>Verification</strong>
             </p>
-            <p className="underline text-accentSecondary">
+            <p className="flex flex-col underline text-accentSecondary">
               <a href="">Progress Monitoring report</a>
               <a href="">FSC Certificate GFA-FM/COC-001288</a>
             </p>
