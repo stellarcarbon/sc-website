@@ -4,9 +4,9 @@ export default function ProjectsPage() {
   return (
     <main className="flex flex-col items-center min-h-[calc(100vh-176px)] bg-secondary">
       {/* Current project title with whale */}
-      <div className="whale-bg pt-4 w-full">
-        <div className="flex flex-col items-center gap-10 max-w-[80%] py-8 m-auto">
-          <span className="text-5xl font-noto text-center leading-[56px] image1">
+      <div className="whale-bg pt-4 md:pt-16 w-full">
+        <div className="flex flex-col items-center gap-10 max-w-[65%] py-8 m-auto">
+          <span className="text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
             Current Offset Project
           </span>
           <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
@@ -16,7 +16,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col md:flex-row grow pt-12 max-w-[80%]  md:max-w-[1080px] m-auto">
+      <div className="flex flex-col md:flex-row grow pt-12 md:pt-20 max-w-[80%]  lg:max-w-[900px] m-auto">
         {/* Images */}
         <div className="w-full mb-8 md:flex-1  md:mr-16">
           <div className="m-auto max-w-[80%] mb-[30px] image0">
