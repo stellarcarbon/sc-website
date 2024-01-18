@@ -32,3 +32,56 @@ body {
 .stroke-custom {
   @apply stroke-current;
 }
+
+.whale-bg {
+  background-image: linear-gradient(
+      180deg,
+      rgba(165, 206, 199, 0.6) 0%,
+      #151f33 100%
+    ),
+    url("/environmental-nonprofit-37.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.image0 {
+  animation-name: image0;
+  animation-duration: 1000ms;
+  animation-delay: 0ms;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes image0 {
+  from {
+    transform: translate3d(10%, 0px, 0px);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0px, 0px, 0px);
+    opacity: 100;
+  }
+}
+
+.image1 {
+  animation-name: image1;
+  animation-duration: 1000ms;
+  animation-delay: 0ms;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes image1 {
+  from {
+    transform: scale3d(0.95, 0.95, 0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+    opacity: 100;
+  }
+}
+
+p {
+  padding-bottom: 1.5em;
+}
