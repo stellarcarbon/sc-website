@@ -2,9 +2,9 @@ import CountUp from "@/components/CountUp";
 
 export default function ProjectsPage() {
   return (
-    <main className="flex flex-col min-h-[calc(100vh-176px)] bg-secondary">
+    <main className="flex flex-col items-center min-h-[calc(100vh-176px)] bg-secondary">
       {/* Current project title with whale */}
-      <div className="whale-bg pt-4 h-[320px]">
+      <div className="whale-bg pt-4 w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] py-8 m-auto">
           <span className="text-5xl font-noto text-center leading-[56px] image1">
             Current Offset Project
@@ -16,9 +16,9 @@ export default function ProjectsPage() {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col  grow pt-12 max-w-[80%] m-auto">
+      <div className="flex flex-col md:flex-row grow pt-12 max-w-[80%]  md:max-w-[1080px] m-auto">
         {/* Images */}
-        <div className="w-full mb-8">
+        <div className="w-full mb-8 md:flex-1  md:mr-16">
           <div className="m-auto max-w-[80%] mb-[30px] image0">
             <img src="/forest_from_above_carbonbank_1280x719.jpg" />
           </div>
@@ -27,7 +27,7 @@ export default function ProjectsPage() {
           </div>
         </div>
         {/* Text */}
-        <div className="font-noto">
+        <div className="font-noto md:flex-1">
           <h2 className="text-2xl">
             About Shipibo Conibo and Cacataibo Indigenous Communities
           </h2>
@@ -68,38 +68,38 @@ export default function ProjectsPage() {
             </p>
           </div>
         </div>
+      </div>
 
-        {/* Widgets */}
-        <div>
-          <CountUp
-            value={12}
-            unit={"Km2 Area"}
-            subject={"Under better management of natural resources."}
-          />
+      {/* Widgets */}
+      <div className="max-w-[80%] mt-12 flex flex-col md:flex-row justify-center">
+        <CountUp
+          value={12}
+          unit={"Km2 Area"}
+          subject={"Under better management of natural resources."}
+        />
 
-          <CountUp
-            value={5.2}
-            unit={"Km2 Area"}
-            subject={
-              "Better biophysical conditions within the lands of indigenous communities."
-            }
-          />
+        <CountUp
+          value={5.2}
+          unit={"Km2 Area"}
+          subject={
+            "Better biophysical conditions within the lands of indigenous communities."
+          }
+        />
 
-          <CountUp
-            value={350}
-            unit={"Families"}
-            subject={
-              "Indigenous families with improved livelihoods and economic benefits."
-            }
-          />
-          <CountUp
-            value={4}
-            unit={"Businesses"}
-            subject={
-              "Sustainable businesses developed by indigenous communities."
-            }
-          />
-        </div>
+        <CountUp
+          value={350}
+          unit={"Families"}
+          subject={
+            "Indigenous families with improved livelihoods and economic benefits."
+          }
+        />
+        <CountUp
+          value={4}
+          unit={"Businesses"}
+          subject={
+            "Sustainable businesses developed by indigenous communities."
+          }
+        />
       </div>
     </main>
   );
