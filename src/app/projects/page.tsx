@@ -16,7 +16,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col md:flex-row grow pt-12 md:pt-20 max-w-[80%]  lg:max-w-[900px] m-auto">
+      <div className="flex flex-col md:flex-row grow pt-12 md:pt-20 max-w-[80%] lg:max-w-[900px] xl:max-w-[1200px] m-auto">
         {/* Images */}
         <div className="w-full mb-8 md:flex-1  md:mr-16">
           <div className="m-auto max-w-[80%] mb-[30px] image0">
