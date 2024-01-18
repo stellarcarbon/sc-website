@@ -1,10 +1,12 @@
+import CountUp from "@/components/CountUp";
+
 export default function ProjectsPage() {
   return (
     <main className="flex flex-col min-h-[calc(100vh-176px)] bg-secondary">
       {/* Current project title with whale */}
       <div className="whale-bg pt-4 h-[320px]">
         <div className="flex flex-col items-center gap-10 max-w-[80%] py-8 m-auto">
-          <span className="text-5xl font-noto text-center leading-[56px]">
+          <span className="text-5xl font-noto text-center leading-[56px] image1">
             Current Offset Project
           </span>
           <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
@@ -65,6 +67,38 @@ export default function ProjectsPage() {
               <a href="">FSC Certificate GFA-FM/COC-001288</a>
             </p>
           </div>
+        </div>
+
+        {/* Widgets */}
+        <div>
+          <CountUp
+            value={12}
+            unit={"Km2 Area"}
+            subject={"Under better management of natural resources."}
+          />
+
+          <CountUp
+            value={5.2}
+            unit={"Km2 Area"}
+            subject={
+              "Better biophysical conditions within the lands of indigenous communities."
+            }
+          />
+
+          <CountUp
+            value={350}
+            unit={"Families"}
+            subject={
+              "Indigenous families with improved livelihoods and economic benefits."
+            }
+          />
+          <CountUp
+            value={4}
+            unit={"Businesses"}
+            subject={
+              "Sustainable businesses developed by indigenous communities."
+            }
+          />
         </div>
       </div>
     </main>

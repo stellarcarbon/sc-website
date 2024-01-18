@@ -5,7 +5,7 @@ export default function Footer() {
 
   return (
     <div className="h-24 flex flex-col justify-center items-center shadow-md-inverted bg-primary text-accent">
-      <hr className="w-[80%] border-secondary" />
+      {/* <hr className="w-[80%] border-secondary" /> */}
       <div className="py-4 grow flex flex-wrap items-center justify-center gap-2 gap-x-8 md:gap-x-12">
         <span className="text-gray-500">© 2023 Stellarcarbon</span>
 
