@@ -44,6 +44,7 @@ export default class TransactionHistoryService {
       .payments()
       .forAccount(CARBON_SINK_ACCOUNT)
       .limit(200)
+      .order("desc")
       .call();
 
     // Payments to CarbonSINK account from user
