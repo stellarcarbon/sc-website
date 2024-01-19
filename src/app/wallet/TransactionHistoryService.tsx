@@ -1,6 +1,6 @@
 import { HorizonApi, Server, ServerApi } from "stellar-sdk/lib/horizon";
+import { Networks, TransactionBuilder, OperationType } from "stellar-sdk/lib/index";
 
-import { Networks, TransactionBuilder } from "stellar-sdk/lib/index";
 import IndexedDBService from "./IndexedDBService";
 import { MyTransactionRecord } from "../types";
 
@@ -67,13 +67,16 @@ export default class TransactionHistoryService {
         let assetAmount = 0;
 
         // De klant koopt CARBON met XLM of USDC of any.
+        const typeStrictReceive: OperationType = "pathPaymentStrictReceive"
         let paymentOperation = operations.find(
-          (op: any) => op.type === "pathPaymentStrictReceive"
+          (op: any) => op.type === typeStrictReceive
         );
 
         if (paymentOperation !== undefined) {
           asset = paymentOperation.sendAsset.code;
-          assetAmount = paymentOperation.destAmount;
+          // This is a "worst case" amount, an approximation:
+          // The exact source amount is in tx.result_xdr which is more challenging to parse.
+          assetAmount = paymentOperation.sendMax;
         } else {
           // Als iemand met CARBON direct betaalt.
           paymentOperation = operations.find(
