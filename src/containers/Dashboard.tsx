@@ -99,7 +99,7 @@ export default function Dashboard() {
 
         <button
           className={`absolute right-0 top-4 py-1 px-2 ${
-            isCheckoutExpanded ? "top-2" : ""
+            isCheckoutExpanded ? "top-1" : ""
           }`}
           onClick={() => {
             setIsCheckoutExpanded(!isCheckoutExpanded);

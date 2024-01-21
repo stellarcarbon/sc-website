@@ -86,14 +86,15 @@ export default function CheckoutForm({
   };
 
   return (
-    <form className="flex flex-col bg-primary rounded-md min-w-[80%]">
+    <form className="flex flex-col font-sans bg-primary rounded-md min-w-[80%]">
+      <h1 className="pt-4 px-4 font-sans self-center text-2xl">Checkout</h1>
       <TonnesRange register={register} watch={watch} setValue={setValue} />
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
       <FormError className="py-0">{formErr}</FormError>
       <Button
         onClick={() => handleSubmit(onSubmit)()}
-        className="!py-2 !w-[60%] text-sm mb-4 self-center"
+        className="!py-2 !w-[60%] text-sm mb-8 self-center"
         disabled={false}
       >
         Sign & Submit
