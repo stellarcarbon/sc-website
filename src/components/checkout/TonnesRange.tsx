@@ -51,7 +51,7 @@ export default function TonnesRange({
       <div className="md:flex items-center gap-4">
         <div className="flex gap-2 justify-center md:justify-start">
           <div className="flex gap-1 items-center">
-            <span>0</span>
+            <span>1</span>
             <input
               className="w-64 range-lg"
               type="range"

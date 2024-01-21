@@ -4,7 +4,7 @@ export default function ProjectsPage() {
   return (
     <main className="flex flex-col items-center min-h-[calc(100vh-176px)] bg-secondary">
       {/* Current project title with whale */}
-      <div className="whale-bg pt-4 md:pt-16 w-full">
+      <div className="whale-bg pt-4 md:pt-8 w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-8 m-auto">
           <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
             Current Offset Project
@@ -71,13 +71,12 @@ export default function ProjectsPage() {
       </div>
 
       {/* Widgets */}
-      <div className="max-w-[80%] mt-12 flex flex-col md:flex-row justify-center">
+      <div className="max-w-[80%] my-12 flex flex-col md:flex-row justify-center">
         <CountUp
           value={12}
           unit={"Km2 Area"}
           subject={"Under better management of natural resources."}
         />
-
         <CountUp
           value={5.2}
           unit={"Km2 Area"}
@@ -85,7 +84,6 @@ export default function ProjectsPage() {
             "Better biophysical conditions within the lands of indigenous communities."
           }
         />
-
         <CountUp
           value={350}
           unit={"Families"}

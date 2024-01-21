@@ -69,16 +69,16 @@ export default function SelectWallet() {
 
   return (
     <>
-      <div className="flex flex-col items-start bg-secondary md:border border-tertiary text-white md:min-w-[600px] md:max-w-[650px] py-4 md:py-6 pt-8 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">
+      <div className="flex flex-col items-start bg-secondary md:border border-tertiary md:min-w-[600px] md:max-w-[650px] py-4 md:py-6 pt-8 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">
         <h1 className="text-2xl font-bold mx-6 my-1">Select a wallet</h1>
 
-        <p className="text-xs mx-6 mb-1 max-w-[80%] hidden md:block">
+        <span className="text-xs mx-6 mb-1 max-w-[80%] hidden md:block">
           Connect a wallet to be able to create new transactions and access your
           sinking history.
-        </p>
-        <p className="text-xs mx-6 mb-1 max-w-[80%] md:hidden">
+        </span>
+        <span className="text-xs mx-6 mb-1 max-w-[80%] md:hidden">
           Tap your wallet to use it to connect.
-        </p>
+        </span>
         {selectedWalletType ? (
           <b className="hidden">{`${selectedWalletType}`}</b>
         ) : (
@@ -141,10 +141,10 @@ export default function SelectWallet() {
           Contact details (optional)
         </h1>
 
-        <p className="text-xs mx-6 mb-1 max-w-[80%]">
+        <span className="text-xs mx-6 mb-1 max-w-[80%]">
           Your contact details will be used to send you a confirmation of your
           purchases. This step is optional.
-        </p>
+        </span>
 
         <ContactInfoForm
           username={username}
@@ -157,17 +157,13 @@ export default function SelectWallet() {
         <h1 className="text-2xl font-bold mx-6 my-1 mt-14">
           Accept terms & conditions
         </h1>
-        <p className="text-xs mx-6 mb-2 max-w-[80%]">
+        <span className="text-xs mx-6 mb-2 max-w-[80%]">
           Read about our terms & conditions and privacy policy <u>here</u>.
-        </p>
+        </span>
 
         <div
           className={`mx-6 !cursor:pointer pl-2 gap-2 flex items-center font-bold border  border-transparent rounded-md 
-        ${
-          tncAccepted
-            ? "bg-primary text-white  !border-accentSecondary"
-            : "bg-secondary "
-        }
+        ${tncAccepted ? "bg-primary !border-accentSecondary" : "bg-secondary "}
         `}
         >
           <input

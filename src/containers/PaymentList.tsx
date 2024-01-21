@@ -1,17 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useAppContext } from "@/context/appContext";
-import { MyTransactionRecord } from "@/app/types";
 
 export default function PaymentList() {
   const { myTransactions } = useAppContext();
 
-  const router = useRouter();
-
   return (
-    <div className="text-accent m-2 flex flex-col gap-2">
+    <div className="m-2 flex flex-col gap-2">
       <h1 className="flex flex-col text-lg font-bold text-center">
         <span>Transaction history</span>
         <span className="text-xs break-words w-[80%] self-center">{`For account (dev-mode): GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y`}</span>
@@ -33,7 +28,7 @@ export default function PaymentList() {
                 // onClick={() => {
                 //   router.push(`/wallet/transaction/${transaction.id}`);
                 // }}
-                className="flex flex-col text-sm text-accent bg-tertiary rounded-md border border-accentSecondary p-2 "
+                className="flex flex-col text-sm  bg-tertiary rounded-md border border-accentSecondary p-2 "
                 key={`payment_${transaction.id}`}
               >
                 <div className="flex justify-start items-center">

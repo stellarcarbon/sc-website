@@ -10,10 +10,15 @@ import CheckoutForm from "./CheckoutForm";
 import Button from "@/components/Button";
 import TransactionHistoryService from "@/app/wallet/TransactionHistoryService";
 import { DEV_ACCOUNT } from "@/app/types";
+import DeleteIcon from "@/components/icons/DeleteIcon";
 
 export default function Dashboard() {
-  const { walletConnection, myTransactions, setMyTransactions } =
-    useAppContext();
+  const {
+    walletConnection,
+    myTransactions,
+    setMyTransactions,
+    disconnectWallet,
+  } = useAppContext();
   const [isCheckoutExpanded, setIsCheckoutExpanded] = useState<boolean>(false);
 
   const transactionHistoryService = new TransactionHistoryService(DEV_ACCOUNT);
@@ -34,33 +39,45 @@ export default function Dashboard() {
       {/* <h1 className="self-center text-lg font-bold">My Stellarcarbon</h1> */}
 
       {/* Connection info */}
-      <div className="flex flex-col m-2 p-4 bg-tertiary border border-accentSecondary rounded-md text-accent">
-        <div className="flex justify-between items-center w-full">
-          <h1 className="text-lg font-bold text-white">Connection info</h1>
+      <div className="flex flex-col m-2 p-4 bg-tertiary border border-accentSecondary rounded-md">
+        <div className="flex flex-col justify-between items-center w-full">
+          <h1 className="text-lg font-bold">Your wallet is connected</h1>
+        </div>
+        <div className="flex flex-col w-full">
+          <div className="flex items-center">
+            <span className="w-32">Wallet</span>
+            <span className="text-xs">{walletConnection?.walletType}</span>
+          </div>
+          <div className="flex items-top md:items-center">
+            <span className="w-32">Stellar PubKey</span>
+            <span className="text-xs break-words max-w-[50%] md:max-w-[90%]">
+              {walletConnection?.stellarPubKey}
+            </span>
+          </div>
+          <PersonalDetailsDisplay />
+        </div>
+        <div className="flex gap-2 w-full justify-start mt-4">
           <Button className="!p-2">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-1 text-xs">
               {/* <span>Edit</span> */}
+              <span className="pt-[1px]">Edit wallet</span>
               <EditIcon />
             </div>
           </Button>
+          <Button onClick={disconnectWallet} className="!p-2">
+            <div className="flex items-center justify-between gap-1 text-xs">
+              {/* <span>Edit</span> */}
+              <span className="">Remove wallet</span>
+              <DeleteIcon />
+            </div>
+          </Button>
         </div>
-        <div className="flex justify-between items-center">
-          <span>Wallet</span>
-          <span className="text-xs">{walletConnection?.walletType}</span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span>Stellar PubKey</span>
-          <span className="text-xs break-words max-w-[50%]">
-            {walletConnection?.stellarPubKey}
-          </span>
-        </div>
-        <PersonalDetailsDisplay />
       </div>
 
       {/* Checkout form */}
-      <div className=" m-2 border border-tertiary text-accent relative">
+      <div className=" m-2 border border-tertiary  relative">
         <button
-          className={`flex items-center w-full min-h-9 ${
+          className={`flex items-center bg-accent text-black w-full h-16 ${
             isCheckoutExpanded && "hidden"
           }`}
           onClick={() => {
@@ -70,12 +87,12 @@ export default function Dashboard() {
           {isCheckoutExpanded ? (
             <></>
           ) : (
-            <span className="w-full">Click to sink carbon</span>
+            <span className="w-full">Click here to sink carbon</span>
           )}
         </button>
 
         <button
-          className="absolute right-0 top-0 py-1 px-2"
+          className="absolute right-0 top-4 py-1 px-2"
           onClick={() => {
             setIsCheckoutExpanded(!isCheckoutExpanded);
           }}
@@ -90,8 +107,6 @@ export default function Dashboard() {
 
       {/* Infinite scroll */}
       <PaymentList />
-
-      <DisconnectWalletButton />
     </div>
   );
 }

@@ -26,6 +26,7 @@ const config: Config = {
         accent: "#d8def2",
         // accentSecondary: "#596FB7",
         accentSecondary: "#8b9dd9",
+        textColor: "#ffffff",
       },
       fontFamily: {
         noto: ["Noto Serif", "sans-serif"],

@@ -14,7 +14,7 @@ export default function TopBar() {
     <header
       className={`flex w-full justify-between items-center h-20 z-10 relative
       border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]
-    bg-primary border-secondary text-white`}
+    bg-primary border-secondary`}
     >
       <img className="h-10 ml-[5vw]" src="/stellarcarbon-heading.png" />
 

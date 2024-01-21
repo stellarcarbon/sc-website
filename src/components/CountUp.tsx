@@ -13,7 +13,7 @@ export default function CountUp(props: CountUpProps) {
   const [counter, setCounter] = useState<number>(0);
   const [ref, isVisible] = useIntersectionObserver({ threshold: 0.5 });
 
-  const intervalInMS = props.value > 1000 ? 1 : 1000 / props.value;
+  const intervalInMS = props.value > 3000 ? 1 : 1000 / props.value;
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -38,7 +38,7 @@ export default function CountUp(props: CountUpProps) {
 
   return (
     <div ref={ref} className="my-4 w-full flex flex-col items-center">
-      <span className="mb-4 text-6xl text-white font-noto">{counter}</span>
+      <span className="mb-4 text-6xl font-noto">{counter}</span>
       <span className="mb-2 uppercase text-large text-accent font-semibold tracking-widest text-sm">
         {props.unit}
       </span>

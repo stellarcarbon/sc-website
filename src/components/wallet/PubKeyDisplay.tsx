@@ -5,7 +5,7 @@ export default function PubKeyDisplay() {
 
   return (
     <>
-      <p>Connected with Stellar PubKey:</p>
+      <span>Connected with Stellar PubKey:</span>
       <span id="stellarPubKey" className="text-2xl break-all mt-4 mb-12">
         {walletConnection!.stellarPubKey}
       </span>
