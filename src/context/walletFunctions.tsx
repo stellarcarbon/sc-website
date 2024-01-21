@@ -26,6 +26,7 @@ export const walletConnectDialog = async (
     let stellarPubKey = await kit.getPublicKey(); // will throw on error
 
     return {
+      kit,
       stellarPubKey,
       walletType: userWalletType,
       isAnonymous: false,

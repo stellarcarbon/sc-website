@@ -73,6 +73,10 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     const storedWalletConnectionJSONString = localStorage.getItem("wallet");
     if (storedWalletConnectionJSONString) {
       const wc: WalletConnection = JSON.parse(storedWalletConnectionJSONString);
+      wc.kit = new StellarWalletsKit({
+        selectedWallet: wc.walletType,
+        network: WalletNetwork.PUBLIC,
+      });
       setWalletConnection(wc);
     }
 

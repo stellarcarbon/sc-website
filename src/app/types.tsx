@@ -1,6 +1,7 @@
-import { WalletType } from "stellar-wallets-kit";
+import { StellarWalletsKit, WalletType } from "stellar-wallets-kit";
 
 export type WalletConnection = {
+  kit: StellarWalletsKit;
   stellarPubKey: string;
   walletType: WalletType;
   personalDetails?: PersonalDetails;

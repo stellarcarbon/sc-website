@@ -10,10 +10,24 @@ import { CheckoutFormData } from "@/app/types";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
 import { useAppContext } from "@/context/appContext";
-import { useEffect, useState } from "react";
+import {
+  Dispatch,
+  HTMLProps,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export default function CheckoutForm() {
+interface CheckoutFormProps extends HTMLProps<HTMLFormElement> {
+  setShowFormSuccess: Dispatch<SetStateAction<boolean>>;
+  setFormStatusMessage: Dispatch<SetStateAction<string>>;
+}
+
+export default function CheckoutForm({
+  setShowFormSuccess,
+  setFormStatusMessage,
+}: CheckoutFormProps) {
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
@@ -39,11 +53,31 @@ export default function CheckoutForm() {
     if (!walletConnection?.isAnonymous) {
       payload.email = walletConnection?.personalDetails?.useremail;
     }
+    setShowFormSuccess(true);
+    setFormStatusMessage("Creating transaction using StellarCarbon API...");
     carbonApi
       .buildSinkCarbonXdrSinkCarbonXdrPost(payload)
       .then((response) => {
         setSignResponse(response);
         console.log("sink carbon xdr post succesful\n", response.toString());
+        setFormStatusMessage("Sign the transaction using your wallet.");
+        console.log(walletConnection);
+        walletConnection?.kit
+          .sign({
+            xdr: response.txXdr,
+            publicKey: walletConnection.stellarPubKey,
+          })
+          .then((response) => {
+            console.log("Wallet sign succesful", response.toString());
+            setFormStatusMessage(
+              "Transaction signed. Posting to blockchain and awaiting confirmation. This can take a couple seconds..."
+            );
+            setTimeout(() => {
+              setFormStatusMessage(
+                "Success! (did not really post to blockchain though)"
+              );
+            }, 3000);
+          });
       })
       .catch((error) => {
         setFormErr(error.toString());
@@ -52,7 +86,7 @@ export default function CheckoutForm() {
   };
 
   return (
-    <form className="flex flex-col min-w-[80%]">
+    <form className="flex flex-col bg-primary rounded-md min-w-[80%]">
       <TonnesRange register={register} watch={watch} setValue={setValue} />
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
