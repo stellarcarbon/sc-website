@@ -23,9 +23,7 @@ export const connectWallet = (anonymous: boolean) => {
 };
 
 export const canDisconnect = () => {
-  cy.get("button")
-    .contains("Disconnect & choose another STELLAR account")
-    .click();
+  cy.get("button").contains("Remove").click();
 
   // Assert if we are back on wallet connection setup page
   cy.location("pathname").should("eq", "/wallet");
