@@ -1,9 +1,9 @@
 import AuditTable from "@/containers/AuditTable";
+import HomeExplainSection from "@/containers/HomeExplainSection";
 
 export default function Home() {
   return (
-    // <main className="flex flex-col min-h-screen items-center justify-start ">
-    <div className="flex flex-col items-center min-h-screen">
+    <main className="flex flex-col items-center min-h-screen">
       <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full min-h-[1200px] top-0 left-0 z-0 block absolute" />
       <div className="z-10 relative mt-[10vh] text-center max-w-[85%] min-h-[calc(1200px-10vh-80px)]">
         <h1>
@@ -31,9 +31,7 @@ export default function Home() {
         </p>
       </div>
 
-      <AuditTable />
-    </div>
-
-    // </main>
+      <HomeExplainSection />
+    </main>
   );
 }

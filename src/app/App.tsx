@@ -17,7 +17,7 @@ export default function App({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col">
       <TopBar />
-      <div className="grow text-textColor bg-primary">{children}</div>
+      <div className="grow text-textColor bg-secondary">{children}</div>
       <Footer />
     </div>
   );

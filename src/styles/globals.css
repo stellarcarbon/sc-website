@@ -45,6 +45,19 @@ body {
   background-position: 50%;
 }
 
+.blockchain-bg {
+  background-image: url("/dalle.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+@media only screen and (max-width: 768px) {
+  .blockchain-bg {
+    background-size: auto;
+  }
+}
+
 .image0 {
   animation-name: image0;
   animation-duration: 1000ms;
