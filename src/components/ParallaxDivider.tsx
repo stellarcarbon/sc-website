@@ -22,7 +22,7 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
       const screenFactor = 50;
 
       const newT = Math.max(
-        Math.min(0, -(yCoordinate - window.scrollY) / 3),
+        Math.min(100, -(yCoordinate - window.scrollY) / 3),
         -400
       );
 
@@ -50,7 +50,7 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
           style={t}
         ></div>
       </div>
-      <div className="h-[300px] w-screen"></div>
+      <div className="h-[200px] md:h-[300px] w-screen"></div>
     </div>
   );
 }
