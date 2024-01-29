@@ -41,5 +41,18 @@ export interface MyTransactionRecord {
   // Add other relevant transaction properties here
 }
 
+export interface FrontpageTransactionRecord {
+  pubkey: string;
+  createdAt: string;
+  memo: string;
+  sinkAmount: number;
+}
+
 export const DEV_ACCOUNT =
   "GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y";
+
+export const CARBON_SINK_ACCOUNT =
+  "GC7CDWMCWNCY7JYUW5UBEOLNBSTNDKKZSFTHKGZNPPSOXLFYFX3CSINK";
+
+export const CARBON_ACCOUNT =
+  "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";

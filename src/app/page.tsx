@@ -1,11 +1,17 @@
-import AuditTable from "@/containers/AuditTable";
+"use client";
+
+import AutumnForestDivider from "@/components/AutumnForestDivider";
+import ParallaxDivider, {
+  ParallaxBackgrounds,
+} from "@/components/ParallaxDivider";
 import HomeExplainSection from "@/containers/HomeExplainSection";
+import LastTransactionsSection from "@/containers/LastTransactionsSection";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center min-h-screen">
-      <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full min-h-[1200px] top-0 left-0 z-0 block absolute" />
-      <div className="z-10 relative mt-[10vh] text-center max-w-[85%] min-h-[calc(1200px-10vh-80px)]">
+      <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-screen min-h-[1200px] md:min-h-0 md:h-[800px] top-0 left-0 z-0 block absolute" />
+      <div className="z-10 relative py-[10vh] text-center max-w-[85%] min-h-[calc(1200px-10vh-80px)] md:min-h-[720px]">
         <h1>
           <span className="text-7xl font-noto">Sinking CARBON</span>
           <br />
@@ -32,6 +38,16 @@ export default function Home() {
       </div>
 
       <HomeExplainSection />
+
+      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} />
+
+      <LastTransactionsSection />
+
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
+
+      <div className="h-[800px] flex flex-col justify-center">
+        Some other stuff
+      </div>
     </main>
   );
 }

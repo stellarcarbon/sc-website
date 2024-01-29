@@ -23,13 +23,13 @@ export default function Dashboard() {
   const [showFormSuccess, setShowFormSuccess] = useState<boolean>(false);
   const [formStatusMessage, setFormStatusMessage] = useState<string>("");
 
-  const transactionHistoryService = new TransactionHistoryService(DEV_ACCOUNT);
+  const transactionHistoryService = new TransactionHistoryService();
 
   useEffect(() => {
     // Load the transactions for this dash on mount if not loaded yet.
     if (myTransactions === null) {
       transactionHistoryService
-        .fetchHistory()
+        .fetchAccountHistory(DEV_ACCOUNT)
         .then((transactionRecords): void => {
           setMyTransactions(transactionRecords);
         });

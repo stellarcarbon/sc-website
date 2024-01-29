@@ -1,6 +1,17 @@
+"use client";
+
+import carbonApi from "@/app/carbonApi";
 import AuditTableStat from "@/components/audit_table/AuditTableStat";
+import { useEffect, useState } from "react";
 
 export default function AuditTable() {
+  const [carbonpoolVerra, setCarbonpoolVerra] = useState<number>();
+  const [carbonpoolStellar, setCarbonpoolStellar] = useState<number>();
+  const [carbonsinkVerra, setCarbonsinkVerra] = useState<number>();
+  const [carbonsinkStellar, setCarbonsinkStellar] = useState<number>();
+
+  useEffect(() => {}, []);
+
   return (
     <div className="md:max-w-[1080px] grid grid-cols-3 gap-1 w-full border border-tertiary bg-primary ">
       <div className="grid grid-rows-2 col-span-2 border border-white">

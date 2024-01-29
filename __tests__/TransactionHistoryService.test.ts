@@ -6,7 +6,7 @@ describe("TransactionHistoryService", () => {
   let thService: TransactionHistoryService;
 
   beforeAll(() => {
-    thService = new TransactionHistoryService(DEV_ACCOUNT);
+    thService = new TransactionHistoryService();
   });
 
   test("Can create a new instance", async () => {
@@ -15,7 +15,7 @@ describe("TransactionHistoryService", () => {
 
   test("Can fetch transaction history, convert to MyTransactionRecord array and update app context", async () => {
     // Uses the actual blockchain, should mock each http request to horizon for a more maintainable test.
-    const result = await thService.fetchHistory();
+    const result = await thService.fetchAccountHistory(DEV_ACCOUNT);
     expect(result).toEqual([
       {
         asset: "USDC",

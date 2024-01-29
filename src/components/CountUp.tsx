@@ -35,7 +35,6 @@ export default function CountUp(props: CountUpProps) {
     let interval: NodeJS.Timeout;
 
     if (isVisible && counter < props.value) {
-      console.log("efffect");
       interval = setInterval(() => {
         setCounter(
           (prevCounter) => {
@@ -66,6 +65,10 @@ export default function CountUp(props: CountUpProps) {
     };
   }, [isVisible]);
 
+  const toNumberWithCommas = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   useEffect(() => {
     if (counter === props.value) {
       clearInterval(mInterval);
@@ -74,7 +77,9 @@ export default function CountUp(props: CountUpProps) {
 
   return (
     <div ref={ref} className="my-4 w-full flex flex-col items-center">
-      <span className="mb-4 text-6xl font-noto">{counter}</span>
+      <span className="mb-4 text-6xl font-noto">
+        {toNumberWithCommas(counter)}
+      </span>
       <span className="mb-2 uppercase text-large text-accent font-semibold tracking-widest text-sm">
         {props.unit}
       </span>

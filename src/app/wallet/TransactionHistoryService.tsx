@@ -1,46 +1,25 @@
-import { HorizonApi, Server, ServerApi } from "stellar-sdk/lib/horizon";
-import { Networks, TransactionBuilder, OperationType } from "stellar-sdk/lib/index";
+import { Server } from "stellar-sdk/lib/horizon";
+import {
+  Networks,
+  TransactionBuilder,
+  OperationType,
+} from "stellar-sdk/lib/index";
 
-import IndexedDBService from "./IndexedDBService";
-import { MyTransactionRecord } from "../types";
+import {
+  CARBON_ACCOUNT,
+  CARBON_SINK_ACCOUNT,
+  FrontpageTransactionRecord,
+  MyTransactionRecord,
+} from "../types";
 
 export default class TransactionHistoryService {
-  private userAccount: string;
+  private server = new Server("https://horizon.stellar.org");
 
-  constructor(userAccount: string) {
-    this.userAccount = userAccount;
-  }
-
-  public async fetchHistory(): Promise<MyTransactionRecord[]> {
-    const server = new Server("https://horizon.stellar.org");
-
-    // const idbService = await IndexedDBService.create();
-
-    // const transactionStream = server
-    //   .transactions()
-    //   .forAccount("GC7CDWMCWNCY7JYUW5UBEOLNBSTNDKKZSFTHKGZNPPSOXLFYFX3CSINK")
-    //   .stream({
-    //     onmessage: async (transactionRecord: any) => {
-    //       console.log("message", transactionRecord);
-    //       const mr: MyTransactionRecord = {
-    //         id: transactionRecord.id,
-    //       };
-    //       idbService.saveTransaction(mr);
-    //       this.updateContextState(mr);
-    //     },
-    //     onerror: (error) => {
-    //       console.error("Error in transaction stream:", error);
-    //     },
-    //   });
-
-    const CARBON_SINK_ACCOUNT =
-      "GC7CDWMCWNCY7JYUW5UBEOLNBSTNDKKZSFTHKGZNPPSOXLFYFX3CSINK";
-
-    const CARBON_ACCOUNT =
-      "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";
-
+  public async fetchAccountHistory(
+    account: string
+  ): Promise<MyTransactionRecord[]> {
     // All payments to CarbonSINK account
-    const payments = await server
+    const payments = await this.server
       .payments()
       .forAccount(CARBON_SINK_ACCOUNT)
       .limit(200)
@@ -50,8 +29,7 @@ export default class TransactionHistoryService {
     // Payments to CarbonSINK account from user
     const userPayments = payments.records.filter(
       (record: any) =>
-        record.asset_issuer === CARBON_SINK_ACCOUNT &&
-        record.to === this.userAccount
+        record.asset_issuer === CARBON_SINK_ACCOUNT && record.to === account
     );
 
     const mrs: MyTransactionRecord[] = await Promise.all(
@@ -67,7 +45,7 @@ export default class TransactionHistoryService {
         let assetAmount = 0;
 
         // De klant koopt CARBON met XLM of USDC of any.
-        const typeStrictReceive: OperationType = "pathPaymentStrictReceive"
+        const typeStrictReceive: OperationType = "pathPaymentStrictReceive";
         let paymentOperation = operations.find(
           (op: any) => op.type === typeStrictReceive
         );
@@ -98,5 +76,31 @@ export default class TransactionHistoryService {
     );
 
     return mrs;
+  }
+
+  public async fetchLastFiveTransactions(): Promise<
+    FrontpageTransactionRecord[]
+  > {
+    const payments = await this.server
+      .payments()
+      .forAccount(CARBON_SINK_ACCOUNT)
+      .limit(5)
+      .order("desc")
+      .call();
+
+    const output: FrontpageTransactionRecord[] = await Promise.all(
+      payments.records.map(async (payment: any) => {
+        const transaction = (await payment.transaction()) as any;
+
+        return {
+          pubkey: payment.to,
+          createdAt: transaction.created_at,
+          memo: transaction.memo,
+          sinkAmount: Number(payment.amount),
+        };
+      })
+    );
+
+    return output;
   }
 }

@@ -15,7 +15,6 @@ import {
 } from "../app/types";
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
 import { useRouter, usePathname } from "next/navigation";
-import TransactionHistoryService from "../app/wallet/TransactionHistoryService";
 
 // A global app context used to write & read state everywhere.
 type AppContext = {
