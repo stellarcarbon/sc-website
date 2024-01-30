@@ -1,4 +1,4 @@
-import { Server } from "stellar-sdk/lib/horizon";
+import { Server, ServerApi } from "stellar-sdk/lib/horizon";
 import {
   Networks,
   TransactionBuilder,
@@ -11,6 +11,7 @@ import {
   FrontpageTransactionRecord,
   MyTransactionRecord,
 } from "../types";
+import { PaymentsPageToFrontPageToTransactionsRecordArray } from "../utils";
 
 export default class TransactionHistoryService {
   private server = new Server("https://horizon.stellar.org");
@@ -78,7 +79,7 @@ export default class TransactionHistoryService {
     return mrs;
   }
 
-  public async fetchLastFiveTransactions(): Promise<
+  public async fetchRecentTransactions(): Promise<
     FrontpageTransactionRecord[]
   > {
     const payments = await this.server
@@ -88,19 +89,8 @@ export default class TransactionHistoryService {
       .order("desc")
       .call();
 
-    const output: FrontpageTransactionRecord[] = await Promise.all(
-      payments.records.map(async (payment: any) => {
-        const transaction = (await payment.transaction()) as any;
+    payments.next();
 
-        return {
-          pubkey: payment.to,
-          createdAt: transaction.created_at,
-          memo: transaction.memo,
-          sinkAmount: Number(payment.amount),
-        };
-      })
-    );
-
-    return output;
+    return await PaymentsPageToFrontPageToTransactionsRecordArray(payments);
   }
 }

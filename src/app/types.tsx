@@ -46,6 +46,7 @@ export interface FrontpageTransactionRecord {
   createdAt: string;
   memo: string;
   sinkAmount: number;
+  id?: string;
 }
 
 export const DEV_ACCOUNT =

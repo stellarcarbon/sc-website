@@ -5,7 +5,7 @@ import "./styles.css";
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="flex flex-col min-h-[calc(100vh-176px)] bg-secondary font-noto p-4 md:px-32 md:max-w-[1600px] md:m-auto">
+    <main className="flex flex-col w-full min-h-[calc(100vh-176px)] bg-secondary font-noto p-4 md:px-32 md:max-w-[1600px] md:m-auto">
       <Head>
         <link rel="stylesheet" href="./styles.css" />
       </Head>
@@ -205,14 +205,16 @@ export default function PrivacyPolicyPage() {
           are not managed by the same browser settings as those used for Browser
           Cookies. For more information on how You can delete Flash Cookies,
           please read “Where can I change the settings for disabling, or
-          deleting local shared objects?” available at<span>&nbsp;</span>
+          deleting local shared objects?” available <span>&nbsp;</span>
           <a
             href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
             rel="external nofollow noopener"
             target="_blank"
+            className="underline"
           >
-            https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_
+            here
           </a>
+          .
         </li>
         <li>
           <strong>Web Beacons.</strong>

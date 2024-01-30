@@ -10,7 +10,7 @@ export default function LastTransactionsSection() {
     useState<FrontpageTransactionRecord[]>();
 
   useEffect(() => {
-    txHistoryService.fetchLastFiveTransactions().then((txRecords): void => {
+    txHistoryService.fetchRecentTransactions().then((txRecords): void => {
       console.log(txRecords);
       setLastTransactions(txRecords);
     });
@@ -33,7 +33,7 @@ export default function LastTransactionsSection() {
               return (
                 <div
                   key={`tx_${idx}`}
-                  className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 mx-2 md:mx-0 max-w-[90%] self-center md:self-start md:max-w-[40vw]"
+                  className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 mx-2 md:mx-0 w-[90%] self-center md:self-start md:max-w-[40vw]"
                 >
                   <div className="flex justify-start items-center">
                     <span className="w-24 md:w-32">Account</span>

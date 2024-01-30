@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef, RefObject } from "react";
+import { ServerApi } from "stellar-sdk/lib/horizon";
+import { FrontpageTransactionRecord } from "./types";
 
 export function debounce<T extends (...args: any[]) => void>(
   func: T,
@@ -53,3 +55,38 @@ export const useIntersectionObserver = (
 
   return [ref, isIntersecting];
 };
+
+export async function PaymentsPageToFrontPageToTransactionsRecordArray(
+  paymentsPage: ServerApi.CollectionPage<
+    | ServerApi.PaymentOperationRecord
+    | ServerApi.CreateAccountOperationRecord
+    | ServerApi.AccountMergeOperationRecord
+    | ServerApi.PathPaymentOperationRecord
+    | ServerApi.PathPaymentStrictSendOperationRecord
+    | ServerApi.InvokeHostFunctionOperationRecord
+  >
+): Promise<FrontpageTransactionRecord[]> {
+  let input = paymentsPage.records;
+
+  console.log(input);
+  input.sort((a, b) =>
+    Number(a.paging_token) > Number(b.paging_token) ? -1 : 1
+  );
+  console.log(input);
+
+  const output: FrontpageTransactionRecord[] = await Promise.all(
+    input.map(async (payment: any) => {
+      const transaction = (await payment.transaction()) as any;
+
+      return {
+        pubkey: payment.to,
+        createdAt: transaction.created_at,
+        memo: transaction.memo,
+        sinkAmount: Number(payment.amount),
+        id: payment.id,
+      };
+    })
+  );
+
+  return output;
+}

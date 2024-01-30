@@ -12,7 +12,7 @@ export default function TopBar() {
 
   return (
     <header
-      className={`flex w-screen justify-between items-center h-20 z-10 relative
+      className={`flex w-full justify-between items-center h-20 z-10 relative
       border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]
     bg-primary border-secondary`}
     >
@@ -22,6 +22,7 @@ export default function TopBar() {
         <TopBarLink href="/">Home</TopBarLink>
         <TopBarLink href="/explain">Explain</TopBarLink>
         <TopBarLink href="/projects">Projects</TopBarLink>
+        <TopBarLink href="/transactions">Transactions</TopBarLink>
         <TopBarLink href="/about">About us</TopBarLink>
         <TopBarLink href="/wallet">Wallet</TopBarLink>
       </div>

@@ -2,7 +2,7 @@ import AuditTable from "@/containers/AuditTable";
 
 export default function ExplainPage() {
   return (
-    <main className="pb-16 flex flex-col min-h-[calc(100vh-176px)] font-noto">
+    <main className="pb-16 flex flex-col font-noto">
       <div className="blockchain-bg w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
           <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">

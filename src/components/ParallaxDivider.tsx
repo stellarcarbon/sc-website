@@ -43,14 +43,14 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
   };
 
   return (
-    <div className="relative" ref={componentRef}>
+    <div className="relative w-full" ref={componentRef}>
       <div className="absolute overflow-hidden top-0 left-0 right-0 bottom-0">
         <div
           className={`${image} bg-cover bg-top  bg-no-repeat w-screen h-[800px]`}
           style={t}
         ></div>
       </div>
-      <div className="h-[200px] md:h-[300px] w-screen"></div>
+      <div className="h-[200px] md:h-[300px] w-full"></div>
     </div>
   );
 }
