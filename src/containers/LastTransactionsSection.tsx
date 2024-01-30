@@ -17,7 +17,7 @@ export default function LastTransactionsSection() {
   }, []);
 
   return (
-    <div className="bg-tertiary py-8 w-full h-[750px] md:h-[554px]">
+    <div className="bg-tertiary py-16 w-full">
       <div className="flex flex-col md:flex-row h-full">
         <div className="md:flex-1 font-noto m-auto md:pl-[10%] max-w-[80%] md:max-w-[50%]">
           <h1 className="text-2xl">Recent transactions</h1>
@@ -27,13 +27,13 @@ export default function LastTransactionsSection() {
           </div>
         </div>
 
-        <div className="md:flex-1">
+        <div className="md:flex-1 min-h-[400px] flex flex-col justify-center">
           {lastTransactions ? (
             lastTransactions.map((tx, idx) => {
               return (
                 <div
                   key={`tx_${idx}`}
-                  className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 mx-2 md:mx-0 md:max-w-[40vw]"
+                  className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 mx-2 md:mx-0 max-w-[90%] self-center md:self-start md:max-w-[40vw]"
                 >
                   <div className="flex justify-start items-center">
                     <span className="w-24 md:w-32">Account</span>
@@ -59,7 +59,9 @@ export default function LastTransactionsSection() {
               );
             })
           ) : (
-            <div></div>
+            <div className="text-xl self-center font-bold">
+              Loading transaction history...
+            </div>
           )}
         </div>
       </div>

@@ -84,7 +84,7 @@ export default class TransactionHistoryService {
     const payments = await this.server
       .payments()
       .forAccount(CARBON_SINK_ACCOUNT)
-      .limit(5)
+      .limit(4)
       .order("desc")
       .call();
 

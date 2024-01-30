@@ -2,8 +2,8 @@ import AuditTable from "@/containers/AuditTable";
 
 export default function ExplainPage() {
   return (
-    <main className="flex flex-col min-h-[calc(100vh-176px)] font-noto">
-      <div className="blockchain-bg =md:pt-8 w-full">
+    <main className="pb-16 flex flex-col min-h-[calc(100vh-176px)] font-noto">
+      <div className="blockchain-bg w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
           <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
             What is Stellarcarbon?
@@ -14,7 +14,7 @@ export default function ExplainPage() {
         </div>
       </div>
 
-      <div className="flex flex-col p-4 py-8 md:max-w-[1080px] md:m-auto">
+      <div className="flex flex-col p-4 py-16 md:max-w-[1080px] md:m-auto">
         <h2 className="text-2xl">An introduction</h2>
         <hr className="my-8 w-[100px] border-2 border-accentSecondary" />
         <div className="tracking-wide leading-7">
@@ -53,7 +53,9 @@ export default function ExplainPage() {
           </p>
         </div>
       </div>
-      <AuditTable />
+      <div className="m-auto md:w-[900px]">
+        <AuditTable />
+      </div>
     </main>
   );
 }
