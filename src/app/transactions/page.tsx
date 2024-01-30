@@ -28,7 +28,6 @@ export default function TransactionsPage() {
     >();
 
   const [paginationError, setPaginationError] = useState<string>();
-  const [reverse, setReverse] = useState<boolean>(false);
 
   const fetchPayments = async (
     limit: number,
@@ -98,7 +97,6 @@ export default function TransactionsPage() {
         updateParams("desc", newCursor);
       }
     }
-    setReverse(false);
   };
 
   const goToPreviousPage = async () => {
@@ -122,7 +120,6 @@ export default function TransactionsPage() {
         updateParams("asc", newCursor);
       }
     }
-    setReverse(true);
   };
 
   useEffect(() => {

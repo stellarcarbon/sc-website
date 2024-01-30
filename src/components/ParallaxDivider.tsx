@@ -34,7 +34,6 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
     if (componentRef.current) {
       const rect = componentRef.current.getBoundingClientRect();
       yCoordinate = rect.top + window.scrollY;
-      console.log("Y Coordinate:", image, yCoordinate);
     }
   }, []);
 

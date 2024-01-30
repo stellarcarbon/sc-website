@@ -12,7 +12,6 @@ export default function LastTransactionsSection() {
 
   useEffect(() => {
     txHistoryService.fetchRecentTransactions().then((txRecords): void => {
-      console.log(txRecords);
       setLastTransactions(txRecords);
     });
   }, []);

@@ -29,8 +29,6 @@ export default function CountUp(props: CountUpProps) {
 
   intervalInMS = (1000 * step) / props.value;
 
-  console.log(counter, props.value, step, intervalInMS);
-
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
@@ -42,7 +40,6 @@ export default function CountUp(props: CountUpProps) {
             if (prevCounter < ~~(props.value / step) * step) {
               newCounter += step;
             } else {
-              console.log(prevCounter, props.value);
               if (prevCounter < props.value) {
                 newCounter += props.value - prevCounter;
               }

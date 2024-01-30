@@ -68,11 +68,9 @@ export async function PaymentsPageToFrontPageToTransactionsRecordArray(
 ): Promise<FrontpageTransactionRecord[]> {
   let input = paymentsPage.records;
 
-  console.log(input);
   input.sort((a, b) =>
     Number(a.paging_token) > Number(b.paging_token) ? -1 : 1
   );
-  console.log(input);
 
   const output: FrontpageTransactionRecord[] = await Promise.all(
     input.map(async (payment: any) => {
