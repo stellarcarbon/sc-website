@@ -2,6 +2,7 @@
 
 import { FrontpageTransactionRecord } from "@/app/types";
 import TransactionHistoryService from "@/app/wallet/TransactionHistoryService";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function LastTransactionsSection() {
@@ -24,6 +25,9 @@ export default function LastTransactionsSection() {
           <hr className="my-8 w-[100px] border-2 border-accentSecondary" />
           <div className="tracking-wide leading-7">
             <p>Check out the most recent transactions on Stellarcarbon.</p>
+            <Link href="/transactions" className="underline text-sm">
+              View the full list here
+            </Link>
           </div>
         </div>
 

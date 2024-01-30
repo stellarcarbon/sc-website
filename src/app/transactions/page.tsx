@@ -162,7 +162,7 @@ export default function TransactionsPage() {
         </div>
 
         <div className="self-center max-w-full">
-          {transactions ? (
+          {transactions.length > 0 ? (
             transactions.map((tx, idx) => {
               return (
                 <a
@@ -199,7 +199,7 @@ export default function TransactionsPage() {
               );
             })
           ) : (
-            <div>Loading</div>
+            <div>Loading transactions...</div>
           )}
         </div>
 
