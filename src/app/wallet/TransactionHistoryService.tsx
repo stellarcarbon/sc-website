@@ -19,7 +19,7 @@ export default class TransactionHistoryService {
   public async fetchAccountHistory(
     account: string
   ): Promise<MyTransactionRecord[]> {
-    // All payments to CarbonSINK account
+    // All payments that CarbonSINK account is involved in.
     const payments = await this.server
       .payments()
       .forAccount(CARBON_SINK_ACCOUNT)
@@ -27,7 +27,7 @@ export default class TransactionHistoryService {
       .order("desc")
       .call();
 
-    // Payments to CarbonSINK account from user
+    // Payments in CarbonSINK to user account
     const userPayments = payments.records.filter(
       (record: any) =>
         record.asset_issuer === CARBON_SINK_ACCOUNT && record.to === account
@@ -90,6 +90,13 @@ export default class TransactionHistoryService {
       .call();
 
     payments.next();
+
+    // TODO: implementeren.
+    // Filters the carbon sink payments originating from the carbon sink issuer
+    // const filtered_payments = payments.records.filter(
+    //   (record: any) =>
+    //     record.asset_issuer === CARBON_SINK_ACCOUNT && record.from === CARBON_SINK_ACCOUNT
+    // );
 
     return await PaymentsPageToFrontPageToTransactionsRecordArray(payments);
   }
