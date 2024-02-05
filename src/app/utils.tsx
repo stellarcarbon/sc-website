@@ -75,8 +75,8 @@ export async function PaymentsPageToFrontPageToTransactionsRecordArray(
   const output: FrontpageTransactionRecord[] = await Promise.all(
     input.map(async (payment: any) => {
       const transaction = (await payment.transaction()) as any;
-
       return {
+        hash: transaction.id,
         pubkey: payment.to,
         createdAt: transaction.created_at,
         memo: transaction.memo,

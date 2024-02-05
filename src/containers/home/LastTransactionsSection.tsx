@@ -22,9 +22,15 @@ export default function LastTransactionsSection() {
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
         <div className="m-auto pl-[5%] md:w-[40%] ">
-          <Header>Recent transactions</Header>
+          <Header>Using the blockchain</Header>
           <div className="tracking-wide leading-7">
-            <p>Check out the most recent transactions on Stellarcarbon.</p>
+            <p>
+              All sinked CARBON is accounted for on the Stellar blockchain,
+              making it highly transparent that your contribution ends up in the
+              right place.
+              <br />
+              <br /> Check out the most recent transactions on Stellarcarbon.
+            </p>
             <Link href="/transactions" className="underline text-sm">
               View the full list here
             </Link>
@@ -41,9 +47,9 @@ export default function LastTransactionsSection() {
                   className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 mx-2 md:mx-0 w-[90%] max-w-[690px] self-center"
                 >
                   <div className="flex justify-start items-center">
-                    <span className="w-24 md:w-32">Account</span>
+                    <span className="w-24 md:w-32">Transaction</span>
                     <span className=" truncate max-w-[60%] md:max-w-[100%]">
-                      {tx.pubkey}
+                      {tx.hash}
                     </span>
                   </div>
                   <div className="flex justify-start items-center">

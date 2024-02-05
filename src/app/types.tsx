@@ -42,6 +42,7 @@ export interface MyTransactionRecord {
 }
 
 export interface FrontpageTransactionRecord {
+  hash: string;
   pubkey: string;
   createdAt: string;
   memo: string;
