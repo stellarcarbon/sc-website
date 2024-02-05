@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import AuditTable from "@/containers/AuditTable";
 
 export default function ExplainPage() {
@@ -15,8 +16,7 @@ export default function ExplainPage() {
       </div>
 
       <div className="flex flex-col p-4 py-16 md:max-w-[1080px] md:m-auto">
-        <h2 className="text-2xl">An introduction</h2>
-        <hr className="my-8 w-[100px] border-2 border-accentSecondary" />
+        <Header>An introduction</Header>
         <div className="tracking-wide leading-7">
           <p>
             Stellarcarbon works by combining a cooperation with Verra for
@@ -33,8 +33,8 @@ export default function ExplainPage() {
             Pellentesque ac vulputate massa.
           </p>
         </div>
-        <h2 className="text-2xl">Some calculations</h2>
-        <hr className="my-8 w-[100px] border-2 border-accentSecondary" />
+
+        <Header>Some calculations</Header>
         <div className="tracking-wide leading-7">
           <p>
             In ut eros pretium velit congue fringilla. Fusce id commodo nibh.

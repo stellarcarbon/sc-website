@@ -7,6 +7,7 @@ import { CARBON_SINK_ACCOUNT, FrontpageTransactionRecord } from "../types";
 import { PaymentsPageToFrontPageToTransactionsRecordArray } from "../utils";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
+import Header from "@/components/Header";
 
 export default function TransactionsPage() {
   const searchParams = useSearchParams();
@@ -141,8 +142,7 @@ export default function TransactionsPage() {
       </div>
 
       <div className="mb-32 p-4 md:p-16 py-16 flex flex-col md:max-w-[1080px] md:mx-auto bg-secondary rounded-md">
-        <h2 className="text-2xl">Transaction history</h2>
-        <hr className="my-8 w-[100px] border-2 border-accentSecondary" />
+        <Header>Transaction history</Header>
         <div className="tracking-wide leading-7">
           <p>
             Here you can find the complete history of transactions using

@@ -1,4 +1,5 @@
 import CountUp from "@/components/CountUp";
+import Header from "@/components/Header";
 
 export default function ProjectsPage() {
   return (
@@ -28,10 +29,9 @@ export default function ProjectsPage() {
         </div>
         {/* Text */}
         <div className="font-noto md:flex-1">
-          <h2 className="text-2xl">
+          <Header>
             About Shipibo Conibo and Cacataibo Indigenous Communities
-          </h2>
-          <hr className="my-8 w-[100px] border-2 border-accentSecondary" />
+          </Header>
           <div className="tracking-wide leading-7">
             <p>
               The Ucayali Region is located in the central part of eastern Peru,

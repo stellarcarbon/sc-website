@@ -1,4 +1,5 @@
 import CountUp from "@/components/CountUp";
+import Header from "@/components/Header";
 import Link from "next/link";
 
 export default function ExplainSection() {
@@ -19,8 +20,7 @@ export default function ExplainSection() {
       </div>
       {/* Text */}
       <div className="font-noto md:flex-1 mt-8">
-        <h2 className="text-2xl">How does Stellarcarbon work?</h2>
-        <hr className="my-8 w-[100px] border-2 border-accentSecondary" />
+        <Header>How does Stellarcarbon work?</Header>
         <div className="tracking-wide leading-7">
           <p>
             Stellarcarbon works by combining a cooperation with Verra for
