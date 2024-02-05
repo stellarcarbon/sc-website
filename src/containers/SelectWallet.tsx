@@ -69,16 +69,16 @@ export default function SelectWallet() {
 
   return (
     <>
-      <div className="flex flex-col items-start bg-secondary md:border border-tertiary md:min-w-[600px] md:max-w-[650px] py-4 md:py-6 pt-8 md:p-0 md:pt-6 rounded-md border-gray shadow-lg">
-        <h1 className="text-2xl font-bold mx-6 my-1">Select a wallet</h1>
+      <div className="flex flex-col items-start bg-secondary md:border border-tertiary md:min-w-[600px] md:max-w-[650px]  md:py-6 md:p-0 md:pt-6 md:rounded-md border-gray shadow-lg">
+        <h1 className="text-3xl font-bold mx-6 mt-8 my-3">Wallet selection</h1>
 
-        <span className="text-xs mx-6 mb-1 max-w-[80%] hidden md:block">
+        <p className="text-sm mx-6 mb-1 max-w-[80%] hidden md:block">
           Connect a wallet to be able to create new transactions and access your
           sinking history.
-        </span>
-        <span className="text-xs mx-6 mb-1 max-w-[80%] md:hidden">
+        </p>
+        <p className="text-sm mx-6 mb-1 max-w-[80%] md:hidden">
           Tap your wallet to use it to connect.
-        </span>
+        </p>
         {selectedWalletType ? (
           <b className="hidden">{`${selectedWalletType}`}</b>
         ) : (
@@ -137,14 +137,14 @@ export default function SelectWallet() {
           )}
         </div>
 
-        <h1 className="text-2xl font-bold mx-6 my-1 mt-12">
+        <h1 className="text-3xl font-bold mx-6 my-3 mt-12">
           Contact details (optional)
         </h1>
 
-        <span className="text-xs mx-6 mb-1 max-w-[80%]">
+        <p className="text-sm mx-6 mb-1 max-w-[80%]">
           Your contact details will be used to send you a confirmation of your
           purchases. This step is optional.
-        </span>
+        </p>
 
         <ContactInfoForm
           username={username}
@@ -154,12 +154,10 @@ export default function SelectWallet() {
           emailError={emailError}
         />
 
-        <h1 className="text-2xl font-bold mx-6 my-1 mt-14">
-          Accept terms & conditions
-        </h1>
-        <span className="text-xs mx-6 mb-2 max-w-[80%]">
+        <h1 className="text-3xl font-bold mx-6 my-3 mt-14">Privacy policy</h1>
+        <p className="text-sm mx-6 max-w-[80%]">
           Read about our terms & conditions and privacy policy <u>here</u>.
-        </span>
+        </p>
 
         <div
           className={`mx-6 !cursor:pointer pl-2 gap-2 flex items-center font-bold border  border-transparent rounded-md 
@@ -187,7 +185,7 @@ export default function SelectWallet() {
           </FormError>
         )}
 
-        <Button className="my-10 self-center" onClick={submitForm}>
+        <Button className="mt-6 mb-9 self-center" onClick={submitForm}>
           Connect wallet
         </Button>
 

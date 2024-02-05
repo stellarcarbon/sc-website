@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import { Providers } from "@/app/providers";
-import TopBar from "@/components/TopBar";
 import App from "./App";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,6 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i"
+        />
+      </head>
       <body className={`${inter.className}`}>
         <Providers>
           <App>{children}</App>

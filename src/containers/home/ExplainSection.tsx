@@ -1,7 +1,7 @@
 import CountUp from "@/components/CountUp";
 import Link from "next/link";
 
-export default function HomeExplainSection() {
+export default function ExplainSection() {
   return (
     <div className="flex flex-col md:flex-row py-12 m-auto max-w-[80%]">
       {/* Stats */}

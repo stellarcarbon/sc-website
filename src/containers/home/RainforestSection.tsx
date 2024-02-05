@@ -1,0 +1,32 @@
+export default function RainforestIntro() {
+  return (
+    <>
+      <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full min-h-[1200px] md:min-h-0 md:h-[800px] top-0 left-0 z-0 block absolute" />
+      <div className="flex flex-col justify-center z-10 relative text-center max-w-[85%] min-h-[calc(1200px-80px)] md:min-h-[720px]">
+        <h1 className="my-4">
+          <span className="text-7xl font-noto">Sinking CARBON</span>
+          <br />
+          <span className="text-7xl font-noto">with Stellar</span>
+        </h1>
+        <h2 className="my-4 uppercase text-2xl tracking-[.4em] font-bold">
+          Under development
+        </h2>
+        <h2 className="my-4 uppercase text-2xl tracking-[.4em] font-bold">
+          Stellar Offsets
+        </h2>
+        <span className="m-6 leading-8">
+          We provide a simple way to make voluntary, negative emissions
+          contributions,
+          <br /> via high integrity nature based projects on the blockchain.
+        </span>
+        <span className="m-6 leading-8">
+          Each CARBON token represents 1 tonne of carbon dioxide-equivalent
+          emissions that have
+          <br /> been reduced, avoided, or sequestered by a verified carbon
+          offset project, and which will not
+          <br /> be released into the atmosphere.
+        </span>
+      </div>
+    </>
+  );
+}
