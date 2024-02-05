@@ -3,11 +3,11 @@ import Header from "@/components/Header";
 
 export default function ProjectsPage() {
   return (
-    <main className="flex flex-col items-center min-h-[calc(100vh-176px)] bg-secondary">
+    <main className="flex flex-col items-center font-noto">
       {/* Current project title with whale */}
       <div className="whale-bg pt-4 md:pt-8 w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-8 m-auto">
-          <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
+          <span className="text-5xl md:text-[7vw] text-center leading-[56px] md:leading-[8vw] image1">
             Current Offset Project
           </span>
           <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
           </div>
         </div>
         {/* Text */}
-        <div className="font-noto md:flex-1">
+        <div className="md:flex-1">
           <Header>
             About Shipibo Conibo and Cacataibo Indigenous Communities
           </Header>

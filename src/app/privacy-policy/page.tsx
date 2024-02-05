@@ -1,14 +1,50 @@
 "use client";
 
-import Head from "next/head";
-import "./styles.css";
-
 export default function PrivacyPolicyPage() {
   return (
-    <main className="flex flex-col w-full min-h-[calc(100vh-176px)] bg-secondary font-noto p-4 md:px-32 md:max-w-[1600px] md:m-auto">
-      <Head>
-        <link rel="stylesheet" href="./styles.css" />
-      </Head>
+    <main className="flex flex-col font-noto py-8 md:px-32 md:max-w-[1600px] md:m-auto">
+      <style jsx>{`
+        h1 {
+          font-size: 32px;
+          font-weight: bold;
+        }
+
+        h2 {
+          font-size: 28px;
+          font-weight: bold;
+        }
+
+        h3 {
+          font-size: 22px;
+          font-weight: bold;
+        }
+
+        ul {
+          list-style: disc;
+          margin: 0;
+          padding: 0;
+          padding-inline-start: 20px;
+          margin-bottom: 16px;
+          line-height: 26px;
+        }
+
+        ul ul {
+          list-style: square;
+        }
+
+        li {
+          font-size: 14px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+
+        li p {
+          padding-bottom: 0px;
+        }
+      `}</style>
+
       <h1>Privacy Policy</h1>
       <p>Last updated: March 09, 2021</p>
       <p>

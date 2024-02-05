@@ -25,7 +25,7 @@ export default function TopBar() {
         <TopBarLink href="/wallet">Wallet</TopBarLink>
       </div>
       <HamburgerButton
-        className="mr-[5vw] md:hidden text-accent"
+        className="p-[22px] md:hidden text-accent"
         onClick={openDrawer}
       />
     </header>

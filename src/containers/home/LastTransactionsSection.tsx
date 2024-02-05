@@ -18,9 +18,9 @@ export default function LastTransactionsSection() {
   }, []);
 
   return (
-    <div className="bg-tertiary py-16 w-full">
-      <div className="flex flex-col md:flex-row h-full">
-        <div className="md:flex-1 font-noto m-auto md:pl-[10%] max-w-[80%] md:max-w-[50%]">
+    <div className="bg-tertiary py-12 w-full">
+      <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full">
+        <div className="md:flex-1 m-auto md:pl-[10%] max-w-[80%] md:max-w-[50%]">
           <Header>Recent transactions</Header>
           <div className="tracking-wide leading-7">
             <p>Check out the most recent transactions on Stellarcarbon.</p>

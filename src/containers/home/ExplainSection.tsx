@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function ExplainSection() {
   return (
-    <div className="flex flex-col md:flex-row py-12 m-auto max-w-[80%]">
+    <div className="flex flex-col md:flex-row mb-4 py-12 m-auto max-w-[80%]">
       {/* Stats */}
       <div className="flex flex-col md:flex-1">
         <CountUp
@@ -19,7 +19,7 @@ export default function ExplainSection() {
         />
       </div>
       {/* Text */}
-      <div className="font-noto md:flex-1 mt-8">
+      <div className="md:flex-1 mt-8">
         <Header>How does Stellarcarbon work?</Header>
         <div className="tracking-wide leading-7">
           <p>
