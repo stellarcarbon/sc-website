@@ -24,7 +24,7 @@ export default function ExplainSection() {
         </div>
       </div>
       {/* Stats */}
-      <div className="flex flex-col mt-8 md:flex-1">
+      <div className="flex flex-col justify-center mt-8 md:mt-0 md:flex-1">
         <CountUp
           value={202000}
           subject={"Carbon stored on the Stellar Network"}
