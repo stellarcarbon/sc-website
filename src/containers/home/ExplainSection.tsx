@@ -4,9 +4,9 @@ import Link from "next/link";
 
 export default function ExplainSection() {
   return (
-    <div className="flex flex-col md:flex-row mb-4 py-12 m-auto w-full">
+    <div className="flex flex-col md:flex-row py-12 m-auto w-full">
       {/* Text */}
-      <div className="md:flex-1 mt-0 pl-[5%] md:max-w-[40%]">
+      <div className="md:flex-1 flex flex-col justify-center pl-[5%] md:max-w-[40%]">
         <Header>What does Stellarcarbon do?</Header>
         <div className="tracking-wide leading-7">
           <p>
