@@ -25,9 +25,9 @@ export default function LastTransactionsSection() {
           <Header>Using the blockchain</Header>
           <div className="tracking-wide leading-7">
             <p>
-              All sinked CARBON is accounted for on the Stellar blockchain,
-              making it highly transparent that your contribution ends up in the
-              right place.
+              All sinked CARBON is accounted for by using the Stellar blockchain
+              technology, making it highly transparent that your contribution
+              ends up in the right place.
               <br />
               <br /> Check out the most recent transactions on Stellarcarbon.
             </p>

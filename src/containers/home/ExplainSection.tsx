@@ -10,13 +10,17 @@ export default function ExplainSection() {
         <Header>What does Stellarcarbon do?</Header>
         <div className="tracking-wide leading-7">
           <p>
-            With Stellcarbon you can convert XLM or any other asset in your
-            Stellar wallet to CO2 reductions and biodiversity.
-            <br />
-            <br /> Stellarcarbon works by combining a cooperation with Verra for
-            reliable carbon compensation and the blockchain to enable users to
-            easily use their XLM to improve biodiversity and reduce CO2
-            emissions.
+            With Stellcarbon you can use XLM or any other asset in your Stellar
+            wallet to contribute to a vetted biodiversity project. This provides
+            an easy way for Stellar users to support a trustworthy nature
+            project of their selection.
+            {/* We put a lot of effort into finding trustworthy
+            biodiversity projects and making it easy to support them for our
+            users. */}
+            {/* Stellarcarbon works by
+            combining a cooperation with Verra for reliable carbon compensation
+            and the blockchain to enable users to easily use their XLM to
+            improve biodiversity and reduce CO2 emissions. */}
           </p>
           <Link className="text-sm underline" href="/explain">
             Read detailed explanation here
