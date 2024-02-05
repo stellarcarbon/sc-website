@@ -19,8 +19,9 @@ export default function LastTransactionsSection() {
 
   return (
     <div className="bg-tertiary py-12 w-full">
-      <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full">
-        <div className="m-auto md:pl-[7%] w-[90%] md:w-[40%] ">
+      <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
+        {/* Text */}
+        <div className="m-auto pl-[5%] md:w-[40%] ">
           <Header>Recent transactions</Header>
           <div className="tracking-wide leading-7">
             <p>Check out the most recent transactions on Stellarcarbon.</p>
@@ -30,6 +31,7 @@ export default function LastTransactionsSection() {
           </div>
         </div>
 
+        {/* Transaction list */}
         <div className="md:flex-1 min-h-[400px] flex flex-col items-center justify-center">
           {lastTransactions ? (
             lastTransactions.map((tx, idx) => {
