@@ -47,11 +47,11 @@ export default function StellarCarbonIcon({
       <g className="layer">
         <title>Stellarcarbon Logo</title>
         <text
-          font-family="Roboto, sans-serif"
-          font-size="30"
-          font-weight="bold"
+          fontFamily="Roboto, sans-serif"
+          fontSize="30"
+          fontWeight="bold"
           id="name"
-          text-anchor="middle"
+          textAnchor="middle"
           x="201"
           xmlSpace="preserve"
           y="60"

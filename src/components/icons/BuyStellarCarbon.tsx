@@ -11,7 +11,7 @@ export default function BuyStellarCarbonIcon({
     <svg
       className={`h-14 ${className}`}
       fill="currentColor"
-      viewBox="0 0 400 100"
+      viewBox="0 0 410 100"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
@@ -47,12 +47,12 @@ export default function BuyStellarCarbonIcon({
       <g className="layer">
         <title>Stellarcarbon Logo</title>
         <text
-          font-family="Roboto, sans-serif"
-          font-size="32"
-          font-weight="bold"
+          fontFamily="Roboto, sans-serif"
+          fontSize="32"
+          fontWeight="bold"
           id="name"
-          text-anchor="middle"
-          x="240"
+          textAnchor="middle"
+          x="250"
           xmlSpace="preserve"
           y="60"
         >
@@ -61,7 +61,7 @@ export default function BuyStellarCarbonIcon({
         <use
           id="logo"
           transform="matrix(2.02133, 0, 0, 2.02133, -227.103, -44.9761)"
-          x="-65.11"
+          x="-69.11"
           xlinkHref="#svg_3"
           y="-3.03"
         />

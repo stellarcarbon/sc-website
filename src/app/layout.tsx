@@ -18,12 +18,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i"
-        />
-      </head>
       <body className={`${inter.className}`}>
         <Providers>
           <App>{children}</App>

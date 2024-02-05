@@ -20,7 +20,7 @@ export default function LastTransactionsSection() {
   return (
     <div className="bg-tertiary py-12 w-full">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full">
-        <div className="md:flex-1 m-auto md:pl-[10%] max-w-[80%] md:max-w-[50%]">
+        <div className="m-auto md:pl-[7%] w-[90%] md:w-[40%] ">
           <Header>Recent transactions</Header>
           <div className="tracking-wide leading-7">
             <p>Check out the most recent transactions on Stellarcarbon.</p>
@@ -30,17 +30,19 @@ export default function LastTransactionsSection() {
           </div>
         </div>
 
-        <div className="md:flex-1 min-h-[400px] flex flex-col justify-center">
+        <div className="md:flex-1 min-h-[400px] flex flex-col items-center justify-center">
           {lastTransactions ? (
             lastTransactions.map((tx, idx) => {
               return (
                 <div
                   key={`tx_${idx}`}
-                  className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 mx-2 md:mx-0 w-[90%] self-center md:self-start md:max-w-[40vw]"
+                  className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 mx-2 md:mx-0 w-[90%] max-w-[690px] self-center"
                 >
                   <div className="flex justify-start items-center">
                     <span className="w-24 md:w-32">Account</span>
-                    <span className=" truncate max-w-[60%]">{tx.pubkey}</span>
+                    <span className=" truncate max-w-[60%] md:max-w-[100%]">
+                      {tx.pubkey}
+                    </span>
                   </div>
                   <div className="flex justify-start items-center">
                     <span className="w-24 md:w-32">Date</span>
