@@ -31,8 +31,8 @@ export default function RainforestIntro() {
             >
               Stellar
             </a>{" "}
-            users to contribute to high integrity nature based projects, making
-            compensating your CO2 emissions effortless.
+            users to contribute to high-integrity nature based projects, making
+            it effortless to compensate for your remaining emissions.
             {/* 
             We provide a simple way to make voluntary, negative emissions
             contributions,
