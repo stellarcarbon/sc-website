@@ -1,3 +1,4 @@
+import { roboto } from "@/app/fonts";
 import { HTMLProps } from "react";
 
 interface StellarCarbonIconProps extends HTMLProps<HTMLImageElement> {}
@@ -8,7 +9,7 @@ export default function StellarCarbonIcon({
 
   return (
     <svg
-      className={`h-14 ${className}`}
+      className={`h-14 ${className} ${roboto.className}`}
       fill="currentColor"
       viewBox="0 0 340 100"
       xmlns="http://www.w3.org/2000/svg"

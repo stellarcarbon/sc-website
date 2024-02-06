@@ -3,14 +3,8 @@ import { Inter, Roboto } from "next/font/google";
 import "../styles/globals.css";
 import { Providers } from "@/app/providers";
 import App from "./App";
+import { inter } from "./fonts";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const roboto = Roboto({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: "sc-website",
