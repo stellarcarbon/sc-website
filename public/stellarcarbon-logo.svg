@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <svg 
   viewBox="0 0 340 100" 
-  xmlns="http://www.w3.org/2000/svg" 
-  xmlns:svg="http://www.w3.org/2000/svg" 
+  xmlns="http://www.w3.org/2000/svg"  
   xmlns:xlink="http://www.w3.org/1999/xlink"
 >
   <defs>
@@ -12,8 +11,6 @@
     <symbol 
       id="sc_icon" 
       viewBox="0 0 792 612" 
-      xmlns="http://www.w3.org/2000/svg" 
-      xmlns:xlink="http://www.w3.org/1999/xlink"
     >
       <g id="sc_icon_1">
         <g id="sc_icon_2">
