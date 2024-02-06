@@ -51,7 +51,7 @@ export default function StellarCarbonIcon({
           fontWeight="bold"
           id="sc_name"
           textAnchor="middle"
-          x="213"
+          x="222"
           y="59"
           xmlSpace="preserve"
         >
