@@ -5,7 +5,6 @@ import { Providers } from "@/app/providers";
 import App from "./App";
 import { inter } from "./fonts";
 
-
 export const metadata: Metadata = {
   title: "sc-website",
   description: "sc-website staging",
