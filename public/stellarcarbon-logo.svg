@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
-<svg fill="#fff" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
  <defs>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&amp;display=swap');
+  </style>
   <symbol id="svg_3" viewBox="0 0 792 612" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
    <g id="svg_2">
     <g id="svg_5">
@@ -17,7 +20,7 @@
  </defs>
  <g class="layer">
   <title>Stellarcarbon Logo</title>
-  <text font-family="Roboto, sans-serif" font-size="30" font-weight="bold" id="name" text-anchor="middle" x="201" xml:space="preserve" y="60">stellarcarbon</text>
-  <use id="logo" transform="matrix(2.02133, 0, 0, 2.02133, -227.103, -44.9761)" x="-12.11" xlink:href="#svg_3" y="-3.03"/>
+  <text font-family="Roboto, sans-serif" font-size="36" font-weight="bold" id="name" text-anchor="middle" x="222" xml:space="preserve" y="59">stellarcarbon</text>
+  <use id="logo" transform="scale(2.4)" x="-149" xlink:href="#svg_3" y="-29.5"/>
  </g>
 </svg>
