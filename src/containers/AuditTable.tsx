@@ -37,7 +37,7 @@ export default function AuditTable() {
           />
           <div className="pt-[37px] text-xl font-bold">-</div>
           <AuditTableStat
-            label={"Carbon sinked on Verra"}
+            label={"Carbon sunk on Verra"}
             number={23000}
             unit={"kg"}
           />

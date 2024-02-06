@@ -183,7 +183,7 @@ export default function TransactionsPage() {
                     </span>
                   </div>
                   <div className="flex justify-start items-center">
-                    <span className="w-28 md:w-32">Sinked</span>
+                    <span className="w-28 md:w-32">Sunk</span>
 
                     <span className="">{tx.sinkAmount?.toFixed(2)}</span>
                   </div>

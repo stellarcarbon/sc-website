@@ -25,7 +25,7 @@ export default function LastTransactionsSection() {
           <Header>Using the blockchain</Header>
           <div className="tracking-wide leading-7">
             <p>
-              All sinked CARBON is accounted for by using the Stellar blockchain
+              All sunk CARBON is accounted for by using the Stellar blockchain
               technology, making it highly transparent that your contribution
               ends up in the right place.
               <br />
@@ -59,7 +59,7 @@ export default function LastTransactionsSection() {
                     </span>
                   </div>
                   <div className="flex justify-start items-center">
-                    <span className="w-24 md:w-32">Sinked</span>
+                    <span className="w-24 md:w-32">Sunk</span>
 
                     <span className="">{tx.sinkAmount?.toFixed(2)}</span>
                   </div>

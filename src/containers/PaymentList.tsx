@@ -44,7 +44,7 @@ export default function PaymentList() {
                   </span>
                 </div>
                 <div className="flex justify-start items-center">
-                  <span className="w-24 md:w-32">Sinked</span>
+                  <span className="w-24 md:w-32">Sunk</span>
 
                   <span className="">{transaction.sinkAmount?.toFixed(2)}</span>
                 </div>

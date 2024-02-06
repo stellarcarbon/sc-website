@@ -36,7 +36,7 @@ export default function ExplainSection() {
         />
         <CountUp
           value={26000}
-          subject={"Carbon sinked by users"}
+          subject={"Carbon sunk by users"}
           unit={"Kilograms"}
         />
       </div>
