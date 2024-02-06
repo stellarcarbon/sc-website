@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import TopBarLink from "./TopBarLink";
 import { useAppContext } from "@/context/appContext";
 import HamburgerButton from "./HamburgerButton";
@@ -14,7 +15,9 @@ export default function TopBar() {
       border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]
     bg-primary border-secondary`}
     >
-      <StellarCarbonIcon className="ml-[2vw] text-accent" />
+      <Link href="/">
+        <StellarCarbonIcon className="ml-[2vw] text-accent" />
+      </Link>
 
       <div className="mr-8 gap-4 items-center hidden md:flex">
         <TopBarLink href="/">Home</TopBarLink>
