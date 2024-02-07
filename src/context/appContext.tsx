@@ -2,22 +2,19 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
-import {
-  ISupportedWallet,
-  StellarWalletsKit,
-  WalletNetwork,
-  WalletType,
-} from "stellar-wallets-kit";
+import { ISupportedWallet, WalletType } from "stellar-wallets-kit";
 import {
   MyTransactionRecord,
   PersonalDetails,
   WalletConnection,
 } from "../app/types";
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
+import LocalStorageService from "@/app/LocalStorageService";
 
 // A global app context used to write & read state everywhere.
 type AppContext = {
+  // Wallet connection
   connectionError: string | null;
   supportedWallets: ISupportedWallet[];
   walletConnection: WalletConnection | null;
@@ -26,9 +23,13 @@ type AppContext = {
     personalDetails: PersonalDetails
   ) => Promise<boolean>;
   disconnectWallet: () => void;
+
+  // Drawer
   isDrawerOpen: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;
+
+  // Personal transactions on dashboard
   myTransactions: MyTransactionRecord[] | null;
   setMyTransactions: Dispatch<SetStateAction<MyTransactionRecord[] | null>>;
 };
@@ -58,7 +59,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
 
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -69,21 +69,13 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     console.log("On mount AppContext");
 
     // Load local storage if available
-    const storedWalletConnectionJSONString = localStorage.getItem("wallet");
-    if (storedWalletConnectionJSONString) {
-      const wc: WalletConnection = JSON.parse(storedWalletConnectionJSONString);
-      wc.kit = new StellarWalletsKit({
-        selectedWallet: wc.walletType,
-        network: WalletNetwork.PUBLIC,
-      });
-      setWalletConnection(wc);
-    }
+    const walletConnection = LocalStorageService.loadWalletConnection();
+    setWalletConnection(walletConnection);
 
     // Load supported wallets if not loaded yet.
     if (supportedWallets.length === 0) {
       loadAvailableWallets().then((wallets) => {
         setSupportedWallets(wallets);
-        return;
       });
     }
   }, []);
@@ -104,7 +96,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         walletConnection.isAnonymous = true;
       }
 
-      localStorage.setItem("wallet", JSON.stringify(walletConnection));
+      LocalStorageService.setWalletConnection(walletConnection);
       setWalletConnection(walletConnection);
 
       return true;
@@ -118,7 +110,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   const disconnectWallet = () => {
-    localStorage.removeItem("wallet");
+    LocalStorageService.removeWalletConnection();
     setWalletConnection(null);
     setMyTransactions(null);
   };
