@@ -38,7 +38,7 @@ export default function LastTransactionsSection() {
         </div>
 
         {/* Transaction list */}
-        <div className="md:flex-1 min-h-[400px] flex flex-col items-center justify-center">
+        <div className="md:flex-1 max-w-[60%] min-h-[400px] flex flex-col items-center justify-center">
           {lastTransactions ? (
             lastTransactions.map((tx, idx) => {
               return (
