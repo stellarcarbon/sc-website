@@ -1,5 +1,5 @@
 import { MyTransactionRecord } from "@/app/types";
-import IndexedDBService from "../src/app/wallet/IndexedDBService";
+import IndexedDBService from "../src/app/services/IndexedDBService";
 import { describe, expect, test, beforeAll } from "@jest/globals";
 
 const makeTransactionRecord = (id: string): MyTransactionRecord => {

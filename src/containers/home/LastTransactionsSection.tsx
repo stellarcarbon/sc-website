@@ -1,7 +1,7 @@
 "use client";
 
 import { FrontpageTransactionRecord } from "@/app/types";
-import TransactionHistoryService from "@/app/wallet/TransactionHistoryService";
+import TransactionHistoryService from "@/app/services/TransactionHistoryService";
 import Header from "@/components/Header";
 import Link from "next/link";
 import { useEffect, useState } from "react";

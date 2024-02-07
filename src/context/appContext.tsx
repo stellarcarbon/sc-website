@@ -10,7 +10,7 @@ import {
 } from "../app/types";
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
 import { usePathname } from "next/navigation";
-import LocalStorageService from "@/app/LocalStorageService";
+import LocalStorageService from "@/app/services/LocalStorageService";
 
 // A global app context used to write & read state everywhere.
 type AppContext = {

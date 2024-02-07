@@ -7,7 +7,7 @@ import PaymentList from "./PaymentList";
 import { useAppContext } from "@/context/appContext";
 import CheckoutForm from "./CheckoutForm";
 import Button from "@/components/Button";
-import TransactionHistoryService from "@/app/wallet/TransactionHistoryService";
+import TransactionHistoryService from "@/app/services/TransactionHistoryService";
 import { DEV_ACCOUNT } from "@/app/types";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 

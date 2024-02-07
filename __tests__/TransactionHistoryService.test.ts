@@ -1,4 +1,4 @@
-import TransactionHistoryService from "../src/app/wallet/TransactionHistoryService";
+import TransactionHistoryService from "../src/app/services/TransactionHistoryService";
 import { describe, expect, test, beforeAll } from "@jest/globals";
 
 const DEV_ACCOUNT = "GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y";
