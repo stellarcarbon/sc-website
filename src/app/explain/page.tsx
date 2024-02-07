@@ -15,7 +15,7 @@ export default function ExplainPage() {
         </div>
       </div>
 
-      <div className="flex flex-col p-4 py-16 md:max-w-[1080px] md:m-auto">
+      <div className="flex flex-col p-4 py-12 md:max-w-[1080px] md:m-auto">
         <Header>An introduction</Header>
         <div className="tracking-wide leading-7">
           <p>
