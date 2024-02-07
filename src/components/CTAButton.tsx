@@ -1,4 +1,4 @@
-import { HTMLProps, ReactNode } from "react";
+import { HTMLProps } from "react";
 import BuyStellarCarbonIcon from "./icons/BuyStellarCarbon";
 import { useRouter } from "next/navigation";
 

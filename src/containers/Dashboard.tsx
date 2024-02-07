@@ -1,5 +1,4 @@
 import CaretUpIcon from "@/components/icons/CaretUpIcon";
-import DisconnectWalletButton from "@/components/wallet/DisconnectWalletButton";
 import PersonalDetailsDisplay from "@/components/wallet/PersonalDetailsDisplay";
 import { useEffect, useState } from "react";
 import CaretDownIcon from "@/components/icons/CaretDownIcon";
@@ -38,8 +37,6 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col bg-secondary w-full min-h-[calc(100vh-176px)] md:max-w-[800px] md:p-4 md:rounded-md">
-      {/* <h1 className="self-center text-lg font-bold">My Stellarcarbon</h1> */}
-
       {/* Connection info */}
       <div className="flex flex-col m-2 p-4 bg-primary border border-accentSecondary rounded-md">
         <div className="flex flex-col justify-between items-start w-full">
@@ -115,8 +112,6 @@ export default function Dashboard() {
           />
         )}
       </div>
-
-      {/* <hr className="w-[calc(100%-32px)] m-2 self-center border-accentSecondary" /> */}
 
       {/* Infinite scroll */}
       <PaymentList />

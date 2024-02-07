@@ -10,11 +10,7 @@ interface TonnesRangeProps {
   setValue: (name: keyof CheckoutFormData, value: any) => void;
 }
 
-export default function TonnesRange({
-  register,
-  watch,
-  setValue,
-}: TonnesRangeProps) {
+export default function TonnesRange({ register, watch }: TonnesRangeProps) {
   const [quote, setQuote] = useState<string>();
   const tonnes = watch("tonnes");
 

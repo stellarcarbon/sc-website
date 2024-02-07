@@ -2,13 +2,11 @@
 
 import { useAppContext } from "@/context/appContext";
 import CloseIcon from "./icons/CloseIcon";
-import Button from "./Button";
 import DrawerLink from "./DrawerLink";
 import { useRouter, usePathname } from "next/navigation";
 import CTAButton from "./CTAButton";
 import StellarCarbonIcon from "./icons/StellarCarbonIcon";
 import Link from "next/link";
-import { useEffect } from "react";
 
 export default function Drawer() {
   const { closeDrawer } = useAppContext();
@@ -34,11 +32,12 @@ export default function Drawer() {
       <hr className="w-full my-4 mb-8 border-secondary" />
       <CTAButton
         className="self-center"
-        onClick={async () => {
-          await router.push("/wallet");
+        onClick={() => {
           if (pathname === "/wallet") {
-            // In case already on that path, have to close ourselves.
+            // In case already on that path, have to the Drawer from here.
             closeDrawer();
+          } else {
+            router.push("/wallet");
           }
         }}
       />

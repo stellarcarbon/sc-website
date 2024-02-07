@@ -1,10 +1,10 @@
 "use client";
 
-import carbonApi from "@/app/carbonApi";
 import AuditTableStat from "@/components/audit_table/AuditTableStat";
 import { useEffect, useState } from "react";
 
 export default function AuditTable() {
+  // TODO: implement connection to carbon_api
   const [carbonpoolVerra, setCarbonpoolVerra] = useState<number>();
   const [carbonpoolStellar, setCarbonpoolStellar] = useState<number>();
   const [carbonsinkVerra, setCarbonsinkVerra] = useState<number>();

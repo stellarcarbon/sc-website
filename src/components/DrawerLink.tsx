@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode } from "react";
-import { useAppContext } from "@/context/appContext";
 
 interface DrawerLinkProps {
   children: ReactNode;

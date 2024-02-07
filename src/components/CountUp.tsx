@@ -34,24 +34,17 @@ export default function CountUp(props: CountUpProps) {
 
     if (isVisible && counter < props.value) {
       interval = setInterval(() => {
-        setCounter(
-          (prevCounter) => {
-            let newCounter = prevCounter;
-            if (prevCounter < ~~(props.value / step) * step) {
-              newCounter += step;
-            } else {
-              if (prevCounter < props.value) {
-                newCounter += props.value - prevCounter;
-              }
+        setCounter((prevCounter) => {
+          let newCounter = prevCounter;
+          if (prevCounter < ~~(props.value / step) * step) {
+            newCounter += step;
+          } else {
+            if (prevCounter < props.value) {
+              newCounter += props.value - prevCounter;
             }
-            return newCounter;
           }
-          // prevCounter < ~~(props.value / step) * step
-          //   ? prevCounter + step
-          //   : prevCounter > props.value
-          //   ? prevCounter + (prevCounter - props.value)
-          //   : prevCounter
-        );
+          return newCounter;
+        });
       }, intervalInMS);
       setMInterval(interval);
     }

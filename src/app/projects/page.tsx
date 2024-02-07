@@ -73,7 +73,7 @@ export default function ProjectsPage() {
       {/* Widgets */}
       <div className="max-w-[80%] my-12 flex flex-col md:flex-row justify-center">
         <CountUp
-          value={12}
+          value={1270}
           unit={"Km2 Area"}
           subject={"Under better management of natural resources."}
         />
