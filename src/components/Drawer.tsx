@@ -34,7 +34,7 @@ export default function Drawer() {
         className="self-center"
         onClick={() => {
           if (pathname === "/wallet") {
-            // In case already on that path, have to the Drawer from here.
+            // In case already on that path, have to close the Drawer from here.
             closeDrawer();
           } else {
             router.push("/wallet");

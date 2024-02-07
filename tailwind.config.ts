@@ -32,7 +32,7 @@ const config: Config = {
         textColor: "#ffffff",
       },
       fontFamily: {
-        noto: ["Noto Serif", "sans-serif"],
+        noto: ["Noto Sans", "sans-serif"],
       },
     },
   },
