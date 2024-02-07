@@ -33,9 +33,9 @@ export default function RainforestIntro() {
     <>
       <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full top-0 left-0 z-0 block absolute" />
       <div className="hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%] max-h-[50%]">
-        <div className="flex flex-col leading-8 text-md px-5 py-4 w-full bg-primary/[.54]">
-          <h1 className="text-5xl lg:text-6xl font-noto my-2 mb-4">
-            Stellarcarbon
+        <div className="flex flex-col leading-8 text-md px-5 py-8 w-full bg-primary/[.54]">
+          <h1 className="px-4 text-4xl lg:text-5xl font-noto mb-4">
+            Sinking CARBON with Stellar
           </h1>
           <span className="md:max-w-[50%] self-center">
             We provide a simple way for{" "}
@@ -46,8 +46,9 @@ export default function RainforestIntro() {
             >
               Stellar
             </a>{" "}
-            users to contribute to high-integrity nature based projects, making
-            it effortless to compensate for your remaining emissions.
+            blockchain users to contribute to high-integrity nature based
+            projects, making it effortless to compensate for your remaining
+            emissions.
           </span>
           <CTAButton className="self-center mt-4 md:mt-8" />
         </div>

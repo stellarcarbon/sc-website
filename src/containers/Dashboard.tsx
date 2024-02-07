@@ -28,7 +28,7 @@ export default function Dashboard() {
     // Load the transactions for this dash on mount if not loaded yet.
     if (myTransactions === null) {
       transactionHistoryService
-        .fetchAccountHistory(DEV_ACCOUNT)
+        .fetchAccountHistory(walletConnection?.stellarPubKey!)
         .then((transactionRecords): void => {
           setMyTransactions(transactionRecords);
         });

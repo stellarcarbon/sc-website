@@ -69,15 +69,17 @@ export default function SelectWallet() {
 
   return (
     <>
-      <div className="flex flex-col items-start bg-secondary md:border border-tertiary md:min-w-[600px] md:max-w-[650px]  md:py-6 md:p-0 md:pt-6 md:rounded-md border-gray shadow-lg">
-        <h1 className="text-3xl font-bold mx-6 mt-8 my-3">Wallet selection</h1>
+      <div className="flex flex-col items-start bg-secondary md:border border-tertiary md:min-w-[600px] md:max-w-[650px] md:p-0 md:rounded-md border-gray shadow-lg">
+        <h1 className="text-3xl font-bold mx-6 mt-8 md:mt-6 my-3">
+          Select wallet
+        </h1>
 
         <p className="text-sm mx-6 mb-1 max-w-[80%] hidden md:block">
           Connect a wallet to be able to create new transactions and access your
           sinking history.
         </p>
         <p className="text-sm mx-6 mb-1 max-w-[80%] md:hidden">
-          Tap your wallet to use it to connect.
+          Tap your wallet choice.
         </p>
         {selectedWalletType ? (
           <b className="hidden">{`${selectedWalletType}`}</b>
