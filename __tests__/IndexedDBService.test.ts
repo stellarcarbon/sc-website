@@ -1,6 +1,6 @@
 import { MyTransactionRecord } from "@/app/types";
 import IndexedDBService from "../src/app/services/IndexedDBService";
-import { describe, expect, test, beforeAll } from "@jest/globals";
+import { describe, expect, test, beforeAll } from "vitest";
 
 const makeTransactionRecord = (id: string): MyTransactionRecord => {
   return {

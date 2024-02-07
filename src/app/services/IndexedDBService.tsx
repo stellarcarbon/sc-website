@@ -1,4 +1,5 @@
 import { MyTransactionRecord } from "../types";
+import "fake-indexeddb/auto";
 
 export default class IndexedDBService {
   private db: IDBDatabase | null = null;

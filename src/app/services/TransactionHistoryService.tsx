@@ -1,4 +1,4 @@
-import { Server, ServerApi } from "stellar-sdk/lib/horizon";
+import { Server } from "stellar-sdk/lib/horizon";
 import {
   Networks,
   TransactionBuilder,
