@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, RefObject } from "react";
 import { ServerApi } from "stellar-sdk/lib/horizon";
-import { FrontpageTransactionRecord } from "./types";
+import { CARBON_SINK_ACCOUNT, FrontpageTransactionRecord } from "./types";
 
 export function debounce<T extends (...args: any[]) => void>(
   func: T,
@@ -31,6 +31,7 @@ export function debounce<T extends (...args: any[]) => void>(
   return { call, cancel };
 }
 
+// Used for parallax scrolling behavior
 export const useIntersectionObserver = (
   options: IntersectionObserverInit
 ): [RefObject<HTMLDivElement>, boolean] => {
@@ -72,8 +73,15 @@ export async function PaymentsPageToFrontPageToTransactionsRecordArray(
     Number(a.paging_token) > Number(b.paging_token) ? -1 : 1
   );
 
+  const filteredInput = input.filter((record) => {
+    // TODO: Moet deze conditie ook?
+    // record.asset_issuer === CARBON_SINK_ACCOUNT
+
+    return record.source_account === CARBON_SINK_ACCOUNT;
+  });
+
   const output: FrontpageTransactionRecord[] = await Promise.all(
-    input.map(async (payment: any) => {
+    filteredInput.map(async (payment: any) => {
       const transaction = (await payment.transaction()) as any;
       return {
         hash: transaction.id,

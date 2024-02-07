@@ -91,13 +91,6 @@ export default class TransactionHistoryService {
 
     payments.next();
 
-    // TODO: implementeren.
-    // Filters the carbon sink payments originating from the carbon sink issuer
-    // const filtered_payments = payments.records.filter(
-    //   (record: any) =>
-    //     record.asset_issuer === CARBON_SINK_ACCOUNT && record.from === CARBON_SINK_ACCOUNT
-    // );
-
     return await PaymentsPageToFrontPageToTransactionsRecordArray(payments);
   }
 }

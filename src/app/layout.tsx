@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Roboto } from "next/font/google";
 import "../styles/globals.css";
-import { Providers } from "@/app/providers";
 import App from "./App";
 import { inter } from "./fonts";
+import { AppContextProvider } from "@/context/appContext";
 
 export const metadata: Metadata = {
   title: "sc-website",
@@ -18,9 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        <Providers>
+        <AppContextProvider>
           <App>{children}</App>
-        </Providers>
+        </AppContextProvider>
       </body>
     </html>
   );

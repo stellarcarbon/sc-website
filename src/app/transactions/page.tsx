@@ -158,7 +158,7 @@ export default function TransactionsPage() {
           </p>
         </div>
 
-        <div className="self-center max-w-full">
+        <div className="flex flex-col items-center w-full">
           {transactions.length > 0 ? (
             transactions.map((tx, idx) => {
               return (
@@ -166,31 +166,34 @@ export default function TransactionsPage() {
                   key={`tx_${idx}`}
                   href={`https://stellar.expert/explorer/public/tx/${tx.id}`}
                   target="_blank"
-                  className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 w-full self-center md:self-start md:max-w-[40vw]"
+                  className="flex flex-col p-2 w-full lg:w-[80%] text-sm bg-primary rounded-md border border-accentSecondary"
                 >
-                  <div className="flex justify-start items-center">
-                    <span className="w-28 md:w-32">Transaction ID</span>
-                    <span className=" truncate max-w-[60%]">{tx.id}</span>
+                  <div className="grid grid-cols-4">
+                    <span className="">TX Hash</span>
+                    <span className="truncate col-span-3">{tx.hash}</span>
                   </div>
-                  <div className="flex justify-start items-center">
-                    <span className="w-28 md:w-32">Account</span>
-                    <span className=" truncate max-w-[60%]">{tx.pubkey}</span>
+
+                  <div className="grid grid-cols-4">
+                    <span className="">Account</span>
+                    <span className="truncate col-span-3">{tx.pubkey}</span>
                   </div>
-                  <div className="flex justify-start items-center">
-                    <span className="w-28 md:w-32">Date</span>
-                    <span className="">
+                  <div className="grid grid-cols-4">
+                    <span className="">Date</span>
+                    <span className="col-span-3">
                       {new Date(tx.createdAt).toDateString()}
                     </span>
                   </div>
-                  <div className="flex justify-start items-center">
-                    <span className="w-28 md:w-32">Sunk</span>
+                  <div className="grid grid-cols-4">
+                    <span className="">Sunk</span>
 
-                    <span className="">{tx.sinkAmount?.toFixed(2)}</span>
+                    <span className="grow col-span-3">
+                      {tx.sinkAmount?.toFixed(2)}
+                    </span>
                   </div>
-                  <div className="flex justify-start items-center">
-                    <span className="w-28 md:w-32">Memo</span>
+                  <div className="grid grid-cols-4">
+                    <span className="">Memo</span>
 
-                    <span className=" truncate max-w-[60%]">{tx.memo}</span>
+                    <span className="truncate col-span-3">{tx.memo}</span>
                   </div>
                 </a>
               );
