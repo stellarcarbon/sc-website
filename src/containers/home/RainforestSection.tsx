@@ -32,8 +32,10 @@ export default function RainforestIntro() {
     <>
       <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full min-h-[calc(100vh)] top-0 left-0 z-0 block absolute" />
       <div className="hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%] max-h-[50%]">
-        <div className="flex flex-col leading-8 text-md p-5 pb-7 md:py-10 w-full bg-primary/[.54]">
-          <h1 className="text-4xl font-noto my-2 mb-4">Stellarcarbon</h1>
+        <div className="flex flex-col leading-8 text-md px-5 py-4 w-full bg-primary/[.54]">
+          <h1 className="text-5xl lg:text-6xl font-noto my-2 mb-4">
+            Stellarcarbon
+          </h1>
           <span className="md:max-w-[50%] self-center">
             We provide a simple way for{" "}
             <a
