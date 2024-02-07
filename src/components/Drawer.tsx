@@ -5,16 +5,21 @@ import CloseIcon from "./icons/CloseIcon";
 import Button from "./Button";
 import DrawerLink from "./DrawerLink";
 import { useRouter, usePathname } from "next/navigation";
+import CTAButton from "./CTAButton";
+import StellarCarbonIcon from "./icons/StellarCarbonIcon";
+import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Drawer() {
   const { closeDrawer } = useAppContext();
-  const router = useRouter();
   const pathname = usePathname();
-
+  const router = useRouter();
   return (
     <div className="flex flex-col min-w-screen min-h-screen bg-primary border-secondary">
-      <div className="flex justify-between items-center px-[5vw] h-20 border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)] border-secondary">
-        <img className="h-10" src="/stellarcarbon-heading.png" />
+      <div className="flex justify-between items-center pl-[2vw] pr-[22px] h-20 border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)] border-secondary">
+        <Link href="/">
+          <StellarCarbonIcon className="text-accent" />
+        </Link>
         <button className={`text-accent`} onClick={closeDrawer}>
           <CloseIcon />
         </button>
@@ -23,11 +28,12 @@ export default function Drawer() {
         <DrawerLink href="/">Home</DrawerLink>
         <DrawerLink href="/explain">What is Stellarcarbon?</DrawerLink>
         <DrawerLink href="/projects">Current projects</DrawerLink>
+        <DrawerLink href="/transactions">Transactions</DrawerLink>
         <DrawerLink href="/about">About us</DrawerLink>
       </div>
       <hr className="w-full my-4 mb-8 border-secondary" />
-      <Button
-        className="w-[50%] self-center"
+      <CTAButton
+        className="self-center"
         onClick={async () => {
           await router.push("/wallet");
           if (pathname === "/wallet") {
@@ -35,9 +41,7 @@ export default function Drawer() {
             closeDrawer();
           }
         }}
-      >
-        Action
-      </Button>
+      />
     </div>
   );
 }
