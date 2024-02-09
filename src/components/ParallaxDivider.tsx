@@ -7,6 +7,7 @@ export enum ParallaxBackgrounds {
   AUTUMN_FOREST = "bg-autumnforest",
   RIVER_ESTUARY = "bg-riverestuary",
   JADE_WETLANDS = "bg-jadewetlands",
+  LAFAYETTE = "bg-lafayette"
 }
 
 interface ParallaxDiverProps {

@@ -15,7 +15,7 @@ export default function App({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     closeDrawer();
-  }, [pathname, closeDrawer]);
+  }, [pathname]);
 
   if (isDrawerOpen) {
     return <Drawer />;

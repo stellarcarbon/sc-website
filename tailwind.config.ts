@@ -20,6 +20,7 @@ const config: Config = {
           "url('/forest_from_above_colorful_carbonbank_1281x854.jpg')",
         riverestuary: "url('/River_estuary_drone_view.jpg')",
         jadewetlands: "url('/Jade_Wetlands.jpg')",
+        lafayette: "url('/lafayette.jpg')",
       },
       boxShadow: {
         "md-inverted": "-2px 2px 15px -10px rgba(0,0,0,0.75)",

@@ -14,17 +14,17 @@ export default function Home() {
 
       <ExplainSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} />
+      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
 
       <LastTransactionsSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
+      <ParallaxDivider image={ParallaxBackgrounds.JADE_WETLANDS} />
 
       <div className="h-[800px] flex flex-col justify-center">
         Some other stuff
       </div>
 
-      <ParallaxDivider image={ParallaxBackgrounds.JADE_WETLANDS} />
+      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} />
     </main>
   );
 }
