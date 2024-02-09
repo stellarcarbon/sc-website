@@ -1,5 +1,6 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import { CheckoutFormData, CurrencyOptions } from "@/app/types";
+import { CheckoutFormData } from "@/app/types";
+import { PaymentAsset } from "@/client";
 
 interface CurrencySelectProps {
   register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
@@ -15,12 +16,12 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
         className="text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
         {...register("currency")}
       >
-        {Object.values(CurrencyOptions).map((option) => {
+        {Object.values(PaymentAsset).map((option) => {
           return (
             <option
               key={option}
               value={option}
-              selected={option === CurrencyOptions.ANY}
+              selected={option === PaymentAsset.ANY}
             >
               {option}
             </option>

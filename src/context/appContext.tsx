@@ -11,6 +11,9 @@ import {
 import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
 import { usePathname } from "next/navigation";
 import LocalStorageService from "@/app/services/LocalStorageService";
+import { OpenAPI } from "@/client";
+
+OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
 
 // A global app context used to write & read state everywhere.
 type AppContext = {

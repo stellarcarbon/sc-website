@@ -8,12 +8,10 @@ import { useAppContext } from "@/context/appContext";
 import CheckoutForm from "./CheckoutForm";
 import Button from "@/components/Button";
 import TransactionHistoryService from "@/app/services/TransactionHistoryService";
-import { FormStatusMessages } from "@/app/types";
+import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 import FormStatusModal from "./FormStatusModal";
-import { BuildSinkCarbonXdrSinkCarbonXdrPostRequest } from "@/carbon_api";
-import carbonApi from "@/app/carbonApi";
-import { CarbonService } from "@/client";
+import { ApiError, CarbonService } from "@/client";
 
 export default function Dashboard() {
   const {
@@ -51,66 +49,43 @@ export default function Dashboard() {
     setSubmissionStatusMessage(FormStatusMessages.creating);
   };
 
-  const doCheckoutFlow = (
-    payload: BuildSinkCarbonXdrSinkCarbonXdrPostRequest
-  ) => {
+  const doCheckoutFlow = (payload: SinkCarbonXdrPostRequest) => {
     if (!walletConnection?.isAnonymous) {
       payload.email = walletConnection?.personalDetails?.useremail;
     }
     setShowFormStatusModal(true);
     setSubmissionStatusMessage(FormStatusMessages.creating);
 
-    carbonApi
-      .buildSinkCarbonXdrSinkCarbonXdrPost(payload)
+    CarbonService.buildSinkCarbonXdrSinkCarbonXdrPost(payload)
       .then((response) => {
-        console.log(response);
         setSubmissionStatusMessage(FormStatusMessages.signTransaction);
         walletConnection?.kit
           .sign({
-            xdr: response.txXdr,
+            xdr: response.tx_xdr,
             publicKey: walletConnection.stellarPubKey,
           })
           .then((response) => {
             console.log("ok");
+            setSubmissionStatusMessage(FormStatusMessages.awaitBlockchain);
+
+            setTimeout(() => {
+              setSubmissionStatusMessage(FormStatusMessages.completed);
+            }, 3000);
           })
           .catch((error) => {
             console.log(error);
-            setSubmissionErrorMessage("Something went wrong while signing.");
+            setSubmissionErrorMessage(
+              "Transaction signing failed. Please try again."
+            );
           });
       })
       .catch((error) => {
         console.log(error);
-        setSubmissionErrorMessage(error.detail[0].msg);
+        if (error instanceof ApiError) {
+          console.log(error.body.detail[0].msg);
+          setSubmissionErrorMessage(error.body.detail[0].msg);
+        }
       });
-
-    // carbonApi
-    //   .buildSinkCarbonXdrSinkCarbonXdrPost(payload)
-    //   .then((response) => {
-    //     setSignResponse(response);
-    //     console.log("sink carbon xdr post succesful\n", response.toString());
-    //     setFormStatusMessage(FormStatusMessages.signTransaction);
-    //     console.log(walletConnection);
-    //     walletConnection?.kit
-    //       .sign({
-    //         xdr: response.txXdr,
-    //         publicKey: walletConnection.stellarPubKey,
-    //       })
-    //       .then((response) => {
-    //         console.log("Wallet sign succesful", response.toString());
-    //         setFormStatusMessage(
-    //           "Transaction signed. Posting to blockchain and awaiting confirmation. This can take a couple seconds..."
-    //         );
-    //         setTimeout(() => {
-    //           setFormStatusMessage(
-    //             "Success! (did not really post to blockchain though)"
-    //           );
-    //         }, 3000);
-    //       });
-    //   })
-    //   .catch((error) => {
-    //     setFormErr(error.toString());
-    //     console.log("sink carbon xdr post error\n", error);
-    //   });
   };
 
   return (

@@ -2,7 +2,7 @@
 export const connectWallet = (anonymous: boolean) => {
   cy.visit("/wallet");
 
-  cy.get("button").contains("Connect wallet").click();
+  cy.get("button").contains("Continue").click();
 
   cy.location("pathname").should("eq", "/wallet/connect");
   cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
@@ -27,7 +27,7 @@ export const canDisconnect = () => {
 
   // Assert if we are back on wallet connection setup page
   cy.location("pathname").should("eq", "/wallet");
-  cy.get("button").contains("Connect wallet");
+  cy.get("button").contains("Continue");
   cy.window().then((win) => {
     const wallet = win.localStorage.getItem("wallet");
     expect(wallet).to.be.null;

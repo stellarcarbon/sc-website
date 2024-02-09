@@ -1,3 +1,4 @@
+import { MemoType, PaymentAsset, VcsProject } from "@/client";
 import { StellarWalletsKit, WalletType } from "stellar-wallets-kit";
 
 export type WalletConnection = {
@@ -15,15 +16,8 @@ export type PersonalDetails = {
 
 export interface CheckoutFormData {
   tonnes: number;
-  currency: CurrencyOptions;
+  currency: PaymentAsset;
   reason: ReasonOptions;
-}
-
-// TODO: Is this the right list?
-export enum CurrencyOptions {
-  ANY = "any",
-  XLM = "XLM",
-  USDC = "USDC",
 }
 
 export enum ReasonOptions {
@@ -64,6 +58,17 @@ export const CARBON_ACCOUNT =
 export enum FormStatusMessages {
   creating = "Creating your transaction using Stellarcarbon API...",
   signTransaction = "Sign the transaction using your wallet in the pop-up.",
-  awaitBlockchain = "Transaction signed. Posting to blockchain and awaiting confirmation. This can take a couple seconds...",
+  awaitBlockchain = "Transaction signed. It has been submitted to the Stellar blockchain and we are awaiting confirmation. This can take a couple seconds...",
   completed = "Success! (did not really post to blockchain though)",
+}
+
+export interface SinkCarbonXdrPostRequest {
+  funder: string;
+  recipient?: string;
+  carbonAmount?: number;
+  paymentAsset?: PaymentAsset;
+  vcsProjectId?: VcsProject;
+  memoType?: MemoType;
+  memoValue?: string;
+  email?: string;
 }

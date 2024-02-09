@@ -1,8 +1,8 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { CheckoutFormData } from "@/app/types";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import carbonApi from "@/app/carbonApi";
 import { debounce } from "@/app/utils";
+import { CarbonService } from "@/client";
 
 interface TonnesRangeProps {
   register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
@@ -23,14 +23,13 @@ export default function TonnesRange({
   const { call: fetchQuote, cancel: cancelFetchQuote } = debounce(
     (tonnes: number) => {
       setQuote(undefined);
-      carbonApi
-        .getCarbonQuoteCarbonQuoteGet({
-          carbonAmount: tonnes,
-        })
-        .then((result: any) => {
-          console.log(result);
-          setQuote(result.totalCost);
-        });
+
+      CarbonService.getCarbonQuoteCarbonQuoteGet({
+        carbonAmount: tonnes,
+      }).then((result: any) => {
+        console.log(result);
+        setQuote(result.total_cost);
+      });
     },
     500
   );

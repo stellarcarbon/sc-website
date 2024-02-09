@@ -1,15 +1,14 @@
-import { BuildSinkCarbonXdrSinkCarbonXdrPostRequest } from "@/carbon_api";
 import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
 import TonnesRange from "@/components/checkout/TonnesRange";
-import { CheckoutFormData } from "@/app/types";
+import { CheckoutFormData, SinkCarbonXdrPostRequest } from "@/app/types";
 import Button from "@/components/Button";
 import { useAppContext } from "@/context/appContext";
 import { HTMLProps, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface CheckoutFormProps extends HTMLProps<HTMLFormElement> {
-  doCheckoutFlow: (payload: BuildSinkCarbonXdrSinkCarbonXdrPostRequest) => void;
+  doCheckoutFlow: (payload: SinkCarbonXdrPostRequest) => void;
 }
 
 export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
@@ -28,7 +27,7 @@ export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
   }, []);
 
   const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
-    let payload: BuildSinkCarbonXdrSinkCarbonXdrPostRequest = {
+    let payload: SinkCarbonXdrPostRequest = {
       funder: walletConnection?.stellarPubKey!,
       carbonAmount: tonnes,
       paymentAsset: currency,

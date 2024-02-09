@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import FormError from "@/components/FormError";
 import ErrorIcon from "@/components/icons/ErrorIcon";
 import SignIcon from "@/components/icons/SignIcon";
+import SuccessIcon from "@/components/icons/SuccessIcon";
 import { Hourglass } from "react-loader-spinner";
 
 interface FormStatusModalProps {
@@ -43,6 +44,32 @@ export default function FormStatusModal({
         </div>
       </>
     );
+  } else if (message === FormStatusMessages.awaitBlockchain) {
+    status = (
+      <>
+        <span className="text-center">{message}</span>
+        <div className="my-4">
+          <Hourglass
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="hourglass-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            colors={["#d8def2", "#d8def2"]}
+          />
+        </div>
+      </>
+    );
+  } else if (message === FormStatusMessages.completed) {
+    status = (
+      <>
+        <span className="text-center">{message}</span>
+        <div className="">
+          <SuccessIcon />
+        </div>
+      </>
+    );
   }
 
   return (
@@ -60,6 +87,11 @@ export default function FormStatusModal({
             status
           )}
           <Button
+            disabled={
+              (message === FormStatusMessages.creating ||
+                message === FormStatusMessages.signTransaction) &&
+              !submissionError
+            }
             onClick={() => {
               closeModal();
             }}

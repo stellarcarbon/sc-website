@@ -68,7 +68,7 @@ describe("Connect wallet error handling.", () => {
       },
     });
 
-    cy.get("button").contains("Connect wallet").click();
+    cy.get("button").contains("Continue").click();
     cy.location("pathname").should("eq", "/wallet/connect");
 
     cy.get("button").contains("Connect wallet").click();
@@ -87,7 +87,7 @@ describe("Connect wallet error handling.", () => {
   it("has form validation on personal details form", () => {
     cy.visit("/wallet");
 
-    cy.get("button").contains("Connect wallet").click();
+    cy.get("button").contains("Continue").click();
     cy.location("pathname").should("eq", "/wallet/connect");
 
     cy.get("#ALBEDO_SelectWalletButtonDesktop").click();
