@@ -15,9 +15,9 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
   const [transform, setTransform] = useState<number>(0);
 
-  let yCoordinate = 0;
-
   useEffect(() => {
+    let yCoordinate = 0;
+
     const parallaxer = () => {
       const screenFactor = 50;
 

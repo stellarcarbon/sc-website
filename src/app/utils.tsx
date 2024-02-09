@@ -47,9 +47,11 @@ export const useIntersectionObserver = (
       observer.observe(ref.current);
     }
 
+    const delRef = ref.current;
+
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (delRef) {
+        observer.unobserve(delRef);
       }
     };
   }, [ref, options]);

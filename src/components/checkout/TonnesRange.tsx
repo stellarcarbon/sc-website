@@ -41,7 +41,7 @@ export default function TonnesRange({
     return () => {
       cancelFetchQuote();
     };
-  }, [tonnes]);
+  }, [tonnes, fetchQuote, cancelFetchQuote]);
 
   return (
     <div className="flex flex-col p-4">

@@ -129,7 +129,7 @@ export default function TransactionsPage() {
     const order = (searchParams.get("order") ?? "desc") as "asc" | "desc";
 
     fetchPayments(limit, order, cursor);
-  }, []);
+  }, [fetchPayments, searchParams]);
 
   return (
     <main className="flex flex-col font-noto blockchain-bg bg-no-repeat bg-fixed bg-cover min-h-[calc(100vh-176px)]">
