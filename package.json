@@ -9,7 +9,8 @@
     "lint": "next lint",
     "e2e": "cypress open --e2e",
     "e2e:headless": "next build && start-server-and-test start http://localhost:3000 \"cypress run --e2e\"",
-    "test": "vitest"
+    "test": "vitest",
+    "generate-client": "openapi --useOptions --input https://api-beta.stellarcarbon.io/openapi.json --output ./src/client --client axios"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
@@ -18,6 +19,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
+    "react-loader-spinner": "^6.1.6",
     "stellar-sdk": "^11.2.0",
     "stellar-wallets-kit": "github:Creit-Tech/Stellar-Wallets-Kit"
   },
@@ -33,6 +35,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "fake-indexeddb": "^5.0.2",
+    "openapi-typescript-codegen": "^0.27.0",
     "pino-pretty": "^10.3.1",
     "postcss": "^8",
     "start-server-and-test": "^2.0.3",

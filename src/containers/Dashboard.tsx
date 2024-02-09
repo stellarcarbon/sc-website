@@ -8,8 +8,12 @@ import { useAppContext } from "@/context/appContext";
 import CheckoutForm from "./CheckoutForm";
 import Button from "@/components/Button";
 import TransactionHistoryService from "@/app/services/TransactionHistoryService";
-import { DEV_ACCOUNT } from "@/app/types";
+import { FormStatusMessages } from "@/app/types";
 import DeleteIcon from "@/components/icons/DeleteIcon";
+import FormStatusModal from "./FormStatusModal";
+import { BuildSinkCarbonXdrSinkCarbonXdrPostRequest } from "@/carbon_api";
+import carbonApi from "@/app/carbonApi";
+import { CarbonService } from "@/client";
 
 export default function Dashboard() {
   const {
@@ -19,8 +23,14 @@ export default function Dashboard() {
     disconnectWallet,
   } = useAppContext();
   const [isCheckoutExpanded, setIsCheckoutExpanded] = useState<boolean>(false);
-  const [showFormSuccess, setShowFormSuccess] = useState<boolean>(false);
-  const [formStatusMessage, setFormStatusMessage] = useState<string>("");
+
+  // Form submission modal related
+  const [showFormSubmissionModal, setShowFormStatusModal] =
+    useState<boolean>(false);
+  const [submissionStatusMessage, setSubmissionStatusMessage] =
+    useState<FormStatusMessages>(FormStatusMessages.creating);
+  const [submissionErrorMessage, setSubmissionErrorMessage] =
+    useState<string>();
 
   const transactionHistoryService = new TransactionHistoryService();
 
@@ -34,6 +44,74 @@ export default function Dashboard() {
         });
     }
   }, []);
+
+  const closeModal = () => {
+    setShowFormStatusModal(false);
+    setSubmissionErrorMessage(undefined);
+    setSubmissionStatusMessage(FormStatusMessages.creating);
+  };
+
+  const doCheckoutFlow = (
+    payload: BuildSinkCarbonXdrSinkCarbonXdrPostRequest
+  ) => {
+    if (!walletConnection?.isAnonymous) {
+      payload.email = walletConnection?.personalDetails?.useremail;
+    }
+    setShowFormStatusModal(true);
+    setSubmissionStatusMessage(FormStatusMessages.creating);
+
+    carbonApi
+      .buildSinkCarbonXdrSinkCarbonXdrPost(payload)
+      .then((response) => {
+        console.log(response);
+        setSubmissionStatusMessage(FormStatusMessages.signTransaction);
+        walletConnection?.kit
+          .sign({
+            xdr: response.txXdr,
+            publicKey: walletConnection.stellarPubKey,
+          })
+          .then((response) => {
+            console.log("ok");
+          })
+          .catch((error) => {
+            console.log(error);
+            setSubmissionErrorMessage("Something went wrong while signing.");
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        setSubmissionErrorMessage(error.detail[0].msg);
+      });
+
+    // carbonApi
+    //   .buildSinkCarbonXdrSinkCarbonXdrPost(payload)
+    //   .then((response) => {
+    //     setSignResponse(response);
+    //     console.log("sink carbon xdr post succesful\n", response.toString());
+    //     setFormStatusMessage(FormStatusMessages.signTransaction);
+    //     console.log(walletConnection);
+    //     walletConnection?.kit
+    //       .sign({
+    //         xdr: response.txXdr,
+    //         publicKey: walletConnection.stellarPubKey,
+    //       })
+    //       .then((response) => {
+    //         console.log("Wallet sign succesful", response.toString());
+    //         setFormStatusMessage(
+    //           "Transaction signed. Posting to blockchain and awaiting confirmation. This can take a couple seconds..."
+    //         );
+    //         setTimeout(() => {
+    //           setFormStatusMessage(
+    //             "Success! (did not really post to blockchain though)"
+    //           );
+    //         }, 3000);
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     setFormErr(error.toString());
+    //     console.log("sink carbon xdr post error\n", error);
+    //   });
+  };
 
   return (
     <div className="flex flex-col bg-secondary w-full min-h-[calc(100vh-176px)] md:max-w-[800px] md:p-4 md:rounded-md">
@@ -58,14 +136,12 @@ export default function Dashboard() {
         <div className="flex gap-2 w-full justify-start mt-4">
           <Button className="!p-2">
             <div className="flex items-center justify-between gap-1 text-xs">
-              {/* <span>Edit</span> */}
               <span className="pt-[1px]">Edit</span>
               <EditIcon />
             </div>
           </Button>
           <Button onClick={disconnectWallet} className="!p-2">
             <div className="flex items-center justify-between gap-1 text-xs">
-              {/* <span>Edit</span> */}
               <span className="">Remove</span>
               <DeleteIcon />
             </div>
@@ -105,32 +181,18 @@ export default function Dashboard() {
           {isCheckoutExpanded ? <CaretDownIcon /> : <CaretUpIcon />}
         </button>
 
-        {isCheckoutExpanded && (
-          <CheckoutForm
-            setShowFormSuccess={setShowFormSuccess}
-            setFormStatusMessage={setFormStatusMessage}
-          />
-        )}
+        {isCheckoutExpanded && <CheckoutForm doCheckoutFlow={doCheckoutFlow} />}
       </div>
 
       {/* Infinite scroll */}
       <PaymentList />
 
-      {showFormSuccess && (
-        <>
-          <div className="absolute top-0 left-0 w-screen h-screen bg-gray-600 opacity-80"></div>
-          <div className="absolute top-0 left-0 w-screen h-screen flex items-center justify-center ">
-            <div className="flex flex-col p-4 justify-between bg-tertiary w-[80%] h-[60%] opacity-100 shadow-xl rounded-md">
-              <span className="text-2xl self-center">Transaction status</span>
-              <span className="p-0 self-center text-center">
-                {formStatusMessage}
-              </span>
-              <Button onClick={() => setShowFormSuccess(false)}>
-                Return to dashboard
-              </Button>
-            </div>
-          </div>
-        </>
+      {showFormSubmissionModal && (
+        <FormStatusModal
+          message={submissionStatusMessage}
+          closeModal={closeModal}
+          submissionError={submissionErrorMessage}
+        />
       )}
     </div>
   );

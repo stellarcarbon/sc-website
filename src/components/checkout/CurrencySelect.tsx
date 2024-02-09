@@ -15,10 +15,13 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
         className="text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
         {...register("currency")}
       >
-        <option value="">Select an option</option>
         {Object.values(CurrencyOptions).map((option) => {
           return (
-            <option key={option} value={option}>
+            <option
+              key={option}
+              value={option}
+              selected={option === CurrencyOptions.ANY}
+            >
               {option}
             </option>
           );

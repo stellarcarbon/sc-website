@@ -19,7 +19,9 @@ export interface CheckoutFormData {
   reason: ReasonOptions;
 }
 
+// TODO: Is this the right list?
 export enum CurrencyOptions {
+  ANY = "any",
   XLM = "XLM",
   USDC = "USDC",
 }
@@ -58,3 +60,10 @@ export const CARBON_SINK_ACCOUNT =
 
 export const CARBON_ACCOUNT =
   "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";
+
+export enum FormStatusMessages {
+  creating = "Creating your transaction using Stellarcarbon API...",
+  signTransaction = "Sign the transaction using your wallet in the pop-up.",
+  awaitBlockchain = "Transaction signed. Posting to blockchain and awaiting confirmation. This can take a couple seconds...",
+  completed = "Success! (did not really post to blockchain though)",
+}

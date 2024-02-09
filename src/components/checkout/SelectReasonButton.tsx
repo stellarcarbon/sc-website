@@ -33,7 +33,7 @@ export default function SelectReasonButton({
       type="button"
       className={`text-black shadow-md p-2 border w-16 h-16 ${
         isSelected
-          ? " border-accentSecondary !text-accent bg-primary"
+          ? " border-accentSecondary !text-accent bg-secondary"
           : "bg-white"
       }`}
       disabled={disabled}
