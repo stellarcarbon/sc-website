@@ -23,6 +23,8 @@ export default function Home() {
       <div className="h-[800px] flex flex-col justify-center">
         Some other stuff
       </div>
+
+      <ParallaxDivider image={ParallaxBackgrounds.JADE_WETLANDS} />
     </main>
   );
 }

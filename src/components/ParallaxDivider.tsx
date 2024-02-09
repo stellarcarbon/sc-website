@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 export enum ParallaxBackgrounds {
   FOREST = "bg-forest",
   AUTUMN_FOREST = "bg-autumnforest",
+  RIVER_ESTUARY = "bg-riverestuary",
+  JADE_WETLANDS = "bg-jadewetlands",
 }
 
 interface ParallaxDiverProps {
@@ -45,7 +47,7 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
     <div className="relative w-full" ref={componentRef}>
       <div className="absolute overflow-hidden top-0 left-0 right-0 bottom-0">
         <div
-          className={`${image} bg-cover bg-top  bg-no-repeat w-screen h-[800px]`}
+          className={`${image} bg-cover bg-top bg-no-repeat w-screen h-[800px]`}
           style={t}
         ></div>
       </div>
