@@ -32,8 +32,8 @@ export default function PartnerSection() {
             Stellar Entities Storing CARBON
           </h1>
           <div className="flex flex-col md:flex-row items-center justify-around w-full">
-            {Object.values(Partners).map((partner) => {
-              return <PartnerLogo partner={partner} />;
+            {Object.values(Partners).map((partner, idx) => {
+              return <PartnerLogo key={`partner_${idx}`} partner={partner} />;
             })}
           </div>
         </div>
