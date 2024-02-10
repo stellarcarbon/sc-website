@@ -25,7 +25,7 @@ export default function RainforestIntro() {
     adjustBackgroundSize();
 
     // Adjust on resize or orientation changes
-    window.addEventListener("resize", adjustBackgroundSize);
+    // window.addEventListener("resize", adjustBackgroundSize);
     window.addEventListener("orientationchange", adjustBackgroundSize);
   }, []);
 
