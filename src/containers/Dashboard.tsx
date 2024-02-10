@@ -94,7 +94,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col bg-secondary w-full min-h-[calc(100vh-176px)] md:max-w-[800px] md:p-4 md:rounded-md">
       {/* Connection info */}
-      <div className="flex flex-col m-2 p-4 bg-primary border border-accentSecondary rounded-md">
+      <div className="relative flex flex-col m-2 p-4 bg-primary border border-accentSecondary rounded-md">
         <div className="flex flex-col justify-between items-start w-full">
           <h1 className="text-lg font-bold">Your wallet is connected.</h1>
         </div>
@@ -111,7 +111,7 @@ export default function Dashboard() {
           </div>
           <PersonalDetailsDisplay />
         </div>
-        <div className="flex gap-2 w-full justify-start mt-4">
+        <div className="absolute top-0 right-0 flex gap-2 justify-start mt-4 mr-4">
           <Button
             className="!p-2"
             onClick={() => {
