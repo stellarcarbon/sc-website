@@ -14,11 +14,10 @@ export default function Home() {
 
       <ExplainSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
 
       <LastTransactionsSection />
-
-      <ParallaxDivider image={ParallaxBackgrounds.JADE_WETLANDS} />
+      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
 
       <div className="h-[800px] flex flex-col justify-center">
         Some other stuff

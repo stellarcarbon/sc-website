@@ -7,13 +7,14 @@ export default function ExplainSection() {
     <div className="flex flex-col md:flex-row py-12 m-auto w-full">
       {/* Text */}
       <div className="md:flex-1 flex flex-col justify-center pl-[5%] md:max-w-[40%]">
-        <Header>What does Stellarcarbon do?</Header>
+        <Header>Our mission</Header>
         <div className="tracking-wide leading-7">
           <p>
-            With Stellcarbon you can use XLM or any other asset in your Stellar
-            wallet to contribute to a vetted biodiversity project. This provides
-            an easy way for Stellar users to support a trustworthy nature
-            project of their selection.
+            Stellarcarbons mission is to provide user with a convenient way to
+            use XLM or other assets in their Stellar wallet to contribute to a
+            vetted biodiversity project. In other words, we provide an easy way
+            for Stellar users to support a trustworthy nature project of their
+            selection.
             {/* We put a lot of effort into finding trustworthy
             biodiversity projects and making it easy to support them for our
             users. */}
