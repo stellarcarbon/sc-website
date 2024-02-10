@@ -6,6 +6,7 @@ import ParallaxDivider, {
 import ExplainSection from "@/containers/home/ExplainSection";
 import RainforestIntro from "@/containers/home/RainforestSection";
 import LastTransactionsSection from "@/containers/home/LastTransactionsSection";
+import PartnerSection from "@/containers/home/PartnerSection";
 
 export default function Home() {
   return (
@@ -19,11 +20,13 @@ export default function Home() {
       <LastTransactionsSection />
       <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
 
-      <div className="h-[800px] flex flex-col justify-center">
-        Some other stuff
-      </div>
+      <PartnerSection />
 
       <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} />
+
+      <div className="h-[600px] flex flex-col justify-center">
+        Some other stuff
+      </div>
     </main>
   );
 }
