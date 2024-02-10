@@ -12,6 +12,7 @@ import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 import FormStatusModal from "./FormStatusModal";
 import { ApiError, CarbonService } from "@/client";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const {
@@ -20,6 +21,8 @@ export default function Dashboard() {
     setMyTransactions,
     disconnectWallet,
   } = useAppContext();
+  const router = useRouter();
+
   const [isCheckoutExpanded, setIsCheckoutExpanded] = useState<boolean>(false);
 
   // Form submission modal related
@@ -109,7 +112,12 @@ export default function Dashboard() {
           <PersonalDetailsDisplay />
         </div>
         <div className="flex gap-2 w-full justify-start mt-4">
-          <Button className="!p-2">
+          <Button
+            className="!p-2"
+            onClick={() => {
+              router.push("/wallet/connect");
+            }}
+          >
             <div className="flex items-center justify-between gap-1 text-xs">
               <span className="pt-[1px]">Edit</span>
               <EditIcon />

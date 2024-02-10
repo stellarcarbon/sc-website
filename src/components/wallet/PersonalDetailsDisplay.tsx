@@ -10,13 +10,17 @@ export default function PersonalDetailsDisplay() {
     <div className="">
       {!walletConnection.isAnonymous && (
         <div className="">
-          <div className="flex justify-between">
-            <span>Username</span>
-            <span>{walletConnection.personalDetails?.username}</span>
+          <div className="flex items-center">
+            <span className="w-32">Username</span>
+            <span className="text-xs">
+              {walletConnection.personalDetails?.username}
+            </span>
           </div>
-          <div className="flex justify-between">
-            <span>Email</span>
-            <span>{walletConnection.personalDetails?.useremail}</span>
+          <div className="flex items-center">
+            <span className="w-32">Email</span>
+            <span className="text-xs">
+              {walletConnection.personalDetails?.useremail}
+            </span>
           </div>
         </div>
       )}

@@ -3,7 +3,7 @@
 import { WalletType } from "stellar-wallets-kit";
 import SelectWalletButton from "../components/wallet/SelectWalletButton";
 import { useAppContext } from "@/context/appContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import SelectWalletButtonDesktop from "../components/wallet/SelectWalletButtonDesktop";
 import ContactInfoForm from "./ContactInfoForm";
@@ -13,7 +13,8 @@ import LoadingWallets from "../components/wallet/LoadingWallets";
 import { useRouter } from "next/navigation";
 
 export default function SelectWallet() {
-  const { connectWallet, connectionError, supportedWallets } = useAppContext();
+  const { connectWallet, connectionError, supportedWallets, walletConnection } =
+    useAppContext();
   const [selectedWalletType, setSelectedWalletType] =
     useState<WalletType | null>(null);
   const [tncAccepted, setTncAccepted] = useState<boolean>(false);
@@ -43,12 +44,14 @@ export default function SelectWallet() {
   const submitForm = () => {
     setTncError(!tncAccepted);
     setSelectWalletError(selectedWalletType === null);
-    setEmailError(useremail !== "" && !isValidEmail(useremail));
+    setEmailError(
+      (useremail !== "" || username !== "") && !isValidEmail(useremail)
+    );
 
     if (
       selectedWalletType === null ||
       !tncAccepted ||
-      (useremail !== "" && !isValidEmail(useremail))
+      ((useremail !== "" || username !== "") && !isValidEmail(useremail))
     )
       return;
 
@@ -66,6 +69,17 @@ export default function SelectWallet() {
       setTncAccepted(false);
     });
   };
+
+  useEffect(() => {
+    if (walletConnection) {
+      setSelectedWalletType(walletConnection.walletType);
+      setTncAccepted(true);
+      if (!walletConnection.isAnonymous && walletConnection.personalDetails) {
+        setUsername(walletConnection.personalDetails.username);
+        setUseremail(walletConnection.personalDetails.useremail);
+      }
+    }
+  }, []);
 
   return (
     <>
