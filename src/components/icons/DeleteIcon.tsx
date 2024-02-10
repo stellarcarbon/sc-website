@@ -2,8 +2,8 @@ export default function DeleteIcon() {
   return (
     <svg
       className="stroke-custom"
-      width="18px"
-      height="18px"
+      width="20px"
+      height="20px"
       viewBox="0 0 1024 1024"
       fill=""
       version="1.1"

@@ -9,7 +9,7 @@ export default function PaymentList() {
     <div className="m-2 mb-4 py-3 pb-2 flex flex-col gap-2 bg-primary rounded-md border border-accentSecondary">
       <h1 className="flex flex-col text-lg font-bold text-center">
         <span>Transaction history</span>
-        <span className="text-xs break-words w-[80%] self-center">{`For account (dev-mode): GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y`}</span>
+        {/* <span className="text-xs break-words w-[80%] self-center">{`For account (dev-mode): GC53JCXZHW3SVNRE4CT6XFP46WX4ACFQU32P4PR3CU43OB7AKKMFXZ6Y`}</span> */}
       </h1>
       {myTransactions !== null ? (
         myTransactions.length === 0 ? (

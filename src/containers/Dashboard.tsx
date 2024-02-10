@@ -119,13 +119,13 @@ export default function Dashboard() {
             }}
           >
             <div className="flex items-center justify-between gap-1 text-xs">
-              <span className="pt-[1px]">Edit</span>
+              <span className="hidden md:block">Edit</span>
               <EditIcon />
             </div>
           </Button>
           <Button onClick={disconnectWallet} className="!p-2">
             <div className="flex items-center justify-between gap-1 text-xs">
-              <span className="">Remove</span>
+              <span className="hidden md:block">Remove</span>
               <DeleteIcon />
             </div>
           </Button>
