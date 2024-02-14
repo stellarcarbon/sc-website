@@ -1,6 +1,7 @@
 export enum Partners {
   MOJOFLOWER = "mojoflower.png",
   PUBLICNODE = "publicnode.png",
+  CFCE       = "cfce.jpeg",
 }
 
 interface PartnerLogoProps {
