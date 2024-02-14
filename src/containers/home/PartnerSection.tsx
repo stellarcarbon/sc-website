@@ -11,9 +11,9 @@ export default function PartnerSection() {
           <Header>For business</Header>
           <div className="tracking-wide leading-7">
             <p>
-              We also provide API integration for Stellar entities that want to
-              make it easy for their users to contribute to biodiversity or
-              compensate emissions.
+              We also provide an API integration for others building on Stellar who 
+              want to make it easy for their users to contribute to biodiversity or
+              compensate for their emissions.
             </p>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
@@ -29,7 +29,7 @@ export default function PartnerSection() {
         {/* Partners */}
         <div className="mt-8 md:mt-0 md:flex-1 md:max-w-[60%] md:min-h-[300px] flex flex-col items-center justify-center">
           <h1 className="text-3xl font-noto text-center">
-            Stellar Entities Storing CARBON
+            Join our early adopters
           </h1>
           <div className="flex flex-col md:flex-row items-center justify-around w-full">
             {Object.values(Partners).map((partner, idx) => {
