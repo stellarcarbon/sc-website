@@ -1,9 +1,9 @@
-name: CI/CD with Tests and Vercel Deploy for main branch
+name: CI/CD with Tests and Vercel Deploy for develop
 
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   test:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: develop
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -38,7 +38,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: develop
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
