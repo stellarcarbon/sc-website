@@ -11,9 +11,9 @@ export default function PartnerSection() {
           <Header>For business</Header>
           <div className="tracking-wide leading-7">
             <p>
-              We also provide an API integration for others building on Stellar who 
-              want to make it easy for their users to contribute to biodiversity or
-              compensate for their emissions.
+              We also provide an API integration for others building on Stellar
+              who want to make it easy for their users to contribute to
+              biodiversity or compensate for their emissions.
             </p>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
@@ -31,7 +31,7 @@ export default function PartnerSection() {
           <h1 className="text-3xl font-noto text-center">
             Join our early adopters
           </h1>
-          <div className="flex flex-col md:flex-row items-center justify-around w-full">
+          <div className="flex flex-col md:flex-row md:flex-wrap md:gap-4 items-center justify-around w-full">
             {Object.values(Partners).map((partner, idx) => {
               return <PartnerLogo key={`partner_${idx}`} partner={partner} />;
             })}
