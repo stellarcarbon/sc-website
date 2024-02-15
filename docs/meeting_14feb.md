@@ -6,8 +6,8 @@
 - ~~Twitter account linken stellarcarbon~~
 - ~~padding privacy policy mobile~~
 - ~~Linken van "for business" naar swagger pagina.~~
-- Connect wallet: "Current selection: ALBEDO" ipv "Tap your wallet choice" na het tappen.
-- WalletConnect voor disabled + mededeling op splash-uitleg scherm. Rabbit toevoegen aan lijstje.
+- ~~Connect wallet: "Current selection: ALBEDO" ipv "Tap your wallet choice" na het tappen.~~
+- ~~WalletConnect voor disabled + mededeling op splash-uitleg scherm. Rabbit toevoegen aan lijstje.~~
 - Rabbit uittesten
 
 Nice to have:
