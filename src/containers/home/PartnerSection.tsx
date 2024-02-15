@@ -20,8 +20,12 @@ export default function PartnerSection() {
               non euismod quam. Nulla facilisi. Donec dignissim elementum dui
               sed dignissim.
             </p>
-            <Link href="/transactions" className="underline text-sm">
-              Read more about integrating with our API here
+            <Link
+              href="https://api-beta.stellarcarbon.io/docs"
+              target="_blank"
+              className="underline text-sm"
+            >
+              Read our API docs here
             </Link>
           </div>
         </div>
