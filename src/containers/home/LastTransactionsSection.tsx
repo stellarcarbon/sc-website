@@ -5,6 +5,7 @@ import TransactionHistoryService from "@/app/services/TransactionHistoryService"
 import Header from "@/components/Header";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function LastTransactionsSection() {
   const txHistoryService = new TransactionHistoryService();
@@ -60,8 +61,10 @@ export default function LastTransactionsSection() {
                   </div>
                   <div className="flex justify-start items-center">
                     <span className="w-24 md:w-32">Sunk</span>
-
-                    <span className="">{tx.sinkAmount?.toFixed(2)}</span>
+                    <div className="flex items-center gap-1">
+                      <CARBONCurrencyIcon />
+                      <span>{tx.sinkAmount?.toFixed(2)}</span>
+                    </div>
                   </div>
                   <div className="flex justify-start items-center">
                     <span className="w-24 md:w-32">Memo</span>

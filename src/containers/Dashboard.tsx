@@ -8,7 +8,11 @@ import { useAppContext } from "@/context/appContext";
 import CheckoutForm from "./CheckoutForm";
 import Button from "@/components/Button";
 import TransactionHistoryService from "@/app/services/TransactionHistoryService";
-import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
+import {
+  DEV_ACCOUNT,
+  FormStatusMessages,
+  SinkCarbonXdrPostRequest,
+} from "@/app/types";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 import FormStatusModal from "./FormStatusModal";
 import { ApiError, CarbonService } from "@/client";
@@ -39,7 +43,8 @@ export default function Dashboard() {
     // Load the transactions for this dash on mount if not loaded yet.
     if (myTransactions === null) {
       transactionHistoryService
-        .fetchAccountHistory(walletConnection?.stellarPubKey!)
+        // .fetchAccountHistory(walletConnection?.stellarPubKey!)1
+        .fetchAccountHistory(DEV_ACCOUNT)
         .then((transactionRecords): void => {
           setMyTransactions(transactionRecords);
         });

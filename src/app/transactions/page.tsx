@@ -8,6 +8,7 @@ import { PaymentsPageToFrontPageToTransactionsRecordArray } from "../utils";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
 import Header from "@/components/Header";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function TransactionsPage() {
   const searchParams = useSearchParams();
@@ -187,7 +188,10 @@ export default function TransactionsPage() {
                     <span className="">Sunk</span>
 
                     <span className="grow col-span-3">
-                      {tx.sinkAmount?.toFixed(2)}
+                      <div className="flex gap-1 items-center">
+                        <CARBONCurrencyIcon />
+                        <span>{tx.sinkAmount?.toFixed(2)}</span>
+                      </div>
                     </span>
                   </div>
                   <div className="grid grid-cols-4">
