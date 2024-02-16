@@ -9,6 +9,7 @@
 - ~~Connect wallet: "Current selection: ALBEDO" ipv "Tap your wallet choice" na het tappen.~~
 - ~~WalletConnect voor disabled + mededeling op splash-uitleg scherm. Rabbit toevoegen aan lijstje.~~
 - Rabbit uittesten
+- WalletConnect knop disablen op desktop
 
 Nice to have:
 
