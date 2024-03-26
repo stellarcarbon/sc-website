@@ -24,7 +24,7 @@ Our infrastructure enables the integration between the Stellar network and tradi
 
 At a high level of abstraction, the integration between Stellar and the Verra Registry looks like this:
 
-![High level overview of Verra integration](img/verra-integration.png)
+![High level overview of Verra integration](img/stellar-verra-integration.png)
 
 We've developed a prototype retail-oriented checkout UI that was intended to be deeplinked from our current website. It was realistic enough that it enabled us to do usability testing with several participants. It has been used in production to do actual credit retirements (even with a hardware wallet), but only by team members and a couple of testers. In late 2023 we decided to not move forward with this checkout UI as a production system, because we can offer a better user experience by redesigning our website as a web app that includes the checkout functionality as well as user account management.
 
