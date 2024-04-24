@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 
-const basePath = process.env.NODE_ENV === 'development' ? '' : '/sc-website'
+let basePath = "";
+if (process.env.NODE_ENV === "production") {
+  basePath = "/sc-website";
+}
 
 const nextConfig = {
-  output: 'export',
+  output: "export",
   basePath,
 };
 
