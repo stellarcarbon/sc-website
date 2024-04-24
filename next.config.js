@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 let basePath = "";
-if (process.env.NODE_ENV === "production") {
+if (process.env.DEPLOYMENT_SERVICE === "digitalocean") {
   basePath = "/sc-website";
 }
 
