@@ -45,6 +45,6 @@ jobs:
         run: npm install -g vercel
 
       - name: Deploy to Vercel
-        run: vercel --prod -y -t $VERCEL_TOKEN
+        run: vercel --prod -y -b NODE_ENV=development -t $VERCEL_TOKEN
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
