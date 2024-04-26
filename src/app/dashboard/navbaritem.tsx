@@ -82,7 +82,7 @@ export default function NavBarItem({ item }: NavBarItemProps) {
       onClick={navigate}
       className={`${
         isSelected ? "text-accentSecondary bg-secondary" : ""
-      } relative p-2 bg-red w-28 h-full flex flex-col justify-end items-center gap-1`}
+      } relative p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-1`}
     >
       {p.icon}
       <span className="text-[12px] text-center">{p.label}</span>
