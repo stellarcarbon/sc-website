@@ -34,7 +34,7 @@ type AppContext = {
   // Wallet connection
   connectionError: string | null;
   supportedWallets: ISupportedWallet[];
-  walletConnection: WalletConnection | null;
+  walletConnection: WalletConnection | undefined | null;
   connectWallet: (
     walletType: WalletType,
     personalDetails: PersonalDetails

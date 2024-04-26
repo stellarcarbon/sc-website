@@ -1,9 +1,17 @@
-export default function CARBONCurrencyIcon() {
+interface CARBONCurrencyIconProps {
+  width?: number;
+  height?: number;
+}
+
+export default function CARBONCurrencyIcon({
+  width,
+  height,
+}: CARBONCurrencyIconProps) {
   return (
     <svg
       fill="currentColor"
-      width="18px"
-      height="18px"
+      width={`${width ? `${width}px` : "18px"}`}
+      height={`${height ? `${height}px` : "18px"}`}
       version="1.1"
       id="Layer_1"
       x="0px"
