@@ -1,21 +1,12 @@
 "use client";
 
-import AccountIcon from "@/components/icons/AccountIcon";
-import AirTravelIcon from "@/components/icons/AirTravelIcon";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import EnvironmentIcon from "@/components/icons/EnvironmentIcon";
-import HistoryIcon from "@/components/icons/HistoryIcon";
-import RoadTravelIcon from "@/components/icons/RoadTravelIcon";
-import StellarCarbonIcon from "@/components/icons/StellarCarbonIcon";
-import { useParams, usePathname, useRouter } from "next/navigation";
+
+import { usePathname, useRouter } from "next/navigation";
 import { HTMLProps, ReactNode, useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faClockRotateLeft,
-  faReceipt,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
 
 interface NavBarItemProps extends HTMLProps<HTMLDivElement> {
   item: DashboardTabs;
@@ -63,19 +54,25 @@ export default function NavBarItem({ item }: NavBarItemProps) {
 
   const p: DashboardTabProps = DashboardTabPropsConfig[item];
 
+  const checkIsSelected = () => {
+    if (
+      pathname.includes("/dashboard/history") &&
+      p.route === "/dashboard/history"
+    ) {
+      setIsSelected(true);
+    } else {
+      setIsSelected(pathname === p.route);
+    }
+  };
+
   const [isSelected, setIsSelected] = useState<boolean>(pathname === p.route);
 
   useEffect(() => {
-    console.log("set is selected");
-    if (pathname === p.route) {
-      setIsSelected(true);
-    } else {
-      setIsSelected(false);
-    }
+    checkIsSelected();
   }, [pathname]);
 
   const navigate = () => {
-    router.push(`${p.route}`);
+    router.push(p.route);
   };
 
   console.log(p.label, isSelected);
@@ -84,17 +81,17 @@ export default function NavBarItem({ item }: NavBarItemProps) {
     <div
       onClick={navigate}
       className={`${
-        isSelected ? "text-accentSecondary " : ""
-      } relative pb-2 bg-red w-24 h-full flex flex-col justify-end items-center gap-1`}
+        isSelected ? "text-accentSecondary bg-secondary" : ""
+      } relative p-2 bg-red w-28 h-full flex flex-col justify-end items-center gap-1`}
     >
       {p.icon}
       <span className="text-[12px] text-center">{p.label}</span>
       {
-        <div
-          className={`${
-            isSelected ? "animate-navbarstart" : "animate-navbarend"
-          } absolute opacity-0 bottom-0 w-full h-1 bg-accentSecondary`}
-        ></div>
+        // <div
+        //   className={`${
+        //     isSelected ? "animate-navbarstart" : "animate-navbarend"
+        //   } absolute opacity-0 bottom-0 w-full h-1 bg-accentSecondary`}
+        // ></div>
       }
     </div>
   );

@@ -38,7 +38,7 @@ export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
   };
 
   return (
-    <form className="flex flex-col font-sans bg-primary rounded-md min-w-[80%]">
+    <form className="flex flex-col font-sans bg-secondary rounded-md min-w-[80%]">
       <h1 className="pt-4 px-4 font-sans self-center text-2xl">Checkout</h1>
       <TonnesRange
         register={register}
@@ -49,7 +49,7 @@ export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
       />
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
-      <div className="m-4 p-4 flex flex-col items-center justify-center bg-secondary border border-accent">
+      <div className="m-4 p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">
         <h3 className="text-xl font-bold">Transaction preview</h3>
         <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full md:max-w-[60%]">
           <span className="text-start">Amount to sink</span>

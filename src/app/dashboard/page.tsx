@@ -25,30 +25,48 @@ export default function Dashboard() {
   return (
     <div className="mt-6 flex flex-col gap-4 w-full">
       {/* Welkom blok */}
-      <div className="flex flex-col">
+      <div className="flex flex-col m-2">
         <span className="text-xl self-center">Welkom, anonymous</span>
         <span className="text-xs mt-1 text-center">
-          Beheer hier je wallet connection en bekijk een overzicht van je
+          Beheer hier je wallet connection en bekijk een samenvatting van je
           transacties.
         </span>
       </div>
 
       <div className="m-2 p-4 flex flex-col gap-2 rounded bg-primary border border-accentSecondary">
-        <h1 className="self-center text-[18px] mb-2">Sinking summary</h1>
+        {/* <h1 className="self-center text-[18px] mb-2">Sinking summary</h1> */}
 
         <div className="text-sm flex justify-between items-center gap-1">
-          <span className="font-bold">Amount of CARBON sinked:</span>
-          <div className="flex gap-1 items-center">
-            <span>0</span>
-            <CARBONCurrencyIcon width={14} height={14} />
+          <div className="flex flex-col">
+            <div className="text-2xl font-bold flex gap-4 justify-between items-center">
+              <span className="">Sinked</span>
+              <div className="flex gap-1 items-center">
+                <span className="font-normal">25</span>
+                <CARBONCurrencyIcon width={18} height={18} />
+              </div>
+            </div>
+
+            <span className="text-xs">
+              This is the total amount of CARBON tokens that have been sinked
+              using this wallet.
+            </span>
           </div>
         </div>
 
         <div className="text-sm flex justify-between items-center gap-1">
-          <span className="font-bold">Pending CARBON:</span>
-          <div className="flex gap-1 items-center">
-            <span>0</span>
-            <CARBONCurrencyIcon width={14} height={14} />
+          <div className="flex flex-col">
+            <div className="text-2xl font-bold flex gap-4 justify-between items-center">
+              <span className="">Pending</span>
+              <div className="flex gap-1 items-center">
+                <span className="font-normal">1.55</span>
+                <CARBONCurrencyIcon width={18} height={18} />
+              </div>
+            </div>
+
+            <span className="text-xs">
+              The amount of fractional carbon certificates that are still
+              pending.
+            </span>
           </div>
         </div>
       </div>
