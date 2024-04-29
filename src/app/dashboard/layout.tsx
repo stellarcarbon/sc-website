@@ -10,7 +10,7 @@ export default function DashboardLayout({
   return (
     <main className="flex flex-col items-center justify-start min-h-[calc(100vh-176px)]">
       <NavBar />
-      <div className="w-full">{children}</div>
+      <div className="w-full font-sans">{children}</div>
     </main>
   );
 }

@@ -9,7 +9,7 @@ export default function HistoryLayout({
 }) {
   return (
     <main className="flex flex-col items-center justify-start">
-      <div className="h-10 w-full flex justify-around items-stretch bg-secondary border-b-accentSecondary">
+      <div className="h-12 w-full flex justify-around items-center bg-secondary border-b-accentSecondary">
         <HistoryNavBarItem item={HistoryTabs.HISTORY} />
         <HistoryNavBarItem item={HistoryTabs.PENDING} />
       </div>

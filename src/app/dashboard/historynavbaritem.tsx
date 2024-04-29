@@ -43,7 +43,7 @@ export default function HistoryNavBarItem({ item }: HistoryNavBarItemProps) {
   return (
     <div
       onClick={() => router.push(p.route)}
-      className={`relative py-3 text-center text-xs w-[40%]
+      className={`relative h-12 flex flex-col justify-center py-3 text-center text-sm w-[40%]
         ${isSelected ? "text-accentSecondary" : ""}
       `}
     >

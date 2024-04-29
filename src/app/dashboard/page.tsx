@@ -11,19 +11,9 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function Dashboard() {
   const { walletConnection } = useAppContext();
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   console.log("wc:", walletConnection);
-  //   if (walletConnection) {
-  //     router.push("/dashboard/overview");
-  //   } else if (walletConnection === undefined) {
-  //     router.push("/wallet/connect");
-  //   }
-  // }, [walletConnection]);
 
   return (
-    <div className="mt-6 flex flex-col gap-4 w-full">
+    <div className="my-6 flex flex-col gap-4 w-full">
       {/* Welkom blok */}
       <div className="flex flex-col m-2">
         <span className="text-xl self-center">Welkom, anonymous</span>
@@ -33,48 +23,43 @@ export default function Dashboard() {
         </span>
       </div>
 
-      <div className="m-2 p-4 flex flex-col gap-2 rounded bg-primary border border-accentSecondary">
+      <div className="m-2 p-4 flex flex-col gap-3 rounded bg-primary">
         {/* <h1 className="self-center text-[18px] mb-2">Sinking summary</h1> */}
 
-        <div className="text-sm flex justify-between items-center gap-1">
-          <div className="flex flex-col">
-            <div className="text-2xl font-bold flex gap-4 justify-between items-center">
-              <span className="">Sinked</span>
-              <div className="flex gap-1 items-center">
-                <span className="font-normal">25</span>
-                <CARBONCurrencyIcon width={18} height={18} />
-              </div>
+        <div className="flex flex-col gap-1 text-sm">
+          <div className="text-2xl font-bold flex gap-4 justify-between items-center">
+            <span className="">Sinked</span>
+            <div className="flex gap-1 items-center">
+              <span className="font-normal">25</span>
+              <CARBONCurrencyIcon width={18} height={18} />
             </div>
-
-            <span className="text-xs">
-              This is the total amount of CARBON tokens that have been sinked
-              using this wallet.
-            </span>
           </div>
+
+          <span className="text-xs">
+            This is the total amount of CARBON tokens that have been sinked
+            using this wallet.
+          </span>
         </div>
 
-        <div className="text-sm flex justify-between items-center gap-1">
-          <div className="flex flex-col">
-            <div className="text-2xl font-bold flex gap-4 justify-between items-center">
-              <span className="">Pending</span>
-              <div className="flex gap-1 items-center">
-                <span className="font-normal">1.55</span>
-                <CARBONCurrencyIcon width={18} height={18} />
-              </div>
+        <div className="flex flex-col gap-1 text-sm">
+          <div className="text-2xl font-bold flex gap-4 justify-between items-center">
+            <span className="">Pending</span>
+            <div className="flex gap-1 items-center">
+              <span className="font-normal">1.55</span>
+              <CARBONCurrencyIcon width={18} height={18} />
             </div>
-
-            <span className="text-xs">
-              The amount of fractional carbon certificates that are still
-              pending.
-            </span>
           </div>
+
+          <span className="text-xs">
+            The amount of fractional carbon certificates that are still pending.
+          </span>
         </div>
       </div>
 
       {/* <hr className="mx-4 border-accentSecondary" /> */}
       {/* <div className="m-2 p-4 flex flex-col gap-2 bg-primary border border-accentSecondary rounded"></div> */}
 
-      <div className="m-2 p-4 flex flex-col gap-2 bg-primary border border-accentSecondary rounded">
+      <div className="m-2 p-4 flex flex-col gap-2 bg-primary rounded">
         <h1 className="self-center text-[18px] mb-2">Connection details</h1>
 
         <div className="flex flex-col">
