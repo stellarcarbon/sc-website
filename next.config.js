@@ -2,7 +2,7 @@
 const nextConfig = {
   // Settings from digitalocean nextjs sample https://github.com/digitalocean/sample-nextjs/
   output: "export",
-  distDir: "_static",
+  distDir: "out",
   images: {
     unoptimized: true,
   },
