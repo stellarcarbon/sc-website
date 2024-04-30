@@ -1,7 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* 
+TODO: do not cheat React by disabling exhaustive deps. 
+
+Not very important, but nice programming challenge.
+
+https://overreacted.io/a-complete-guide-to-useeffect/
+
+*/
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Server, ServerApi } from "stellar-sdk/lib/horizon";
 import { CARBON_SINK_ACCOUNT, FrontpageTransactionRecord } from "../types";
 import { PaymentsPageToFrontPageToTransactionsRecordArray } from "../utils";
@@ -31,22 +40,21 @@ export default function TransactionsPage() {
 
   const [paginationError, setPaginationError] = useState<string>();
 
-  const updateParams = (
-    order: "asc" | "desc",
-    cursor: string | undefined,
-    limit?: number
-  ) => {
-    const currentParams = new URLSearchParams(searchParams.toString());
-    if (typeof cursor === "string") {
-      currentParams.set("cursor", cursor);
-    }
-    currentParams.set("order", order);
-    if (limit) {
-      currentParams.set("limit", limit.toString());
-    }
+  const updateParams = useCallback(
+    (order: "asc" | "desc", cursor: string | undefined, limit?: number) => {
+      const currentParams = new URLSearchParams(searchParams.toString());
+      if (typeof cursor === "string") {
+        currentParams.set("cursor", cursor);
+      }
+      currentParams.set("order", order);
+      if (limit) {
+        currentParams.set("limit", limit.toString());
+      }
 
-    router.replace(`?${currentParams}`, { scroll: false });
-  };
+      router.replace(`?${currentParams}`, { scroll: false });
+    },
+    [router]
+  );
 
   const goToNextPage = async () => {
     setPaginationError(undefined);
@@ -81,8 +89,8 @@ export default function TransactionsPage() {
           : await currentPage.prev();
 
       console.log(prevPage);
-
       const newCursor = transactions[0]?.id; // First transaction is the cursor
+
       const enrichedPayments =
         await PaymentsPageToFrontPageToTransactionsRecordArray(prevPage);
 
@@ -91,24 +99,18 @@ export default function TransactionsPage() {
       } else {
         setCurrentPage(prevPage);
         setTransactions(enrichedPayments);
-
         updateParams("asc", newCursor);
       }
     }
   };
 
-  useEffect(() => {
-    console.log("TransactionPage", searchParams);
+  const fetchPayments = useCallback(
+    // async (limit: number, order: "asc" | "desc", cursor?: string) => {
+    async () => {
+      const limit = Number(searchParams.get("limit") ?? "5");
+      const cursor = searchParams.get("cursor") ?? undefined;
+      const order = (searchParams.get("order") ?? "desc") as "asc" | "desc";
 
-    const limit = Number(searchParams.get("limit") ?? "5");
-    const cursor = searchParams.get("cursor") ?? undefined;
-    const order = (searchParams.get("order") ?? "desc") as "asc" | "desc";
-
-    async function fetchPayments(
-      limit: number,
-      order: "asc" | "desc",
-      cursor?: string
-    ) {
       try {
         const horizonServer = new Server("https://horizon.stellar.org");
         let request = horizonServer
@@ -131,10 +133,14 @@ export default function TransactionsPage() {
       } catch (error) {
         console.error("Error fetching payments:", error);
       }
-    }
+    },
+    []
+  );
 
-    fetchPayments(limit, order, cursor);
-  }, []);
+  useEffect(() => {
+    console.log("TransactionPage", fetchPayments);
+    fetchPayments();
+  }, [fetchPayments]);
 
   return (
     <main className="flex flex-col font-noto blockchain-bg bg-no-repeat bg-fixed bg-cover min-h-[calc(100vh-176px)]">

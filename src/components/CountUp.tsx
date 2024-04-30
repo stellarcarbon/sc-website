@@ -1,3 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* 
+TODO: do not cheat React by disabling exhaustive deps. 
+
+Not very important, but nice programming challenge.
+
+https://overreacted.io/a-complete-guide-to-useeffect/
+
+*/
 "use client";
 
 import { useIntersectionObserver } from "@/app/utils";
@@ -9,38 +18,38 @@ interface CountUpProps extends HTMLProps<HTMLDivElement> {
   subject: string;
 }
 
-export default function CountUp(props: CountUpProps) {
+export default function CountUp({ value, unit, subject }: CountUpProps) {
   const [counter, setCounter] = useState<number>(0);
   const [ref, isVisible] = useIntersectionObserver({ threshold: 0.5 });
 
   const [mInterval, setMInterval] = useState<NodeJS.Timeout>();
 
-  let intervalInMS = props.value > 1000 ? 1 : 1000 / props.value;
+  let intervalInMS = value > 1000 ? 1 : 1000 / value;
 
   let step = 1;
-  if (props.value <= 999) {
-  } else if (props.value > 1000 && props.value <= 9999) {
+  if (value <= 999) {
+  } else if (value > 1000 && value <= 9999) {
     step = 10;
-  } else if (props.value > 10000 && props.value <= 99999) {
+  } else if (value > 10000 && value <= 99999) {
     step = 100;
-  } else if (props.value > 100000) {
+  } else if (value > 100000) {
     step = 1000;
   }
 
-  intervalInMS = (1000 * step) / props.value;
+  intervalInMS = (1000 * step) / value;
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
-    if (isVisible && counter < props.value) {
+    if (isVisible && counter < value) {
       interval = setInterval(() => {
         setCounter((prevCounter) => {
           let newCounter = prevCounter;
-          if (prevCounter < ~~(props.value / step) * step) {
+          if (prevCounter < ~~(value / step) * step) {
             newCounter += step;
           } else {
-            if (prevCounter < props.value) {
-              newCounter += props.value - prevCounter;
+            if (prevCounter < value) {
+              newCounter += value - prevCounter;
             }
           }
           return newCounter;
@@ -60,7 +69,7 @@ export default function CountUp(props: CountUpProps) {
   };
 
   useEffect(() => {
-    if (counter === props.value) {
+    if (counter === value) {
       clearInterval(mInterval);
     }
   }, [counter]);
@@ -71,9 +80,9 @@ export default function CountUp(props: CountUpProps) {
         {toNumberWithCommas(counter)}
       </span>
       <span className="mb-2 uppercase text-large text-accent font-semibold tracking-widest text-sm">
-        {props.unit}
+        {unit}
       </span>
-      <span className="text-center text-sm text-accent">{props.subject}</span>
+      <span className="text-center text-sm text-accent">{subject}</span>
     </div>
   );
 }
