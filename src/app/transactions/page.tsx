@@ -88,7 +88,6 @@ export default function TransactionsPage() {
           ? await currentPage.next()
           : await currentPage.prev();
 
-      console.log(prevPage);
       const newCursor = transactions[0]?.id; // First transaction is the cursor
 
       const enrichedPayments =
@@ -138,7 +137,6 @@ export default function TransactionsPage() {
   );
 
   useEffect(() => {
-    console.log("TransactionPage", fetchPayments);
     fetchPayments();
   }, [fetchPayments]);
 

@@ -28,7 +28,6 @@ export default function TonnesRange({
         CarbonService.getCarbonQuoteCarbonQuoteGet({
           carbonAmount: tonnes,
         }).then((result: any) => {
-          console.log(result);
           setQuote(result.total_cost);
         });
       }, 500),
