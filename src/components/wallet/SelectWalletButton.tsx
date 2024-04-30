@@ -24,6 +24,7 @@ export default function SelectWalletButton({
             : "opacity-30"
         } `}
         src={wallet.icon}
+        alt={`${wallet.name} wallet select button`}
       />
       {disabled && (
         <div className="rounded-full absolute inset-0 bg-slate-400 opacity-50" />

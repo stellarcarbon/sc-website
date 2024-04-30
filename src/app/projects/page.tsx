@@ -21,10 +21,16 @@ export default function ProjectsPage() {
         {/* Images */}
         <div className="w-full mb-8 md:flex-1  md:mr-16">
           <div className="m-auto max-w-[80%] mb-[30px] image0">
-            <img src="/forest_from_above_carbonbank_1280x719.jpg" />
+            <img
+              src="/forest_from_above_carbonbank_1280x719.jpg"
+              alt="Forest from above"
+            />
           </div>
           <div className="max-w-[70%] text-right mr-0 ml-auto mt-[-30%] image1">
-            <img src="/VCS-1360-Comite-de-Vigilancia-y-Control-Comunal-cuidando-las-tierras-indigenas.jpg" />
+            <img
+              src="/VCS-1360-Comite-de-Vigilancia-y-Control-Comunal-cuidando-las-tierras-indigenas.jpg"
+              alt="Comite de Vigilancia y Control Comunal cuidando las tierras indigenas"
+            />
           </div>
         </div>
         {/* Text */}
