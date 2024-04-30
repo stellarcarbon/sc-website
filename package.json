@@ -11,6 +11,7 @@
     "e2e": "cypress open --e2e",
     "e2e:headless": "next build && start-server-and-test start-static http://localhost:3000 \"cypress run --e2e\"",
     "test": "vitest",
+    "test:ci": "vitest run",
     "generate-client": "openapi --useOptions --input https://api-beta.stellarcarbon.io/openapi.json --output ./src/client --client axios"
   },
   "dependencies": {
