@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
-
-let basePath = "";
-if (process.env.DEPLOYMENT_SERVICE === "digitalocean") {
-  basePath = "/sc-website";
-}
-
 const nextConfig = {
+  // Settings from digitalocean nextjs sample https://github.com/digitalocean/sample-nextjs/
   output: "export",
-  basePath,
+  distDir: "_static",
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig;
