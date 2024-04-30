@@ -25,7 +25,7 @@ export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
 
   useEffect(() => {
     setValue("tonnes", 1);
-  }, []);
+  }, [setValue]);
 
   const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
     let payload: SinkCarbonXdrPostRequest = {

@@ -31,35 +31,6 @@ export default function TransactionsPage() {
 
   const [paginationError, setPaginationError] = useState<string>();
 
-  const fetchPayments = async (
-    limit: number,
-    order: "asc" | "desc",
-    cursor?: string
-  ) => {
-    try {
-      const horizonServer = new Server("https://horizon.stellar.org");
-      let request = horizonServer
-        .payments()
-        .forAccount(CARBON_SINK_ACCOUNT)
-        .limit(limit)
-        .order(order ?? "desc");
-
-      if (cursor) {
-        request = request.cursor(cursor);
-      }
-
-      const paymentsPage = await request.call();
-      const enrichedPayments =
-        await PaymentsPageToFrontPageToTransactionsRecordArray(paymentsPage);
-
-      setTransactions(enrichedPayments);
-      setCurrentPage(paymentsPage);
-      updateParams(order, enrichedPayments[0]?.id, limit);
-    } catch (error) {
-      console.error("Error fetching payments:", error);
-    }
-  };
-
   const updateParams = (
     order: "asc" | "desc",
     cursor: string | undefined,
@@ -109,6 +80,8 @@ export default function TransactionsPage() {
           ? await currentPage.next()
           : await currentPage.prev();
 
+      console.log(prevPage);
+
       const newCursor = transactions[0]?.id; // First transaction is the cursor
       const enrichedPayments =
         await PaymentsPageToFrontPageToTransactionsRecordArray(prevPage);
@@ -125,9 +98,40 @@ export default function TransactionsPage() {
   };
 
   useEffect(() => {
+    console.log("TransactionPage", searchParams);
+
     const limit = Number(searchParams.get("limit") ?? "5");
     const cursor = searchParams.get("cursor") ?? undefined;
     const order = (searchParams.get("order") ?? "desc") as "asc" | "desc";
+
+    async function fetchPayments(
+      limit: number,
+      order: "asc" | "desc",
+      cursor?: string
+    ) {
+      try {
+        const horizonServer = new Server("https://horizon.stellar.org");
+        let request = horizonServer
+          .payments()
+          .forAccount(CARBON_SINK_ACCOUNT)
+          .limit(limit)
+          .order(order ?? "desc");
+
+        if (cursor) {
+          request = request.cursor(cursor);
+        }
+
+        const paymentsPage = await request.call();
+        const enrichedPayments =
+          await PaymentsPageToFrontPageToTransactionsRecordArray(paymentsPage);
+
+        setTransactions(enrichedPayments);
+        setCurrentPage(paymentsPage);
+        updateParams(order, enrichedPayments[0]?.id, limit);
+      } catch (error) {
+        console.error("Error fetching payments:", error);
+      }
+    }
 
     fetchPayments(limit, order, cursor);
   }, []);

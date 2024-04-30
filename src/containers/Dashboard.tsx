@@ -40,16 +40,18 @@ export default function Dashboard() {
   const transactionHistoryService = new TransactionHistoryService();
 
   useEffect(() => {
+    async function fetchMyTransactions() {
+      const records = await transactionHistoryService.fetchAccountHistory(
+        walletConnection?.stellarPubKey!
+      );
+      setMyTransactions(records);
+    }
+
     // Load the transactions for this dash on mount if not loaded yet.
     if (myTransactions === null) {
-      transactionHistoryService
-        // .fetchAccountHistory(walletConnection?.stellarPubKey!)1
-        .fetchAccountHistory(DEV_ACCOUNT)
-        .then((transactionRecords): void => {
-          setMyTransactions(transactionRecords);
-        });
+      fetchMyTransactions();
     }
-  }, []);
+  }, [myTransactions]);
 
   const closeModal = () => {
     setShowFormStatusModal(false);

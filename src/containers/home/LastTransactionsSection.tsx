@@ -13,9 +13,12 @@ export default function LastTransactionsSection() {
     useState<FrontpageTransactionRecord[]>();
 
   useEffect(() => {
-    txHistoryService.fetchRecentTransactions().then((txRecords): void => {
+    async function fetchRecentTransactions() {
+      const txRecords = await txHistoryService.fetchRecentTransactions();
       setLastTransactions(txRecords);
-    });
+    }
+
+    fetchRecentTransactions();
   }, []);
 
   return (
