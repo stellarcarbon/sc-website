@@ -37,19 +37,20 @@ export default function Dashboard() {
   const [submissionErrorMessage, setSubmissionErrorMessage] =
     useState<string>();
 
-  const transactionHistoryService = new TransactionHistoryService();
-
   useEffect(() => {
+    async function fetchMyTransactions() {
+      const transactionHistoryService = new TransactionHistoryService();
+      const records = await transactionHistoryService.fetchAccountHistory(
+        walletConnection?.stellarPubKey!
+      );
+      setMyTransactions(records);
+    }
+
     // Load the transactions for this dash on mount if not loaded yet.
     if (myTransactions === null) {
-      transactionHistoryService
-        // .fetchAccountHistory(walletConnection?.stellarPubKey!)1
-        .fetchAccountHistory(DEV_ACCOUNT)
-        .then((transactionRecords): void => {
-          setMyTransactions(transactionRecords);
-        });
+      fetchMyTransactions();
     }
-  }, []);
+  }, [myTransactions, setMyTransactions, walletConnection]);
 
   const closeModal = () => {
     setShowFormStatusModal(false);

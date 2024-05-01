@@ -9,8 +9,9 @@
     "start-static": "npx serve@latest out",
     "lint": "next lint",
     "e2e": "cypress open --e2e",
-    "e2e:headless": "next build && start-server-and-test start-static http://localhost:3000 \"cypress run --e2e\"",
+    "e2e:headless": "cross-env NODE_ENV=test next build && cross-env NODE_ENV=test start-server-and-test start http://localhost:3000 \"cypress run --e2e\"",
     "test": "vitest",
+    "test:ci": "vitest run",
     "generate-client": "openapi --useOptions --input https://api-beta.stellarcarbon.io/openapi.json --output ./src/client --client axios"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "@types/react-dom": "^18",
     "@types/stellar-sdk": "^0.15.1",
     "autoprefixer": "^10.0.1",
+    "cross-env": "^7.0.3",
     "cypress": "^13.6.2",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",

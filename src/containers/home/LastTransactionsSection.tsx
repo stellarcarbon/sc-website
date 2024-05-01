@@ -8,14 +8,17 @@ import { useEffect, useState } from "react";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function LastTransactionsSection() {
-  const txHistoryService = new TransactionHistoryService();
   const [lastTransactions, setLastTransactions] =
     useState<FrontpageTransactionRecord[]>();
 
   useEffect(() => {
-    txHistoryService.fetchRecentTransactions().then((txRecords): void => {
+    async function fetchRecentTransactions() {
+      const txHistoryService = new TransactionHistoryService();
+      const txRecords = await txHistoryService.fetchRecentTransactions();
       setLastTransactions(txRecords);
-    });
+    }
+
+    fetchRecentTransactions();
   }, []);
 
   return (

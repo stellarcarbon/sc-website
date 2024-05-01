@@ -27,7 +27,11 @@ export default function SelectWalletButtonDesktop({
       onClick={onClick}
       disabled={!wallet.isAvailable}
     >
-      <img className="h-[32px] w-[32px]" src={wallet.icon} />
+      <img
+        className="h-[32px] w-[32px]"
+        src={wallet.icon}
+        alt={`${wallet} wallet select button`}
+      />
       <div className="flex-1">{wallet.name}</div>
     </button>
   );

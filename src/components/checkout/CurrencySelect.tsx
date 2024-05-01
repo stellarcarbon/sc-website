@@ -18,11 +18,7 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
       >
         {Object.values(PaymentAsset).map((option) => {
           return (
-            <option
-              key={option}
-              value={option}
-              selected={option === PaymentAsset.ANY}
-            >
+            <option key={option} value={option} defaultValue={PaymentAsset.ANY}>
               {option}
             </option>
           );

@@ -79,7 +79,7 @@ export default function SelectWallet() {
         setUseremail(walletConnection.personalDetails.useremail);
       }
     }
-  }, []);
+  }, [walletConnection]);
 
   return (
     <>
