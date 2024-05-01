@@ -1,14 +1,28 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
-import { ISupportedWallet, WalletType } from "stellar-wallets-kit";
+import {
+  ISupportedWallet,
+  StellarWalletsKit,
+  WalletType,
+} from "stellar-wallets-kit";
 import {
   MyTransactionRecord,
   PersonalDetails,
   WalletConnection,
 } from "../app/types";
-import { loadAvailableWallets, walletConnectDialog } from "./walletFunctions";
+import {
+  loadAvailableWalletsMock,
+  walletConnectDialog,
+} from "./walletFunctions";
 import { usePathname } from "next/navigation";
 import LocalStorageService from "@/app/services/LocalStorageService";
 import { OpenAPI } from "@/client";
@@ -64,24 +78,33 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const pathname = usePathname();
 
+  const loadAvailableWallets = useCallback(async (): Promise<void> => {
+    let wallets;
+    if (window.Cypress) {
+      wallets = await loadAvailableWalletsMock();
+    } else {
+      wallets = await StellarWalletsKit.getSupportedWallets();
+    }
+
+    setSupportedWallets(wallets);
+  }, []);
+
   useEffect(() => {
     closeDrawer();
   }, [pathname]);
 
   useEffect(() => {
-    console.log("On mount AppContext");
-
     // Load local storage if available
-    const walletConnection = LocalStorageService.loadWalletConnection();
-    setWalletConnection(walletConnection);
+    if (walletConnection === null) {
+      const wc = LocalStorageService.loadWalletConnection();
+      setWalletConnection(wc);
+    }
 
     // Load supported wallets if not loaded yet.
     if (supportedWallets.length === 0) {
-      loadAvailableWallets().then((wallets) => {
-        setSupportedWallets(wallets);
-      });
+      loadAvailableWallets();
     }
-  }, []);
+  }, [loadAvailableWallets, supportedWallets, walletConnection]);
 
   const connectWallet = async (
     userWalletType: WalletType,

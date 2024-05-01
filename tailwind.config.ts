@@ -36,6 +36,17 @@ const config: Config = {
       fontFamily: {
         noto: ["Noto Sans", "sans-serif"],
       },
+
+      animation: {
+        fade: "fadeOut 1s ease-in forwards",
+      },
+
+      keyframes: () => ({
+        fadeOut: {
+          "0%": { opacity: "100" },
+          "100%": { opacity: "0" },
+        },
+      }),
     },
   },
 };

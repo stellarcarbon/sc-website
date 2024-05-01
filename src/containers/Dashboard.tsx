@@ -8,7 +8,11 @@ import { useAppContext } from "@/context/appContext";
 import CheckoutForm from "./CheckoutForm";
 import Button from "@/components/Button";
 import TransactionHistoryService from "@/app/services/TransactionHistoryService";
-import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
+import {
+  DEV_ACCOUNT,
+  FormStatusMessages,
+  SinkCarbonXdrPostRequest,
+} from "@/app/types";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 import FormStatusModal from "./FormStatusModal";
 import { ApiError, CarbonService } from "@/client";
@@ -33,18 +37,20 @@ export default function Dashboard() {
   const [submissionErrorMessage, setSubmissionErrorMessage] =
     useState<string>();
 
-  const transactionHistoryService = new TransactionHistoryService();
-
   useEffect(() => {
+    async function fetchMyTransactions() {
+      const transactionHistoryService = new TransactionHistoryService();
+      const records = await transactionHistoryService.fetchAccountHistory(
+        walletConnection?.stellarPubKey!
+      );
+      setMyTransactions(records);
+    }
+
     // Load the transactions for this dash on mount if not loaded yet.
     if (myTransactions === null) {
-      transactionHistoryService
-        .fetchAccountHistory(walletConnection?.stellarPubKey!)
-        .then((transactionRecords): void => {
-          setMyTransactions(transactionRecords);
-        });
+      fetchMyTransactions();
     }
-  }, []);
+  }, [myTransactions, setMyTransactions, walletConnection]);
 
   const closeModal = () => {
     setShowFormStatusModal(false);

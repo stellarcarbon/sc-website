@@ -79,7 +79,7 @@ export default function SelectWallet() {
         setUseremail(walletConnection.personalDetails.useremail);
       }
     }
-  }, []);
+  }, [walletConnection]);
 
   return (
     <>
@@ -93,7 +93,9 @@ export default function SelectWallet() {
           sinking history.
         </p>
         <p className="text-sm mx-6 mb-1 max-w-[80%] md:hidden">
-          Tap your wallet choice.
+          {selectedWalletType
+            ? `Current selection: ${selectedWalletType}`
+            : `Tap your wallet choice.`}
         </p>
         {selectedWalletType ? (
           <b className="hidden">{`${selectedWalletType}`}</b>
@@ -114,6 +116,10 @@ export default function SelectWallet() {
                     wallet={supportedWallet}
                     isSelected={selectedWalletType === supportedWallet.type}
                     onClick={() => selectWallet(supportedWallet.type)}
+                    disabled={
+                      !supportedWallet.isAvailable ||
+                      supportedWallet.type === "WALLET_CONNECT"
+                    }
                   />
                 );
               })}

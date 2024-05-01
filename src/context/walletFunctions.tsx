@@ -34,16 +34,9 @@ export const walletConnectDialog = async (
   }
 };
 
-export const loadAvailableWallets = async (): Promise<ISupportedWallet[]> => {
-  if (window.Cypress) {
-    return await loadAvailableWalletsMock();
-  } else {
-    const wallets = await StellarWalletsKit.getSupportedWallets();
-    return wallets;
-  }
-};
-
-const loadAvailableWalletsMock = async (): Promise<ISupportedWallet[]> => {
+export const loadAvailableWalletsMock = async (): Promise<
+  ISupportedWallet[]
+> => {
   return [
     {
       name: "xBull Wallet",

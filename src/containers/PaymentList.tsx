@@ -1,5 +1,6 @@
 "use client";
 
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 
 export default function PaymentList() {
@@ -46,7 +47,10 @@ export default function PaymentList() {
                 <div className="flex justify-start items-center">
                   <span className="w-24 md:w-32">Sunk</span>
 
-                  <span className="">{transaction.sinkAmount?.toFixed(2)}</span>
+                  <div className="flex items-center gap-1">
+                    <CARBONCurrencyIcon />
+                    <span>{transaction.sinkAmount?.toFixed(2)}</span>
+                  </div>
                 </div>
                 <div className="flex justify-start items-center">
                   <span className="w-24 md:w-32">Price</span>

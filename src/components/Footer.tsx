@@ -14,7 +14,11 @@ export default function Footer() {
         <a className="underline text-sm" href="mailto:support@stellarcarbon.io">
           support@stellarcarbon.io
         </a>
-        <img className="w-6 h-6" src="/x-logo-white.png" />
+        <img
+          className="w-6 h-6"
+          src="/x-logo-white.png"
+          alt="Stellarcarbon Logo"
+        />
       </div>
     </div>
   );

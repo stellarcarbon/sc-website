@@ -1,6 +1,6 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { CheckoutFormData } from "@/app/types";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo } from "react";
 import { debounce } from "@/app/utils";
 import { CarbonService } from "@/client";
 
@@ -20,18 +20,18 @@ export default function TonnesRange({
 }: TonnesRangeProps) {
   const tonnes = watch("tonnes");
 
-  const { call: fetchQuote, cancel: cancelFetchQuote } = debounce(
-    (tonnes: number) => {
-      setQuote(undefined);
+  const { call: fetchQuote, cancel: cancelFetchQuote } = useMemo(
+    () =>
+      debounce((tonnes: number) => {
+        setQuote(undefined);
 
-      CarbonService.getCarbonQuoteCarbonQuoteGet({
-        carbonAmount: tonnes,
-      }).then((result: any) => {
-        console.log(result);
-        setQuote(result.total_cost);
-      });
-    },
-    500
+        CarbonService.getCarbonQuoteCarbonQuoteGet({
+          carbonAmount: tonnes,
+        }).then((result: any) => {
+          setQuote(result.total_cost);
+        });
+      }, 500),
+    [setQuote]
   );
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function TonnesRange({
     return () => {
       cancelFetchQuote();
     };
-  }, [tonnes]);
+  }, [tonnes, cancelFetchQuote, fetchQuote]);
 
   return (
     <div className="flex flex-col p-4">

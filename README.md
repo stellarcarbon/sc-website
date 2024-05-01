@@ -6,6 +6,18 @@ Staging can be found on https://sc-website-eosin.vercel.app/
 
 TODO: robots.txt maken
 
+Cypress e2e test werkt niet op digitalocean app platform.
+
+```
+[2024-04-30 11:54:37] │ Your system is missing the dependency: Xvfb
+[2024-04-30 11:54:37] │
+[2024-04-30 11:54:37] │ Install Xvfb and run Cypress again.
+[2024-04-30 11:54:37] │
+[2024-04-30 11:54:37] │ Read our documentation on dependencies for more information:
+[2024-04-30 11:54:37] │
+[2024-04-30 11:54:37] │ https://on.cypress.io/required-dependencies
+```
+
 ## Developer instructions
 
 This is a NextJS project.

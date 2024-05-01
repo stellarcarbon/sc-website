@@ -21,10 +21,16 @@ export default function ProjectsPage() {
         {/* Images */}
         <div className="w-full mb-8 md:flex-1  md:mr-16">
           <div className="m-auto max-w-[80%] mb-[30px] image0">
-            <img src="/forest_from_above_carbonbank_1280x719.jpg" />
+            <img
+              src="/forest_from_above_carbonbank_1280x719.jpg"
+              alt="Forest from above"
+            />
           </div>
           <div className="max-w-[70%] text-right mr-0 ml-auto mt-[-30%] image1">
-            <img src="/VCS-1360-Comite-de-Vigilancia-y-Control-Comunal-cuidando-las-tierras-indigenas.jpg" />
+            <img
+              src="/VCS-1360-Comite-de-Vigilancia-y-Control-Comunal-cuidando-las-tierras-indigenas.jpg"
+              alt="Comite de Vigilancia y Control Comunal cuidando las tierras indigenas"
+            />
           </div>
         </div>
         {/* Text */}
@@ -55,7 +61,11 @@ export default function ProjectsPage() {
               and degradation.
             </p>
             <p>
-              <a href="verra" className="underline text-accentSecondary">
+              <a
+                href="https://registry.verra.org/app/projectDetail/VCS/1360"
+                target="_blank"
+                className="underline text-accentSecondary"
+              >
                 Read more on Verra
               </a>
             </p>
@@ -63,8 +73,18 @@ export default function ProjectsPage() {
               <strong>Verification</strong>
             </p>
             <p className="flex flex-col underline text-accentSecondary">
-              <a href="">Progress Monitoring report</a>
-              <a href="">FSC Certificate GFA-FM/COC-001288</a>
+              <a
+                href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=44972&IDKEY=j98klasmf8jflkasf8098afnasfkj98f0a9sfsakjflsakjf8dk62016388"
+                target="_blank"
+              >
+                Progress Monitoring report
+              </a>
+              <a
+                href="https://info.fsc.org/details.php?id=a0240000005sSO8AAM&type=certificate"
+                target="_blank"
+              >
+                FSC Certificate GFA-FM/COC-001288
+              </a>
             </p>
           </div>
         </div>

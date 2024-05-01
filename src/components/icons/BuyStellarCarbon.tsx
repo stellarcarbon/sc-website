@@ -5,8 +5,6 @@ interface BuyStellarCarbonIconProps extends HTMLProps<HTMLImageElement> {}
 export default function BuyStellarCarbonIcon({
   className,
 }: BuyStellarCarbonIconProps) {
-  // return <img className={`h-14 ${className}`} src="/stellarcarbon-logo.svg" />;
-
   return (
     <svg
       className={`h-14 ${className}`}
