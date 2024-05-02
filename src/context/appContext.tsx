@@ -66,8 +66,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [supportedWallets, setSupportedWallets] = useState<ISupportedWallet[]>(
     []
   );
-  const [walletConnection, setWalletConnection] =
-    useState<WalletConnection | null>(null);
+  const [walletConnection, setWalletConnection] = useState<
+    WalletConnection | null | undefined
+  >(null);
   const [myTransactions, setMyTransactions] = useState<
     MyTransactionRecord[] | null
   >(null);

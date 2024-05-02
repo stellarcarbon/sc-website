@@ -23,9 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
-        <App>{children}</App>
-      </body>
+      <AppContextProvider>
+        <body className={`${inter.className}`}>
+          <App>{children}</App>
+        </body>
+      </AppContextProvider>
     </html>
   );
 }
