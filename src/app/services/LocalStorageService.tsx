@@ -4,7 +4,7 @@ import { WalletConnection } from "../types";
 export default class LocalStorageService {
   public static LOCAL_STORAGE_KEY = "wallet";
 
-  public static loadWalletConnection(): WalletConnection | null {
+  public static loadWalletConnection(): WalletConnection | undefined {
     const storedWalletConnectionJSONString = localStorage.getItem(
       this.LOCAL_STORAGE_KEY
     );
@@ -17,7 +17,7 @@ export default class LocalStorageService {
       });
       return wc;
     }
-    return null;
+    return undefined;
   }
 
   public static setWalletConnection(walletConnection: WalletConnection): void {

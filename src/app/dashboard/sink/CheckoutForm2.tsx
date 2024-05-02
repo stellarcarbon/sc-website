@@ -8,11 +8,11 @@ import { HTMLProps, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
-interface CheckoutFormProps extends HTMLProps<HTMLFormElement> {
+interface CheckoutForm2Props extends HTMLProps<HTMLFormElement> {
   doCheckoutFlow: (payload: SinkCarbonXdrPostRequest) => void;
 }
 
-export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
+export default function CheckoutForm2({ doCheckoutFlow }: CheckoutForm2Props) {
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
@@ -25,7 +25,7 @@ export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
 
   useEffect(() => {
     setValue("tonnes", 1);
-  }, [setValue]);
+  }, []);
 
   const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
     let payload: SinkCarbonXdrPostRequest = {
@@ -38,8 +38,7 @@ export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
   };
 
   return (
-    <form className="flex flex-col font-sans bg-secondary rounded-md min-w-[80%]">
-      {/* <h1 className="pt-4 px-4 font-sans self-center text-2xl">Checkout</h1> */}
+    <form className="m-2 flex flex-col  bg-primary rounded-md min-w-[80%]">
       <TonnesRange
         register={register}
         watch={watch}
@@ -49,7 +48,7 @@ export default function CheckoutForm({ doCheckoutFlow }: CheckoutFormProps) {
       />
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
-      <div className="m-4 p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">
+      <div className="m-4 p-4 flex flex-col items-center justify-center bg-secondary border border-accentSecondary rounded">
         <h3 className="text-xl font-bold">Transaction preview</h3>
         <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full md:max-w-[60%]">
           <span className="text-start">Amount to sink</span>
