@@ -3,7 +3,7 @@
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 import { usePathname, useRouter } from "next/navigation";
-import { HTMLProps, ReactNode, useEffect, useState } from "react";
+import { HTMLProps, ReactNode, useEffect, useMemo, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -21,7 +21,6 @@ interface DashboardTabProps {
 export enum DashboardTabs {
   OVERVIEW = "overview",
   SINK = "sink",
-  // PENDING = "pending",
   HISTORY = "history",
 }
 
@@ -36,11 +35,6 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
     icon: <CARBONCurrencyIcon width={17} height={17} />,
     route: "/dashboard/sink/",
   },
-  // [DashboardTabs.PENDING]: {
-  //   label: "Pending retirements",
-  //   // icon: <RoadTravelIcon />,
-  //   route: "pending",
-  // },
   [DashboardTabs.HISTORY]: {
     label: "My Transactions",
     icon: <FontAwesomeIcon icon={faReceipt} fontSize={"17px"} />,
@@ -52,24 +46,30 @@ export default function NavBarItem({ item }: NavBarItemProps) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const p: DashboardTabProps = DashboardTabPropsConfig[item];
+  const p: DashboardTabProps = useMemo(
+    () => DashboardTabPropsConfig[item],
+    [item]
+  );
 
-  const checkIsSelected = () => {
-    if (
-      pathname.includes("/dashboard/transactions/") &&
-      p.route === "/dashboard/transactions/"
-    ) {
-      setIsSelected(true);
-    } else {
-      setIsSelected(pathname === p.route);
-    }
-  };
-
-  const [isSelected, setIsSelected] = useState<boolean>(pathname === p.route);
+  const [isSelected, setIsSelected] = useState<boolean>(
+    pathname === p.route ||
+      pathname === p.route.substring(0, p.route.length - 1) // Alternative condition for trailing slash routing
+  );
 
   useEffect(() => {
+    const checkIsSelected = () => {
+      if (
+        pathname.includes("/dashboard/transactions/") &&
+        p.route === "/dashboard/transactions/"
+      ) {
+        setIsSelected(true);
+      } else {
+        setIsSelected(pathname === p.route);
+      }
+    };
+
     checkIsSelected();
-  }, [pathname]);
+  }, [pathname, p]);
 
   const navigate = () => {
     router.push(p.route);
