@@ -29,12 +29,12 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
   [DashboardTabs.OVERVIEW]: {
     label: "Dashboard",
     icon: <FontAwesomeIcon icon={faUser} fontSize={"17px"} />,
-    route: "/dashboard",
+    route: "/dashboard/",
   },
   [DashboardTabs.SINK]: {
     label: "Sink CARBON",
     icon: <CARBONCurrencyIcon width={17} height={17} />,
-    route: "/dashboard/sink",
+    route: "/dashboard/sink/",
   },
   // [DashboardTabs.PENDING]: {
   //   label: "Pending retirements",
@@ -44,7 +44,7 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
   [DashboardTabs.HISTORY]: {
     label: "My Transactions",
     icon: <FontAwesomeIcon icon={faReceipt} fontSize={"17px"} />,
-    route: "/dashboard/transactions",
+    route: "/dashboard/transactions/",
   },
 };
 
@@ -56,8 +56,8 @@ export default function NavBarItem({ item }: NavBarItemProps) {
 
   const checkIsSelected = () => {
     if (
-      pathname.includes("/dashboard/transactions") &&
-      p.route === "/dashboard/transactions"
+      pathname.includes("/dashboard/transactions/") &&
+      p.route === "/dashboard/transactions/"
     ) {
       setIsSelected(true);
     } else {

@@ -20,11 +20,11 @@ export enum TransactionsTabs {
 const HistoryTabPropsConfig: Record<TransactionsTabs, TransactionsTabProps> = {
   [TransactionsTabs.PENDING]: {
     label: "Pending retirements",
-    route: "/dashboard/transactions",
+    route: "/dashboard/transactions/",
   },
   [TransactionsTabs.HISTORY]: {
     label: "Transaction history",
-    route: "/dashboard/transactions/history",
+    route: "/dashboard/transactions/history/",
   },
 };
 
