@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { HTMLProps, useEffect, useState } from "react";
+import { HTMLProps, useEffect, useMemo, useState } from "react";
 
 interface TransactionsNavBarItemProps extends HTMLProps<HTMLDivElement> {
   item: TransactionsTabs;
@@ -34,13 +34,16 @@ export default function HistoryNavBarItem({
   const router = useRouter();
   const pathname = usePathname();
 
-  const p: TransactionsTabProps = HistoryTabPropsConfig[item];
+  const p: TransactionsTabProps = useMemo(
+    () => HistoryTabPropsConfig[item],
+    [item]
+  );
 
   const [isSelected, setIsSelected] = useState<boolean>(p.route === pathname);
 
   useEffect(() => {
     setIsSelected(p.route === pathname);
-  }, [pathname]);
+  }, [pathname, p]);
 
   return (
     <div

@@ -23,7 +23,7 @@ export default function PendingRetirements() {
           setMyTransactions(transactionRecords);
         });
     }
-  }, []);
+  }, [myTransactions, setMyTransactions]);
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
