@@ -63,6 +63,8 @@ export default function NavBarItem({ item }: NavBarItemProps) {
         p.route === "/dashboard/transactions/"
       ) {
         setIsSelected(true);
+      } else if (pathname === "/dashboard" && p.route === "/dashboard/") {
+        setIsSelected(true);
       } else {
         setIsSelected(pathname === p.route);
       }

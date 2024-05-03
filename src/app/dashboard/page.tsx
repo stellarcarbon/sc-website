@@ -22,7 +22,7 @@ export default function Dashboard() {
 
   return (
     <div {...swipeHandlers} className="py-6 flex flex-col gap-4 w-full">
-      {/* Welkom blok */}
+      {/* Welkom */}
       <div className="flex flex-col m-2">
         <span className="text-xl self-center">Welkom, anonymous</span>
         <span className="text-xs mt-1 text-center">
@@ -31,9 +31,8 @@ export default function Dashboard() {
         </span>
       </div>
 
+      {/* Transaction summary */}
       <div className="m-2 p-4 flex flex-col gap-3 rounded bg-primary">
-        {/* <h1 className="self-center text-[18px] mb-2">Sinking summary</h1> */}
-
         <div className="flex flex-col gap-1 text-sm">
           <div className="text-2xl font-bold flex gap-4 justify-between items-center">
             <span className="">Sinked</span>
@@ -64,9 +63,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* <hr className="mx-4 border-accentSecondary" /> */}
-      {/* <div className="m-2 p-4 flex flex-col gap-2 bg-primary border border-accentSecondary rounded"></div> */}
-
+      {/* Contact details */}
       <div className="m-2 p-4 flex flex-col gap-2 bg-primary rounded">
         <h1 className="self-center text-[18px] mb-2">Connection details</h1>
 
@@ -105,45 +102,6 @@ export default function Dashboard() {
           <Button className="!py-1">Disconnect</Button>
         </div>
       </div>
-
-      {/* CINFO OLD */}
-      {/* <div className="relative flex flex-col m-2 p-4 bg-primary border border-accentSecondary rounded-md">
-        <div className="flex flex-col justify-between items-start w-full">
-          <h1 className="text-lg font-bold">Your wallet is connected.</h1>
-        </div>
-        <div className="flex flex-col w-full">
-          <div className="flex items-center">
-            <span className="w-32">Wallet</span>
-            <span className="text-xs">{walletConnection?.walletType}</span>
-          </div>
-          <div className="flex items-top md:items-center">
-            <span className="w-32">Stellar PubKey</span>
-            <span className="text-xs break-words max-w-[50%] md:max-w-[90%]">
-              {walletConnection?.stellarPubKey}
-            </span>
-          </div>
-          <PersonalDetailsDisplay />
-        </div>
-        <div className="absolute top-0 right-0 flex gap-2 justify-start mt-4 mr-4">
-          <Button
-            className="!p-2"
-            onClick={() => {
-              router.push("/wallet/connect");
-            }}
-          >
-            <div className="flex items-center justify-between gap-1 text-xs">
-              <span className="hidden md:block">Edit</span>
-              <EditIcon />
-            </div>
-          </Button>
-          <Button onClick={() => {}} className="!p-2">
-            <div className="flex items-center justify-between gap-1 text-xs">
-              <span className="hidden md:block">Remove</span>
-              <DeleteIcon />
-            </div>
-          </Button>
-        </div>
-      </div> */}
     </div>
   );
 }
