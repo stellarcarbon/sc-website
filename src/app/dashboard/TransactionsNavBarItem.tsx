@@ -3,36 +3,38 @@
 import { usePathname, useRouter } from "next/navigation";
 import { HTMLProps, useEffect, useState } from "react";
 
-interface HistoryNavBarItemProps extends HTMLProps<HTMLDivElement> {
-  item: HistoryTabs;
+interface TransactionsNavBarItemProps extends HTMLProps<HTMLDivElement> {
+  item: TransactionsTabs;
 }
 
-interface HistoryTabProps {
+interface TransactionsTabProps {
   label: string;
   route: string;
 }
 
-export enum HistoryTabs {
-  HISTORY = "history",
+export enum TransactionsTabs {
   PENDING = "pending",
+  HISTORY = "history",
 }
 
-const HistoryTabPropsConfig: Record<HistoryTabs, HistoryTabProps> = {
-  [HistoryTabs.HISTORY]: {
-    label: "Transaction history",
-    route: "/dashboard/history",
-  },
-  [HistoryTabs.PENDING]: {
+const HistoryTabPropsConfig: Record<TransactionsTabs, TransactionsTabProps> = {
+  [TransactionsTabs.PENDING]: {
     label: "Pending retirements",
-    route: "/dashboard/history/pending",
+    route: "/dashboard/transactions",
+  },
+  [TransactionsTabs.HISTORY]: {
+    label: "Transaction history",
+    route: "/dashboard/transactions/history",
   },
 };
 
-export default function HistoryNavBarItem({ item }: HistoryNavBarItemProps) {
+export default function HistoryNavBarItem({
+  item,
+}: TransactionsNavBarItemProps) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const p: HistoryTabProps = HistoryTabPropsConfig[item];
+  const p: TransactionsTabProps = HistoryTabPropsConfig[item];
 
   const [isSelected, setIsSelected] = useState<boolean>(p.route === pathname);
 

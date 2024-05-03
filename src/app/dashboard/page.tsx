@@ -8,12 +8,20 @@ import Button from "@/components/Button";
 import EditIcon from "@/components/icons/EditIcon";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import { useSwipeable, SwipeDirections } from "react-swipeable";
 
 export default function Dashboard() {
   const { walletConnection } = useAppContext();
+  const router = useRouter();
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => router.push("/dashboard/sink"),
+    onSwipedRight: () => router.push("/dashboard/transactions"),
+    delta: 100,
+  });
 
   return (
-    <div className="my-6 flex flex-col gap-4 w-full">
+    <div {...swipeHandlers} className="py-6 flex flex-col gap-4 w-full">
       {/* Welkom blok */}
       <div className="flex flex-col m-2">
         <span className="text-xl self-center">Welkom, anonymous</span>

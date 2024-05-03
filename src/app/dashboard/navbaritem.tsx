@@ -44,7 +44,7 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
   [DashboardTabs.HISTORY]: {
     label: "My Transactions",
     icon: <FontAwesomeIcon icon={faReceipt} fontSize={"17px"} />,
-    route: "/dashboard/history",
+    route: "/dashboard/transactions",
   },
 };
 
@@ -56,8 +56,8 @@ export default function NavBarItem({ item }: NavBarItemProps) {
 
   const checkIsSelected = () => {
     if (
-      pathname.includes("/dashboard/history") &&
-      p.route === "/dashboard/history"
+      pathname.includes("/dashboard/transactions") &&
+      p.route === "/dashboard/transactions"
     ) {
       setIsSelected(true);
     } else {
@@ -74,8 +74,6 @@ export default function NavBarItem({ item }: NavBarItemProps) {
   const navigate = () => {
     router.push(p.route);
   };
-
-  console.log(p.label, isSelected);
 
   return (
     <div

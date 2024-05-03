@@ -1,10 +1,20 @@
 "use client";
 
+import { useSwipeable } from "react-swipeable";
 import CheckoutForm2 from "./CheckoutForm2";
+import { useRouter } from "next/navigation";
 
 export default function DashboardSink() {
+  const router = useRouter();
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => router.push("/dashboard/transactions"),
+    onSwipedRight: () => router.push("/dashboard"),
+    delta: 100,
+  });
+
   return (
-    <div className="my-8">
+    <div {...swipeHandlers} className="py-8">
       {/* Welkom blok */}
       <div className="flex flex-col m-2 mb-8">
         <span className="text-xl self-center">Sink CARBON</span>
