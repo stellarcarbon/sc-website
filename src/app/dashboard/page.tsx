@@ -33,7 +33,13 @@ export default function Dashboard() {
       className="flex flex-col w-full flex-1 justify-start"
     >
       {/* Welkom */}
-      <div className="py-6 px-4 flex flex-col">
+      <div className="flex flex-col my-6 w-full">
+        {/* <span className="text-xl self-center">Sink CARBON</span> */}
+        <span className="text-sm mt-1 text-center">
+          Get an overview of your activity and manage your wallet connection.
+        </span>
+      </div>
+      {/* <div className="py-6 px-4 flex flex-col">
         <span className="text-xl self-center">
           Welkom,{" "}
           {walletConnection?.isAnonymous
@@ -44,16 +50,29 @@ export default function Dashboard() {
           Beheer hier je wallet connection en bekijk een samenvatting van je
           transacties.
         </span>
-      </div>
+      </div> */}
 
       {/* <hr className="border-tertiary" /> */}
 
       {/* Transaction summary */}
       <div className="py-4 px-4 flex flex-col gap-3 bg-primary border-y border-y-tertiary">
+        <h1 className="text-2xl self-center">Overview</h1>
+        {/* 
+        <div className="flex flex-col">
+          <span className="text-md">
+            Welkom{" "}
+            {walletConnection?.isAnonymous
+              ? "anonymous"
+              : walletConnection?.personalDetails?.username}
+            ,
+          </span>
+          <span className="text-xs">blabla</span>
+        </div> */}
+
         <div className="flex flex-col gap-1 text-sm">
           <div className="text-xl font-bold flex gap-4 justify-between items-center">
             <span className="">Total sinked</span>
-            <div className="flex gap-1 items-center">
+            <div className="flex gap-1 items-center text-accent">
               <span className="font-normal">25</span>
               <CARBONCurrencyIcon width={18} height={18} />
             </div>
@@ -68,7 +87,7 @@ export default function Dashboard() {
         <div className="flex flex-col gap-1 text-sm">
           <div className="text-xl font-bold flex gap-4 justify-between items-center">
             <span className="">Pending certificate claims</span>
-            <div className="flex gap-1 items-center">
+            <div className="flex gap-1 items-center text-accent">
               <span className="font-normal">1.55</span>
               <CARBONCurrencyIcon width={18} height={18} />
             </div>
@@ -87,25 +106,25 @@ export default function Dashboard() {
       {/* <hr className="border-tertiary" /> */}
 
       {/* Contact details */}
-      <div className="my-8 p-4 flex flex-col gap-2 bg-primary border-y border-y-tertiary">
-        <h1 className="self-center text-xl">Connection details</h1>
+      <div className="my-8 p-4 flex flex-col gap-3 bg-primary border-y border-y-tertiary">
+        <h1 className="self-center text-2xl">Connection details</h1>
 
-        <div className="flex flex-col">
-          <span className="text-md font-bold">Wallet type</span>
+        <div className="flex flex-col gap-1">
+          <span className="text-xl font-bold">Wallet type</span>
           <span className="text-sm text-accent">
             {walletConnection?.walletType}
           </span>
         </div>
 
-        <div className="flex flex-col">
-          <span className="text-md font-bold">Stellar public key</span>
+        <div className="flex flex-col gap-1">
+          <span className="text-xl font-bold">Stellar public key</span>
           <span className="text-xs break-words text-accent">
             {walletConnection?.stellarPubKey}
           </span>
         </div>
 
-        <div className="flex flex-col">
-          <span className="text-md font-bold">Contact information</span>
+        <div className="flex flex-col gap-1">
+          <span className="text-xl font-bold">Contact information</span>
           {walletConnection?.isAnonymous ? (
             <span className="text-xs text-accent">Anonymous</span>
           ) : (
