@@ -138,7 +138,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const disconnectWallet = () => {
     LocalStorageService.removeWalletConnection();
-    setWalletConnection(null);
+    setWalletConnection(undefined);
     setMyTransactions(null);
   };
 

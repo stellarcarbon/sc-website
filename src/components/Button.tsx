@@ -13,11 +13,11 @@ export default function Button({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`flex justify-center rounded-md shadow-md px-5 py-4 
+      className={`flex justify-center rounded-md shadow-md px-5 py-4 bg-accent
       ${
         disabled
-          ? "bg-gray-100 text-gray-300"
-          : "bg-accent text-black transition-colors active:bg-primary active:text-white hover:border-gray-300 hover:bg-accentSecondary hover:text-white hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          ? " text-gray-500 opacity-30"
+          : " text-black transition-colors active:bg-primary active:text-white hover:border-gray-300 hover:bg-accentSecondary hover:text-white hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
       } ${className}`}
     >
       {children}

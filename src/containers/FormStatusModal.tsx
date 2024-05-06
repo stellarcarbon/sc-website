@@ -1,9 +1,12 @@
+"use client";
+
 import { FormStatusMessages } from "@/app/types";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
 import ErrorIcon from "@/components/icons/ErrorIcon";
 import SignIcon from "@/components/icons/SignIcon";
 import SuccessIcon from "@/components/icons/SuccessIcon";
+import { useEffect } from "react";
 import { Hourglass } from "react-loader-spinner";
 
 interface FormStatusModalProps {
@@ -18,6 +21,7 @@ export default function FormStatusModal({
   closeModal,
 }: FormStatusModalProps) {
   let status;
+
   if (message === FormStatusMessages.creating) {
     status = (
       <>
@@ -76,28 +80,30 @@ export default function FormStatusModal({
     <>
       <div className="fixed top-0 left-0 w-screen h-screen bg-gray-600 opacity-80 z-10"></div>
       <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-20">
-        <div className="flex flex-col p-8 justify-between items-center bg-primary w-[80%] md:w-[400px] lg:w-[30%] h-[60%] lg:h-[50%] opacity-100 shadow-xl rounded-md">
+        <div className="flex flex-col py-8 px-4 justify-between items-center bg-primary w-[80%] md:w-[400px] lg:w-[30%] h-[60%] lg:h-[50%] opacity-100 shadow-xl rounded-md">
           <span className="text-2xl">Transaction status</span>
           {submissionError ? (
             <>
-              <FormError className="text-center">{submissionError}</FormError>
+              <FormError className="text-center text-md">
+                {submissionError}
+              </FormError>
               <ErrorIcon />
             </>
           ) : (
             status
           )}
-          <Button
-            disabled={
-              (message === FormStatusMessages.creating ||
-                message === FormStatusMessages.signTransaction) &&
-              !submissionError
-            }
-            onClick={() => {
-              closeModal();
-            }}
-          >
-            Return to dashboard
-          </Button>
+
+          {(message === FormStatusMessages.creating ||
+            message === FormStatusMessages.signTransaction) &&
+          !submissionError ? (
+            <Button className="h-10 !py-2" onClick={closeModal}>
+              Cancel Transaction
+            </Button>
+          ) : (
+            <Button className="h-10 !py-2" onClick={closeModal}>
+              Return to dashboard
+            </Button>
+          )}
         </div>
       </div>
     </>

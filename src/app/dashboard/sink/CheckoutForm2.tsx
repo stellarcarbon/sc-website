@@ -9,10 +9,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 interface CheckoutForm2Props extends HTMLProps<HTMLFormElement> {
-  doCheckoutFlow: (payload: SinkCarbonXdrPostRequest) => void;
+  postSinkRequest: (payload: SinkCarbonXdrPostRequest) => void;
 }
 
-export default function CheckoutForm2({ doCheckoutFlow }: CheckoutForm2Props) {
+export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
@@ -34,7 +34,7 @@ export default function CheckoutForm2({ doCheckoutFlow }: CheckoutForm2Props) {
       paymentAsset: currency,
       memoValue: reason,
     };
-    doCheckoutFlow(payload);
+    postSinkRequest(payload);
   };
 
   return (

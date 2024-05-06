@@ -62,7 +62,7 @@ export default function SelectWallet() {
 
     connectWallet(selectedWalletType!, personalDetails).then((didSucceed) => {
       if (didSucceed) {
-        router.push("/wallet");
+        router.push("/dashboard");
       }
 
       setSelectedWalletType(null);

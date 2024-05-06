@@ -9,9 +9,10 @@ import EditIcon from "@/components/icons/EditIcon";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSwipeable, SwipeDirections } from "react-swipeable";
+import Link from "next/link";
 
 export default function Dashboard() {
-  const { walletConnection } = useAppContext();
+  const { walletConnection, disconnectWallet } = useAppContext();
   const router = useRouter();
 
   const swipeHandlers = useSwipeable({
@@ -20,15 +21,73 @@ export default function Dashboard() {
     delta: 100,
   });
 
+  useEffect(() => {
+    if (walletConnection === undefined) {
+      router.push("/wallet");
+    }
+  }, [walletConnection]);
+
   return (
     <div {...swipeHandlers} className="py-6 flex flex-col gap-4 w-full">
       {/* Welkom */}
-      <div className="flex flex-col m-2">
-        <span className="text-xl self-center">Welkom, anonymous</span>
+      <div className="flex flex-col mx-2">
+        <span className="text-xl self-center">
+          Welkom,{" "}
+          {walletConnection?.isAnonymous
+            ? "anonymous"
+            : walletConnection?.personalDetails?.username}
+        </span>
         <span className="text-xs mt-1 text-center">
           Beheer hier je wallet connection en bekijk een samenvatting van je
           transacties.
         </span>
+      </div>
+
+      {/* Contact details */}
+      <div className="m-2 p-4 flex flex-col gap-2 bg-primary rounded">
+        {/* <h1 className="self-center text-[18px] mb-2">Connection details</h1> */}
+
+        <div className="flex flex-col">
+          <span className="text-md font-bold">Wallet type</span>
+          <span className="text-sm">Albedo</span>
+        </div>
+
+        <div className="flex flex-col">
+          <span className="text-md font-bold">Stellar public key</span>
+          <span className="text-xs break-words">
+            {walletConnection?.stellarPubKey}
+          </span>
+        </div>
+
+        <div className="flex flex-col">
+          <span className="text-md font-bold">Contact information</span>
+          {walletConnection?.isAnonymous ? (
+            <span className="text-xs">Anonymous</span>
+          ) : (
+            <div className="flex flex-col text-xs">
+              <div className="flex justify-between">
+                <span className="font-bold">Username:</span>
+                <span>{walletConnection?.personalDetails?.username}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-bold">Email address:</span>
+                <span>{walletConnection?.personalDetails?.useremail}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-center gap-4 h-8 mt-1">
+          <Button
+            className="!py-1"
+            onClick={() => router.push("/wallet/connect")}
+          >
+            Edit
+          </Button>
+          <Button className="!py-1" onClick={disconnectWallet}>
+            Disconnect
+          </Button>
+        </div>
       </div>
 
       {/* Transaction summary */}
@@ -58,48 +117,12 @@ export default function Dashboard() {
           </div>
 
           <span className="text-xs">
-            The amount of fractional carbon certificates that are still pending.
+            The amount of fractional carbon certificates that are still pending
+            a certificate claim.{" "}
+            <Link className="underline text-accentSecondary" href="">
+              What does this mean?
+            </Link>
           </span>
-        </div>
-      </div>
-
-      {/* Contact details */}
-      <div className="m-2 p-4 flex flex-col gap-2 bg-primary rounded">
-        <h1 className="self-center text-[18px] mb-2">Connection details</h1>
-
-        <div className="flex flex-col">
-          <span className="text-md font-bold">Wallet type</span>
-          <span className="text-sm">Albedo</span>
-        </div>
-
-        <div className="flex flex-col">
-          <span className="text-md font-bold">Stellar pub key</span>
-          <span className="text-xs break-words">
-            {walletConnection?.stellarPubKey}
-          </span>
-        </div>
-
-        <div className="flex flex-col">
-          <span className="text-md font-bold">Contact information</span>
-          {walletConnection?.isAnonymous ? (
-            <span className="text-xs">Anonymous</span>
-          ) : (
-            <div className="flex flex-col text-xs">
-              <div className="flex justify-between">
-                <span className="font-bold">Username:</span>
-                <span>{walletConnection?.personalDetails?.username}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-bold">Email address:</span>
-                <span>{walletConnection?.personalDetails?.useremail}</span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="flex justify-center gap-4 h-8 mt-3">
-          <Button className="!py-1">Edit</Button>
-          <Button className="!py-1">Disconnect</Button>
         </div>
       </div>
     </div>

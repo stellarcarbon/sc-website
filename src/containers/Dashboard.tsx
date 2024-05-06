@@ -90,10 +90,8 @@ export default function Dashboard() {
       })
       .catch((error) => {
         console.log(error);
-        if (error instanceof ApiError) {
-          console.log(error.body.detail[0].msg);
-          setSubmissionErrorMessage(error.body.detail[0].msg);
-        }
+        console.log(error.body.detail[0].msg);
+        setSubmissionErrorMessage(error.body.detail[0].msg);
       });
   };
 

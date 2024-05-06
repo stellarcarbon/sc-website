@@ -33,11 +33,11 @@ export default function Drawer() {
       <CTAButton
         className="self-center"
         onClick={() => {
-          if (pathname === "/wallet") {
+          if (pathname === "/dashboard") {
             // In case already on that path, have to close the Drawer from here.
             closeDrawer();
           } else {
-            router.push("/wallet");
+            router.push("/dashboard");
           }
         }}
       />

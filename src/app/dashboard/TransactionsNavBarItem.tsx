@@ -48,7 +48,7 @@ export default function HistoryNavBarItem({
   return (
     <div
       onClick={() => router.push(p.route)}
-      className={`relative h-12 flex flex-col justify-center py-3 text-center text-sm w-[40%]
+      className={`relative h-12 flex flex-col justify-center items-center py-3 text-center text-sm w-[50%]
         ${isSelected ? "text-accentSecondary" : ""}
       `}
     >
@@ -57,7 +57,7 @@ export default function HistoryNavBarItem({
         <div
           className={`${
             isSelected ? "animate-navbarstart" : "animate-navbarend"
-          } absolute opacity-0 bottom-0 w-full h-1 bg-accentSecondary`}
+          } absolute opacity-0 bottom-0 w-[80%] h-1 bg-accentSecondary`}
         ></div>
       }
     </div>

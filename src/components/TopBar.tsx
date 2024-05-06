@@ -25,7 +25,7 @@ export default function TopBar() {
         <TopBarLink href="/projects">Projects</TopBarLink>
         <TopBarLink href="/transactions">Transactions</TopBarLink>
         <TopBarLink href="/about">About us</TopBarLink>
-        <TopBarLink href="/wallet">Wallet</TopBarLink>
+        <TopBarLink href="/dashboard">Dashboard</TopBarLink>
       </div>
       <HamburgerButton
         className="p-[22px] md:hidden text-accent"
