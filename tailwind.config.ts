@@ -39,12 +39,22 @@ const config: Config = {
 
       animation: {
         fade: "fadeOut 1s ease-in forwards",
+        navbarstart: "navbarIn .2s ease-in forwards",
+        navbarend: "navbarOut .2s ease-in forwards",
       },
 
       keyframes: () => ({
         fadeOut: {
           "0%": { opacity: "100" },
           "100%": { opacity: "0" },
+        },
+        navbarIn: {
+          "0%": { width: "0%", opacity: "0" },
+          "100%": { width: "100%", opacity: "100" },
+        },
+        navbarOut: {
+          "0%": { width: "100%" },
+          "100%": { width: "0%" },
         },
       }),
     },

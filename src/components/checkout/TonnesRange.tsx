@@ -45,9 +45,10 @@ export default function TonnesRange({
 
   return (
     <div className="flex flex-col p-4">
-      <span className="font-bold">How much would you like to offset?</span>
+      <span className="font-bold">Offset amount</span>
       <span className="text-xs mb-2 mt-1">
-        Amount CARBON (in tonnes CO2-equivalent: tCO₂-e)
+        Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to
+        1 ton CO2 emitted.
       </span>
       <div className="md:flex items-center gap-4">
         <div className="flex gap-2 justify-center md:justify-start">
