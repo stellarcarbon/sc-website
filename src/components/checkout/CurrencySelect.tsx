@@ -14,11 +14,12 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
 
       <select
         className="text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
+        defaultValue={PaymentAsset.ANY}
         {...register("currency")}
       >
         {Object.values(PaymentAsset).map((option) => {
           return (
-            <option key={option} value={option} defaultValue={PaymentAsset.ANY}>
+            <option key={option} value={option}>
               {option}
             </option>
           );

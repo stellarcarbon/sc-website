@@ -25,8 +25,8 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
 
   return (
     <div className="flex flex-col p-4">
-      <span className="font-bold mb-0">Tell us why (optional)</span>
-      <span className="text-xs mt-1">Select a reason</span>
+      <span className="font-bold mb-0">Add a label (optional)</span>
+      <span className="text-xs mt-1">Select a reason...</span>
       <div className="flex gap-2 my-2">
         {Object.values(ReasonOptions).map((option) => {
           return (
@@ -39,7 +39,7 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
           );
         })}
       </div>
-      <span className="text-xs">or write your own message</span>
+      <span className="text-xs">...or write your own message.</span>
       <textarea
         onChange={onReasonTextChange}
         value={reason}
