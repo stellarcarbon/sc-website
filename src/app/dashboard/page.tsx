@@ -25,36 +25,81 @@ export default function Dashboard() {
     if (walletConnection === undefined) {
       router.push("/wallet");
     }
-  }, [walletConnection]);
+  }, [walletConnection, router]);
 
   return (
-    <div {...swipeHandlers} className="py-6 flex flex-col gap-4 w-full">
+    <div
+      {...swipeHandlers}
+      className="flex flex-col w-full flex-1 justify-start"
+    >
       {/* Welkom */}
-      <div className="flex flex-col mx-2">
+      <div className="py-6 px-4 flex flex-col">
         <span className="text-xl self-center">
           Welkom,{" "}
           {walletConnection?.isAnonymous
             ? "anonymous"
             : walletConnection?.personalDetails?.username}
         </span>
-        <span className="text-xs mt-1 text-center">
+        <span className="text-sm mt-1 text-center">
           Beheer hier je wallet connection en bekijk een samenvatting van je
           transacties.
         </span>
       </div>
 
+      {/* <hr className="border-tertiary" /> */}
+
+      {/* Transaction summary */}
+      <div className="py-4 px-4 flex flex-col gap-3 bg-primary border-y border-y-tertiary">
+        <div className="flex flex-col gap-1 text-sm">
+          <div className="text-xl font-bold flex gap-4 justify-between items-center">
+            <span className="">Total sinked</span>
+            <div className="flex gap-1 items-center">
+              <span className="font-normal">25</span>
+              <CARBONCurrencyIcon width={18} height={18} />
+            </div>
+          </div>
+
+          <span className="text-xs">
+            This is the total amount of CARBON tokens that have been sinked
+            using this wallet.
+          </span>
+        </div>
+
+        <div className="flex flex-col gap-1 text-sm">
+          <div className="text-xl font-bold flex gap-4 justify-between items-center">
+            <span className="">Pending certificate claims</span>
+            <div className="flex gap-1 items-center">
+              <span className="font-normal">1.55</span>
+              <CARBONCurrencyIcon width={18} height={18} />
+            </div>
+          </div>
+
+          <span className="text-xs">
+            The amount of fractional carbon certificates that are still pending
+            a certificate claim.{" "}
+            <Link className="underline text-accentSecondary" href="">
+              What does this mean?
+            </Link>
+          </span>
+        </div>
+      </div>
+
+      {/* <hr className="border-tertiary" /> */}
+
       {/* Contact details */}
-      <div className="m-2 p-4 flex flex-col gap-2 bg-primary rounded">
-        {/* <h1 className="self-center text-[18px] mb-2">Connection details</h1> */}
+      <div className="my-8 p-4 flex flex-col gap-2 bg-primary border-y border-y-tertiary">
+        <h1 className="self-center text-xl">Connection details</h1>
 
         <div className="flex flex-col">
           <span className="text-md font-bold">Wallet type</span>
-          <span className="text-sm">Albedo</span>
+          <span className="text-sm text-accent">
+            {walletConnection?.walletType}
+          </span>
         </div>
 
         <div className="flex flex-col">
           <span className="text-md font-bold">Stellar public key</span>
-          <span className="text-xs break-words">
+          <span className="text-xs break-words text-accent">
             {walletConnection?.stellarPubKey}
           </span>
         </div>
@@ -62,9 +107,9 @@ export default function Dashboard() {
         <div className="flex flex-col">
           <span className="text-md font-bold">Contact information</span>
           {walletConnection?.isAnonymous ? (
-            <span className="text-xs">Anonymous</span>
+            <span className="text-xs text-accent">Anonymous</span>
           ) : (
-            <div className="flex flex-col text-xs">
+            <div className="flex flex-col text-xs text-accent">
               <div className="flex justify-between">
                 <span className="font-bold">Username:</span>
                 <span>{walletConnection?.personalDetails?.username}</span>
@@ -87,42 +132,6 @@ export default function Dashboard() {
           <Button className="!py-1" onClick={disconnectWallet}>
             Disconnect
           </Button>
-        </div>
-      </div>
-
-      {/* Transaction summary */}
-      <div className="m-2 p-4 flex flex-col gap-3 rounded bg-primary">
-        <div className="flex flex-col gap-1 text-sm">
-          <div className="text-2xl font-bold flex gap-4 justify-between items-center">
-            <span className="">Sinked</span>
-            <div className="flex gap-1 items-center">
-              <span className="font-normal">25</span>
-              <CARBONCurrencyIcon width={18} height={18} />
-            </div>
-          </div>
-
-          <span className="text-xs">
-            This is the total amount of CARBON tokens that have been sinked
-            using this wallet.
-          </span>
-        </div>
-
-        <div className="flex flex-col gap-1 text-sm">
-          <div className="text-2xl font-bold flex gap-4 justify-between items-center">
-            <span className="">Pending</span>
-            <div className="flex gap-1 items-center">
-              <span className="font-normal">1.55</span>
-              <CARBONCurrencyIcon width={18} height={18} />
-            </div>
-          </div>
-
-          <span className="text-xs">
-            The amount of fractional carbon certificates that are still pending
-            a certificate claim.{" "}
-            <Link className="underline text-accentSecondary" href="">
-              What does this mean?
-            </Link>
-          </span>
         </div>
       </div>
     </div>

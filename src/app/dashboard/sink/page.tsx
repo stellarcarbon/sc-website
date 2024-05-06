@@ -100,14 +100,15 @@ export default function DashboardSink() {
   );
 
   return (
-    <div {...swipeHandlers} className="pb-6">
+    <div {...swipeHandlers} className="pb-6 w-full">
       {/* Welkom blok */}
-      <div className="flex flex-col mx-2 my-6">
-        <span className="text-xl self-center">Sink CARBON</span>
-        <span className="text-xs mt-1 text-center">
-          Use this form to create a sinking transaction.
+      <div className="flex flex-col my-6 w-full">
+        {/* <span className="text-xl self-center">Sink CARBON</span> */}
+        <span className="text-sm mt-1 text-center">
+          Use this form to create a new sinking transaction.
         </span>
       </div>
+      {/* <hr className="border-tertiary" /> */}
       <CheckoutForm2 postSinkRequest={postSinkRequest} />
       {showFormStatusModal && (
         <FormStatusModal

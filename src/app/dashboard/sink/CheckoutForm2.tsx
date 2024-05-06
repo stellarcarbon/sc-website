@@ -38,7 +38,7 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
   };
 
   return (
-    <form className="m-2 flex flex-col  bg-primary rounded-md min-w-[80%]">
+    <form className="p-2 flex flex-col  bg-primary min-w-[80%] border-b border-t border-t-tertiary border-b-tertiary">
       <TonnesRange
         register={register}
         watch={watch}
@@ -50,20 +50,20 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
       <ReasonSelect watch={watch} setValue={setValue} />
       <div className="m-4 p-4 flex flex-col items-center justify-center bg-secondary border border-accentSecondary rounded">
         <h3 className="text-xl font-bold">Transaction preview</h3>
-        <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full md:max-w-[60%] text-accent">
+        <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full md:max-w-[60%]">
           <span className="text-start">Amount to sink</span>
-          <div className="flex gap-1 items-center justify-end">
+          <div className="flex gap-1 items-center justify-end text-accent">
             <CARBONCurrencyIcon />
-            <span className="font-bold text-end">{tonnes}</span>
+            <span className="font-bold text-end ">{tonnes}</span>
           </div>
 
           <span className="text-start">Currency to use</span>
-          <span className="font-bold text-end">{currency}</span>
+          <span className="font-bold text-end text-accent">{currency}</span>
 
           <hr className="col-span-2 my-2 w-[100%]" />
 
-          <span className="text-start ">Price in $</span>
-          <span className="font-bold text-end">{`$${
+          <span className="text-start">Price in $</span>
+          <span className="font-bold text-end text-accent">{`$ ${
             Number.isNaN(Number(quote)) ? "" : Number(quote).toFixed(2)
           }`}</span>
 

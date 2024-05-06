@@ -16,7 +16,10 @@ export default function DashboardMyTransactions() {
   });
 
   return (
-    <div {...swipeHandlers} className="w-full min-h-full flex-1">
+    <div
+      {...swipeHandlers}
+      className="flex-1 flex flex-col justify-center items-center"
+    >
       <h1>PENDING</h1>
     </div>
   );
