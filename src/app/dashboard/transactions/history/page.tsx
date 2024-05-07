@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { Blocks } from "react-loader-spinner";
 import { useSwipeable } from "react-swipeable";
 import TransactionHistoryDetail from "./TransactionHistoryDetail";
+import TransactionsLoading from "./TransactionsLoading";
 
 export default function PendingRetirements() {
   const { myTransactions, setMyTransactions } = useAppContext();
@@ -17,7 +18,7 @@ export default function PendingRetirements() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Load the transactions for this dash on mount if not loaded yet.
+    // Load the transactions for this page on mount if not loaded yet.
     if (myTransactions === null) {
       const transactionHistoryService = new TransactionHistoryService();
       transactionHistoryService
@@ -43,21 +44,24 @@ export default function PendingRetirements() {
 
   if (myTransactions === null) {
     return (
-      <div
-        {...swipeHandlers}
-        className="mx-2 text-center flex-1 flex flex-col justify-center items-center"
-      >
-        <Blocks
-          height="80"
-          width="80"
-          color="#ff0000"
-          ariaLabel="blocks-loading"
-          wrapperStyle={{}}
-          wrapperClass="blocks-wrapper"
-          visible={true}
-        />
-        <span>Fetching your transaction history...</span>
+      <div {...swipeHandlers} className="flex-1 flex flex-col justify-center">
+        <TransactionsLoading />
       </div>
+      // <div
+      //   {...swipeHandlers}
+      //   className="mx-2 text-center flex-1 flex flex-col justify-center items-center"
+      // >
+      //   <Blocks
+      //     height="80"
+      //     width="80"
+      //     color="#ff0000"
+      //     ariaLabel="blocks-loading"
+      //     wrapperStyle={{}}
+      //     wrapperClass="blocks-wrapper"
+      //     visible={true}
+      //   />
+      //   <span>Fetching your transaction history...</span>
+      // </div>
     );
   } else if (myTransactions.length === 0) {
     return (
