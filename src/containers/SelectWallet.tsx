@@ -83,20 +83,20 @@ export default function SelectWallet() {
 
   return (
     <>
-      <div className="flex flex-col items-start bg-secondary md:border border-tertiary md:min-w-[600px] md:max-w-[650px] md:p-0 md:rounded-md border-gray shadow-lg">
-        <h1 className="text-3xl font-bold mx-6 mt-8 md:mt-6 my-3">
-          Select wallet
-        </h1>
+      <div className="flex flex-col px-6 gap-8 items-start bg-secondary md:border border-tertiary md:min-w-[600px] md:max-w-[650px] md:rounded-md border-gray shadow-lg">
+        <div className="flex flex-col gap-1 w-full">
+          <h1 className="text-2xl font-bold mt-8 md:mt-6">Select a wallet</h1>
 
-        <p className="text-sm mx-6 mb-1 max-w-[80%] hidden md:block">
-          Connect a wallet to be able to create new transactions and access your
-          sinking history.
-        </p>
-        <p className="text-sm mx-6 mb-1 max-w-[80%] md:hidden">
-          {selectedWalletType
-            ? `Current selection: ${selectedWalletType}`
-            : `Tap your wallet choice.`}
-        </p>
+          <span className="text-sm mb-1 max-w-[80%] hidden md:block">
+            Connect a wallet to be able to create new transactions and access
+            your sinking history.
+          </span>
+          <span className="text-sm max-w-[80%] md:hidden">
+            {selectedWalletType
+              ? `Current selection: ${selectedWalletType}`
+              : `Tap your wallet choice.`}
+          </span>
+        </div>
         {selectedWalletType ? (
           <b className="hidden">{`${selectedWalletType}`}</b>
         ) : (
@@ -104,7 +104,7 @@ export default function SelectWallet() {
         )}
 
         {/* Mobile buttons */}
-        <div className="mt-4 md:hidden">
+        <div className="md:hidden">
           {supportedWallets.length === 0 ? (
             <LoadingWallets />
           ) : (
@@ -134,7 +134,7 @@ export default function SelectWallet() {
         </div>
 
         {/* Desktop buttons */}
-        <div className="md:block hidden my-4 min-w-full px-8">
+        <div className="md:block hidden min-w-full px-8">
           {supportedWallets.length === 0 ? (
             <LoadingWallets />
           ) : (
@@ -159,47 +159,49 @@ export default function SelectWallet() {
           )}
         </div>
 
-        <h1 className="text-3xl font-bold mx-6 my-3 mt-12">
-          Contact details (optional)
-        </h1>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-2xl font-bold ">Contact details (optional)</h1>
 
-        <p className="text-sm mx-6 mb-1 max-w-[80%]">
-          Your contact details will be used to send you a confirmation of your
-          purchases. This step is optional.
-        </p>
+          <span className="text-xs max-w-[80%] mb-4">
+            Your contact details will be used to send you a confirmation of your
+            purchases. This step is optional.
+          </span>
 
-        <ContactInfoForm
-          username={username}
-          setUsername={setUsername}
-          useremail={useremail}
-          setUseremail={setUseremail}
-          emailError={emailError}
-        />
+          <ContactInfoForm
+            username={username}
+            setUsername={setUsername}
+            useremail={useremail}
+            setUseremail={setUseremail}
+            emailError={emailError}
+          />
+        </div>
 
-        <h1 className="text-3xl font-bold mx-6 my-3 mt-14">Privacy policy</h1>
-        <p className="text-sm mx-6 max-w-[80%]">
-          Read about our terms & conditions and privacy policy <u>here</u>.
-        </p>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-2xl font-bold">Privacy policy</h1>
+          <p className="text-sm max-w-[80%]">
+            Read about our terms & conditions and privacy policy <u>here</u>.
+          </p>
 
-        <div
-          className={`mx-6 !cursor:pointer pl-2 gap-2 flex items-center font-bold border  border-transparent rounded-md 
+          <div
+            className={`!cursor:pointer pl-2 gap-2 flex items-center font-bold border  border-transparent rounded-md 
         ${tncAccepted ? "bg-primary !border-accentSecondary" : "bg-secondary "}
         `}
-        >
-          <input
-            className="w-5 h-5"
-            type="checkbox"
-            checked={tncAccepted}
-            onChange={() => setTncAccepted(!tncAccepted)}
-            id="checkbox_policy"
-          />
-          <label
-            className="p-2 cursor-pointer text-sm "
-            htmlFor="checkbox_policy"
           >
-            I have read and agree with the terms & conditions and the privacy
-            policy.
-          </label>
+            <input
+              className="w-5 h-5"
+              type="checkbox"
+              checked={tncAccepted}
+              onChange={() => setTncAccepted(!tncAccepted)}
+              id="checkbox_policy"
+            />
+            <label
+              className="p-2 cursor-pointer text-sm "
+              htmlFor="checkbox_policy"
+            >
+              I have read and agree with the terms & conditions and the privacy
+              policy.
+            </label>
+          </div>
         </div>
         {tncError && (
           <FormError className="ml-4">
@@ -207,7 +209,7 @@ export default function SelectWallet() {
           </FormError>
         )}
 
-        <Button className="mt-6 mb-9 self-center" onClick={submitForm}>
+        <Button className="mb-9 self-center" onClick={submitForm}>
           Connect wallet
         </Button>
 

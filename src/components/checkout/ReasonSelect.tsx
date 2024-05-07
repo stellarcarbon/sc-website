@@ -24,9 +24,9 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
   };
 
   return (
-    <div className="flex flex-col p-4">
-      <span className="font-bold mb-0">Add a label (optional)</span>
-      <span className="text-xs mt-1">Select a reason...</span>
+    <div className="flex flex-col p-4 gap-1">
+      <span className="text-xl font-bold mb-0">Add a label (optional)</span>
+      <span className="text-xs">Select a reason...</span>
       <div className="flex gap-2 my-2">
         {Object.values(ReasonOptions).map((option) => {
           return (

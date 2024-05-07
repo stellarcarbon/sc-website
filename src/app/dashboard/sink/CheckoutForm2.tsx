@@ -38,7 +38,7 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
   };
 
   return (
-    <form className="p-2 flex flex-col  bg-primary min-w-[80%] border-b border-t border-t-tertiary border-b-tertiary">
+    <form className="flex flex-col py-2 bg-primary min-w-[80%] border-b border-t border-t-tertiary border-b-tertiary">
       <TonnesRange
         register={register}
         watch={watch}

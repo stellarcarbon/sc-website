@@ -44,9 +44,9 @@ export default function TonnesRange({
   }, [tonnes, cancelFetchQuote, fetchQuote]);
 
   return (
-    <div className="flex flex-col p-4">
-      <span className="font-bold">Offset amount</span>
-      <span className="text-xs mb-2 mt-1">
+    <div className="flex flex-col p-4 gap-1">
+      <span className="text-xl font-bold">Offset amount</span>
+      <span className="text-xs mb-2">
         Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to
         1 ton CO2 emitted.
       </span>

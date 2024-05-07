@@ -76,58 +76,63 @@ export default function PendingRetirements() {
     );
   } else {
     return (
-      <div
-        {...swipeHandlers}
-        className="px-2 flex flex-col items-center gap-2 pt-4 pb-8"
-      >
-        {myTransactions.map((transaction) => {
-          return (
-            <a
-              href={`https://stellar.expert/explorer/public/tx/${transaction.id}`}
-              target="_blank"
-              // onClick={() => {
-              //   router.push(`/wallet/transaction/${transaction.id}`);
-              // }}
-              className="flex flex-col text-sm bg-secondary rounded-md  border-accentSecondary p-2 mx-2 w-full "
-              key={`payment_${transaction.id}`}
-            >
-              <div className="flex justify-start items-center">
-                <span className="w-20 md:w-32">Hash</span>
-                <span className=" truncate max-w-[60%]">{transaction.id}</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <span className="w-20 md:w-32">Date</span>
-                <span className="">
-                  {new Date(transaction.createdAt).toDateString()}
-                </span>
-              </div>
-              <div className="flex justify-start items-center">
-                <span className="w-20 md:w-32">Sunk</span>
+      <div {...swipeHandlers} className="px-2 flex flex-col items-center pb-8">
+        <div className="flex flex-col justify-center h-12 self-start px-2">
+          <span className="text-sm">This is your transaction history.</span>
+        </div>
 
-                <div className="flex items-center gap-1">
-                  <CARBONCurrencyIcon />
-                  <span>{transaction.sinkAmount?.toFixed(2)}</span>
+        <div className="flex flex-col gap-1 w-full">
+          {myTransactions.map((transaction) => {
+            return (
+              <a
+                href={`https://stellar.expert/explorer/public/tx/${transaction.id}`}
+                target="_blank"
+                // onClick={() => {
+                //   router.push(`/wallet/transaction/${transaction.id}`);
+                // }}
+                className="flex flex-col text-sm bg-secondary rounded-md  border-accentSecondary p-2 w-full "
+                key={`payment_${transaction.id}`}
+              >
+                <div className="flex justify-start items-center">
+                  <span className="w-20 md:w-32">Hash</span>
+                  <span className=" truncate max-w-[60%]">
+                    {transaction.id}
+                  </span>
                 </div>
-              </div>
-              <div className="flex justify-start items-center">
-                <span className="w-20 md:w-32">Price</span>
-
-                <div className="flex gap-1 ">
-                  <span>{transaction.assetAmount?.toFixed(2)}</span>
-                  <span>{transaction.asset}</span>
+                <div className="flex justify-start items-center">
+                  <span className="w-20 md:w-32">Date</span>
+                  <span className="">
+                    {new Date(transaction.createdAt).toDateString()}
+                  </span>
                 </div>
-              </div>
+                <div className="flex justify-start items-center">
+                  <span className="w-20 md:w-32">Sunk</span>
 
-              <div className="flex justify-start items-center">
-                <span className="w-20 md:w-32">Memo</span>
+                  <div className="flex items-center gap-1">
+                    <CARBONCurrencyIcon />
+                    <span>{transaction.sinkAmount?.toFixed(2)}</span>
+                  </div>
+                </div>
+                <div className="flex justify-start items-center">
+                  <span className="w-20 md:w-32">Price</span>
 
-                <span className=" truncate max-w-[60%]">
-                  {transaction.memo}
-                </span>
-              </div>
-            </a>
-          );
-        })}
+                  <div className="flex gap-1 ">
+                    <span>{transaction.assetAmount?.toFixed(2)}</span>
+                    <span>{transaction.asset}</span>
+                  </div>
+                </div>
+
+                <div className="flex justify-start items-center">
+                  <span className="w-20 md:w-32">Memo</span>
+
+                  <span className=" truncate max-w-[60%]">
+                    {transaction.memo}
+                  </span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
       </div>
     );
   }

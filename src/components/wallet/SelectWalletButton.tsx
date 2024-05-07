@@ -18,7 +18,7 @@ export default function SelectWalletButton({
         id={`${wallet.type}_SelectWalletButton`}
         className={`h-20 w-20 rounded-full p-3 ${
           !disabled
-            ? ` hover:border hover:border-black cursor-pointer ${
+            ? ` md:hover:border hover:border-black cursor-pointer ${
                 isSelected ? "bg-white border border-black" : "bg-gray-700"
               } `
             : "opacity-30"

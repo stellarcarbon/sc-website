@@ -18,9 +18,13 @@ export default function DashboardMyTransactions() {
   return (
     <div
       {...swipeHandlers}
-      className="flex-1 flex flex-col justify-center items-center"
+      className="flex-1 flex flex-col justify-start items-center px-4"
     >
-      <h1>PENDING</h1>
+      <div className="flex flex-col justify-center self-start h-12">
+        <span className="text-sm">These are your pending retirements.</span>
+      </div>
+
+      <div className="flex flex-col gap-1"></div>
     </div>
   );
 }
