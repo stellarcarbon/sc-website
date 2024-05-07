@@ -5,14 +5,16 @@ import { DEV_ACCOUNT } from "@/app/types";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { Blocks } from "react-loader-spinner";
 import { useSwipeable } from "react-swipeable";
+import TransactionHistoryDetail from "./TransactionHistoryDetail";
 
 export default function PendingRetirements() {
   const { myTransactions, setMyTransactions } = useAppContext();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     // Load the transactions for this dash on mount if not loaded yet.
@@ -34,6 +36,10 @@ export default function PendingRetirements() {
     onSwipedRight: () => router.push("/dashboard/transactions"),
     delta: 100,
   });
+
+  if (searchParams.get("hash") !== null) {
+    return <TransactionHistoryDetail hash={searchParams.get("hash")!} />;
+  }
 
   if (myTransactions === null) {
     return (
@@ -84,9 +90,10 @@ export default function PendingRetirements() {
         <div className="flex flex-col gap-1 w-full">
           {myTransactions.map((transaction) => {
             return (
-              <a
-                href={`https://stellar.expert/explorer/public/tx/${transaction.id}`}
-                target="_blank"
+              <Link
+                // href={`https://stellar.expert/explorer/public/tx/${transaction.id}`}
+                href={`/dashboard/transactions/history/?hash=${transaction.id}`}
+                // target="_blank"
                 // onClick={() => {
                 //   router.push(`/wallet/transaction/${transaction.id}`);
                 // }}
@@ -129,7 +136,7 @@ export default function PendingRetirements() {
                     {transaction.memo}
                   </span>
                 </div>
-              </a>
+              </Link>
             );
           })}
         </div>
