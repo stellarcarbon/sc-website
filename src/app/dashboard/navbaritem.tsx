@@ -10,6 +10,8 @@ import { faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
 
 interface NavBarItemProps extends HTMLProps<HTMLDivElement> {
   item: DashboardTabs;
+  first?: boolean;
+  last?: boolean;
 }
 
 interface DashboardTabProps {
@@ -42,7 +44,7 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
   },
 };
 
-export default function NavBarItem({ item }: NavBarItemProps) {
+export default function NavBarItem({ item, first, last }: NavBarItemProps) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -80,9 +82,10 @@ export default function NavBarItem({ item }: NavBarItemProps) {
   return (
     <div
       onClick={navigate}
-      className={`${
-        isSelected ? "text-accentSecondary bg-secondary" : ""
-      } relative p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-1`}
+      className={`relative cursor-pointer p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-1
+      ${isSelected ? "text-accentSecondary bg-secondary" : ""} ${
+        first ? "md:rounded-tl" : ""
+      } ${last ? "md:rounded-tr" : ""}`}
     >
       {p.icon}
       <span className="text-[12px] text-center">{p.label}</span>

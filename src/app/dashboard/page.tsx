@@ -52,8 +52,8 @@ export default function Dashboard() {
         </span>
       </div> */}
 
-      {/* Contact details */}
-      <div className="p-4 flex flex-col gap-3 bg-primary border-y border-y-tertiary">
+      {/* Connection details */}
+      <div className="mx-4 p-4 flex flex-col gap-3 bg-primary border border-tertiary">
         <h1 className="self-center text-2xl">Your wallet</h1>
 
         <div className="flex flex-col gap-1">
@@ -102,7 +102,7 @@ export default function Dashboard() {
       </div>
 
       {/* Transaction summary */}
-      <div className="py-4 px-4 flex flex-col gap-3 bg-primary border-y border-y-tertiary">
+      <div className="mx-4 py-4 px-4 flex flex-col gap-3 bg-primary border border-tertiary">
         <h1 className="text-2xl self-center">Sinking history</h1>
         {/* 
         <div className="flex flex-col">

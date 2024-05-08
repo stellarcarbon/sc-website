@@ -38,7 +38,7 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
   };
 
   return (
-    <form className="flex flex-col py-2 bg-primary min-w-[80%] border-b border-t border-t-tertiary border-b-tertiary">
+    <form className="flex flex-col py-2 bg-secondary min-w-[80%]">
       <TonnesRange
         register={register}
         watch={watch}
@@ -48,7 +48,7 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
       />
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
-      <div className="m-4 p-4 flex flex-col items-center justify-center bg-secondary border border-accentSecondary rounded">
+      <div className="m-4 md:w-[70%] md:self-center p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">
         <h3 className="text-xl font-bold">Transaction preview</h3>
         <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full md:max-w-[60%]">
           <span className="text-start">Amount to sink</span>
@@ -77,8 +77,8 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
           )} */}
         </div>
         <span className="text-xs mb-4 text-center">
-          Make sure the transaction above is correct, then press Sign & Submit
-          to finalize the transaction.
+          Make sure the transaction above is correct before finalizing the
+          transaction.
         </span>
         <Button
           onClick={() => handleSubmit(onSubmit)()}
