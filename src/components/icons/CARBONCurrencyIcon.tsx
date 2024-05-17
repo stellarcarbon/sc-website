@@ -1,4 +1,6 @@
-interface CARBONCurrencyIconProps {
+import { HTMLProps } from "react";
+
+interface CARBONCurrencyIconProps extends HTMLProps<HTMLOrSVGElement> {
   width?: number;
   height?: number;
 }
@@ -6,9 +8,11 @@ interface CARBONCurrencyIconProps {
 export default function CARBONCurrencyIcon({
   width,
   height,
+  className,
 }: CARBONCurrencyIconProps) {
   return (
     <svg
+      className={className}
       fill="currentColor"
       width={`${width ? `${width}px` : "18px"}`}
       height={`${height ? `${height}px` : "18px"}`}

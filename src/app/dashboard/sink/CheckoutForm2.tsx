@@ -18,7 +18,7 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
 
-  const [quote, setQuote] = useState<string | undefined>(undefined);
+  const [quote, setQuote] = useState<number>(0);
 
   const tonnes = watch("tonnes");
   const currency = watch("currency");
@@ -40,7 +40,13 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
 
   return (
     <form className="flex flex-col py-2 bg-secondary min-w-[80%]">
-      <AmountInput register={register} watch={watch} />
+      <AmountInput
+        register={register}
+        watch={watch}
+        setValue={setValue}
+        quote={quote}
+        setQuote={setQuote}
+      />
       {/* <TonnesRange
         register={register}
         watch={watch}

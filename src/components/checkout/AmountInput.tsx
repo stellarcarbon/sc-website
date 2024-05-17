@@ -7,128 +7,173 @@ import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { Blocks } from "react-loader-spinner";
+import StellarCarbonIcon from "../icons/StellarCarbonIcon";
+import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
 
 interface AmountInputProps {
   register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
   watch: (name: string) => number;
-  // setValue: (name: keyof CheckoutFormData, value: any) => void;
-  // quote: string | undefined;
-  // setQuote: Dispatch<SetStateAction<string | undefined>>;
+  setValue: (name: keyof CheckoutFormData, value: any) => void;
+  quote: number;
+  setQuote: Dispatch<SetStateAction<number>>;
 }
-
-// Debounce function
-// function debounce<T extends (...args: any[]) => void>(
-//   callback: T,
-//   delay: number
-// ): T {
-//   let timeout: NodeJS.Timeout;
-//   return function (this: ThisParameterType<T>, ...args: Parameters<T>): void {
-//     clearTimeout(timeout);
-//     timeout = setTimeout(() => callback.apply(this, args), delay);
-//   } as T;
-// }
 
 export default function AmountInput({
   register,
   watch,
-}: // quote,
-// setQuote,
-AmountInputProps) {
+  setValue,
+  quote,
+  setQuote,
+}: AmountInputProps) {
   const tonnes = watch("tonnes");
 
-  const [carbonAmount, setCarbonAmount] = useState<number>(1);
-  const [usdAmount, setUsdAmount] = useState<number>(5);
+  // const [carbonAmount, setCarbonAmount] = useState<number>(1);
+  // const [usdAmount, setUsdAmount] = useState<number>(5);
   const [activeInput, setActiveInput] = useState<"carbon" | "usd">("carbon");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [statusMessage, setStatusMessage] = useState<string>("");
+  const [hasError, setHasError] = useState<boolean>(false);
 
   const { call: carbonToUsd, cancel: cancelCarbonToUsd } = useMemo(() => {
     return debounce(async (carbonAmount: number) => {
-      const response = await CarbonService.getCarbonQuoteCarbonQuoteGet({
-        carbonAmount,
-      });
-      const newUsdAmount = Number(response.total_cost);
-      if (usdAmount !== newUsdAmount) {
-        setUsdAmount(newUsdAmount);
+      if (carbonAmount === 0) {
+        setQuote(0);
+        setHasError(false);
+        setStatusMessage(
+          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO2 emitted."
+        );
+        return;
       }
+
+      CarbonService.getCarbonQuoteCarbonQuoteGet({
+        carbonAmount,
+      })
+        .then((response) => {
+          setIsLoading(false);
+          setHasError(false);
+          const newUsdAmount = Number(response.total_cost);
+          if (quote !== newUsdAmount) {
+            setQuote(Math.round(newUsdAmount * 100) / 100);
+            setStatusMessage(
+              `${carbonAmount} CARBON costs $ ${newUsdAmount} at the current rate.`
+            );
+          }
+        })
+        .catch((err) => {
+          if (err.status === 422) {
+            setHasError(true);
+            setStatusMessage(err.body.detail[0].msg);
+          }
+        });
     }, 500);
-  }, [setUsdAmount, usdAmount]);
+  }, [quote, setQuote]);
 
-  // const convertCarbonToUsd = async (carbonAmount: number) => {
-  //   const usdPrice = await CarbonService.getCarbonQuoteCarbonQuoteGet({
-  //     carbonAmount,
-  //   });
-  //   return usdPrice;
-  // };
+  const { call: usdToCarbon, cancel: cancelUsdToCarbon } = useMemo(() => {
+    return debounce(async (usdAmount: number) => {
+      if (usdAmount === 0) {
+        setValue("tonnes", 0);
+        // setCarbonAmount(0);
+        setHasError(false);
+        setStatusMessage(
+          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO2 emitted."
+        );
+        return;
+      }
 
-  const convertUsdToCarbon = async (usdAmount: number) => {
-    const carbonPrice = await CarbonService.getUsdQuoteUsdQuoteGet({
-      usdAmount,
-    });
-    return carbonPrice;
-  };
+      CarbonService.getUsdQuoteUsdQuoteGet({
+        usdAmount,
+      })
+        .then((response) => {
+          setIsLoading(false);
+          setHasError(false);
+          const newCarbonAmount = Number(response.total_carbon);
+          if (tonnes !== newCarbonAmount) {
+            setValue("tonnes", newCarbonAmount);
+            setStatusMessage(
+              `${newCarbonAmount} CARBON costs $ ${usdAmount} at the current rate.`
+            );
+          }
+        })
+        .catch((err) => {
+          if (err.status === 422) {
+            setHasError(true);
+            setStatusMessage(err.body.detail[0].msg);
+          }
+        });
+    }, 500);
+  }, [setValue, tonnes]);
+
+  useEffect(() => {
+    if (activeInput === "usd") {
+      setIsLoading(true);
+      usdToCarbon(quote);
+      return () => {
+        cancelUsdToCarbon();
+      };
+    }
+  }, [quote]);
 
   useEffect(() => {
     if (activeInput === "carbon") {
-      carbonToUsd(carbonAmount);
-      // const handleConvert = async () => {
-      //   const response = await convertCarbonToUsd(Number(carbonAmount));
-      //   const newUsdAmount = response.total_cost;
-      //   if (usdAmount !== newUsdAmount) {
-      //     setUsdAmount(newUsdAmount);
-      //   }
-      // };
-
-      // const debounceConvert = debounce(handleConvert, 300);
-      // debounceConvert();
+      setIsLoading(true);
+      carbonToUsd(tonnes);
       return () => {
         cancelCarbonToUsd();
       };
     }
-  }, [carbonAmount, activeInput, carbonToUsd, cancelCarbonToUsd]);
-
-  // useEffect(() => {
-  //   if (activeInput === "usd") {
-  //     const handleConvert = async () => {
-  //       const response = await convertUsdToCarbon(Number(usdAmount));
-  //       const newCarbonAmount = response.total_carbon;
-  //       if (carbonAmount !== newCarbonAmount) {
-  //         setCarbonAmount(newCarbonAmount);
-  //       }
-  //     };
-  //   }
-  // }, [usdAmount, activeInput]);
+    setActiveInput("carbon");
+  }, [tonnes]);
 
   return (
-    <div className="flex flex-col p-4 gap-1">
-      <h1 className="text-xl font-bold">Offset amount</h1>
-      <span className="text-xs">
-        Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to
-        1 ton CO2 emitted.
-      </span>
+    <div className="flex flex-col p-4 pb-0 gap-1">
+      <h1 className="text-xl text-center font-bold">Exchange rate</h1>
 
-      <div className="flex justify-around items-center gap-2">
-        <input
-          type="number"
-          className="p-1 max-w-[40%] text-black"
-          value={carbonAmount}
-          onChange={(e) => {
-            setCarbonAmount(Number(e.target.value));
-            setActiveInput("carbon");
-          }}
-          // {...register("tonnes")}
-        />
-        <FontAwesomeIcon icon={faArrowRightArrowLeft} />
-        <input
-          type="text"
-          className="p-1 max-w-[40%] text-black"
-          value={usdAmount}
-          onChange={(e) => {
-            setUsdAmount(Number(e.target.value));
-            setActiveInput("usd");
-          }}
-        />
+      <div className="flex justify-around items-center gap-2 h-16">
+        <div className="relative w-[35%]">
+          <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
+            <CARBONCurrencyIcon className="" />
+          </div>
+          <input
+            type="number"
+            inputMode="numeric"
+            className="px-2 py-1 w-full text-black"
+            {...register("tonnes")}
+          />
+        </div>
+
+        {isLoading ? (
+          <Blocks width={48} height={48} />
+        ) : (
+          <FontAwesomeIcon
+            icon={faArrowRightArrowLeft}
+            className="px-4 py-4 text-xl"
+          />
+        )}
+        <div className="relative w-[35%]">
+          <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
+            $
+          </div>
+          <input
+            type="text"
+            className="px-2 pl-7 py-1 w-full text-black"
+            value={quote || ""}
+            onChange={(e) => {
+              setIsLoading(true);
+              setQuote(Number(e.target.value));
+              setActiveInput("usd");
+            }}
+          />
+        </div>
       </div>
 
-      {/* <div>{usdAmount}</div> */}
+      <div className="bg-primary px-4 h-16 flex flex-col justify-center mb-12">
+        <span
+          className={`text-center text-xs ${hasError ? "text-red-500" : ""}`}
+        >
+          {statusMessage}
+        </span>
+      </div>
     </div>
   );
 }
