@@ -2,10 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CARBONQuoteResponse } from '../models/CARBONQuoteResponse';
 import type { MemoType } from '../models/MemoType';
 import type { PaymentAsset } from '../models/PaymentAsset';
-import type { QuoteResponse } from '../models/QuoteResponse';
 import type { SinkingResponse } from '../models/SinkingResponse';
+import type { USDQuoteResponse } from '../models/USDQuoteResponse';
 import type { VcsProject } from '../models/VcsProject';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -20,14 +21,17 @@ export class CarbonService {
      *
      * This quote is non-binding and does not take into account the amount of CARBON that we are
      * currently able to provide from our pool.
-     * @returns QuoteResponse Successful Response
+     * @returns CARBONQuoteResponse Successful Response
      * @throws ApiError
      */
     public static getCarbonQuoteCarbonQuoteGet({
         carbonAmount,
     }: {
+        /**
+         * requested amount of CARBON
+         */
         carbonAmount?: (number | string),
-    }): CancelablePromise<QuoteResponse> {
+    }): CancelablePromise<CARBONQuoteResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/carbon-quote',
@@ -35,7 +39,41 @@ export class CarbonService {
                 'carbon_amount': carbonAmount,
             },
             errors: {
+                400: `Horizon transaction has failed or is malformed`,
+                410: `Data requested from Horizon is before recorded history`,
                 422: `Validation Error`,
+                500: `An unhandled error occurred on the server`,
+                503: `Horizon's historical database is too stale`,
+                504: `Horizon could not confirm transaction inclusion (check network conditions)`,
+            },
+        });
+    }
+    /**
+     * Get the amount of CARBON that can be bought for a certain price.
+     * @returns USDQuoteResponse Successful Response
+     * @throws ApiError
+     */
+    public static getUsdQuoteUsdQuoteGet({
+        usdAmount,
+    }: {
+        /**
+         * request amount of USD
+         */
+        usdAmount?: (number | string),
+    }): CancelablePromise<USDQuoteResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/usd-quote',
+            query: {
+                'usd_amount': usdAmount,
+            },
+            errors: {
+                400: `Horizon transaction has failed or is malformed`,
+                410: `Data requested from Horizon is before recorded history`,
+                422: `Validation Error`,
+                500: `An unhandled error occurred on the server`,
+                503: `Horizon's historical database is too stale`,
+                504: `Horizon could not confirm transaction inclusion (check network conditions)`,
             },
         });
     }
@@ -43,16 +81,6 @@ export class CarbonService {
      * Build the XDR for a new CARBON sinking transaction.
      * An offset is done by atomically swapping CARBON for CarbonSINK. This endpoint can be used to
      * build the XDR for such a sinking transaction.
-     *
-     * - *funder*: public key of the account that pays for the transaction
-     * - *recipient*: public key of the account that will receive CarbonSINK (default: funder)
-     * - *carbon_amount*: the amount of CARBON to sink
-     * - *payment_asset*: the preferred asset to pay with when the funder does not have a sufficient CARBON balance
-     * - *vcs_project_id*: carbon project from which credits will be retired
-     * - *memo_type*: the kind of memo that will be attached to the transaction
-     * - *memo_value*: description of the reason for offsetting
-     * - *email*: email address that will receive the Verra certificate
-     * (also supports `Your Name <account@domain.xyz>` format)
      *
      * If the funder does not have a sufficient balance of CARBON, a path payment will be used to
      * purchase the exact amount of CARBON to be retired. The most favorable rate will be selected
@@ -72,13 +100,37 @@ export class CarbonService {
         memoValue,
         email,
     }: {
+        /**
+         * public key of the account that pays for the transaction
+         */
         funder: string,
+        /**
+         * public key of the account that will receive CarbonSINK (default: funder)
+         */
         recipient?: (string | null),
+        /**
+         * the amount of CARBON to sink
+         */
         carbonAmount?: (number | string),
+        /**
+         * the preferred asset to pay with when the funder does not have a sufficient CARBON balance
+         */
         paymentAsset?: (PaymentAsset | null),
+        /**
+         * carbon project from which credits will be retired
+         */
         vcsProjectId?: (VcsProject | null),
+        /**
+         * the kind of memo that will be attached to the transaction
+         */
         memoType?: (MemoType | null),
+        /**
+         * description of the reason for offsetting
+         */
         memoValue?: (string | null),
+        /**
+         * email address that will receive the Verra certificate (also supports `Your Name <account@domain.xyz>` format)
+         */
         email?: (string | null),
     }): CancelablePromise<SinkingResponse> {
         return __request(OpenAPI, {
@@ -95,7 +147,13 @@ export class CarbonService {
                 'email': email,
             },
             errors: {
+                400: `No payment path was found for this Stellar account`,
+                404: `Stellar account was not found on the Public Global Stellar Network`,
+                410: `Data requested from Horizon is before recorded history`,
                 422: `Validation Error`,
+                500: `An unhandled error occurred on the server`,
+                503: `Horizon's historical database is too stale`,
+                504: `Horizon could not confirm transaction inclusion (check network conditions)`,
             },
         });
     }
