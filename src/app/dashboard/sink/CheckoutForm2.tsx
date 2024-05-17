@@ -7,6 +7,7 @@ import { useAppContext } from "@/context/appContext";
 import { HTMLProps, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import AmountInput from "@/components/checkout/AmountInput";
 
 interface CheckoutForm2Props extends HTMLProps<HTMLFormElement> {
   postSinkRequest: (payload: SinkCarbonXdrPostRequest) => void;
@@ -39,13 +40,14 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
 
   return (
     <form className="flex flex-col py-2 bg-secondary min-w-[80%]">
-      <TonnesRange
+      <AmountInput register={register} watch={watch} />
+      {/* <TonnesRange
         register={register}
         watch={watch}
         setValue={setValue}
         quote={quote}
         setQuote={setQuote}
-      />
+      /> */}
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
       <div className="m-4 md:w-[70%] md:self-center p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">

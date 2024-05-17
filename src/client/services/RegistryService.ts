@@ -21,11 +21,34 @@ export class RegistryService {
      * @returns RetirementsResponse Successful Response
      * @throws ApiError
      */
-    public static listRetirementsRegistryRetirementsGet(): CancelablePromise<RetirementsResponse> {
+    public static listRetirementsRegistryRetirementsGet({
+        forAddress,
+        dateGte,
+    }: {
+        /**
+         * Optionally filter the retirements list by Stellar address.
+         *
+         * This filter does not affect any of the aggregate statistics. Any filtered
+         * statistics need to be computed by the client making the request.
+         *
+         */
+        forAddress?: (string | null),
+        /**
+         * Only list retirements done on or after this date.
+         */
+        dateGte?: (string | null),
+    }): CancelablePromise<RetirementsResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/registry/retirements',
+            query: {
+                'for_address': forAddress,
+                'date_gte': dateGte,
+            },
             errors: {
+                400: `The request you sent was invalid in some way`,
+                422: `Validation Error`,
+                500: `An unhandled error occurred on the server`,
                 504: `Timeout querying the Verra Registry (8 seconds)`,
             },
         });
@@ -48,6 +71,8 @@ export class RegistryService {
             method: 'GET',
             url: '/registry/inventory',
             errors: {
+                400: `The request you sent was invalid in some way`,
+                500: `An unhandled error occurred on the server`,
                 504: `Timeout querying the Verra Registry (5 seconds)`,
             },
         });

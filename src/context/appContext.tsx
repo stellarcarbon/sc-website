@@ -27,7 +27,12 @@ import { usePathname } from "next/navigation";
 import LocalStorageService from "@/app/services/LocalStorageService";
 import { OpenAPI } from "@/client";
 
-OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+if (process.env.NODE_ENV === "development") {
+  OpenAPI.BASE = "http://localhost:8000";
+} else {
+  OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
+}
 
 // A global app context used to write & read state everywhere.
 type AppContext = {
