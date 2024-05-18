@@ -32,93 +32,11 @@ export default function Dashboard() {
       {...swipeHandlers}
       className="flex flex-col gap-8 w-full flex-1 justify-start py-8"
     >
-      {/* Welkom */}
-      {/* <div className="flex flex-col justify-center h-16 px-4 w-full">
-        
-        <span className="text-sm mt-1 text-center">
-          Get an overview of your activity and manage your wallet connection.
-        </span>
-      </div> */}
-      {/* <div className="py-6 px-4 flex flex-col">
-        <span className="text-xl self-center">
-          Welkom,{" "}
-          {walletConnection?.isAnonymous
-            ? "anonymous"
-            : walletConnection?.personalDetails?.username}
-        </span>
-        <span className="text-sm mt-1 text-center">
-          Beheer hier je wallet connection en bekijk een samenvatting van je
-          transacties.
-        </span>
-      </div> */}
-
-      {/* Connection details */}
-      <div className="mx-4 p-4 flex flex-col gap-3 bg-primary border border-tertiary">
-        <h1 className="self-center text-2xl">Your wallet</h1>
-
-        <div className="flex flex-col gap-1">
-          <span className="text-xl font-bold">Wallet type</span>
-          <span className="text-sm text-accent">
-            {walletConnection?.walletType}
-          </span>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <span className="text-xl font-bold">Stellar public key</span>
-          <span className="text-xs break-words text-accent">
-            {walletConnection?.stellarPubKey}
-          </span>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <span className="text-xl font-bold">Contact information</span>
-          {walletConnection?.isAnonymous ? (
-            <span className="text-xs text-accent">Anonymous</span>
-          ) : (
-            <div className="flex flex-col text-xs text-accent">
-              <div className="flex justify-between">
-                <span className="font-bold">Username:</span>
-                <span>{walletConnection?.personalDetails?.username}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-bold">Email address:</span>
-                <span>{walletConnection?.personalDetails?.useremail}</span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="flex justify-center gap-4 h-8 mt-1">
-          <Button
-            className="!py-1"
-            onClick={() => router.push("/wallet/connect")}
-          >
-            Edit
-          </Button>
-          <Button className="!py-1" onClick={disconnectWallet}>
-            Disconnect
-          </Button>
-        </div>
-      </div>
-
       {/* Transaction summary */}
-      <div className="mx-4 py-4 px-4 flex flex-col gap-3 bg-primary border border-tertiary">
-        <h1 className="text-2xl self-center">Sinking history</h1>
-        {/* 
-        <div className="flex flex-col">
-          <span className="text-md">
-            Welkom{" "}
-            {walletConnection?.isAnonymous
-              ? "anonymous"
-              : walletConnection?.personalDetails?.username}
-            ,
-          </span>
-          <span className="text-xs">blabla</span>
-        </div> */}
-
+      <div className="mx-4 py-4 px-4 flex flex-col gap-8 bg-primary border border-tertiary">
         <div className="flex flex-col gap-1 text-sm">
-          <div className="text-xl font-bold flex gap-4 justify-between items-center">
-            <span className="">Total sinked</span>
+          <div className="text-xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
+            <span className="text-lg">Total sinked</span>
             <div className="flex gap-1 items-center text-accent">
               <span className="font-normal">25</span>
               <CARBONCurrencyIcon width={18} height={18} />
@@ -132,8 +50,8 @@ export default function Dashboard() {
         </div>
 
         <div className="flex flex-col gap-1 text-sm">
-          <div className="text-xl font-bold flex gap-4 justify-between items-center">
-            <span className="">Pending certificate claims</span>
+          <div className="text-xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
+            <span className="text-lg">Pending certificate claims</span>
             <div className="flex gap-1 items-center text-accent">
               <span className="font-normal">1.55</span>
               <CARBONCurrencyIcon width={18} height={18} />
@@ -147,6 +65,55 @@ export default function Dashboard() {
               What does this mean?
             </Link>
           </span>
+        </div>
+      </div>
+
+      {/* Connection details */}
+      <div className="mx-4 p-4 flex flex-col gap-1 bg-primary border border-tertiary text-accent">
+        <h1 className="text-white font-bold text-lg text-start">
+          Session details
+        </h1>
+
+        <div className="flex justify-between items-center border-b border-b-tertiary">
+          <span className="text-white">Pubkey</span>
+          <span className="text-[10px] break-words w-[60%] ">
+            {walletConnection?.stellarPubKey}
+          </span>
+        </div>
+
+        <div className="flex justify-between items-center border-b border-b-tertiary">
+          <span className="text-white">Wallet</span>
+          <span className="text-xs">{walletConnection?.walletType}</span>
+        </div>
+        {walletConnection?.isAnonymous ? (
+          <></>
+        ) : (
+          <>
+            <div className="flex justify-between items-center border-b border-b-tertiary">
+              <span className="text-white">Username</span>
+              <span className="text-xs">
+                {walletConnection?.personalDetails?.username}
+              </span>
+            </div>
+            <div className="flex justify-between items-center border-b border-b-tertiary">
+              <span className="text-white">Email</span>
+              <span className="text-xs">
+                {walletConnection?.personalDetails?.useremail}
+              </span>
+            </div>
+          </>
+        )}
+        {/* <span className="text-sm">Connected anonymously.</span> */}
+        <div className="flex justify-end gap-4 h-7 mt-4 mb-1 mx-2">
+          <Button
+            className="!text-sm"
+            onClick={() => router.push("/wallet/connect")}
+          >
+            Edit
+          </Button>
+          <Button className="!text-sm" onClick={disconnectWallet}>
+            Disconnect
+          </Button>
         </div>
       </div>
     </div>

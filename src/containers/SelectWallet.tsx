@@ -209,7 +209,7 @@ export default function SelectWallet() {
           </FormError>
         )}
 
-        <Button className="mb-9 self-center" onClick={submitForm}>
+        <Button className="mb-9 h-10 self-center" onClick={submitForm}>
           Connect wallet
         </Button>
 

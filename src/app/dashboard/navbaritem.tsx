@@ -28,7 +28,7 @@ export enum DashboardTabs {
 
 const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
   [DashboardTabs.OVERVIEW]: {
-    label: "Dashboard",
+    label: "My Stellarcarbon",
     icon: <FontAwesomeIcon icon={faUser} fontSize={"17px"} />,
     route: "/dashboard/",
   },
@@ -38,7 +38,7 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
     route: "/dashboard/sink/",
   },
   [DashboardTabs.HISTORY]: {
-    label: "My Transactions",
+    label: "Ledger",
     icon: <FontAwesomeIcon icon={faReceipt} fontSize={"17px"} />,
     route: "/dashboard/transactions/",
   },
