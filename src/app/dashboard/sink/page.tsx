@@ -1,7 +1,7 @@
 "use client";
 
 import { useSwipeable } from "react-swipeable";
-import CheckoutForm2 from "./CheckoutForm2";
+import CheckoutForm from "./CheckoutForm";
 import { useRouter } from "next/navigation";
 import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
@@ -101,15 +101,7 @@ export default function DashboardSink() {
 
   return (
     <div {...swipeHandlers} className="pb-8 w-full">
-      {/* Welkom blok */}
-      {/* <div className="flex flex-col justify-center h-16 px-4 w-full"> */}
-      {/* <span className="text-xl self-center">Sink CARBON</span> */}
-      {/* <span className="text-sm mt-1 text-center">
-          Use this form to create a new sinking transaction.
-        </span> */}
-      {/* </div> */}
-      {/* <hr className="border-tertiary" /> */}
-      <CheckoutForm2 postSinkRequest={postSinkRequest} />
+      <CheckoutForm postSinkRequest={postSinkRequest} />
       {showFormStatusModal && (
         <FormStatusModal
           message={submissionStatusMessage}

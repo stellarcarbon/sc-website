@@ -8,11 +8,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import AmountInput from "@/components/checkout/AmountInput";
 
-interface CheckoutForm2Props extends HTMLProps<HTMLFormElement> {
+interface CheckoutFormProps extends HTMLProps<HTMLFormElement> {
   postSinkRequest: (payload: SinkCarbonXdrPostRequest) => void;
 }
 
-export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
+export default function CheckoutForm({ postSinkRequest }: CheckoutFormProps) {
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
