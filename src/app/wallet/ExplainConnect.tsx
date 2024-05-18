@@ -27,7 +27,7 @@ export default function ExplainConnect({ onClick }: { onClick: () => void }) {
     {`By sinking CARBON tokens you are helping prevent more CO2
       emissions from occuring :)`} */}
       {/* </p> */}
-      <Button className="self-center" onClick={onClick}>
+      <Button className="self-center h-10" onClick={onClick}>
         Continue
       </Button>
       {/* </div> */}

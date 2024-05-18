@@ -13,7 +13,7 @@ export default function Button({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`flex justify-center rounded-md shadow-md px-5 py-4 bg-accent
+      className={`flex justify-center items-center rounded-md shadow-md px-5 bg-accent
       ${
         disabled
           ? " text-gray-500 opacity-30"
