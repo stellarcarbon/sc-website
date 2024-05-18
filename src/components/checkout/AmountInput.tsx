@@ -2,13 +2,12 @@
 
 import { CheckoutFormData } from "@/app/types";
 import { debounce } from "@/app/utils";
-import { CarbonService, CARBONQuoteResponse, USDQuoteResponse } from "@/client";
+import { CarbonService } from "@/client";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { Blocks } from "react-loader-spinner";
-import StellarCarbonIcon from "../icons/StellarCarbonIcon";
 import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
 
 interface AmountInputProps {
@@ -56,7 +55,9 @@ export default function AmountInput({
           if (quote !== newUsdAmount) {
             setQuote(Math.round(newUsdAmount * 100) / 100);
             setStatusMessage(
-              `${carbonAmount} CARBON costs $ ${newUsdAmount} at the current rate.`
+              `${carbonAmount} CARBON costs $ ${newUsdAmount.toFixed(
+                2
+              )} at the current rate.`
             );
           }
         })
@@ -91,7 +92,9 @@ export default function AmountInput({
           if (tonnes !== newCarbonAmount) {
             setValue("tonnes", newCarbonAmount);
             setStatusMessage(
-              `${newCarbonAmount} CARBON costs $ ${usdAmount} at the current rate.`
+              `${newCarbonAmount} CARBON costs $ ${usdAmount.toFixed(
+                2
+              )} at the current rate.`
             );
           }
         })
@@ -126,10 +129,14 @@ export default function AmountInput({
   }, [tonnes]);
 
   return (
-    <div className="flex flex-col p-4 pb-0 gap-1">
-      <h1 className="text-xl text-center font-bold">Exchange rate</h1>
+    <div className="flex flex-col p-4 md:px-8 gap-1">
+      <h1 className="text-xl text-start font-bold">Choose amount to sink</h1>
+      <span className="text-xs">
+        Use the exchange rate calculator to determine the amount of CARBON you
+        want to sink.
+      </span>
 
-      <div className="flex justify-around items-center gap-2 h-16">
+      <div className="flex justify-between items-center gap-2 h-16 px-2">
         <div className="relative w-[35%]">
           <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
             <CARBONCurrencyIcon className="" />
@@ -167,9 +174,9 @@ export default function AmountInput({
         </div>
       </div>
 
-      <div className="bg-primary px-4 h-16 flex flex-col justify-center mb-12">
+      <div className="bg-primary px-4 h-16 flex flex-col justify-center">
         <span
-          className={`text-center text-xs ${hasError ? "text-red-500" : ""}`}
+          className={`text-center text-sm ${hasError ? "text-red-500" : ""}`}
         >
           {statusMessage}
         </span>

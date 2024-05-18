@@ -1,6 +1,5 @@
 import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
-import TonnesRange from "@/components/checkout/TonnesRange";
 import { CheckoutFormData, SinkCarbonXdrPostRequest } from "@/app/types";
 import Button from "@/components/Button";
 import { useAppContext } from "@/context/appContext";
@@ -39,7 +38,7 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
   };
 
   return (
-    <form className="flex flex-col py-2 bg-secondary min-w-[80%]">
+    <form className="flex flex-col gap-4 pt-4 bg-secondary min-w-[80%]">
       <AmountInput
         register={register}
         watch={watch}
@@ -47,18 +46,11 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
         quote={quote}
         setQuote={setQuote}
       />
-      {/* <TonnesRange
-        register={register}
-        watch={watch}
-        setValue={setValue}
-        quote={quote}
-        setQuote={setQuote}
-      /> */}
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
-      <div className="m-4 md:w-[70%] md:self-center p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">
+      <div className="m-4 md:w-[80%] md:self-center p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">
         <h3 className="text-xl font-bold">Transaction preview</h3>
-        <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full md:max-w-[60%]">
+        <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full md:max-w-[80%]">
           <span className="text-start">Amount to sink</span>
           <div className="flex gap-1 items-center justify-end text-accent">
             <CARBONCurrencyIcon />
@@ -74,17 +66,8 @@ export default function CheckoutForm2({ postSinkRequest }: CheckoutForm2Props) {
           <span className="font-bold text-end text-accent">{`$ ${
             Number.isNaN(Number(quote)) ? "" : Number(quote).toFixed(2)
           }`}</span>
-
-          {/* {reason && (
-            <>
-              <span className="flex items-center text-start mt-4">Reason</span>
-              <span className="text-start mt-4 h-18 text-sm font-bold line-clamp-3 break-words inline-block">
-                {reason ? reason : "Not specified"}
-              </span>
-            </>
-          )} */}
         </div>
-        <span className="text-xs mb-4 text-center">
+        <span className="text-xs mb-4 mx-4 text-center">
           Make sure the transaction above is correct before finalizing the
           transaction.
         </span>

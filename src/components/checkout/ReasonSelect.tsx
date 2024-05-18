@@ -24,7 +24,7 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
   };
 
   return (
-    <div className="flex flex-col p-4 gap-1">
+    <div className="flex flex-col p-4 md:px-8 gap-1">
       <span className="text-xl font-bold mb-0">Add a label (optional)</span>
       <span className="text-xs">Select a reason...</span>
       <div className="flex gap-2 my-2">
@@ -43,7 +43,7 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
       <textarea
         onChange={onReasonTextChange}
         value={reason}
-        className="my-2 text-black p-1"
+        className="my-2 text-black p-1 md:w-[80%]"
       />
     </div>
   );
