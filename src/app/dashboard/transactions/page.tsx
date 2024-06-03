@@ -8,7 +8,6 @@ export default function DashboardMyTransactions() {
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: (ed) => {
-      console.log(ed);
       router.push("/dashboard/transactions/history");
     },
     onSwipedRight: () => router.push("/dashboard/sink"),

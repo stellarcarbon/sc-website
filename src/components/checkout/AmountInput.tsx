@@ -27,8 +27,6 @@ export default function AmountInput({
 }: AmountInputProps) {
   const tonnes = watch("tonnes");
 
-  // const [carbonAmount, setCarbonAmount] = useState<number>(1);
-  // const [usdAmount, setUsdAmount] = useState<number>(5);
   const [activeInput, setActiveInput] = useState<"carbon" | "usd">("carbon");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [statusMessage, setStatusMessage] = useState<string>("");
@@ -36,6 +34,7 @@ export default function AmountInput({
 
   const { call: carbonToUsd, cancel: cancelCarbonToUsd } = useMemo(() => {
     return debounce(async (carbonAmount: number) => {
+      console.log(carbonAmount);
       if (carbonAmount === 0) {
         setQuote(0);
         setHasError(false);
@@ -54,16 +53,15 @@ export default function AmountInput({
           const newUsdAmount = Number(response.total_cost);
           if (quote !== newUsdAmount) {
             setQuote(Math.round(newUsdAmount * 100) / 100);
-            setStatusMessage(
-              `${carbonAmount} CARBON costs $ ${newUsdAmount.toFixed(
-                2
-              )} at the current rate.`
-            );
+            // setStatusMessage(
+            //   `${carbonAmount} CARBON costs $ ${newUsdAmount.toFixed(2)}`
+            // );
           }
         })
         .catch((err) => {
           if (err.status === 422) {
             setHasError(true);
+            setIsLoading(false);
             setStatusMessage(err.body.detail[0].msg);
           }
         });
@@ -72,6 +70,7 @@ export default function AmountInput({
 
   const { call: usdToCarbon, cancel: cancelUsdToCarbon } = useMemo(() => {
     return debounce(async (usdAmount: number) => {
+      console.log("usdToCarbon");
       if (usdAmount === 0) {
         setValue("tonnes", 0);
         // setCarbonAmount(0);
@@ -91,16 +90,15 @@ export default function AmountInput({
           const newCarbonAmount = Number(response.total_carbon);
           if (tonnes !== newCarbonAmount) {
             setValue("tonnes", newCarbonAmount);
-            setStatusMessage(
-              `${newCarbonAmount} CARBON costs $ ${usdAmount.toFixed(
-                2
-              )} at the current rate.`
-            );
+            // setStatusMessage(
+            //   `${newCarbonAmount} CARBON costs $ ${usdAmount.toFixed(2)}`
+            // );
           }
         })
         .catch((err) => {
           if (err.status === 422) {
             setHasError(true);
+            setIsLoading(false);
             setStatusMessage(err.body.detail[0].msg);
           }
         });
@@ -108,22 +106,21 @@ export default function AmountInput({
   }, [setValue, tonnes]);
 
   useEffect(() => {
+    console.log("quote", activeInput);
     if (activeInput === "usd") {
       setIsLoading(true);
       usdToCarbon(quote);
-      return () => {
-        cancelUsdToCarbon();
-      };
+      // return () => {
+      //   cancelUsdToCarbon();
+      // };
     }
   }, [quote]);
 
   useEffect(() => {
+    console.log("o", activeInput);
     if (activeInput === "carbon") {
       setIsLoading(true);
       carbonToUsd(tonnes);
-      return () => {
-        cancelCarbonToUsd();
-      };
     }
     setActiveInput("carbon");
   }, [tonnes]);
@@ -149,14 +146,11 @@ export default function AmountInput({
           />
         </div>
 
-        {isLoading ? (
-          <Blocks width={48} height={48} />
-        ) : (
-          <FontAwesomeIcon
-            icon={faArrowRightArrowLeft}
-            className="px-4 py-4 text-xl"
-          />
-        )}
+        <FontAwesomeIcon
+          icon={faArrowRightArrowLeft}
+          className="px-4 py-4 text-xl"
+        />
+
         <div className="relative w-[35%]">
           <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
             $
@@ -174,12 +168,36 @@ export default function AmountInput({
         </div>
       </div>
 
-      <div className="bg-primary px-4 h-16 flex flex-col justify-center">
-        <span
-          className={`text-center text-sm ${hasError ? "text-red-500" : ""}`}
-        >
-          {statusMessage}
-        </span>
+      <div
+        className={`${
+          isLoading ? "" : "bg-primary border rounded border-accentSecondary"
+        } px-4 h-16 flex flex-col justify-center items-center `}
+      >
+        {isLoading ? (
+          <Blocks width={48} height={48} />
+        ) : hasError ? (
+          <span className={`text-center mx-6 text-red-500 text-xs`}>
+            {statusMessage}
+          </span>
+        ) : (
+          <div className="flex justify-center items-center text-lg text-center">
+            <span>{tonnes}</span>
+            <CARBONCurrencyIcon className="mx-1" />
+            <span className="">costs $ {quote}</span>
+          </div>
+        )}
+
+        {/* {!isLoading && !hasError ? (
+          <div className="flex justify-center items-center text-lg text-center">
+            <span>{tonnes}</span>
+            <CARBONCurrencyIcon className="mx-1" />
+            <span className="">costs $ {quote}</span>
+          </div>
+        ) : (
+          <span className={`text-center mx-6 text-red-500 text-xs`}>
+            {statusMessage}
+          </span>
+        )} */}
       </div>
     </div>
   );
