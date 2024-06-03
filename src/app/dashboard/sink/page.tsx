@@ -6,9 +6,13 @@ import { useRouter } from "next/navigation";
 import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ApiError, CarbonService, SinkingResponse } from "@/client";
+import { SinkingResponse } from "@/client";
 import FormStatusModal from "@/containers/FormStatusModal";
-import { AxiosError } from "axios";
+
+export interface SinkingTransaction {
+  transactionPostRequest: SinkCarbonXdrPostRequest;
+  estimatedPriceInDollars: number;
+}
 
 export default function DashboardSink() {
   const { walletConnection } = useAppContext();
@@ -27,6 +31,8 @@ export default function DashboardSink() {
     useState<FormStatusMessages>(FormStatusMessages.creating);
   const [submissionErrorMessage, setSubmissionErrorMessage] =
     useState<string>();
+  const [sinkingTransaction, setSinkingTransaction] =
+    useState<SinkingTransaction>();
 
   const formStatusRef = useRef<boolean | null>(null);
 
@@ -70,43 +76,49 @@ export default function DashboardSink() {
     [walletConnection]
   );
 
-  const postSinkRequest = useCallback(
-    (sinkRequest: SinkCarbonXdrPostRequest) => {
+  const initSubmitSinkingTransaction = useCallback(
+    (sinkRequest: SinkCarbonXdrPostRequest, quote: number) => {
       if (!walletConnection?.isAnonymous) {
         sinkRequest.email = walletConnection?.personalDetails?.useremail;
       }
 
       setShowFormStatusModal(true);
 
-      setSubmissionStatusMessage(FormStatusMessages.creating);
+      setSubmissionStatusMessage(FormStatusMessages.confirm);
 
-      CarbonService.buildSinkCarbonXdrSinkCarbonXdrPost(sinkRequest)
-        .then((response) => {
-          signTransaction(response);
-        })
-        .catch((error) => {
-          console.log(error);
-          if (error instanceof ApiError) {
-            console.log(error.body.detail[0].msg);
-            setSubmissionErrorMessage(error.body.detail[0].msg);
-          } else if (error instanceof AxiosError) {
-            setSubmissionErrorMessage("Connection error, please retry.");
-          } else {
-            setSubmissionErrorMessage("Unknown error.");
-          }
-        });
+      setSinkingTransaction({
+        transactionPostRequest: sinkRequest,
+        estimatedPriceInDollars: quote,
+      });
+
+      // CarbonService.buildSinkCarbonXdrSinkCarbonXdrPost(sinkRequest)
+      //   .then((response) => {
+      //     signTransaction(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //     if (error instanceof ApiError) {
+      //       console.log(error.body.detail[0].msg);
+      //       setSubmissionErrorMessage(error.body.detail[0].msg);
+      //     } else if (error instanceof AxiosError) {
+      //       setSubmissionErrorMessage("Connection error, please retry.");
+      //     } else {
+      //       setSubmissionErrorMessage("Unknown error.");
+      //     }
+      //   });
     },
     [signTransaction, walletConnection]
   );
 
   return (
     <div {...swipeHandlers} className="pb-8 w-full">
-      <CheckoutForm postSinkRequest={postSinkRequest} />
+      <CheckoutForm submitSinkingTransaction={initSubmitSinkingTransaction} />
       {showFormStatusModal && (
         <FormStatusModal
           message={submissionStatusMessage}
           closeModal={closeModal}
           submissionError={submissionErrorMessage}
+          sinkingTransaction={sinkingTransaction}
         />
       )}
     </div>

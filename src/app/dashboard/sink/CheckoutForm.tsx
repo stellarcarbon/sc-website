@@ -9,10 +9,15 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import AmountInput from "@/components/checkout/AmountInput";
 
 interface CheckoutFormProps extends HTMLProps<HTMLFormElement> {
-  postSinkRequest: (payload: SinkCarbonXdrPostRequest) => void;
+  submitSinkingTransaction: (
+    payload: SinkCarbonXdrPostRequest,
+    quote: number
+  ) => void;
 }
 
-export default function CheckoutForm({ postSinkRequest }: CheckoutFormProps) {
+export default function CheckoutForm({
+  submitSinkingTransaction,
+}: CheckoutFormProps) {
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
@@ -34,7 +39,8 @@ export default function CheckoutForm({ postSinkRequest }: CheckoutFormProps) {
       paymentAsset: currency,
       memoValue: reason,
     };
-    postSinkRequest(payload);
+
+    submitSinkingTransaction(payload, quote);
   };
 
   return (
@@ -48,9 +54,9 @@ export default function CheckoutForm({ postSinkRequest }: CheckoutFormProps) {
       />
       <CurrencySelect register={register} />
       <ReasonSelect watch={watch} setValue={setValue} />
-      <div className="m-4 md:w-[80%] md:self-center p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">
+      <div className="m-4 mx-8 p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">
         <h3 className="text-xl font-bold">Transaction preview</h3>
-        <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full md:max-w-[80%]">
+        <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full max-w-[88%] md:max-w-[63%] lg:max-w-[40%]">
           <span className="text-start">Amount to sink</span>
           <div className="flex gap-1 items-center justify-end text-accent">
             <CARBONCurrencyIcon />
@@ -67,10 +73,10 @@ export default function CheckoutForm({ postSinkRequest }: CheckoutFormProps) {
             Number.isNaN(Number(quote)) ? "" : Number(quote).toFixed(2)
           }`}</span>
         </div>
-        <span className="text-xs mb-4 mx-4 text-center">
+        {/* <span className="text-xs mb-4 mx-4 text-center">
           Make sure the transaction above is correct before finalizing the
           transaction.
-        </span>
+        </span> */}
         <Button
           onClick={() => handleSubmit(onSubmit)()}
           className="!py-2 !w-[60%] max-w-[200px] text-md self-center"

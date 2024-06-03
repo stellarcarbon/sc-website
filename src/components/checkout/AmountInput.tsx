@@ -133,10 +133,14 @@ export default function AmountInput({
           />
         </div>
 
-        <FontAwesomeIcon
-          icon={faArrowRightArrowLeft}
-          className="px-4 py-4 text-xl"
-        />
+        {isLoading ? (
+          <Blocks width={48} height={48} />
+        ) : (
+          <FontAwesomeIcon
+            icon={faArrowRightArrowLeft}
+            className="px-4 py-4 text-xl"
+          />
+        )}
 
         <div className="relative w-[35%]">
           <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
@@ -161,7 +165,8 @@ export default function AmountInput({
         } px-4 h-16 flex flex-col justify-center items-center `}
       >
         {isLoading ? (
-          <Blocks width={48} height={48} />
+          // <Blocks width={48} height={48} />
+          <></>
         ) : hasError ? (
           <span className={`text-center mx-6 text-red-500 text-xs`}>
             {statusMessage}
@@ -169,10 +174,10 @@ export default function AmountInput({
         ) : (
           <div className="w-full flex justify-center gap-1 items-center text-lg text-center">
             <div className="flex items-center">
-              <span>{tonnes}</span>
+              <span>Sinking {tonnes}</span>
               <CARBONCurrencyIcon className="ml-1" />
             </div>
-            <span className="mx-[2px]">costs</span>
+            <span className="mx-[2px]">costs approx.</span>
             <div className="flex items-center">
               <span>$</span>
               <span className="ml-[1px]"> {quote}</span>
