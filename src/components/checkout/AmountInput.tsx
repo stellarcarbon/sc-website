@@ -170,9 +170,9 @@ export default function AmountInput({
           <div className="w-full flex justify-center gap-1 items-center text-lg text-center">
             <div className="flex items-center">
               <span>{tonnes}</span>
-              <CARBONCurrencyIcon className="mx-1" />
+              <CARBONCurrencyIcon className="ml-1" />
             </div>
-            <span>costs</span>
+            <span className="mx-[2px]">costs</span>
             <div className="flex items-center">
               <span>$</span>
               <span className="ml-[1px]"> {quote}</span>
