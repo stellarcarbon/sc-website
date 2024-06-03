@@ -56,7 +56,7 @@ export default function CheckoutForm({
       <ReasonSelect watch={watch} setValue={setValue} />
       <div className="m-4 mx-8 p-4 flex flex-col items-center justify-center bg-primary border border-accentSecondary rounded">
         <h3 className="text-xl font-bold">Transaction preview</h3>
-        <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full max-w-[88%] md:max-w-[63%] lg:max-w-[40%]">
+        <div className="grid grid-cols-2 text-center my-4 md:my-9 w-full max-w-[88%] md:max-w-[63%] lg:max-w-[50%]">
           <span className="text-start">Amount to sink</span>
           <div className="flex gap-1 items-center justify-end text-accent">
             <CARBONCurrencyIcon />

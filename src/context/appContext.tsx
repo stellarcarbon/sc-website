@@ -29,7 +29,8 @@ import { OpenAPI } from "@/client";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {
-  OpenAPI.BASE = "http://localhost:8000";
+  // OpenAPI.BASE = "http://localhost:8000";
+  OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
 } else {
   OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
 }

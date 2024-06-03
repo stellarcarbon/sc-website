@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { SinkingResponse } from "@/client";
+import { ApiError, CarbonService, SinkingResponse } from "@/client";
 import FormStatusModal from "@/containers/FormStatusModal";
+import { AxiosError } from "axios";
 
 export interface SinkingTransaction {
   transactionPostRequest: SinkCarbonXdrPostRequest;
@@ -41,9 +42,37 @@ export default function DashboardSink() {
   }, [showFormStatusModal]);
 
   const closeModal = () => {
-    setShowFormStatusModal(false);
-    setSubmissionErrorMessage(undefined);
+    if (submissionStatusMessage === FormStatusMessages.completed) {
+      router.push("/dashboard");
+    } else {
+      setShowFormStatusModal(false);
+      setSubmissionErrorMessage(undefined);
+      setSubmissionStatusMessage(FormStatusMessages.creating);
+    }
+  };
+
+  const confirmSubmission = () => {
     setSubmissionStatusMessage(FormStatusMessages.creating);
+
+    CarbonService.buildSinkCarbonXdrSinkCarbonXdrPost(
+      sinkingTransaction?.transactionPostRequest!
+    )
+      .then((response) => {
+        signTransaction(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error instanceof ApiError) {
+          console.log(error.body.detail[0].msg);
+          setSubmissionErrorMessage(error.body.detail[0].msg);
+        } else if (error instanceof AxiosError) {
+          setSubmissionErrorMessage(
+            `Error connecting to Stellarcarbon API, please retry or contact support.`
+          );
+        } else {
+          setSubmissionErrorMessage("Unknown error.");
+        }
+      });
   };
 
   const signTransaction = useCallback(
@@ -90,22 +119,6 @@ export default function DashboardSink() {
         transactionPostRequest: sinkRequest,
         estimatedPriceInDollars: quote,
       });
-
-      // CarbonService.buildSinkCarbonXdrSinkCarbonXdrPost(sinkRequest)
-      //   .then((response) => {
-      //     signTransaction(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //     if (error instanceof ApiError) {
-      //       console.log(error.body.detail[0].msg);
-      //       setSubmissionErrorMessage(error.body.detail[0].msg);
-      //     } else if (error instanceof AxiosError) {
-      //       setSubmissionErrorMessage("Connection error, please retry.");
-      //     } else {
-      //       setSubmissionErrorMessage("Unknown error.");
-      //     }
-      //   });
     },
     [signTransaction, walletConnection]
   );
@@ -117,6 +130,7 @@ export default function DashboardSink() {
         <FormStatusModal
           message={submissionStatusMessage}
           closeModal={closeModal}
+          confirmSubmission={confirmSubmission}
           submissionError={submissionErrorMessage}
           sinkingTransaction={sinkingTransaction}
         />

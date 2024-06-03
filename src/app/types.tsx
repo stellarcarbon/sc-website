@@ -59,7 +59,7 @@ export enum FormStatusMessages {
   confirm = "Please confirm the transaction to continue to sign it with your wallet.",
   creating = "Creating your transaction using Stellarcarbon API...",
   signTransaction = "Sign the transaction using your wallet in the pop-up.",
-  awaitBlockchain = "Transaction signed.\n It has been submitted to the Stellar blockchain and we are awaiting confirmation. This can take a couple seconds...",
+  awaitBlockchain = "Transaction signed.\n Submitting to the Stellar blockchain....",
   completed = "Success! (did not really post to blockchain though)",
 }
 

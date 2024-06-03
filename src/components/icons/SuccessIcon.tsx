@@ -1,8 +1,8 @@
 export default function SuccessIcon() {
   return (
     <svg
-      width="120px"
-      height="120px"
+      width="100px"
+      height="100px"
       viewBox="0 0 1024 1024"
       xmlns="http://www.w3.org/2000/svg"
     >

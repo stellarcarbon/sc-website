@@ -15,6 +15,7 @@ interface FormStatusModalProps {
   message: FormStatusMessages;
   submissionError?: string;
   closeModal: () => void;
+  confirmSubmission: () => void;
   sinkingTransaction: SinkingTransaction | undefined;
 }
 
@@ -22,13 +23,14 @@ export default function FormStatusModal({
   message,
   submissionError,
   closeModal,
+  confirmSubmission,
   sinkingTransaction,
 }: FormStatusModalProps) {
   let status;
 
   if (message === FormStatusMessages.confirm) {
     status = (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col justify-center items-center bg-secondary py-4 rounded mt-12">
         <span className="text-center">{message}</span>
         <div className="flex flex-col m-6 w-[80%] items-center gap-2 text-xl">
           <div className="flex justify-between w-full items-center gap-4">
@@ -56,7 +58,12 @@ export default function FormStatusModal({
             <span>{sinkingTransaction?.transactionPostRequest.memoValue}</span>
           </div>
         </div>
-        <Button className="!py-2 w-[200px] font-bold">Confirm & submit</Button>
+        <Button
+          className="!py-2 w-[200px] font-bold"
+          onClick={confirmSubmission}
+        >
+          Confirm & submit
+        </Button>
       </div>
     );
   }
@@ -80,16 +87,16 @@ export default function FormStatusModal({
     );
   } else if (message === FormStatusMessages.signTransaction) {
     status = (
-      <>
+      <div className="flex flex-col justify-center items-center flex-1 gap-2">
         <span className="text-center">{message}</span>
         <div className="my-4">
           <SignIcon />
         </div>
-      </>
+      </div>
     );
   } else if (message === FormStatusMessages.awaitBlockchain) {
     status = (
-      <>
+      <div className="flex flex-col justify-center items-center flex-1 gap-2">
         <span className="text-center">{message}</span>
         <div className="my-4">
           <Hourglass
@@ -102,16 +109,14 @@ export default function FormStatusModal({
             colors={["#d8def2", "#d8def2"]}
           />
         </div>
-      </>
+      </div>
     );
   } else if (message === FormStatusMessages.completed) {
     status = (
-      <>
+      <div className="flex flex-col justify-center items-center flex-1 gap-4">
         <span className="text-center">{message}</span>
-        <div className="">
-          <SuccessIcon />
-        </div>
-      </>
+        <SuccessIcon />
+      </div>
     );
   }
 
@@ -120,14 +125,14 @@ export default function FormStatusModal({
       <div className="fixed top-0 left-0 w-screen h-screen bg-gray-600 opacity-80 z-10"></div>
       <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-20">
         <div className="flex flex-col py-8 px-4 justify-between items-center bg-primary w-[80%] md:w-[400px] lg:w-[30%] h-[60%] lg:h-[50%] opacity-100 shadow-xl rounded-md">
-          <span className="text-2xl">Transaction submit</span>
+          {/* <span className="text-2xl">Transaction submit</span> */}
           {submissionError ? (
-            <>
+            <div className="flex flex-col justify-center items-center flex-1 gap-8">
               <FormError className="text-center text-md">
                 {submissionError}
               </FormError>
               <ErrorIcon />
-            </>
+            </div>
           ) : (
             status
           )}
