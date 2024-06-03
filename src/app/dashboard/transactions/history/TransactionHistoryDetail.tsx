@@ -57,16 +57,18 @@ export default function TransactionHistoryDetail({
   }
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 border border-tertiary bg-secondary rounded m-4">
       <div className="h-12 px-4 flex items-center border-b-tertiary">
         <Button
           onClick={() => router.push("/dashboard/transactions/history/")}
-          className="flex gap-1 items-center bg-accent text-primary rounded border !h-6 !py-[2px] !px-3 w-fit"
+          className="flex gap-1 items-center bg-accent text-primary rounded border !h-6 !py-[2px] !px-[6px] w-fit"
         >
           <FontAwesomeIcon icon={faArrowLeft} />
           {/* <span>Back to list</span> */}
         </Button>
-        <h1 className="flex-1 text-center text-xl">Transaction Details</h1>
+        <h1 className="flex-1 text-center text-xl font-bold">
+          Transaction Details
+        </h1>
       </div>
 
       {tx === undefined ? (
@@ -76,14 +78,16 @@ export default function TransactionHistoryDetail({
         </div>
       ) : (
         <>
-          <span className="break-words text-sm self-center text-center max-w-[80vw] my-2">
+          {/* <span className="break-words text-xs self-center text-center max-w-[80vw] my-2 border-b">
             {tx.id}
-          </span>
+          </span> */}
           <div className="flex flex-col px-4 gap-0">
-            {/* <div className="flex justify-between items-center  break-words">
-            <span className="text-xl flex-1">Hash</span>
-            <span className="text-xs">{tx.id}</span>
-          </div> */}
+            <div className="flex justify-between items-center gap-6">
+              <span className="text-md font-bold flex-1">Hash</span>
+              <span className="text-xs break-words min-w-1 text-right">
+                {tx.id}
+              </span>
+            </div>
 
             <div className="flex justify-between items-center">
               <span className="text-md font-bold flex-1">Date</span>
