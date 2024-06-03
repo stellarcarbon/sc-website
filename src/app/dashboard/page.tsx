@@ -43,7 +43,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <span className="text-xs">
+          <span className="text-xs mt-2">
             This is the total amount of CARBON tokens that have been sinked
             using this wallet.
           </span>
@@ -58,7 +58,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <span className="text-xs">
+          <span className="text-xs mt-2">
             The amount of fractional carbon certificates that are still pending
             a certificate claim.{" "}
             <Link className="underline text-accentSecondary" href="">
@@ -76,7 +76,7 @@ export default function Dashboard() {
 
         <div className="flex justify-between items-center border-b border-b-tertiary">
           <span className="text-white">Pubkey</span>
-          <span className="text-[10px] break-words w-[60%] ">
+          <span className="text-[10px] break-words w-[60%] text-right">
             {walletConnection?.stellarPubKey}
           </span>
         </div>

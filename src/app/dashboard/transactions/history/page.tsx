@@ -47,21 +47,6 @@ export default function PendingRetirements() {
       <div {...swipeHandlers} className="flex-1 flex flex-col justify-center">
         <TransactionsLoading />
       </div>
-      // <div
-      //   {...swipeHandlers}
-      //   className="mx-2 text-center flex-1 flex flex-col justify-center items-center"
-      // >
-      //   <Blocks
-      //     height="80"
-      //     width="80"
-      //     color="#ff0000"
-      //     ariaLabel="blocks-loading"
-      //     wrapperStyle={{}}
-      //     wrapperClass="blocks-wrapper"
-      //     visible={true}
-      //   />
-      //   <span>Fetching your transaction history...</span>
-      // </div>
     );
   } else if (myTransactions.length === 0) {
     return (
