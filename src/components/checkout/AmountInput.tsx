@@ -34,7 +34,6 @@ export default function AmountInput({
 
   const { call: carbonToUsd, cancel: cancelCarbonToUsd } = useMemo(() => {
     return debounce(async (carbonAmount: number) => {
-      console.log(carbonAmount);
       if (carbonAmount === 0) {
         setQuote(0);
         setHasError(false);
@@ -53,9 +52,6 @@ export default function AmountInput({
           const newUsdAmount = Number(response.total_cost);
           if (quote !== newUsdAmount) {
             setQuote(Math.round(newUsdAmount * 100) / 100);
-            // setStatusMessage(
-            //   `${carbonAmount} CARBON costs $ ${newUsdAmount.toFixed(2)}`
-            // );
           }
         })
         .catch((err) => {
@@ -70,7 +66,6 @@ export default function AmountInput({
 
   const { call: usdToCarbon, cancel: cancelUsdToCarbon } = useMemo(() => {
     return debounce(async (usdAmount: number) => {
-      console.log("usdToCarbon");
       if (usdAmount === 0) {
         setValue("tonnes", 0);
         // setCarbonAmount(0);
@@ -90,9 +85,6 @@ export default function AmountInput({
           const newCarbonAmount = Number(response.total_carbon);
           if (tonnes !== newCarbonAmount) {
             setValue("tonnes", newCarbonAmount);
-            // setStatusMessage(
-            //   `${newCarbonAmount} CARBON costs $ ${usdAmount.toFixed(2)}`
-            // );
           }
         })
         .catch((err) => {
@@ -106,18 +98,13 @@ export default function AmountInput({
   }, [setValue, tonnes]);
 
   useEffect(() => {
-    console.log("quote", activeInput);
     if (activeInput === "usd") {
       setIsLoading(true);
       usdToCarbon(quote);
-      // return () => {
-      //   cancelUsdToCarbon();
-      // };
     }
   }, [quote]);
 
   useEffect(() => {
-    console.log("o", activeInput);
     if (activeInput === "carbon") {
       setIsLoading(true);
       carbonToUsd(tonnes);
@@ -180,24 +167,18 @@ export default function AmountInput({
             {statusMessage}
           </span>
         ) : (
-          <div className="flex justify-center items-center text-lg text-center">
-            <span>{tonnes}</span>
-            <CARBONCurrencyIcon className="mx-1" />
-            <span className="">costs $ {quote}</span>
+          <div className="w-full flex justify-center gap-1 items-center text-lg text-center">
+            <div className="flex items-center">
+              <span>{tonnes}</span>
+              <CARBONCurrencyIcon className="mx-1" />
+            </div>
+            <span>costs</span>
+            <div className="flex items-center">
+              <span>$</span>
+              <span className="ml-[1px]"> {quote}</span>
+            </div>
           </div>
         )}
-
-        {/* {!isLoading && !hasError ? (
-          <div className="flex justify-center items-center text-lg text-center">
-            <span>{tonnes}</span>
-            <CARBONCurrencyIcon className="mx-1" />
-            <span className="">costs $ {quote}</span>
-          </div>
-        ) : (
-          <span className={`text-center mx-6 text-red-500 text-xs`}>
-            {statusMessage}
-          </span>
-        )} */}
       </div>
     </div>
   );
