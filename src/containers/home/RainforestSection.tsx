@@ -45,16 +45,20 @@ export default function RainforestIntro() {
 
     window.addEventListener("scroll", trackScroll, { passive: true });
 
-    return () => {
-      window.removeEventListener("scroll", trackScroll);
-    };
+    return () => {};
   }, []);
 
   useEffect(() => {
+    const trackScroll = () => {
+      const position = window.scrollY;
+      setScrollPosition(position);
+    };
+
     const curPos =
       document.documentElement.scrollTop || document.body.scrollTop;
     setScrollPosition(curPos);
-    // hideTopBar();
+
+    window.addEventListener("scroll", trackScroll, { passive: true });
 
     const chev = chevDown.current;
     const handleAnimationEnd = () => {
@@ -67,6 +71,7 @@ export default function RainforestIntro() {
 
     return () => {
       chev?.removeEventListener("animationend", handleAnimationEnd);
+      window.removeEventListener("scroll", trackScroll);
     };
   }, []);
 
