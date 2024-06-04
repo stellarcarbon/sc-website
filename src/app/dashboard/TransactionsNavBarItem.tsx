@@ -56,7 +56,9 @@ export default function HistoryNavBarItem({
       {
         <div
           className={`${
-            isSelected ? "animate-navbarstart" : "animate-navbarend"
+            isSelected
+              ? "animate-dashboardnavbarstart"
+              : "animate-dashboardnavbarend"
           } absolute opacity-0 bottom-0 w-[80%] h-1 bg-accentSecondary`}
         ></div>
       }

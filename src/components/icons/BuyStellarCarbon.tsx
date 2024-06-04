@@ -54,7 +54,7 @@ export default function BuyStellarCarbonIcon({
           xmlSpace="preserve"
           y="60"
         >
-          sink carbon now
+          sink carbon now!
         </text>
         <use
           id="logo"

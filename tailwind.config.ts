@@ -39,8 +39,10 @@ const config: Config = {
 
       animation: {
         fade: "fadeOut 1s ease-in forwards",
-        navbarstart: "navbarIn .2s ease-in forwards",
-        navbarend: "navbarOut .2s ease-in forwards",
+        dashboardnavbarstart: "dashboardNavbarIn .2s ease-in forwards",
+        dashboardnavbarend: "dashboardNavbarOut .2s ease-in forwards",
+        showtopbar: "topbarIn .3s ease-in forwards",
+        hidetopbar: "topbarOut .3s ease-in forwards",
       },
 
       keyframes: () => ({
@@ -48,13 +50,21 @@ const config: Config = {
           "0%": { opacity: "100" },
           "100%": { opacity: "0" },
         },
-        navbarIn: {
+        dashboardNavbarIn: {
           "0%": { width: "0%", opacity: "0" },
           "100%": { width: "80%", opacity: "100" },
         },
-        navbarOut: {
+        dashboardNavbarOut: {
           "0%": { width: "80%" },
           "100%": { width: "0%" },
+        },
+        topbarIn: {
+          "0%": { top: "-80px" },
+          "100%": { top: "0px" },
+        },
+        topbarOut: {
+          "0%": { top: "0px" },
+          "100%": { top: "-80px" },
         },
       }),
     },

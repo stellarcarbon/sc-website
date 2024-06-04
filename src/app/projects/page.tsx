@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 
 export default function ProjectsPage() {
   return (
-    <main className="flex flex-col items-center font-noto">
+    <main className="flex flex-col items-center font-noto mt-[80px]">
       {/* Current project title with whale */}
       <div className="whale-bg pt-4 md:pt-8 w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-8 m-auto">
