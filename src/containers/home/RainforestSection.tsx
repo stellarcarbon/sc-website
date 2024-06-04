@@ -9,7 +9,6 @@ import { useEffect, useRef, useState } from "react";
 export default function RainforestIntro() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const chevDown = useRef<HTMLDivElement>(null);
-  const { hideTopBar, isTopBarShown, showTopBar } = useAppContext();
 
   useEffect(() => {
     function adjustBackgroundSize() {
@@ -46,16 +45,10 @@ export default function RainforestIntro() {
 
     window.addEventListener("scroll", trackScroll, { passive: true });
 
-    if (scrollPosition > 0) {
-      showTopBar();
-    } else {
-      // hideTopBar();
-    }
-
     return () => {
       window.removeEventListener("scroll", trackScroll);
     };
-  }, [hideTopBar, isTopBarShown, showTopBar, scrollPosition]);
+  }, []);
 
   useEffect(() => {
     const curPos =
@@ -74,7 +67,6 @@ export default function RainforestIntro() {
 
     return () => {
       chev?.removeEventListener("animationend", handleAnimationEnd);
-      showTopBar();
     };
   }, []);
 
