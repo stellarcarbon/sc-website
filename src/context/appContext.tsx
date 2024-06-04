@@ -52,11 +52,6 @@ type AppContext = {
   openDrawer: () => void;
   closeDrawer: () => void;
 
-  // TopBar
-  isTopBarShown: boolean;
-  showTopBar: () => void;
-  hideTopBar: () => void;
-
   // Personal transactions on dashboard
   myTransactions: MyTransactionRecord[] | null;
   setMyTransactions: Dispatch<SetStateAction<MyTransactionRecord[] | null>>;
@@ -87,10 +82,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
-
-  const [isTopBarShown, setIsTopBarShown] = useState<boolean>(true);
-  const showTopBar = () => setIsTopBarShown(true);
-  const hideTopBar = () => setIsTopBarShown(false);
 
   const pathname = usePathname();
 
@@ -167,9 +158,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       isDrawerOpen,
       openDrawer,
       closeDrawer,
-      isTopBarShown,
-      showTopBar,
-      hideTopBar,
+
       myTransactions,
       setMyTransactions,
     };
@@ -178,7 +167,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     supportedWallets,
     walletConnection,
     isDrawerOpen,
-    isTopBarShown,
     myTransactions,
   ]);
 

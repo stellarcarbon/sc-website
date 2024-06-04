@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function TopBar() {
-  const { openDrawer, isTopBarShown } = useAppContext();
+  const { openDrawer } = useAppContext();
   const pathname = usePathname();
   const [scrollPosition, setScrollPosition] = useState<number>();
   const [initial, setInitial] = useState<boolean>(true);
