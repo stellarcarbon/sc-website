@@ -5,15 +5,40 @@ import TopBarLink from "./TopBarLink";
 import { useAppContext } from "@/context/appContext";
 import HamburgerButton from "./HamburgerButton";
 import StellarCarbonIcon from "./icons/StellarCarbonIcon";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function TopBar() {
   const { openDrawer } = useAppContext();
+  const pathname = usePathname();
+  const [scrollPosition, setScrollPosition] = useState<number>();
+  const [initial, setInitial] = useState<boolean>(true);
+
+  useEffect(() => {
+    function updateScrollPosition() {
+      const pos = window.scrollY;
+      setScrollPosition(pos);
+      setInitial(false);
+    }
+
+    window.addEventListener("scroll", updateScrollPosition);
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollPosition);
+    };
+  }, []);
 
   return (
     <header
-      className={`flex w-full justify-between items-center h-20 z-10 relative
+      className={`flex w-full justify-between items-center h-20 z-[1000] fixed
       border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]
-    bg-primary border-secondary`}
+    bg-primary border-secondary ${
+      pathname === "/" && (scrollPosition === 0 || scrollPosition === undefined)
+        ? initial
+          ? "hidden"
+          : "animate-hidetopbar"
+        : "animate-showtopbar"
+    }`}
     >
       <Link href="/">
         <StellarCarbonIcon className="ml-[2vw] text-accent" />

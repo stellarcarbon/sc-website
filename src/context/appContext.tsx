@@ -158,6 +158,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       isDrawerOpen,
       openDrawer,
       closeDrawer,
+
       myTransactions,
       setMyTransactions,
     };

@@ -9,7 +9,6 @@ import { useAppContext } from "@/context/appContext";
 
 export default function App({ children }: { children: React.ReactNode }) {
   const { isDrawerOpen } = useAppContext();
-
   if (isDrawerOpen) {
     return <Drawer />;
   }
