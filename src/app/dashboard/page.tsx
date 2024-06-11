@@ -28,8 +28,6 @@ export default function Dashboard() {
     }
   }, [walletConnection, router]);
 
-  console.log(window.scrollY);
-
   return (
     <div
       {...swipeHandlers}

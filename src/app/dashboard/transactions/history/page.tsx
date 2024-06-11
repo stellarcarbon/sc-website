@@ -11,6 +11,7 @@ import { Blocks } from "react-loader-spinner";
 import { useSwipeable } from "react-swipeable";
 import TransactionHistoryDetail from "./TransactionHistoryDetail";
 import TransactionsLoading from "./TransactionsLoading";
+import { useSCRouter } from "@/app/utils";
 
 export default function PendingRetirements() {
   const { myTransactions, setMyTransactions } = useAppContext();
