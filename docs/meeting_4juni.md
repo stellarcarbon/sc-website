@@ -39,3 +39,10 @@ Tegels op pending retirements hetzelfde als op Past Transactions. Behalve:
 
 - Er moet een countdown bij.
 - Hoeveel van het totaalbedrag in deze transactie is al retired?
+
+# Added notes
+
+Ledger --> Activity
+
+Ledger.Pending retirements --> "Transactions that are pending their retirement"
+Ledger.Transaction history --> "Transactions that have been fully retired"
