@@ -1,3 +1,4 @@
+import { useSCRouter } from "@/app/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
@@ -8,7 +9,7 @@ interface DrawerLinkProps {
 
 export default function DrawerLink({ children, href }: DrawerLinkProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useSCRouter();
 
   const isCurrentRoute = () => {
     if (href === "/") return pathname === "/";

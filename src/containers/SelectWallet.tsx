@@ -11,6 +11,7 @@ import FormError from "../components/FormError";
 import { PersonalDetails } from "@/app/types";
 import LoadingWallets from "../components/wallet/LoadingWallets";
 import { useRouter } from "next/navigation";
+import { useSCRouter } from "@/app/utils";
 
 export default function SelectWallet() {
   const { connectWallet, connectionError, supportedWallets, walletConnection } =
@@ -26,7 +27,7 @@ export default function SelectWallet() {
   const [tncError, setTncError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
 
-  const router = useRouter();
+  const router = useSCRouter();
 
   const selectWallet = (wType: WalletType) => {
     if (selectedWalletType === wType) {

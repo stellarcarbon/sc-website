@@ -7,6 +7,7 @@ import { HTMLProps, ReactNode, useEffect, useMemo, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useSCRouter } from "../utils";
 
 interface NavBarItemProps extends HTMLProps<HTMLDivElement> {
   item: DashboardTabs;
@@ -34,7 +35,7 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
   },
   [DashboardTabs.SINK]: {
     label: "Sink CARBON",
-    icon: <CARBONCurrencyIcon width={17} height={17} />,
+    icon: <CARBONCurrencyIcon width={18} height={18} />,
     route: "/dashboard/sink/",
   },
   [DashboardTabs.HISTORY]: {
@@ -46,7 +47,7 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
 
 export default function NavBarItem({ item, first, last }: NavBarItemProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useSCRouter();
 
   const p: DashboardTabProps = useMemo(
     () => DashboardTabPropsConfig[item],
@@ -82,7 +83,7 @@ export default function NavBarItem({ item, first, last }: NavBarItemProps) {
   return (
     <div
       onClick={navigate}
-      className={`relative cursor-pointer p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-1
+      className={`relative cursor-pointer p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-[4px]
       ${isSelected ? "text-accentSecondary bg-secondary" : ""} ${
         first ? "md:rounded-tl" : ""
       } ${last ? "md:rounded-tr" : ""}`}

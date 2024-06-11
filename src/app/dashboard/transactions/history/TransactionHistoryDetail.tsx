@@ -11,6 +11,7 @@ import { useEffect, useMemo } from "react";
 import TransactionsLoading from "./TransactionsLoading";
 import { useSwipeable } from "react-swipeable";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import { useSCRouter } from "@/app/utils";
 
 interface TransactionHistoryDetailProps {
   hash: string;
@@ -19,7 +20,7 @@ interface TransactionHistoryDetailProps {
 export default function TransactionHistoryDetail({
   hash,
 }: TransactionHistoryDetailProps) {
-  const router = useRouter();
+  const router = useSCRouter();
   const { myTransactions, setMyTransactions } = useAppContext();
 
   useEffect(() => {

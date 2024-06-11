@@ -1,11 +1,12 @@
 import { HTMLProps } from "react";
 import BuyStellarCarbonIcon from "./icons/BuyStellarCarbon";
 import { useRouter } from "next/navigation";
+import { useSCRouter } from "@/app/utils";
 
 interface CTAButtonProps extends HTMLProps<HTMLButtonElement> {}
 
 export default function CTAButton({ className = "", onClick }: CTAButtonProps) {
-  const router = useRouter();
+  const router = useSCRouter();
   return (
     <button
       type="button"

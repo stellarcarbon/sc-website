@@ -13,13 +13,16 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { CARBON_SINK_ACCOUNT, FrontpageTransactionRecord } from "../types";
 import { Server, ServerApi } from "stellar-sdk/lib/horizon";
-import { PaymentsPageToFrontPageToTransactionsRecordArray } from "../utils";
+import {
+  PaymentsPageToFrontPageToTransactionsRecordArray,
+  useSCRouter,
+} from "../utils";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
 
 export default function AllTransactions() {
   const searchParams = useSearchParams();
-  const router = useRouter();
+  const router = useSCRouter();
 
   const [transactions, setTransactions] = useState<
     FrontpageTransactionRecord[]

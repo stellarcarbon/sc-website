@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef, RefObject } from "react";
 import { ServerApi } from "stellar-sdk/lib/horizon";
 import { CARBON_SINK_ACCOUNT, FrontpageTransactionRecord } from "./types";
+import { useRouter } from "next/navigation";
+import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export function debounce<T extends (...args: any[]) => void>(
   func: T,
@@ -97,4 +99,25 @@ export async function PaymentsPageToFrontPageToTransactionsRecordArray(
   );
 
   return output;
+}
+
+const defaultNavigationOptions = {
+  scroll: true,
+};
+
+export function useSCRouter() {
+  const router = useRouter();
+
+  const scPush = (url: string, options: NavigateOptions = {}) => {
+    const mergedOptions = { ...defaultNavigationOptions, ...options };
+    router.push(url, mergedOptions);
+    if (mergedOptions.scroll) {
+      window.scrollTo(0, 0);
+    }
+  };
+
+  return {
+    ...router,
+    push: scPush,
+  };
 }

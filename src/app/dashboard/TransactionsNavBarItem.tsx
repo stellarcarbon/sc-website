@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { HTMLProps, useEffect, useMemo, useState } from "react";
+import { useSCRouter } from "../utils";
 
 interface TransactionsNavBarItemProps extends HTMLProps<HTMLDivElement> {
   item: TransactionsTabs;
@@ -31,7 +32,7 @@ const HistoryTabPropsConfig: Record<TransactionsTabs, TransactionsTabProps> = {
 export default function HistoryNavBarItem({
   item,
 }: TransactionsNavBarItemProps) {
-  const router = useRouter();
+  const router = useSCRouter();
   const pathname = usePathname();
 
   const p: TransactionsTabProps = useMemo(

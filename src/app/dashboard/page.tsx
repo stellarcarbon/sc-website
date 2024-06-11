@@ -10,10 +10,11 @@ import DeleteIcon from "@/components/icons/DeleteIcon";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSwipeable, SwipeDirections } from "react-swipeable";
 import Link from "next/link";
+import { useSCRouter } from "../utils";
 
 export default function Dashboard() {
   const { walletConnection, disconnectWallet } = useAppContext();
-  const router = useRouter();
+  const router = useSCRouter();
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => router.push("/dashboard/sink"),
@@ -26,6 +27,8 @@ export default function Dashboard() {
       router.push("/wallet");
     }
   }, [walletConnection, router]);
+
+  console.log(window.scrollY);
 
   return (
     <div

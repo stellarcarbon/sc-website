@@ -1,5 +1,6 @@
 "use client";
 
+import { useSCRouter } from "@/app/utils";
 import Button from "@/components/Button";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Link from "next/link";
@@ -7,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useSwipeable } from "react-swipeable";
 
 export default function DashboardMyTransactions() {
-  const router = useRouter();
+  const router = useSCRouter();
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: (ed) => {

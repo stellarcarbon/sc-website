@@ -2,12 +2,12 @@
 
 import { useSwipeable } from "react-swipeable";
 import CheckoutForm from "../../../components/checkout/CheckoutForm";
-import { useRouter } from "next/navigation";
 import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ApiError, CarbonService, SinkingResponse } from "@/client";
 import FormStatusModal from "@/components/checkout/FormStatusModal";
+import { useSCRouter } from "@/app/utils";
 
 export interface SinkingTransaction {
   transactionPostRequest?: SinkCarbonXdrPostRequest;
@@ -17,7 +17,7 @@ export interface SinkingTransaction {
 export default function DashboardSink() {
   const { walletConnection } = useAppContext();
 
-  const router = useRouter();
+  const router = useSCRouter();
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => router.push("/dashboard/transactions"),

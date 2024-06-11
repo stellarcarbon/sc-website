@@ -7,11 +7,12 @@ import { useRouter, usePathname } from "next/navigation";
 import CTAButton from "./CTAButton";
 import StellarCarbonIcon from "./icons/StellarCarbonIcon";
 import Link from "next/link";
+import { useSCRouter } from "@/app/utils";
 
 export default function Drawer() {
   const { closeDrawer } = useAppContext();
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useSCRouter();
   return (
     <div className="flex flex-col min-w-screen min-h-screen bg-primary border-secondary">
       <div className="flex justify-between items-center pl-[2vw] pr-[22px] h-20 border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)] border-secondary">

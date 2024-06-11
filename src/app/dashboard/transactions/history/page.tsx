@@ -14,7 +14,7 @@ import TransactionsLoading from "./TransactionsLoading";
 
 export default function PendingRetirements() {
   const { myTransactions, setMyTransactions } = useAppContext();
-  const router = useRouter();
+  const router = useSCRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
