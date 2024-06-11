@@ -104,7 +104,7 @@ export default function RainforestIntro() {
             projects, making it effortless to compensate for your remaining
             emissions.
           </span> */}
-          <div className="flex flex-col items-center text-start gap-4 leading-8 ">
+          <div className="text-sm md:text-lg lg:text-xl flex flex-col items-center text-center  gap-4 leading-8 ">
             <span>
               We provide a simple way for{" "}
               <a
@@ -116,12 +116,12 @@ export default function RainforestIntro() {
               </a>{" "}
               blockchain users to compensate for their CO2 emissions.
             </span>
-            <span>
-              By sinking CARBON you are contributing to high-integrity nature
-              based projects. Find out more below.
-            </span>
           </div>
-          <CTAButton className="self-center mt-8 md:mt-8" />
+          <CTAButton className="self-center" />
+          <span className="text-sm md:text-base">
+            By sinking CARBON you are contributing to high-integrity nature
+            based projects. Find out more below.
+          </span>
         </div>
         <div
           ref={chevDown}

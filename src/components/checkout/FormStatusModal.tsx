@@ -71,10 +71,10 @@ export default function FormStatusModal({
             </div>
           </div>
           <Button
-            className="!py-2 w-[200px] font-bold"
+            className="!py-2 w-[200px] font-bold !bg-accentSecondary !text-white hover:!bg-tertiary"
             onClick={confirmSubmission}
           >
-            Confirm & submit
+            Sign with wallet
           </Button>
         </div>
       </>
