@@ -56,8 +56,8 @@ export const CARBON_ACCOUNT =
   "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";
 
 export enum FormStatusMessages {
-  confirm = "Please confirm the transaction to continue to sign it with your wallet.",
   creating = "Creating your transaction using Stellarcarbon API...",
+  confirm = "Please confirm the transaction to continue to sign it with your wallet.",
   signTransaction = "Sign the transaction using your wallet in the pop-up.",
   awaitBlockchain = "Transaction signed.\n Submitting to the Stellar blockchain....",
   completed = "Success! (did not really post to blockchain though)",

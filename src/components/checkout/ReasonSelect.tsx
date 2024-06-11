@@ -23,8 +23,10 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
     setValue("reason", event.target.value);
   };
 
+  // TODO: enforce max length of reason message 29 bytes
+
   return (
-    <div className="flex flex-col p-4 md:px-8 gap-1">
+    <div className="flex flex-col gap-1">
       <span className="text-xl font-bold mb-0">Add a label (optional)</span>
       <span className="text-xs">Select a reason...</span>
       <div className="flex gap-2 my-2">
@@ -43,7 +45,7 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
       <textarea
         onChange={onReasonTextChange}
         value={reason}
-        className="my-2 text-black p-1 md:w-[80%]"
+        className="my-2 text-black py-1 px-2 md:w-[80%] rounded-sm"
       />
     </div>
   );

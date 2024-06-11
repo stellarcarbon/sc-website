@@ -113,7 +113,7 @@ export default function AmountInput({
   }, [tonnes]);
 
   return (
-    <div className="flex flex-col p-4 md:px-8 gap-1">
+    <div className="flex flex-col gap-1">
       <h1 className="text-xl text-start font-bold">Choose amount to sink</h1>
       <span className="text-xs">
         Use the exchange rate calculator to determine the amount of CARBON you
@@ -128,19 +128,15 @@ export default function AmountInput({
           <input
             type="number"
             inputMode="numeric"
-            className="px-2 py-1 w-full text-black"
+            className="px-2 py-1 w-full text-black rounded-sm"
             {...register("tonnes")}
           />
         </div>
 
-        {isLoading ? (
-          <Blocks width={48} height={48} />
-        ) : (
-          <FontAwesomeIcon
-            icon={faArrowRightArrowLeft}
-            className="px-4 py-4 text-xl"
-          />
-        )}
+        <FontAwesomeIcon
+          icon={faArrowRightArrowLeft}
+          className="px-4 py-4 text-xl"
+        />
 
         <div className="relative w-[35%]">
           <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
@@ -148,7 +144,7 @@ export default function AmountInput({
           </div>
           <input
             type="text"
-            className="px-2 pl-7 py-1 w-full text-black"
+            className="px-2 pl-7 py-1 w-full text-black rounded-sm"
             value={quote || ""}
             onChange={(e) => {
               setIsLoading(true);
@@ -160,15 +156,12 @@ export default function AmountInput({
       </div>
 
       <div
-        className={`${
-          isLoading ? "" : "bg-primary border rounded border-accentSecondary"
-        } px-4 h-16 flex flex-col justify-center items-center `}
+        className={`px-4 h-20 mt-2 flex flex-col justify-center items-center bg-primary border rounded border-accentSecondary`}
       >
         {isLoading ? (
-          // <Blocks width={48} height={48} />
-          <></>
+          <Blocks width={48} height={48} />
         ) : hasError ? (
-          <span className={`text-center mx-6 text-red-500 text-xs`}>
+          <span className={`text-center mx-6 text-red-500 text-sm`}>
             {statusMessage}
           </span>
         ) : (
