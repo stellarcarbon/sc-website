@@ -8,7 +8,7 @@ interface CurrencySelectProps {
 
 export default function CurrencySelect({ register }: CurrencySelectProps) {
   return (
-    <div className="flex flex-col p-4 md:px-8 gap-1">
+    <div className="flex flex-col gap-1">
       <span className="text-xl font-bold">How would you like to pay?</span>
       <span className="text-xs mb-2">
         {`Choose a preferred payment asset to use or select "any".`}

@@ -32,9 +32,7 @@ export default function SelectReasonButton({
     <button
       type="button"
       className={`text-black shadow-md p-2 border w-16 h-16 rounded ${
-        isSelected
-          ? " border-accentSecondary !text-accent bg-secondary"
-          : "bg-white"
+        isSelected ? " border-accent !text-accent bg-tertiary" : "bg-white"
       }`}
       disabled={disabled}
       onClick={onClick}

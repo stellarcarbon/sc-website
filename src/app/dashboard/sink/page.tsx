@@ -1,18 +1,17 @@
 "use client";
 
 import { useSwipeable } from "react-swipeable";
-import CheckoutForm from "./CheckoutForm";
+import CheckoutForm from "../../../components/checkout/CheckoutForm";
 import { useRouter } from "next/navigation";
 import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ApiError, CarbonService, SinkingResponse } from "@/client";
-import FormStatusModal from "@/containers/FormStatusModal";
-import { AxiosError } from "axios";
+import FormStatusModal from "@/components/checkout/FormStatusModal";
 
 export interface SinkingTransaction {
-  transactionPostRequest: SinkCarbonXdrPostRequest;
-  estimatedPriceInDollars: number;
+  transactionPostRequest?: SinkCarbonXdrPostRequest;
+  transactionPostResponse?: SinkingResponse;
 }
 
 export default function DashboardSink() {
@@ -33,7 +32,10 @@ export default function DashboardSink() {
   const [submissionErrorMessage, setSubmissionErrorMessage] =
     useState<string>();
   const [sinkingTransaction, setSinkingTransaction] =
-    useState<SinkingTransaction>();
+    useState<SinkingTransaction>({
+      transactionPostRequest: undefined,
+      transactionPostResponse: undefined,
+    });
 
   const formStatusRef = useRef<boolean | null>(null);
 
@@ -51,76 +53,63 @@ export default function DashboardSink() {
     }
   };
 
-  const confirmSubmission = () => {
-    setSubmissionStatusMessage(FormStatusMessages.creating);
+  const signTransaction = useCallback(() => {
+    if (sinkingTransaction.transactionPostResponse === undefined) {
+      setSubmissionErrorMessage("Cannot find signed transaction.");
+    }
 
-    CarbonService.buildSinkCarbonXdrSinkCarbonXdrPost(
-      sinkingTransaction?.transactionPostRequest!
-    )
-      .then((response) => {
-        signTransaction(response);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error instanceof ApiError) {
-          console.log(error.body.detail[0].msg);
-          setSubmissionErrorMessage(error.body.detail[0].msg);
-        } else if (error instanceof AxiosError) {
-          setSubmissionErrorMessage(
-            `Error connecting to Stellarcarbon API, please retry or contact support.`
-          );
-        } else {
-          setSubmissionErrorMessage("Unknown error.");
-        }
-      });
-  };
+    setSubmissionStatusMessage(FormStatusMessages.signTransaction);
 
-  const signTransaction = useCallback(
-    (sinkingResponse: SinkingResponse) => {
-      setSubmissionStatusMessage(FormStatusMessages.signTransaction);
+    if (formStatusRef.current) {
+      walletConnection?.kit
+        .sign({
+          xdr: sinkingTransaction.transactionPostResponse!.tx_xdr,
+          publicKey: walletConnection.stellarPubKey,
+        })
+        .then((response) => {
+          console.log("signing ok");
+          setSubmissionStatusMessage(FormStatusMessages.awaitBlockchain);
 
-      if (formStatusRef.current) {
-        walletConnection?.kit
-          .sign({
-            xdr: sinkingResponse.tx_xdr,
-            publicKey: walletConnection.stellarPubKey,
-          })
-          .then((response) => {
-            console.log("signing ok");
-            setSubmissionStatusMessage(FormStatusMessages.awaitBlockchain);
-
-            setTimeout(() => {
-              setSubmissionStatusMessage(FormStatusMessages.completed);
-            }, 3000);
-          })
-          .catch((error) => {
-            console.log("signing error", error);
-            setSubmissionErrorMessage("Transaction signing failed.");
-          })
-          .finally(() => {
-            console.log("signing finally");
-          });
-      }
-    },
-    [walletConnection]
-  );
+          setTimeout(() => {
+            setSubmissionStatusMessage(FormStatusMessages.completed);
+          }, 3000);
+        })
+        .catch((error) => {
+          console.log("signing error", error);
+          setSubmissionErrorMessage("Transaction signing failed.");
+        })
+        .finally(() => {
+          console.log("signing finally");
+        });
+    }
+  }, [walletConnection, sinkingTransaction]);
 
   const initSubmitSinkingTransaction = useCallback(
-    (sinkRequest: SinkCarbonXdrPostRequest, quote: number) => {
+    async (sinkRequest: SinkCarbonXdrPostRequest, quote: number) => {
       if (!walletConnection?.isAnonymous) {
         sinkRequest.email = walletConnection?.personalDetails?.useremail;
       }
 
       setShowFormStatusModal(true);
+      setSubmissionStatusMessage(FormStatusMessages.creating);
 
-      setSubmissionStatusMessage(FormStatusMessages.confirm);
+      try {
+        const response =
+          await CarbonService.buildSinkCarbonXdrSinkCarbonXdrPost(sinkRequest);
 
-      setSinkingTransaction({
-        transactionPostRequest: sinkRequest,
-        estimatedPriceInDollars: quote,
-      });
+        setSinkingTransaction({
+          transactionPostRequest: sinkRequest,
+          transactionPostResponse: response,
+        });
+
+        setSubmissionStatusMessage(FormStatusMessages.confirm);
+      } catch (error) {
+        setSubmissionErrorMessage(
+          `Error building transaction with Stellarcarbon API. ${error}`
+        );
+      }
     },
-    [signTransaction, walletConnection]
+    [walletConnection]
   );
 
   return (
@@ -130,7 +119,7 @@ export default function DashboardSink() {
         <FormStatusModal
           message={submissionStatusMessage}
           closeModal={closeModal}
-          confirmSubmission={confirmSubmission}
+          confirmSubmission={signTransaction}
           submissionError={submissionErrorMessage}
           sinkingTransaction={sinkingTransaction}
         />
