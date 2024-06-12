@@ -82,10 +82,10 @@ export default function DashboardMyTransactions() {
                 of your transactions that are pending retirement below.
               </span>
               <span>
-                To request a certificate with the Verra registry we need to
-                submit a round number. We recommend you add the remaining
-                fraction to request your certificate. Alternatively, you can
-                request your certificate for current whole number.
+                To request a personal certificate with the Verra registry we
+                need to submit a round number. We recommend you add the
+                remaining fraction to request your certificate. Alternatively,
+                you can request your certificate for current whole number.
               </span>
               <div className="flex justify-center gap-4 h-10">
                 <Button>Add remaining fraction</Button>

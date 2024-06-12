@@ -2,6 +2,7 @@
 
 import { SinkingTransaction } from "@/app/dashboard/sink/page";
 import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
+import { useViewportWidth } from "@/app/utils";
 import { SinkingResponse } from "@/client";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
@@ -27,13 +28,14 @@ export default function FormStatusModal({
   confirmSubmission,
   sinkingTransaction,
 }: FormStatusModalProps) {
+  const isWide = useViewportWidth();
   let status;
 
   if (message === FormStatusMessages.confirm) {
     status = (
       <>
         <span className="text-center">{message}</span>
-        <div className="w-full flex flex-col gap-8 m-6 justify-center items-center bg-secondary py-6 rounded">
+        <div className="w-full flex flex-col gap-8 m-6 justify-center items-center bg-secondary py-6 rounded lg:max-w-[75%]">
           <div className="flex flex-col w-full px-6 items-center gap-2 text-lg">
             <div className="flex justify-between w-full items-center gap-4">
               <span>Sinking</span>
@@ -104,7 +106,7 @@ export default function FormStatusModal({
       <>
         <span className="text-center">{message}</span>
         <div className="my-4">
-          <SignIcon />
+          <SignIcon large={isWide} />
         </div>
       </>
       // </div>
@@ -139,7 +141,7 @@ export default function FormStatusModal({
     <>
       <div className="fixed top-0 left-0 w-screen h-screen bg-gray-600 opacity-80 z-10"></div>
       <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-20">
-        <div className="flex flex-col py-8 px-4 md:px-12 justify-between items-center bg-primary w-[80%] md:w-[400px] lg:w-[30%] h-[60%] lg:h-[50%] opacity-100 shadow-xl rounded-md">
+        <div className="flex flex-col py-8 px-4 md:px-12 justify-between items-center bg-primary w-[80%] md:w-[60%] lg:w-[60%] h-[60%] lg:h-[70%] max-w-[800px] opacity-100 shadow-xl rounded-md">
           {/* <span className="text-2xl">Transaction submit</span> */}
           {submissionError ? (
             <div className="flex flex-col justify-center items-center flex-1 gap-8">
