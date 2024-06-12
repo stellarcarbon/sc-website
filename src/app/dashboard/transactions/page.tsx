@@ -2,13 +2,16 @@
 
 import { useSCRouter } from "@/app/utils";
 import Button from "@/components/Button";
+import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSwipeable } from "react-swipeable";
 
 export default function DashboardMyTransactions() {
   const router = useSCRouter();
+  const { myTransactions } = useAppContext();
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: (ed) => {
@@ -54,6 +57,15 @@ export default function DashboardMyTransactions() {
       <hr className="w-[90%] my-4" />
 
       <div className="flex flex-col w-full gap-2">
+        {myTransactions?.map((transaction, index) => {
+          return (
+            <TransactionListItem
+              key={index}
+              transaction={transaction}
+              onClick={() => {}}
+            />
+          );
+        })}
         <div className="bg-secondary p-2">Item 1</div>
         <div className="bg-secondary p-2">Item 2</div>
         <div className="bg-secondary p-2">Item 3</div>
