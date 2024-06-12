@@ -52,10 +52,10 @@ const config: Config = {
         },
         dashboardNavbarIn: {
           "0%": { width: "0%", opacity: "0" },
-          "100%": { width: "80%", opacity: "100" },
+          "100%": { width: "100%", opacity: "100" },
         },
         dashboardNavbarOut: {
-          "0%": { width: "80%" },
+          "0%": { width: "100%" },
           "100%": { width: "0%" },
         },
         topbarIn: {
