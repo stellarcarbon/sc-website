@@ -1,6 +1,7 @@
 import { MyTransactionRecord } from "@/app/types";
 import Link from "next/link";
 import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
+import CountDownTimer from "../CountDownTimer";
 
 interface TransactionListItemProps {
   transaction: MyTransactionRecord;
@@ -44,6 +45,7 @@ export default function TransactionListItem({
         <span className="w-20 md:w-32">Memo</span>
         <span className=" truncate max-w-[60%]">{transaction.memo}</span>
       </div>
+      <CountDownTimer initialDuration={86400} />
     </div>
   );
 }
