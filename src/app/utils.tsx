@@ -123,7 +123,15 @@ export function useSCRouter() {
 }
 
 export const useViewportWidth = () => {
-  const [isWide, setIsWide] = useState(window.innerWidth > 768);
+  const mf = () => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth > 768;
+    } else {
+      return false;
+    }
+  };
+
+  const [isWide, setIsWide] = useState(mf);
 
   useEffect(() => {
     const handleResize = () => {

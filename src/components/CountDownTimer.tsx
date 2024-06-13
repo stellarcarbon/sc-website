@@ -55,12 +55,18 @@ export default function CountDownTimer({
   });
 
   return (
-    <div className="flex justify-between">
-      <div>
-        Countdown:{" "}
-        {timerComponents.length ? timerComponents : <span>Time is up!</span>}
-      </div>
-      <div>End Date: {targetDate.toLocaleString()}</div>
+    <div className="flex flex-col items-center text-xs">
+      {timerComponents.length ? (
+        <>
+          <span>Automatically retires in </span>
+          <span className="text-base">{timerComponents}</span>
+        </>
+      ) : (
+        <span>Time is up!</span>
+      )}
+      <span className="mt-4">Community retirement deadline</span>
+      <span className="text-base">{targetDate.toLocaleString()}</span>
+      {/* <div>End Date: {targetDate.toLocaleString()}</div> */}
     </div>
   );
 }

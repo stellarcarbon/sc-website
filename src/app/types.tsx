@@ -35,6 +35,8 @@ export interface MyTransactionRecord {
   asset: string;
   sinkAmount: number;
   // Add other relevant transaction properties here
+
+  isPending: boolean;
 }
 
 export interface FrontpageTransactionRecord {

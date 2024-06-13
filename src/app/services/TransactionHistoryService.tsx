@@ -19,6 +19,8 @@ export default class TransactionHistoryService {
   public static async fetchAccountHistory(
     account: string
   ): Promise<MyTransactionRecord[]> {
+    console.log("Fetching account history.");
+
     // All payments that CarbonSINK account is involved in.
     const payments = await this.server
       .payments()
@@ -72,6 +74,7 @@ export default class TransactionHistoryService {
           assetAmount: Number(assetAmount),
           asset,
           sinkAmount: Number(userPayment.amount),
+          isPending: false,
         } as MyTransactionRecord;
       })
     );

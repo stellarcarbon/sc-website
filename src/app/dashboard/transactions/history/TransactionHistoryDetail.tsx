@@ -1,7 +1,5 @@
 "use client";
 
-import TransactionHistoryService from "@/app/services/TransactionHistoryService";
-import { DEV_ACCOUNT } from "@/app/types";
 import Button from "@/components/Button";
 import { useAppContext } from "@/context/appContext";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -22,18 +20,6 @@ export default function TransactionHistoryDetail({
 }: TransactionHistoryDetailProps) {
   const router = useSCRouter();
   const { myTransactions, setMyTransactions } = useAppContext();
-
-  useEffect(() => {
-    // Load the transactions for this page on mount if not loaded yet.
-    if (myTransactions === null) {
-      TransactionHistoryService
-        // .fetchAccountHistory(walletConnection?.stellarPubKey!)1
-        .fetchAccountHistory(DEV_ACCOUNT)
-        .then((transactionRecords): void => {
-          setMyTransactions(transactionRecords);
-        });
-    }
-  }, [myTransactions, setMyTransactions]);
 
   const tx = useMemo(() => {
     console.log(myTransactions);
