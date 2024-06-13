@@ -101,14 +101,16 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   }, [pathname]);
 
   useEffect(() => {
-    // Load local storage if available
     if (walletConnection === null) {
+      // Load local storage if available
       const wc = LocalStorageService.loadWalletConnection();
       setWalletConnection(wc);
+    } else if (myTransactions === null) {
+      // Load personal transactions if not loaded yet.
     }
 
-    // Load supported wallets if not loaded yet.
     if (supportedWallets.length === 0) {
+      // Load supported wallets if not loaded yet.
       loadAvailableWallets();
     }
   }, [loadAvailableWallets, supportedWallets, walletConnection]);

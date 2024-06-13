@@ -26,8 +26,7 @@ export default function TransactionHistoryDetail({
   useEffect(() => {
     // Load the transactions for this page on mount if not loaded yet.
     if (myTransactions === null) {
-      const transactionHistoryService = new TransactionHistoryService();
-      transactionHistoryService
+      TransactionHistoryService
         // .fetchAccountHistory(walletConnection?.stellarPubKey!)1
         .fetchAccountHistory(DEV_ACCOUNT)
         .then((transactionRecords): void => {

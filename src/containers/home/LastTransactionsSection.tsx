@@ -13,8 +13,8 @@ export default function LastTransactionsSection() {
 
   useEffect(() => {
     async function fetchRecentTransactions() {
-      const txHistoryService = new TransactionHistoryService();
-      const txRecords = await txHistoryService.fetchRecentTransactions();
+      const txRecords =
+        await TransactionHistoryService.fetchRecentTransactions();
       setLastTransactions(txRecords);
     }
 

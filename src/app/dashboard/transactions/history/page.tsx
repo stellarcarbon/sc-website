@@ -14,7 +14,7 @@ import TransactionsLoading from "./TransactionsLoading";
 import { useSCRouter } from "@/app/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 
-export default function PendingRetirements() {
+export default function ActivityHistory() {
   const { myTransactions, setMyTransactions } = useAppContext();
   const router = useSCRouter();
   const searchParams = useSearchParams();
@@ -22,8 +22,7 @@ export default function PendingRetirements() {
   useEffect(() => {
     // Load the transactions for this page on mount if not loaded yet.
     if (myTransactions === null) {
-      const transactionHistoryService = new TransactionHistoryService();
-      transactionHistoryService
+      TransactionHistoryService
         // .fetchAccountHistory(walletConnection?.stellarPubKey!)1
         .fetchAccountHistory(DEV_ACCOUNT)
         .then((transactionRecords): void => {
