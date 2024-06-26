@@ -64,8 +64,8 @@ export default function CountDownTimer({
       ) : (
         <span>Time is up!</span>
       )}
-      <span className="mt-4">Community retirement deadline</span>
-      <span className="text-base">{targetDate.toLocaleString()}</span>
+      {/* <span className="mt-4">Community retirement deadline</span>
+      <span className="text-base">{targetDate.toLocaleString()}</span> */}
       {/* <div>End Date: {targetDate.toLocaleString()}</div> */}
     </div>
   );

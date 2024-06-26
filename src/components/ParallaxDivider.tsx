@@ -7,14 +7,18 @@ export enum ParallaxBackgrounds {
   AUTUMN_FOREST = "bg-autumnforest",
   RIVER_ESTUARY = "bg-riverestuary",
   JADE_WETLANDS = "bg-jadewetlands",
-  LAFAYETTE = "bg-lafayette"
+  LAFAYETTE = "bg-lafayette",
 }
 
 interface ParallaxDiverProps {
   image: ParallaxBackgrounds;
+  smaller?: boolean;
 }
 
-export default function ParallaxDivider({ image }: ParallaxDiverProps) {
+export default function ParallaxDivider({
+  image,
+  smaller = false,
+}: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
   const [transform, setTransform] = useState<number>(0);
 
@@ -25,11 +29,11 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
       const screenFactor = 50;
 
       const newT = Math.max(
-        Math.min(100, -(yCoordinate - window.scrollY) / 3),
+        Math.min(100, -(yCoordinate - window.scrollY) / 5),
         -400
       );
 
-      setTransform(newT);
+      setTransform(newT < 0 ? newT : 0);
     };
 
     window.addEventListener("scroll", parallaxer);
@@ -52,7 +56,9 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
           style={t}
         ></div>
       </div>
-      <div className="h-[200px] md:h-[300px] w-full"></div>
+      <div
+        className={`${smaller ? "h-[150px]" : "h-[200px] md:h-[300px]"} w-full`}
+      ></div>
     </div>
   );
 }
