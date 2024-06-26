@@ -1,36 +1,18 @@
 "use client";
 
-import TransactionHistoryService from "@/app/services/TransactionHistoryService";
-import { DEV_ACCOUNT } from "@/app/types";
-import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { Blocks } from "react-loader-spinner";
 import { useSwipeable } from "react-swipeable";
 import TransactionHistoryDetail from "./TransactionHistoryDetail";
 import TransactionsLoading from "./TransactionsLoading";
 import { useSCRouter } from "@/app/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 
-export default function PendingRetirements() {
+export default function ActivityHistory() {
   const { myTransactions, setMyTransactions } = useAppContext();
   const router = useSCRouter();
   const searchParams = useSearchParams();
-
-  useEffect(() => {
-    // Load the transactions for this page on mount if not loaded yet.
-    if (myTransactions === null) {
-      const transactionHistoryService = new TransactionHistoryService();
-      transactionHistoryService
-        // .fetchAccountHistory(walletConnection?.stellarPubKey!)1
-        .fetchAccountHistory(DEV_ACCOUNT)
-        .then((transactionRecords): void => {
-          setMyTransactions(transactionRecords);
-        });
-    }
-  }, [myTransactions, setMyTransactions]);
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
@@ -88,6 +70,7 @@ export default function PendingRetirements() {
                   `/dashboard/transactions/history/?hash=${transaction.id}`
                 )
               }
+              isPending={false}
             />
           ))}
         </div>

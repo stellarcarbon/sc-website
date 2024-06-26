@@ -15,6 +15,7 @@ import {
   WalletType,
 } from "stellar-wallets-kit";
 import {
+  DEV_ACCOUNT,
   MyTransactionRecord,
   PersonalDetails,
   WalletConnection,
@@ -26,6 +27,7 @@ import {
 import { usePathname } from "next/navigation";
 import LocalStorageService from "@/app/services/LocalStorageService";
 import { OpenAPI } from "@/client";
+import TransactionHistoryService from "@/app/services/TransactionHistoryService";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {
@@ -101,17 +103,33 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   }, [pathname]);
 
   useEffect(() => {
-    // Load local storage if available
     if (walletConnection === null) {
+      // Load local storage if available
       const wc = LocalStorageService.loadWalletConnection();
       setWalletConnection(wc);
+    } else if (
+      myTransactions === null &&
+      typeof walletConnection?.stellarPubKey === "string"
+    ) {
+      // Load personal transactions if not loaded yet.
+      TransactionHistoryService.fetchAccountHistory(
+        // walletConnection?.stellarPubKey!
+        DEV_ACCOUNT
+      ).then((transactionRecords): void => {
+        setMyTransactions(transactionRecords);
+      });
     }
 
-    // Load supported wallets if not loaded yet.
     if (supportedWallets.length === 0) {
+      // Load supported wallets if not loaded yet.
       loadAvailableWallets();
     }
-  }, [loadAvailableWallets, supportedWallets, walletConnection]);
+  }, [
+    loadAvailableWallets,
+    supportedWallets,
+    walletConnection,
+    myTransactions,
+  ]);
 
   const connectWallet = async (
     userWalletType: WalletType,

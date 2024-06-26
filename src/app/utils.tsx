@@ -121,3 +121,26 @@ export function useSCRouter() {
     push: scPush,
   };
 }
+
+export const useViewportWidth = () => {
+  const mf = () => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth > 768;
+    } else {
+      return false;
+    }
+  };
+
+  const [isWide, setIsWide] = useState(mf);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWide(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isWide;
+};

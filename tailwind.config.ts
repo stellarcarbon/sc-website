@@ -43,6 +43,8 @@ const config: Config = {
         dashboardnavbarend: "dashboardNavbarOut .2s ease-in forwards",
         showtopbar: "topbarIn .3s ease-in forwards",
         hidetopbar: "topbarOut .3s ease-in forwards",
+        showrequestcertificate: "retirementsOut .2s ease-out forwards",
+        hiderequestcertificate: "retirementsIn .5s ease-in forwards",
       },
 
       keyframes: () => ({
@@ -65,6 +67,26 @@ const config: Config = {
         topbarOut: {
           "0%": { top: "0px" },
           "100%": { top: "-80px" },
+        },
+        retirementsOut: {
+          "0%": { transform: "translateX(-50%)", left: "50%", height: "40px" },
+          "100%": {
+            transform: "translateX(0)",
+            left: "calc(100% - 24px)",
+            height: "24px",
+          },
+        },
+        retirementsIn: {
+          "0%": {
+            transform: "translateX(0)",
+            left: "calc(100% - 24px)",
+            height: "36px",
+          },
+          "100%": {
+            transform: "translateX(-50%)",
+            left: "50%",
+            height: "40px",
+          },
         },
       }),
     },
