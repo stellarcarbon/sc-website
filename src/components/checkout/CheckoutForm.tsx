@@ -45,7 +45,7 @@ export default function CheckoutForm({
   };
 
   return (
-    <form className="flex flex-col gap-10 mx-5 md:mx-8 mt-6 bg-secondary min-w-[80%]">
+    <form className="flex flex-col gap-12 mx-5 md:mx-8 mt-10 bg-secondary min-w-[80%]">
       <AmountInput
         register={register}
         watch={watch}

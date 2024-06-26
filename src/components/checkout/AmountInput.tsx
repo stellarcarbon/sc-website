@@ -31,6 +31,8 @@ export default function AmountInput({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [statusMessage, setStatusMessage] = useState<string>("");
   const [hasError, setHasError] = useState<boolean>(false);
+  const [showFractionalWarning, setShowFractionalWarning] =
+    useState<boolean>(false);
 
   const { call: carbonToUsd, cancel: cancelCarbonToUsd } = useMemo(() => {
     return debounce(async (carbonAmount: number) => {
@@ -112,6 +114,10 @@ export default function AmountInput({
     setActiveInput("carbon");
   }, [tonnes]);
 
+  useEffect(() => {
+    setShowFractionalWarning(tonnes % 1 != 0);
+  }, [isLoading]);
+
   return (
     <div className="flex flex-col gap-1">
       <h1 className="text-xl text-start font-bold">Choose amount to sink</h1>
@@ -156,7 +162,7 @@ export default function AmountInput({
       </div>
 
       <div
-        className={`px-4 h-20 mt-2 flex flex-col justify-center items-center bg-primary border rounded border-accentSecondary`}
+        className={`px-4 py-6 min-h-20 mt-2 gap-4 flex flex-col justify-center items-center bg-primary border rounded border-accentSecondary`}
       >
         {isLoading ? (
           <Blocks width={48} height={48} />
@@ -165,17 +171,26 @@ export default function AmountInput({
             {statusMessage}
           </span>
         ) : (
-          <div className="w-full flex justify-center gap-1 items-center text-lg text-center">
-            <div className="flex items-center">
-              <span>Sinking {tonnes}</span>
-              <CARBONCurrencyIcon className="ml-1" />
+          <>
+            <div className="w-full flex justify-center gap-1 items-center text-lg text-center">
+              <div className="flex items-center">
+                <span>Sinking {tonnes}</span>
+                <CARBONCurrencyIcon className="ml-1" />
+              </div>
+              <span className="mx-[2px]">costs approx.</span>
+              <div className="flex items-center">
+                <span>$</span>
+                <span className="ml-[1px]"> {quote}</span>
+              </div>
             </div>
-            <span className="mx-[2px]">costs approx.</span>
-            <div className="flex items-center">
-              <span>$</span>
-              <span className="ml-[1px]"> {quote}</span>
-            </div>
-          </div>
+            {showFractionalWarning && (
+              <span className="md:mx-12 text-sm text-red-500 text-center">
+                Warning: if you sink a fractional amount of CARBON you cannot
+                receive a personal certificate without either rounding down or
+                up. Read more <span className="underline">here</span>.
+              </span>
+            )}
+          </>
         )}
       </div>
     </div>
