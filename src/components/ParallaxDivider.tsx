@@ -13,11 +13,13 @@ export enum ParallaxBackgrounds {
 interface ParallaxDiverProps {
   image: ParallaxBackgrounds;
   smaller?: boolean;
+  smallest?: boolean;
 }
 
 export default function ParallaxDivider({
   image,
   smaller = false,
+  smallest = false,
 }: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
   const [transform, setTransform] = useState<number>(0);
@@ -41,6 +43,9 @@ export default function ParallaxDivider({
     if (componentRef.current) {
       const rect = componentRef.current.getBoundingClientRect();
       yCoordinate = rect.top + window.scrollY;
+      setTransform(
+        Math.max(Math.min(100, -(yCoordinate - window.scrollY) / 5), -400)
+      );
     }
   }, []);
 
@@ -57,7 +62,9 @@ export default function ParallaxDivider({
         ></div>
       </div>
       <div
-        className={`${smaller ? "h-[150px]" : "h-[200px] md:h-[300px]"} w-full`}
+        className={`${smaller ? "h-[125px]" : "h-[200px] md:h-[300px]"} ${
+          smallest && "h-[90px] md:h-[100px]"
+        } w-full`}
       ></div>
     </div>
   );

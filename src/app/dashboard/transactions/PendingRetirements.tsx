@@ -13,6 +13,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import RequestCertificateModal from "./RequestCertificateModal";
 
 enum DevState {
   devAccount = "dev_account",
@@ -30,6 +31,8 @@ export default function PendingRetirements() {
   const [showCertificateChoice, setShowCertificateChoice] =
     useState<boolean>(false);
   const [devState, setDevState] = useState<DevState>(DevState.first);
+  const [showCertificateModal, setShowCertificateModal] =
+    useState<boolean>(false);
 
   const pendingTransactions = useMemo(() => {
     return myTransactions?.filter((tx) => tx.isPending === true);
@@ -134,8 +137,17 @@ export default function PendingRetirements() {
 
   return (
     <>
-      <div className="px-4 flex flex-col">
-        {/* <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full">
+      {showCertificateModal && (
+        <RequestCertificateModal
+          onClose={() => setShowCertificateModal(false)}
+          totalCarbonPending={totalCarbonPending}
+        />
+      )}
+
+      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest />
+
+      <div className="px-4 flex flex-col border-0 border-tertiary">
+        {/* <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full mt-6">
           <span>Dev buttons</span>
           <div className="flex flex-wrap gap-4 text-xs">
             <Button
@@ -203,12 +215,16 @@ export default function PendingRetirements() {
           </div>
           <span className="text-xs text-center mx-4">
             This CARBON is waiting to be retired into a certificate on the Verra
-            registry.
+            registry. Read more about pending retirements{" "}
+            <Link href="/explain" className="underline">
+              here
+            </Link>
+            .
           </span>
         </div>
 
         <div
-          className={` md:w-[80%] self-center border rounded border-tertiary p-4 text-sm my-10 mt-6 ${
+          className={` md:w-[80%] self-center border rounded border-tertiary p-4 text-sm my-10 mt-2 ${
             showCertificateChoice ? "bg-secondary" : ""
           }`}
         >
@@ -227,29 +243,37 @@ export default function PendingRetirements() {
                       <FontAwesomeIcon icon={faClose} />
                     </Button>
                   </div>
-                  <span>
-                    Requesting a certificate at the Verra registry is completely
-                    optional. All CARBON transactions will eventually be retired
-                    using community certificates. However it also possible to
-                    receive a personal certificate.
+                  <span className="text-center">
+                    To create a certificate we have to submit a whole number of{" "}
+                    <CARBONCurrencyIcon className="inline" /> to the Verra
+                    registry. We recommend you add the remaining fraction to
+                    request a certificate for {Math.ceil(totalCarbonPending)}{" "}
+                    <CARBONCurrencyIcon className="inline" /> by sinking an
+                    additional {(1 - (totalCarbonPending % 1)).toFixed(2)}{" "}
+                    tonnes.{" "}
+                    {totalCarbonPending > 1 && (
+                      <span>
+                        Alternatively, you can round down and request a
+                        certificate for {Math.floor(totalCarbonPending)} tonnes.
+                      </span>
+                    )}
                   </span>
-                  <span>
-                    To request a personal certificate we have to submit a round
-                    number to the Verra registry. We recommend you add the
-                    remaining fraction to request your certificate.
+
+                  <span className="text-center">
+                    Creating a personal certificate at the Verra registry is
+                    completely optional. All CARBON transactions will eventually
+                    be retired using community certificates.
                   </span>
-                  {totalCarbonPending > 1 && (
-                    <span>
-                      Alternatively, you can round down and request a
-                      certificate for {Math.floor(totalCarbonPending)} tonnes.
-                    </span>
-                  )}
+
                   <div className="flex flex-wrap justify-center gap-4">
-                    <Button className="text-sm md:text-base">
+                    <Button
+                      onClick={() => setShowCertificateModal(true)}
+                      className="text-sm md:text-base"
+                    >
                       Sink remaining fraction
                     </Button>
                     <Button
-                      className="text-xs md:text-base"
+                      className="text-sm md:text-base"
                       disabled={totalCarbonPending < 1}
                     >
                       Round down
@@ -259,21 +283,28 @@ export default function PendingRetirements() {
               ) : (
                 <div className="flex flex-col gap-4 items-center">
                   <span className="text-center">
+                    Any pending retirements will automatically retire into the
+                    community pool after 90 days.
+                  </span>
+
+                  <span className="text-center">
+                    If you want to create a personal certificate you have to do
+                    so before this period ends.
+                  </span>
+
+                  {/* 
+                  <span className="text-center">
                     If you do not request a personal certificate, your sinking
                     transactions will be automatically retired into the
                     community pool 90 days after the corresponding transaction
-                    took place. Read more about pending retirements{" "}
-                    <Link href="/explain" className="underline">
-                      here
-                    </Link>
-                    .
-                  </span>
+                    took place.
+                  </span> */}
 
                   <Button
-                    className="w-[200px]"
+                    className="w-[250px]"
                     onClick={() => setShowCertificateChoice(true)}
                   >
-                    Request a certificate
+                    Create personal certificate
                   </Button>
                 </div>
               )}
@@ -291,9 +322,7 @@ export default function PendingRetirements() {
           )}
         </div>
       </div>
-
       <ParallaxDivider image={ParallaxBackgrounds.FOREST} smaller />
-
       <div className="px-4 w-full mt-10">
         <div className="flex flex-col gap-2">
           <span className="self-center text-xl mb-4">

@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { useViewportWidth } from "../utils";
 import { useMemo } from "react";
 import TransactionsLoading from "./transactions/history/TransactionsLoading";
+import ParallaxDivider, {
+  ParallaxBackgrounds,
+} from "@/components/ParallaxDivider";
 
 export default function Overview() {
   const { walletConnection, disconnectWallet, myTransactions } =
@@ -80,10 +83,12 @@ export default function Overview() {
         )}
       </div>
 
+      <ParallaxDivider smallest image={ParallaxBackgrounds.FOREST} />
+
       {/* Connection details */}
       <div className="mx-4 p-4 flex flex-col gap-1 bg-primary border border-tertiary text-accent md:mx-8 md:p-6">
         <h1 className="text-white font-bold text-lg md:text-2xl text-start">
-          Session details
+          Your connected wallet
         </h1>
 
         <div className="flex justify-between items-center border-b border-b-tertiary">
