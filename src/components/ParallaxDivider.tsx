@@ -23,6 +23,7 @@ export default function ParallaxDivider({
 }: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
   const [transform, setTransform] = useState<number>(0);
+  const [baseX, setBaseX] = useState<number>(0);
 
   useEffect(() => {
     let yCoordinate = 0;
@@ -47,11 +48,21 @@ export default function ParallaxDivider({
         Math.max(Math.min(100, -(yCoordinate - window.scrollY) / 5), -400)
       );
     }
+
+    // setBaseX(Math.floor(Math.random() * -600));
   }, []);
 
   const t = {
-    transform: `translate(0px, ${transform}px)`,
+    transform: `translate(${baseX}px, ${transform}px)`,
   };
+
+  let heightSettings = "h-[200px] md:h-[300px]";
+  if (smaller) {
+    heightSettings = "h-[125px] md:h-[125px]";
+  }
+  if (smallest) {
+    heightSettings = "h-[90px] md:h-[125px]";
+  }
 
   return (
     <div className="relative w-full" ref={componentRef}>
@@ -61,11 +72,7 @@ export default function ParallaxDivider({
           style={t}
         ></div>
       </div>
-      <div
-        className={`${smaller ? "h-[125px]" : "h-[200px] md:h-[300px]"} ${
-          smallest && "h-[90px] md:h-[100px]"
-        } w-full`}
-      ></div>
+      <div className={`${heightSettings} w-full`}></div>
     </div>
   );
 }

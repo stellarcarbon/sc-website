@@ -37,7 +37,7 @@ export default function Dashboard() {
   return (
     <div
       {...swipeHandlers}
-      className="flex flex-col gap-8 w-full flex-1 justify-start py-8"
+      className="flex flex-col gap-8 w-full flex-1 justify-start"
     >
       <Overview />
     </div>

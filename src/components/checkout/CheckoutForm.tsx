@@ -45,7 +45,7 @@ export default function CheckoutForm({
 
   return (
     <form className="">
-      <div className="flex flex-col gap-12 mx-5 md:mx-8 mt-10 bg-secondary min-w-[80%]">
+      <div className="flex flex-col gap-12 mx-5 md:mx-8 my-8 bg-secondary min-w-[80%]">
         <Suspense>
           <AmountInput
             register={register}
@@ -55,10 +55,13 @@ export default function CheckoutForm({
             setQuote={setQuote}
           />
         </Suspense>
+      </div>
+      {/* <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest /> */}
+      <div className="flex flex-col gap-12 mx-5 md:mx-8 my-6 bg-secondary min-w-[80%]">
         <CurrencySelect register={register} />
         <ReasonSelect watch={watch} setValue={setValue} />
       </div>
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} smaller />
+      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest />
       <div className="flex flex-col gap-12 mx-5 md:mx-8 mt-10 bg-secondary min-w-[80%]">
         <TransactionPreview
           tonnes={tonnes}

@@ -140,14 +140,6 @@ export default function PendingRetirements() {
     );
   }, [pendingTransactions]);
 
-  const remainingFraction = useMemo(() => {
-    return Math.ceil(totalCarbonPending) - totalCarbonPending;
-  }, [totalCarbonPending]);
-
-  const sinkRemaining = () => {
-    router.push(`/dashboard/sink/?amount=${remainingFraction.toFixed(3)}`);
-  };
-
   return (
     <>
       {showCertificateModal && (
@@ -157,7 +149,7 @@ export default function PendingRetirements() {
         />
       )}
 
-      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest />
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest />
 
       <div className="px-4 flex flex-col border-0 border-tertiary">
         {/* <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full mt-6">
@@ -224,7 +216,7 @@ export default function PendingRetirements() {
           </h1>
           <div className="flex items-center justify-center gap-1 text-3xl">
             <span>{totalCarbonPending.toFixed(3)}</span>
-            <CARBONCurrencyIcon />
+            <CARBONCurrencyIcon width={24} height={24} />
           </div>
           <span className="text-xs text-center mx-4">
             This CARBON is waiting to be retired into a certificate. Read more
