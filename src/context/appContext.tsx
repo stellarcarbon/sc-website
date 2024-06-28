@@ -48,6 +48,7 @@ type AppContext = {
     personalDetails: PersonalDetails
   ) => Promise<boolean>;
   disconnectWallet: () => void;
+  updateWalletConnection: (personalDetails: PersonalDetails) => void;
 
   // Drawer
   isDrawerOpen: boolean;
@@ -160,6 +161,17 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const updateWalletConnection = (personalDetails: PersonalDetails) => {
+    const newWalletConnection: WalletConnection = {
+      ...walletConnection!,
+      personalDetails: personalDetails,
+      isAnonymous: false,
+    };
+
+    LocalStorageService.setWalletConnection(newWalletConnection);
+    setWalletConnection(newWalletConnection);
+  };
+
   const disconnectWallet = () => {
     LocalStorageService.removeWalletConnection();
     setWalletConnection(undefined);
@@ -173,6 +185,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       walletConnection,
       connectWallet,
       disconnectWallet,
+      updateWalletConnection,
+
       isDrawerOpen,
       openDrawer,
       closeDrawer,

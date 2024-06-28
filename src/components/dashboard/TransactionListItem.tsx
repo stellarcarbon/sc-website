@@ -79,7 +79,8 @@ export default function TransactionListItem({
         </span>
       </div>
 
-      {isPending && (
+      {/* TODO: check dit */}
+      {isPending && transaction.sinkAmount % 1 != 0 && (
         <>
           <hr className="my-2" />
           <CountDownTimer initialDuration={initialDuration} />

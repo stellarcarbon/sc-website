@@ -15,6 +15,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Router } from "next/router";
 import { useEffect, useMemo, useState } from "react";
+import RequestCertificateModal from "./RequestCertificateModal";
+import RequestCertificate from "./RequestCertificate";
 
 enum DevState {
   devAccount = "dev_account",
@@ -34,6 +36,8 @@ export default function PendingRetirements() {
   const [showCertificateChoice, setShowCertificateChoice] =
     useState<boolean>(false);
   const [devState, setDevState] = useState<DevState>(DevState.first);
+  const [showCertificateModal, setShowCertificateModal] =
+    useState<boolean>(false);
 
   const pendingTransactions = useMemo(() => {
     return myTransactions?.filter((tx) => tx.isPending === true);
@@ -146,8 +150,17 @@ export default function PendingRetirements() {
 
   return (
     <>
-      <div className="px-4 flex flex-col">
-        {/* <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full">
+      {showCertificateModal && (
+        <RequestCertificateModal
+          onClose={() => setShowCertificateModal(false)}
+          totalCarbonPending={totalCarbonPending}
+        />
+      )}
+
+      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest />
+
+      <div className="px-4 flex flex-col border-0 border-tertiary">
+        {/* <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full mt-6">
           <span>Dev buttons</span>
           <div className="flex flex-wrap gap-4 text-xs">
             <Button
@@ -214,106 +227,21 @@ export default function PendingRetirements() {
             <CARBONCurrencyIcon />
           </div>
           <span className="text-xs text-center mx-4">
-            This CARBON is waiting to be retired into a certificate on the Verra
-            registry.
+            This CARBON is waiting to be retired into a certificate. Read more
+            about pending retirements{" "}
+            <Link href="/explain" className="underline">
+              here
+            </Link>
+            .
           </span>
         </div>
 
-        <div
-          className={` md:w-[80%] self-center border rounded border-tertiary p-4 text-sm my-10 mt-6 ${
-            showCertificateChoice ? "bg-secondary" : ""
-          }`}
-        >
-          {totalCarbonPending % 1 != 0 ? (
-            <>
-              {showCertificateChoice ? (
-                <div className="p-1 flex flex-col gap-4 items-center">
-                  <div className="relative flex w-full justify-center">
-                    <h2 className="text-xl font-semibold">
-                      Requesting a certificate
-                    </h2>
-                    <Button
-                      className="absolute left-[calc(100%-24px)] w-[24px] !py-2 !px-4 bg-secondary text-white"
-                      onClick={() => setShowCertificateChoice(false)}
-                    >
-                      <FontAwesomeIcon icon={faClose} />
-                    </Button>
-                  </div>
-                  <span>
-                    Requesting a certificate at the Verra registry is completely
-                    optional. All CARBON transactions will eventually be retired
-                    using community certificates. However it also possible to
-                    receive a personal certificate.
-                  </span>
-                  <span>
-                    To request a personal certificate we have to submit a round
-                    number to the Verra registry. We recommend you add the
-                    remaining fraction to request your certificate.
-                  </span>
-                  {totalCarbonPending > 1 && (
-                    <span>
-                      Alternatively, you can round down and request a
-                      certificate for {Math.floor(totalCarbonPending)}{" "}
-                      <CARBONCurrencyIcon className="inline" />
-                    </span>
-                  )}
-                  <div className="flex flex-wrap justify-center gap-4">
-                    <Button
-                      onClick={sinkRemaining}
-                      className="text-sm md:text-base"
-                    >
-                      Sink {remainingFraction.toFixed(3)}{" "}
-                      <CARBONCurrencyIcon className="ml-1 inline" />
-                    </Button>
-                    <Button
-                      className="text-sm md:text-base"
-                      disabled={totalCarbonPending < 1}
-                    >
-                      Round down to {Math.floor(totalCarbonPending)}
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-4 items-center">
-                  <span className="text-center">
-                    If you do not request a personal certificate, your sinking
-                    transactions will be automatically retired into the
-                    community pool 90 days after the corresponding transaction
-                    took place. Read more about pending retirements{" "}
-                    <Link href="/explain" className="underline">
-                      here
-                    </Link>
-                    .
-                  </span>
-
-                  <Button
-                    className="w-[200px]"
-                    onClick={() => setShowCertificateChoice(true)}
-                  >
-                    Request a certificate
-                  </Button>
-                </div>
-              )}
-            </>
-          ) : totalCarbonPending === 0 ? (
-            <span>
-              You currently do not have any transactions pending retirement.
-            </span>
-          ) : (
-            <span>
-              Your current pending balance is whole number. We are currently
-              busy creating a certificate for you. Please be patient and watch
-              your email inbox to receive it.
-            </span>
-          )}
-        </div>
+        <RequestCertificate totalCarbonPending={totalCarbonPending} />
       </div>
-
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} smaller />
-
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest />
       <div className="px-4 w-full mt-10">
         <div className="flex flex-col gap-2">
-          <span className="self-center text-xl mb-4">
+          <span className="self-center text-lg mb-4 font-semibold">
             Your pending transactions
           </span>
           {pendingTransactions?.map((transaction, index) => {
