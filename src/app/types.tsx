@@ -1,4 +1,4 @@
-import { MemoType, PaymentAsset, VcsProject } from "@/client";
+import { MemoType, PaymentAsset, SinkingResponse, VcsProject } from "@/client";
 import { StellarWalletsKit, WalletType } from "stellar-wallets-kit";
 
 export type WalletConnection = {
@@ -35,6 +35,8 @@ export interface MyTransactionRecord {
   asset: string;
   sinkAmount: number;
   // Add other relevant transaction properties here
+
+  isPending: boolean;
 }
 
 export interface FrontpageTransactionRecord {
@@ -57,7 +59,7 @@ export const CARBON_ACCOUNT =
 
 export enum FormStatusMessages {
   creating = "Creating your transaction using Stellarcarbon API...",
-  confirm = "Please confirm the transaction by signing it with your wallet.",
+  confirm = "Your transaction is ready and approved by Stellarcarbon. Please confirm the transaction by signing it with your wallet.",
   signTransaction = "Sign the transaction using your wallet in the pop-up.",
   awaitBlockchain = "Transaction signed.\n Submitting to the Stellar blockchain....",
   completed = "Success! (did not really post to blockchain though)",
@@ -72,4 +74,9 @@ export interface SinkCarbonXdrPostRequest {
   memoType?: MemoType;
   memoValue?: string;
   email?: string;
+}
+
+export interface SinkingTransaction {
+  transactionPostRequest?: SinkCarbonXdrPostRequest;
+  transactionPostResponse?: SinkingResponse;
 }

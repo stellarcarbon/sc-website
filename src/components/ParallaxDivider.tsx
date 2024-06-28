@@ -7,16 +7,23 @@ export enum ParallaxBackgrounds {
   AUTUMN_FOREST = "bg-autumnforest",
   RIVER_ESTUARY = "bg-riverestuary",
   JADE_WETLANDS = "bg-jadewetlands",
-  LAFAYETTE = "bg-lafayette"
+  LAFAYETTE = "bg-lafayette",
 }
 
 interface ParallaxDiverProps {
   image: ParallaxBackgrounds;
+  smaller?: boolean;
+  smallest?: boolean;
 }
 
-export default function ParallaxDivider({ image }: ParallaxDiverProps) {
+export default function ParallaxDivider({
+  image,
+  smaller = false,
+  smallest = false,
+}: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
   const [transform, setTransform] = useState<number>(0);
+  const [baseX, setBaseX] = useState<number>(0);
 
   useEffect(() => {
     let yCoordinate = 0;
@@ -25,11 +32,11 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
       const screenFactor = 50;
 
       const newT = Math.max(
-        Math.min(100, -(yCoordinate - window.scrollY) / 3),
+        Math.min(100, -(yCoordinate - window.scrollY) / 5),
         -400
       );
 
-      setTransform(newT);
+      setTransform(newT < 0 ? newT : 0);
     };
 
     window.addEventListener("scroll", parallaxer);
@@ -37,12 +44,25 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
     if (componentRef.current) {
       const rect = componentRef.current.getBoundingClientRect();
       yCoordinate = rect.top + window.scrollY;
+      setTransform(
+        Math.max(Math.min(100, -(yCoordinate - window.scrollY) / 5), -400)
+      );
     }
+
+    // setBaseX(Math.floor(Math.random() * -600));
   }, []);
 
   const t = {
-    transform: `translate(0px, ${transform}px)`,
+    transform: `translate(${baseX}px, ${transform}px)`,
   };
+
+  let heightSettings = "h-[200px] md:h-[300px]";
+  if (smaller) {
+    heightSettings = "h-[125px] md:h-[125px]";
+  }
+  if (smallest) {
+    heightSettings = "h-[90px] md:h-[125px]";
+  }
 
   return (
     <div className="relative w-full" ref={componentRef}>
@@ -52,7 +72,7 @@ export default function ParallaxDivider({ image }: ParallaxDiverProps) {
           style={t}
         ></div>
       </div>
-      <div className="h-[200px] md:h-[300px] w-full"></div>
+      <div className={`${heightSettings} w-full`}></div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import TextInput from "@/components/TextInput";
 import FormError from "../components/FormError";
 
 interface ContactInfoFormProps {
@@ -28,11 +29,8 @@ export default function ContactInfoForm({
       <label className="text-xs" htmlFor="username">
         Username
       </label>
-      <input
-        className="w-full bg-gray-100 p-2 rounded-sm border border-black text-black"
-        type="text"
+      <TextInput
         name="username"
-        // defaultValue="test_username"
         placeholder="Your name"
         value={username}
         onChange={usernameOnChange}
@@ -41,11 +39,8 @@ export default function ContactInfoForm({
       <label className="text-xs" htmlFor="useremail">
         Email
       </label>
-      <input
-        className="w-full bg-gray-100 p-2 rounded-sm border border-black text-black"
-        type="text"
+      <TextInput
         name="useremail"
-        // defaultValue="test_useremail@stellarcarbon.io"
         placeholder="Your email address"
         value={useremail}
         onChange={useremailOnChange}

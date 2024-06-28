@@ -8,9 +8,13 @@ Hieronder een poging alle benodigde endpoints stellarcarbon API op te sommen van
 
 Returned alle transacties op Stellarcarbon. (voor transactions page)
 
+limit & pagination
+
 ### Laatste 5 transacties
 
 Returned de laatste 5 transacties op Stellarcarbon. (voor homepage)
+
+limit & pagination
 
 ### Dashboard transactie lijsten
 

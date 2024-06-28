@@ -6,20 +6,19 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import { useAppContext } from "@/context/appContext";
 
 export default function LastTransactionsSection() {
+  const { myTransactions } = useAppContext();
+
   const [lastTransactions, setLastTransactions] =
     useState<FrontpageTransactionRecord[]>();
 
   useEffect(() => {
-    async function fetchRecentTransactions() {
-      const txHistoryService = new TransactionHistoryService();
-      const txRecords = await txHistoryService.fetchRecentTransactions();
-      setLastTransactions(txRecords);
-    }
-
-    fetchRecentTransactions();
-  }, []);
+    TransactionHistoryService.fetchRecentTransactions().then((records) => {
+      setLastTransactions(records);
+    });
+  }, [lastTransactions]);
 
   return (
     <div className="bg-tertiary py-12 w-full">

@@ -14,11 +14,13 @@ import {
 import { PaymentsPageToFrontPageToTransactionsRecordArray } from "../utils";
 
 export default class TransactionHistoryService {
-  private server = new Server("https://horizon.stellar.org");
+  private static server = new Server("https://horizon.stellar.org");
 
-  public async fetchAccountHistory(
+  public static async fetchAccountHistory(
     account: string
   ): Promise<MyTransactionRecord[]> {
+    console.log("Fetching account history.");
+
     // All payments that CarbonSINK account is involved in.
     const payments = await this.server
       .payments()
@@ -72,6 +74,7 @@ export default class TransactionHistoryService {
           assetAmount: Number(assetAmount),
           asset,
           sinkAmount: Number(userPayment.amount),
+          isPending: false,
         } as MyTransactionRecord;
       })
     );
@@ -79,7 +82,7 @@ export default class TransactionHistoryService {
     return mrs;
   }
 
-  public async fetchRecentTransactions(): Promise<
+  public static async fetchRecentTransactions(): Promise<
     FrontpageTransactionRecord[]
   > {
     const payments = await this.server

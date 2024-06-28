@@ -39,7 +39,7 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
     route: "/dashboard/sink/",
   },
   [DashboardTabs.HISTORY]: {
-    label: "Ledger",
+    label: "Activity",
     icon: <FontAwesomeIcon icon={faReceipt} fontSize={"17px"} />,
     route: "/dashboard/transactions/",
   },
@@ -89,7 +89,7 @@ export default function NavBarItem({ item, first, last }: NavBarItemProps) {
       } ${last ? "md:rounded-tr" : ""}`}
     >
       {p.icon}
-      <span className="text-[12px] text-center">{p.label}</span>
+      <span className="text-[12px] md:text-[14px] text-center">{p.label}</span>
       {
         // <div
         //   className={`${
