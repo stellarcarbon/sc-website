@@ -62,7 +62,7 @@ export default function CheckoutForm({
         <ReasonSelect watch={watch} setValue={setValue} />
       </div>
       <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest />
-      <div className="flex flex-col gap-12 mx-5 md:mx-8 mt-10 bg-secondary min-w-[80%]">
+      <div className="flex flex-col gap-12 mx-5 md:mx-8 my-10 bg-secondary min-w-[80%]">
         <TransactionPreview
           tonnes={tonnes}
           currency={currency}
@@ -70,6 +70,7 @@ export default function CheckoutForm({
           onClick={() => handleSubmit(onSubmit)()}
         />
       </div>
+      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest />
     </form>
   );
 }

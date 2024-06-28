@@ -20,7 +20,7 @@ export default function DashboardSink() {
   });
 
   return (
-    <div {...swipeHandlers} className="pb-8 w-full">
+    <div {...swipeHandlers} className="w-full">
       <SinkForm />
     </div>
   );
