@@ -9,6 +9,7 @@ import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
+import { useSearchParams } from "next/navigation";
 
 interface AmountInputProps {
   register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
@@ -26,6 +27,12 @@ export default function AmountInput({
   setQuote,
 }: AmountInputProps) {
   const tonnes = watch("tonnes");
+  const searchParams = useSearchParams();
+  const amount = searchParams.get("amount");
+
+  useEffect(() => {
+    setValue("tonnes", amount !== null ? amount : 1);
+  }, [amount, setValue]);
 
   const [activeInput, setActiveInput] = useState<"carbon" | "usd">("carbon");
   const [isLoading, setIsLoading] = useState<boolean>(false);

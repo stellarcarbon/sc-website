@@ -1,4 +1,4 @@
-import { MemoType, PaymentAsset, VcsProject } from "@/client";
+import { MemoType, PaymentAsset, SinkingResponse, VcsProject } from "@/client";
 import { StellarWalletsKit, WalletType } from "stellar-wallets-kit";
 
 export type WalletConnection = {
@@ -74,4 +74,9 @@ export interface SinkCarbonXdrPostRequest {
   memoType?: MemoType;
   memoValue?: string;
   email?: string;
+}
+
+export interface SinkingTransaction {
+  transactionPostRequest?: SinkCarbonXdrPostRequest;
+  transactionPostResponse?: SinkingResponse;
 }

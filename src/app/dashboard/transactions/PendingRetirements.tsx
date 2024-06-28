@@ -12,6 +12,8 @@ import { useAppContext } from "@/context/appContext";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Router } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 
 enum DevState {
@@ -24,6 +26,8 @@ enum DevState {
 }
 
 export default function PendingRetirements() {
+  const router = useRouter();
+
   const { myTransactions, setMyTransactions, walletConnection } =
     useAppContext();
 
@@ -132,6 +136,14 @@ export default function PendingRetirements() {
     );
   }, [pendingTransactions]);
 
+  const remainingFraction = useMemo(() => {
+    return Math.ceil(totalCarbonPending) - totalCarbonPending;
+  }, [totalCarbonPending]);
+
+  const sinkRemaining = () => {
+    router.push(`/dashboard/sink/?amount=${remainingFraction.toFixed(3)}`);
+  };
+
   return (
     <>
       <div className="px-4 flex flex-col">
@@ -198,7 +210,7 @@ export default function PendingRetirements() {
             CARBON pending retirement
           </h1>
           <div className="flex items-center justify-center gap-1 text-3xl">
-            <span>{totalCarbonPending}</span>
+            <span>{totalCarbonPending.toFixed(3)}</span>
             <CARBONCurrencyIcon />
           </div>
           <span className="text-xs text-center mx-4">
@@ -241,18 +253,23 @@ export default function PendingRetirements() {
                   {totalCarbonPending > 1 && (
                     <span>
                       Alternatively, you can round down and request a
-                      certificate for {Math.floor(totalCarbonPending)} tonnes.
+                      certificate for {Math.floor(totalCarbonPending)}{" "}
+                      <CARBONCurrencyIcon className="inline" />
                     </span>
                   )}
                   <div className="flex flex-wrap justify-center gap-4">
-                    <Button className="text-sm md:text-base">
-                      Sink remaining fraction
+                    <Button
+                      onClick={sinkRemaining}
+                      className="text-sm md:text-base"
+                    >
+                      Sink {remainingFraction.toFixed(3)}{" "}
+                      <CARBONCurrencyIcon className="ml-1 inline" />
                     </Button>
                     <Button
-                      className="text-xs md:text-base"
+                      className="text-sm md:text-base"
                       disabled={totalCarbonPending < 1}
                     >
-                      Round down
+                      Round down to {Math.floor(totalCarbonPending)}
                     </Button>
                   </div>
                 </div>

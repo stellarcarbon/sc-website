@@ -1,7 +1,10 @@
 "use client";
 
-import { SinkingTransaction } from "@/app/dashboard/sink/page";
-import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
+import {
+  FormStatusMessages,
+  SinkCarbonXdrPostRequest,
+  SinkingTransaction,
+} from "@/app/types";
 import { useViewportWidth } from "@/app/utils";
 import { SinkingResponse } from "@/client";
 import Button from "@/components/Button";
@@ -141,7 +144,7 @@ export default function FormStatusModal({
     <>
       <div className="fixed top-0 left-0 w-screen h-screen bg-gray-600 opacity-80 z-10"></div>
       <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-20">
-        <div className="flex flex-col py-8 px-6 md:px-12 justify-start items-center bg-primary w-[80%] md:w-[60%] lg:w-[60%] h-[60%] lg:h-[70%] max-w-[800px] opacity-100 shadow-xl rounded-md">
+        <div className="flex flex-col py-8 px-6 md:px-12 justify-start items-center bg-primary w-[87%] md:w-[60%] lg:w-[60%] h-[60%] lg:h-[70%] max-w-[800px] opacity-100 shadow-xl rounded-md">
           {/* <span className="text-2xl">Transaction submit</span> */}
           {submissionError ? (
             <div className="flex flex-col justify-center items-center flex-1 gap-8">
