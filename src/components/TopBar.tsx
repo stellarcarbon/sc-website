@@ -30,7 +30,7 @@ export default function TopBar() {
 
   return (
     <header
-      className={`flex w-full justify-between items-center h-20 z-[1000] fixed
+      className={`flex w-full justify-between items-center h-20 z-[100] fixed
       border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]
     bg-primary border-secondary ${
       pathname === "/" && (scrollPosition === 0 || scrollPosition === undefined)
