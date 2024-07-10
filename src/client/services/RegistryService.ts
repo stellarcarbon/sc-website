@@ -21,7 +21,7 @@ export class RegistryService {
      * @returns RetirementsResponse Successful Response
      * @throws ApiError
      */
-    public static listRetirementsRegistryRetirementsGet({
+    public static listRetirements({
         forAddress,
         dateGte,
     }: {
@@ -66,7 +66,7 @@ export class RegistryService {
      * @returns InventoryResponse Successful Response
      * @throws ApiError
      */
-    public static listInventoryRegistryInventoryGet(): CancelablePromise<InventoryResponse> {
+    public static listInventory(): CancelablePromise<InventoryResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/registry/inventory',

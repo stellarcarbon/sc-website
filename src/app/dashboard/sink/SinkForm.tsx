@@ -87,8 +87,7 @@ export default function SinkForm() {
       setSubmissionStatusMessage(FormStatusMessages.creating);
 
       try {
-        const response =
-          await CarbonService.buildSinkCarbonXdrSinkCarbonXdrPost(sinkRequest);
+        const response = await CarbonService.buildSinkCarbonXdr(sinkRequest);
 
         setSinkingTransaction({
           transactionPostRequest: sinkRequest,

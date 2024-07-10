@@ -52,7 +52,7 @@ export default function AmountInput({
         return;
       }
 
-      CarbonService.getCarbonQuoteCarbonQuoteGet({
+      CarbonService.getCarbonQuote({
         carbonAmount,
       })
         .then((response) => {
@@ -85,7 +85,7 @@ export default function AmountInput({
         return;
       }
 
-      CarbonService.getUsdQuoteUsdQuoteGet({
+      CarbonService.getUsdQuote({
         usdAmount,
       })
         .then((response) => {
