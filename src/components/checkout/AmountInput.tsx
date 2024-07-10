@@ -191,10 +191,10 @@ export default function AmountInput({
               </div>
             </div>
             {showFractionalWarning && (
-              <span className="md:mx-12 text-sm text-red-500 text-center">
-                Warning: if you sink a fractional amount of CARBON you cannot
-                receive a personal certificate without either rounding down or
-                up. Read more <span className="underline">here</span>.
+              <span className="md:mx-12 text-sm text-center">
+                If you sink a fractional amount of CARBON you cannot receive a
+                personal certificate without either rounding down or up. Read
+                more <span className="underline">here</span>.
               </span>
             )}
           </>

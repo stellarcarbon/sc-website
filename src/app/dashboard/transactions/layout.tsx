@@ -2,7 +2,7 @@
 
 import TransactionsNavBarItem, {
   TransactionsTabs,
-} from "../TransactionsNavBarItem";
+} from "@/components/dashboard/TransactionsNavBarItem";
 
 export default function HistoryLayout({
   children,

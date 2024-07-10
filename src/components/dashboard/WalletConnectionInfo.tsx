@@ -5,11 +5,11 @@ export default function WalletConnectionInfo() {
 
   return (
     <div className="bg-primary mx-4 rounded border border-accentSecondary grid grid-cols-5">
-      <div className="py-2 border-r border-accentSecondary">
-        <div className="p-2 text-center">
-          <img src={supportedWallets[0]?.icon} />
+      <div className="flex flex-col items-center py-2 border-r border-accentSecondary">
+        <div className="p-2">
+          <img className="h-12 w-12" src={supportedWallets[0]?.icon} />
         </div>
-        <div className="text-sm text-center">
+        <div className="text-xs text-center">
           {walletConnection?.walletType}
         </div>
       </div>

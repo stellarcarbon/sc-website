@@ -1,8 +1,8 @@
 "use client";
 
+import { useSCRouter } from "@/app/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { HTMLProps, useEffect, useMemo, useState } from "react";
-import { useSCRouter } from "../utils";
 
 interface TransactionsNavBarItemProps extends HTMLProps<HTMLDivElement> {
   item: TransactionsTabs;
@@ -29,7 +29,7 @@ const HistoryTabPropsConfig: Record<TransactionsTabs, TransactionsTabProps> = {
   },
 };
 
-export default function HistoryNavBarItem({
+export default function TransactionsNavBarItem({
   item,
 }: TransactionsNavBarItemProps) {
   const router = useSCRouter();

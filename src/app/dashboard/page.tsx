@@ -13,14 +13,13 @@ import Link from "next/link";
 import { useSCRouter, useViewportWidth } from "../utils";
 import dynamic from "next/dynamic";
 
-const Overview = dynamic(() => import("./Overview"), {
+const Overview = dynamic(() => import("../../components/dashboard/Overview"), {
   ssr: false,
 });
 
 export default function Dashboard() {
-  const { walletConnection, disconnectWallet } = useAppContext();
+  const { walletConnection } = useAppContext();
   const router = useSCRouter();
-  const isWide = useViewportWidth();
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => router.push("/dashboard/sink"),

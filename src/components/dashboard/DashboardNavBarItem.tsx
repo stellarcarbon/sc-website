@@ -7,9 +7,9 @@ import { HTMLProps, ReactNode, useEffect, useMemo, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useSCRouter } from "../utils";
+import { useSCRouter } from "../../app/utils";
 
-interface NavBarItemProps extends HTMLProps<HTMLDivElement> {
+interface DashboardNavBarItemProps extends HTMLProps<HTMLDivElement> {
   item: DashboardTabs;
   first?: boolean;
   last?: boolean;
@@ -45,7 +45,11 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
   },
 };
 
-export default function NavBarItem({ item, first, last }: NavBarItemProps) {
+export default function DashboardNavBarItem({
+  item,
+  first,
+  last,
+}: DashboardNavBarItemProps) {
   const pathname = usePathname();
   const router = useSCRouter();
 
