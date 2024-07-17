@@ -78,11 +78,21 @@ export default function Overview() {
         <WalletConnectionInfo />
       </div>
 
+      <ParallaxDivider
+        image={ParallaxBackgrounds.RAINFOREST}
+        smallest
+        yOffset={-20}
+      />
+
       <div className="my-4">
         <TransactionSummary />
       </div>
 
-      <ParallaxDivider smallest image={ParallaxBackgrounds.FOREST} />
+      <ParallaxDivider
+        smallest
+        image={ParallaxBackgrounds.RAINFOREST}
+        yOffset={-250}
+      />
 
       <div className="flex flex-col w-full gap-4">
         <div className="flex justify-between mx-4 md:mx-8">
@@ -173,7 +183,11 @@ export default function Overview() {
         </div>
       </div>
 
-      <ParallaxDivider smallest image={ParallaxBackgrounds.FOREST} />
+      <ParallaxDivider
+        smallest
+        image={ParallaxBackgrounds.RAINFOREST}
+        yOffset={-420}
+      />
     </>
   );
 }

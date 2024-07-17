@@ -31,7 +31,11 @@ export default function DashboardSink() {
           Cacataibo Indigenous Communities
         </span>
       </div>
-      <ParallaxDivider smallest image={ParallaxBackgrounds.FOREST} />
+      <ParallaxDivider
+        smallest
+        image={ParallaxBackgrounds.RAINFOREST}
+        yOffset={-50}
+      />
       <SinkForm />
     </div>
   );

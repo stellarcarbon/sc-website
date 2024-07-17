@@ -28,13 +28,9 @@ enum DevState {
 }
 
 export default function PendingRetirements() {
-  const router = useRouter();
-
   const { myTransactions, setMyTransactions, walletConnection } =
     useAppContext();
 
-  const [showCertificateChoice, setShowCertificateChoice] =
-    useState<boolean>(false);
   const [devState, setDevState] = useState<DevState>(DevState.first);
   const [showCertificateModal, setShowCertificateModal] =
     useState<boolean>(false);
@@ -132,7 +128,7 @@ export default function PendingRetirements() {
         },
       ]);
     }
-  }, [devState, setMyTransactions]);
+  }, [devState, setMyTransactions, walletConnection]);
 
   const totalCarbonPending = useMemo(() => {
     return (
@@ -149,7 +145,7 @@ export default function PendingRetirements() {
         />
       )}
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest />
+      <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest />
 
       <div className="px-4 flex flex-col border-0 border-tertiary">
         {/* <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full mt-6">
@@ -230,8 +226,12 @@ export default function PendingRetirements() {
 
         <RequestCertificate totalCarbonPending={totalCarbonPending} />
       </div>
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest />
-      <div className="px-4 w-full mt-10">
+      <ParallaxDivider
+        image={ParallaxBackgrounds.RAINFOREST}
+        smallest
+        yOffset={-300}
+      />
+      <div className="px-4 w-full mt-10 mb-12">
         <div className="flex flex-col gap-2">
           <span className="self-center text-lg mb-4 font-semibold">
             Your pending transactions
@@ -248,6 +248,11 @@ export default function PendingRetirements() {
           })}
         </div>
       </div>
+      <ParallaxDivider
+        image={ParallaxBackgrounds.RAINFOREST}
+        smallest
+        yOffset={-400}
+      />
     </>
   );
 }

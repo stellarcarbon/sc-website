@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export enum ParallaxBackgrounds {
   FOREST = "bg-forest",
@@ -8,29 +8,34 @@ export enum ParallaxBackgrounds {
   RIVER_ESTUARY = "bg-riverestuary",
   JADE_WETLANDS = "bg-jadewetlands",
   LAFAYETTE = "bg-lafayette",
+  RAINFOREST = "bg-rainforest",
+  DALLE = "bg-dalle",
 }
 
 interface ParallaxDiverProps {
   image: ParallaxBackgrounds;
   smaller?: boolean;
   smallest?: boolean;
+  mirrored?: boolean;
+  xOffset?: number;
+  yOffset?: number;
 }
 
 export default function ParallaxDivider({
   image,
   smaller = false,
   smallest = false,
+  mirrored = false,
+  xOffset = 0,
+  yOffset = 0,
 }: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
   const [transform, setTransform] = useState<number>(0);
-  const [baseX, setBaseX] = useState<number>(0);
 
   useEffect(() => {
     let yCoordinate = 0;
 
     const parallaxer = () => {
-      const screenFactor = 50;
-
       const newT = Math.max(
         Math.min(100, -(yCoordinate - window.scrollY) / 5),
         -400
@@ -48,27 +53,32 @@ export default function ParallaxDivider({
         Math.max(Math.min(100, -(yCoordinate - window.scrollY) / 5), -400)
       );
     }
-
-    // setBaseX(Math.floor(Math.random() * -600));
   }, []);
 
-  const t = {
-    transform: `translate(${baseX}px, ${transform}px)`,
-  };
+  const t = useMemo(() => {
+    let transformStyling = `translate(${xOffset}px, ${transform + yOffset}px)`;
+    if (mirrored) {
+      transformStyling += ` scaleX(-1)`;
+    }
+    return { transform: transformStyling };
+  }, [xOffset, yOffset, transform, mirrored]);
 
-  let heightSettings = "h-[200px] md:h-[300px]";
-  if (smaller) {
-    heightSettings = "h-[125px] md:h-[125px]";
-  }
-  if (smallest) {
-    heightSettings = "h-[90px] md:h-[125px]";
-  }
+  const heightSettings = useMemo(() => {
+    let styling = "h-[200px] md:h-[300px]";
+    if (smaller) {
+      styling = "h-[125px] md:h-[125px]";
+    }
+    if (smallest) {
+      styling = "h-[90px] md:h-[125px]";
+    }
+    return styling;
+  }, [smaller, smallest]);
 
   return (
     <div className="relative w-full" ref={componentRef}>
       <div className="absolute overflow-hidden top-0 left-0 right-0 bottom-0">
         <div
-          className={`${image} bg-cover bg-top bg-no-repeat w-screen h-[800px]`}
+          className={`${image} bg-cover bg-top bg-no-repeat w-[100vw] h-[800px]`}
           style={t}
         ></div>
       </div>

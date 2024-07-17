@@ -60,7 +60,11 @@ export default function CheckoutForm({
         <CurrencySelect register={register} />
         <ReasonSelect watch={watch} setValue={setValue} />
       </div>
-      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest />
+      <ParallaxDivider
+        image={ParallaxBackgrounds.RAINFOREST}
+        smallest
+        yOffset={-225}
+      />
       <div className="flex flex-col items-center gap-4 mx-5 md:mx-8 bg-secondary min-w-[80%]">
         <h3 className="text-xl md:text-2xl font-bold">
           Your sinking transaction
@@ -74,7 +78,11 @@ export default function CheckoutForm({
           Go to signing
         </Button>
       </div>
-      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest />
+      <ParallaxDivider
+        image={ParallaxBackgrounds.RAINFOREST}
+        smallest
+        yOffset={-380}
+      />
     </form>
   );
 }

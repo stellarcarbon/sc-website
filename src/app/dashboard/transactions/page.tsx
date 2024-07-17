@@ -18,7 +18,7 @@ export default function DashboardMyTransactions() {
   return (
     <div
       {...swipeHandlers}
-      className="flex-1 flex flex-col justify-start items-center px-0 mt-0 mb-12"
+      className="flex-1 flex flex-col justify-start items-center"
     >
       <PendingRetirements />
     </div>
