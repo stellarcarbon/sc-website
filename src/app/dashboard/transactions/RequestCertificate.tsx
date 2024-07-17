@@ -17,8 +17,6 @@ enum RequestCertificateStates {
   info = "info",
   anonymous = "anonymous",
   choose = "choose",
-  ceil = "ceil",
-  floor = "floor",
 }
 
 export default function RequestCertificate({
@@ -28,7 +26,7 @@ export default function RequestCertificate({
   const router = useRouter();
 
   const [step, setStep] = useState<RequestCertificateStates>(
-    RequestCertificateStates.anonymous
+    RequestCertificateStates.info
   );
 
   const [formUsername, setFormUsername] = useState<string>("");
@@ -54,7 +52,7 @@ export default function RequestCertificate({
       return;
     }
 
-    updateWalletConnection({
+    updateWalletConnection(false, {
       username: formUsername,
       useremail: formEmail,
     });
@@ -73,7 +71,7 @@ export default function RequestCertificate({
   let body = <></>;
   if (step === RequestCertificateStates.info) {
     body = (
-      <div className="flex flex-col gap-4 items-center">
+      <div className="p-4 flex flex-col gap-4 items-center bg-secondary">
         <span className="text-center">
           Any pending retirements will automatically retire into the community
           pool after 90 days.
@@ -102,7 +100,7 @@ export default function RequestCertificate({
 
   if (step === RequestCertificateStates.choose) {
     body = (
-      <div className="p-1 flex flex-col gap-4 items-center">
+      <div className="p-4 flex flex-col gap-4 items-center">
         <div className="relative flex w-full justify-center">
           <h2 className="text-xl font-semibold">Requesting a certificate</h2>
         </div>
@@ -146,7 +144,7 @@ export default function RequestCertificate({
 
   if (step === RequestCertificateStates.anonymous) {
     body = (
-      <div className="flex flex-col gap-4 items-center my-4 mt-2">
+      <div className="p-4 flex flex-col gap-4 items-center my-4 mt-2">
         <h2 className="text-lg md:text-lg font-semibold">
           Request certificate
         </h2>
@@ -184,7 +182,7 @@ export default function RequestCertificate({
 
   return (
     <div
-      className={`md:w-[80%] self-center relative p-4 mb-10 text-sm border border-tertiary rounded ${
+      className={`md:w-[80%] self-center relative mb-10 text-sm border border-tertiary rounded ${
         step !== RequestCertificateStates.info && "bg-secondary"
       }`}
     >

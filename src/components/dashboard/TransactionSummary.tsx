@@ -14,7 +14,7 @@ export default function TransactionSummary() {
   }, [isWide]);
 
   return (
-    <div className="mt-6 mx-4 py-4 px-2 flex flex-col gap-8  border-tertiary md:mx-8 md:p-6">
+    <div className="mx-4 md:mx-8 flex flex-col gap-8  border-tertiary ">
       {myTransactions === null ? (
         <div className="flex-1 flex flex-col justify-center min-h-[250px] md:min-h-[400px]">
           <TransactionsLoading />

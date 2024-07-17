@@ -1,11 +1,7 @@
 import Button from "@/components/Button";
-import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useViewportWidth } from "../../app/utils";
-import { useEffect, useMemo, useState } from "react";
-import TransactionsLoading from "../../app/dashboard/transactions/history/TransactionsLoading";
+import { useEffect, useState } from "react";
+
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
@@ -41,17 +37,24 @@ export default function Overview() {
   };
 
   const submitForm = () => {
+    if (formUsername === "" && formEmail === "") {
+      updateWalletConnection(true);
+      setShowContactInformationForm(false);
+      setFormError(undefined);
+      return;
+    }
+
     if (!isValidEmail(formEmail)) {
       setFormError("Invalid email address");
       return;
     }
 
-    updateWalletConnection({
+    updateWalletConnection(false, {
       username: formUsername,
       useremail: formEmail,
     });
-
     setShowContactInformationForm(false);
+    setFormError(undefined);
   };
 
   const [showContactInformationForm, setShowContactInformationForm] =
@@ -71,13 +74,28 @@ export default function Overview() {
 
   return (
     <>
-      <TransactionSummary />
+      <div className="mt-8">
+        <WalletConnectionInfo />
+      </div>
+
+      <div className="my-4">
+        <TransactionSummary />
+      </div>
 
       <ParallaxDivider smallest image={ParallaxBackgrounds.FOREST} />
 
-      <div className="flex flex-col w-full gap-8">
-        <WalletConnectionInfo />
-
+      <div className="flex flex-col w-full gap-4">
+        <div className="flex justify-between mx-4 md:mx-8">
+          <h1 className="text-xl md:text-2xl font-semibold">
+            Contact information
+          </h1>
+          <Button
+            className="!text-sm h-7 !px-3"
+            onClick={() => setShowContactInformationForm(true)}
+          >
+            Edit
+          </Button>
+        </div>
         <div className="mx-4 flex flex-col gap-1 md:mx-8">
           {showContactInformationForm ? (
             <div className="relative p-4 py-8 flex flex-col gap-2 items-center bg-primary rounded border border-accentSecondary">
@@ -119,40 +137,35 @@ export default function Overview() {
             </div>
           ) : walletConnection?.isAnonymous ? (
             <div className="flex flex-col gap-2 text-center">
-              <h1 className="text-white font-bold text-lg md:text-2xl text-center">
-                Personal details
-              </h1>
-              <span className="text-sm mb-4">
+              <span className="text-sm mb-8 mt-4">
                 Your session is anonymous. To receive personal certificates add
                 your username and email address.
               </span>
-              <Button
-                onClick={() => setShowContactInformationForm(true)}
-                className="w-[200px] text-sm self-center"
-              >
-                Update contact info
-              </Button>
+              <div className="flex flex-col items-center mx-2">
+                <Button onClick={disconnectWallet} className="!text-sm">
+                  Disconnect wallet
+                </Button>
+              </div>
             </div>
           ) : (
             <>
-              <div className="flex justify-between items-center border-b border-b-tertiary">
-                <span className="text-white md:text-lg">Username</span>
-                <span className="text-xs md:text-sm">
-                  {walletConnection?.personalDetails?.username}
-                </span>
+              <div className="flex flex-col gap-3 text-base mb-5">
+                <div className="flex justify-between items-center border-b border-b-tertiary">
+                  <span className="text-white md:text-lg">Username</span>
+                  <span className="text-xs md:text-base">
+                    {walletConnection?.personalDetails?.username}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center border-b border-b-tertiary">
+                  <span className="text-white md:text-lg">Email</span>
+                  <span className="text-xs md:text-base">
+                    {walletConnection?.personalDetails?.useremail}
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-between items-center border-b border-b-tertiary">
-                <span className="text-white md:text-lg">Email</span>
-                <span className="text-xs md:text-sm">
-                  {walletConnection?.personalDetails?.useremail}
-                </span>
-              </div>
-              <div className="flex justify-end gap-4 h-7 mt-4 mb-1 mx-2">
-                <Button
-                  className="!text-sm"
-                  onClick={() => setShowContactInformationForm(true)}
-                >
-                  Edit contact information
+              <div className="flex flex-col items-center gap-4 mx-2">
+                <Button onClick={disconnectWallet} className="!text-sm">
+                  Disconnect wallet
                 </Button>
               </div>
             </>
@@ -161,12 +174,6 @@ export default function Overview() {
       </div>
 
       <ParallaxDivider smallest image={ParallaxBackgrounds.FOREST} />
-
-      <div className="flex flex-col items-center mb-8">
-        <Button onClick={disconnectWallet} className="w-[200px]">
-          Disconnect wallet
-        </Button>
-      </div>
     </>
   );
 }

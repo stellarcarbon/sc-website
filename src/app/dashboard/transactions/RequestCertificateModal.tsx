@@ -53,7 +53,7 @@ export default function RequestCertificateModal({
       return;
     }
 
-    updateWalletConnection({
+    updateWalletConnection(false, {
       username: formUsername,
       useremail: formEmail,
     });
