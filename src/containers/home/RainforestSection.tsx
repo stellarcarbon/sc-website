@@ -76,7 +76,11 @@ export default function RainforestIntro() {
   }, []);
 
   const onClickChevDown = () => {
-    window.scrollTo({ left: 0, top: window.innerHeight, behavior: "smooth" });
+    window.scrollTo({
+      left: 0,
+      top: window.innerHeight - 80,
+      behavior: "smooth",
+    });
   };
 
   return (

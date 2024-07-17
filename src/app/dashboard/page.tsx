@@ -18,7 +18,6 @@ const Overview = dynamic(() => import("../../components/dashboard/Overview"), {
 });
 
 export default function Dashboard() {
-  const { walletConnection } = useAppContext();
   const router = useSCRouter();
 
   const swipeHandlers = useSwipeable({
@@ -26,12 +25,6 @@ export default function Dashboard() {
     onSwipedRight: () => router.push("/dashboard/transactions/history"),
     delta: 100,
   });
-
-  useEffect(() => {
-    if (walletConnection === undefined) {
-      router.push("/wallet");
-    }
-  }, [walletConnection, router]);
 
   return (
     <div

@@ -12,12 +12,8 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import TransactionSummary from "./TransactionSummary";
 
 export default function Overview() {
-  const {
-    walletConnection,
-    updateWalletConnection,
-    disconnectWallet,
-    myTransactions,
-  } = useAppContext();
+  const { walletConnection, updateWalletConnection, disconnectWallet } =
+    useAppContext();
 
   const [formUsername, setFormUsername] = useState<string>("");
   const [formEmail, setFormEmail] = useState<string>("");
@@ -74,8 +70,8 @@ export default function Overview() {
 
   return (
     <>
-      <div className="mt-8">
-        <WalletConnectionInfo />
+      <div className="mt-8 mb-6">
+        <TransactionSummary />
       </div>
 
       <ParallaxDivider
@@ -85,14 +81,14 @@ export default function Overview() {
       />
 
       <div className="my-4">
-        <TransactionSummary />
+        <WalletConnectionInfo />
       </div>
-
+      {/* 
       <ParallaxDivider
         smallest
         image={ParallaxBackgrounds.RAINFOREST}
         yOffset={-250}
-      />
+      /> */}
 
       <div className="flex flex-col w-full gap-4">
         <div className="flex justify-between mx-4 md:mx-8">
@@ -132,7 +128,7 @@ export default function Overview() {
                   placeholder="Your email address"
                 />
               </div>
-              <Button onClick={submitForm} className="mt-3">
+              <Button onClick={submitForm} className="mt-3 !text-sm">
                 Update contact info
               </Button>
               <Button
