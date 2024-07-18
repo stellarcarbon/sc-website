@@ -61,7 +61,7 @@ export const useIntersectionObserver = (
   return [ref, isIntersecting];
 };
 
-export async function PaymentsPageToFrontPageToTransactionsRecordArray(
+export async function PaymentsPageToFrontPageTransactionsRecordArray(
   paymentsPage: ServerApi.CollectionPage<
     | ServerApi.PaymentOperationRecord
     | ServerApi.CreateAccountOperationRecord

@@ -2,8 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export enum MemoType {
-    TEXT = 'text',
-    HASH = 'hash',
-    NONE = 'none',
-}
+import type { MemoType } from './MemoType';
+export type MemoItem = {
+    type: MemoType;
+    value: (string | null);
+};
+

@@ -1,6 +1,6 @@
 "use client";
 
-import { FrontpageTransactionRecord } from "@/app/types";
+import { MyTransactionRecord } from "@/app/types";
 import TransactionHistoryService from "@/app/services/TransactionHistoryService";
 import Header from "@/components/Header";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export default function LastTransactionsSection() {
   const { myTransactions } = useAppContext();
 
   const [lastTransactions, setLastTransactions] =
-    useState<FrontpageTransactionRecord[]>();
+    useState<MyTransactionRecord[]>();
 
   useEffect(() => {
     TransactionHistoryService.fetchRecentTransactions().then((records) => {
@@ -52,7 +52,7 @@ export default function LastTransactionsSection() {
                   <div className="flex justify-start items-center">
                     <span className="w-24 md:w-32">Transaction</span>
                     <span className=" truncate max-w-[60%] md:max-w-[100%]">
-                      {tx.hash}
+                      {tx.id}
                     </span>
                   </div>
                   <div className="flex justify-start items-center">

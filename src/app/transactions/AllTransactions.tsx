@@ -9,12 +9,16 @@ https://overreacted.io/a-complete-guide-to-useeffect/
 
 */
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { CARBON_SINK_ACCOUNT, FrontpageTransactionRecord } from "../types";
+import {
+  CARBON_SINK_ACCOUNT,
+  FrontpageTransactionRecord,
+  MyTransactionRecord,
+} from "../types";
 import { Server, ServerApi } from "stellar-sdk/lib/horizon";
 import {
-  PaymentsPageToFrontPageToTransactionsRecordArray,
+  PaymentsPageToFrontPageTransactionsRecordArray,
   useSCRouter,
 } from "../utils";
 import Button from "@/components/Button";
@@ -68,7 +72,7 @@ export default function AllTransactions() {
       const newCursor = transactions?.slice(-1)[0]?.id; // Last transaction is the cursor
 
       const enrichedPayments =
-        await PaymentsPageToFrontPageToTransactionsRecordArray(nextPage);
+        await PaymentsPageToFrontPageTransactionsRecordArray(nextPage);
 
       if (enrichedPayments.length === 0) {
         setPaginationError("No more transactions on next page.");
@@ -92,7 +96,7 @@ export default function AllTransactions() {
       const newCursor = transactions[0]?.id; // First transaction is the cursor
 
       const enrichedPayments =
-        await PaymentsPageToFrontPageToTransactionsRecordArray(prevPage);
+        await PaymentsPageToFrontPageTransactionsRecordArray(prevPage);
 
       if (enrichedPayments.length === 0) {
         setPaginationError("No more transactions on previous page.");
@@ -125,7 +129,7 @@ export default function AllTransactions() {
 
         const paymentsPage = await request.call();
         const enrichedPayments =
-          await PaymentsPageToFrontPageToTransactionsRecordArray(paymentsPage);
+          await PaymentsPageToFrontPageTransactionsRecordArray(paymentsPage);
 
         setTransactions(enrichedPayments);
         setCurrentPage(paymentsPage);

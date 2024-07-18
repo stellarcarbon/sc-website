@@ -2,8 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export enum MemoType {
-    TEXT = 'text',
-    HASH = 'hash',
-    NONE = 'none',
-}
+export type DestAssetItem = {
+    code: string;
+    issuer: string;
+    amount: string;
+};
+

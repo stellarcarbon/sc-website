@@ -27,6 +27,12 @@ export enum ReasonOptions {
   ROADTRAVEL = "ROADTRAVEL",
 }
 
+export enum RetirementStatus {
+  PENDING_CERTIFICATE = "Pending certificate attribution",
+  PENDING_COMPLETION = "Pending finalization",
+  RETIRED = "Retired into certificate",
+}
+
 export interface MyTransactionRecord {
   id: string;
   createdAt: string;
@@ -36,7 +42,7 @@ export interface MyTransactionRecord {
   sinkAmount: number;
   // Add other relevant transaction properties here
 
-  isPending: boolean;
+  retirementStatus: RetirementStatus;
 }
 
 export interface FrontpageTransactionRecord {
