@@ -78,7 +78,7 @@ export default function ParallaxDivider({
     <div className="relative w-full" ref={componentRef}>
       <div className="absolute overflow-hidden top-0 left-0 right-0 bottom-0">
         <div
-          className={`${image} bg-cover bg-right-top bg-no-repeat w-[100vw] h-[800px]`}
+          className={`${image} bg-cover bg-top bg-no-repeat w-[100vw] h-[800px]`}
           style={t}
         ></div>
       </div>
