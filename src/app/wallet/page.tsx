@@ -25,7 +25,7 @@ export default function WalletPage() {
   }, [walletConnection, router]);
 
   return (
-    <main className="flex flex-col justify-center blockchain-bg bg-no-repeat bg-fixed bg-cover items-center md:py-6 min-h-[calc(100vh-176px)] mt-[80px]">
+    <main className="flex flex-col justify-center blockchain-bg bg-no-repeat bg-fixed bg-cover items-center md:py-6 min-h-[calc(100vh-176px)] mt-[64px] md:mt-[80px]">
       {isLoading ? <Blocks /> : <ExplainConnect onClick={navigate} />}
     </main>
   );

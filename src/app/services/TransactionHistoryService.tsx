@@ -16,7 +16,6 @@ export default class TransactionHistoryService {
         retirementStatus = RetirementStatus.PENDING_USER;
       }
 
-      console.log(transaction.hash, transaction.paging_token);
       return {
         id: transaction.hash,
         createdAt: transaction.created_at,

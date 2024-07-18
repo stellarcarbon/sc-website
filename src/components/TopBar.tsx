@@ -30,18 +30,20 @@ export default function TopBar() {
 
   return (
     <header
-      className={`flex w-full justify-between items-center h-20 z-[100] fixed
+      className={`flex w-full justify-between items-center h-16 md:h-20 z-[100] fixed
       border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]
     bg-primary border-secondary ${
-      pathname === "/" && (scrollPosition === 0 || scrollPosition === undefined)
-        ? initial
-          ? "hidden"
-          : "animate-hidetopbar"
-        : "animate-showtopbar"
+      pathname === "/"
+        ? scrollPosition === 0 || scrollPosition === undefined
+          ? initial
+            ? "hidden"
+            : "animate-hidetopbar"
+          : "animate-showtopbar"
+        : ""
     }`}
     >
       <Link href="/">
-        <StellarCarbonIcon className="ml-[2vw] text-accent" />
+        <StellarCarbonIcon className="ml-[4vw] text-accent" />
       </Link>
 
       <div className="mr-8 gap-4 items-center hidden md:flex">
