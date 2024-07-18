@@ -2,6 +2,7 @@ import { HTMLProps } from "react";
 import BuyStellarCarbonIcon from "./icons/BuyStellarCarbon";
 import { useRouter } from "next/navigation";
 import { useSCRouter } from "@/app/utils";
+import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 
 interface CTAButtonProps extends HTMLProps<HTMLButtonElement> {}
 
@@ -17,9 +18,13 @@ export default function CTAButton({ className = "", onClick }: CTAButtonProps) {
               router.push("/dashboard/sink");
             }
       }
-      className={`p-1 w-[250px] flex justify-center bg-accent text-black uppercase rounded-2xl shadow-[0px_11px_40px_1px_rgba(255,255,255,0.3)] hover:bg-primary hover:text-white ${className}`}
+      className={`p-1 w-[270px] flex justify-center bg-primary text-white rounded-xl border border-accentSecondary hover:bg-secondary hover:text-white ${className}`}
     >
-      <BuyStellarCarbonIcon />
+      {/* <BuyStellarCarbonIcon /> */}
+      <div className=" h-11 flex items-center gap-3">
+        <CARBONCurrencyIcon width={28} height={28} />
+        <span className="font-semibold text-lg">Sink CARBON here</span>
+      </div>
     </button>
   );
 }

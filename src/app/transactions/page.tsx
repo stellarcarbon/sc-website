@@ -2,20 +2,22 @@
 
 import { Suspense } from "react";
 import Header from "@/components/Header";
-import AllTransactions from "./AllTransactions";
+import TransactionHistory from "./TransactionHistory";
 
 export default function TransactionsPage() {
   return (
-    <main className="flex flex-col font-noto blockchain-bg bg-no-repeat bg-fixed bg-cover min-h-[calc(100vh-176px)] mt-[80px]">
-      <div className="w-full">
+    <main className="flex flex-col items-center font-noto pb-4 mt-[80px]">
+      <div className="blockchain-bg w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
-          <span className="text-5xl md:text-[4vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
+          <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
             Stellarcarbon Ledger
+          </span>
+          <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
+            Complete transaction history
           </span>
         </div>
       </div>
-
-      <div className="mb-32 p-4 md:p-16 py-16 flex flex-col md:max-w-[1080px] md:mx-auto bg-secondary rounded-md">
+      <div className="p-4 md:p-16 pt-16 flex flex-col md:max-w-[1080px] md:mx-auto bg-secondary rounded-md">
         <Header>Transaction history</Header>
         <div className="tracking-wide leading-7">
           <p>
@@ -31,10 +33,11 @@ export default function TransactionsPage() {
             nunc et pellentesque auctor.
           </p>
         </div>
+
+        <Suspense>
+          <TransactionHistory />
+        </Suspense>
       </div>
-      <Suspense>
-        <AllTransactions />
-      </Suspense>
     </main>
   );
 }

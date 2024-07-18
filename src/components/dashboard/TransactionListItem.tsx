@@ -1,4 +1,4 @@
-import { MyTransactionRecord } from "@/app/types";
+import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import Link from "next/link";
 import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
 import CountDownTimer from "../CountDownTimer";
@@ -7,7 +7,8 @@ import { useMemo } from "react";
 interface TransactionListItemProps {
   transaction: MyTransactionRecord;
   onClick: () => void;
-  isPending: boolean;
+  showCountdown?: boolean;
+  bgPrimary?: boolean;
 }
 
 declare global {
@@ -25,18 +26,63 @@ Date.prototype.addDays = function (days) {
 export default function TransactionListItem({
   transaction,
   onClick,
-  isPending,
+  showCountdown = false,
+  bgPrimary = false,
 }: TransactionListItemProps) {
   const initialDuration = useMemo(() => {
     const txDate = new Date(transaction.createdAt);
     const txDatePlus90 = txDate.addDays(90); // TODO: Make this the actual 90 days
-    console.log(txDatePlus90);
     const now = new Date();
 
     const outcome = +txDatePlus90 - +now;
 
     return outcome / 1000;
   }, [transaction]);
+
+  return (
+    <div
+      className={`p-2 w-full grid grid-cols-4 md:grid-cols-6 ${
+        bgPrimary ? "bg-primary" : "bg-secondary"
+      } border-accentSecondary rounded-md cursor-pointer text-sm`}
+    >
+      <div className="">Hash</div>
+      <div className="col-span-3 md:col-span-5 truncate">{transaction.id}</div>
+
+      <div>Date</div>
+      <div className="col-span-3 md:col-span-5">
+        {new Date(transaction.createdAt).toDateString()}
+      </div>
+
+      <div>Sunk</div>
+      <div className="col-span-3 md:col-span-5 flex gap-1">
+        <CARBONCurrencyIcon />
+        <span>{transaction.sinkAmount?.toFixed(2)}</span>
+      </div>
+
+      <div>Price</div>
+      <div className="col-span-3 md:col-span-5 flex gap-1">
+        <span>{transaction.assetAmount?.toFixed(2)}</span>
+        <span>{transaction.asset}</span>
+      </div>
+
+      <div>Memo</div>
+      <div className="col-span-3 md:col-span-5">{transaction.memo}</div>
+
+      <div>Status</div>
+      <div className="col-span-3 md:col-span-5">
+        {transaction.retirementStatus}
+      </div>
+
+      {showCountdown &&
+        transaction.retirementStatus !== RetirementStatus.RETIRED &&
+        transaction.sinkAmount % 1 != 0 && (
+          <div className="col-span-4 md:col-span-6">
+            <hr className="my-2" />
+            <CountDownTimer initialDuration={initialDuration} />
+          </div>
+        )}
+    </div>
+  );
 
   return (
     <div
@@ -75,17 +121,18 @@ export default function TransactionListItem({
       <div className="flex justify-start items-center">
         <span className="w-20 md:w-32">Status</span>
         <span className="truncate max-w-[60%]">
-          {isPending ? "Pending retirement" : "Retired into certificate"}
+          {transaction.retirementStatus}
         </span>
       </div>
 
       {/* TODO: check dit */}
-      {isPending && transaction.sinkAmount % 1 != 0 && (
-        <>
-          <hr className="my-2" />
-          <CountDownTimer initialDuration={initialDuration} />
-        </>
-      )}
+      {transaction.retirementStatus !== RetirementStatus.RETIRED &&
+        transaction.sinkAmount % 1 != 0 && (
+          <>
+            <hr className="my-2" />
+            <CountDownTimer initialDuration={initialDuration} />
+          </>
+        )}
     </div>
   );
 }

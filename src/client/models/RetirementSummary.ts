@@ -2,8 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export enum MemoType {
-    TEXT = 'text',
-    HASH = 'hash',
-    NONE = 'none',
-}
+export type RetirementSummary = {
+    certificate_id: number;
+    amount_filled: string;
+    finalized: boolean;
+};
+

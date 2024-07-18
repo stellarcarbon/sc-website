@@ -55,3 +55,5 @@ npm run e2e:headless
 ### CarbonAPI code generation
 
 The CarbonAPI client is generated based on the OpenAPI schema of the CarbonAPI. Its newest version can be found on https://api.com.
+
+`npm run generate-client`

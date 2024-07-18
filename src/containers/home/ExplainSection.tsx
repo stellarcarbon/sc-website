@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function ExplainSection() {
   return (
-    <div className="flex flex-col md:flex-row py-12 m-auto w-full">
+    <div className="flex flex-col md:flex-row py-12 m-auto w-full border-y border-y-tertiary">
       {/* Text */}
       <div className="md:flex-1 flex flex-col justify-center pl-[5%] md:max-w-[40%]">
         <Header>Our mission</Header>

@@ -59,7 +59,7 @@ export default function CountDownTimer({
       {timerComponents.length ? (
         <>
           <span>Automatically retires in </span>
-          <span className="text-base">{timerComponents}</span>
+          <span className="text-sm">{timerComponents}</span>
         </>
       ) : (
         <span>Time is up!</span>

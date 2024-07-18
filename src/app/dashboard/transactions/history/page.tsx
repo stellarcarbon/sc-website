@@ -70,7 +70,6 @@ export default function ActivityHistory() {
                   `/dashboard/transactions/history/?hash=${transaction.id}`
                 )
               }
-              isPending={false}
             />
           ))}
         </div>

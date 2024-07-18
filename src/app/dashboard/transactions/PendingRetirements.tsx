@@ -1,7 +1,7 @@
 "use client";
 
 import TransactionHistoryService from "@/app/services/TransactionHistoryService";
-import { DEV_ACCOUNT } from "@/app/types";
+import { DEV_ACCOUNT, RetirementStatus } from "@/app/types";
 import Button from "@/components/Button";
 import ParallaxDivider, {
   ParallaxBackgrounds,
@@ -17,6 +17,7 @@ import { Router } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import RequestCertificateModal from "./RequestCertificateModal";
 import RequestCertificate from "./RequestCertificate";
+import { AccountService, CarbonService, SinkService } from "@/client";
 
 enum DevState {
   devAccount = "dev_account",
@@ -36,7 +37,12 @@ export default function PendingRetirements() {
     useState<boolean>(false);
 
   const pendingTransactions = useMemo(() => {
-    return myTransactions?.filter((tx) => tx.isPending === true);
+    // return myTransactions;
+    return myTransactions?.filter(
+      (tx) =>
+        tx.retirementStatus === RetirementStatus.PENDING_USER ||
+        tx.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
+    );
   }, [myTransactions]);
 
   useEffect(() => {
@@ -69,7 +75,7 @@ export default function PendingRetirements() {
           assetAmount: 26.48,
           asset: "USDC",
           sinkAmount: 1.5,
-          isPending: true,
+          retirementStatus: RetirementStatus.PENDING_USER,
         },
         {
           id: "A2",
@@ -78,13 +84,12 @@ export default function PendingRetirements() {
           assetAmount: 58.46,
           asset: "USDC",
           sinkAmount: 3.3,
-          isPending: true,
+          retirementStatus: RetirementStatus.PENDING_USER,
         },
       ]);
     }
     if (devState === DevState.second) {
       const now = new Date();
-      console.log(now);
 
       setMyTransactions([
         {
@@ -94,7 +99,7 @@ export default function PendingRetirements() {
           assetAmount: 5.29,
           asset: "USDC",
           sinkAmount: 0.3,
-          isPending: true,
+          retirementStatus: RetirementStatus.PENDING_USER,
         },
       ]);
     }
@@ -109,7 +114,7 @@ export default function PendingRetirements() {
           assetAmount: 17.63,
           asset: "USDC",
           sinkAmount: 1,
-          isPending: true,
+          retirementStatus: RetirementStatus.PENDING_USER,
         },
       ]);
     }
@@ -124,7 +129,7 @@ export default function PendingRetirements() {
           assetAmount: 17.63,
           asset: "USDC",
           sinkAmount: 1,
-          isPending: false,
+          retirementStatus: RetirementStatus.RETIRED,
         },
       ]);
     }
@@ -148,9 +153,9 @@ export default function PendingRetirements() {
       <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest />
 
       <div className="px-4 flex flex-col border-0 border-tertiary">
-        {/* <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full mt-6">
+        <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full mt-6">
           <span>Dev buttons</span>
-          <div className="flex flex-wrap gap-4 text-xs">
+          <div className="flex justify-center flex-wrap gap-4 text-xs">
             <Button
               className={
                 devState === DevState.walletAccount
@@ -204,7 +209,7 @@ export default function PendingRetirements() {
               state 4
             </Button>
           </div>
-        </div> */}
+        </div>
 
         <div className="flex flex-col gap-2 items-center my-8">
           <h1 className="text-center text-lg font-semibold">
@@ -231,7 +236,7 @@ export default function PendingRetirements() {
         smallest
         yOffset={-300}
       />
-      <div className="px-4 w-full mt-10 mb-12">
+      <div className="px-4 w-full mt-6 mb-10">
         <div className="flex flex-col gap-2">
           <span className="self-center text-lg mb-4 font-semibold">
             Your pending transactions
@@ -242,7 +247,7 @@ export default function PendingRetirements() {
                 key={transaction.id}
                 transaction={transaction}
                 onClick={() => {}}
-                isPending={true}
+                showCountdown
               />
             );
           })}
