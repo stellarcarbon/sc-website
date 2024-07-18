@@ -7,12 +7,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
+import TransactionListItem from "@/components/dashboard/TransactionListItem";
+import TransactionsLoading from "@/app/dashboard/transactions/history/TransactionsLoading";
 
 export default function LastTransactionsSection() {
-  const { myTransactions } = useAppContext();
-
-  const [lastTransactions, setLastTransactions] =
-    useState<MyTransactionRecord[]>();
+  const [lastTransactions, setLastTransactions] = useState<
+    MyTransactionRecord[]
+  >([]);
 
   useEffect(() => {
     TransactionHistoryService.fetchRecentTransactions().then((records) => {
@@ -41,47 +42,21 @@ export default function LastTransactionsSection() {
         </div>
 
         {/* Transaction list */}
-        <div className="md:flex-1 md:max-w-[60%] min-h-[400px] flex flex-col items-center justify-center">
-          {lastTransactions ? (
-            lastTransactions.map((tx, idx) => {
-              return (
-                <div
-                  key={`tx_${idx}`}
-                  className="flex flex-col text-sm bg-primary rounded-md border border-accentSecondary p-2 mx-2 md:mx-0 w-[90%] max-w-[690px] self-center"
-                >
-                  <div className="flex justify-start items-center">
-                    <span className="w-24 md:w-32">Transaction</span>
-                    <span className=" truncate max-w-[60%] md:max-w-[100%]">
-                      {tx.id}
-                    </span>
-                  </div>
-                  <div className="flex justify-start items-center">
-                    <span className="w-24 md:w-32">Date</span>
-                    <span className="">
-                      {new Date(tx.createdAt).toDateString()}
-                    </span>
-                  </div>
-                  <div className="flex justify-start items-center">
-                    <span className="w-24 md:w-32">Sunk</span>
-                    <div className="flex items-center gap-1">
-                      <CARBONCurrencyIcon />
-                      <span>{tx.sinkAmount?.toFixed(2)}</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-start items-center">
-                    <span className="w-24 md:w-32">Memo</span>
-
-                    <span className=" truncate max-w-[60%]">{tx.memo}</span>
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            <div className="text-xl self-center font-bold">
-              Loading transaction history...
+        <>
+          {lastTransactions && (
+            <div className="mx-2 md:flex-1 md:max-w-[60%] min-h-[400px] flex flex-col items-center justify-center gap-1">
+              {lastTransactions.map((tx, idx) => {
+                return (
+                  <TransactionListItem
+                    key={`tx_${idx}`}
+                    onClick={() => {}}
+                    transaction={tx}
+                  />
+                );
+              })}
             </div>
           )}
-        </div>
+        </>
       </div>
     </div>
   );

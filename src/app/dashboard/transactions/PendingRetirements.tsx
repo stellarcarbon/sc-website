@@ -40,8 +40,8 @@ export default function PendingRetirements() {
     // return myTransactions;
     return myTransactions?.filter(
       (tx) =>
-        tx.retirementStatus === RetirementStatus.PENDING_CERTIFICATE ||
-        tx.retirementStatus === RetirementStatus.PENDING_COMPLETION
+        tx.retirementStatus === RetirementStatus.PENDING_USER ||
+        tx.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
     );
   }, [myTransactions]);
 
@@ -75,7 +75,7 @@ export default function PendingRetirements() {
           assetAmount: 26.48,
           asset: "USDC",
           sinkAmount: 1.5,
-          retirementStatus: RetirementStatus.PENDING_CERTIFICATE,
+          retirementStatus: RetirementStatus.PENDING_USER,
         },
         {
           id: "A2",
@@ -84,7 +84,7 @@ export default function PendingRetirements() {
           assetAmount: 58.46,
           asset: "USDC",
           sinkAmount: 3.3,
-          retirementStatus: RetirementStatus.PENDING_CERTIFICATE,
+          retirementStatus: RetirementStatus.PENDING_USER,
         },
       ]);
     }
@@ -99,7 +99,7 @@ export default function PendingRetirements() {
           assetAmount: 5.29,
           asset: "USDC",
           sinkAmount: 0.3,
-          retirementStatus: RetirementStatus.PENDING_CERTIFICATE,
+          retirementStatus: RetirementStatus.PENDING_USER,
         },
       ]);
     }
@@ -114,7 +114,7 @@ export default function PendingRetirements() {
           assetAmount: 17.63,
           asset: "USDC",
           sinkAmount: 1,
-          retirementStatus: RetirementStatus.PENDING_CERTIFICATE,
+          retirementStatus: RetirementStatus.PENDING_USER,
         },
       ]);
     }
@@ -247,6 +247,7 @@ export default function PendingRetirements() {
                 key={transaction.id}
                 transaction={transaction}
                 onClick={() => {}}
+                showCountdown
               />
             );
           })}

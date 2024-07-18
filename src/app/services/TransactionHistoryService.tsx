@@ -6,9 +6,10 @@ export default class TransactionHistoryService {
     return txsResponse.transactions.map((transaction) => {
       let retirementStatus = RetirementStatus.RETIRED;
       if (!transaction.retirement_finalized) {
-        retirementStatus = RetirementStatus.PENDING_CERTIFICATE;
+        retirementStatus = RetirementStatus.PENDING_USER;
       }
 
+      console.log(transaction.hash, transaction.paging_token);
       return {
         id: transaction.hash,
         createdAt: transaction.created_at,
@@ -17,8 +18,25 @@ export default class TransactionHistoryService {
         asset: transaction.source_asset.code,
         sinkAmount: Number(transaction.carbon_amount),
         retirementStatus,
+        pagingToken: transaction.paging_token,
       } as MyTransactionRecord;
     });
+  }
+
+  public static async fetchLedger(
+    cursor?: string,
+    limit?: number,
+    order?: "asc" | "desc"
+  ): Promise<MyTransactionRecord[]> {
+    console.log(cursor, Number(cursor));
+    const sinkTxsResponse: SinkTxListResponse = await SinkService.getSinkTxList(
+      {
+        cursor: Number(cursor),
+        limit,
+        order,
+      }
+    );
+    return this.mapTxsResponse(sinkTxsResponse);
   }
 
   public static async fetchAccountHistory(
@@ -36,7 +54,7 @@ export default class TransactionHistoryService {
     MyTransactionRecord[]
   > {
     const sinkTxsResponse = await SinkService.getSinkTxList({
-      limit: 4,
+      limit: 3,
     });
     return this.mapTxsResponse(sinkTxsResponse);
   }

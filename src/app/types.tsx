@@ -28,8 +28,8 @@ export enum ReasonOptions {
 }
 
 export enum RetirementStatus {
-  PENDING_CERTIFICATE = "Pending certificate attribution",
-  PENDING_COMPLETION = "Pending finalization",
+  PENDING_USER = "Pending certificate attribution",
+  PENDING_STELLARCARBON = "Pending finalization by Stellarcarbon",
   RETIRED = "Retired into certificate",
 }
 
@@ -40,9 +40,9 @@ export interface MyTransactionRecord {
   assetAmount: number;
   asset: string;
   sinkAmount: number;
-  // Add other relevant transaction properties here
-
   retirementStatus: RetirementStatus;
+
+  pagingToken: string;
 }
 
 export interface FrontpageTransactionRecord {

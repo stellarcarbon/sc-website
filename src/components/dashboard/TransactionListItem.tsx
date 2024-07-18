@@ -7,6 +7,8 @@ import { useMemo } from "react";
 interface TransactionListItemProps {
   transaction: MyTransactionRecord;
   onClick: () => void;
+  showCountdown?: boolean;
+  bgPrimary?: boolean;
 }
 
 declare global {
@@ -24,6 +26,8 @@ Date.prototype.addDays = function (days) {
 export default function TransactionListItem({
   transaction,
   onClick,
+  showCountdown = false,
+  bgPrimary = false,
 }: TransactionListItemProps) {
   const initialDuration = useMemo(() => {
     const txDate = new Date(transaction.createdAt);
@@ -36,7 +40,11 @@ export default function TransactionListItem({
   }, [transaction]);
 
   return (
-    <div className="p-2 w-full grid grid-cols-4 md:grid-cols-6 bg-secondary border-accentSecondary rounded-md cursor-pointer text-sm">
+    <div
+      className={`p-2 w-full grid grid-cols-4 md:grid-cols-6 ${
+        bgPrimary ? "bg-primary" : "bg-secondary"
+      } border-accentSecondary rounded-md cursor-pointer text-sm`}
+    >
       <div className="">Hash</div>
       <div className="col-span-3 md:col-span-5 truncate">{transaction.id}</div>
 
@@ -65,8 +73,8 @@ export default function TransactionListItem({
         {transaction.retirementStatus}
       </div>
 
-      {/* TODO: check dit */}
-      {transaction.retirementStatus !== RetirementStatus.RETIRED &&
+      {showCountdown &&
+        transaction.retirementStatus !== RetirementStatus.RETIRED &&
         transaction.sinkAmount % 1 != 0 && (
           <div className="col-span-4 md:col-span-6">
             <hr className="my-2" />
