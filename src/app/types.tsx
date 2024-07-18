@@ -42,7 +42,7 @@ export interface MyTransactionRecord {
   sinkAmount: number;
   retirementStatus: RetirementStatus;
 
-  pagingToken: string;
+  pagingToken?: string;
 }
 
 export interface FrontpageTransactionRecord {
