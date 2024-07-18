@@ -32,7 +32,6 @@ export default function TransactionHistory({}) {
       if (order !== undefined) newSearchParams.set("order", order);
 
       router.replace(`?${newSearchParams}`, { scroll: false });
-      console.log("!!");
     },
     [router, searchParams]
   );
@@ -61,7 +60,6 @@ export default function TransactionHistory({}) {
       );
 
       setTransactions(txs);
-      console.log(txs);
     } catch (e: any) {
       const msg = e.body.detail[0]?.msg;
       setError(msg);

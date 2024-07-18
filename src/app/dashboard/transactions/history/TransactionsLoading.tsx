@@ -6,8 +6,7 @@ export default function TransactionsLoading() {
       <Blocks
         height="80"
         width="80"
-        // color="#ff0000"
-        color="#0000ff"
+        color="#ff0000"
         ariaLabel="blocks-loading"
         wrapperStyle={{}}
         wrapperClass="blocks-wrapper"
