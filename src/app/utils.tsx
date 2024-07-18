@@ -1,6 +1,4 @@
 import { useEffect, useState, useRef, RefObject } from "react";
-import { ServerApi } from "stellar-sdk/lib/horizon";
-import { CARBON_SINK_ACCOUNT, FrontpageTransactionRecord } from "./types";
 import { useRouter } from "next/navigation";
 import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
@@ -60,46 +58,6 @@ export const useIntersectionObserver = (
 
   return [ref, isIntersecting];
 };
-
-export async function PaymentsPageToFrontPageTransactionsRecordArray(
-  paymentsPage: ServerApi.CollectionPage<
-    | ServerApi.PaymentOperationRecord
-    | ServerApi.CreateAccountOperationRecord
-    | ServerApi.AccountMergeOperationRecord
-    | ServerApi.PathPaymentOperationRecord
-    | ServerApi.PathPaymentStrictSendOperationRecord
-    | ServerApi.InvokeHostFunctionOperationRecord
-  >
-): Promise<FrontpageTransactionRecord[]> {
-  let input = paymentsPage.records;
-
-  input.sort((a, b) =>
-    Number(a.paging_token) > Number(b.paging_token) ? -1 : 1
-  );
-
-  const filteredInput = input.filter((record) => {
-    // TODO: Moet deze conditie ook?
-    // record.asset_issuer === CARBON_SINK_ACCOUNT
-
-    return record.source_account === CARBON_SINK_ACCOUNT;
-  });
-
-  const output: FrontpageTransactionRecord[] = await Promise.all(
-    filteredInput.map(async (payment: any) => {
-      const transaction = (await payment.transaction()) as any;
-      return {
-        hash: transaction.id,
-        pubkey: payment.to,
-        createdAt: transaction.created_at,
-        memo: transaction.memo,
-        sinkAmount: Number(payment.amount),
-        id: payment.id,
-      };
-    })
-  );
-
-  return output;
-}
 
 const defaultNavigationOptions = {
   scroll: true,

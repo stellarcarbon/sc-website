@@ -31,7 +31,6 @@
     "react-hook-form": "^7.49.2",
     "react-loader-spinner": "^6.1.6",
     "react-swipeable": "^7.0.1",
-    "stellar-sdk": "^11.2.0",
     "stellar-wallets-kit": "github:Creit-Tech/Stellar-Wallets-Kit"
   },
   "devDependencies": {
@@ -40,7 +39,6 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/stellar-sdk": "^0.15.1",
     "autoprefixer": "^10.0.1",
     "cross-env": "^7.0.3",
     "cypress": "^13.6.2",
