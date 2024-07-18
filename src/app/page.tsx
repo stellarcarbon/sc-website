@@ -22,11 +22,15 @@ export default function Home() {
 
       <PartnerSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} />
+      <ParallaxDivider
+        image={ParallaxBackgrounds.AUTUMN_FOREST}
+        smaller
+        yOffset={-200}
+      />
 
-      <div className="h-[600px] flex flex-col justify-center">
+      {/* <div className="h-[600px] flex flex-col justify-center">
         Some other stuff
-      </div>
+      </div> */}
     </main>
   );
 }

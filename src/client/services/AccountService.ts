@@ -21,7 +21,7 @@ export class AccountService {
     }: {
         recipientAddress: string,
         finalized?: (boolean | null),
-        cursor?: (number | null),
+        cursor?: (number | string | null),
         limit?: (number | null),
         order?: 'asc' | 'desc',
     }): CancelablePromise<SinkTxListResponse> {

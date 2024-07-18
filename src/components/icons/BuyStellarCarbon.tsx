@@ -7,7 +7,7 @@ export default function BuyStellarCarbonIcon({
 }: BuyStellarCarbonIconProps) {
   return (
     <svg
-      className={`h-14 ${className}`}
+      className={`h-10 ${className}`}
       fill="currentColor"
       viewBox="0 0 410 100"
       xmlns="http://www.w3.org/2000/svg"
@@ -46,11 +46,11 @@ export default function BuyStellarCarbonIcon({
         <title>Stellarcarbon Logo</title>
         <text
           fontFamily="Roboto, sans-serif"
-          fontSize="32"
+          fontSize="36"
           fontWeight="bold"
           id="name"
           textAnchor="middle"
-          x="250"
+          x="300"
           xmlSpace="preserve"
           y="60"
         >

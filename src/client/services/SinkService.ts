@@ -28,7 +28,7 @@ export class SinkService {
         fromDate?: (string | null),
         beforeDate?: (string | null),
         finalized?: (boolean | null),
-        cursor?: (number | null),
+        cursor?: (number | string | null),
         limit?: (number | null),
         order?: 'asc' | 'desc',
     }): CancelablePromise<SinkTxListResponse> {

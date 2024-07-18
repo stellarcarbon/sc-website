@@ -19,10 +19,10 @@ export default function LastTransactionsSection() {
     TransactionHistoryService.fetchRecentTransactions().then((records) => {
       setLastTransactions(records);
     });
-  }, [lastTransactions]);
+  }, []);
 
   return (
-    <div className="bg-tertiary py-12 w-full">
+    <div className="bg-tertiary py-12 w-full border-y border-y-secondary">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
         <div className="m-auto pl-[5%] md:w-[40%] ">

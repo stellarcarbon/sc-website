@@ -9,6 +9,7 @@ import Button from "@/components/Button";
 import { ApiError } from "@/client";
 import TransactionsLoading from "../dashboard/transactions/history/TransactionsLoading";
 import { useSCRouter } from "../utils";
+import Link from "next/link";
 
 interface TransactionHistoryProps {}
 
@@ -18,6 +19,7 @@ export default function TransactionHistory({}) {
 
   const [transactions, setTransactions] = useState<MyTransactionRecord[]>([]);
   const [error, setError] = useState<string>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const updateSearchParams = useCallback(
     (cursor?: string, order?: "asc" | "desc", limit?: number) => {
@@ -36,8 +38,6 @@ export default function TransactionHistory({}) {
   );
 
   const fetchTransactions = useCallback(async () => {
-    console.log(searchParams.get("cursor"));
-
     let cursor: string | undefined = undefined;
     if (searchParams.get("cursor") !== null) {
       cursor = searchParams.get("cursor")!;
@@ -52,10 +52,6 @@ export default function TransactionHistory({}) {
     if (searchParams.get("order") !== null) {
       order = searchParams.get("order") as "asc" | "desc";
     }
-
-    // const order = (searchParams.get("order") ?? "desc") as "asc" | "desc";
-
-    // console.log("fetching with limit: ", limit);
 
     try {
       const txs = await TransactionHistoryService.fetchLedger(
@@ -92,7 +88,7 @@ export default function TransactionHistory({}) {
     <>
       {!error ? (
         <div className="flex flex-col items-center">
-          <div className="w-full py-8 flex flex-col gap-1">
+          <div className="w-full py-8 pb-16 flex flex-col gap-1">
             {transactions.length > 1 ? (
               transactions.map((tx, idx) => {
                 return (
@@ -104,8 +100,15 @@ export default function TransactionHistory({}) {
                   />
                 );
               })
-            ) : (
+            ) : isLoading ? (
               <TransactionsLoading />
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-6">
+                <span>No more records found.</span>
+                <Link className="underline" href="/transactions">
+                  Go back to start
+                </Link>
+              </div>
             )}
           </div>
           <div className="w-full px-4 md:px-12 flex justify-between">

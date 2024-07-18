@@ -2,7 +2,14 @@ import { MyTransactionRecord, RetirementStatus } from "../types";
 import { AccountService, SinkService, SinkTxListResponse } from "@/client";
 
 export default class TransactionHistoryService {
-  private static mapTxsResponse(txsResponse: SinkTxListResponse) {
+  private static mapTxsResponse(
+    txsResponse: SinkTxListResponse,
+    order: "asc" | "desc" = "desc"
+  ) {
+    let transactions = txsResponse.transactions;
+    if (order === "asc") {
+      transactions.reverse();
+    }
     return txsResponse.transactions.map((transaction) => {
       let retirementStatus = RetirementStatus.RETIRED;
       if (!transaction.retirement_finalized) {
@@ -28,15 +35,14 @@ export default class TransactionHistoryService {
     limit?: number,
     order?: "asc" | "desc"
   ): Promise<MyTransactionRecord[]> {
-    console.log(cursor, Number(cursor));
     const sinkTxsResponse: SinkTxListResponse = await SinkService.getSinkTxList(
       {
-        cursor: Number(cursor),
+        cursor,
         limit,
         order,
       }
     );
-    return this.mapTxsResponse(sinkTxsResponse);
+    return this.mapTxsResponse(sinkTxsResponse, order);
   }
 
   public static async fetchAccountHistory(

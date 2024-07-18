@@ -87,11 +87,11 @@ export default function RainforestIntro() {
     <>
       <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full top-0 left-0 z-0 block absolute" />
       <div className="min-h-[100vh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
-        <div className="flex flex-col gap-8 text-md px-5 py-12 w-full bg-secondary/[.44]">
-          <span className="font-mono text-4xl md:text-[80px]">
-            {/* <CARBONCurrencyIcon width={56} height={56} /> */}
-            Stellarcarbon
-          </span>
+        <span className="font-mono text-4xl md:text-[80px]">
+          {/* <CARBONCurrencyIcon width={56} height={56} /> */}
+          Stellarcarbon
+        </span>
+        <div className="flex flex-col gap-8 md:gap-16 text-md px-5 py-12 w-full bg-secondary/[.64]">
           {/* <h1 className="px-4 text-lg font-noto mb-4">
             Sinking CARBON with Stellar
           </h1> */}
@@ -108,7 +108,7 @@ export default function RainforestIntro() {
             projects, making it effortless to compensate for your remaining
             emissions.
           </span> */}
-          <div className="text-sm md:text-lg lg:text-xl flex flex-col items-center text-center  gap-4 leading-8 ">
+          <div className="text-sm md:text-lg lg:text-lg flex flex-col items-center text-center  gap-4 leading-8 ">
             <span>
               We provide a simple way for{" "}
               <a
@@ -118,15 +118,16 @@ export default function RainforestIntro() {
               >
                 Stellar
               </a>{" "}
-              blockchain users to compensate for their CO2 emissions.
+              blockchain users to contribute to nature based projects.
             </span>
           </div>
-          <CTAButton className="self-center" />
-          <span className="text-sm md:text-base">
+
+          {/* <span className="text-sm md:text-base">
             By sinking CARBON you are contributing to high-integrity nature
             based projects. Find out more below.
-          </span>
+          </span> */}
         </div>
+        <CTAButton className="self-center" />
         <div
           ref={chevDown}
           className={`absolute cursor-pointer bottom-0 animate-bounce ${

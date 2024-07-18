@@ -70,7 +70,7 @@ export default function Overview() {
 
   return (
     <>
-      <div className="mt-10 mb-6">
+      <div className="mt-10 md:mt-14 mb-6">
         <TransactionSummary />
       </div>
 
