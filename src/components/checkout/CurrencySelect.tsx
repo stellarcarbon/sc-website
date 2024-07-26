@@ -8,16 +8,16 @@ interface CurrencySelectProps {
 
 export default function CurrencySelect({ register }: CurrencySelectProps) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 md:gap-3">
       <span className="text-xl md:text-2xl font-bold">
-        How would you like to pay?
+        Choose preferred asset
       </span>
       <span className="text-xs md:text-sm mb-2">
         {`Choose a preferred payment asset to use or select "any".`}
       </span>
 
       <select
-        className="w-[80%] text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
+        className="w-full text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
         defaultValue={PaymentAsset.ANY}
         {...register("currency")}
       >

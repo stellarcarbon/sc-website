@@ -2,7 +2,7 @@ import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import Link from "next/link";
 import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
 import CountDownTimer from "../CountDownTimer";
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 
 interface TransactionListItemProps {
   transaction: MyTransactionRecord;
@@ -23,6 +23,16 @@ Date.prototype.addDays = function (days) {
   return date;
 };
 
+function ItemHeader({ children }: { children: ReactNode }) {
+  return (
+    <div className="col-span-2 md:col-span-1 font-semibold">{children}</div>
+  );
+}
+
+function ItemValue({ children }: { children: ReactNode }) {
+  return <div className="col-span-4 md:col-span-5 truncate">{children}</div>;
+}
+
 export default function TransactionListItem({
   transaction,
   onClick,
@@ -42,10 +52,38 @@ export default function TransactionListItem({
   return (
     <div
       onClick={onClick}
-      className={`p-2 w-full grid grid-cols-4 md:grid-cols-6 ${
+      className={`p-2 w-full grid grid-cols-6 md:grid-cols-6 ${
         bgPrimary ? "bg-primary" : "bg-secondary"
       } border-accentSecondary rounded-md cursor-pointer text-sm`}
     >
+      <ItemHeader>Hash</ItemHeader>
+      <ItemValue>{transaction.id}</ItemValue>
+
+      <ItemHeader>Date</ItemHeader>
+      <ItemValue>{new Date(transaction.createdAt).toDateString()}</ItemValue>
+
+      <ItemHeader>Sunk</ItemHeader>
+      <ItemValue>
+        <div className="flex items-center gap-1">
+          <CARBONCurrencyIcon />
+          <span>{transaction.sinkAmount?.toFixed(2)}</span>
+        </div>
+      </ItemValue>
+
+      <ItemHeader>Price</ItemHeader>
+      <ItemValue>
+        <div className="flex items-center gap-1">
+          <span>{transaction.assetAmount?.toFixed(2)}</span>
+          <span>{transaction.asset}</span>
+        </div>
+      </ItemValue>
+
+      <ItemHeader>Memo</ItemHeader>
+      <ItemValue>{transaction.memo}</ItemValue>
+
+      <ItemHeader>Status</ItemHeader>
+      <ItemValue>{transaction.retirementStatus}</ItemValue>
+      {/* 
       <div className="">Hash</div>
       <div className="col-span-3 md:col-span-5 truncate">{transaction.id}</div>
 
@@ -72,22 +110,24 @@ export default function TransactionListItem({
       <div>Status</div>
       <div className="col-span-3 md:col-span-5">
         {transaction.retirementStatus}
-      </div>
+      </div> */}
 
       {transaction.retirementStatus === RetirementStatus.RETIRED && (
         <>
-          <div>
+          <ItemHeader>
             {transaction.retirements.length > 1
-              ? "Certificates"
-              : "Certificate"}
-          </div>
-          <div>
-            {transaction.retirements.map((retirement, idx) => (
-              <span key={`${transaction.id}_${idx}}`}>
-                {retirement.certificate_id}
-              </span>
-            ))}
-          </div>
+              ? "Certificate IDs"
+              : "Certificate ID"}
+          </ItemHeader>
+          <ItemValue>
+            <div className="flex gap-2">
+              {transaction.retirements.map((retirement, idx) => (
+                <span key={`${transaction.id}_${idx}}`}>
+                  {retirement.certificate_id}
+                </span>
+              ))}
+            </div>
+          </ItemValue>
         </>
       )}
 

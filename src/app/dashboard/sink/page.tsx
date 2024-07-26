@@ -24,9 +24,9 @@ export default function DashboardSink() {
 
   return (
     <div {...swipeHandlers} className="w-full">
-      <div className="my-8 mx-4 flex flex-col items-center gap-2">
+      {/* <div className="my-8 mx-4 flex flex-col items-center gap-4">
         <h1 className="text-3xl">Sink CARBON</h1>
-        <span className="text-xs md:text-sm text-center">
+        <span className="text-sm md:text-sm text-center">
           Use this form to sink CARBON to help support the Shipibo Conibo and
           Cacataibo Indigenous Communities
         </span>
@@ -35,7 +35,7 @@ export default function DashboardSink() {
         smallest
         image={ParallaxBackgrounds.RAINFOREST}
         yOffset={-50}
-      />
+      /> */}
       <SinkForm />
     </div>
   );

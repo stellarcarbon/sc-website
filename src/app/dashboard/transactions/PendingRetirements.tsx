@@ -155,66 +155,68 @@ export default function PendingRetirements() {
         />
       )}
 
-      <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest />
+      {/* <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest /> */}
 
       <div className="px-4 flex flex-col border-0 border-tertiary">
-        <div className="flex flex-col gap-2 items-center bg-secondary p-2 mb-6 border rounded w-full mt-6">
-          <span>Dev buttons</span>
-          <div className="flex justify-center flex-wrap gap-4 text-xs">
-            <Button
-              className={
-                devState === DevState.walletAccount
-                  ? "!bg-tertiary text-white"
-                  : ""
-              }
-              onClick={() => setDevState(DevState.walletAccount)}
-            >
-              s_wallet
-            </Button>
-            <Button
-              className={
-                devState === DevState.devAccount
-                  ? "!bg-tertiary text-white"
-                  : ""
-              }
-              onClick={() => setDevState(DevState.devAccount)}
-            >
-              s_DEV_ACCOUNT
-            </Button>
-            <Button
-              className={
-                devState === DevState.first ? "!bg-tertiary text-white" : ""
-              }
-              onClick={() => setDevState(DevState.first)}
-            >
-              state 1
-            </Button>
-            <Button
-              className={
-                devState === DevState.second ? "!bg-tertiary text-white" : ""
-              }
-              onClick={() => setDevState(DevState.second)}
-            >
-              state 2
-            </Button>
-            <Button
-              className={
-                devState === DevState.third ? "!bg-tertiary text-white" : ""
-              }
-              onClick={() => setDevState(DevState.third)}
-            >
-              state 3
-            </Button>
-            <Button
-              className={
-                devState === DevState.fourth ? "!bg-tertiary text-white" : ""
-              }
-              onClick={() => setDevState(DevState.fourth)}
-            >
-              state 4
-            </Button>
+        {false && (
+          <div className="flex flex-col gap-2 items-center bg-secondary p-4 border rounded w-full mt-6">
+            <span>Dev buttons</span>
+            <div className="flex justify-center flex-wrap gap-4 text-xs">
+              <Button
+                className={
+                  devState === DevState.walletAccount
+                    ? "!bg-tertiary text-white"
+                    : ""
+                }
+                onClick={() => setDevState(DevState.walletAccount)}
+              >
+                s_wallet
+              </Button>
+              <Button
+                className={
+                  devState === DevState.devAccount
+                    ? "!bg-tertiary text-white"
+                    : ""
+                }
+                onClick={() => setDevState(DevState.devAccount)}
+              >
+                s_DEV_ACCOUNT
+              </Button>
+              <Button
+                className={
+                  devState === DevState.first ? "!bg-tertiary text-white" : ""
+                }
+                onClick={() => setDevState(DevState.first)}
+              >
+                state 1
+              </Button>
+              <Button
+                className={
+                  devState === DevState.second ? "!bg-tertiary text-white" : ""
+                }
+                onClick={() => setDevState(DevState.second)}
+              >
+                state 2
+              </Button>
+              <Button
+                className={
+                  devState === DevState.third ? "!bg-tertiary text-white" : ""
+                }
+                onClick={() => setDevState(DevState.third)}
+              >
+                state 3
+              </Button>
+              <Button
+                className={
+                  devState === DevState.fourth ? "!bg-tertiary text-white" : ""
+                }
+                onClick={() => setDevState(DevState.fourth)}
+              >
+                state 4
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="flex flex-col gap-2 items-center my-8">
           <h1 className="text-center text-lg font-semibold">
@@ -225,7 +227,7 @@ export default function PendingRetirements() {
             <CARBONCurrencyIcon width={24} height={24} />
           </div>
           <span className="text-xs text-center mx-4">
-            This CARBON is waiting to be retired into a certificate. Read more
+            This CARBON is ready to be retired into a certificate. Read more
             about pending retirements{" "}
             <Link href="/explain" className="underline">
               here

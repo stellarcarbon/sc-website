@@ -128,7 +128,7 @@ export default function AmountInput({
   return (
     <div className="flex flex-col gap-1">
       <h1 className="text-xl md:text-2xl text-start font-bold">
-        Choose amount to sink
+        CARBON amount
       </h1>
       <span className="text-xs md:text-sm">
         Use the exchange rate calculator to determine the amount of CARBON you

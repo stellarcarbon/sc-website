@@ -26,29 +26,35 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
   // TODO: enforce max length of reason message 29 bytes
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 md:gap-3">
       <span className="text-xl md:text-2xl font-bold mb-0">
         Add a label (optional)
       </span>
-      <span className="text-xs md:text-sm">Select a reason...</span>
-      <div className="flex gap-2 my-2">
-        {Object.values(ReasonOptions).map((option) => {
-          return (
-            <SelectReasonButton
-              key={`${option}_button`}
-              isSelected={reason === option}
-              onClick={() => selectReason(option)}
-              reason={option}
-            />
-          );
-        })}
+      <div className="flex flex-col gap-1">
+        <span className="text-xs md:text-sm">Select a reason...</span>
+        <div className="flex gap-2 my-2">
+          {Object.values(ReasonOptions).map((option) => {
+            return (
+              <SelectReasonButton
+                key={`${option}_button`}
+                isSelected={reason === option}
+                onClick={() => selectReason(option)}
+                reason={option}
+              />
+            );
+          })}
+        </div>
       </div>
-      <span className="text-xs md:text-sm">...or write your own message.</span>
-      <textarea
-        onChange={onReasonTextChange}
-        value={reason}
-        className="my-2 text-black py-1 px-2 md:w-[80%] rounded-sm"
-      />
+      <div className="flex flex-col gap-1">
+        <span className="text-xs md:text-sm">
+          ...or write your own message.
+        </span>
+        <textarea
+          onChange={onReasonTextChange}
+          value={reason}
+          className="my-2 text-black py-1 px-2 md:w-[80%] rounded-sm"
+        />
+      </div>
     </div>
   );
 }

@@ -55,9 +55,16 @@ export default function CheckoutForm({
           />
         </Suspense>
       </div>
-      {/* <ParallaxDivider image={ParallaxBackgrounds.AUTUMN_FOREST} smallest /> */}
+      <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest />
       <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
         <CurrencySelect register={register} />
+      </div>
+      <ParallaxDivider
+        image={ParallaxBackgrounds.RAINFOREST}
+        smallest
+        yOffset={-150}
+      />
+      <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
         <ReasonSelect watch={watch} setValue={setValue} />
       </div>
       <ParallaxDivider
