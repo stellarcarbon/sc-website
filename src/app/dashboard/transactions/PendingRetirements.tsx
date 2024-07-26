@@ -76,6 +76,7 @@ export default function PendingRetirements() {
           asset: "USDC",
           sinkAmount: 1.5,
           retirementStatus: RetirementStatus.PENDING_USER,
+          retirements: [],
         },
         {
           id: "A2",
@@ -85,6 +86,7 @@ export default function PendingRetirements() {
           asset: "USDC",
           sinkAmount: 3.3,
           retirementStatus: RetirementStatus.PENDING_USER,
+          retirements: [],
         },
       ]);
     }
@@ -100,6 +102,7 @@ export default function PendingRetirements() {
           asset: "USDC",
           sinkAmount: 0.3,
           retirementStatus: RetirementStatus.PENDING_USER,
+          retirements: [],
         },
       ]);
     }
@@ -115,6 +118,7 @@ export default function PendingRetirements() {
           asset: "USDC",
           sinkAmount: 1,
           retirementStatus: RetirementStatus.PENDING_USER,
+          retirements: [],
         },
       ]);
     }
@@ -130,6 +134,7 @@ export default function PendingRetirements() {
           asset: "USDC",
           sinkAmount: 1,
           retirementStatus: RetirementStatus.RETIRED,
+          retirements: [],
         },
       ]);
     }

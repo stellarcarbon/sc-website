@@ -2,45 +2,42 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { SinkTxItem } from '../models/SinkTxItem';
-import type { SinkTxListResponse } from '../models/SinkTxListResponse';
+import type { RetirementDetail } from '../models/RetirementDetail';
+import type { RetirementListResponse } from '../models/RetirementListResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-export class SinkService {
+export class RetirementService {
     /**
-     * List sinking transactions and their retirement status.
-     * @returns SinkTxListResponse Successful Response
+     * List finalized retirements.
+     * @returns RetirementListResponse Successful Response
      * @throws ApiError
      */
-    public static getSinkTxList({
-        forFunder,
-        forRecipient,
+    public static getRetirementList({
+        forBeneficiary,
         fromDate,
         beforeDate,
-        finalized,
+        project,
         cursor,
         limit,
         order = 'desc',
     }: {
-        forFunder?: (string | null),
-        forRecipient?: (string | null),
+        forBeneficiary?: (string | null),
         fromDate?: (string | null),
         beforeDate?: (string | null),
-        finalized?: (boolean | null),
+        project?: (number | null),
         cursor?: (number | string | null),
         limit?: (number | null),
         order?: 'asc' | 'desc',
-    }): CancelablePromise<SinkTxListResponse> {
+    }): CancelablePromise<RetirementListResponse> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/sink-txs/',
+            url: '/retirements/',
             query: {
-                'for_funder': forFunder,
-                'for_recipient': forRecipient,
+                'for_beneficiary': forBeneficiary,
                 'from_date': fromDate,
                 'before_date': beforeDate,
-                'finalized': finalized,
+                'project': project,
                 'cursor': cursor,
                 'limit': limit,
                 'order': order,
@@ -53,27 +50,27 @@ export class SinkService {
         });
     }
     /**
-     * Fetch a single sink transaction and its retirement status.
-     * @returns SinkTxItem Successful Response
+     * Fetch a single retirement and its instrument details.
+     * @returns RetirementDetail Successful Response
      * @throws ApiError
      */
-    public static getSinkTxItem({
-        txHash,
+    public static getRetirementItem({
+        certificateId,
     }: {
         /**
-         * The sink transaction hash (64 hexadecimal characters)
+         * The retirement's certificate ID
          */
-        txHash: string,
-    }): CancelablePromise<SinkTxItem> {
+        certificateId: number,
+    }): CancelablePromise<RetirementDetail> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/sink-txs/{tx_hash}',
+            url: '/retirements/{certificate_id}',
             path: {
-                'tx_hash': txHash,
+                'certificate_id': certificateId,
             },
             errors: {
                 400: `The request you sent was invalid in some way`,
-                404: `Transaction was not found in our database`,
+                404: `Retirement was not found in our database`,
                 422: `Validation Error`,
                 500: `An unhandled error occurred on the server`,
             },

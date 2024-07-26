@@ -3,14 +3,19 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { InstrumentItem } from './InstrumentItem';
-export type RetirementItem = {
+import type { RetiredFromBlock } from './RetiredFromBlock';
+import type { SinkTxSummary } from './SinkTxSummary';
+import type { VcsProjectDetail } from './VcsProjectDetail';
+export type RetirementDetail = {
     certificate_id: number;
     vcu_amount: number;
     serial_number: string;
     retirement_date: string;
     beneficiary: string;
     details: string;
-    vcs_project_id: number;
+    vcs_project: VcsProjectDetail;
     instrument: InstrumentItem;
+    retired_from: Array<RetiredFromBlock>;
+    sink_statuses: Array<SinkTxSummary>;
 };
 

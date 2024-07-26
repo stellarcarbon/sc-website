@@ -41,6 +41,7 @@ export default function TransactionListItem({
 
   return (
     <div
+      onClick={onClick}
       className={`p-2 w-full grid grid-cols-4 md:grid-cols-6 ${
         bgPrimary ? "bg-primary" : "bg-secondary"
       } border-accentSecondary rounded-md cursor-pointer text-sm`}
@@ -72,6 +73,23 @@ export default function TransactionListItem({
       <div className="col-span-3 md:col-span-5">
         {transaction.retirementStatus}
       </div>
+
+      {transaction.retirementStatus === RetirementStatus.RETIRED && (
+        <>
+          <div>
+            {transaction.retirements.length > 1
+              ? "Certificates"
+              : "Certificate"}
+          </div>
+          <div>
+            {transaction.retirements.map((retirement, idx) => (
+              <span key={`${transaction.id}_${idx}}`}>
+                {retirement.certificate_id}
+              </span>
+            ))}
+          </div>
+        </>
+      )}
 
       {showCountdown &&
         transaction.retirementStatus !== RetirementStatus.RETIRED &&

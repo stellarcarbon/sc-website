@@ -1,4 +1,10 @@
-import { MemoType, PaymentAsset, SinkingResponse, VcsProject } from "@/client";
+import {
+  MemoType,
+  PaymentAsset,
+  RetirementSummary,
+  SinkingResponse,
+  VcsProject,
+} from "@/client";
 import { StellarWalletsKit, WalletType } from "stellar-wallets-kit";
 
 export type WalletConnection = {
@@ -30,7 +36,7 @@ export enum ReasonOptions {
 export enum RetirementStatus {
   PENDING_USER = "Pending certificate attribution",
   PENDING_STELLARCARBON = "Pending finalization by Stellarcarbon",
-  RETIRED = "Retired into certificate",
+  RETIRED = "Retired into certificate(s)",
 }
 
 export interface MyTransactionRecord {
@@ -41,6 +47,7 @@ export interface MyTransactionRecord {
   asset: string;
   sinkAmount: number;
   retirementStatus: RetirementStatus;
+  retirements: RetirementSummary[];
 
   pagingToken?: string;
 }

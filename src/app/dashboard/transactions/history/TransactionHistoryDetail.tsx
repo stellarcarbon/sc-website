@@ -5,11 +5,15 @@ import { useAppContext } from "@/context/appContext";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import TransactionsLoading from "./TransactionsLoading";
 import { useSwipeable } from "react-swipeable";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSCRouter } from "@/app/utils";
+import { RetirementStatus } from "@/app/types";
+import { RetirementDetail, RetirementService } from "@/client";
+import RetirementDetailCard from "./RetirementDetailCard";
+import { Blocks } from "react-loader-spinner";
 
 interface TransactionHistoryDetailProps {
   hash: string;
@@ -20,6 +24,11 @@ export default function TransactionHistoryDetail({
 }: TransactionHistoryDetailProps) {
   const router = useSCRouter();
   const { myTransactions, setMyTransactions } = useAppContext();
+  const [retirementDetails, setRetirementDetails] = useState<
+    RetirementDetail[]
+  >([]);
+  const [isLoadingRetirements, setIsLoadingRetirements] =
+    useState<boolean>(true);
 
   const tx = useMemo(() => {
     console.log(myTransactions);
@@ -33,6 +42,24 @@ export default function TransactionHistoryDetail({
     onSwipedRight: () => router.push("/dashboard/transactions"),
     delta: 100,
   });
+
+  useEffect(() => {
+    const getRetirements = async () => {
+      const promises: Promise<RetirementDetail>[] = [];
+      tx?.retirements.forEach((ret) => {
+        promises.push(
+          RetirementService.getRetirementItem({
+            certificateId: ret.certificate_id,
+          })
+        );
+      });
+      setRetirementDetails(await Promise.all(promises));
+      setIsLoadingRetirements(false);
+      // RetirementService.getRetirementItem({ certificateId: })
+    };
+
+    getRetirements();
+  }, [tx]);
 
   if (myTransactions === null) {
     return (
@@ -67,7 +94,7 @@ export default function TransactionHistoryDetail({
           {/* <span className="break-words text-xs self-center text-center max-w-[80vw] my-2 border-b">
             {tx.id}
           </span> */}
-          <div className="flex flex-col px-4 gap-0">
+          <div className="flex flex-col px-4 gap-0 flex-1">
             <div className="flex justify-between items-center gap-6">
               <span className="text-md font-bold flex-1">Hash</span>
               <span className="text-xs break-words min-w-1 text-right">
@@ -99,6 +126,10 @@ export default function TransactionHistoryDetail({
               <span className="text-md font-bold flex-1">Memo</span>
               <span className="text-sm break-words">{tx.memo}</span>
             </div>
+            <div className="flex justify-between items-center">
+              <span className="text-md font-bold flex-1">Status</span>
+              <span className="text-sm break-words">{tx.retirementStatus}</span>
+            </div>
             <a
               href={`https://stellar.expert/explorer/public/tx/${tx.id}`}
               target="_blank"
@@ -106,9 +137,43 @@ export default function TransactionHistoryDetail({
             >
               View this transaction on Stellar.expert
             </a>
-            <div className="flex flex-col mt-6">
-              <span className="text-xl">Retirements in this transaction</span>
-            </div>
+
+            {tx.retirementStatus === RetirementStatus.RETIRED && (
+              <div className="flex flex-col mt-6 gap-2 flex-1">
+                <h1 className="text-center text-xl font-semibold">
+                  {RetirementStatus.RETIRED}
+                </h1>
+                <span className="text-md">
+                  The CARBON sunk in this transaction has been retired into one
+                  or more Verra Certificates.
+                </span>
+                {isLoadingRetirements ? (
+                  <div className="mx-2 mb-4 text-center flex flex-col justify-center items-center flex-1">
+                    <Blocks
+                      height="80"
+                      width="80"
+                      color="#ff0000"
+                      ariaLabel="blocks-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="blocks-wrapper"
+                      visible={true}
+                    />
+                    <span>Fetching retirements...</span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col my-4">
+                    {retirementDetails.map((retirement, idx) => {
+                      return (
+                        <RetirementDetailCard
+                          key={`ret_detail_card_${idx}`}
+                          retirement={retirement}
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </>
       )}

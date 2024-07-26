@@ -107,15 +107,17 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   }, [pathname]);
 
   useEffect(() => {
+    // On app load
     if (walletConnection === null) {
       // Load local storage if available
       const wc = LocalStorageService.loadWalletConnection();
       setWalletConnection(wc);
     } else if (
       myTransactions === null &&
-      typeof walletConnection?.stellarPubKey === "string"
+      typeof walletConnection?.stellarPubKey === "string" &&
+      pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
     ) {
-      // Load personal transactions if not loaded yet.
+      // Load personal transactions.
       TransactionHistoryService.fetchAccountHistory(
         // walletConnection?.stellarPubKey!
         DEV_ACCOUNT
@@ -133,6 +135,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     supportedWallets,
     walletConnection,
     myTransactions,
+    pathname,
   ]);
 
   const connectWallet = async (

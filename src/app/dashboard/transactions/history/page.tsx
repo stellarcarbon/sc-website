@@ -8,11 +8,17 @@ import TransactionHistoryDetail from "./TransactionHistoryDetail";
 import TransactionsLoading from "./TransactionsLoading";
 import { useSCRouter } from "@/app/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
+import { useEffect, useState } from "react";
+import { CarbonService, SinkService } from "@/client";
+import TransactionHistoryService from "@/app/services/TransactionHistoryService";
+import { DEV_ACCOUNT } from "@/app/types";
 
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions } = useAppContext();
   const router = useSCRouter();
   const searchParams = useSearchParams();
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
@@ -22,11 +28,23 @@ export default function ActivityHistory() {
     delta: 100,
   });
 
+  useEffect(() => {
+    // Reload personal transactions on page visit
+
+    TransactionHistoryService.fetchAccountHistory(
+      // walletConnection?.stellarPubKey!
+      DEV_ACCOUNT
+    ).then((transactionRecords): void => {
+      setMyTransactions(transactionRecords);
+      setIsLoading(false);
+    });
+  }, [setMyTransactions]);
+
   if (searchParams.get("hash") !== null) {
     return <TransactionHistoryDetail hash={searchParams.get("hash")!} />;
   }
 
-  if (myTransactions === null) {
+  if (isLoading || myTransactions === null) {
     return (
       <div {...swipeHandlers} className="flex-1 flex flex-col justify-center">
         <TransactionsLoading />
@@ -65,11 +83,12 @@ export default function ActivityHistory() {
             <TransactionListItem
               key={`txlistitem_${index}`}
               transaction={transaction}
-              onClick={() =>
+              onClick={() => {
+                console.log("click");
                 router.push(
                   `/dashboard/transactions/history/?hash=${transaction.id}`
-                )
-              }
+                );
+              }}
             />
           ))}
         </div>

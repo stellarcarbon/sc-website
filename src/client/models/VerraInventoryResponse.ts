@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreditBatch } from './CreditBatch';
-export type InventoryResponse = {
+export type VerraInventoryResponse = {
     total_inventory_credits: number;
     credit_batches: Array<CreditBatch>;
 };

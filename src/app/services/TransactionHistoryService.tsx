@@ -24,6 +24,7 @@ export default class TransactionHistoryService {
         asset: transaction.source_asset.code,
         sinkAmount: Number(transaction.carbon_amount),
         retirementStatus,
+        retirements: transaction.retirements,
         pagingToken: transaction.paging_token,
       } as MyTransactionRecord;
     });

@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { InventoryResponse } from '../models/InventoryResponse';
-import type { RetirementsResponse } from '../models/RetirementsResponse';
+import type { VerraInventoryResponse } from '../models/VerraInventoryResponse';
+import type { VerraRetirementsResponse } from '../models/VerraRetirementsResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -18,7 +18,7 @@ export class RegistryService {
      * tonnes for which Stellarcarbon has finalized their retirement in the registry.
      *
      * This endpoint can be slow to respond due to the upstream query that is done in the Verra Registry.
-     * @returns RetirementsResponse Successful Response
+     * @returns VerraRetirementsResponse Successful Response
      * @throws ApiError
      */
     public static listRetirements({
@@ -37,7 +37,7 @@ export class RegistryService {
          * Only list retirements done on or after this date.
          */
         dateGte?: (string | null),
-    }): CancelablePromise<RetirementsResponse> {
+    }): CancelablePromise<VerraRetirementsResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/registry/retirements',
@@ -63,10 +63,10 @@ export class RegistryService {
      * because of incomplete fractional retirements.
      *
      * The field `total_inventory_credits` contains the sum of all batches in the inventory.
-     * @returns InventoryResponse Successful Response
+     * @returns VerraInventoryResponse Successful Response
      * @throws ApiError
      */
-    public static listInventory(): CancelablePromise<InventoryResponse> {
+    public static listInventory(): CancelablePromise<VerraInventoryResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/registry/inventory',
