@@ -36,8 +36,8 @@ export default function ActivityHistory() {
     // Reload personal transactions on page visit
 
     TransactionHistoryService.fetchAccountHistory(
-      walletConnection?.stellarPubKey!
-      // DEV_ACCOUNT
+      // walletConnection?.stellarPubKey!
+      DEV_ACCOUNT
     ).then((transactionRecords): void => {
       setMyTransactions(transactionRecords);
       setIsLoading(false);
