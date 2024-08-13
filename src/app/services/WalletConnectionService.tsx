@@ -1,8 +1,8 @@
 import { StellarWalletsKit, WalletNetwork } from "stellar-wallets-kit";
 import { WalletConnection } from "../types";
 
-export default class LocalStorageService {
-  public static LOCAL_STORAGE_KEY = "wallet";
+export default class WalletConnectionService {
+  private static LOCAL_STORAGE_KEY = "wallet";
 
   public static loadWalletConnection(): WalletConnection | undefined {
     const storedWalletConnectionJSONString = localStorage.getItem(

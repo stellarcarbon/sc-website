@@ -18,6 +18,8 @@ import { useEffect, useMemo, useState } from "react";
 import RequestCertificateModal from "./RequestCertificateModal";
 import RequestCertificate from "./RequestCertificate";
 import { AccountService, CarbonService, SinkService } from "@/client";
+import PendingRounding from "./PendingRounding";
+import RoundingService from "@/app/services/RoundingService";
 
 enum DevState {
   devAccount = "dev_account",
@@ -29,8 +31,13 @@ enum DevState {
 }
 
 export default function PendingRetirements() {
-  const { myTransactions, setMyTransactions, walletConnection } =
-    useAppContext();
+  const {
+    myTransactions,
+    setMyTransactions,
+    walletConnection,
+    hasPendingRounding,
+    setHasPendingRounding,
+  } = useAppContext();
 
   const [devState, setDevState] = useState<DevState>(DevState.first);
   const [showCertificateModal, setShowCertificateModal] =
@@ -44,6 +51,18 @@ export default function PendingRetirements() {
         tx.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
     );
   }, [myTransactions]);
+
+  useEffect(() => {
+    if (walletConnection) {
+      RoundingService.hasPendingRounding(walletConnection.stellarPubKey).then(
+        (isPending) => {
+          if (isPending) {
+            setHasPendingRounding(true);
+          }
+        }
+      );
+    }
+  }, [setHasPendingRounding, walletConnection]);
 
   useEffect(() => {
     if (devState === DevState.devAccount) {
@@ -236,7 +255,11 @@ export default function PendingRetirements() {
           </span>
         </div>
 
-        <RequestCertificate totalCarbonPending={totalCarbonPending} />
+        {!hasPendingRounding ? (
+          <RequestCertificate totalCarbonPending={totalCarbonPending} />
+        ) : (
+          <PendingRounding />
+        )}
       </div>
       <ParallaxDivider
         image={ParallaxBackgrounds.RAINFOREST}

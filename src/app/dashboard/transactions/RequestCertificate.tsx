@@ -1,5 +1,6 @@
 "use client";
 
+import RoundingService from "@/app/services/RoundingService";
 import Button from "@/components/Button";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import TextInput from "@/components/TextInput";
@@ -22,7 +23,8 @@ enum RequestCertificateStates {
 export default function RequestCertificate({
   totalCarbonPending,
 }: RequestCertificateProps) {
-  const { updateWalletConnection, walletConnection } = useAppContext();
+  const { updateWalletConnection, walletConnection, setHasPendingRounding } =
+    useAppContext();
   const router = useRouter();
 
   const [step, setStep] = useState<RequestCertificateStates>(
@@ -71,7 +73,7 @@ export default function RequestCertificate({
   let body = <></>;
   if (step === RequestCertificateStates.info) {
     body = (
-      <div className="p-4 flex flex-col gap-4 items-center bg-secondary">
+      <div className="p-4 flex flex-col gap-4 items-center">
         <span className="text-center">
           Any pending retirements will automatically retire into the community
           pool after 90 days.
@@ -134,6 +136,14 @@ export default function RequestCertificate({
           <Button
             className="text-sm md:text-base"
             disabled={totalCarbonPending < 1}
+            onClick={() => {
+              // TODO: Send message to Alex that round-down is requested.
+              RoundingService.setLatestRetirement(
+                walletConnection?.stellarPubKey!
+              );
+
+              setHasPendingRounding(true);
+            }}
           >
             Round down to {Math.floor(totalCarbonPending)}
           </Button>
@@ -182,9 +192,7 @@ export default function RequestCertificate({
 
   return (
     <div
-      className={`md:w-[80%] self-center relative mb-10 text-sm border border-tertiary rounded ${
-        step !== RequestCertificateStates.info && "bg-secondary"
-      }`}
+      className={`md:w-[80%] self-center relative mb-10 text-sm border border-tertiary rounded bg-secondary`}
     >
       {body}
       {step !== RequestCertificateStates.info && (
