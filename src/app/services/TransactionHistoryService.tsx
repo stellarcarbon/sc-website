@@ -13,7 +13,13 @@ export default class TransactionHistoryService {
     return txsResponse.transactions.map((transaction) => {
       let retirementStatus = RetirementStatus.RETIRED;
       if (!transaction.retirement_finalized) {
-        retirementStatus = RetirementStatus.PENDING_USER;
+        if (Number(txsResponse.total_carbon_pending) % 1 === 0) {
+          // if the total amount pending is round, we are only waiting for SC.
+          retirementStatus = RetirementStatus.PENDING_STELLARCARBON;
+        } else {
+          // Otherwise a user action is required.
+          retirementStatus = RetirementStatus.PENDING_USER;
+        }
       }
 
       return {

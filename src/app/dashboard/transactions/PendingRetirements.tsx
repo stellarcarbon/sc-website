@@ -18,6 +18,8 @@ import { useEffect, useMemo, useState } from "react";
 import RequestCertificateModal from "./RequestCertificateModal";
 import RequestCertificate from "./RequestCertificate";
 import { AccountService, CarbonService, SinkService } from "@/client";
+import PendingRounding from "../../../components/dashboard/PendingRounding";
+import RoundingService from "@/app/services/RoundingService";
 
 enum DevState {
   devAccount = "dev_account",
@@ -29,21 +31,34 @@ enum DevState {
 }
 
 export default function PendingRetirements() {
-  const { myTransactions, setMyTransactions, walletConnection } =
-    useAppContext();
+  const {
+    myTransactions,
+    setMyTransactions,
+    walletConnection,
+    hasPendingRounding,
+    setHasPendingRounding,
+  } = useAppContext();
 
   const [devState, setDevState] = useState<DevState>(DevState.first);
   const [showCertificateModal, setShowCertificateModal] =
     useState<boolean>(false);
 
   const pendingTransactions = useMemo(() => {
-    // return myTransactions;
     return myTransactions?.filter(
       (tx) =>
         tx.retirementStatus === RetirementStatus.PENDING_USER ||
         tx.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
     );
   }, [myTransactions]);
+
+  useEffect(() => {
+    // Check pending rounding status upon rendering this page
+    if (walletConnection) {
+      RoundingService.hasPendingRounding(walletConnection.stellarPubKey).then(
+        (isPending) => setHasPendingRounding(isPending)
+      );
+    }
+  }, [setHasPendingRounding, walletConnection]);
 
   useEffect(() => {
     if (devState === DevState.devAccount) {
@@ -236,7 +251,11 @@ export default function PendingRetirements() {
           </span>
         </div>
 
-        <RequestCertificate totalCarbonPending={totalCarbonPending} />
+        {!hasPendingRounding ? (
+          <RequestCertificate totalCarbonPending={totalCarbonPending} />
+        ) : (
+          <PendingRounding />
+        )}
       </div>
       <ParallaxDivider
         image={ParallaxBackgrounds.RAINFOREST}

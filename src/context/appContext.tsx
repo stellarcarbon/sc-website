@@ -25,9 +25,10 @@ import {
   walletConnectDialog,
 } from "./walletFunctions";
 import { usePathname } from "next/navigation";
-import LocalStorageService from "@/app/services/LocalStorageService";
+import WalletConnectionService from "@/app/services/WalletConnectionService";
 import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/app/services/TransactionHistoryService";
+import RoundingService from "@/app/services/RoundingService";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {
@@ -61,6 +62,10 @@ type AppContext = {
   // Personal transactions on dashboard
   myTransactions: MyTransactionRecord[] | null;
   setMyTransactions: Dispatch<SetStateAction<MyTransactionRecord[] | null>>;
+
+  // Round down support
+  hasPendingRounding: boolean | undefined;
+  setHasPendingRounding: Dispatch<SetStateAction<boolean | undefined>>;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -84,6 +89,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [myTransactions, setMyTransactions] = useState<
     MyTransactionRecord[] | null
   >(null);
+  const [hasPendingRounding, setHasPendingRounding] = useState<boolean>();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const openDrawer = () => setIsDrawerOpen(true);
@@ -110,20 +116,33 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     // On app load
     if (walletConnection === null) {
       // Load local storage if available
-      const wc = LocalStorageService.loadWalletConnection();
+      const wc = WalletConnectionService.loadWalletConnection();
       setWalletConnection(wc);
-    } else if (
-      myTransactions === null &&
-      typeof walletConnection?.stellarPubKey === "string" &&
-      pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
-    ) {
-      // Load personal transactions.
-      TransactionHistoryService.fetchAccountHistory(
-        // walletConnection?.stellarPubKey!
-        DEV_ACCOUNT
-      ).then((transactionRecords): void => {
-        setMyTransactions(transactionRecords);
-      });
+    } else {
+      if (
+        myTransactions === null &&
+        typeof walletConnection?.stellarPubKey === "string" &&
+        pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
+      ) {
+        // Load personal transactions.
+        TransactionHistoryService.fetchAccountHistory(
+          // walletConnection?.stellarPubKey!
+          DEV_ACCOUNT
+        ).then((transactionRecords): void => {
+          setMyTransactions(transactionRecords);
+        });
+      }
+
+      // Pending rounding check
+      if (
+        walletConnection !== undefined &&
+        hasPendingRounding === undefined &&
+        pathname !== "/dashboard/transactions/" // This path will fetch on its own.
+      ) {
+        RoundingService.hasPendingRounding(walletConnection.stellarPubKey).then(
+          (isPending) => setHasPendingRounding(isPending)
+        );
+      }
     }
 
     if (supportedWallets.length === 0) {
@@ -136,6 +155,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     walletConnection,
     myTransactions,
     pathname,
+    hasPendingRounding,
   ]);
 
   const connectWallet = async (
@@ -154,7 +174,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         walletConnection.isAnonymous = true;
       }
 
-      LocalStorageService.setWalletConnection(walletConnection);
+      WalletConnectionService.setWalletConnection(walletConnection);
       setWalletConnection(walletConnection);
 
       return true;
@@ -175,14 +195,14 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         isAnonymous,
       };
 
-      LocalStorageService.setWalletConnection(newWalletConnection);
+      WalletConnectionService.setWalletConnection(newWalletConnection);
       setWalletConnection(newWalletConnection);
     },
     [walletConnection]
   );
 
   const disconnectWallet = () => {
-    LocalStorageService.removeWalletConnection();
+    WalletConnectionService.removeWalletConnection();
     setWalletConnection(undefined);
     setMyTransactions(null);
   };
@@ -202,6 +222,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       myTransactions,
       setMyTransactions,
+
+      hasPendingRounding,
+      setHasPendingRounding,
     };
   }, [
     connectionError,
@@ -210,6 +233,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     isDrawerOpen,
     myTransactions,
     updateWalletConnection,
+    hasPendingRounding,
   ]);
 
   return (
