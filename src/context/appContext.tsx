@@ -64,8 +64,8 @@ type AppContext = {
   setMyTransactions: Dispatch<SetStateAction<MyTransactionRecord[] | null>>;
 
   // Round down support
-  hasPendingRounding: boolean;
-  setHasPendingRounding: Dispatch<SetStateAction<boolean>>;
+  hasPendingRounding: boolean | undefined;
+  setHasPendingRounding: Dispatch<SetStateAction<boolean | undefined>>;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -89,7 +89,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [myTransactions, setMyTransactions] = useState<
     MyTransactionRecord[] | null
   >(null);
-  const [hasPendingRounding, setHasPendingRounding] = useState<boolean>(false);
+  const [hasPendingRounding, setHasPendingRounding] = useState<boolean>();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const openDrawer = () => setIsDrawerOpen(true);
@@ -136,14 +136,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       // Pending rounding check
       if (
         walletConnection !== undefined &&
+        hasPendingRounding === undefined &&
         pathname !== "/dashboard/transactions/" // This path will fetch on its own.
       ) {
         RoundingService.hasPendingRounding(walletConnection.stellarPubKey).then(
-          (isPending) => {
-            if (isPending) {
-              setHasPendingRounding(true);
-            }
-          }
+          (isPending) => setHasPendingRounding(isPending)
         );
       }
     }
@@ -158,6 +155,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     walletConnection,
     myTransactions,
     pathname,
+    hasPendingRounding,
   ]);
 
   const connectWallet = async (

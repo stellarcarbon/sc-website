@@ -18,7 +18,7 @@ import { useEffect, useMemo, useState } from "react";
 import RequestCertificateModal from "./RequestCertificateModal";
 import RequestCertificate from "./RequestCertificate";
 import { AccountService, CarbonService, SinkService } from "@/client";
-import PendingRounding from "./PendingRounding";
+import PendingRounding from "../../../components/dashboard/PendingRounding";
 import RoundingService from "@/app/services/RoundingService";
 
 enum DevState {
@@ -44,7 +44,6 @@ export default function PendingRetirements() {
     useState<boolean>(false);
 
   const pendingTransactions = useMemo(() => {
-    // return myTransactions;
     return myTransactions?.filter(
       (tx) =>
         tx.retirementStatus === RetirementStatus.PENDING_USER ||
@@ -53,13 +52,10 @@ export default function PendingRetirements() {
   }, [myTransactions]);
 
   useEffect(() => {
+    // Check pending rounding status upon rendering this page
     if (walletConnection) {
       RoundingService.hasPendingRounding(walletConnection.stellarPubKey).then(
-        (isPending) => {
-          if (isPending) {
-            setHasPendingRounding(true);
-          }
-        }
+        (isPending) => setHasPendingRounding(isPending)
       );
     }
   }, [setHasPendingRounding, walletConnection]);
