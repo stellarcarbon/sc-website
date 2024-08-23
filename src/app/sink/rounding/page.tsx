@@ -5,7 +5,11 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Modal from "@/components/Modal";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { SEP10ChallengeResponse } from "@/client/models/SEP10ChallengeResponse";
-import { AuthService } from "@/client";
+import {
+  AccountService,
+  AuthService,
+  RequestCertificateResponse,
+} from "@/client";
 import { useAppContext } from "@/context/appContext";
 import { Blocks } from "react-loader-spinner";
 import { RetirementStatus } from "@/app/types";
@@ -22,6 +26,7 @@ import RoundingService from "@/app/services/RoundingService";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
+import { OpenAPI } from "@/client";
 
 enum RoundDownSteps {
   fetchingChallenge = "Fetching challenge...",
@@ -43,6 +48,8 @@ export default function RoundDownPage() {
 
   const [challenge, setChallenge] = useState<SEP10ChallengeResponse>();
   const [jwt, setJWT] = useState<string>();
+  const [requestCertificateResponse, setRequestCertificateResponse] =
+    useState<RequestCertificateResponse>();
 
   const [step, setStep] = useState<RoundDownSteps>(
     RoundDownSteps.fetchingChallenge
@@ -113,8 +120,20 @@ export default function RoundDownPage() {
   }, [walletConnection, challenge]);
 
   const requestCertificate = useCallback(() => {
-    setStep(RoundDownSteps.success);
-    RoundingService.setLatestRetirement(walletConnection?.stellarPubKey!);
+    if (walletConnection && walletConnection.personalDetails) {
+      OpenAPI.HEADERS = {
+        Authorization: `Bearer ${jwt}`,
+      };
+      console.log(jwt);
+      AccountService.requestCertificate({
+        recipientAddress: walletConnection.stellarPubKey,
+        email: walletConnection.personalDetails?.useremail,
+      }).then((response) => {
+        setRequestCertificateResponse(response);
+        setStep(RoundDownSteps.success);
+        RoundingService.setLatestRetirement(walletConnection?.stellarPubKey!);
+      });
+    }
   }, []);
 
   const totalCarbonPending = useMemo(() => {
@@ -154,7 +173,6 @@ export default function RoundDownPage() {
   if (step === RoundDownSteps.awaitingAuthentication) {
     body = (
       <>
-        <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest />
         <div className="flex-1 flex flex-col justify-center">
           <div className="flex flex-col p-6 py-8 md:p-12 justify-start items-center gap-6 text-center bg-primary">
             <FontAwesomeIcon icon={faFileShield} className="text-[48px] pt-2" />
@@ -223,23 +241,42 @@ export default function RoundDownPage() {
           Your certificate request was received in good order and will be
           created soon.
         </span>
+        <div className="flex flex-col bg-secondary border border-tertiary rounded-md">
+          <div className="flex justify-between w-full items-center">
+            <span>Account</span>
+            <span>{requestCertificateResponse?.account}</span>
+          </div>
+          <div className="flex justify-between w-full items-center">
+            <span>Certificate amount</span>
+            <span>{requestCertificateResponse?.certificate_amount}</span>
+          </div>
+          <div className="flex justify-between w-full items-center">
+            <span>Pending balance left</span>
+            <span>
+              {requestCertificateResponse?.pending_balance_after_retirement}
+            </span>
+          </div>
+        </div>
         <SuccessIcon />
       </div>
     );
   }
 
-  return <div></div>;
-
   return (
     <Modal>
-      <div className="h-full flex flex-col pb-8 justify-start items-center ">
-        {body}
-        <Button
-          className="h-10 !py-2 mt-auto"
-          onClick={() => router.push("/dashboard/transactions")}
-        >
-          Return to dashboard
-        </Button>
+      <div className="h-full flex flex-col justify-start">
+        <ParallaxDivider image={ParallaxBackgrounds.FOREST} mini />
+        <div className="flex-1 flex flex-col pb-8 justify-start items-center ">
+          {body}
+          {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest /> */}
+          <Button
+            className="h-10 !py-2 mt-auto"
+            onClick={() => router.push("/dashboard/transactions")}
+          >
+            Return to dashboard
+          </Button>
+        </div>
+        <ParallaxDivider image={ParallaxBackgrounds.FOREST} mini />
       </div>
     </Modal>
   );

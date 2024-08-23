@@ -139,7 +139,7 @@ export default function RequestCertificate({
             className="text-sm md:text-base"
             disabled={totalCarbonPending < 1}
             onClick={() => {
-              router.push("/dashboard/transactions/rounding");
+              router.push("/sink/rounding");
 
               // TODO: Send message to Alex that round-down is requested.
               // RoundingService.setLatestRetirement(
