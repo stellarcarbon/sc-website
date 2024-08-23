@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AssetStats } from '../models/AssetStats';
 import type { CARBONQuoteResponse } from '../models/CARBONQuoteResponse';
 import type { MemoType } from '../models/MemoType';
 import type { PaymentAsset } from '../models/PaymentAsset';
@@ -161,6 +162,25 @@ export class CarbonService {
         });
     }
     /**
+     * @deprecated
+     * Get aggregated stats of the CARBON and CarbonSINK assets.
+     * @returns AssetStats Successful Response
+     * @throws ApiError
+     */
+    public static deprecatedGetCarbonStats(): CancelablePromise<AssetStats> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/stats',
+            errors: {
+                400: `Horizon transaction has failed or is malformed`,
+                410: `Data requested from Horizon is before recorded history`,
+                500: `An unhandled error occurred on the server`,
+                503: `Horizon's historical database is too stale`,
+                504: `Horizon could not confirm transaction inclusion (check network conditions)`,
+            },
+        });
+    }
+    /**
      * Get a quote of the current CARBON price in USD.
      * Request a price quote for any amount of CARBON.
      *
@@ -299,6 +319,24 @@ export class CarbonService {
                 404: `Stellar account was not found on the Public Global Stellar Network`,
                 410: `Data requested from Horizon is before recorded history`,
                 422: `Validation Error`,
+                500: `An unhandled error occurred on the server`,
+                503: `Horizon's historical database is too stale`,
+                504: `Horizon could not confirm transaction inclusion (check network conditions)`,
+            },
+        });
+    }
+    /**
+     * Get aggregated stats of the CARBON and CarbonSINK assets.
+     * @returns AssetStats Successful Response
+     * @throws ApiError
+     */
+    public static getCarbonStats(): CancelablePromise<AssetStats> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/carbon/stats',
+            errors: {
+                400: `Horizon transaction has failed or is malformed`,
+                410: `Data requested from Horizon is before recorded history`,
                 500: `An unhandled error occurred on the server`,
                 503: `Horizon's historical database is too stale`,
                 504: `Horizon could not confirm transaction inclusion (check network conditions)`,

@@ -9,6 +9,7 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 export class RegistryService {
     /**
+     * @deprecated
      * Get the list of Stellarcarbon retirements in the Verra Registry.
      * Fetch the list of finalized CARBON retirements from the Verra Registry.
      *
@@ -21,7 +22,7 @@ export class RegistryService {
      * @returns VerraRetirementsResponse Successful Response
      * @throws ApiError
      */
-    public static listRetirements({
+    public static deprecatedListRetirements({
         forAddress,
         dateGte,
     }: {
@@ -54,6 +55,7 @@ export class RegistryService {
         });
     }
     /**
+     * @deprecated
      * Get the list of Stellarcarbon inventory batches in the Verra Registry.
      * Show Stellarcarbon's inventory held in the CARBON Pool in the Verra Registry.
      *
@@ -66,7 +68,7 @@ export class RegistryService {
      * @returns VerraInventoryResponse Successful Response
      * @throws ApiError
      */
-    public static listInventory(): CancelablePromise<VerraInventoryResponse> {
+    public static deprecatedListInventory(): CancelablePromise<VerraInventoryResponse> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/registry/inventory',

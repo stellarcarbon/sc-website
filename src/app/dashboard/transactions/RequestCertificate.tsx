@@ -1,6 +1,7 @@
 "use client";
 
 import RoundingService from "@/app/services/RoundingService";
+import { AuthService } from "@/client";
 import Button from "@/components/Button";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import TextInput from "@/components/TextInput";
@@ -9,6 +10,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import type { SEP10ChallengeResponse } from "@/client/models/SEP10ChallengeResponse";
 
 interface RequestCertificateProps {
   totalCarbonPending: number;
@@ -137,12 +139,14 @@ export default function RequestCertificate({
             className="text-sm md:text-base"
             disabled={totalCarbonPending < 1}
             onClick={() => {
-              // TODO: Send message to Alex that round-down is requested.
-              RoundingService.setLatestRetirement(
-                walletConnection?.stellarPubKey!
-              );
+              router.push("/dashboard/transactions/rounding");
 
-              setHasPendingRounding(true);
+              // TODO: Send message to Alex that round-down is requested.
+              // RoundingService.setLatestRetirement(
+              //   walletConnection?.stellarPubKey!
+              // );
+
+              // setHasPendingRounding(true);
             }}
           >
             Round down to {Math.floor(totalCarbonPending)}

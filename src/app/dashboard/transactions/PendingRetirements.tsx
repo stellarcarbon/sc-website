@@ -40,8 +40,6 @@ export default function PendingRetirements() {
   } = useAppContext();
 
   const [devState, setDevState] = useState<DevState>(DevState.first);
-  const [showCertificateModal, setShowCertificateModal] =
-    useState<boolean>(false);
 
   const pendingTransactions = useMemo(() => {
     return myTransactions?.filter(
@@ -163,12 +161,12 @@ export default function PendingRetirements() {
 
   return (
     <>
-      {showCertificateModal && (
+      {/* {showCertificateModal && (
         <RequestCertificateModal
           onClose={() => setShowCertificateModal(false)}
           totalCarbonPending={totalCarbonPending}
         />
-      )}
+      )} */}
 
       {/* <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest /> */}
 
