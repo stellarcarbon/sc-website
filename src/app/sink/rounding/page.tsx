@@ -27,6 +27,7 @@ import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
 import { OpenAPI } from "@/client";
+import { mRequestCertificate } from "@/app/utils";
 
 enum RoundDownSteps {
   fetchingChallenge = "Fetching challenge...",
@@ -119,22 +120,33 @@ export default function RoundDownPage() {
     }
   }, [walletConnection, challenge]);
 
-  const requestCertificate = useCallback(() => {
-    if (walletConnection && walletConnection.personalDetails) {
-      OpenAPI.HEADERS = {
-        Authorization: `Bearer ${jwt}`,
-      };
-      console.log(jwt);
-      AccountService.requestCertificate({
-        recipientAddress: walletConnection.stellarPubKey,
-        email: walletConnection.personalDetails?.useremail,
-      }).then((response) => {
-        setRequestCertificateResponse(response);
-        setStep(RoundDownSteps.success);
-        RoundingService.setLatestRetirement(walletConnection?.stellarPubKey!);
-      });
-    }
-  }, []);
+  const requestCertificate = useCallback(
+    (token: string) => {
+      if (walletConnection && walletConnection.personalDetails) {
+        mRequestCertificate({
+          recipientAddress: walletConnection.stellarPubKey,
+          email: walletConnection.personalDetails?.useremail,
+          jwt: token,
+        }).then((response) => {
+          if (response !== undefined) {
+            setRequestCertificateResponse(response);
+            setStep(RoundDownSteps.success);
+            RoundingService.setLatestRetirement(walletConnection.stellarPubKey);
+          }
+        });
+
+        // AccountService.requestCertificate({
+        //   recipientAddress: walletConnection.stellarPubKey,
+        //   email: walletConnection.personalDetails?.useremail,
+        // }).then((response) => {
+        //   setRequestCertificateResponse(response);
+        //   setStep(RoundDownSteps.success);
+        //   RoundingService.setLatestRetirement(walletConnection?.stellarPubKey!);
+        // });
+      }
+    },
+    [walletConnection]
+  );
 
   const totalCarbonPending = useMemo(() => {
     const filteredTransactions = myTransactions?.filter(
@@ -214,7 +226,7 @@ export default function RoundDownPage() {
   if (step === RoundDownSteps.requestCertificate) {
     body = (
       <div className="flex-1 flex flex-col justify-center">
-        <div className="flex flex-col p-6 py-8 md:p-12 justify-start items-center gap-6 text-center bg-secondary">
+        <div className="flex flex-col p-6 py-8 md:p-12 justify-start items-center gap-6 text-center">
           <FontAwesomeIcon icon={faUserShield} className="text-[48px]" />
           <span className="">Auth challenge signed and valid.</span>
 
@@ -225,7 +237,7 @@ export default function RoundDownPage() {
           </span>
           <Button
             className="mt-auto !py-2 w-[200px] font-bold !bg-accentSecondary !text-white hover:!bg-tertiary"
-            onClick={requestCertificate}
+            onClick={() => requestCertificate(jwt!)}
           >
             Request certificate
           </Button>
@@ -266,7 +278,7 @@ export default function RoundDownPage() {
     <Modal>
       <div className="h-full flex flex-col justify-start">
         <ParallaxDivider image={ParallaxBackgrounds.FOREST} mini />
-        <div className="flex-1 flex flex-col pb-8 justify-start items-center ">
+        <div className="flex-1 flex flex-col pb-8 justify-start items-center md:border-y border-tertiary">
           {body}
           {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest /> */}
           <Button

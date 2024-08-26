@@ -75,7 +75,7 @@ export default function ParallaxDivider({
     }
 
     if (mini) {
-      styling = "h-[50px] md:h-[80px]";
+      styling = "h-[0px] md:h-[42px]";
     }
     return styling;
   }, [smaller, smallest, mini]);

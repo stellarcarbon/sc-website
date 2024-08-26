@@ -158,7 +158,7 @@ export default function RequestCertificate({
 
   if (step === RequestCertificateStates.anonymous) {
     body = (
-      <div className="p-4 flex flex-col gap-4 items-center my-4 mt-2">
+      <div className="p-4 flex flex-col gap-4 items-center">
         <h2 className="text-lg md:text-lg font-semibold">
           Request certificate
         </h2>
