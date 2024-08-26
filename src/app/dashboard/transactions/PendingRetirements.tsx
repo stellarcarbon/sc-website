@@ -161,15 +161,6 @@ export default function PendingRetirements() {
 
   return (
     <>
-      {/* {showCertificateModal && (
-        <RequestCertificateModal
-          onClose={() => setShowCertificateModal(false)}
-          totalCarbonPending={totalCarbonPending}
-        />
-      )} */}
-
-      {/* <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest /> */}
-
       <div className="w-full px-4 flex flex-col border-b border-secondary">
         {false && (
           <div className="flex flex-col gap-2 items-center bg-secondary p-4 border rounded w-full mt-6">

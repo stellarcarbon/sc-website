@@ -140,13 +140,6 @@ export default function RequestCertificate({
             disabled={totalCarbonPending < 1}
             onClick={() => {
               router.push("/sink/rounding");
-
-              // TODO: Send message to Alex that round-down is requested.
-              // RoundingService.setLatestRetirement(
-              //   walletConnection?.stellarPubKey!
-              // );
-
-              // setHasPendingRounding(true);
             }}
           >
             Round down to {Math.floor(totalCarbonPending)}

@@ -134,15 +134,6 @@ export default function RoundDownPage() {
             RoundingService.setLatestRetirement(walletConnection.stellarPubKey);
           }
         });
-
-        // AccountService.requestCertificate({
-        //   recipientAddress: walletConnection.stellarPubKey,
-        //   email: walletConnection.personalDetails?.useremail,
-        // }).then((response) => {
-        //   setRequestCertificateResponse(response);
-        //   setStep(RoundDownSteps.success);
-        //   RoundingService.setLatestRetirement(walletConnection?.stellarPubKey!);
-        // });
       }
     },
     [walletConnection]
@@ -158,8 +149,6 @@ export default function RoundDownPage() {
       filteredTransactions?.reduce((sum, tx) => sum + tx.sinkAmount, 0) ?? 0
     );
   }, [myTransactions]);
-
-  console.log(step);
 
   let body;
   if (step === RoundDownSteps.fetchingChallenge) {
