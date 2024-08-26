@@ -126,7 +126,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     // On app load
-    console.log("myTransactions", myTransactions);
     if (walletConnection === null) {
       // Load local storage if available
       const wc = WalletConnectionService.loadWalletConnection();
