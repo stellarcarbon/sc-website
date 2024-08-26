@@ -32,11 +32,23 @@ import RoundingService from "@/app/services/RoundingService";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {
-  // OpenAPI.BASE = "http://localhost:8000";
-  OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
+  OpenAPI.BASE = "http://localhost:8000";
+  // OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
 } else {
   OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
 }
+
+declare global {
+  interface Date {
+    addDays(days: number): Date;
+  }
+}
+
+Date.prototype.addDays = function (days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+};
 
 // A global app context used to write & read state everywhere.
 type AppContext = {

@@ -40,8 +40,6 @@ export default function PendingRetirements() {
   } = useAppContext();
 
   const [devState, setDevState] = useState<DevState>(DevState.first);
-  const [showCertificateModal, setShowCertificateModal] =
-    useState<boolean>(false);
 
   const pendingTransactions = useMemo(() => {
     return myTransactions?.filter(
@@ -163,16 +161,7 @@ export default function PendingRetirements() {
 
   return (
     <>
-      {showCertificateModal && (
-        <RequestCertificateModal
-          onClose={() => setShowCertificateModal(false)}
-          totalCarbonPending={totalCarbonPending}
-        />
-      )}
-
-      {/* <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest /> */}
-
-      <div className="px-4 flex flex-col border-0 border-tertiary">
+      <div className="w-full px-4 flex flex-col border-b border-secondary">
         {false && (
           <div className="flex flex-col gap-2 items-center bg-secondary p-4 border rounded w-full mt-6">
             <span>Dev buttons</span>
@@ -241,42 +230,52 @@ export default function PendingRetirements() {
             <span>{totalCarbonPending.toFixed(3)}</span>
             <CARBONCurrencyIcon width={24} height={24} />
           </div>
-          <span className="text-xs text-center mx-4">
-            This CARBON is ready to be retired into a certificate. Read more
-            about pending retirements{" "}
-            <Link href="/explain" className="underline">
-              here
-            </Link>
-            .
-          </span>
+          {totalCarbonPending > 0 && (
+            <span className="text-xs text-center mx-4">
+              This CARBON is ready to be retired into a certificate. Read more
+              about pending retirements{" "}
+              <Link href="/explain" className="underline">
+                here
+              </Link>
+              .
+            </span>
+          )}
         </div>
 
-        {!hasPendingRounding ? (
-          <RequestCertificate totalCarbonPending={totalCarbonPending} />
-        ) : (
-          <PendingRounding />
-        )}
+        {totalCarbonPending > 0 &&
+          totalCarbonPending !== 1 &&
+          (!hasPendingRounding ? (
+            <RequestCertificate totalCarbonPending={totalCarbonPending} />
+          ) : (
+            <PendingRounding />
+          ))}
       </div>
       <ParallaxDivider
         image={ParallaxBackgrounds.RAINFOREST}
         smallest
         yOffset={-300}
       />
-      <div className="px-4 w-full mt-6 mb-10">
-        <div className="flex flex-col gap-2">
+      <div className="flex-1 flex flex-col px-4 w-full py-8 border-y border-secondary">
+        <div className="flex-1 flex flex-col gap-2">
           <span className="self-center text-lg mb-4 font-semibold">
             Your pending transactions
           </span>
-          {pendingTransactions?.map((transaction, index) => {
-            return (
-              <TransactionListItem
-                key={transaction.id}
-                transaction={transaction}
-                onClick={() => {}}
-                showCountdown
-              />
-            );
-          })}
+          {pendingTransactions?.length ?? 0 > 0 ? (
+            pendingTransactions?.map((transaction, index) => {
+              return (
+                <TransactionListItem
+                  key={transaction.id}
+                  transaction={transaction}
+                  onClick={() => {}}
+                  showCountdown
+                />
+              );
+            })
+          ) : (
+            <div className="flex-1 flex flex-col justify-center text-center text-sm">
+              No pending transactions found.
+            </div>
+          )}
         </div>
       </div>
       <ParallaxDivider

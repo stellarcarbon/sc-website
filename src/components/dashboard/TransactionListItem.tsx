@@ -11,18 +11,6 @@ interface TransactionListItemProps {
   bgPrimary?: boolean;
 }
 
-declare global {
-  interface Date {
-    addDays(days: number): Date;
-  }
-}
-
-Date.prototype.addDays = function (days) {
-  var date = new Date(this.valueOf());
-  date.setDate(date.getDate() + days);
-  return date;
-};
-
 function ItemHeader({ children }: { children: ReactNode }) {
   return (
     <div className="col-span-2 md:col-span-1 font-semibold">{children}</div>

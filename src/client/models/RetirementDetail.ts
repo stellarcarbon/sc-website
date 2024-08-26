@@ -8,6 +8,7 @@ import type { SinkTxSummary } from './SinkTxSummary';
 import type { VcsProjectDetail } from './VcsProjectDetail';
 export type RetirementDetail = {
     certificate_id: number;
+    registry_url: string;
     vcu_amount: number;
     serial_number: string;
     retirement_date: string;

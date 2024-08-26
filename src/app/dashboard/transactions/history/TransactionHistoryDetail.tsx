@@ -31,7 +31,6 @@ export default function TransactionHistoryDetail({
     useState<boolean>(true);
 
   const tx = useMemo(() => {
-    console.log(myTransactions);
     return myTransactions?.find((tx) => tx.id === hash);
   }, [myTransactions, hash]);
 

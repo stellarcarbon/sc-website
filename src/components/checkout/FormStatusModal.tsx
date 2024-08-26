@@ -15,6 +15,7 @@ import SignIcon from "@/components/icons/SignIcon";
 import SuccessIcon from "@/components/icons/SuccessIcon";
 import { useEffect } from "react";
 import { Hourglass } from "react-loader-spinner";
+import Modal from "../Modal";
 
 interface FormStatusModalProps {
   message: FormStatusMessages;
@@ -142,9 +143,8 @@ export default function FormStatusModal({
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-screen h-screen bg-gray-600 opacity-80 z-[150]"></div>
-      <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-[200]">
-        <div className="flex flex-col py-8 px-6 md:px-12 justify-start items-center bg-primary w-[87%] md:w-[60%] lg:w-[60%] min-h-[550px] h-[60%] lg:h-[70%] max-w-[800px] opacity-100 shadow-xl rounded-md overflow-auto z-[2000]">
+      <Modal>
+        <div className="h-full flex flex-col py-8 px-6 md:px-12 justify-start items-center ">
           {/* <span className="text-2xl">Transaction submit</span> */}
           {submissionError ? (
             <div className="flex flex-col justify-center items-center flex-1 gap-8">
@@ -169,7 +169,7 @@ export default function FormStatusModal({
             </Button>
           )}
         </div>
-      </div>
+      </Modal>
     </>
   );
 }

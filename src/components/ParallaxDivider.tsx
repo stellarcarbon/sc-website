@@ -16,6 +16,7 @@ interface ParallaxDiverProps {
   image: ParallaxBackgrounds;
   smaller?: boolean;
   smallest?: boolean;
+  mini?: boolean;
   mirrored?: boolean;
   xOffset?: number;
   yOffset?: number;
@@ -25,6 +26,7 @@ export default function ParallaxDivider({
   image,
   smaller = false,
   smallest = false,
+  mini = false,
   mirrored = false,
   xOffset = 0,
   yOffset = 0,
@@ -71,8 +73,12 @@ export default function ParallaxDivider({
     if (smallest) {
       styling = "h-[90px] md:h-[125px]";
     }
+
+    if (mini) {
+      styling = "h-[0px] md:h-[42px]";
+    }
     return styling;
-  }, [smaller, smallest]);
+  }, [smaller, smallest, mini]);
 
   return (
     <div className="relative w-full" ref={componentRef}>

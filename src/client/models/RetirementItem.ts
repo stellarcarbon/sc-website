@@ -5,6 +5,7 @@
 import type { InstrumentItem } from './InstrumentItem';
 export type RetirementItem = {
     certificate_id: number;
+    registry_url: string;
     vcu_amount: number;
     serial_number: string;
     retirement_date: string;
