@@ -1,7 +1,7 @@
 "use client";
 
 import { useSwipeable } from "react-swipeable";
-import CheckoutForm from "../../../components/checkout/CheckoutForm";
+import CheckoutForm from "@/components/checkout/CheckoutForm";
 import { SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
 import { useCallback } from "react";

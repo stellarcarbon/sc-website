@@ -19,9 +19,8 @@ import {
   MyTransactionRecord,
   PersonalDetails,
   SinkCarbonXdrPostRequest,
-  SinkingTransaction,
   WalletConnection,
-} from "../app/types";
+} from "@/app/types";
 import {
   loadAvailableWalletsMock,
   walletConnectDialog,

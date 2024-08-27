@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { Blocks } from "react-loader-spinner";
-import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSearchParams } from "next/navigation";
 
 interface AmountInputProps {

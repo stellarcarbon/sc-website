@@ -2,7 +2,7 @@
 
 import { useSCRouter } from "@/app/utils";
 import { useSwipeable } from "react-swipeable";
-import PendingRetirements from "./PendingRetirements";
+import PendingRetirements from "@/components/dashboard/transactions/PendingRetirements";
 
 export default function DashboardMyTransactions() {
   const router = useSCRouter();

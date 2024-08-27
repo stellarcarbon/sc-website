@@ -2,7 +2,7 @@
 
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { HTMLProps, ReactNode, useEffect, useMemo, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

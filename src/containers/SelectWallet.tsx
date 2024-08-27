@@ -1,16 +1,15 @@
 "use client";
 
 import { WalletType } from "stellar-wallets-kit";
-import SelectWalletButton from "../components/wallet/SelectWalletButton";
+import SelectWalletButton from "@/components/wallet/SelectWalletButton";
 import { useAppContext } from "@/context/appContext";
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
-import SelectWalletButtonDesktop from "../components/wallet/SelectWalletButtonDesktop";
+import Button from "@/components/Button";
+import SelectWalletButtonDesktop from "@/components/wallet/SelectWalletButtonDesktop";
 import ContactInfoForm from "./ContactInfoForm";
-import FormError from "../components/FormError";
+import FormError from "@/components/FormError";
 import { PersonalDetails } from "@/app/types";
-import LoadingWallets from "../components/wallet/LoadingWallets";
-import { useRouter } from "next/navigation";
+import LoadingWallets from "@/components/wallet/LoadingWallets";
 import { useSCRouter } from "@/app/utils";
 
 export default function SelectWallet() {

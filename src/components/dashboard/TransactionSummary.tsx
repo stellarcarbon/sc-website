@@ -1,6 +1,6 @@
-import TransactionsLoading from "@/app/dashboard/transactions/history/TransactionsLoading";
+import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useAppContext } from "@/context/appContext";
-import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Link from "next/link";
 import { useViewportWidth } from "@/app/utils";
 import { useMemo } from "react";

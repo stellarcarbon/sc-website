@@ -4,7 +4,7 @@ import {
   WalletNetwork,
   WalletType,
 } from "stellar-wallets-kit";
-import { WalletConnection } from "../app/types";
+import { WalletConnection } from "@/app/types";
 
 export const walletConnectDialog = async (
   userWalletType: WalletType

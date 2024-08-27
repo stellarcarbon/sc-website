@@ -1,9 +1,9 @@
 import { HTMLProps } from "react";
 import { ReasonOptions } from "@/app/types";
-import EnvironmentIcon from "../icons/EnvironmentIcon";
-import HouseholdIcon from "../icons/HouseholdIcon";
-import RoadTravelIcon from "../icons/RoadTravelIcon";
-import AirTravelIcon from "../icons/AirTravelIcon";
+import EnvironmentIcon from "@/components/icons/EnvironmentIcon";
+import HouseholdIcon from "@/components/icons/HouseholdIcon";
+import RoadTravelIcon from "@/components/icons/RoadTravelIcon";
+import AirTravelIcon from "@/components/icons/AirTravelIcon";
 
 interface SelectReasonButtonProps extends HTMLProps<HTMLButtonElement> {
   isSelected: boolean;

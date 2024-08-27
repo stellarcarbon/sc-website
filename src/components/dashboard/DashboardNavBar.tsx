@@ -8,7 +8,6 @@ export default function DashboardNavBar() {
       <DashboardNavBarItem item={DashboardTabs.OVERVIEW} first={true} />
       <DashboardNavBarItem item={DashboardTabs.SINK} />
       <DashboardNavBarItem item={DashboardTabs.HISTORY} last={true} />
-      {/* <NavBarItem item={DashboardTabs.PENDING} /> */}
     </div>
   );
 }

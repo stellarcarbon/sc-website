@@ -9,16 +9,10 @@ import ParallaxDivider, {
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Router } from "next/router";
 import { useEffect, useMemo, useState } from "react";
-import RequestCertificateModal from "./RequestCertificateModal";
 import RequestCertificate from "./RequestCertificate";
-import { AccountService, CarbonService, SinkService } from "@/client";
-import PendingRounding from "../../../components/dashboard/PendingRounding";
+import PendingRounding from "../PendingRounding";
 import RoundingService from "@/services/RoundingService";
 
 enum DevState {

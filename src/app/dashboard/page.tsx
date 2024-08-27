@@ -1,16 +1,7 @@
 "use client";
 
-import PersonalDetailsDisplay from "@/components/wallet/PersonalDetailsDisplay";
-import { useAppContext } from "../../context/appContext";
-import { useRouter } from "next/navigation";
-import { useContext, useEffect, useMemo } from "react";
-import Button from "@/components/Button";
-import EditIcon from "@/components/icons/EditIcon";
-import DeleteIcon from "@/components/icons/DeleteIcon";
-import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import { useSwipeable, SwipeDirections } from "react-swipeable";
-import Link from "next/link";
-import { useSCRouter, useViewportWidth } from "../utils";
+import { useSwipeable } from "react-swipeable";
+import { useSCRouter } from "@/app/utils";
 import dynamic from "next/dynamic";
 
 const Overview = dynamic(() => import("../../components/dashboard/Overview"), {

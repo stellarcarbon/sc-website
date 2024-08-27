@@ -1,5 +1,5 @@
 import TextInput from "@/components/TextInput";
-import FormError from "../components/FormError";
+import FormError from "@/components/FormError";
 
 interface ContactInfoFormProps {
   username: string;

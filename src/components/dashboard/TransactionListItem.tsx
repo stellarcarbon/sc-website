@@ -1,7 +1,6 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
-import Link from "next/link";
-import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
-import CountDownTimer from "../CountDownTimer";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import CountDownTimer from "@/components/CountDownTimer";
 import { ReactNode, useMemo } from "react";
 
 interface TransactionListItemProps {

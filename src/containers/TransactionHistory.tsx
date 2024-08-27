@@ -6,8 +6,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import Button from "@/components/Button";
-import TransactionsLoading from "../dashboard/transactions/history/TransactionsLoading";
-import { useSCRouter } from "../utils";
+import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
+import { useSCRouter } from "@/app/utils";
 import Link from "next/link";
 
 export default function TransactionHistory({}) {

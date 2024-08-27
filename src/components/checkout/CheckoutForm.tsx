@@ -9,7 +9,9 @@ import { HTMLProps, Suspense, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import AmountInput from "@/components/checkout/AmountInput";
 import TransactionPreview from "@/components/checkout/TransactionPreview";
-import ParallaxDivider, { ParallaxBackgrounds } from "../ParallaxDivider";
+import ParallaxDivider, {
+  ParallaxBackgrounds,
+} from "@/components/ParallaxDivider";
 
 interface CheckoutFormProps extends HTMLProps<HTMLFormElement> {
   submitSinkingTransaction: (

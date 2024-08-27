@@ -18,9 +18,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SuccessIcon from "@/components/icons/SuccessIcon";
 import RoundingService from "@/services/RoundingService";
-import ParallaxDivider, {
-  ParallaxBackgrounds,
-} from "@/components/ParallaxDivider";
 
 enum RoundDownSteps {
   fetchingChallenge = "Fetching challenge...",

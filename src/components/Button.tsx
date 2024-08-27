@@ -1,4 +1,4 @@
-import { HTMLProps, ReactNode } from "react";
+import { HTMLProps } from "react";
 
 interface ButtonProps extends HTMLProps<HTMLButtonElement> {}
 

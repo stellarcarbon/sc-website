@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import Header from "@/components/Header";
-import TransactionHistory from "./TransactionHistory";
+import TransactionHistory from "@/containers/TransactionHistory";
 
 export default function TransactionsPage() {
   return (

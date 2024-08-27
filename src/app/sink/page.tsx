@@ -1,6 +1,6 @@
 "use client";
 
-import { useSCRouter, useViewportWidth } from "@/app/utils";
+import { useViewportWidth } from "@/app/utils";
 import { CarbonService, SinkingResponse } from "@/client";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";

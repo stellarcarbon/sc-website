@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import DashboardNavBar from "../../components/dashboard/DashboardNavBar";
+import DashboardNavBar from "@/components/dashboard/DashboardNavBar";
 import { useAppContext } from "@/context/appContext";
-import { useSCRouter } from "../utils";
+import { useSCRouter } from "@/app/utils";
 
 export default function DashboardLayout({
   children, // will be a page or nested layout

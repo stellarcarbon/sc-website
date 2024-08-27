@@ -2,14 +2,13 @@
 
 import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useSwipeable } from "react-swipeable";
-import TransactionHistoryDetail from "./TransactionHistoryDetail";
-import TransactionsLoading from "./TransactionsLoading";
+import TransactionHistoryDetail from "@/components/dashboard/transactions/TransactionHistoryDetail";
+import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useSCRouter } from "@/app/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { useEffect, useState } from "react";
-import { CarbonService, SinkService } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { DEV_ACCOUNT } from "@/app/types";
 import ParallaxDivider, {

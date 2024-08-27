@@ -1,6 +1,4 @@
 import { HTMLProps } from "react";
-import BuyStellarCarbonIcon from "./icons/BuyStellarCarbon";
-import { useRouter } from "next/navigation";
 import { useSCRouter } from "@/app/utils";
 import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 

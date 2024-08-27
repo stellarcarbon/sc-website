@@ -1,7 +1,7 @@
 "use client";
 
 import { useSCRouter } from "@/app/utils";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { HTMLProps, useEffect, useMemo, useState } from "react";
 
 interface TransactionsNavBarItemProps extends HTMLProps<HTMLDivElement> {

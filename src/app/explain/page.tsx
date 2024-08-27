@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import AuditTable from "@/containers/AuditTable";
-import { useAppContext } from "@/context/appContext";
 
 export default function ExplainPage() {
   return (

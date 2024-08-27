@@ -3,7 +3,7 @@
 import { useAppContext } from "@/context/appContext";
 import CloseIcon from "./icons/CloseIcon";
 import DrawerLink from "./DrawerLink";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import CTAButton from "./CTAButton";
 import StellarCarbonIcon from "./icons/StellarCarbonIcon";
 import Link from "next/link";

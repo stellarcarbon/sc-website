@@ -1,7 +1,4 @@
 import { HTMLProps } from "react";
-import Button from "./Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
 import ParallaxDivider, { ParallaxBackgrounds } from "./ParallaxDivider";
 
 interface ModalProps extends HTMLProps<HTMLDivElement> {}

@@ -1,4 +1,4 @@
-import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 interface TransactionPreviewProps {
   tonnes: number;

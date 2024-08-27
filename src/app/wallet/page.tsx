@@ -1,10 +1,10 @@
 "use client";
 
-import ExplainConnect from "./ExplainConnect";
+import ExplainConnect from "@/containers/ExplainConnect";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/context/appContext";
 import { Blocks } from "react-loader-spinner";
-import { useSCRouter } from "../utils";
+import { useSCRouter } from "@/app/utils";
 
 export default function WalletPage() {
   const router = useSCRouter();
