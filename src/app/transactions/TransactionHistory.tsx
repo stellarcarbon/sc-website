@@ -1,7 +1,7 @@
 "use client";
 
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
-import { MyTransactionRecord } from "../types";
+import { MyTransactionRecord } from "@/app/types";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import TransactionHistoryService from "../services/TransactionHistoryService";

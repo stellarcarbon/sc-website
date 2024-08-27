@@ -1,4 +1,4 @@
-import { MyTransactionRecord } from "../types";
+import { MyTransactionRecord } from "@/app/types";
 import "fake-indexeddb/auto";
 
 export default class IndexedDBService {

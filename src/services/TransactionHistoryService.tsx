@@ -1,4 +1,4 @@
-import { MyTransactionRecord, RetirementStatus } from "../types";
+import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import { AccountService, SinkService, SinkTxListResponse } from "@/client";
 
 export default class TransactionHistoryService {

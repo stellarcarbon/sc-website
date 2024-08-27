@@ -1,6 +1,6 @@
 "use client";
 
-import TransactionHistoryService from "@/app/services/TransactionHistoryService";
+import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { DEV_ACCOUNT, RetirementStatus } from "@/app/types";
 import Button from "@/components/Button";
 import ParallaxDivider, {
@@ -19,7 +19,7 @@ import RequestCertificateModal from "./RequestCertificateModal";
 import RequestCertificate from "./RequestCertificate";
 import { AccountService, CarbonService, SinkService } from "@/client";
 import PendingRounding from "../../../components/dashboard/PendingRounding";
-import RoundingService from "@/app/services/RoundingService";
+import RoundingService from "@/services/RoundingService";
 
 enum DevState {
   devAccount = "dev_account",

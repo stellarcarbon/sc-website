@@ -1,6 +1,6 @@
 "use client";
 
-import RoundingService from "@/app/services/RoundingService";
+import RoundingService from "@/services/RoundingService";
 import { AuthService } from "@/client";
 import Button from "@/components/Button";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";

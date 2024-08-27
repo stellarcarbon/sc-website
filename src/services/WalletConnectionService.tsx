@@ -1,5 +1,5 @@
 import { StellarWalletsKit, WalletNetwork } from "stellar-wallets-kit";
-import { WalletConnection } from "../types";
+import { WalletConnection } from "@/app/types";
 
 export default class WalletConnectionService {
   private static LOCAL_STORAGE_KEY = "wallet";

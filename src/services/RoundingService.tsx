@@ -1,5 +1,11 @@
-import { AccountService, RetirementItem } from "@/client";
-import { DEV_ACCOUNT } from "../types";
+import {
+  AccountService,
+  AuthService,
+  RetirementItem,
+  SEP10ChallengeResponse,
+} from "@/client";
+import { DEV_ACCOUNT, WalletConnection } from "@/app/types";
+import { mRequestCertificate } from "@/app/utils";
 
 export default class RoundingService {
   private static LOCAL_STORAGE_KEY = "rd";
@@ -51,5 +57,38 @@ export default class RoundingService {
     }
 
     return true;
+  }
+
+  public static async getChallenge(walletConnection: WalletConnection) {
+    return await AuthService.getSep10Challenge({
+      account: walletConnection.stellarPubKey,
+    });
+  }
+
+  public static async signChallenge(
+    walletConnection: WalletConnection,
+    challenge: SEP10ChallengeResponse
+  ) {
+    return await walletConnection.kit.sign({
+      xdr: challenge.transaction,
+      publicKey: walletConnection.stellarPubKey,
+    });
+  }
+
+  public static async validateChallenge(signedXDR: string) {
+    return await AuthService.validateSep10Challenge({
+      transaction: signedXDR,
+    });
+  }
+
+  public static async requestCertificate(
+    walletConnection: WalletConnection,
+    token: string
+  ) {
+    return await mRequestCertificate({
+      recipientAddress: walletConnection.stellarPubKey,
+      email: walletConnection.personalDetails!.useremail,
+      jwt: token,
+    });
   }
 }

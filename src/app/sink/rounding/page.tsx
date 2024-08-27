@@ -5,29 +5,22 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Modal from "@/components/Modal";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { SEP10ChallengeResponse } from "@/client/models/SEP10ChallengeResponse";
-import {
-  AccountService,
-  AuthService,
-  RequestCertificateResponse,
-} from "@/client";
+import { RequestCertificateResponse } from "@/client";
 import { useAppContext } from "@/context/appContext";
 import { Blocks } from "react-loader-spinner";
 import { RetirementStatus } from "@/app/types";
 import { useSCRouter } from "@/app/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCheck,
   faFileShield,
-  faShield,
   faUserShield,
+  faWarning,
 } from "@fortawesome/free-solid-svg-icons";
 import SuccessIcon from "@/components/icons/SuccessIcon";
-import RoundingService from "@/app/services/RoundingService";
+import RoundingService from "@/services/RoundingService";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
-import { OpenAPI } from "@/client";
-import { mRequestCertificate } from "@/app/utils";
 
 enum RoundDownSteps {
   fetchingChallenge = "Fetching challenge...",
@@ -35,6 +28,12 @@ enum RoundDownSteps {
   signingChallenge = "Signing challenge...",
   requestCertificate = "Request certifcate",
   success = "Success",
+}
+
+enum RoundDownErrors {
+  noPersonalDetails = "No personal details are attached your wallet connection.",
+  apiConnectionError = "Something went wrong connecting to the Stellarcarbon API.",
+  signingError = "Something went wrong while signing the challenge.",
 }
 
 export default function RoundDownPage() {
@@ -51,6 +50,8 @@ export default function RoundDownPage() {
   const [jwt, setJWT] = useState<string>();
   const [requestCertificateResponse, setRequestCertificateResponse] =
     useState<RequestCertificateResponse>();
+
+  const [error, setError] = useState<RoundDownErrors>();
 
   const [step, setStep] = useState<RoundDownSteps>(
     RoundDownSteps.fetchingChallenge
@@ -86,55 +87,66 @@ export default function RoundDownPage() {
   }, []);
 
   useEffect(() => {
+    // Redirect if no personal walletConnection is available
+    if (walletConnection === undefined) {
+      router.push("/");
+    }
+  }, [walletConnection, router]);
+
+  useEffect(() => {
     // Auth challenge on opening
     if (walletConnection !== null) {
-      AuthService.getSep10Challenge({
-        account: walletConnection!.stellarPubKey,
-      }).then((response) => {
-        setStep(RoundDownSteps.awaitingAuthentication);
-        setChallenge(response);
-      });
+      if (walletConnection?.personalDetails === undefined) {
+        setError(RoundDownErrors.noPersonalDetails);
+        return;
+      }
+
+      RoundingService.getChallenge(walletConnection!)
+        .then((challenge) => {
+          setChallenge(challenge);
+          setStep(RoundDownSteps.awaitingAuthentication);
+        })
+        .catch((e) => {
+          setError(RoundDownErrors.apiConnectionError);
+        });
     }
   }, [walletConnection]);
 
-  const signAndValidateChallenge = useCallback(() => {
-    setStep(RoundDownSteps.signingChallenge);
-    if (walletConnection && challenge) {
-      walletConnection.kit
-        .sign({
-          xdr: challenge.transaction,
-          publicKey: walletConnection.stellarPubKey,
-        })
-        .then((r) => {
-          console.log("signing done", r);
-
-          AuthService.validateSep10Challenge({
-            transaction: r.signedXDR,
-          }).then((response) => {
-            const token = response.token;
-            console.log("Got token:", token);
-            setJWT(token);
-            setStep(RoundDownSteps.requestCertificate);
-          });
-        });
+  const verifyIdentity = useCallback(async () => {
+    try {
+      const signedChallenge = await RoundingService.signChallenge(
+        walletConnection!,
+        challenge!
+      );
+      try {
+        const response = await RoundingService.validateChallenge(
+          signedChallenge.signedXDR
+        );
+        const token = response.token;
+        setJWT(token);
+        setStep(RoundDownSteps.requestCertificate);
+      } catch (e) {
+        setError(RoundDownErrors.apiConnectionError);
+      }
+    } catch (e) {
+      setError(RoundDownErrors.signingError);
+      return;
     }
   }, [walletConnection, challenge]);
 
   const requestCertificate = useCallback(
     (token: string) => {
-      if (walletConnection && walletConnection.personalDetails) {
-        mRequestCertificate({
-          recipientAddress: walletConnection.stellarPubKey,
-          email: walletConnection.personalDetails?.useremail,
-          jwt: token,
-        }).then((response) => {
-          if (response !== undefined) {
-            setRequestCertificateResponse(response);
-            setStep(RoundDownSteps.success);
-            RoundingService.setLatestRetirement(walletConnection.stellarPubKey);
-          }
+      RoundingService.requestCertificate(walletConnection!, token)
+        .then((certificate) => {
+          setRequestCertificateResponse(certificate);
+          setStep(RoundDownSteps.success);
+
+          // Set local storage latest retirement.
+          RoundingService.setLatestRetirement(walletConnection!.stellarPubKey);
+        })
+        .catch((e) => {
+          setError(RoundDownErrors.apiConnectionError);
         });
-      }
     },
     [walletConnection]
   );
@@ -183,7 +195,7 @@ export default function RoundDownPage() {
             </div>
             <Button
               className="!py-2 w-[200px] font-bold !bg-accentSecondary !text-white hover:!bg-tertiary"
-              onClick={signAndValidateChallenge}
+              onClick={verifyIdentity}
             >
               Sign auth challenge
             </Button>
@@ -268,7 +280,17 @@ export default function RoundDownPage() {
       <div className="h-full flex flex-col justify-start">
         <ParallaxDivider image={ParallaxBackgrounds.FOREST} mini />
         <div className="flex-1 flex flex-col pb-8 justify-start items-center md:border-y border-tertiary">
-          {body}
+          {error ? (
+            <div className="flex-1 flex flex-col items-center py-8 ">
+              <span className="text-2xl">Error</span>
+              <div className="text-center flex flex-col justify-center flex-1 gap-8 text-red-500">
+                <FontAwesomeIcon icon={faWarning} className="text-[48px]" />
+                {error}
+              </div>
+            </div>
+          ) : (
+            body
+          )}
           {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest /> */}
           <Button
             className="h-10 !py-2 mt-auto"

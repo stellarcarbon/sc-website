@@ -25,10 +25,10 @@ import {
   walletConnectDialog,
 } from "./walletFunctions";
 import { usePathname } from "next/navigation";
-import WalletConnectionService from "@/app/services/WalletConnectionService";
+import WalletConnectionService from "@/services/WalletConnectionService";
 import { OpenAPI } from "@/client";
-import TransactionHistoryService from "@/app/services/TransactionHistoryService";
-import RoundingService from "@/app/services/RoundingService";
+import TransactionHistoryService from "@/services/TransactionHistoryService";
+import RoundingService from "@/services/RoundingService";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {

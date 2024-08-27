@@ -10,7 +10,7 @@ import { useSCRouter } from "@/app/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { useEffect, useState } from "react";
 import { CarbonService, SinkService } from "@/client";
-import TransactionHistoryService from "@/app/services/TransactionHistoryService";
+import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { DEV_ACCOUNT } from "@/app/types";
 import ParallaxDivider, {
   ParallaxBackgrounds,
