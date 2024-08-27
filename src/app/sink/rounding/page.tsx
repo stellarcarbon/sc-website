@@ -254,7 +254,7 @@ export default function RoundDownPage() {
           Your certificate request was received in good order and will be
           created soon.
         </span>
-        <div className="flex flex-col bg-secondary border border-tertiary rounded-md">
+        {/* <div className="flex flex-col bg-secondary border border-tertiary rounded-md">
           <div className="flex justify-between w-full items-center">
             <span>Account</span>
             <span>{requestCertificateResponse?.account}</span>
@@ -269,7 +269,7 @@ export default function RoundDownPage() {
               {requestCertificateResponse?.pending_balance_after_retirement}
             </span>
           </div>
-        </div>
+        </div> */}
         <SuccessIcon />
       </div>
     );
@@ -277,29 +277,25 @@ export default function RoundDownPage() {
 
   return (
     <Modal>
-      <div className="h-full flex flex-col justify-start">
-        <ParallaxDivider image={ParallaxBackgrounds.FOREST} mini />
-        <div className="flex-1 flex flex-col pb-8 justify-start items-center md:border-y border-tertiary">
-          {error ? (
-            <div className="flex-1 flex flex-col items-center py-8 ">
-              <span className="text-2xl">Error</span>
-              <div className="text-center flex flex-col justify-center flex-1 gap-8 text-red-500">
-                <FontAwesomeIcon icon={faWarning} className="text-[48px]" />
-                {error}
-              </div>
+      <div className="flex-1 flex flex-col pb-8 justify-start items-center md:border-y border-tertiary">
+        {error ? (
+          <div className="flex-1 flex flex-col items-center py-8 ">
+            <span className="text-2xl">Error</span>
+            <div className="text-center flex flex-col justify-center flex-1 gap-8 text-red-500">
+              <FontAwesomeIcon icon={faWarning} className="text-[48px]" />
+              {error}
             </div>
-          ) : (
-            body
-          )}
-          {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest /> */}
-          <Button
-            className="h-10 !py-2 mt-auto"
-            onClick={() => router.push("/dashboard/transactions")}
-          >
-            Return to dashboard
-          </Button>
-        </div>
-        <ParallaxDivider image={ParallaxBackgrounds.FOREST} mini />
+          </div>
+        ) : (
+          body
+        )}
+        {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest /> */}
+        <Button
+          className="h-10 !py-2 mt-auto"
+          onClick={() => router.push("/dashboard/transactions")}
+        >
+          Return to dashboard
+        </Button>
       </div>
     </Modal>
   );

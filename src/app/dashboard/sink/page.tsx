@@ -2,18 +2,14 @@
 
 import { useSwipeable } from "react-swipeable";
 import CheckoutForm from "../../../components/checkout/CheckoutForm";
-import { FormStatusMessages, SinkCarbonXdrPostRequest } from "@/app/types";
+import { SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ApiError, CarbonService, SinkingResponse } from "@/client";
-import FormStatusModal from "@/components/checkout/FormStatusModal";
+import { useCallback } from "react";
 import { useSCRouter } from "@/app/utils";
-import SinkForm from "./SinkForm";
-import ParallaxDivider, {
-  ParallaxBackgrounds,
-} from "@/components/ParallaxDivider";
 
-export default function DashboardSink() {
+export default function SinkFormPage() {
+  const { walletConnection, setSinkRequest } = useAppContext();
+
   const router = useSCRouter();
 
   const swipeHandlers = useSwipeable({
@@ -22,21 +18,22 @@ export default function DashboardSink() {
     delta: 100,
   });
 
+  const initSubmitSinkingTransaction = useCallback(
+    async (sinkRequest: SinkCarbonXdrPostRequest, quote: number) => {
+      if (!walletConnection?.isAnonymous) {
+        sinkRequest.email = walletConnection?.personalDetails?.useremail;
+      }
+
+      setSinkRequest(sinkRequest);
+      router.push("/sink");
+      return;
+    },
+    [walletConnection, setSinkRequest, router]
+  );
+
   return (
     <div {...swipeHandlers} className="w-full">
-      {/* <div className="my-8 mx-4 flex flex-col items-center gap-4">
-        <h1 className="text-3xl">Sink CARBON</h1>
-        <span className="text-sm md:text-sm text-center">
-          Use this form to sink CARBON to help support the Shipibo Conibo and
-          Cacataibo Indigenous Communities
-        </span>
-      </div>
-      <ParallaxDivider
-        smallest
-        image={ParallaxBackgrounds.RAINFOREST}
-        yOffset={-50}
-      /> */}
-      <SinkForm />
+      <CheckoutForm submitSinkingTransaction={initSubmitSinkingTransaction} />
     </div>
   );
 }

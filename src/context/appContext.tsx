@@ -18,6 +18,8 @@ import {
   DEV_ACCOUNT,
   MyTransactionRecord,
   PersonalDetails,
+  SinkCarbonXdrPostRequest,
+  SinkingTransaction,
   WalletConnection,
 } from "../app/types";
 import {
@@ -78,6 +80,11 @@ type AppContext = {
   // Round down support
   hasPendingRounding: boolean | undefined;
   setHasPendingRounding: Dispatch<SetStateAction<boolean | undefined>>;
+
+  sinkRequest: SinkCarbonXdrPostRequest | undefined;
+  setSinkRequest: Dispatch<
+    SetStateAction<SinkCarbonXdrPostRequest | undefined>
+  >;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -102,6 +109,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     MyTransactionRecord[] | null
   >(null);
   const [hasPendingRounding, setHasPendingRounding] = useState<boolean>();
+  const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const openDrawer = () => setIsDrawerOpen(true);
@@ -237,6 +245,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       hasPendingRounding,
       setHasPendingRounding,
+
+      sinkRequest,
+      setSinkRequest,
     };
   }, [
     connectionError,
@@ -246,6 +257,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     myTransactions,
     updateWalletConnection,
     hasPendingRounding,
+    sinkRequest,
   ]);
 
   return (
