@@ -1,5 +1,5 @@
-import { MyTransactionRecord } from "@/app/types";
-import IndexedDBService from "../src/app/services/IndexedDBService";
+import { MyTransactionRecord, RetirementStatus } from "../src/app/types";
+import IndexedDBService from "../src/services/IndexedDBService";
 import { describe, expect, test, beforeAll } from "vitest";
 
 const makeTransactionRecord = (id: string): MyTransactionRecord => {
@@ -10,6 +10,8 @@ const makeTransactionRecord = (id: string): MyTransactionRecord => {
     assetAmount: 1,
     asset: "xlm",
     sinkAmount: 1,
+    retirementStatus: RetirementStatus.PENDING_USER,
+    retirements: [],
   };
 };
 
