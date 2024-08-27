@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Hourglass } from "react-loader-spinner";
 
-export enum SinkStatusMessages {
+enum SinkStatusMessages {
   creating = "Creating your transaction using Stellarcarbon API...",
   confirm = "Your transaction is ready and approved by Stellarcarbon. Please confirm the transaction by signing it with your wallet.",
   signTransaction = "Sign the transaction using your wallet in the pop-up.",

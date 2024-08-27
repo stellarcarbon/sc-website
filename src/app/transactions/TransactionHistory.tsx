@@ -10,8 +10,6 @@ import TransactionsLoading from "../dashboard/transactions/history/TransactionsL
 import { useSCRouter } from "../utils";
 import Link from "next/link";
 
-interface TransactionHistoryProps {}
-
 export default function TransactionHistory({}) {
   const searchParams = useSearchParams();
   const router = useSCRouter();
