@@ -111,7 +111,7 @@ export default function ActivityHistory() {
           </div>
         ) : (
           <div className="p-2 flex flex-col gap-2 w-full mb-6">
-            <span className="self-center text-lg my-4 font-semibold">
+            <span className="text-center text-lg my-4 font-semibold">
               Your retired transactions
             </span>
             {myTransactions.map((transaction, index) => (

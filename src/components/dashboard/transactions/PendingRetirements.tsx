@@ -248,7 +248,7 @@ export default function PendingRetirements() {
       <Divider />
       <div className="flex-1 flex flex-col px-4 w-full py-8">
         <div className="flex-1 flex flex-col gap-2">
-          <span className="self-center text-lg mb-6 font-semibold">
+          <span className="text-center text-lg mb-6 font-semibold">
             Your pending transactions
           </span>
           {pendingTransactions?.length ?? 0 > 0 ? (
