@@ -20,6 +20,7 @@ interface ParallaxDiverProps {
   mirrored?: boolean;
   xOffset?: number;
   yOffset?: number;
+  roundedBottom?: boolean;
 }
 
 export default function ParallaxDivider({
@@ -30,6 +31,7 @@ export default function ParallaxDivider({
   mirrored = false,
   xOffset = 0,
   yOffset = 0,
+  roundedBottom = false,
 }: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
   const [transform, setTransform] = useState<number>(0);
@@ -82,7 +84,11 @@ export default function ParallaxDivider({
 
   return (
     <div className="relative w-full" ref={componentRef}>
-      <div className="absolute overflow-hidden top-0 left-0 right-0 bottom-0">
+      <div
+        className={`absolute overflow-hidden top-0 left-0 right-0 bottom-0 ${
+          roundedBottom && "md:rounded-b"
+        }`}
+      >
         <div
           className={`${image} bg-cover bg-top bg-no-repeat w-[100vw] h-[800px]`}
           style={t}

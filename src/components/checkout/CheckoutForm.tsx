@@ -87,6 +87,7 @@ export default function CheckoutForm({
         image={ParallaxBackgrounds.RAINFOREST}
         smallest
         yOffset={-380}
+        roundedBottom
       />
     </form>
   );

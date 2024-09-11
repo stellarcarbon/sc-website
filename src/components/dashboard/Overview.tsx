@@ -169,6 +169,7 @@ export default function Overview() {
           smallest
           image={ParallaxBackgrounds.RAINFOREST}
           yOffset={-420}
+          roundedBottom
         />
       </div>
     </>

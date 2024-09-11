@@ -67,7 +67,7 @@ export default function ActivityHistory() {
 
         <Divider />
 
-        {myTransactions.length !== 0 ? (
+        {myTransactions.length === 0 ? (
           <div className="mx-4 text-center flex-1 flex flex-col justify-center gap-6 md:gap-16 text-sm">
             <span className="text-lg">No retired transactions found.</span>
 
@@ -110,9 +110,9 @@ export default function ActivityHistory() {
             </span> */}
           </div>
         ) : (
-          <div className="p-2 flex flex-col gap-2 w-full">
-            <span className="self-center text-lg mb-4 font-semibold mt-6">
-              Your pending transactions
+          <div className="p-2 flex flex-col gap-2 w-full mb-6">
+            <span className="self-center text-lg my-4 font-semibold">
+              Your retired transactions
             </span>
             {myTransactions.map((transaction, index) => (
               <TransactionListItem
@@ -128,6 +128,12 @@ export default function ActivityHistory() {
             ))}
           </div>
         )}
+        <ParallaxDivider
+          image={ParallaxBackgrounds.RAINFOREST}
+          smallest
+          yOffset={-380}
+          roundedBottom
+        />
       </div>
     );
   }

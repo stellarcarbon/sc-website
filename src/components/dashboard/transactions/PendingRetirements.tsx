@@ -156,7 +156,7 @@ export default function PendingRetirements() {
 
   return (
     <>
-      <div className="w-full px-4 flex flex-col">
+      <div className="w-full px-4 flex flex-col py-1">
         {false && (
           <div className="flex flex-col gap-2 items-center bg-secondary p-4 border rounded w-full mt-6">
             <span>Dev buttons</span>
@@ -248,7 +248,7 @@ export default function PendingRetirements() {
       <Divider />
       <div className="flex-1 flex flex-col px-4 w-full py-8">
         <div className="flex-1 flex flex-col gap-2">
-          <span className="self-center text-lg mb-4 font-semibold">
+          <span className="self-center text-lg mb-6 font-semibold">
             Your pending transactions
           </span>
           {pendingTransactions?.length ?? 0 > 0 ? (
@@ -269,10 +269,12 @@ export default function PendingRetirements() {
           )}
         </div>
       </div>
+
       <ParallaxDivider
         image={ParallaxBackgrounds.RAINFOREST}
         smallest
         yOffset={-400}
+        roundedBottom
       />
     </>
   );
