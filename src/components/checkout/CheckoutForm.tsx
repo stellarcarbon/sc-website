@@ -12,6 +12,7 @@ import TransactionPreview from "@/components/checkout/TransactionPreview";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
+import Divider from "../Divider";
 
 interface CheckoutFormProps extends HTMLProps<HTMLFormElement> {
   submitSinkingTransaction: (
@@ -46,6 +47,12 @@ export default function CheckoutForm({
 
   return (
     <form className="flex flex-col mt-8 gap-8">
+      <div className="mx-4 md:mx-8">
+        <span className="text-sm">
+          Use this form to create a new CARBON sink transaction.
+        </span>
+      </div>
+      <Divider />
       <div className="mx-4 md:mx-8 flex flex-col gap-12 bg-secondary min-w-[80%]">
         <Suspense>
           <AmountInput
@@ -57,35 +64,24 @@ export default function CheckoutForm({
           />
         </Suspense>
       </div>
-      <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest />
+      {/* <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest /> */}
+      <Divider />
       <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
         <CurrencySelect register={register} />
       </div>
-      <ParallaxDivider
-        image={ParallaxBackgrounds.RAINFOREST}
-        smallest
-        yOffset={-150}
-      />
+      <Divider />
       <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
         <ReasonSelect watch={watch} setValue={setValue} />
       </div>
-      <ParallaxDivider
-        image={ParallaxBackgrounds.RAINFOREST}
-        smallest
-        yOffset={-225}
-      />
+
+      <Divider />
       <div className="flex flex-col items-center gap-4 mx-5 md:mx-8 bg-secondary min-w-[80%]">
-        <h3 className="text-xl md:text-2xl font-bold">
-          Your sinking transaction
-        </h3>
-        <TransactionPreview tonnes={tonnes} currency={currency} quote={quote} />
-        <Button
-          onClick={() => handleSubmit(onSubmit)()}
-          className="!py-2 !w-[60%] max-w-[200px] mt-4 mb-2 text-md self-center"
-          disabled={false}
-        >
-          Go to signing
-        </Button>
+        <TransactionPreview
+          tonnes={tonnes}
+          currency={currency}
+          quote={quote}
+          handleSubmit={() => handleSubmit(onSubmit)()}
+        />
       </div>
       <ParallaxDivider
         image={ParallaxBackgrounds.RAINFOREST}

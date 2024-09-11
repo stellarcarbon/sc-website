@@ -186,7 +186,7 @@ export default function RequestCertificate({
 
   return (
     <div
-      className={`md:w-[80%] self-center relative mb-10 text-sm border border-tertiary rounded bg-secondary`}
+      className={`md:p-2 md:w-[60%] self-center relative mb-10 text-sm border border-tertiary rounded bg-secondary`}
     >
       {body}
       {step !== RequestCertificateStates.info && (

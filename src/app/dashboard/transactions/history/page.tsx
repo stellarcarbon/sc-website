@@ -14,6 +14,7 @@ import { DEV_ACCOUNT } from "@/app/types";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
+import Divider from "@/components/Divider";
 
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions, walletConnection } =
@@ -64,10 +65,10 @@ export default function ActivityHistory() {
           </span>
         </div>
 
-        <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest />
+        <Divider />
 
-        {myTransactions.length === 0 ? (
-          <div className="mx-4 my-12 text-center flex-1 flex flex-col justify-center gap-6 md:gap-16 text-sm">
+        {myTransactions.length !== 0 ? (
+          <div className="mx-4 text-center flex-1 flex flex-col justify-center gap-6 md:gap-16 text-sm">
             <span className="text-lg">No retired transactions found.</span>
 
             <div className="flex flex-col gap-2 md:gap-6">
@@ -110,6 +111,9 @@ export default function ActivityHistory() {
           </div>
         ) : (
           <div className="p-2 flex flex-col gap-2 w-full">
+            <span className="self-center text-lg mb-4 font-semibold mt-6">
+              Your pending transactions
+            </span>
             {myTransactions.map((transaction, index) => (
               <TransactionListItem
                 key={`txlistitem_${index}`}

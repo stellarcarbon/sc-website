@@ -14,6 +14,7 @@ import { useEffect, useMemo, useState } from "react";
 import RequestCertificate from "./RequestCertificate";
 import PendingRounding from "../PendingRounding";
 import RoundingService from "@/services/RoundingService";
+import Divider from "@/components/Divider";
 
 enum DevState {
   devAccount = "dev_account",
@@ -155,7 +156,7 @@ export default function PendingRetirements() {
 
   return (
     <>
-      <div className="w-full px-4 flex flex-col border-b border-secondary">
+      <div className="w-full px-4 flex flex-col">
         {false && (
           <div className="flex flex-col gap-2 items-center bg-secondary p-4 border rounded w-full mt-6">
             <span>Dev buttons</span>
@@ -244,12 +245,8 @@ export default function PendingRetirements() {
             <PendingRounding />
           ))}
       </div>
-      <ParallaxDivider
-        image={ParallaxBackgrounds.RAINFOREST}
-        smallest
-        yOffset={-300}
-      />
-      <div className="flex-1 flex flex-col px-4 w-full py-8 border-y border-secondary">
+      <Divider />
+      <div className="flex-1 flex flex-col px-4 w-full py-8">
         <div className="flex-1 flex flex-col gap-2">
           <span className="self-center text-lg mb-4 font-semibold">
             Your pending transactions

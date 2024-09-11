@@ -10,6 +10,7 @@ import TextInput from "@/components/TextInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import TransactionSummary from "./TransactionSummary";
+import Divider from "../Divider";
 
 export default function Overview() {
   const { walletConnection, updateWalletConnection, disconnectWallet } =
@@ -70,28 +71,13 @@ export default function Overview() {
 
   return (
     <>
-      <div className="mt-10 md:mt-14 mb-6">
+      <div className="my-10 mb-6">
         <TransactionSummary />
       </div>
 
-      <ParallaxDivider
-        image={ParallaxBackgrounds.RAINFOREST}
-        smallest
-        yOffset={-20}
-      />
-
-      <div className="my-4">
-        <WalletConnectionInfo />
-      </div>
-      {/* 
-      <ParallaxDivider
-        smallest
-        image={ParallaxBackgrounds.RAINFOREST}
-        yOffset={-250}
-      /> */}
-
       <div className="flex flex-col w-full gap-4">
-        <div className="flex justify-between mx-4 md:mx-8">
+        <WalletConnectionInfo />
+        <div className="flex justify-between mx-4 md:mx-8 mt-2">
           <h1 className="text-xl md:text-2xl font-semibold">
             Contact information
           </h1>
@@ -178,12 +164,13 @@ export default function Overview() {
           )}
         </div>
       </div>
-
-      <ParallaxDivider
-        smallest
-        image={ParallaxBackgrounds.RAINFOREST}
-        yOffset={-420}
-      />
+      <div className="flex-1 flex items-end">
+        <ParallaxDivider
+          smallest
+          image={ParallaxBackgrounds.RAINFOREST}
+          yOffset={-420}
+        />
+      </div>
     </>
   );
 }
