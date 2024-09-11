@@ -178,7 +178,7 @@ export default function SinkPage() {
 
   return (
     <Modal>
-      <div className="h-full flex flex-col py-8 px-6 md:px-12 justify-start items-center border-y border-tertiary">
+      <div className="h-full flex flex-col py-8 px-6 md:px-12 justify-start items-center">
         {/* <span className="text-2xl">Transaction submit</span> */}
         {submissionError ? (
           <div className="flex flex-col justify-center items-center flex-1 gap-8">

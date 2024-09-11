@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "@/context/appContext";
 import { Blocks } from "react-loader-spinner";
 import { useSCRouter } from "@/app/utils";
+import Modal from "@/components/Modal";
+import ConnectLanding from "@/containers/ConnectLanding";
 
 export default function WalletPage() {
   const router = useSCRouter();
@@ -24,9 +26,7 @@ export default function WalletPage() {
     }
   }, [walletConnection, router]);
 
-  return (
-    <main className="flex flex-col justify-center blockchain-bg bg-no-repeat bg-fixed bg-cover items-center md:py-6 min-h-[calc(100vh-176px)] mt-[64px] md:mt-[80px]">
-      {isLoading ? <Blocks /> : <ExplainConnect onClick={navigate} />}
-    </main>
-  );
+  // return <Modal>Hallo</Modal>;
+
+  return <ConnectLanding />;
 }
