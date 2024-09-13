@@ -3,9 +3,8 @@
 import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
 import { CheckoutFormData, SinkCarbonXdrPostRequest } from "@/app/types";
-import Button from "@/components/Button";
 import { useAppContext } from "@/context/appContext";
-import { HTMLProps, Suspense, useState } from "react";
+import { Suspense, useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import AmountInput from "@/components/checkout/AmountInput";
 import TransactionPreview from "@/components/checkout/TransactionPreview";
@@ -13,26 +12,32 @@ import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
 import Divider from "../Divider";
+import { useRouter } from "next/navigation";
 
-interface CheckoutFormProps extends HTMLProps<HTMLFormElement> {
-  submitSinkingTransaction: (
-    payload: SinkCarbonXdrPostRequest,
-    quote: number
-  ) => void;
-}
-
-export default function CheckoutForm({
-  submitSinkingTransaction,
-}: CheckoutFormProps) {
-  const { walletConnection } = useAppContext();
+export default function CheckoutForm() {
+  const { walletConnection, setSinkRequest } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
+
+  const router = useRouter();
 
   const [quote, setQuote] = useState<number>(0);
 
   const tonnes = watch("tonnes");
   const currency = watch("currency");
   const reason = watch("reason");
+
+  const initializeSubmitSinkingTransaction = useCallback(
+    async (sinkRequest: SinkCarbonXdrPostRequest, quote: number) => {
+      if (!walletConnection?.isAnonymous) {
+        sinkRequest.email = walletConnection?.personalDetails?.useremail;
+      }
+
+      setSinkRequest(sinkRequest);
+      router.push("/sink");
+    },
+    [walletConnection, setSinkRequest, router]
+  );
 
   const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
     let payload: SinkCarbonXdrPostRequest = {
@@ -42,7 +47,7 @@ export default function CheckoutForm({
       memoValue: reason,
     };
 
-    submitSinkingTransaction(payload, quote);
+    initializeSubmitSinkingTransaction(payload, quote);
   };
 
   return (
