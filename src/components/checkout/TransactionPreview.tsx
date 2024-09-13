@@ -15,9 +15,9 @@ export default function TransactionPreview({
   handleSubmit,
 }: TransactionPreviewProps) {
   return (
-    <div className="p-6 w-full md:w-[70%] self-center flex flex-col gap-6 items-center justify-center bg-primary border border-accentSecondary rounded">
+    <div className="p-6 w-full md:w-[100%] self-center flex flex-col gap-6 items-center justify-center bg-primary border border-accentSecondary rounded">
       <h3 className="text-xl md:text-2xl font-bold">Your transaction</h3>
-      <div className="grid grid-cols-2 gap-1 text-center w-full">
+      <div className="md:px-24 grid grid-cols-2 gap-1 text-center w-full">
         <span className="text-start">Amount to sink</span>
         <div className="flex gap-1 items-center justify-end text-accent">
           <CARBONCurrencyIcon />

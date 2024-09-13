@@ -4,7 +4,7 @@ export default function WalletConnectionInfo() {
   const { walletConnection, supportedWallets } = useAppContext();
 
   return (
-    <div className="bg-primary mx-4 rounded border border-accentSecondary grid grid-cols-5">
+    <div className="bg-primary mx-6 md:mx-8 rounded border border-accentSecondary grid grid-cols-5">
       <div className="flex flex-col items-center py-2 border-r border-accentSecondary">
         <div className="p-2">
           <img className="h-12 w-12" src={supportedWallets[0]?.icon} />
