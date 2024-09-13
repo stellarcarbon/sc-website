@@ -5,6 +5,7 @@ import {
   WalletType,
 } from "stellar-wallets-kit";
 import { WalletConnection } from "@/app/types";
+import appConfig from "@/config";
 
 export const walletConnectDialog = async (
   userWalletType: WalletType
@@ -20,7 +21,7 @@ export const walletConnectDialog = async (
   } else {
     let kit = new StellarWalletsKit({
       selectedWallet: userWalletType,
-      network: WalletNetwork.PUBLIC,
+      network: appConfig.network,
     });
 
     let stellarPubKey = await kit.getPublicKey(); // will throw on error

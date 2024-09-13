@@ -86,8 +86,8 @@ export default function SinkPage() {
   if (message === SinkStatusMessages.confirm) {
     status = (
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
-        <span className="text-center md:text-2xl">{message}</span>
-        <div className="w-full flex flex-col gap-8 m-6 justify-center items-center bg-secondary py-6 rounded lg:max-w-[75%]">
+        <span className="text-center md:text-lg">{message}</span>
+        <div className="w-full flex flex-col gap-8 m-6 justify-center items-center bg-secondary border border-tertiary py-6 rounded lg:max-w-[75%]">
           <div className="flex flex-col w-full px-6 items-center gap-2 text-lg">
             <div className="flex justify-between w-full items-center gap-4">
               <span>Sinking</span>
@@ -108,11 +108,11 @@ export default function SinkPage() {
             </div>
             <div className="flex justify-between items-center w-full gap-4">
               <span>Memo</span>
-              <span>{sinkRequest?.memoValue}</span>
+              <span>{sinkRequest?.memoValue ?? "-"}</span>
             </div>
           </div>
           <Button
-            className="!py-2 w-[200px] font-bold !bg-accentSecondary !text-white hover:!bg-tertiary"
+            className="!py-2 w-[200px] font-semibold"
             onClick={confirmSubmission}
           >
             Sign with wallet
@@ -125,7 +125,7 @@ export default function SinkPage() {
   if (message === SinkStatusMessages.creating) {
     status = (
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
-        <span className="text-center text-lg md:text-2xl">{message}</span>
+        <span className="text-center text-lg md:text-lg">{message}</span>
         <div className="my-4">
           <Hourglass
             visible={true}
@@ -143,7 +143,7 @@ export default function SinkPage() {
     status = (
       // <div className="flex flex-col justify-center items-center flex-1 gap-2">
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
-        <span className="text-center md:text-2xl">{message}</span>
+        <span className="text-center md:text-lg">{message}</span>
         <div className="my-4">
           <SignIcon large={isWide} />
         </div>
@@ -153,7 +153,7 @@ export default function SinkPage() {
   } else if (message === SinkStatusMessages.awaitBlockchain) {
     status = (
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
-        <span className="text-center md:text-2xl">{message}</span>
+        <span className="text-center md:text-lg">{message}</span>
         <div className="my-4">
           <Hourglass
             visible={true}
@@ -170,7 +170,7 @@ export default function SinkPage() {
   } else if (message === SinkStatusMessages.completed) {
     status = (
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
-        <span className="text-center md:text-2xl">{message}</span>
+        <span className="text-center md:text-lg">{message}</span>
         <SuccessIcon />
       </div>
     );
@@ -182,7 +182,7 @@ export default function SinkPage() {
         {/* <span className="text-2xl">Transaction submit</span> */}
         {submissionError ? (
           <div className="flex flex-col justify-center items-center flex-1 gap-8">
-            <FormError className="text-center text-md">
+            <FormError className="text-center text-base md:text-lg">
               {submissionError}
             </FormError>
             <ErrorIcon />

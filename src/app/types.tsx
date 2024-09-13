@@ -70,14 +70,6 @@ export const CARBON_SINK_ACCOUNT =
 export const CARBON_ACCOUNT =
   "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";
 
-export enum FormStatusMessages {
-  creating = "Creating your transaction using Stellarcarbon API...",
-  confirm = "Your transaction is ready and approved by Stellarcarbon. Please confirm the transaction by signing it with your wallet.",
-  signTransaction = "Sign the transaction using your wallet in the pop-up.",
-  awaitBlockchain = "Transaction signed.\n Submitting to the Stellar blockchain....",
-  completed = "Success! (did not really post to blockchain though)",
-}
-
 export interface SinkCarbonXdrPostRequest {
   funder: string;
   recipient?: string;

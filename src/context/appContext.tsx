@@ -122,6 +122,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       wallets = await loadAvailableWalletsMock();
     } else {
       wallets = await StellarWalletsKit.getSupportedWallets();
+      console.log(wallets);
     }
 
     setSupportedWallets(wallets);
