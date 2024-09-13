@@ -15,6 +15,7 @@ import RequestCertificate from "./RequestCertificate";
 import PendingRounding from "../PendingRounding";
 import RoundingService from "@/services/RoundingService";
 import Divider from "@/components/Divider";
+import DashboardTitle from "../DashboardTitle";
 
 enum DevState {
   devAccount = "dev_account",
@@ -156,7 +157,7 @@ export default function PendingRetirements() {
 
   return (
     <>
-      <div className="w-full px-4 flex flex-col py-1">
+      <div className="w-full px-4 flex flex-col">
         {false && (
           <div className="flex flex-col gap-2 items-center bg-secondary p-4 border rounded w-full mt-6">
             <span>Dev buttons</span>
@@ -217,16 +218,14 @@ export default function PendingRetirements() {
           </div>
         )}
 
-        <div className="flex flex-col gap-2 items-center my-8">
-          <h1 className="text-center text-lg font-semibold">
-            CARBON pending retirement
-          </h1>
-          <div className="flex items-center justify-center gap-1 text-3xl">
+        <div className="flex flex-col items-center">
+          <DashboardTitle>Pending retirements balance</DashboardTitle>
+          <div className="flex items-center justify-center gap-3 text-[48px] mb-12">
             <span>{totalCarbonPending.toFixed(3)}</span>
-            <CARBONCurrencyIcon width={24} height={24} />
+            <CARBONCurrencyIcon width={40} height={40} />
           </div>
-          {totalCarbonPending > 0 && (
-            <span className="text-xs text-center mx-4">
+          {/* {totalCarbonPending > 0 && (
+            <span className="text-sm text-center mx-4 mt-2">
               This CARBON is ready to be retired into a certificate. Read more
               about pending retirements{" "}
               <Link href="/explain" className="underline">
@@ -234,7 +233,7 @@ export default function PendingRetirements() {
               </Link>
               .
             </span>
-          )}
+          )} */}
         </div>
 
         {totalCarbonPending > 0 &&
@@ -245,12 +244,10 @@ export default function PendingRetirements() {
             <PendingRounding />
           ))}
       </div>
-      <Divider />
-      <div className="flex-1 flex flex-col px-4 w-full py-8">
+
+      <div className="flex-1 flex flex-col px-4 w-full pb-12">
         <div className="flex-1 flex flex-col gap-2">
-          <span className="text-center text-lg mb-6 font-semibold">
-            Your pending transactions
-          </span>
+          <DashboardTitle>Your pending transactions</DashboardTitle>
           {pendingTransactions?.length ?? 0 > 0 ? (
             pendingTransactions?.map((transaction, index) => {
               return (

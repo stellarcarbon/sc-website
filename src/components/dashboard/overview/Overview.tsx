@@ -11,6 +11,7 @@ import TransactionSummary from "../TransactionSummary";
 import WalletConnectionButtons from "./wcbuttons";
 import OverviewContactInformationForm from "./ContactInformationForm";
 import OverviewContactInformation from "./ContactInformation";
+import DashboardTitle from "../DashboardTitle";
 
 export default function Overview() {
   const { disconnectWallet } = useAppContext();
@@ -20,32 +21,30 @@ export default function Overview() {
 
   return (
     <>
-      <div className="mt-10 md:mt-16 flex flex-col gap-4">
-        <h1 className="self-center text-xl md:text-2xl font-semibold">
-          Activity summary
-        </h1>
+      <div className="flex flex-col">
+        <DashboardTitle>Activity summary</DashboardTitle>
         <TransactionSummary />
       </div>
 
-      <div className="flex flex-col w-full gap-6 mt-8 md:mt-10">
-        <h1 className="self-center text-xl md:text-2xl font-semibold">
-          Wallet Connection
-        </h1>
-        <WalletConnectionInfo />
+      <div className="flex flex-col w-full ">
+        <DashboardTitle>Wallet Connection</DashboardTitle>
+        <div className="flex flex-col gap-6">
+          <WalletConnectionInfo />
 
-        {showContactInformationForm ? (
-          <OverviewContactInformationForm
-            onClose={() => setShowContactInformationForm(false)}
-          />
-        ) : (
-          <>
-            <OverviewContactInformation />
-            <WalletConnectionButtons
-              onEdit={() => setShowContactInformationForm(true)}
-              onDisconnect={disconnectWallet}
+          {showContactInformationForm ? (
+            <OverviewContactInformationForm
+              onClose={() => setShowContactInformationForm(false)}
             />
-          </>
-        )}
+          ) : (
+            <>
+              <OverviewContactInformation />
+              <WalletConnectionButtons
+                onEdit={() => setShowContactInformationForm(true)}
+                onDisconnect={disconnectWallet}
+              />
+            </>
+          )}
+        </div>
       </div>
       <div className="flex-1 flex items-end">
         <ParallaxDivider

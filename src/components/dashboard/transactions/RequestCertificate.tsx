@@ -6,6 +6,7 @@ import TextInput from "@/components/TextInput";
 import { useAppContext } from "@/context/appContext";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
@@ -73,14 +74,24 @@ export default function RequestCertificate({
   if (step === RequestCertificateStates.info) {
     body = (
       <div className="p-4 flex flex-col gap-4 items-center">
+        <h2 className="text-lg font-semibold">Create a personal certificate</h2>
         <span className="text-center">
           Any pending retirements will automatically retire into the community
-          pool after 90 days.
+          pool after 90 days, which means you can no longer attain a personal
+          certificate.
         </span>
 
         <span className="text-center">
-          If you want to create a personal certificate you have to do so before
+          If you want to request a personal certificate you have to do so before
           this period ends.
+        </span>
+
+        <span>
+          Read more about retirements & certificates{" "}
+          <Link href="/explain" className="underline">
+            here
+          </Link>
+          .
         </span>
 
         <Button
@@ -93,7 +104,7 @@ export default function RequestCertificate({
             }
           }}
         >
-          Create personal certificate
+          Request certificate
         </Button>
       </div>
     );

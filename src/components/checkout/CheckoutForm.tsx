@@ -13,6 +13,7 @@ import ParallaxDivider, {
 } from "@/components/ParallaxDivider";
 import Divider from "../Divider";
 import { useRouter } from "next/navigation";
+import DashboardTitle from "../dashboard/DashboardTitle";
 
 export default function CheckoutForm() {
   const { walletConnection, setSinkRequest } = useAppContext();
@@ -51,49 +52,53 @@ export default function CheckoutForm() {
   };
 
   return (
-    <form className="flex flex-col mt-8 gap-8">
-      <div className="mx-4 md:mx-8">
+    <div className="flex flex-col">
+      {/* <div className="mx-4 md:mx-8">
         <span className="text-sm">
           Use this form to create a new CARBON sink transaction.
         </span>
       </div>
-      <Divider />
-      <div className="mx-4 md:mx-8 flex flex-col gap-12 bg-secondary min-w-[80%]">
-        <Suspense>
-          <AmountInput
-            register={register}
-            watch={watch}
-            setValue={setValue}
-            quote={quote}
-            setQuote={setQuote}
-          />
-        </Suspense>
-      </div>
-      {/* <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest /> */}
-      <Divider />
-      <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
-        <CurrencySelect register={register} />
-      </div>
-      <Divider />
-      <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
-        <ReasonSelect watch={watch} setValue={setValue} />
-      </div>
+      <Divider /> */}
 
-      <Divider />
-      <div className="flex flex-col items-center gap-4 mx-5 md:mx-8 bg-secondary min-w-[80%]">
-        <TransactionPreview
-          tonnes={tonnes}
-          currency={currency}
-          quote={quote}
-          handleSubmit={() => handleSubmit(onSubmit)()}
+      <DashboardTitle>Sink CARBON</DashboardTitle>
+      <form className="flex flex-col gap-12 md:gap-20">
+        <div className="mx-4 md:mx-8 flex flex-col gap-12 bg-secondary min-w-[80%]">
+          <Suspense>
+            <AmountInput
+              register={register}
+              watch={watch}
+              setValue={setValue}
+              quote={quote}
+              setQuote={setQuote}
+            />
+          </Suspense>
+        </div>
+        {/* <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest /> */}
+        {/* <Divider /> */}
+        <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
+          <CurrencySelect register={register} />
+        </div>
+        {/* <Divider /> */}
+        <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
+          <ReasonSelect watch={watch} setValue={setValue} />
+        </div>
+
+        {/* <Divider /> */}
+        <div className="flex flex-col items-center gap-4 mx-5 md:mx-8 bg-secondary min-w-[80%]">
+          <TransactionPreview
+            tonnes={tonnes}
+            currency={currency}
+            quote={quote}
+            handleSubmit={() => handleSubmit(onSubmit)()}
+          />
+        </div>
+        <ParallaxDivider
+          image={ParallaxBackgrounds.RAINFOREST}
+          smallest
+          yOffset={-380}
+          roundedBottom
         />
-      </div>
-      <ParallaxDivider
-        image={ParallaxBackgrounds.RAINFOREST}
-        smallest
-        yOffset={-380}
-        roundedBottom
-      />
-    </form>
+      </form>
+    </div>
   );
 }

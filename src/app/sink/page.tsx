@@ -9,10 +9,12 @@ import ErrorIcon from "@/components/icons/ErrorIcon";
 import SignIcon from "@/components/icons/SignIcon";
 import SuccessIcon from "@/components/icons/SuccessIcon";
 import Modal from "@/components/Modal";
+import appConfig from "@/config";
 import { useAppContext } from "@/context/appContext";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Hourglass } from "react-loader-spinner";
+import { TransactionBuilder } from "@stellar/stellar-sdk";
 
 enum SinkStatusMessages {
   creating = "Creating your transaction using Stellarcarbon API...",
@@ -70,9 +72,14 @@ export default function SinkPage() {
       .then((r) => {
         // TODO: Fake blockchain commit
         setMessage(SinkStatusMessages.awaitBlockchain);
-        setTimeout(() => {
+        const finalTransaction = TransactionBuilder.fromXDR(
+          r.signedXDR,
+          appConfig.network
+        );
+        appConfig.server.submitTransaction(finalTransaction).then((result) => {
+          console.log(result);
           setMessage(SinkStatusMessages.completed);
-        }, 3000);
+        });
       })
       .catch((err) => {
         setSubmissionError("Transaction signing failed.");

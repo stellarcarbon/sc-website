@@ -22,6 +22,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@hookform/error-message": "^2.0.1",
+    "@stellar/stellar-sdk": "^12.2.0",
     "google-fonts-plugin": "^5.0.2",
     "i": "^0.3.7",
     "next": "14.0.4",

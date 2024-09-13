@@ -41,7 +41,7 @@ export default function TransactionListItem({
       onClick={onClick}
       className={`p-2 w-full grid grid-cols-6 md:grid-cols-6 ${
         bgPrimary ? "bg-primary" : "bg-secondary"
-      } border-accentSecondary rounded-md cursor-pointer text-sm`}
+      } border border-accentSecondary rounded-md cursor-pointer text-sm`}
     >
       <ItemHeader>Hash</ItemHeader>
       <ItemValue>{transaction.id}</ItemValue>

@@ -4,13 +4,13 @@ export default function OverviewContactInformation() {
   const { walletConnection } = useAppContext();
 
   return walletConnection?.isAnonymous ? (
-    <span className="text-sm text-center">
+    <span className="text-sm text-center mx-4 md:mx-8 my-4">
       Your session is anonymous. To receive personal certificates add your
       username and email address.
     </span>
   ) : (
-    <div className="flex flex-col gap-1 mx-4 md:mx-8">
-      <div className="flex flex-col gap-3 text-base mb-5">
+    <div className="flex flex-col gap-1 mx-4 md:mx-8 my-4">
+      <div className="flex flex-col gap-3 text-base">
         <div className="flex justify-between items-center border-b border-b-tertiary">
           <span className="text-white md:text-lg font-semibold">Username</span>
           <span className="text-xs md:text-base">

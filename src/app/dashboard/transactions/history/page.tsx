@@ -15,6 +15,7 @@ import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
 import Divider from "@/components/Divider";
+import DashboardTitle from "@/components/dashboard/DashboardTitle";
 
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions, walletConnection } =
@@ -57,14 +58,15 @@ export default function ActivityHistory() {
   } else {
     return (
       <div {...swipeHandlers} className="flex flex-col items-center flex-1">
-        <div className="flex flex-col justify-center self-start px-6 my-8">
+        <div className=" mx-4 md:mx-8 flex flex-col items-center mb-8 md:mb-12">
+          <DashboardTitle>Retired transactions</DashboardTitle>
+
           <span className="text-sm text-center">
             Here you can find the transactions that have been retired into one
             or more certificates. Click on them to find out more details about
             the transaction and its corresponding certificate(s).
           </span>
         </div>
-
         <Divider />
 
         {myTransactions.length === 0 ? (
