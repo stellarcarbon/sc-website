@@ -37,8 +37,8 @@ export default function ActivityHistory() {
     // Reload personal transactions on page visit
 
     TransactionHistoryService.fetchAccountHistory(
-      // walletConnection?.stellarPubKey!
-      DEV_ACCOUNT
+      walletConnection?.stellarPubKey!
+      // DEV_ACCOUNT
     ).then((transactionRecords): void => {
       setMyTransactions(transactionRecords);
       setIsLoading(false);
@@ -58,7 +58,7 @@ export default function ActivityHistory() {
   } else {
     return (
       <div {...swipeHandlers} className="flex flex-col items-center flex-1">
-        <div className=" mx-4 md:mx-8 flex flex-col items-center mb-8 md:mb-12">
+        <div className=" mx-4 md:mx-8 flex flex-col items-center">
           <DashboardTitle>Retired transactions</DashboardTitle>
 
           <span className="text-sm text-center">
@@ -67,7 +67,8 @@ export default function ActivityHistory() {
             the transaction and its corresponding certificate(s).
           </span>
         </div>
-        <Divider />
+
+        <Divider className="my-8 md:my-12" />
 
         {myTransactions.length === 0 ? (
           <div className="mx-4 text-center flex-1 flex flex-col justify-center gap-6 md:gap-16 text-sm">
@@ -113,9 +114,6 @@ export default function ActivityHistory() {
           </div>
         ) : (
           <div className="p-2 flex flex-col gap-2 w-full mb-6">
-            <span className="text-center text-lg my-4 font-semibold">
-              Your retired transactions
-            </span>
             {myTransactions.map((transaction, index) => (
               <TransactionListItem
                 key={`txlistitem_${index}`}
@@ -130,12 +128,6 @@ export default function ActivityHistory() {
             ))}
           </div>
         )}
-        <ParallaxDivider
-          image={ParallaxBackgrounds.RAINFOREST}
-          smallest
-          yOffset={-380}
-          roundedBottom
-        />
       </div>
     );
   }

@@ -17,7 +17,7 @@ function ItemHeader({ children }: { children: ReactNode }) {
 }
 
 function ItemValue({ children }: { children: ReactNode }) {
-  return <div className="col-span-4 md:col-span-5 truncate">{children}</div>;
+  return <div className="col-span-6 md:col-span-5 truncate">{children}</div>;
 }
 
 export default function TransactionListItem({
@@ -39,7 +39,7 @@ export default function TransactionListItem({
   return (
     <div
       onClick={onClick}
-      className={`p-2 w-full grid grid-cols-6 md:grid-cols-6 ${
+      className={`p-2 w-full grid grid-cols-8 md:grid-cols-6 ${
         bgPrimary ? "bg-primary" : "bg-secondary"
       } border border-accentSecondary rounded-md cursor-pointer text-sm`}
     >

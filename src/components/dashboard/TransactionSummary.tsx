@@ -4,6 +4,7 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Link from "next/link";
 import { useViewportWidth } from "@/app/utils";
 import { useMemo } from "react";
+import { RetirementStatus } from "@/app/types";
 
 export default function TransactionSummary() {
   const { myTransactions } = useAppContext();
@@ -12,6 +13,30 @@ export default function TransactionSummary() {
   const iconSize = useMemo(() => {
     return isWide ? 22 : 18;
   }, [isWide]);
+
+  const latestTransaction = useMemo(() => {
+    if (myTransactions !== null) {
+      return myTransactions[0];
+    }
+  }, [myTransactions]);
+
+  const totalSinked = useMemo(() => {
+    if (myTransactions !== null) {
+      return myTransactions.reduce((acc, tx) => acc + tx.sinkAmount, 0);
+    }
+  }, [myTransactions]);
+
+  const totalPending = useMemo(() => {
+    if (myTransactions !== null) {
+      return myTransactions
+        .filter(
+          (tx) =>
+            tx.retirementStatus === RetirementStatus.PENDING_USER ||
+            tx.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
+        )
+        .reduce((acc, tx) => acc + tx.sinkAmount, 0);
+    }
+  }, [myTransactions]);
 
   return (
     <div className="mx-4 md:mx-8 flex flex-col gap-8  border-tertiary ">
@@ -25,13 +50,18 @@ export default function TransactionSummary() {
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary">
               <span className="text-lg md:text-xl">Latest transaction</span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">2</span>
+                <span className="font-normal">
+                  {latestTransaction?.sinkAmount}
+                </span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>
 
             <span className="text-xs md:text-sm mt-2">
-              Created on 01-01-2001 with memo: {`"ENVIRONMENT"`}
+              {/* Created on 01-01-2001 with memo: {`"ENVIRONMENT"`} */}
+              {`Exchanged ${latestTransaction?.assetAmount} ${latestTransaction?.asset} for ${latestTransaction?.sinkAmount} `}
+              <CARBONCurrencyIcon className="inline" />
+              {` on ${latestTransaction?.createdAt} with memo: ${latestTransaction?.memo}`}
             </span>
           </div>
 
@@ -39,7 +69,7 @@ export default function TransactionSummary() {
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
               <span className="text-lg md:text-xl">Total sinked</span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">25</span>
+                <span className="font-normal">{totalSinked}</span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>
@@ -56,7 +86,7 @@ export default function TransactionSummary() {
                 Pending certificate claims
               </span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">1.55</span>
+                <span className="font-normal">{totalPending}</span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>

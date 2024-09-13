@@ -35,7 +35,7 @@ export default function PendingRetirements() {
     setHasPendingRounding,
   } = useAppContext();
 
-  const [devState, setDevState] = useState<DevState>(DevState.first);
+  const [devState, setDevState] = useState<DevState>();
 
   const pendingTransactions = useMemo(() => {
     return myTransactions?.filter(
@@ -220,7 +220,7 @@ export default function PendingRetirements() {
 
         <div className="flex flex-col items-center">
           <DashboardTitle>Pending retirements balance</DashboardTitle>
-          <div className="flex items-center justify-center gap-3 text-[48px] mb-12">
+          <div className="flex items-center justify-center gap-3 text-[48px] mb-8">
             <span>{totalCarbonPending.toFixed(3)}</span>
             <CARBONCurrencyIcon width={40} height={40} />
           </div>
