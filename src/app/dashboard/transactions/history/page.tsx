@@ -96,21 +96,6 @@ export default function ActivityHistory() {
                 to contribute to the Stellarcarbon initiative.
               </span>
             </div>
-
-            {/* <span>
-              Looks like this Stellar account does not have any retired
-              transactions yet.
-              <br />
-              <br />
-              After{" "}
-              <Link
-                className="underline text-accentSecondary"
-                href="/dashboard/sink"
-              >
-                sinking CARBON
-              </Link>{" "}
-              you can view your transaction(s) here.
-            </span> */}
           </div>
         ) : (
           <div className="p-2 flex flex-col gap-2 w-full mb-6">

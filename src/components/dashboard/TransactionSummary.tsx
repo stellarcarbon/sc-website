@@ -5,10 +5,13 @@ import Link from "next/link";
 import { useViewportWidth } from "@/app/utils";
 import { useMemo } from "react";
 import { RetirementStatus } from "@/app/types";
+import TransactionListItem from "./TransactionListItem";
+import { useRouter } from "next/navigation";
 
 export default function TransactionSummary() {
   const { myTransactions } = useAppContext();
   const isWide = useViewportWidth();
+  const router = useRouter();
 
   const iconSize = useMemo(() => {
     return isWide ? 22 : 18;
@@ -47,22 +50,22 @@ export default function TransactionSummary() {
       ) : (
         <>
           <div className="flex flex-col gap-1 text-sm">
-            <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary">
+            <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary mb-2">
               <span className="text-lg md:text-xl">Latest transaction</span>
-              <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">
-                  {latestTransaction?.sinkAmount}
-                </span>
-                <CARBONCurrencyIcon width={iconSize} height={iconSize} />
-              </div>
             </div>
-
-            <span className="text-xs md:text-sm mt-2">
-              {/* Created on 01-01-2001 with memo: {`"ENVIRONMENT"`} */}
-              {`Exchanged ${latestTransaction?.assetAmount} ${latestTransaction?.asset} for ${latestTransaction?.sinkAmount} `}
-              <CARBONCurrencyIcon className="inline" />
-              {` on ${latestTransaction?.createdAt} with memo: ${latestTransaction?.memo}`}
-            </span>
+            {latestTransaction ? (
+              <TransactionListItem
+                bgPrimary
+                transaction={latestTransaction}
+                onClick={() => {
+                  router.push(
+                    `/dashboard/transactions/history/?hash=${latestTransaction.id}`
+                  );
+                }}
+              />
+            ) : (
+              <div>You have not made any transactions yet.</div>
+            )}
           </div>
 
           <div className="flex flex-col gap-1 text-sm">
