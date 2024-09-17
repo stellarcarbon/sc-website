@@ -91,7 +91,7 @@ type AppContext = {
     SetStateAction<SinkCarbonXdrPostRequest | undefined>
   >;
 
-  stellarWalletsKit: StellarWalletsKit;
+  stellarWalletsKit: StellarWalletsKit | null;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -109,8 +109,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [supportedWallets, setSupportedWallets] = useState<ISupportedWallet[]>(
     []
   );
-  const stellarWalletsKitRef = useRef<any>(null);
+  const stellarWalletsKitRef = useRef<StellarWalletsKit | null>(null);
 
+  // Null at first, will become undefined after attempting to load from local storage fails.
   const [walletConnection, setWalletConnection] = useState<
     WalletConnection | null | undefined
   >(null);
@@ -126,90 +127,81 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const pathname = usePathname();
 
-  const loadAvailableWallets = useCallback(async (): Promise<void> => {
-    let wallets;
-    if (window.Cypress) {
-      wallets = await loadAvailableWalletsMock();
-    } else {
-      wallets =
-        (await stellarWalletsKitRef.current?.getSupportedWallets()) ?? [];
-    }
-
-    setSupportedWallets(wallets);
-  }, []);
-
   useEffect(() => {
     closeDrawer();
   }, [pathname]);
 
   useEffect(() => {
-    const loadStellarKit = async () => {
-      if (typeof window !== "undefined") {
-        // This makes sure assigning the kit to the ref happens client side.
-        const { StellarWalletsKit } = await import(
-          "@creit.tech/stellar-wallets-kit"
-        );
-        stellarWalletsKitRef.current = new StellarWalletsKit({
-          network: appConfig.network,
-          selectedWalletId: XBULL_ID,
-          modules: allowAllModules(),
-        });
-        console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
+    const loadApp = async () => {
+      const loadStellarWalletsKit = async () => {
+        if (typeof window !== "undefined") {
+          // This import makes sure assigning the kit to the ref happens client side.
+          const { StellarWalletsKit } = await import(
+            "@creit.tech/stellar-wallets-kit"
+          );
+          stellarWalletsKitRef.current = new StellarWalletsKit({
+            network: appConfig.network,
+            selectedWalletId: XBULL_ID,
+            modules: allowAllModules(),
+          });
+          console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
+
+          // Load supported wallets from stellar wallets kit
+          let wallets;
+          if (window.Cypress) {
+            wallets = await loadAvailableWalletsMock();
+          } else {
+            wallets =
+              (await stellarWalletsKitRef.current?.getSupportedWallets()) ?? [];
+          }
+          setSupportedWallets(wallets);
+        }
+      };
+
+      const loadWalletConnection = () => {
+        const wc = WalletConnectionService.loadWalletConnection();
+        if (wc !== undefined) {
+          stellarWalletsKitRef.current?.setWallet(wc.walletType.id);
+        }
+        setWalletConnection(wc);
+      };
+
+      if (stellarWalletsKitRef.current === null) {
+        await loadStellarWalletsKit();
+      }
+
+      if (walletConnection === null) {
+        loadWalletConnection();
+      } else {
+        if (
+          myTransactions === null &&
+          walletConnection?.stellarPubKey !== "" &&
+          pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
+        ) {
+          // Load personal transactions.
+          TransactionHistoryService.fetchAccountHistory(
+            // walletConnection?.stellarPubKey!
+            DEV_ACCOUNT
+          ).then((transactionRecords): void => {
+            setMyTransactions(transactionRecords);
+          });
+        }
+
+        // Pending rounding check
+        if (
+          walletConnection !== undefined &&
+          hasPendingRounding === undefined &&
+          pathname !== "/dashboard/transactions/" // This path will fetch on its own.
+        ) {
+          RoundingService.hasPendingRounding(
+            walletConnection.stellarPubKey
+          ).then((isPending) => setHasPendingRounding(isPending));
+        }
       }
     };
 
-    loadStellarKit();
-  }, []);
-
-  useEffect(() => {
-    // On app load
-    if (walletConnection === null) {
-      // Load local storage if available
-      const wc = WalletConnectionService.loadWalletConnection();
-      setWalletConnection(wc);
-
-      if (wc !== undefined) {
-        stellarWalletsKitRef.current.setWallet(wc.walletType.id);
-      }
-    } else {
-      if (
-        myTransactions === null &&
-        walletConnection?.stellarPubKey !== "" &&
-        pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
-      ) {
-        // Load personal transactions.
-        TransactionHistoryService.fetchAccountHistory(
-          walletConnection?.stellarPubKey!
-          // DEV_ACCOUNT
-        ).then((transactionRecords): void => {
-          setMyTransactions(transactionRecords);
-        });
-      }
-
-      // Pending rounding check
-      if (
-        walletConnection !== undefined &&
-        hasPendingRounding === undefined &&
-        pathname !== "/dashboard/transactions/" // This path will fetch on its own.
-      ) {
-        RoundingService.hasPendingRounding(walletConnection.stellarPubKey).then(
-          (isPending) => setHasPendingRounding(isPending)
-        );
-      }
-    }
-
-    if (supportedWallets.length === 0) {
-      // Load supported wallets if not loaded yet.
-      loadAvailableWallets();
-    }
-  }, [
-    loadAvailableWallets,
-    supportedWallets,
-    walletConnection,
-    myTransactions,
-    pathname,
-    hasPendingRounding,
-  ]);
+    loadApp();
+  }, [walletConnection, myTransactions, pathname, hasPendingRounding]);
 
   const connectWallet = async (
     wallet: ISupportedWallet,

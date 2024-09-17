@@ -99,11 +99,15 @@ export default function SelectWallet() {
         </span>
         <span className="text-xs max-w-[80%] md:hidden">
           {selectedWallet
-            ? `Current selection: ${selectedWallet}`
+            ? `Current selection: ${selectedWallet.name}`
             : `Tap your wallet choice.`}
         </span>
       </div>
-      {selectedWallet ? <b className="hidden">{`${selectedWallet}`}</b> : <></>}
+      {selectedWallet ? (
+        <b className="hidden">{`${selectedWallet.name}`}</b>
+      ) : (
+        <></>
+      )}
 
       {/* Mobile buttons */}
       <div className="md:hidden">

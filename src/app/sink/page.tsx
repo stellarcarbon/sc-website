@@ -71,7 +71,7 @@ export default function SinkPage() {
     setMessage(SinkStatusMessages.signTransaction);
 
     stellarWalletsKit
-      .signTransaction(sinkCarbonXdr.tx_xdr, {
+      ?.signTransaction(sinkCarbonXdr.tx_xdr, {
         address: walletConnection?.stellarPubKey,
       })
       .then((r) => {
@@ -96,7 +96,7 @@ export default function SinkPage() {
       .catch((err) => {
         setSubmissionError("Transaction signing failed.");
       });
-  }, [sinkCarbonXdr, walletConnection]);
+  }, [sinkCarbonXdr, walletConnection, stellarWalletsKit]);
 
   if (sinkRequest === undefined) {
     return null;

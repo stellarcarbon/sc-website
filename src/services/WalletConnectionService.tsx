@@ -1,11 +1,4 @@
-import {
-  allowAllModules,
-  StellarWalletsKit,
-  WalletNetwork,
-  xBullModule,
-} from "@creit.tech/stellar-wallets-kit";
 import { WalletConnection } from "@/app/types";
-import appConfig from "@/config";
 
 export default class WalletConnectionService {
   private static LOCAL_STORAGE_KEY = "wallet";

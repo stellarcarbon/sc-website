@@ -29,6 +29,8 @@ export const walletConnectDialog = async (
     let addr = await kit.getAddress(); // will throw on error
     let pubKey = addr.address;
 
+    console.log(">", pubKey);
+
     return {
       stellarPubKey: pubKey,
       walletType: wallet,
