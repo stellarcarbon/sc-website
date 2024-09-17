@@ -1,6 +1,5 @@
 "use client";
 
-import { WalletType } from "stellar-wallets-kit";
 import SelectWalletButton from "@/components/wallet/SelectWalletButton";
 import { useAppContext } from "@/context/appContext";
 import { useEffect, useState } from "react";
@@ -13,12 +12,17 @@ import LoadingWallets from "@/components/wallet/LoadingWallets";
 import { useSCRouter } from "@/app/utils";
 import Divider from "@/components/Divider";
 import { useRouter } from "next/navigation";
+import { ISupportedWallet } from "@creit.tech/stellar-wallets-kit";
+import { set } from "cypress/types/lodash";
 
 export default function SelectWallet() {
   const { connectWallet, connectionError, supportedWallets, walletConnection } =
     useAppContext();
-  const [selectedWalletType, setSelectedWalletType] =
-    useState<WalletType | null>(null);
+  // const [selectedWalletType, setSelectedWalletType] = useState<string | null>(
+  //   null
+  // );
+  const [selectedWallet, setSelectedWallet] = useState<ISupportedWallet>();
+
   const [tncAccepted, setTncAccepted] = useState<boolean>(false);
 
   const [username, setUsername] = useState<string>("");
@@ -30,11 +34,12 @@ export default function SelectWallet() {
 
   const router = useRouter();
 
-  const selectWallet = (wType: WalletType) => {
-    if (selectedWalletType === wType) {
-      setSelectedWalletType(null);
+  const selectWallet = (wallet: ISupportedWallet) => {
+    console.log("selectWallet", wallet);
+    if (selectedWallet === wallet) {
+      setSelectedWallet(undefined);
     } else {
-      setSelectedWalletType(wType);
+      setSelectedWallet(wallet);
     }
   };
 
@@ -45,13 +50,13 @@ export default function SelectWallet() {
 
   const submitForm = () => {
     setTncError(!tncAccepted);
-    setSelectWalletError(selectedWalletType === null);
+    setSelectWalletError(selectedWallet === undefined);
     setEmailError(
       (useremail !== "" || username !== "") && !isValidEmail(useremail)
     );
 
     if (
-      selectedWalletType === null ||
+      selectedWallet === undefined ||
       !tncAccepted ||
       ((useremail !== "" || username !== "") && !isValidEmail(useremail))
     )
@@ -62,19 +67,19 @@ export default function SelectWallet() {
       useremail,
     };
 
-    connectWallet(selectedWalletType!, personalDetails).then((didSucceed) => {
+    connectWallet(selectedWallet, personalDetails).then((didSucceed) => {
       if (didSucceed) {
         router.push("/dashboard/sink");
       }
 
-      setSelectedWalletType(null);
+      setSelectedWallet(undefined);
       setTncAccepted(false);
     });
   };
 
   useEffect(() => {
     if (walletConnection) {
-      setSelectedWalletType(walletConnection.walletType);
+      setSelectedWallet(walletConnection.walletType);
       setTncAccepted(true);
       if (!walletConnection.isAnonymous && walletConnection.personalDetails) {
         setUsername(walletConnection.personalDetails.username);
@@ -93,16 +98,12 @@ export default function SelectWallet() {
           sinking history.
         </span>
         <span className="text-xs max-w-[80%] md:hidden">
-          {selectedWalletType
-            ? `Current selection: ${selectedWalletType}`
+          {selectedWallet
+            ? `Current selection: ${selectedWallet}`
             : `Tap your wallet choice.`}
         </span>
       </div>
-      {selectedWalletType ? (
-        <b className="hidden">{`${selectedWalletType}`}</b>
-      ) : (
-        <></>
-      )}
+      {selectedWallet ? <b className="hidden">{`${selectedWallet}`}</b> : <></>}
 
       {/* Mobile buttons */}
       <div className="md:hidden">
@@ -110,13 +111,13 @@ export default function SelectWallet() {
           <LoadingWallets />
         ) : (
           <div className="flex flex-wrap justify-center gap-6 px-4">
-            {supportedWallets.map((supportedWallet) => {
+            {supportedWallets.map((supportedWallet, idx) => {
               return (
                 <SelectWalletButton
-                  key={`selectWalletButton_${supportedWallet.type}`}
+                  key={`selectWalletButton_${idx}`}
                   wallet={supportedWallet}
-                  isSelected={selectedWalletType === supportedWallet.type}
-                  onClick={() => selectWallet(supportedWallet.type)}
+                  isSelected={supportedWallet.id === selectedWallet?.id}
+                  onClick={() => selectWallet(supportedWallet)}
                   disabled={
                     !supportedWallet.isAvailable ||
                     supportedWallet.type === "WALLET_CONNECT"
@@ -140,13 +141,13 @@ export default function SelectWallet() {
           <LoadingWallets />
         ) : (
           <div className="flex flex-wrap gap-1 justify-start">
-            {supportedWallets.map((supportedWallet) => {
+            {supportedWallets.map((supportedWallet, idx) => {
               return (
                 <SelectWalletButtonDesktop
-                  key={`swbd_${supportedWallet.type}`}
+                  key={`swbd_${idx}`}
                   wallet={supportedWallet}
-                  isSelected={selectedWalletType === supportedWallet.type}
-                  onClick={() => selectWallet(supportedWallet.type)}
+                  isSelected={supportedWallet.id === selectedWallet?.id}
+                  onClick={() => selectWallet(supportedWallet)}
                 >
                   {supportedWallet.name}
                 </SelectWalletButtonDesktop>

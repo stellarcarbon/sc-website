@@ -1,4 +1,9 @@
-import { StellarWalletsKit, WalletNetwork } from "stellar-wallets-kit";
+import {
+  allowAllModules,
+  StellarWalletsKit,
+  WalletNetwork,
+  xBullModule,
+} from "@creit.tech/stellar-wallets-kit";
 import { WalletConnection } from "@/app/types";
 import appConfig from "@/config";
 
@@ -12,10 +17,6 @@ export default class WalletConnectionService {
 
     if (storedWalletConnectionJSONString) {
       const wc: WalletConnection = JSON.parse(storedWalletConnectionJSONString);
-      wc.kit = new StellarWalletsKit({
-        selectedWallet: wc.walletType,
-        network: appConfig.network,
-      });
       return wc;
     }
     return undefined;

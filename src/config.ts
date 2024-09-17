@@ -1,5 +1,5 @@
 import * as StellarSdk from "@stellar/stellar-sdk";
-import { WalletNetwork } from "stellar-wallets-kit";
+import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 
 StellarSdk.xdr;
 
