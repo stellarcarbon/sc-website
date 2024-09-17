@@ -70,34 +70,6 @@ export default function TransactionListItem({
 
       <ItemHeader>Status</ItemHeader>
       <ItemValue>{transaction.retirementStatus}</ItemValue>
-      {/* 
-      <div className="">Hash</div>
-      <div className="col-span-3 md:col-span-5 truncate">{transaction.id}</div>
-
-      <div>Date</div>
-      <div className="col-span-3 md:col-span-5">
-        {new Date(transaction.createdAt).toDateString()}
-      </div>
-
-      <div>Sunk</div>
-      <div className="col-span-3 md:col-span-5 flex gap-1">
-        <CARBONCurrencyIcon />
-        <span>{transaction.sinkAmount?.toFixed(2)}</span>
-      </div>
-
-      <div>Price</div>
-      <div className="col-span-3 md:col-span-5 flex gap-1">
-        <span>{transaction.assetAmount?.toFixed(2)}</span>
-        <span>{transaction.asset}</span>
-      </div>
-
-      <div>Memo</div>
-      <div className="col-span-3 md:col-span-5">{transaction.memo}</div>
-
-      <div>Status</div>
-      <div className="col-span-3 md:col-span-5">
-        {transaction.retirementStatus}
-      </div> */}
 
       {transaction.retirementStatus === RetirementStatus.RETIRED && (
         <>
@@ -121,7 +93,7 @@ export default function TransactionListItem({
       {showCountdown &&
         transaction.retirementStatus !== RetirementStatus.RETIRED &&
         transaction.sinkAmount % 1 != 0 && (
-          <div className="col-span-4 md:col-span-6">
+          <div className="col-span-8 md:col-span-6">
             <hr className="my-2" />
             <CountDownTimer initialDuration={initialDuration} />
           </div>

@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Hourglass } from "react-loader-spinner";
 import { TransactionBuilder } from "@stellar/stellar-sdk";
+import TransactionHistoryService from "@/services/TransactionHistoryService";
 
 enum SinkStatusMessages {
   creating = "Creating your transaction using Stellarcarbon API...",
@@ -25,7 +26,7 @@ enum SinkStatusMessages {
 }
 
 export default function SinkPage() {
-  const { walletConnection, sinkRequest } = useAppContext();
+  const { walletConnection, sinkRequest, setMyTransactions } = useAppContext();
   const [message, setMessage] = useState<SinkStatusMessages>(
     SinkStatusMessages.creating
   );
@@ -79,6 +80,14 @@ export default function SinkPage() {
         appConfig.server.submitTransaction(finalTransaction).then((result) => {
           console.log(result);
           setMessage(SinkStatusMessages.completed);
+          setTimeout(() => {
+            // Load personal transactions.
+            TransactionHistoryService.fetchAccountHistory(
+              walletConnection?.stellarPubKey!
+            ).then((transactionRecords): void => {
+              setMyTransactions(transactionRecords);
+            });
+          }, 2000);
         });
       })
       .catch((err) => {
@@ -210,7 +219,13 @@ export default function SinkPage() {
         ) : (
           <Button
             className="h-10 !py-2 mt-auto"
-            onClick={() => router.push("/dashboard/sink")}
+            onClick={() => {
+              if (message === SinkStatusMessages.completed) {
+                router.push("/dashboard");
+              } else {
+                router.push("/dashboard/sink");
+              }
+            }}
           >
             Return to dashboard
           </Button>

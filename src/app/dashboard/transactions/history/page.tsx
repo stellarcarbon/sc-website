@@ -4,18 +4,14 @@ import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useSwipeable } from "react-swipeable";
-import TransactionHistoryDetail from "@/components/dashboard/transactions/TransactionHistoryDetail";
+import TransactionDetail from "@/components/dashboard/transactions/TransactionDetail";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useSCRouter } from "@/app/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
-import { DEV_ACCOUNT } from "@/app/types";
-import ParallaxDivider, {
-  ParallaxBackgrounds,
-} from "@/components/ParallaxDivider";
-import Divider from "@/components/Divider";
 import DashboardTitle from "@/components/dashboard/DashboardTitle";
+import { RetirementStatus } from "@/app/types";
 
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions, walletConnection } =
@@ -35,18 +31,24 @@ export default function ActivityHistory() {
 
   useEffect(() => {
     // Reload personal transactions on page visit
-
     TransactionHistoryService.fetchAccountHistory(
       walletConnection?.stellarPubKey!
-      // DEV_ACCOUNT
     ).then((transactionRecords): void => {
       setMyTransactions(transactionRecords);
       setIsLoading(false);
     });
-  }, [setMyTransactions]);
+  }, [setMyTransactions, walletConnection]);
+
+  const retiredTransactions = useMemo(() => {
+    return (
+      myTransactions?.filter(
+        (tx) => tx.retirementStatus === RetirementStatus.RETIRED
+      ) ?? []
+    );
+  }, [myTransactions]);
 
   if (searchParams.get("hash") !== null) {
-    return <TransactionHistoryDetail hash={searchParams.get("hash")!} />;
+    return <TransactionDetail hash={searchParams.get("hash")!} />;
   }
 
   if (isLoading || myTransactions === null) {
@@ -58,7 +60,7 @@ export default function ActivityHistory() {
   } else {
     return (
       <div {...swipeHandlers} className="flex flex-col items-center flex-1">
-        <div className=" mx-4 md:mx-8 flex flex-col items-center">
+        <div className=" mx-4 md:mx-8 flex flex-col items-center mb-8">
           <DashboardTitle>Retired transactions</DashboardTitle>
 
           <span className="text-sm text-center">
@@ -68,15 +70,15 @@ export default function ActivityHistory() {
           </span>
         </div>
 
-        <Divider className="my-8 md:my-12" />
+        {/* <Divider className="my-8 md:my-12" /> */}
 
-        {myTransactions.length === 0 ? (
+        {retiredTransactions.length === 0 ? (
           <div className="mx-4 text-center flex-1 flex flex-col justify-center gap-6 md:gap-16 text-sm">
             <span className="text-lg">No retired transactions found.</span>
 
             <div className="flex flex-col gap-2 md:gap-6">
               <span>
-                Maybe you already made a transaction that is{" "}
+                Maybe your transaction is{" "}
                 <Link
                   href="/dashboard/transactions"
                   className="underline text-accentSecondary"
@@ -99,12 +101,11 @@ export default function ActivityHistory() {
           </div>
         ) : (
           <div className="p-2 flex flex-col gap-2 w-full mb-6">
-            {myTransactions.map((transaction, index) => (
+            {retiredTransactions.map((transaction, index) => (
               <TransactionListItem
                 key={`txlistitem_${index}`}
                 transaction={transaction}
                 onClick={() => {
-                  console.log("click");
                   router.push(
                     `/dashboard/transactions/history/?hash=${transaction.id}`
                   );

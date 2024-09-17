@@ -117,30 +117,48 @@ export default function RequestCertificate({
           <h2 className="text-xl font-semibold">Requesting a certificate</h2>
         </div>
         <span className="text-center">
-          To create a certificate we have to submit a whole number of CARBON (
-          <CARBONCurrencyIcon className="inline" />) to the Verra registry. We
-          recommend you add the remaining fraction to request a certificate for{" "}
-          {Math.ceil(totalCarbonPending)}{" "}
-          <CARBONCurrencyIcon className="inline" /> by sinking an additional{" "}
-          {remainingFraction.toFixed(3)} tonnes.{" "}
-          {totalCarbonPending > 1 && (
-            <span>
-              Alternatively, you can round down and request a certificate for{" "}
-              {Math.floor(totalCarbonPending)}{" "}
-              <CARBONCurrencyIcon className="inline" />
-            </span>
-          )}
-        </span>
-
+          To create a personalized certificate we have to submit a whole number
+          of CARBON (
+          <CARBONCurrencyIcon className="inline" />) to the Verra registry.
+        </span>{" "}
+        <span className="self-start">Your options:</span>
+        <>
+          <ul className="list-disc ml-4">
+            {totalCarbonPending < 1 ? (
+              <li>Sink an additional {remainingFraction.toFixed(3)} tonnes.</li>
+            ) : (
+              <>
+                <li>
+                  Request a certificate for {Math.ceil(totalCarbonPending)}{" "}
+                  <CARBONCurrencyIcon className="inline" /> by sinking an
+                  additional {remainingFraction.toFixed(3)} tonnes.
+                </li>
+                <li>
+                  {" "}
+                  {totalCarbonPending > 1 && (
+                    <span>
+                      Alternatively, you can round down and request a
+                      certificate for {Math.floor(totalCarbonPending)}{" "}
+                      <CARBONCurrencyIcon className="inline" />.
+                    </span>
+                  )}
+                </li>
+              </>
+            )}
+            <li>
+              Do nothing. Your transaction will be retired into a community
+              certificate within 90 days of the transaction date.
+            </li>
+          </ul>
+        </>
         <span className="text-center">
           Creating a personal certificate at the Verra registry is completely
           optional. All CARBON transactions will eventually be retired using
           community certificates.
         </span>
-
         <div className="flex flex-wrap justify-center gap-4">
           <Button onClick={sinkRemaining} className="text-sm md:text-base">
-            Sink {remainingFraction.toFixed(3)}
+            Add {remainingFraction.toFixed(3)}
             <CARBONCurrencyIcon className="inline ml-1" />
           </Button>
           <Button
@@ -150,7 +168,8 @@ export default function RequestCertificate({
               router.push("/sink/rounding");
             }}
           >
-            Round down to {Math.floor(totalCarbonPending)}
+            Round down to {Math.floor(totalCarbonPending)}{" "}
+            <CARBONCurrencyIcon className="inline ml-1" />
           </Button>
         </div>
       </div>
@@ -196,9 +215,7 @@ export default function RequestCertificate({
   }
 
   return (
-    <div
-      className={`md:p-2 md:w-[60%] self-center relative mb-10 text-sm border border-tertiary rounded bg-secondary`}
-    >
+    <div>
       {body}
       {step !== RequestCertificateStates.info && (
         <Button
