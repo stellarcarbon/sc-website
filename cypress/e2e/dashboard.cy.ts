@@ -8,7 +8,14 @@ describe("Anonymous user visiting dashboard", () => {
         "wallet",
         JSON.stringify({
           stellarPubKey: "6666",
-          walletType: "ALBEDO",
+          walletType: {
+            id: "freighter",
+            name: "Freighter",
+            type: "HOT_WALLET",
+            icon: "https://stellar.creit.tech/wallet-icons/freighter.png",
+            isAvailable: true,
+            url: "https://freighter.app",
+          },
           isAnonymous: true,
         } as WalletConnection)
       );
@@ -32,7 +39,14 @@ describe("User with personal details visiting dashboard", () => {
         "wallet",
         JSON.stringify({
           stellarPubKey: "6666",
-          walletType: "ALBEDO",
+          walletType: {
+            id: "freighter",
+            name: "Freighter",
+            type: "HOT_WALLET",
+            icon: "https://stellar.creit.tech/wallet-icons/freighter.png",
+            isAvailable: true,
+            url: "https://freighter.app",
+          },
           isAnonymous: false,
           personalDetails: {
             username: "testusername",

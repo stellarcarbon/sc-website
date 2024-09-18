@@ -34,7 +34,8 @@ enum RoundDownErrors {
 }
 
 export default function RoundDownPage() {
-  const { walletConnection, myTransactions } = useAppContext();
+  const { walletConnection, myTransactions, stellarWalletsKit } =
+    useAppContext();
 
   const router = useSCRouter();
 
@@ -76,12 +77,13 @@ export default function RoundDownPage() {
   const verifyIdentity = useCallback(async () => {
     try {
       const signedChallenge = await RoundingService.signChallenge(
-        walletConnection!,
+        stellarWalletsKit!,
+        walletConnection!.stellarPubKey,
         challenge!
       );
       try {
         const response = await RoundingService.validateChallenge(
-          signedChallenge.signedXDR
+          signedChallenge.signedTxXdr
         );
         const token = response.token;
         setJWT(token);
