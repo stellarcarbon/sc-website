@@ -187,7 +187,7 @@ export default function RequestCertificate({
           personalized certificate.
         </span>
 
-        <div className="flex-1 flex flex-col justify-center gap-6 items-center">
+        <form className="flex-1 flex flex-col justify-center gap-6 items-center">
           <span className="text-center">
             Add your contact information to create a personal certificate.
           </span>
@@ -205,11 +205,11 @@ export default function RequestCertificate({
               onChange={onEmailChange}
             />
           </div>
-          <Button onClick={submitForm} className="w-[200px]">
+          <Button type="submit" onClick={submitForm} className="w-[200px]">
             Update contact info
           </Button>
           {formError && <div className="text-red-500">{formError}</div>}
-        </div>
+        </form>
       </div>
     );
   }

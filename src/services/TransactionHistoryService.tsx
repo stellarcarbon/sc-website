@@ -58,7 +58,6 @@ export default class TransactionHistoryService {
       await AccountService.getSinkTxsForRecipient({
         recipientAddress: account,
       });
-    console.log(sinkTxsResponse);
     return this.mapTxsResponse(sinkTxsResponse);
   }
 
