@@ -6,14 +6,18 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
 import {
   ISupportedWallet,
+  XBULL_ID,
+  ALBEDO_ID,
+  FREIGHTER_ID,
+  allowAllModules,
   StellarWalletsKit,
-  WalletType,
-} from "stellar-wallets-kit";
+} from "@creit.tech/stellar-wallets-kit";
 import {
   DEV_ACCOUNT,
   MyTransactionRecord,
@@ -30,6 +34,8 @@ import WalletConnectionService from "@/services/WalletConnectionService";
 import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
+import appConfig from "@/config";
+import dynamic from "next/dynamic";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {
@@ -58,7 +64,7 @@ type AppContext = {
   supportedWallets: ISupportedWallet[];
   walletConnection: WalletConnection | undefined | null;
   connectWallet: (
-    walletType: WalletType,
+    wallet: ISupportedWallet,
     personalDetails: PersonalDetails
   ) => Promise<boolean>;
   disconnectWallet: () => void;
@@ -84,6 +90,8 @@ type AppContext = {
   setSinkRequest: Dispatch<
     SetStateAction<SinkCarbonXdrPostRequest | undefined>
   >;
+
+  stellarWalletsKit: StellarWalletsKit | null;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -101,6 +109,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [supportedWallets, setSupportedWallets] = useState<ISupportedWallet[]>(
     []
   );
+  const stellarWalletsKitRef = useRef<StellarWalletsKit | null>(null);
+
+  // Null at first, will become undefined after attempting to load from local storage fails.
   const [walletConnection, setWalletConnection] = useState<
     WalletConnection | null | undefined
   >(null);
@@ -116,75 +127,90 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const pathname = usePathname();
 
-  const loadAvailableWallets = useCallback(async (): Promise<void> => {
-    let wallets;
-    if (window.Cypress) {
-      wallets = await loadAvailableWalletsMock();
-    } else {
-      wallets = await StellarWalletsKit.getSupportedWallets();
-    }
-
-    setSupportedWallets(wallets);
-  }, []);
-
   useEffect(() => {
     closeDrawer();
   }, [pathname]);
 
   useEffect(() => {
-    // On app load
-    if (walletConnection === null) {
-      // Load local storage if available
-      const wc = WalletConnectionService.loadWalletConnection();
-      setWalletConnection(wc);
-    } else {
-      if (
-        myTransactions === null &&
-        walletConnection?.stellarPubKey !== "" &&
-        pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
-      ) {
-        // Load personal transactions.
-        TransactionHistoryService.fetchAccountHistory(
-          walletConnection?.stellarPubKey!
-          // DEV_ACCOUNT
-        ).then((transactionRecords): void => {
-          setMyTransactions(transactionRecords);
-        });
+    const loadApp = async () => {
+      const loadStellarWalletsKit = async () => {
+        if (typeof window !== "undefined") {
+          // This import makes sure assigning the kit to the ref happens client side.
+          const { StellarWalletsKit } = await import(
+            "@creit.tech/stellar-wallets-kit"
+          );
+          stellarWalletsKitRef.current = new StellarWalletsKit({
+            network: appConfig.network,
+            selectedWalletId: XBULL_ID,
+            modules: allowAllModules(),
+          });
+          console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
+
+          // Load supported wallets from stellar wallets kit
+          let wallets;
+          if (window.Cypress) {
+            wallets = await loadAvailableWalletsMock();
+          } else {
+            wallets =
+              (await stellarWalletsKitRef.current?.getSupportedWallets()) ?? [];
+          }
+          setSupportedWallets(wallets);
+        }
+      };
+
+      const loadWalletConnection = () => {
+        const wc = WalletConnectionService.loadWalletConnection();
+        if (wc !== undefined) {
+          stellarWalletsKitRef.current?.setWallet(wc.walletType.id);
+        }
+        setWalletConnection(wc);
+      };
+
+      if (stellarWalletsKitRef.current === null) {
+        await loadStellarWalletsKit();
       }
 
-      // Pending rounding check
-      if (
-        walletConnection !== undefined &&
-        hasPendingRounding === undefined &&
-        pathname !== "/dashboard/transactions/" // This path will fetch on its own.
-      ) {
-        RoundingService.hasPendingRounding(walletConnection.stellarPubKey).then(
-          (isPending) => setHasPendingRounding(isPending)
-        );
-      }
-    }
+      if (walletConnection === null) {
+        loadWalletConnection();
+      } else {
+        if (
+          myTransactions === null &&
+          walletConnection?.stellarPubKey !== "" &&
+          pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
+        ) {
+          // Load personal transactions.
+          TransactionHistoryService.fetchAccountHistory(
+            // walletConnection?.stellarPubKey!
+            DEV_ACCOUNT
+          ).then((transactionRecords): void => {
+            setMyTransactions(transactionRecords);
+          });
+        }
 
-    if (supportedWallets.length === 0) {
-      // Load supported wallets if not loaded yet.
-      loadAvailableWallets();
-    }
-  }, [
-    loadAvailableWallets,
-    supportedWallets,
-    walletConnection,
-    myTransactions,
-    pathname,
-    hasPendingRounding,
-  ]);
+        // Pending rounding check
+        if (
+          walletConnection !== undefined &&
+          hasPendingRounding === undefined &&
+          pathname !== "/dashboard/transactions/" // This path will fetch on its own.
+        ) {
+          RoundingService.hasPendingRounding(
+            walletConnection.stellarPubKey
+          ).then((isPending) => setHasPendingRounding(isPending));
+        }
+      }
+    };
+
+    loadApp();
+  }, [walletConnection, myTransactions, pathname, hasPendingRounding]);
 
   const connectWallet = async (
-    userWalletType: WalletType,
+    wallet: ISupportedWallet,
     personalDetails: PersonalDetails
   ): Promise<boolean> => {
     setConnectionError(null);
 
     try {
-      const walletConnection = await walletConnectDialog(userWalletType);
+      const walletConnection = await walletConnectDialog(wallet);
 
       if (personalDetails.useremail !== "") {
         walletConnection.personalDetails = personalDetails;
@@ -247,6 +273,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       sinkRequest,
       setSinkRequest,
+
+      stellarWalletsKit: stellarWalletsKitRef.current,
     };
   }, [
     connectionError,
