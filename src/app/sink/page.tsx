@@ -78,7 +78,6 @@ export default function SinkPage() {
           appConfig.network
         );
         appConfig.server.submitTransaction(finalTransaction).then((result) => {
-          console.log(result);
           setMessage(SinkStatusMessages.completed);
           setTimeout(() => {
             // Load personal transactions.

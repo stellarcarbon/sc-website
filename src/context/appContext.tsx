@@ -9,7 +9,11 @@ import {
   useState,
 } from "react";
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
-import { ISupportedWallet, StellarWalletsKit } from "stellar-wallets-kit";
+import {
+  ISupportedWallet,
+  StellarWalletsKit,
+  WalletType,
+} from "stellar-wallets-kit";
 import {
   DEV_ACCOUNT,
   MyTransactionRecord,
