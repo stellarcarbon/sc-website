@@ -35,7 +35,6 @@ export default function SelectWallet() {
   const router = useRouter();
 
   const selectWallet = (wallet: ISupportedWallet) => {
-    console.log("selectWallet", wallet);
     if (selectedWallet === wallet) {
       setSelectedWallet(undefined);
     } else {
