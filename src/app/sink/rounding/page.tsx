@@ -34,54 +34,18 @@ enum RoundDownErrors {
 }
 
 export default function RoundDownPage() {
-  const {
-    walletConnection,
-    myTransactions,
-    setMyTransactions,
-    setHasPendingRounding,
-  } = useAppContext();
+  const { walletConnection, myTransactions } = useAppContext();
 
   const router = useSCRouter();
 
   const [challenge, setChallenge] = useState<SEP10ChallengeResponse>();
   const [jwt, setJWT] = useState<string>();
-  const [requestCertificateResponse, setRequestCertificateResponse] =
-    useState<RequestCertificateResponse>();
 
   const [error, setError] = useState<RoundDownErrors>();
 
   const [step, setStep] = useState<RoundDownSteps>(
     RoundDownSteps.fetchingChallenge
   );
-
-  useEffect(() => {
-    const now = new Date();
-    const d1 = now.addDays(-8);
-    const d2 = now.addDays(-2);
-
-    setMyTransactions([
-      {
-        id: "A1",
-        createdAt: d1.toString(),
-        memo: "Tx 1",
-        assetAmount: 26.48,
-        asset: "USDC",
-        sinkAmount: 1.5,
-        retirementStatus: RetirementStatus.PENDING_USER,
-        retirements: [],
-      },
-      {
-        id: "A2",
-        createdAt: now.toString(),
-        memo: "Tx 2",
-        assetAmount: 58.46,
-        asset: "USDC",
-        sinkAmount: 3.3,
-        retirementStatus: RetirementStatus.PENDING_USER,
-        retirements: [],
-      },
-    ]);
-  }, []);
 
   useEffect(() => {
     // Redirect if no personal walletConnection is available
@@ -135,7 +99,6 @@ export default function RoundDownPage() {
     (token: string) => {
       RoundingService.requestCertificate(walletConnection!, token)
         .then((certificate) => {
-          setRequestCertificateResponse(certificate);
           setStep(RoundDownSteps.success);
 
           // Set local storage latest retirement.

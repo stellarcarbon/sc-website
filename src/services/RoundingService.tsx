@@ -4,7 +4,7 @@ import {
   RetirementItem,
   SEP10ChallengeResponse,
 } from "@/client";
-import { DEV_ACCOUNT, WalletConnection } from "@/app/types";
+import { WalletConnection } from "@/app/types";
 import { mRequestCertificate } from "@/app/utils";
 
 export default class RoundingService {
@@ -12,7 +12,7 @@ export default class RoundingService {
 
   public static async setLatestRetirement(pubKey: string) {
     const retirementList = await AccountService.getRetirementsForBeneficiary({
-      beneficiaryAddress: DEV_ACCOUNT, // TODO: change from dev account to pubKey
+      beneficiaryAddress: pubKey,
       order: "desc",
     });
 

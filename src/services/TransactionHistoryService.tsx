@@ -13,7 +13,7 @@ export default class TransactionHistoryService {
     return txsResponse.transactions.map((transaction) => {
       let retirementStatus = RetirementStatus.RETIRED;
       if (!transaction.retirement_finalized) {
-        if (Number(txsResponse.total_carbon_pending) % 1 === 0) {
+        if (Number(transaction.carbon_amount) % 1 === 0) {
           // if the total amount pending is round, we are only waiting for SC.
           retirementStatus = RetirementStatus.PENDING_STELLARCARBON;
         } else {
@@ -58,7 +58,6 @@ export default class TransactionHistoryService {
       await AccountService.getSinkTxsForRecipient({
         recipientAddress: account,
       });
-
     return this.mapTxsResponse(sinkTxsResponse);
   }
 

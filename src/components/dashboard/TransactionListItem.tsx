@@ -17,7 +17,7 @@ function ItemHeader({ children }: { children: ReactNode }) {
 }
 
 function ItemValue({ children }: { children: ReactNode }) {
-  return <div className="col-span-4 md:col-span-5 truncate">{children}</div>;
+  return <div className="col-span-6 md:col-span-5 truncate">{children}</div>;
 }
 
 export default function TransactionListItem({
@@ -39,7 +39,7 @@ export default function TransactionListItem({
   return (
     <div
       onClick={onClick}
-      className={`p-2 w-full grid grid-cols-6 md:grid-cols-6 ${
+      className={`p-2 w-full grid grid-cols-8 md:grid-cols-6 ${
         bgPrimary ? "bg-primary" : "bg-secondary"
       } border border-accentSecondary rounded-md cursor-pointer text-sm`}
     >
@@ -70,34 +70,6 @@ export default function TransactionListItem({
 
       <ItemHeader>Status</ItemHeader>
       <ItemValue>{transaction.retirementStatus}</ItemValue>
-      {/* 
-      <div className="">Hash</div>
-      <div className="col-span-3 md:col-span-5 truncate">{transaction.id}</div>
-
-      <div>Date</div>
-      <div className="col-span-3 md:col-span-5">
-        {new Date(transaction.createdAt).toDateString()}
-      </div>
-
-      <div>Sunk</div>
-      <div className="col-span-3 md:col-span-5 flex gap-1">
-        <CARBONCurrencyIcon />
-        <span>{transaction.sinkAmount?.toFixed(2)}</span>
-      </div>
-
-      <div>Price</div>
-      <div className="col-span-3 md:col-span-5 flex gap-1">
-        <span>{transaction.assetAmount?.toFixed(2)}</span>
-        <span>{transaction.asset}</span>
-      </div>
-
-      <div>Memo</div>
-      <div className="col-span-3 md:col-span-5">{transaction.memo}</div>
-
-      <div>Status</div>
-      <div className="col-span-3 md:col-span-5">
-        {transaction.retirementStatus}
-      </div> */}
 
       {transaction.retirementStatus === RetirementStatus.RETIRED && (
         <>
@@ -121,7 +93,7 @@ export default function TransactionListItem({
       {showCountdown &&
         transaction.retirementStatus !== RetirementStatus.RETIRED &&
         transaction.sinkAmount % 1 != 0 && (
-          <div className="col-span-4 md:col-span-6">
+          <div className="col-span-8 md:col-span-6">
             <hr className="my-2" />
             <CountDownTimer initialDuration={initialDuration} />
           </div>

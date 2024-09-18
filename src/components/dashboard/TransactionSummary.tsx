@@ -4,14 +4,42 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Link from "next/link";
 import { useViewportWidth } from "@/app/utils";
 import { useMemo } from "react";
+import { RetirementStatus } from "@/app/types";
+import TransactionListItem from "./TransactionListItem";
+import { useRouter } from "next/navigation";
 
 export default function TransactionSummary() {
   const { myTransactions } = useAppContext();
   const isWide = useViewportWidth();
+  const router = useRouter();
 
   const iconSize = useMemo(() => {
     return isWide ? 22 : 18;
   }, [isWide]);
+
+  const latestTransaction = useMemo(() => {
+    if (myTransactions !== null) {
+      return myTransactions[0];
+    }
+  }, [myTransactions]);
+
+  const totalSinked = useMemo(() => {
+    if (myTransactions !== null) {
+      return myTransactions.reduce((acc, tx) => acc + tx.sinkAmount, 0);
+    }
+  }, [myTransactions]);
+
+  const totalPending = useMemo(() => {
+    if (myTransactions !== null) {
+      return myTransactions
+        .filter(
+          (tx) =>
+            tx.retirementStatus === RetirementStatus.PENDING_USER ||
+            tx.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
+        )
+        .reduce((acc, tx) => acc + tx.sinkAmount, 0);
+    }
+  }, [myTransactions]);
 
   return (
     <div className="mx-4 md:mx-8 flex flex-col gap-8  border-tertiary ">
@@ -22,24 +50,29 @@ export default function TransactionSummary() {
       ) : (
         <>
           <div className="flex flex-col gap-1 text-sm">
-            <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary">
+            <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary mb-2">
               <span className="text-lg md:text-xl">Latest transaction</span>
-              <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">2</span>
-                <CARBONCurrencyIcon width={iconSize} height={iconSize} />
-              </div>
             </div>
-
-            <span className="text-xs md:text-sm mt-2">
-              Created on 01-01-2001 with memo: {`"ENVIRONMENT"`}
-            </span>
+            {latestTransaction ? (
+              <TransactionListItem
+                bgPrimary
+                transaction={latestTransaction}
+                onClick={() => {
+                  router.push(
+                    `/dashboard/transactions/history/?hash=${latestTransaction.id}`
+                  );
+                }}
+              />
+            ) : (
+              <div>You have not made any transactions yet.</div>
+            )}
           </div>
 
           <div className="flex flex-col gap-1 text-sm">
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
               <span className="text-lg md:text-xl">Total sinked</span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">25</span>
+                <span className="font-normal">{totalSinked}</span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>
@@ -56,7 +89,7 @@ export default function TransactionSummary() {
                 Pending certificate claims
               </span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">1.55</span>
+                <span className="font-normal">{totalPending}</span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>

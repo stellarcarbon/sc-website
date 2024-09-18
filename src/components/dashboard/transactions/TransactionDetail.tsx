@@ -13,16 +13,17 @@ import { RetirementStatus } from "@/app/types";
 import { RetirementDetail, RetirementService } from "@/client";
 import RetirementDetailCard from "./RetirementDetailCard";
 import { Blocks } from "react-loader-spinner";
+import CountDownTimer from "@/components/CountDownTimer";
+import appConfig from "@/config";
+import { WalletNetwork } from "stellar-wallets-kit";
 
-interface TransactionHistoryDetailProps {
+interface TransactionDetailProps {
   hash: string;
 }
 
-export default function TransactionHistoryDetail({
-  hash,
-}: TransactionHistoryDetailProps) {
+export default function TransactionDetail({ hash }: TransactionDetailProps) {
   const router = useSCRouter();
-  const { myTransactions, setMyTransactions } = useAppContext();
+  const { myTransactions } = useAppContext();
   const [retirementDetails, setRetirementDetails] = useState<
     RetirementDetail[]
   >([]);
@@ -57,6 +58,18 @@ export default function TransactionHistoryDetail({
     };
 
     getRetirements();
+  }, [tx]);
+
+  const initialDuration = useMemo(() => {
+    if (tx !== undefined) {
+      const txDate = new Date(tx.createdAt);
+      const txDatePlus90 = txDate.addDays(90); // TODO: Make this the actual 90 days
+      const now = new Date();
+
+      const outcome = +txDatePlus90 - +now;
+
+      return outcome / 1000;
+    }
   }, [tx]);
 
   if (myTransactions === null) {
@@ -128,8 +141,19 @@ export default function TransactionHistoryDetail({
               <span className="text-md font-bold flex-1">Status</span>
               <span className="text-sm break-words">{tx.retirementStatus}</span>
             </div>
+            {tx.retirementStatus === RetirementStatus.PENDING_USER &&
+              initialDuration !== undefined && (
+                <div className="my-4">
+                  <CountDownTimer initialDuration={initialDuration} />
+                </div>
+              )}
+
             <a
-              href={`https://stellar.expert/explorer/public/tx/${tx.id}`}
+              href={
+                appConfig.network === WalletNetwork.PUBLIC
+                  ? `https://stellar.expert/explorer/public/tx/${tx.id}`
+                  : `https://stellar.expert/explorer/testnet/tx/${tx.id}`
+              }
               target="_blank"
               className="text-accentSecondary underline mt-3"
             >

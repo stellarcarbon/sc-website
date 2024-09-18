@@ -140,13 +140,13 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     } else {
       if (
         myTransactions === null &&
-        typeof walletConnection?.stellarPubKey === "string" &&
+        walletConnection?.stellarPubKey !== "" &&
         pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
       ) {
         // Load personal transactions.
         TransactionHistoryService.fetchAccountHistory(
-          // walletConnection?.stellarPubKey!
-          DEV_ACCOUNT
+          walletConnection?.stellarPubKey!
+          // DEV_ACCOUNT
         ).then((transactionRecords): void => {
           setMyTransactions(transactionRecords);
         });
