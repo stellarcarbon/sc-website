@@ -13,13 +13,10 @@ import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
 import {
   ISupportedWallet,
   XBULL_ID,
-  ALBEDO_ID,
-  FREIGHTER_ID,
   allowAllModules,
   StellarWalletsKit,
 } from "@creit.tech/stellar-wallets-kit";
 import {
-  DEV_ACCOUNT,
   MyTransactionRecord,
   PersonalDetails,
   SinkCarbonXdrPostRequest,
@@ -35,7 +32,6 @@ import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
 import appConfig from "@/config";
-import dynamic from "next/dynamic";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {
@@ -180,8 +176,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         ) {
           // Load personal transactions.
           TransactionHistoryService.fetchAccountHistory(
-            // walletConnection?.stellarPubKey!
-            DEV_ACCOUNT
+            walletConnection?.stellarPubKey!
           ).then((transactionRecords): void => {
             setMyTransactions(transactionRecords);
           });
