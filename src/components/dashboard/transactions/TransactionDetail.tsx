@@ -15,7 +15,7 @@ import RetirementDetailCard from "./RetirementDetailCard";
 import { Blocks } from "react-loader-spinner";
 import CountDownTimer from "@/components/CountDownTimer";
 import appConfig from "@/config";
-import { WalletNetwork } from "stellar-wallets-kit";
+import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 
 interface TransactionDetailProps {
   hash: string;
