@@ -5,12 +5,11 @@ import {
   SinkingResponse,
   VcsProject,
 } from "@/client";
-import { StellarWalletsKit, WalletType } from "stellar-wallets-kit";
+import { ISupportedWallet } from "@creit.tech/stellar-wallets-kit";
 
 export type WalletConnection = {
-  kit: StellarWalletsKit;
   stellarPubKey: string;
-  walletType: WalletType;
+  walletType: ISupportedWallet;
   personalDetails?: PersonalDetails;
   isAnonymous: boolean;
 };

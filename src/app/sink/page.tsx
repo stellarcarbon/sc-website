@@ -26,7 +26,12 @@ enum SinkStatusMessages {
 }
 
 export default function SinkPage() {
-  const { walletConnection, sinkRequest, setMyTransactions } = useAppContext();
+  const {
+    walletConnection,
+    sinkRequest,
+    stellarWalletsKit,
+    setMyTransactions,
+  } = useAppContext();
   const [message, setMessage] = useState<SinkStatusMessages>(
     SinkStatusMessages.creating
   );
@@ -65,16 +70,15 @@ export default function SinkPage() {
 
     setMessage(SinkStatusMessages.signTransaction);
 
-    walletConnection?.kit
-      .sign({
-        xdr: sinkCarbonXdr.tx_xdr,
-        publicKey: walletConnection.stellarPubKey,
+    stellarWalletsKit
+      ?.signTransaction(sinkCarbonXdr.tx_xdr, {
+        address: walletConnection?.stellarPubKey,
       })
       .then((r) => {
         // TODO: Fake blockchain commit
         setMessage(SinkStatusMessages.awaitBlockchain);
         const finalTransaction = TransactionBuilder.fromXDR(
-          r.signedXDR,
+          r.signedTxXdr,
           appConfig.network
         );
         appConfig.server.submitTransaction(finalTransaction).then((result) => {
@@ -92,7 +96,7 @@ export default function SinkPage() {
       .catch((err) => {
         setSubmissionError("Transaction signing failed.");
       });
-  }, [sinkCarbonXdr, walletConnection]);
+  }, [sinkCarbonXdr, walletConnection, stellarWalletsKit]);
 
   if (sinkRequest === undefined) {
     return null;

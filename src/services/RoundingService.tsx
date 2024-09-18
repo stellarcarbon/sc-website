@@ -6,6 +6,7 @@ import {
 } from "@/client";
 import { WalletConnection } from "@/app/types";
 import { mRequestCertificate } from "@/app/utils";
+import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit";
 
 export default class RoundingService {
   private static LOCAL_STORAGE_KEY = "rd";
@@ -66,12 +67,12 @@ export default class RoundingService {
   }
 
   public static async signChallenge(
-    walletConnection: WalletConnection,
+    stellarWalletsKit: StellarWalletsKit,
+    stellarPubKey: string,
     challenge: SEP10ChallengeResponse
   ) {
-    return await walletConnection.kit.sign({
-      xdr: challenge.transaction,
-      publicKey: walletConnection.stellarPubKey,
+    return await stellarWalletsKit.signTransaction(challenge.transaction, {
+      address: stellarPubKey,
     });
   }
 

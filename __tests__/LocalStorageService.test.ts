@@ -1,4 +1,4 @@
-// TODO: cannot use stellar-wallets-kit in test environment right now...
+// TODO: cannot use @creit.tech/stellar-wallets-kit in test environment right now...
 
 import { test } from "vitest";
 
@@ -10,7 +10,7 @@ test("LocalStorageService");
 //   StellarWalletsKit,
 //   WalletNetwork,
 //   WalletType,
-// } from "stellar-wallets-kit";
+// } from "@creit.tech/stellar-wallets-kit";
 
 // describe("LocalStorageService", () => {
 //   const fakeWalletConnection: WalletConnection = {
