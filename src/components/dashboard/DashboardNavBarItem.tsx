@@ -7,7 +7,7 @@ import { HTMLProps, ReactNode, useEffect, useMemo, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useSCRouter } from "../../app/utils";
+import { useSCRouter } from "../../utils";
 
 interface DashboardNavBarItemProps extends HTMLProps<HTMLDivElement> {
   item: DashboardTabs;

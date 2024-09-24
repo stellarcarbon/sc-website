@@ -9,7 +9,7 @@ import { RequestCertificateResponse } from "@/client";
 import { useAppContext } from "@/context/appContext";
 import { Blocks } from "react-loader-spinner";
 import { RetirementStatus } from "@/app/types";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileShield,

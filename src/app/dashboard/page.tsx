@@ -1,7 +1,7 @@
 "use client";
 
 import { useSwipeable } from "react-swipeable";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import dynamic from "next/dynamic";
 
 const Overview = dynamic(

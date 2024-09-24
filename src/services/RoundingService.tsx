@@ -5,7 +5,7 @@ import {
   SEP10ChallengeResponse,
 } from "@/client";
 import { WalletConnection } from "@/app/types";
-import { mRequestCertificate } from "@/app/utils";
+import { mRequestCertificate } from "@/utils";
 import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit";
 
 export default class RoundingService {

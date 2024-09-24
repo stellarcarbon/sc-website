@@ -9,7 +9,7 @@ https://overreacted.io/a-complete-guide-to-useeffect/
 */
 "use client";
 
-import { useIntersectionObserver } from "@/app/utils";
+import { useIntersectionObserver } from "@/utils";
 import { HTMLProps, useEffect, useState } from "react";
 
 interface CountUpProps extends HTMLProps<HTMLDivElement> {

@@ -206,6 +206,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
     try {
       const walletConnection = await walletConnectDialog(wallet);
+      if (walletConnection.stellarPubKey === "") {
+        throw Error("No pubkey from wallet connect dialog");
+      }
 
       if (personalDetails.useremail !== "") {
         walletConnection.personalDetails = personalDetails;

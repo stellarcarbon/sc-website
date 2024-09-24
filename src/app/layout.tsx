@@ -9,6 +9,8 @@ import { AppContextProvider } from "@/context/appContext";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 // Prevent fontawesome from adding its CSS since we did it manually above:
 import { config } from "@fortawesome/fontawesome-svg-core";
+import appConfig from "@/config";
+import DemoApp from "./DemoApp";
 config.autoAddCss = false; /* eslint-disable import/first */
 
 export const metadata: Metadata = {
@@ -25,7 +27,11 @@ export default function RootLayout({
     <html lang="en">
       <AppContextProvider>
         <body className={`${inter.className}`}>
-          <App>{children}</App>
+          {appConfig.demo ? (
+            <DemoApp>{children}</DemoApp>
+          ) : (
+            <App>{children}</App>
+          )}
         </body>
       </AppContextProvider>
     </html>

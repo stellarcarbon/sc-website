@@ -1,5 +1,6 @@
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Button from "../Button";
+import appConfig from "@/config";
 
 interface TransactionPreviewProps {
   tonnes: number;
@@ -15,7 +16,11 @@ export default function TransactionPreview({
   handleSubmit,
 }: TransactionPreviewProps) {
   return (
-    <div className="p-6 w-full md:w-[100%] self-center flex flex-col gap-6 items-center justify-center bg-primary border border-accentSecondary rounded">
+    <div
+      className={`p-6 w-full md:w-[100%] self-center flex flex-col gap-6 items-center justify-center border border-accentSecondary rounded ${
+        appConfig.demo ? "bg-secondary" : "bg-primary"
+      }`}
+    >
       <h3 className="text-xl md:text-2xl font-bold">Your transaction</h3>
       <div className="md:px-24 grid grid-cols-2 gap-1 text-center w-full">
         <span className="text-start">Amount to sink</span>

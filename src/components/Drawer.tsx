@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import CTAButton from "./CTAButton";
 import StellarCarbonIcon from "./icons/StellarCarbonIcon";
 import Link from "next/link";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 
 export default function Drawer() {
   const { closeDrawer } = useAppContext();

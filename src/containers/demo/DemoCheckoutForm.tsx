@@ -1,21 +1,19 @@
 "use client";
 
+import { CheckoutFormData, SinkCarbonXdrPostRequest } from "@/app/types";
+import AmountInput from "@/components/checkout/AmountInput";
 import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
-import { CheckoutFormData, SinkCarbonXdrPostRequest } from "@/app/types";
+import TransactionPreview from "@/components/checkout/TransactionPreview";
+import DashboardTitle from "@/components/dashboard/DashboardTitle";
+import WalletConnectionInfo from "@/components/dashboard/WalletConnectionInfo";
 import { useAppContext } from "@/context/appContext";
+import { useRouter } from "next/navigation";
 import { Suspense, useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import AmountInput from "@/components/checkout/AmountInput";
-import TransactionPreview from "@/components/checkout/TransactionPreview";
-import ParallaxDivider, {
-  ParallaxBackgrounds,
-} from "@/components/ParallaxDivider";
-import Divider from "../Divider";
-import { useRouter } from "next/navigation";
-import DashboardTitle from "../dashboard/DashboardTitle";
+import DemoWalletConnectionInfo from "./DemoWalletConnectionInfo";
 
-export default function CheckoutForm() {
+export default function DemoCheckoutForm() {
   const { walletConnection, setSinkRequest } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
     useForm<CheckoutFormData>();
@@ -35,7 +33,7 @@ export default function CheckoutForm() {
       }
 
       setSinkRequest(sinkRequest);
-      router.push("/sink");
+      router.push("/demo/sink/checkout");
     },
     [walletConnection, setSinkRequest, router]
   );
@@ -53,13 +51,6 @@ export default function CheckoutForm() {
 
   return (
     <div className="flex flex-col">
-      {/* <div className="mx-4 md:mx-8">
-        <span className="text-sm">
-          Use this form to create a new CARBON sink transaction.
-        </span>
-      </div>
-      <Divider /> */}
-
       <DashboardTitle>Sink CARBON</DashboardTitle>
       <form className="flex flex-col gap-12 md:gap-20">
         <div className="mx-4 md:mx-8 flex flex-col gap-12 min-w-[80%]">
@@ -73,17 +64,15 @@ export default function CheckoutForm() {
             />
           </Suspense>
         </div>
-        {/* <ParallaxDivider image={ParallaxBackgrounds.RAINFOREST} smallest /> */}
-        {/* <Divider /> */}
+
         <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
           <CurrencySelect register={register} />
         </div>
-        {/* <Divider /> */}
+
         <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
           <ReasonSelect watch={watch} setValue={setValue} />
         </div>
 
-        {/* <Divider /> */}
         <div className="flex flex-col items-center gap-4 mx-5 md:mx-8 bg-secondary min-w-[80%]">
           <TransactionPreview
             tonnes={tonnes}
@@ -92,12 +81,6 @@ export default function CheckoutForm() {
             handleSubmit={() => handleSubmit(onSubmit)()}
           />
         </div>
-        {/* <ParallaxDivider
-          image={ParallaxBackgrounds.RAINFOREST}
-          smallest
-          yOffset={-380}
-          roundedBottom
-        /> */}
       </form>
     </div>
   );

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import DashboardNavBar from "@/components/dashboard/DashboardNavBar";
 import { useAppContext } from "@/context/appContext";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 
 export default function DashboardLayout({
   children, // will be a page or nested layout

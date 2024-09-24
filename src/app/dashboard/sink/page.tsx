@@ -2,7 +2,7 @@
 
 import { useSwipeable } from "react-swipeable";
 import CheckoutForm from "@/components/checkout/CheckoutForm";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 
 export default function SinkFormPage() {
   const router = useSCRouter();

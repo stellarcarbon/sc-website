@@ -1,6 +1,6 @@
 "use client";
 
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import { useSwipeable } from "react-swipeable";
 import PendingRetirements from "@/components/dashboard/transactions/PendingRetirements";
 

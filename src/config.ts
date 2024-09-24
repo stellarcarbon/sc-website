@@ -12,6 +12,7 @@ const appConfig = {
     process.env.NODE_ENV === "production"
       ? new StellarSdk.Horizon.Server("https://horizon.stellar.org")
       : new StellarSdk.Horizon.Server("https://horizon-testnet.stellar.org"),
+  demo: process.env.NEXT_PUBLIC_DEMO_VERSION === "true",
 };
 
 export default appConfig;

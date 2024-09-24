@@ -5,16 +5,16 @@ import { useAppContext } from "@/context/appContext";
 import { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import SelectWalletButtonDesktop from "@/components/wallet/SelectWalletButtonDesktop";
-import ContactInfoForm from "./ContactInfoForm";
+
 import FormError from "@/components/FormError";
 import { PersonalDetails } from "@/app/types";
 import LoadingWallets from "@/components/wallet/LoadingWallets";
 import Divider from "@/components/Divider";
 import { useRouter } from "next/navigation";
 import { ISupportedWallet } from "@creit.tech/stellar-wallets-kit";
-import { set } from "cypress/types/lodash";
+import ContactInfoForm from "../ContactInfoForm";
 
-export default function SelectWallet() {
+export default function DemoConnectWallet() {
   const { connectWallet, connectionError, supportedWallets, walletConnection } =
     useAppContext();
   // const [selectedWalletType, setSelectedWalletType] = useState<string | null>(
@@ -67,7 +67,7 @@ export default function SelectWallet() {
 
     connectWallet(selectedWallet, personalDetails).then((didSucceed) => {
       if (didSucceed) {
-        router.push("/dashboard/sink");
+        router.push("/demo");
       }
 
       setSelectedWallet(undefined);
@@ -87,7 +87,7 @@ export default function SelectWallet() {
   }, [walletConnection]);
 
   return (
-    <div className="p-6 flex flex-col gap-9 bg-secondary md:bg-primary md:border border-tertiary md:rounded">
+    <div className="p-6 flex flex-col gap-9">
       <div className="flex flex-col gap-1 w-full">
         <h1 className="text-2xl font-bold">Select a wallet</h1>
 

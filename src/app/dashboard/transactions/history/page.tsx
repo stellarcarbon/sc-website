@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useSwipeable } from "react-swipeable";
 import TransactionDetail from "@/components/dashboard/transactions/TransactionDetail";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { useEffect, useMemo, useState } from "react";
 import TransactionHistoryService from "@/services/TransactionHistoryService";

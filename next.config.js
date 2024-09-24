@@ -9,6 +9,8 @@ if (process.env.NODE_ENV === "test") {
   trailingSlash = false;
 }
 
+const isDemo = process.env.NEXT_PUBLIC_DEMO_VERSION === "true";
+
 const nextConfig = {
   output,
   trailingSlash,
@@ -17,6 +19,18 @@ const nextConfig = {
     unoptimized: true,
   },
   // reactStrictMode: false,
+  async redirects() {
+    if (isDemo) {
+      return [
+        {
+          source: "/((?!demo|.*\\.png|.*\\.jpg|$).*)",
+          destination: "/",
+          permanent: false,
+        },
+      ];
+    }
+    return [];
+  },
 };
 
 module.exports = nextConfig;

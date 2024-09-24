@@ -4,7 +4,7 @@ import ExplainConnect from "@/containers/ExplainConnect";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/context/appContext";
 import { Blocks } from "react-loader-spinner";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import Modal from "@/components/Modal";
 import ConnectLanding from "@/containers/ConnectLanding";
 

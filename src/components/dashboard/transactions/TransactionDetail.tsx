@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useSwipeable } from "react-swipeable";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import { RetirementStatus } from "@/app/types";
 import { RetirementDetail, RetirementService } from "@/client";
 import RetirementDetailCard from "./RetirementDetailCard";
