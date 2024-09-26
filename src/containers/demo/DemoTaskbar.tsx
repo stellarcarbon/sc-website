@@ -16,12 +16,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
 export default function DemoTaskbar() {
   const { walletConnection, disconnectWallet } = useAppContext();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const pubKeyDisplay = useMemo(() => {
     if (walletConnection) {
@@ -39,7 +42,9 @@ export default function DemoTaskbar() {
       }`}
     >
       <div className="flex justify-between p-2 md:p-4">
-        <StellarCarbonIcon className="ml-2 md:ml-4 !h-12" />
+        <button onClick={() => router.push("/")}>
+          <StellarCarbonIcon className="ml-2 md:ml-4 !h-12" />
+        </button>
         {walletConnection && (
           <button
             className="w-12 h-12 flex items-center justify-center"
@@ -52,7 +57,7 @@ export default function DemoTaskbar() {
 
       {isOpen && (
         <div className="p-2 md:px-8 md:pb-4 flex justify-between items-center gap-3 mt-2">
-          <div className="flex items-center justify-start border border-tertiary rounded p-1 flex-1">
+          <div className="h-16 flex items-center justify-start border border-tertiary rounded p-1 flex-1">
             <div className="flex flex-col items-center justify-between h-full gap-1 px-1 border-r border-r-tertiary">
               {walletConnection?.walletType.icon && (
                 <Image
