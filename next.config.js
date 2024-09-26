@@ -19,18 +19,19 @@ const nextConfig = {
     unoptimized: true,
   },
   // reactStrictMode: false,
-  async redirects() {
-    if (isDemo) {
-      return [
-        {
-          source: "/((?!demo|.*\\.png|.*\\.jpg|$).*)",
-          destination: "/",
-          permanent: false,
-        },
-      ];
-    }
-    return [];
-  },
+  // async redirects() {
+  //   if (isDemo) {
+  //     console.log("in redirect");
+  //     return [
+  //       {
+  //         source: "/((?!demo|.*\\.png|.*\\.jpg|$).*)",
+  //         destination: "/",
+  //         permanent: false,
+  //       },
+  //     ];
+  //   }
+  //   return [];
+  // },
 };
 
 module.exports = nextConfig;

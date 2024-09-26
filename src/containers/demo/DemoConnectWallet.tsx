@@ -17,9 +17,7 @@ import ContactInfoForm from "../ContactInfoForm";
 export default function DemoConnectWallet() {
   const { connectWallet, connectionError, supportedWallets, walletConnection } =
     useAppContext();
-  // const [selectedWalletType, setSelectedWalletType] = useState<string | null>(
-  //   null
-  // );
+
   const [selectedWallet, setSelectedWallet] = useState<ISupportedWallet>();
 
   const [tncAccepted, setTncAccepted] = useState<boolean>(false);
@@ -77,19 +75,14 @@ export default function DemoConnectWallet() {
 
   useEffect(() => {
     if (walletConnection) {
-      setSelectedWallet(walletConnection.walletType);
-      setTncAccepted(true);
-      if (!walletConnection.isAnonymous && walletConnection.personalDetails) {
-        setUsername(walletConnection.personalDetails.username);
-        setUseremail(walletConnection.personalDetails.useremail);
-      }
+      router.push("/demo");
     }
   }, [walletConnection]);
 
   return (
     <div className="p-6 flex flex-col gap-9">
       <div className="flex flex-col gap-1 w-full">
-        <h1 className="text-2xl font-bold">Select a wallet</h1>
+        <h1 className="text-2xl font-bold">Connect your wallet</h1>
 
         <span className="text-sm mb-1 max-w-[80%] hidden md:block">
           Connect a wallet to be able to create new transactions and access your
@@ -219,7 +212,7 @@ export default function DemoConnectWallet() {
         </FormError>
       )}
 
-      <Button className="mb-9 h-10 self-center" onClick={submitForm}>
+      <Button className="h-10 self-center" onClick={submitForm}>
         Connect wallet
       </Button>
 

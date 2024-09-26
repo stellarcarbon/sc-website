@@ -6,12 +6,10 @@ import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
 import TransactionPreview from "@/components/checkout/TransactionPreview";
 import DashboardTitle from "@/components/dashboard/DashboardTitle";
-import WalletConnectionInfo from "@/components/dashboard/WalletConnectionInfo";
 import { useAppContext } from "@/context/appContext";
 import { useRouter } from "next/navigation";
 import { Suspense, useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import DemoWalletConnectionInfo from "./DemoWalletConnectionInfo";
 
 export default function DemoCheckoutForm() {
   const { walletConnection, setSinkRequest } = useAppContext();
@@ -52,7 +50,7 @@ export default function DemoCheckoutForm() {
   return (
     <div className="flex flex-col">
       <DashboardTitle>Sink CARBON</DashboardTitle>
-      <form className="flex flex-col gap-12 md:gap-20">
+      <form className="flex flex-col gap-12 md:gap-20 mb-12">
         <div className="mx-4 md:mx-8 flex flex-col gap-12 min-w-[80%]">
           <Suspense>
             <AmountInput
