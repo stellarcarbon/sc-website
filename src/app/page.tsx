@@ -7,8 +7,16 @@ import ExplainSection from "@/containers/home/ExplainSection";
 import RainforestIntro from "@/containers/home/RainforestSection";
 import LastTransactionsSection from "@/containers/home/LastTransactionsSection";
 import PartnerSection from "@/containers/home/PartnerSection";
+import DemoLanding from "@/containers/demo/DemoLanding";
+import { useAppContext } from "@/context/appContext";
 
 export default function Home() {
+  const { appConfig } = useAppContext();
+
+  if (appConfig.demo) {
+    return <DemoLanding />;
+  }
+
   return (
     <main className="flex flex-col items-center">
       <RainforestIntro />

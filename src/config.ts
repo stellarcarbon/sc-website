@@ -1,9 +1,13 @@
 import * as StellarSdk from "@stellar/stellar-sdk";
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 
-StellarSdk.xdr;
+export interface AppConfiguration {
+  network: WalletNetwork;
+  server: StellarSdk.Horizon.Server;
+  demo: boolean;
+}
 
-const appConfig = {
+const appConfig: AppConfiguration = {
   network:
     process.env.NODE_ENV === "production"
       ? WalletNetwork.PUBLIC
@@ -12,6 +16,7 @@ const appConfig = {
     process.env.NODE_ENV === "production"
       ? new StellarSdk.Horizon.Server("https://horizon.stellar.org")
       : new StellarSdk.Horizon.Server("https://horizon-testnet.stellar.org"),
+  demo: process.env.NEXT_PUBLIC_DEMO_VERSION === "true",
 };
 
 export default appConfig;

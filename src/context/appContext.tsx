@@ -15,7 +15,9 @@ import {
   XBULL_ID,
   allowAllModules,
   StellarWalletsKit,
+  WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
+import * as StellarSdk from "@stellar/stellar-sdk";
 import {
   MyTransactionRecord,
   PersonalDetails,
@@ -31,7 +33,7 @@ import WalletConnectionService from "@/services/WalletConnectionService";
 import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
-import appConfig from "@/config";
+import { AppConfiguration } from "@/config";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {
@@ -88,6 +90,8 @@ type AppContext = {
   >;
 
   stellarWalletsKit: StellarWalletsKit | null;
+
+  appConfig: AppConfiguration;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -122,6 +126,22 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const closeDrawer = () => setIsDrawerOpen(false);
 
   const pathname = usePathname();
+
+  const appConfig = useMemo(() => {
+    return {
+      network:
+        process.env.NODE_ENV === "production"
+          ? WalletNetwork.PUBLIC
+          : WalletNetwork.TESTNET,
+      server:
+        process.env.NODE_ENV === "production"
+          ? new StellarSdk.Horizon.Server("https://horizon.stellar.org")
+          : new StellarSdk.Horizon.Server(
+              "https://horizon-testnet.stellar.org"
+            ),
+      demo: process.env.NEXT_PUBLIC_DEMO_VERSION === "true",
+    };
+  }, []);
 
   useEffect(() => {
     closeDrawer();
@@ -205,7 +225,10 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     setConnectionError(null);
 
     try {
-      const walletConnection = await walletConnectDialog(wallet);
+      const walletConnection = await walletConnectDialog(
+        wallet,
+        appConfig.network
+      );
 
       if (personalDetails.useremail !== "") {
         walletConnection.personalDetails = personalDetails;
@@ -270,6 +293,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       setSinkRequest,
 
       stellarWalletsKit: stellarWalletsKitRef.current,
+
+      appConfig,
     };
   }, [
     connectionError,
@@ -280,6 +305,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     updateWalletConnection,
     hasPendingRounding,
     sinkRequest,
+    appConfig,
   ]);
 
   return (

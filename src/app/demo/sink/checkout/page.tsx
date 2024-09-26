@@ -215,7 +215,7 @@ export default function SinkPage() {
         !submissionError ? (
           <Button
             className="h-10 !py-2 mt-auto"
-            onClick={() => router.push("/dashboard/sink")}
+            onClick={() => router.push("/demo/sink")}
           >
             Cancel Transaction
           </Button>
@@ -224,9 +224,9 @@ export default function SinkPage() {
             className="h-10 !py-2 mt-auto"
             onClick={() => {
               if (message === SinkStatusMessages.completed) {
-                router.push("/dashboard");
+                router.push("/demo");
               } else {
-                router.push("/dashboard/sink");
+                router.push("/demo/sink");
               }
             }}
           >

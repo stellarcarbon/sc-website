@@ -6,10 +6,10 @@ import {
   WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
 import { WalletConnection } from "@/app/types";
-import appConfig from "@/config";
 
 export const walletConnectDialog = async (
-  wallet: ISupportedWallet
+  wallet: ISupportedWallet,
+  network: WalletNetwork
 ): Promise<WalletConnection> => {
   if (window.Cypress) {
     if (window.walletConnectDialogError) {
@@ -22,7 +22,7 @@ export const walletConnectDialog = async (
   } else {
     let kit = new StellarWalletsKit({
       selectedWalletId: wallet.id,
-      network: appConfig.network,
+      network,
       modules: allowAllModules(),
     });
 

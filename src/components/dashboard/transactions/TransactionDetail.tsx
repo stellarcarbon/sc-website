@@ -14,7 +14,6 @@ import { RetirementDetail, RetirementService } from "@/client";
 import RetirementDetailCard from "./RetirementDetailCard";
 import { Blocks } from "react-loader-spinner";
 import CountDownTimer from "@/components/CountDownTimer";
-import appConfig from "@/config";
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 
 interface TransactionDetailProps {
@@ -23,7 +22,7 @@ interface TransactionDetailProps {
 
 export default function TransactionDetail({ hash }: TransactionDetailProps) {
   const router = useSCRouter();
-  const { myTransactions } = useAppContext();
+  const { myTransactions, appConfig } = useAppContext();
   const [retirementDetails, setRetirementDetails] = useState<
     RetirementDetail[]
   >([]);
