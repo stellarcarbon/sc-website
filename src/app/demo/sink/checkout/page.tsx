@@ -1,7 +1,7 @@
 "use client";
 
 import { useViewportWidth } from "@/app/utils";
-import { CarbonService, SinkingResponse } from "@/client";
+import { ApiError, CarbonService, SinkingResponse } from "@/client";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
@@ -57,8 +57,9 @@ export default function SinkPage() {
           setSinkCarbonXdr(response);
           setMessage(SinkStatusMessages.confirm);
         })
-        .catch((err) => {
-          setSubmissionError("Err");
+        .catch((err: ApiError) => {
+          const errorMessage = err.message;
+          setSubmissionError(errorMessage);
         });
     }
   }, [sinkRequest]);
