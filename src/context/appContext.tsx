@@ -36,8 +36,8 @@ import RoundingService from "@/services/RoundingService";
 import { AppConfiguration } from "@/config";
 import { Server } from "@stellar/stellar-sdk/lib/horizon";
 
-console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
-if (process.env.NODE_ENV === "development") {
+console.log(`NEXT_PUBLIC_PRODUCTION: ${process.env.NEXT_PUBLIC_PRODUCTION}`);
+if (process.env.NEXT_PUBLIC_PRODUCTION === "development") {
   OpenAPI.BASE = "http://localhost:8000";
   // OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
 } else {
@@ -137,11 +137,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const appConfig = useMemo(() => {
     return {
       network:
-        process.env.NODE_ENV === "production"
+        process.env.NEXT_PUBLIC_PRODUCTION === "production"
           ? WalletNetwork.PUBLIC
           : WalletNetwork.TESTNET,
       server:
-        process.env.NODE_ENV === "production"
+        process.env.NEXT_PUBLIC_PRODUCTION === "production"
           ? new StellarSdk.Horizon.Server("https://horizon.stellar.org")
           : new StellarSdk.Horizon.Server(
               "https://horizon-testnet.stellar.org"

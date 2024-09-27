@@ -9,11 +9,11 @@ export interface AppConfiguration {
 
 const appConfig: AppConfiguration = {
   network:
-    process.env.NODE_ENV === "production"
+    process.env.NEXT_PUBLIC_PRODUCTION === "production"
       ? WalletNetwork.PUBLIC
       : WalletNetwork.TESTNET,
   server:
-    process.env.NODE_ENV === "production"
+    process.env.NEXT_PUBLIC_PRODUCTION === "production"
       ? new StellarSdk.Horizon.Server("https://horizon.stellar.org")
       : new StellarSdk.Horizon.Server("https://horizon-testnet.stellar.org"),
   demo: process.env.NEXT_PUBLIC_DEMO_VERSION === "true",
