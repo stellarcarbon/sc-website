@@ -34,6 +34,7 @@ import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
 import { AppConfiguration } from "@/config";
+import { Server } from "@stellar/stellar-sdk/lib/horizon";
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 if (process.env.NODE_ENV === "development") {
@@ -92,6 +93,9 @@ type AppContext = {
   stellarWalletsKit: StellarWalletsKit | null;
 
   appConfig: AppConfiguration;
+
+  xlmBalance: number | undefined;
+  usdcBalance: number | undefined;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -124,6 +128,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
+
+  const [xlmBalance, setXlmBalance] = useState<number>();
+  const [usdcBalance, setUsdcBalance] = useState<number>();
 
   const pathname = usePathname();
 
@@ -188,19 +195,27 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       if (walletConnection === null) {
         loadWalletConnection();
+      } else if (walletConnection === undefined) {
       } else {
         if (
           myTransactions === null &&
-          walletConnection?.stellarPubKey !== "" &&
           pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
         ) {
           // Load personal transactions.
           TransactionHistoryService.fetchAccountHistory(
-            walletConnection?.stellarPubKey!
+            walletConnection.stellarPubKey!
           ).then((transactionRecords): void => {
             setMyTransactions(transactionRecords);
           });
         }
+
+        TransactionHistoryService.fetchAccountBalance(
+          appConfig.server,
+          walletConnection.stellarPubKey
+        ).then((accountBalance) => {
+          setXlmBalance(accountBalance.xlm);
+          setUsdcBalance(accountBalance.usdc);
+        });
 
         // Pending rounding check
         if (
@@ -216,39 +231,48 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     };
 
     loadApp();
-  }, [walletConnection, myTransactions, pathname, hasPendingRounding]);
+  }, [
+    walletConnection,
+    myTransactions,
+    pathname,
+    hasPendingRounding,
+    appConfig,
+  ]);
 
-  const connectWallet = async (
-    wallet: ISupportedWallet,
-    personalDetails: PersonalDetails
-  ): Promise<boolean> => {
-    setConnectionError(null);
+  const connectWallet = useCallback(
+    async (
+      wallet: ISupportedWallet,
+      personalDetails: PersonalDetails
+    ): Promise<boolean> => {
+      setConnectionError(null);
 
-    try {
-      const walletConnection = await walletConnectDialog(
-        wallet,
-        appConfig.network
-      );
+      try {
+        const walletConnection = await walletConnectDialog(
+          wallet,
+          appConfig.network
+        );
 
-      if (personalDetails.useremail !== "") {
-        walletConnection.personalDetails = personalDetails;
-        walletConnection.isAnonymous = false;
-      } else {
-        walletConnection.isAnonymous = true;
+        if (personalDetails.useremail !== "") {
+          walletConnection.personalDetails = personalDetails;
+          walletConnection.isAnonymous = false;
+        } else {
+          walletConnection.isAnonymous = true;
+        }
+
+        WalletConnectionService.setWalletConnection(walletConnection);
+        setWalletConnection(walletConnection);
+
+        return true;
+      } catch (error) {
+        console.log("connect wallet error", error);
+        setConnectionError(
+          "Something went wrong connecting your wallet. Try again."
+        );
+        return false;
       }
-
-      WalletConnectionService.setWalletConnection(walletConnection);
-      setWalletConnection(walletConnection);
-
-      return true;
-    } catch (error) {
-      console.log("connect wallet error", error);
-      setConnectionError(
-        "Something went wrong connecting your wallet. Try again."
-      );
-      return false;
-    }
-  };
+    },
+    [appConfig]
+  );
 
   const updateWalletConnection = useCallback(
     (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
@@ -295,6 +319,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       stellarWalletsKit: stellarWalletsKitRef.current,
 
       appConfig,
+
+      xlmBalance,
+      usdcBalance,
     };
   }, [
     connectionError,
@@ -306,6 +333,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     hasPendingRounding,
     sinkRequest,
     appConfig,
+    xlmBalance,
+    usdcBalance,
+    connectWallet,
   ]);
 
   return (

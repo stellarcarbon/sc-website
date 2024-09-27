@@ -84,3 +84,8 @@ export interface SinkingTransaction {
   transactionPostRequest?: SinkCarbonXdrPostRequest;
   transactionPostResponse?: SinkingResponse;
 }
+
+export interface AccountBalance {
+  xlm: number;
+  usdc: number;
+}

@@ -1,12 +1,15 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { CheckoutFormData } from "@/app/types";
 import { PaymentAsset } from "@/client";
+import { useAppContext } from "@/context/appContext";
 
 interface CurrencySelectProps {
   register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
 }
 
 export default function CurrencySelect({ register }: CurrencySelectProps) {
+  const { xlmBalance, usdcBalance } = useAppContext();
+
   return (
     <div className="flex flex-col gap-1 md:gap-3">
       <span className="text-xl md:text-2xl font-bold">
@@ -25,6 +28,11 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
           let optionLabel = option.toString();
           if (optionLabel === "any")
             optionLabel = "any (horizon will try to  create the best offer)";
+          else if (optionLabel === "XLM") {
+            optionLabel = `XLM - Your balance: ${xlmBalance?.toFixed(2)}`;
+          } else if (optionLabel === "USDC") {
+            optionLabel = `USDC - Your balance: ${usdcBalance?.toFixed(2)}`;
+          }
           return (
             <option key={option} value={option}>
               {optionLabel}

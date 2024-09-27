@@ -1,5 +1,10 @@
-import { MyTransactionRecord, RetirementStatus } from "@/app/types";
+import {
+  AccountBalance,
+  MyTransactionRecord,
+  RetirementStatus,
+} from "@/app/types";
 import { AccountService, SinkService, SinkTxListResponse } from "@/client";
+import { AccountResponse, Server } from "@stellar/stellar-sdk/lib/horizon";
 
 export default class TransactionHistoryService {
   private static mapTxsResponse(
@@ -68,5 +73,33 @@ export default class TransactionHistoryService {
       limit: 3,
     });
     return this.mapTxsResponse(sinkTxsResponse);
+  }
+
+  public static async fetchAccountBalance(
+    server: Server,
+    account: string
+  ): Promise<AccountBalance> {
+    const response: AccountResponse = await server.loadAccount(account);
+
+    const xlmBalance = response.balances.find(
+      (balance) => balance.asset_type === "native"
+    )?.balance;
+
+    const usdcBalance = response.balances.find((balance) => {
+      if (balance.asset_type === "credit_alphanum4") {
+        if (
+          balance.asset_code === "USDC" &&
+          balance.asset_issuer ===
+            "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
+        ) {
+          return true;
+        }
+      }
+    })?.balance;
+
+    return {
+      xlm: xlmBalance ? Number(xlmBalance) : 0,
+      usdc: usdcBalance ? Number(usdcBalance) : 0,
+    };
   }
 }

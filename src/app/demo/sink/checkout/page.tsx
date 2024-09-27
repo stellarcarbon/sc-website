@@ -59,7 +59,7 @@ export default function SinkPage() {
         })
         .catch((err: ApiError) => {
           const errorMessage = err.message;
-          setSubmissionError(errorMessage);
+          setSubmissionError(`submission error: ${errorMessage}`);
         });
     }
   }, [sinkRequest]);
@@ -98,7 +98,13 @@ export default function SinkPage() {
       .catch((err) => {
         setSubmissionError("Transaction signing failed.");
       });
-  }, [sinkCarbonXdr, walletConnection, stellarWalletsKit]);
+  }, [
+    sinkCarbonXdr,
+    walletConnection,
+    stellarWalletsKit,
+    appConfig,
+    setMyTransactions,
+  ]);
 
   if (sinkRequest === undefined) {
     return null;
