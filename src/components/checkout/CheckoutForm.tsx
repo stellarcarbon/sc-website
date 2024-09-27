@@ -80,7 +80,7 @@ export default function CheckoutForm() {
         </div>
         {/* <Divider /> */}
         <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 bg-secondary min-w-[80%]">
-          <ReasonSelect watch={watch} setValue={setValue} />
+          <ReasonSelect register={register} watch={watch} setValue={setValue} />
         </div>
 
         {/* <Divider /> */}

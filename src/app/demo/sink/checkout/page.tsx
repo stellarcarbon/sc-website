@@ -45,9 +45,10 @@ export default function SinkPage() {
 
   useEffect(() => {
     if (sinkRequest === undefined) {
-      router.push("/dashboard/sink");
+      const redirectUrl = appConfig.demo ? "/demo/sink" : "/dashboard/sink";
+      router.push(redirectUrl);
     }
-  }, [sinkRequest, router]);
+  }, [sinkRequest, router, appConfig]);
 
   useEffect(() => {
     if (sinkRequest !== undefined) {
@@ -106,8 +107,8 @@ export default function SinkPage() {
     status = (
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
         <span className="text-center md:text-lg">{message}</span>
-        <div className="w-full flex flex-col gap-8 m-6 justify-center items-center bg-secondary border border-tertiary py-6 rounded lg:max-w-[75%]">
-          <div className="flex flex-col w-full px-6 items-center gap-2 text-lg">
+        <div className="w-full flex flex-col gap-8 m-6 justify-center items-center bg-secondary border border-tertiary py-6 rounded">
+          <div className="flex flex-col w-full px-4 md:px-6 items-center gap-2 text-base md:text-lg">
             <div className="flex justify-between w-full items-center gap-4">
               <span>Sinking</span>
               <div className="flex items-center gap-1">
@@ -127,7 +128,9 @@ export default function SinkPage() {
             </div>
             <div className="flex justify-between items-center w-full gap-4">
               <span>Memo</span>
-              <span>{sinkRequest?.memoValue ?? "-"}</span>
+              <span className="break-all max-w-[60%]">
+                {sinkRequest?.memoValue ?? "-"}
+              </span>
             </div>
           </div>
           <Button

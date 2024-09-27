@@ -26,10 +26,10 @@ export interface CheckoutFormData {
 }
 
 export enum ReasonOptions {
-  ENVIRONMENT = "ENVIRONMENT",
-  HOUSEHOLD = "HOUSEHOLD",
-  AIRTRAVEL = "AIRTRAVEL",
-  ROADTRAVEL = "ROADTRAVEL",
+  ENVIRONMENT = "🌎✨🌍💕🌏",
+  HOUSEHOLD = "🏠 household",
+  AIRTRAVEL = "✈️ air travel",
+  ROADTRAVEL = "🛣️ road travel",
 }
 
 export enum RetirementStatus {

@@ -18,13 +18,16 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
 
       <select
         className="w-full text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
-        defaultValue={PaymentAsset.ANY}
+        defaultValue={PaymentAsset.XLM}
         {...register("currency")}
       >
         {Object.values(PaymentAsset).map((option) => {
+          let optionLabel = option.toString();
+          if (optionLabel === "any")
+            optionLabel = "any (horizon will try to  create the best offer)";
           return (
             <option key={option} value={option}>
-              {option}
+              {optionLabel}
             </option>
           );
         })}

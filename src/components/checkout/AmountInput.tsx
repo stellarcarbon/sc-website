@@ -6,13 +6,13 @@ import { CarbonService } from "@/client";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
 import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSearchParams } from "next/navigation";
 
 interface AmountInputProps {
-  register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
+  register: UseFormRegister<CheckoutFormData>;
   watch: (name: string) => number;
   setValue: (name: keyof CheckoutFormData, value: any) => void;
   quote: number;
@@ -144,7 +144,11 @@ export default function AmountInput({
             type="number"
             inputMode="numeric"
             className="px-2 py-1 w-full text-black rounded-sm"
-            {...register("tonnes")}
+            {...register("tonnes", {
+              validate: () => {
+                return !hasError || "The selected CARBON amount is invalid.";
+              },
+            })}
           />
         </div>
 
@@ -181,7 +185,7 @@ export default function AmountInput({
           </span>
         ) : (
           <>
-            <div className="w-full flex justify-center gap-1 items-center text-lg text-center">
+            <div className="w-full flex justify-center gap-1 items-center text-base md:text-lg text-center">
               <div className="flex items-center">
                 <span>Sinking {tonnes}</span>
                 <CARBONCurrencyIcon className="ml-1" />

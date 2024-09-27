@@ -1,27 +1,42 @@
 import { CheckoutFormData, ReasonOptions } from "@/app/types";
 import SelectReasonButton from "./SelectReasonButton";
+import { memo, useEffect, useMemo, useState } from "react";
+import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 
 interface ReasonSelectProps {
   setValue: (name: keyof CheckoutFormData, value: any) => void;
   watch: (name: string) => string;
+  register: UseFormRegister<CheckoutFormData>;
 }
 
-export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
+export default function ReasonSelect({
+  setValue,
+  watch,
+  register,
+}: ReasonSelectProps) {
   const reason = watch("reason");
+
+  const [memoLength, setMemoLength] = useState<number>(0);
+
+  const textEncoder = useMemo(() => {
+    return new TextEncoder();
+  }, []);
 
   const selectReason = (selectedReason: ReasonOptions) => {
     if (selectedReason === reason) {
       setValue("reason", null);
+      setMemoLength(0);
     } else {
       setValue("reason", selectedReason);
+      const lengthInBytes = textEncoder.encode(selectedReason).length;
+      setMemoLength(lengthInBytes);
     }
   };
 
-  const onReasonTextChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setValue("reason", event.target.value);
-  };
+  useEffect(() => {
+    const lengthInBytes = textEncoder.encode(reason).length;
+    setMemoLength(lengthInBytes);
+  }, [reason, setMemoLength, textEncoder]);
 
   // TODO: enforce max length of reason message 29 bytes
 
@@ -31,7 +46,9 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
         Add a label (optional)
       </span>
       <div className="flex flex-col gap-1">
-        <span className="text-xs md:text-sm">Select a reason...</span>
+        <span className="text-xs md:text-sm">
+          Select the reason you are creating this offset...
+        </span>
         <div className="flex gap-2 my-2">
           {Object.values(ReasonOptions).map((option) => {
             return (
@@ -50,10 +67,18 @@ export default function ReasonSelect({ setValue, watch }: ReasonSelectProps) {
           ...or write your own message.
         </span>
         <textarea
-          onChange={onReasonTextChange}
-          value={reason}
-          className="my-2 text-black py-1 px-2 md:w-[80%] rounded-sm"
+          {...register("reason", {
+            validate: (value) => {
+              return memoLength <= 28 || "Reason label is too long.";
+            },
+          })}
+          className="my-2 text-black py-1 px-2 rounded-sm"
         />
+        <span
+          className={`self-end text-xs ${memoLength > 28 && "text-red-500"}`}
+        >
+          {memoLength}/28 tokens
+        </span>
       </div>
     </div>
   );
