@@ -10,7 +10,7 @@ export default function TextInput({
 }: TextInputProps) {
   return (
     <input
-      className="w-full bg-gray-100 p-2 rounded-sm border border-black text-black"
+      className="w-full bg-gray-100 p-2 rounded border border-black text-black"
       type="text"
       name={name}
       placeholder={placeholder}

@@ -29,7 +29,7 @@ import {
   walletConnectDialog,
 } from "./walletFunctions";
 import { usePathname } from "next/navigation";
-import WalletConnectionService from "@/services/WalletConnectionService";
+import WalletConnectionStorageService from "@/services/WalletConnectionService";
 import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
@@ -182,7 +182,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       };
 
       const loadWalletConnection = () => {
-        const wc = WalletConnectionService.loadWalletConnection();
+        const wc = WalletConnectionStorageService.loadWalletConnection();
         if (wc !== undefined) {
           stellarWalletsKitRef.current?.setWallet(wc.walletType.id);
         }
@@ -246,30 +246,49 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     ): Promise<boolean> => {
       setConnectionError(null);
 
+      // Build the walletConnection object using wallets-kit
+      let newConn;
       try {
-        const walletConnection = await walletConnectDialog(
-          wallet,
-          appConfig.network
-        );
+        newConn = await walletConnectDialog(wallet, appConfig.network);
 
-        if (personalDetails.useremail !== "") {
-          walletConnection.personalDetails = personalDetails;
-          walletConnection.isAnonymous = false;
-        } else {
-          walletConnection.isAnonymous = true;
+        // Some wallets sometimes return empty pubkey on success.
+        if (newConn.stellarPubKey === "") {
+          throw Error();
         }
-
-        WalletConnectionService.setWalletConnection(walletConnection);
-        setWalletConnection(walletConnection);
-
-        return true;
-      } catch (error) {
-        console.log("connect wallet error", error);
+      } catch (error: any) {
         setConnectionError(
           "Something went wrong connecting your wallet. Try again."
         );
         return false;
       }
+
+      if (!newConn) return false;
+
+      // Add user details if specified
+      if (personalDetails.useremail !== "") {
+        newConn.personalDetails = personalDetails;
+        newConn.isAnonymous = false;
+      } else {
+        newConn.isAnonymous = true;
+      }
+
+      // Verify if the account exists.
+      try {
+        const accBalance = await TransactionHistoryService.fetchAccountBalance(
+          appConfig.server,
+          newConn.stellarPubKey
+        );
+      } catch (e) {
+        setConnectionError(
+          `Your account was not found on ${appConfig.server.serverURL}`
+        );
+        return false;
+      }
+
+      WalletConnectionStorageService.setWalletConnection(newConn);
+      setWalletConnection(newConn);
+
+      return true;
     },
     [appConfig]
   );
@@ -282,14 +301,14 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         isAnonymous,
       };
 
-      WalletConnectionService.setWalletConnection(newWalletConnection);
+      WalletConnectionStorageService.setWalletConnection(newWalletConnection);
       setWalletConnection(newWalletConnection);
     },
     [walletConnection]
   );
 
   const disconnectWallet = () => {
-    WalletConnectionService.removeWalletConnection();
+    WalletConnectionStorageService.removeWalletConnection();
     setWalletConnection(undefined);
     setMyTransactions(null);
   };

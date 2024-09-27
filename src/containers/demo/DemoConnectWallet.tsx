@@ -80,87 +80,91 @@ export default function DemoConnectWallet() {
   }, [walletConnection, router]);
 
   return (
-    <div className="p-6 flex flex-col gap-9">
-      <div className="flex flex-col gap-1 w-full">
-        <h1 className="text-2xl font-bold">Connect your wallet</h1>
+    <div className="p-4 md:p-8 flex flex-col gap-12 md:gap-16">
+      <div className="flex flex-col gap-8 mt-4">
+        <div className="flex flex-col gap-1 w-full">
+          <h1 className="text-xl md:text-2xl font-bold">Connect your wallet</h1>
 
-        <span className="text-sm mb-1 max-w-[80%] hidden md:block">
-          Connect a wallet to be able to create new transactions and access your
-          sinking history.
-        </span>
-        <span className="text-xs max-w-[80%] md:hidden">
-          {selectedWallet
-            ? `Current selection: ${selectedWallet.name}`
-            : `Tap your wallet choice.`}
-        </span>
-      </div>
-      {selectedWallet ? (
-        <b className="hidden">{`${selectedWallet.name}`}</b>
-      ) : (
-        <></>
-      )}
-
-      {/* Mobile buttons */}
-      <div className="md:hidden">
-        {supportedWallets.length === 0 ? (
-          <LoadingWallets />
+          <span className="text-sm mb-1 max-w-[80%] hidden md:block">
+            Connect a wallet to be able to create new transactions and access
+            your sinking history.
+          </span>
+          <span className="text-xs max-w-[80%] md:hidden">
+            {selectedWallet
+              ? `Current selection: ${selectedWallet.name}`
+              : `Tap your wallet choice.`}
+          </span>
+        </div>
+        {selectedWallet ? (
+          <b className="hidden">{`${selectedWallet.name}`}</b>
         ) : (
-          <div className="flex flex-wrap justify-center gap-6 px-4">
-            {supportedWallets.map((supportedWallet, idx) => {
-              return (
-                <SelectWalletButton
-                  key={`selectWalletButton_${idx}`}
-                  wallet={supportedWallet}
-                  isSelected={supportedWallet.id === selectedWallet?.id}
-                  onClick={() => selectWallet(supportedWallet)}
-                  disabled={
-                    !supportedWallet.isAvailable ||
-                    supportedWallet.type === "WALLET_CONNECT"
-                  }
-                />
-              );
-            })}
-          </div>
+          <></>
         )}
 
-        {selectWalletError && (
-          <FormError className="text-center">
-            {"Select a wallet to continue"}
-          </FormError>
-        )}
+        {/* Mobile buttons */}
+        <div className="md:hidden">
+          {supportedWallets.length === 0 ? (
+            <LoadingWallets />
+          ) : (
+            <div className="flex flex-wrap justify-center gap-6 px-4">
+              {supportedWallets.map((supportedWallet, idx) => {
+                return (
+                  <SelectWalletButton
+                    key={`selectWalletButton_${idx}`}
+                    wallet={supportedWallet}
+                    isSelected={supportedWallet.id === selectedWallet?.id}
+                    onClick={() => selectWallet(supportedWallet)}
+                    disabled={
+                      !supportedWallet.isAvailable ||
+                      supportedWallet.type === "WALLET_CONNECT"
+                    }
+                  />
+                );
+              })}
+            </div>
+          )}
+
+          {selectWalletError && (
+            <FormError className="text-center">
+              {"Select a wallet to continue"}
+            </FormError>
+          )}
+        </div>
+
+        {/* Desktop buttons */}
+        <div className="md:block hidden min-w-full px-8">
+          {supportedWallets.length === 0 ? (
+            <LoadingWallets />
+          ) : (
+            <div className="flex flex-wrap gap-1 justify-start">
+              {supportedWallets.map((supportedWallet, idx) => {
+                return (
+                  <SelectWalletButtonDesktop
+                    key={`swbd_${idx}`}
+                    wallet={supportedWallet}
+                    isSelected={supportedWallet.id === selectedWallet?.id}
+                    onClick={() => selectWallet(supportedWallet)}
+                  >
+                    {supportedWallet.name}
+                  </SelectWalletButtonDesktop>
+                );
+              })}
+            </div>
+          )}
+
+          {selectWalletError && (
+            <FormError>{"Select a wallet to continue"}</FormError>
+          )}
+        </div>
       </div>
 
-      {/* Desktop buttons */}
-      <div className="md:block hidden min-w-full px-8">
-        {supportedWallets.length === 0 ? (
-          <LoadingWallets />
-        ) : (
-          <div className="flex flex-wrap gap-1 justify-start">
-            {supportedWallets.map((supportedWallet, idx) => {
-              return (
-                <SelectWalletButtonDesktop
-                  key={`swbd_${idx}`}
-                  wallet={supportedWallet}
-                  isSelected={supportedWallet.id === selectedWallet?.id}
-                  onClick={() => selectWallet(supportedWallet)}
-                >
-                  {supportedWallet.name}
-                </SelectWalletButtonDesktop>
-              );
-            })}
-          </div>
-        )}
-
-        {selectWalletError && (
-          <FormError>{"Select a wallet to continue"}</FormError>
-        )}
-      </div>
-
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Contact details */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold ">Contact details (optional)</h1>
+        <h1 className="text-xl md:text-2xl font-bold ">
+          Contact details (optional)
+        </h1>
 
         <span className="text-xs md:text-sm max-w-[80%] mb-4">
           Your contact details will be used to send you a confirmation of your
@@ -176,11 +180,11 @@ export default function DemoConnectWallet() {
         />
       </div>
 
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Privacy policy */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold">Privacy policy</h1>
+        <h1 className="text-xl md:text-2xl font-bold">Privacy policy</h1>
         <p className="text-xs md:text-sm max-w-[80%]">
           Read about our terms & conditions and privacy policy <u>here</u>.
         </p>

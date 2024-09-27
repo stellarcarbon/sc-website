@@ -1,6 +1,6 @@
 import { WalletConnection } from "@/app/types";
 
-export default class WalletConnectionService {
+export default class WalletConnectionStorageService {
   private static LOCAL_STORAGE_KEY = "wallet";
 
   public static loadWalletConnection(): WalletConnection | undefined {

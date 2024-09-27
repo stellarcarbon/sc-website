@@ -20,22 +20,24 @@ export const walletConnectDialog = async (
       walletType: wallet,
     } as WalletConnection;
   } else {
-    let kit = new StellarWalletsKit({
-      selectedWalletId: wallet.id,
-      network,
-      modules: allowAllModules(),
-    });
+    try {
+      let kit = new StellarWalletsKit({
+        selectedWalletId: wallet.id,
+        network,
+        modules: allowAllModules(),
+      });
 
-    let addr = await kit.getAddress(); // will throw on error
-    let pubKey = addr.address;
+      let addr = await kit.getAddress(); // will throw on error
+      let pubKey = addr.address;
 
-    console.log(">", pubKey);
-
-    return {
-      stellarPubKey: pubKey,
-      walletType: wallet,
-      isAnonymous: false,
-    };
+      return {
+        stellarPubKey: pubKey,
+        walletType: wallet,
+        isAnonymous: false,
+      };
+    } catch (e) {
+      throw Error("Something went wrong connecting your wallet. Try again.");
+    }
   }
 };
 
