@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import DemoTaskbar from "./DemoTaskbar";
 
 export default function DemoLanding() {
+  const { walletConnection } = useAppContext();
   const router = useRouter();
 
   useEffect(() => {
@@ -64,7 +65,10 @@ export default function DemoLanding() {
         </div>
         <button
           type="button"
-          onClick={() => router.push("/demo/connect")}
+          onClick={() => {
+            let redirectUrl = walletConnection ? "/demo/sink" : "/demo/connect";
+            router.push(redirectUrl);
+          }}
           className={`p-1 w-[270px] flex justify-center bg-primary text-white rounded-xl border border-accentSecondary hover:bg-secondary hover:text-white`}
         >
           <div className=" h-11 flex items-center gap-3">

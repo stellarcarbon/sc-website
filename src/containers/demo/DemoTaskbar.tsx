@@ -55,8 +55,12 @@ export default function DemoTaskbar() {
         )}
       </div>
 
-      {isOpen && (
-        <div className="p-2 md:px-8 md:pb-4 flex justify-between items-center gap-3 mt-2">
+      {true && (
+        <div
+          className={`-2 md:px-8 md:pb-4 flex justify-between items-center gap-3 mt-2 ${
+            isOpen ? "block" : "hidden"
+          }`}
+        >
           <div className="h-16 flex items-center justify-start border border-tertiary rounded p-1 flex-1">
             <div className="flex flex-col items-center justify-between h-full gap-1 px-1 border-r border-r-tertiary">
               {walletConnection?.walletType.icon && (
@@ -65,6 +69,7 @@ export default function DemoTaskbar() {
                   width={32}
                   src={walletConnection?.walletType.icon}
                   alt="wallet icon"
+                  priority
                 />
               )}
               <div className="text-xs text-center">
