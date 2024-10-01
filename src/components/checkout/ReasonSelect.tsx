@@ -77,7 +77,7 @@ export default function ReasonSelect({
         <span
           className={`self-end text-xs ${memoLength > 28 && "text-red-500"}`}
         >
-          {memoLength}/28 tokens
+          {memoLength}/28
         </span>
       </div>
     </div>

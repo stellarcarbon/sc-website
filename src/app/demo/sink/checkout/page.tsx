@@ -15,13 +15,14 @@ import { useCallback, useEffect, useState } from "react";
 import { Hourglass } from "react-loader-spinner";
 import { TransactionBuilder } from "@stellar/stellar-sdk";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
+import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 
 enum SinkStatusMessages {
   creating = "Creating your transaction using Stellarcarbon API...",
   confirm = "Your transaction is ready and approved by Stellarcarbon. Please confirm the transaction by signing it with your wallet.",
   signTransaction = "Sign the transaction using your wallet in the pop-up.",
   awaitBlockchain = "Transaction signed.\n Submitting to the Stellar blockchain....",
-  completed = "Success! (did not really post to blockchain though)",
+  completed = "Success! Check out the link below to view your transaction.",
 }
 
 export default function SinkPage() {
@@ -200,6 +201,17 @@ export default function SinkPage() {
     status = (
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
         <span className="text-center md:text-lg">{message}</span>
+        <a
+          href={
+            appConfig.network === WalletNetwork.PUBLIC
+              ? `https://stellar.expert/explorer/public/tx/${tx.id}`
+              : `https://stellar.expert/explorer/testnet/tx/${tx.id}`
+          }
+          target="_blank"
+          className="text-accentSecondary underline mt-3"
+        >
+          View this transaction on Stellar.expert
+        </a>
         <SuccessIcon />
       </div>
     );
@@ -240,7 +252,7 @@ export default function SinkPage() {
               }
             }}
           >
-            Return to dashboard
+            Go back
           </Button>
         )}
       </div>

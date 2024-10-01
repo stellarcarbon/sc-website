@@ -86,8 +86,7 @@ export default function DemoConnectWallet() {
           <h1 className="text-xl md:text-2xl font-bold">Connect your wallet</h1>
 
           <span className="text-sm mb-1 max-w-[80%] hidden md:block">
-            Connect a wallet to be able to create new transactions and access
-            your sinking history.
+            Connect a wallet to be able to create new transactions.
           </span>
           <span className="text-xs max-w-[80%] md:hidden">
             {selectedWallet
