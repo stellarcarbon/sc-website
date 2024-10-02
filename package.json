@@ -13,7 +13,7 @@
     "e2e:headless": "cross-env NODE_ENV=test next build && cross-env NODE_ENV=test start-server-and-test start http://localhost:3000 \"cypress run --e2e\"",
     "test": "vitest",
     "test:ci": "vitest run",
-    "generate-client": "openapi --useOptions --input https://api-beta.stellarcarbon.io/openapi.json --output ./src/client --client axios",
+    "generate-client": "openapi --useOptions --input https://api-beta.stellarcarbon.io/test/openapi.json --output ./src/client --client axios",
     "generate-client-local": "openapi --useOptions --input http://localhost:8000/openapi.json --output ./src/client --client axios"
   },
   "dependencies": {
@@ -27,12 +27,14 @@
     "@stellar/stellar-sdk": "^12.2.0",
     "google-fonts-plugin": "^5.0.2",
     "i": "^0.3.7",
+    "lodash": "^4.17.21",
     "next": "14.0.4",
     "npm": "^10.6.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
     "react-loader-spinner": "^6.1.6",
+    "react-select": "^5.8.1",
     "react-swipeable": "^7.0.1"
   },
   "devDependencies": {
