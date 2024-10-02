@@ -65,7 +65,7 @@ export default function DemoConnectWallet() {
 
     connectWallet(selectedWallet, personalDetails).then((didSucceed) => {
       if (didSucceed) {
-        router.push("/demo/sink");
+        router.push("/demo");
       }
 
       setSelectedWallet(undefined);
@@ -75,7 +75,7 @@ export default function DemoConnectWallet() {
 
   useEffect(() => {
     if (walletConnection) {
-      router.push("/demo/sink");
+      router.push("/demo");
     }
   }, [walletConnection, router]);
 

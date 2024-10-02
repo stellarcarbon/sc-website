@@ -250,7 +250,7 @@ export default function SinkPage() {
             className="h-10 !py-2 mt-auto"
             onClick={() => {
               if (message === SinkStatusMessages.completed) {
-                router.push("/demo");
+                router.push("/");
               } else {
                 router.push("/demo/sink");
               }

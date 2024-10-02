@@ -66,7 +66,7 @@ export default function DemoLanding() {
         <button
           type="button"
           onClick={() => {
-            let redirectUrl = walletConnection ? "/demo/sink" : "/demo/connect";
+            let redirectUrl = walletConnection ? "/demo" : "/demo/connect";
             router.push(redirectUrl);
           }}
           className={`p-1 w-[270px] flex justify-center bg-primary text-white rounded-xl border border-accentSecondary hover:bg-secondary hover:text-white`}
