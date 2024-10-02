@@ -39,6 +39,9 @@ export default function SinkPage() {
   const [submissionError, setSubmissionError] = useState<string>();
   const [sinkCarbonXdr, setSinkCarbonXdr] = useState<SinkingResponse>();
 
+  const [completedTransactionHash, setCompletedTransactionHash] =
+    useState<string>();
+
   const router = useRouter();
 
   const isWide = useViewportWidth();
@@ -85,6 +88,7 @@ export default function SinkPage() {
           appConfig.network
         );
         appConfig.server.submitTransaction(finalTransaction).then((result) => {
+          setCompletedTransactionHash(result.hash);
           setMessage(SinkStatusMessages.completed);
           setTimeout(() => {
             // Load personal transactions.
@@ -204,8 +208,8 @@ export default function SinkPage() {
         <a
           href={
             appConfig.network === WalletNetwork.PUBLIC
-              ? `https://stellar.expert/explorer/public/tx/${tx.id}`
-              : `https://stellar.expert/explorer/testnet/tx/${tx.id}`
+              ? `https://stellar.expert/explorer/public/tx/${completedTransactionHash}`
+              : `https://stellar.expert/explorer/testnet/tx/${completedTransactionHash}`
           }
           target="_blank"
           className="text-accentSecondary underline mt-3"

@@ -15,7 +15,7 @@ interface FormFieldProps {
   input: React.ReactElement;
 }
 
-export enum TripType {
+enum TripType {
   ONEWAY = "one-way",
   ROUNDTRIP = "round-trip",
 }
