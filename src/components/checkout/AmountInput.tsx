@@ -10,7 +10,6 @@ import { UseFormRegister } from "react-hook-form";
 import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSearchParams } from "next/navigation";
-import appConfig from "@/config";
 import { useAppContext } from "@/context/appContext";
 
 interface AmountInputProps {
