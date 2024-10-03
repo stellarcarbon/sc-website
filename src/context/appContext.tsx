@@ -33,13 +33,14 @@ import WalletConnectionStorageService from "@/services/WalletConnectionService";
 import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
-import { AppConfiguration } from "@/config";
-import { Server } from "@stellar/stellar-sdk/lib/horizon";
+import { AppConfiguration } from "@/app/types";
 
 console.log(`NEXT_PUBLIC_PRODUCTION: ${process.env.NEXT_PUBLIC_PRODUCTION}`);
 if (process.env.NEXT_PUBLIC_PRODUCTION === "development") {
   OpenAPI.BASE = "http://localhost:8000";
   // OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
+} else if (process.env.NEXT_PUBLIC_PRODUCTION === "production") {
+  OpenAPI.BASE = "https://api.stellarcarbon.io";
 } else {
   OpenAPI.BASE = "https://api-beta.stellarcarbon.io/test";
 }

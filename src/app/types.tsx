@@ -5,7 +5,11 @@ import {
   SinkingResponse,
   VcsProject,
 } from "@/client";
-import { ISupportedWallet } from "@creit.tech/stellar-wallets-kit";
+import {
+  ISupportedWallet,
+  WalletNetwork,
+} from "@creit.tech/stellar-wallets-kit";
+import * as StellarSdk from "@stellar/stellar-sdk";
 
 export type WalletConnection = {
   stellarPubKey: string;
@@ -88,4 +92,10 @@ export interface SinkingTransaction {
 export interface AccountBalance {
   xlm: number;
   usdc: number;
+}
+
+export interface AppConfiguration {
+  network: WalletNetwork;
+  server: StellarSdk.Horizon.Server;
+  demo: boolean;
 }
