@@ -12,13 +12,13 @@ export default function OverviewContactInformation() {
     <div className="flex flex-col gap-1 mx-4 md:mx-8 my-4">
       <div className="flex flex-col gap-3 text-base">
         <div className="flex justify-between items-center border-b border-b-tertiary">
-          <span className="text-white md:text-lg font-semibold">Username</span>
+          <span className="text-white md:text-lg font-semibold">Name</span>
           <span className="text-xs md:text-base">
             {walletConnection?.personalDetails?.username}
           </span>
         </div>
         <div className="flex justify-between items-center border-b border-b-tertiary">
-          <span className="text-white md:text-lg font-semibold">Email</span>
+          <span className="text-white md:text-lg font-semibold">E-mail</span>
           <span className="text-xs md:text-base">
             {walletConnection?.personalDetails?.useremail}
           </span>

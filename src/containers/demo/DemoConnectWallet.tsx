@@ -166,7 +166,7 @@ export default function DemoConnectWallet() {
         </h1>
 
         <span className="text-xs md:text-sm max-w-[80%] mb-4">
-          Your contact details will be used to send you a confirmation of your
+          Your contact details may be used to send you a confirmation of your
           purchases. This step is optional.
         </span>
 

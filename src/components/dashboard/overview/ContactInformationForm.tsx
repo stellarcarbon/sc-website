@@ -77,7 +77,7 @@ export default function OverviewContactInformationForm({
         personalized certificates.
       </span>
       <div className="flex flex-col w-full mb-2">
-        <span className="text-xs">Username</span>
+        <span className="text-xs">Name</span>
         <TextInput
           name="username"
           value={formUsername}
@@ -86,7 +86,7 @@ export default function OverviewContactInformationForm({
         />
       </div>
       <div className="flex flex-col w-full mb-2">
-        <span className="text-xs">Email</span>
+        <span className="text-xs">E-mail</span>
         <TextInput
           name="useremail"
           value={formEmail}

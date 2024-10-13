@@ -129,7 +129,7 @@ export default function DemoPage() {
           input={
             <Select
               options={tripTypeOptions}
-              defaultValue={tripTypeOptions[0]}
+              defaultValue={tripTypeOptions[1]}
               onChange={(option) =>
                 setTripType(option === null ? null : option.value)
               }
@@ -143,7 +143,7 @@ export default function DemoPage() {
           onClick={() => estimateEmissions()}
           className="w-[200px] self-center mt-2 text-sm"
         >
-          Estimate my emission
+          Estimate my emissions
         </Button>
         {/* Estimation */}
         {flightEstimate && (

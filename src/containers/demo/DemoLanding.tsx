@@ -59,7 +59,7 @@ export default function DemoLanding() {
             </span>
             <span className="">
               This demo app was created especially for Meridian participants to
-              compensate for their flight.
+              compensate for their flight emissions.
             </span>
           </div>
         </div>

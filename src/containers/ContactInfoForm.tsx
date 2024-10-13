@@ -27,7 +27,7 @@ export default function ContactInfoForm({
   return (
     <div className="flex flex-col gap-1 items-start md:px-8">
       <label className="text-xs" htmlFor="username">
-        Username
+        Name
       </label>
       <TextInput
         name="username"
@@ -37,7 +37,7 @@ export default function ContactInfoForm({
       />
 
       <label className="text-xs" htmlFor="useremail">
-        Email
+        E-mail
       </label>
       <TextInput
         name="useremail"
