@@ -52,7 +52,7 @@ export default function DemoPage() {
     cabinClassOptions[0].value
   );
   const [tripType, setTripType] = useState<TripType | null>(
-    tripTypeOptions[0].value
+    tripTypeOptions[1].value
   );
 
   const [flightEstimate, setFlightEstimate] =
