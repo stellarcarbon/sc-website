@@ -72,7 +72,7 @@ export default function TransactionSummary() {
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
               <span className="text-lg md:text-xl">Total sinked</span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">{totalSinked}</span>
+                <span className="font-normal">{totalSinked?.toFixed(3)}</span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>
@@ -89,7 +89,7 @@ export default function TransactionSummary() {
                 Pending certificate claims
               </span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">{totalPending}</span>
+                <span className="font-normal">{totalPending?.toFixed(3)}</span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>

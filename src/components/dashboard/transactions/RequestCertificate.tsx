@@ -156,19 +156,19 @@ export default function RequestCertificate({
           optional. All CARBON transactions will eventually be retired using
           community certificates.
         </span>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Button onClick={sinkRemaining} className="text-sm md:text-base">
+        <div className="flex flex-wrap justify-around gap-4 w-full">
+          <Button onClick={sinkRemaining} className="text-sm">
             Add {remainingFraction.toFixed(3)}
             <CARBONCurrencyIcon className="inline ml-1" />
           </Button>
           <Button
-            className="text-sm md:text-base"
+            className="text-sm"
             disabled={totalCarbonPending < 1}
             onClick={() => {
               router.push("/sink/rounding");
             }}
           >
-            Round down to {Math.floor(totalCarbonPending)}{" "}
+            Round down to {Math.floor(totalCarbonPending).toFixed(3)}{" "}
             <CARBONCurrencyIcon className="inline ml-1" />
           </Button>
         </div>

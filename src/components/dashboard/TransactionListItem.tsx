@@ -53,7 +53,7 @@ export default function TransactionListItem({
       <ItemValue>
         <div className="flex items-center gap-1">
           <CARBONCurrencyIcon />
-          <span>{transaction.sinkAmount?.toFixed(2)}</span>
+          <span>{transaction.sinkAmount?.toFixed(3)}</span>
         </div>
       </ItemValue>
 
