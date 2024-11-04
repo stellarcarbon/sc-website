@@ -22,7 +22,9 @@ export default function Overview() {
   return (
     <>
       <div className="flex flex-col">
-        <DashboardTitle>Activity summary</DashboardTitle>
+        <DashboardTitle>
+          Activity summary<span> (testnet)</span>
+        </DashboardTitle>
         <TransactionSummary />
       </div>
 
