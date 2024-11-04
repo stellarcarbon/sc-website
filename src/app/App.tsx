@@ -6,7 +6,7 @@ import Drawer from "@/components/Drawer";
 import Footer from "@/components/Footer";
 import TopBar from "@/components/TopBar";
 import { useAppContext } from "@/context/appContext";
-import DemoApp from "./DemoApp";
+import DemoApp from "../containers/demo/DemoApp";
 
 export default function App({ children }: { children: React.ReactNode }) {
   const { isDrawerOpen, appConfig } = useAppContext();

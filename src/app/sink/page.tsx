@@ -1,7 +1,7 @@
 "use client";
 
 import { useViewportWidth } from "@/app/utils";
-import { CarbonService, SinkingResponse } from "@/client";
+import { ApiError, CarbonService, SinkingResponse } from "@/client";
 import Button from "@/components/Button";
 import FormError from "@/components/FormError";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
@@ -13,15 +13,22 @@ import { useAppContext } from "@/context/appContext";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { Hourglass } from "react-loader-spinner";
-import { TransactionBuilder } from "@stellar/stellar-sdk";
+import {
+  TransactionBuilder,
+  NetworkError,
+  BadRequestError,
+  NotFoundError,
+} from "@stellar/stellar-sdk";
+import * as StellarSdk from "@stellar/stellar-sdk";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
+import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 
 enum SinkStatusMessages {
   creating = "Creating your transaction using Stellarcarbon API...",
   confirm = "Your transaction is ready and approved by Stellarcarbon. Please confirm the transaction by signing it with your wallet.",
   signTransaction = "Sign the transaction using your wallet in the pop-up.",
   awaitBlockchain = "Transaction signed.\n Submitting to the Stellar blockchain....",
-  completed = "Success! (did not really post to blockchain though)",
+  completed = "Success! Check out the link below to view your transaction.",
 }
 
 export default function SinkPage() {
@@ -38,6 +45,9 @@ export default function SinkPage() {
   const [submissionError, setSubmissionError] = useState<string>();
   const [sinkCarbonXdr, setSinkCarbonXdr] = useState<SinkingResponse>();
 
+  const [completedTransactionHash, setCompletedTransactionHash] =
+    useState<string>();
+
   const router = useRouter();
 
   const isWide = useViewportWidth();
@@ -51,18 +61,111 @@ export default function SinkPage() {
 
   useEffect(() => {
     if (sinkRequest !== undefined) {
+      // Build the XDR with stellarcarbon API
       CarbonService.buildSinkCarbonXdr(sinkRequest)
         .then((response) => {
           setSinkCarbonXdr(response);
           setMessage(SinkStatusMessages.confirm);
         })
-        .catch((err) => {
-          setSubmissionError("Err");
+        .catch((err: ApiError) => {
+          const errorMessage: string = err.body["detail"][0]["msg"];
+          setSubmissionError(errorMessage ?? "Unknown error");
         });
     }
   }, [sinkRequest]);
 
+  const catchHorizonError = useCallback((error: any) => {
+    if (error instanceof NetworkError) {
+      setSubmissionError(
+        "Network error: Check your internet connection or Horizon server status."
+      );
+    } else if (error instanceof BadRequestError) {
+      setSubmissionError(
+        "Bad request: There was an issue with the transaction parameters."
+      );
+    } else if (error instanceof NotFoundError) {
+      setSubmissionError(
+        "Not found: The source or destination account does not exist."
+      );
+    } else if (error.response && error.response.data) {
+      // Handle any other transaction failure errors
+      let otherError = [];
+      const resultCodes = error.response.data.extras.result_codes;
+      if (resultCodes) {
+        if (resultCodes.transaction) {
+          otherError.push(`Transaction error code: ${resultCodes.transaction}`);
+        }
+        if (resultCodes.operations) {
+          resultCodes.operations.forEach((op: string, index: number) => {
+            otherError.push(`Operation ${index + 1} error code: ${op}`);
+          });
+        }
+        setSubmissionError(otherError.join("\n"));
+      } else {
+        setSubmissionError("An unknown error occurred.");
+      }
+    }
+  }, []);
+
+  const onSubmitTxSuccess = useCallback(
+    (result: StellarSdk.Horizon.HorizonApi.SubmitTransactionResponse) => {
+      setCompletedTransactionHash(result.hash);
+      setMessage(SinkStatusMessages.completed);
+      setTimeout(() => {
+        // Refresh personal transactions.
+        TransactionHistoryService.fetchAccountHistory(
+          walletConnection?.stellarPubKey!
+        ).then((transactionRecords): void => {
+          setMyTransactions(transactionRecords);
+        });
+      }, 2000);
+    },
+    [
+      setCompletedTransactionHash,
+      setMessage,
+      setMyTransactions,
+      walletConnection,
+    ]
+  );
+
+  const submitTxToHorizon = useCallback(
+    (signedTxXdr: string) => {
+      // try {
+      //   const error = {
+      //     response: {
+      //       data: {
+      //         extras: {
+      //           result_codes: {
+      //             transaction: "tx_failed",
+      //             operations: ["op_no_source_account"],
+      //           },
+      //         },
+      //       },
+      //     },
+      //   };
+
+      //   throw error;
+      // } catch (error: any) {
+      //   catchHorizonError(error);
+      // }
+      // return;
+
+      appConfig.server
+        .submitTransaction(
+          TransactionBuilder.fromXDR(signedTxXdr, appConfig.network)
+        )
+        .then((result) => {
+          onSubmitTxSuccess(result);
+        })
+        .catch((error: any) => {
+          catchHorizonError(error);
+        });
+    },
+    [appConfig, catchHorizonError, onSubmitTxSuccess]
+  );
+
   const confirmSubmission = useCallback(() => {
+    // Sign the transaction using the Stellar Wallets Kit & submit it to Horizon.
     if (sinkCarbonXdr === undefined) {
       setSubmissionError("Cannot find signed transaction.");
       return;
@@ -75,28 +178,17 @@ export default function SinkPage() {
         address: walletConnection?.stellarPubKey,
       })
       .then((r) => {
-        // TODO: Fake blockchain commit
         setMessage(SinkStatusMessages.awaitBlockchain);
-        const finalTransaction = TransactionBuilder.fromXDR(
-          r.signedTxXdr,
-          appConfig.network
-        );
-        appConfig.server.submitTransaction(finalTransaction).then((result) => {
-          setMessage(SinkStatusMessages.completed);
-          setTimeout(() => {
-            // Load personal transactions.
-            TransactionHistoryService.fetchAccountHistory(
-              walletConnection?.stellarPubKey!
-            ).then((transactionRecords): void => {
-              setMyTransactions(transactionRecords);
-            });
-          }, 2000);
-        });
+
+        // TODO: Possibly verify the transaction here, before posting to blockchain?
+        // Transaction may be expired or signatures not valid?
+
+        submitTxToHorizon(r.signedTxXdr);
       })
       .catch((err) => {
         setSubmissionError("Transaction signing failed.");
       });
-  }, [sinkCarbonXdr, walletConnection, stellarWalletsKit]);
+  }, [sinkCarbonXdr, walletConnection, stellarWalletsKit, submitTxToHorizon]);
 
   if (sinkRequest === undefined) {
     return null;
@@ -160,14 +252,12 @@ export default function SinkPage() {
     );
   } else if (message === SinkStatusMessages.signTransaction) {
     status = (
-      // <div className="flex flex-col justify-center items-center flex-1 gap-2">
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
         <span className="text-center md:text-lg">{message}</span>
         <div className="my-4">
           <SignIcon large={isWide} />
         </div>
       </div>
-      // </div>
     );
   } else if (message === SinkStatusMessages.awaitBlockchain) {
     status = (
@@ -190,6 +280,17 @@ export default function SinkPage() {
     status = (
       <div className="h-[90%] gap-8 md:gap-12 flex flex-col justify-center items-center">
         <span className="text-center md:text-lg">{message}</span>
+        <a
+          href={
+            appConfig.network === WalletNetwork.PUBLIC
+              ? `https://stellar.expert/explorer/public/tx/${completedTransactionHash}`
+              : `https://stellar.expert/explorer/testnet/tx/${completedTransactionHash}`
+          }
+          target="_blank"
+          className="text-accentSecondary underline mt-3"
+        >
+          View this transaction on Stellar.expert
+        </a>
         <SuccessIcon />
       </div>
     );
@@ -230,7 +331,7 @@ export default function SinkPage() {
               }
             }}
           >
-            Return to dashboard
+            Go back
           </Button>
         )}
       </div>

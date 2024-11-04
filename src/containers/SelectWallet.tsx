@@ -77,6 +77,7 @@ export default function SelectWallet() {
   };
 
   useEffect(() => {
+    // Edit connection
     if (walletConnection) {
       setSelectedWallet(walletConnection.walletType);
       setTncAccepted(true);
@@ -88,13 +89,12 @@ export default function SelectWallet() {
   }, [walletConnection]);
 
   return (
-    <div className="p-6 flex flex-col gap-9 bg-secondary md:bg-primary md:border border-tertiary md:rounded">
+    <div className="p-6 flex flex-col gap-9 md:gap-16 md:my-16 bg-secondary md:bg-primary md:border border-tertiary md:rounded">
       <div className="flex flex-col gap-1 w-full">
-        <h1 className="text-2xl font-bold">Select a wallet</h1>
+        <h1 className="text-2xl font-bold">Connect your wallet</h1>
 
         <span className="text-sm mb-1 max-w-[80%] hidden md:block">
-          Connect a wallet to be able to create new transactions and access your
-          sinking history.
+          Connect a wallet to be able to create new transactions.
         </span>
         <span className="text-xs max-w-[80%] md:hidden">
           {selectedWallet
@@ -164,11 +164,13 @@ export default function SelectWallet() {
         )}
       </div>
 
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Contact details */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold ">Contact details (optional)</h1>
+        <h1 className=" text-xl md:text-2xl font-bold ">
+          Contact details (optional)
+        </h1>
 
         <span className="text-xs md:text-sm max-w-[80%] mb-4">
           Your contact details will be used to send you a confirmation of your
@@ -184,11 +186,11 @@ export default function SelectWallet() {
         />
       </div>
 
-      <Divider />
+      {/* <Divider /> */}
 
       {/* Privacy policy */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold">Privacy policy</h1>
+        <h1 className="text-xl md:text-2xl font-bold">Privacy policy</h1>
         <p className="text-xs md:text-sm max-w-[80%]">
           Read about our terms & conditions and privacy policy <u>here</u>.
         </p>
@@ -220,7 +222,7 @@ export default function SelectWallet() {
         </FormError>
       )}
 
-      <Button className="mb-9 h-10 self-center" onClick={submitForm}>
+      <Button className="h-10 self-center" onClick={submitForm}>
         Connect wallet
       </Button>
 
