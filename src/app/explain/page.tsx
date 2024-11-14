@@ -26,17 +26,30 @@ export default function ExplainPage() {
         <div className="tracking-wide leading-7">
           <p>
             At Stellarcarbon, we offer a unique solution for individuals and
-            businesses to take direct climate action by purchasing and sinking
-            our CARBON token (<CARBONCurrencyIcon className="inline" />
-            ). Each token represents one tonne of CO₂. Users can initiate a
-            sinking transaction through our API, which purchases a CARBON token
-            (<CARBONCurrencyIcon className="inline" />) that is instantly “sunk”
-            into our CarbonSINK. This transaction not only removes the token
-            from circulation but also creates a commitment for Stellarcarbon to
-            retire an equivalent amount of verified CO₂ credits on Verra. By
-            sinking <CARBONCurrencyIcon className="inline" />, users actively
-            contribute to real-world CO₂ reduction and support credible, vetted
-            projects that make a measurable impact on the environment.
+            businesses to take direct climate action. By sinking{" "}
+            <CARBONCurrencyIcon className="inline" />, users actively contribute
+            to real-world CO₂ reduction and support credible, vetted projects
+            that make a measurable impact on the environment. Each token
+            represents an estimated 1 tonne of CO₂ emission equivalent.
+          </p>
+          <span className="text-2xl">Confidence</span>
+          <p className="mt-1">
+            Providing a trustworthy solution to CO2 reduction so our users can
+            compensate their emissions with confidence is our top priority. We
+            do this by only working with projects that are enlisted in the Verra
+            registry. The Verra registry is an accredited project registry with
+            a Verified Carbon Standard. On top of that, Stellarcarbon is in
+            direct contact with each of our projects making sure project goals
+            are met.
+          </p>
+          <span className="text-2xl">How it works</span>
+          <p className="mt-1">
+            A user can initiate a sinking transaction using our website or API,
+            which sinks CARBON tokens (
+            <CARBONCurrencyIcon className="inline" />) into the CarbonSINK. This
+            transaction not only removes the token from circulation but also
+            creates a commitment for Stellarcarbon to retire an equivalent
+            amount of Verified Carbon Units (VCU) on Verra.
           </p>
         </div>
 
