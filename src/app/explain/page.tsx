@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import AuditTable from "@/containers/AuditTable";
 
 export default function ExplainPage() {
@@ -36,25 +37,28 @@ export default function ExplainPage() {
 
         <Header>Some calculations</Header>
         <div className="tracking-wide leading-7">
-          <p>
-            In ut eros pretium velit congue fringilla. Fusce id commodo nibh.
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-            per inceptos himenaeos. Nullam viverra fringilla purus, ac
-            pellentesque nulla luctus id. Mauris in nisl sapien. Aliquam felis
-            libero, blandit id feugiat et, placerat nec tortor. Aliquam egestas
-            nunc et pellentesque auctor. Integer egestas placerat augue id
-            finibus. Duis feugiat turpis eget ultrices faucibus. Mauris cursus
-            sodales sapien, in viverra nulla. Sed sit amet neque vulputate,
-            viverra nunc ut, egestas lacus. Aliquam fermentum, leo quis eleifend
-            laoreet, nunc neque tempus dolor, nec lacinia lectus libero in orci.
-            Duis eleifend tincidunt porttitor. Mauris enim nibh, ultricies nec
-            mi ut, volutpat viverra tellus. Sed ullamcorper finibus tortor, a
-            condimentum felis aliquet ut.
-          </p>
+          In ut eros pretium velit congue fringilla. Fusce id commodo nibh.
+          Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+          per inceptos himenaeos. Nullam viverra fringilla purus, ac
+          pellentesque nulla luctus id. Mauris in nisl sapien. Aliquam felis
+          libero, blandit id feugiat et, placerat nec tortor. Aliquam egestas
+          nunc et pellentesque auctor. Integer egestas placerat augue id
+          finibus. Duis feugiat turpis eget ultrices faucibus. Mauris cursus
+          sodales sapien, in viverra nulla. Sed sit amet neque vulputate,
+          viverra nunc ut, egestas lacus. Aliquam fermentum, leo quis eleifend
+          laoreet, nunc neque tempus dolor, nec lacinia lectus libero in orci.
+          Duis eleifend tincidunt porttitor. Mauris enim nibh, ultricies nec mi
+          ut, volutpat viverra tellus. Sed ullamcorper finibus tortor, a
+          condimentum felis aliquet ut.
         </div>
-      </div>
-      <div className="m-auto md:w-[900px]">
-        <AuditTable />
+        <span className="text-center py-4 font-semibold">
+          {`1000 kg = 1 ton = 1 VCU = 1 CARBON = 1`}
+          <CARBONCurrencyIcon className="inline ml-1" />
+          {` = 1 CarbonSINK`}
+        </span>
+        <div className="m-auto md:w-[900px]">
+          <AuditTable />
+        </div>
       </div>
     </main>
   );
