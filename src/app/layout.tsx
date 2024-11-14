@@ -13,8 +13,8 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; /* eslint-disable import/first */
 
 export const metadata: Metadata = {
-  title: "sc-website",
-  description: "sc-website staging",
+  title: "Stellarcarbon",
+  description: "Stellarcarbon staging website",
 };
 
 export default function RootLayout({

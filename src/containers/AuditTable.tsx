@@ -23,10 +23,9 @@ export default function AuditTable() {
         setIsLoading(false);
         setError(undefined);
 
-        const carbonPending: number = parseFloat(response.carbon_pending);
-        const carbonRetired: number = parseFloat(response.carbon_retired);
-        const carbonStored: number = parseFloat(response.carbon_stored);
-        const carbonSunk: number = parseFloat(response.carbon_sunk);
+        const carbonRetired = parseFloat(response.carbon_retired);
+        const carbonStored = parseFloat(response.carbon_stored);
+        const carbonSunk = parseFloat(response.carbon_sunk);
 
         setCarbonpoolStellar(carbonStored - carbonSunk);
         setCarbonpoolVerra(carbonStored - carbonRetired);
@@ -59,7 +58,7 @@ export default function AuditTable() {
               />
               <div className="text-xl font-bold">-</div>
               <AuditTableStat
-                label={"CARBON pool on Stellar"}
+                label={"CARBON on Stellar"}
                 number={carbonpoolStellar}
                 unit={"CARBON"}
               />
@@ -73,21 +72,21 @@ export default function AuditTable() {
               />
               <div className="text-xl font-bold">-</div>
               <AuditTableStat
-                label={"Carbon sunk on Verra"}
+                label={"VCU's sunk on Verra"}
                 number={carbonsinkVerra}
-                unit={"tonnes"}
+                unit={"VCU"}
               />
               <div className="text-xl font-bold">=</div>
             </div>
           </div>
           <div className="flex flex-col items-center justify-around border border-white p-2">
             <AuditTableStat
-              label={"Amount pending"}
+              label={"Pending retirement"}
               number={amountPendingPool}
               unit={"tonnes"}
             />
             <AuditTableStat
-              label={"Amount pending"}
+              label={"Pending retirement"}
               number={amountPendingSink}
               unit={"tonnes"}
             />

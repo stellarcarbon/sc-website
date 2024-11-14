@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import AuditTable from "@/containers/AuditTable";
+import Link from "next/link";
 
 export default function ExplainPage() {
   return (
@@ -8,8 +9,9 @@ export default function ExplainPage() {
       <div className="blockchain-bg w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
           <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
-            What is Stellarcarbon?
+            Stellarcarbon
           </span>
+          <span className="text-2xl md:text-[2vw] image1">Explained</span>
           {/* <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
             For the curious
           </span> */}
@@ -17,49 +19,140 @@ export default function ExplainPage() {
       </div>
 
       <div className="flex flex-col p-4 py-12 md:max-w-[1080px] md:m-auto">
-        <Header>An introduction</Header>
+        <Header>
+          An introduction to{" "}
+          <CARBONCurrencyIcon className="inline" width={30} height={40} />
+        </Header>
         <div className="tracking-wide leading-7">
           <p>
-            Stellarcarbon works by combining a cooperation with Verra for
-            reliable carbon compensation and the blockchain to enable users to
-            easily use their XLM to improve biodiversity and reduce CO2
-            emissions.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            non euismod quam. Nulla facilisi. Donec dignissim elementum dui sed
-            dignissim. Cras finibus augue neque, at auctor nisl interdum eget.
-            Duis ante velit, fermentum in lorem vel, scelerisque interdum neque.
-            Proin dolor ex, scelerisque id felis id, molestie finibus magna.
-            Pellentesque ac vulputate massa.
+            At Stellarcarbon, we offer a unique solution for individuals and
+            businesses to take direct climate action by purchasing and sinking
+            our CARBON token (<CARBONCurrencyIcon className="inline" />
+            ). Each token represents one tonne of CO₂. Users can initiate a
+            sinking transaction through our API, which purchases a CARBON token
+            (<CARBONCurrencyIcon className="inline" />) that is instantly “sunk”
+            into our CarbonSINK. This transaction not only removes the token
+            from circulation but also creates a commitment for Stellarcarbon to
+            retire an equivalent amount of verified CO₂ credits on Verra. By
+            sinking <CARBONCurrencyIcon className="inline" />, users actively
+            contribute to real-world CO₂ reduction and support credible, vetted
+            projects that make a measurable impact on the environment.
           </p>
         </div>
 
-        <Header>Some calculations</Header>
+        <>
+          <Header>Our token balance</Header>
+          <div className="tracking-wide leading-7">
+            To maintain transparency in carbon credits and accurately track CO₂
+            reductions, we provide a detailed breakdown of our balances and
+            processes for sinking carbon on the Stellar blockchain. Below, we
+            clarify how our system operates and how each figure displayed on
+            this page is calculated.
+          </div>
+          <UnitExplanationList />
+          <div className="tracking-wide leading-7">
+            {`Any difference between the inventories on the blockchain and Verra are
+          of temporary nature. As our users sink CARBON, retirement of these tokens is
+           initiated. During
+          this process the VCU's are dedicated to a certificate. Stellarcarbon
+          provides personal certificates as well as a automatic community
+          retirement certificate option.`}
+            <br />
+            <br />
+            Eventually all CARBON pending retirement will be accounted for in
+            these community certificates.
+          </div>
+          <span className="text-center py-4 font-semibold">
+            {`1000 kg = 1 ton = 1 VCU = 1 CARBON = 1`}
+            <CARBONCurrencyIcon className="inline ml-1" />
+            {` = 1 CarbonSINK`}
+          </span>
+          <div className="m-auto md:w-[900px] mb-16">
+            <AuditTable />
+          </div>
+        </>
+
+        <Header>Understanding Carbon Accounting on Stellar</Header>
         <div className="tracking-wide leading-7">
-          In ut eros pretium velit congue fringilla. Fusce id commodo nibh.
-          Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-          per inceptos himenaeos. Nullam viverra fringilla purus, ac
-          pellentesque nulla luctus id. Mauris in nisl sapien. Aliquam felis
-          libero, blandit id feugiat et, placerat nec tortor. Aliquam egestas
-          nunc et pellentesque auctor. Integer egestas placerat augue id
-          finibus. Duis feugiat turpis eget ultrices faucibus. Mauris cursus
-          sodales sapien, in viverra nulla. Sed sit amet neque vulputate,
-          viverra nunc ut, egestas lacus. Aliquam fermentum, leo quis eleifend
-          laoreet, nunc neque tempus dolor, nec lacinia lectus libero in orci.
-          Duis eleifend tincidunt porttitor. Mauris enim nibh, ultricies nec mi
-          ut, volutpat viverra tellus. Sed ullamcorper finibus tortor, a
-          condimentum felis aliquet ut.
+          <p>
+            At Stellarcarbon, transparency is key. Our platform enables anyone
+            to support meaningful CO₂ reduction projects, but we know that clear
+            accounting is essential to building trust and credibility. This page
+            provides a detailed view of how we track, balance, and “sink” CO₂
+            emissions using our CARBON and CarbonSINK tokens on the Stellar
+            blockchain.
+          </p>
+          <p>
+            Every step in our process, from inventory tracking to retirement on
+            Verra, is meticulously recorded and displayed here. Using an atomic
+            swap system, we ensure that for every CARBON token purchased and
+            retired, a corresponding CarbonSINK token is issued, representing
+            verifiable CO₂ compensation. Our tables and figures give a real-time
+            view of our current inventory, available supply, and the pending
+            emissions still to be offset, making the carbon accounting process
+            clear and accessible for everyone.
+          </p>
+          <p>
+            With this transparent system, you can confidently support projects
+            that genuinely contribute to biodiversity and climate impact,
+            knowing exactly how your carbon offset is managed and retired.
+          </p>
         </div>
-        <span className="text-center py-4 font-semibold">
-          {`1000 kg = 1 ton = 1 VCU = 1 CARBON = 1`}
-          <CARBONCurrencyIcon className="inline ml-1" />
-          {` = 1 CarbonSINK`}
-        </span>
-        <div className="m-auto md:w-[900px]">
-          <AuditTable />
+        <Header>Audit tool</Header>
+        <div className="tracking-wide leading-7">
+          <p>
+            To enhance transparency and give users full confidence in our carbon
+            accounting process, we offer an open-source auditing tool available
+            on GitHub. This tool allows anyone to independently verify our
+            carbon balance, track the lifecycle of CARBON and CarbonSINK tokens,
+            and monitor the integrity of our sinking mechanism on the Stellar
+            blockchain. We also use it ourselves behind the scenes to power our
+            API.
+            <br />
+            <br /> Check it out{" "}
+            <Link
+              className="underline"
+              href="https://github.com/stellarcarbon/sc-audit"
+              target="_blank"
+            >
+              here
+            </Link>
+            .
+          </p>
         </div>
       </div>
     </main>
+  );
+}
+
+function UnitExplanationList() {
+  return (
+    <ul className="px-8 pt-4 my-4 list-disc bg-primary border border-tertiary rounded-md md:w-[90%] self-center">
+      <UnitExplanation
+        title={`VCU pool on Verra`}
+        text={`This is our current inventory of VCU's at Verra.`}
+      />
+      <UnitExplanation
+        title={`VCU's burned on Verra`}
+        text={`These VCU's have been 'burned' at the Verra registry, making them no longer tradeable.`}
+      />
+      <UnitExplanation
+        title={`CARBON on Stellar`}
+        text={`The amount CARBON currently for available for sale on the Stellar blockchain.`}
+      />
+      <UnitExplanation
+        title={`CarbonSINK on Stellar`}
+        text={`When CARBON is sold, CarbonSINK is created and the CARBON is sunk, indicating this token can no longer be sold.`}
+      />
+    </ul>
+  );
+}
+
+function UnitExplanation({ title, text }: { title: string; text: string }) {
+  return (
+    <li className="mb-4">
+      <h3 className="text-xl">{title}</h3>
+      <span className="text-sm">{text}</span>
+    </li>
   );
 }

@@ -1,8 +1,29 @@
+"use client";
+
+import { CarbonService } from "@/client";
 import CountUp from "@/components/CountUp";
 import Header from "@/components/Header";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Blocks } from "react-loader-spinner";
 
 export default function ExplainSection() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [carbonStored, setCarbonStored] = useState<number>(0);
+  const [carbonSunk, setCarbonSunk] = useState<number>(0);
+
+  useEffect(() => {
+    CarbonService.getCarbonStats()
+      .then((response) => {
+        const cStored = parseFloat(response.carbon_stored);
+        const cSunk = parseFloat(response.carbon_sunk);
+        setCarbonStored(cStored);
+        setCarbonSunk(cSunk);
+        setIsLoading(false);
+      })
+      .catch((err) => {});
+  }, []);
+
   return (
     <div className="flex flex-col md:flex-row py-12 m-auto w-full border-y border-y-tertiary">
       {/* Text */}
@@ -29,17 +50,23 @@ export default function ExplainSection() {
         </div>
       </div>
       {/* Stats */}
-      <div className="flex flex-col justify-center mt-8 md:mt-0 md:flex-1">
-        <CountUp
-          value={202000}
-          subject={"Carbon stored on the Stellar Network"}
-          unit={"Kilograms"}
-        />
-        <CountUp
-          value={26000}
-          subject={"Carbon sunk by users"}
-          unit={"Kilograms"}
-        />
+      <div className="flex flex-col justify-center items-center mt-8 md:mt-0 md:flex-1">
+        {isLoading ? (
+          <Blocks />
+        ) : (
+          <>
+            <CountUp
+              value={carbonStored}
+              subject={"Carbon stored on the Stellar Network"}
+              unit={"Tonnes"}
+            />
+            <CountUp
+              value={carbonSunk * 1000}
+              subject={"Carbon sunk by users"}
+              unit={"Kilograms"}
+            />
+          </>
+        )}
       </div>
     </div>
   );
