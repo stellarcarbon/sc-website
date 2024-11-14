@@ -56,9 +56,9 @@ export default function ExplainSection() {
         ) : (
           <>
             <CountUp
-              value={carbonStored}
+              value={carbonStored * 1000}
               subject={"Carbon stored on the Stellar Network"}
-              unit={"Tonnes"}
+              unit={"Kilograms"}
             />
             <CountUp
               value={carbonSunk * 1000}
