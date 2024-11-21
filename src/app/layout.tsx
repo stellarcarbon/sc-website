@@ -24,6 +24,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          data-domain="test.stellarcarbon.io"
+          src="https://plausible.io/js/script.js"
+        ></script>
+      </head>
       <AppContextProvider>
         <body className={`${inter.className}`}>
           <App>{children}</App>
