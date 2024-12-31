@@ -29,7 +29,7 @@ As a bonus achievement, we've launched a working (mainnet) [demo dApp](https://n
 
 We want to develop a simple smart contract that allows the atomic swap of our payment token (CARBON) for our locked retirement token (CarbonSINK) to be done with Soroban. The Stellar Asset Contract (SAC) will be used to interact with the existing tokens. This will allow further automation through smart contracts, and let integration partners choose between Soroban and a classic Stellar + HTTP API approach, with equivalent functionality.
 
-To enable payments through Soroban, we aim to use a Soroswap liquidity pool for CARBON/USDC as an alternative for the built in payment functionality of our API. It will be of limited size (since all our CARBON is fully backed), and the Stellarcarbon backend will automatically replenish the pool to keep its price in line with our primary sales. We'll start with a constant product pool on testnet but we'll migrate to a concentrated liquidity pool as soon as Soroswap launches it.
+To enable payments through Soroban, we aim to use a Soroswap liquidity pool for CARBON/USDC as an alternative for the built in payment functionality of our API. It will be of limited size (since all our CARBON is fully backed), and the Stellarcarbon backend will automatically replenish the pool to keep its price in line with our primary sales. We'll start with a constant product pool on testnet but we plan to migrate to a concentrated liquidity pool as soon as Soroswap launches it.
 
 ### SAC for CARBON
 
@@ -55,17 +55,56 @@ Our sink carbon contract implements one user-facing function `sink_carbon`. With
 
 - Admin: Account
 - CarbonSinkID: Address
-- Paused: bool
+- IsActive: bool
 
-**fn __constructor:**
+#### fn __constructor
+
+Arguments:
 
 - admin: will be set to the CarbonSINK issuer
 - carbonsink_id: CarbonSINK SAC address
 
-Additionally puts Paused: false in instance storage.
+Additionally puts IsActive: true in instance storage.
 
-**fn sink_carbon:**
+#### fn sink_carbon
 
-**fn reset_admin:**
+Arguments:
 
-**fn toggle_paused:**
+- funder: Address
+- recipient: Address
+- amount: u64
+- project_id: u32
+- memo_text: Bytes
+- email: Bytes
+
+Auth required: funder
+
+Atomically swap an amount of CARBON held by the funder to CarbonSINK in the recipient account. In common usage the funder and recipient addresses are equal. The CARBON is burned by the funder, and the CarbonSINK is minted by this contract.
+
+The sub-contract calls to `carbonsink_client.mint` and `carbonsink_client.set_authorized` require SAC admin authorization, which is implicitly granted because the contract invoker is set to be the SAC admin.
+
+We'll panic with custom error codes for common user errors, such as trying to sink an amount of CARBON with an insufficient balance, or having forgotten to set up a CarbonSINK trustline on a recipient account. It would be feasible to do comprehensive validation of project IDs here, but we will initially fall back to the default value in our backend when unknown values are provided. We will point out this behavior to users during the testing phase, and implement the level of validation that they're comfortable with. The memo and email arguments are not required and will allow empty literals as well as values that our backend isn't willing to accept.
+
+TODO: Events!
+
+#### fn reset_admin
+
+Auth required: Admin
+
+This function calls `set_admin` on the CarbonSINK SAC and sets it to the value of the Admin key. It also deactivates the contract, since the `sink_carbon` function can't function properly without SAC admin privileges. It is included for recovery purposes and to allow this contract to be replaced with a successor.
+
+#### fn activate
+
+Auth required: Admin
+
+Sets IsActive to true.
+
+#### fn deactivate
+
+Auth required: Admin
+
+Sets IsActive to false. There aren't any specific triggers that would necessitate a pause (without additional changes), but we reserve this functionality for any undesirable behavior.
+
+#### fn is_active
+
+Checks whether the contract is active.
