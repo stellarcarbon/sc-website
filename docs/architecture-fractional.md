@@ -48,13 +48,11 @@ As you can see in the above database schema, the data that we need to store is w
 
 The aforementioned tables are all filled with immutable records. During the design of this database schema, it occurred to us that we can implement the m2m relations between these tables as immutable objects as well. Some parsing is required to construct the `sink_status` and `retirement_from_block` objects, but once they have been inserted into the DB, they won't need to be updated. The views on pending retirements and Stellarcarbon's current inventory can be computed by joining these tables. This design makes it easy to dump tables as a collection of insert statements, allowing database operators to restore or catch up from a dump without having to deal with complicated synchronization logic.
 
-
 ### Stellarcarbon API
 
 The account management functionality needs to be exposed by our API. It will be extended with endpoints that list an account's transactions and their status, and view all retirements associated with an account. The existing registry endpoints will be deprecated and replaced with views on Stellarcarbon's inventory and retirements that are populated by the database. A retirement detail view will also incorporate the relation with transactions, and shows a breakdown of the amount of credits retired. Lastly, an endpoint needs to be added which allows a user to ask that Stellarcarbon immediately retires the credits that correspond to their pending balance.
 
 Several improvements are needed to ensure that fractional retirements can be processed smoothly. A background job needs to be added to the backend to ensure that users won't need to take any action for their pending retirements to be finalized when they add up to a round number. Another job will query the database for pending balances older than e.g. 90 days, and bundle them into a collective retirement. We also need a new staging deployment to facilitate integration testing. Our current version is not consistently available on testnet because Verra lacks a testing/staging environment. After we have implemented our database, we can sufficiently mock Verra data to make a staging environment that writes to testnet available at all times.
-
 
 ### User Interface
 
@@ -62,13 +60,11 @@ The fractional retirement functionality will be located in the account managemen
 
 We've designed our user dashboard to have its functionality split into three tabs, to: sink carbon, proceed with pending retirements, and view past transactions. On the pending retirements tab, users will be able to see how much additional carbon they'd have to sink to obtain their next individual retirement certificate from Verra. Alternatively, users with a pending balance of at least 1 tonne may choose to immediately request a certificate for their whole tonnes. The tab will also show for each transaction when their right to an individual retirement certificate will expire, after which the transactions can be bundled with those of other users, leading to a collective retirement certificate.
 
-
 ### Soroban
 
 Stellarcarbon needs to expose at least some functionality through Soroban. Our integration partner CFCE has been writing smart contracts to automatically split donation payments, and to emit a contract event whenever the funds that are accumulated to be used for credit retirement exceed the price of 1 tonne. Without the ability to actually sink carbon from within a Soroban contract, we're left with an annoying manual step in this integration. We want to develop a simple smart contract that allows the atomic swap of our payment token (CARBON) for our locked retirement token (CarbonSINK) to be done with Soroban. The Stellar Asset Contract will be used to interact with the existing tokens.
 
 It is paramount to maintain our operational security, and we expect some challenges relating to the use of the CarbonSINK issuer keypair in authorizing transactions to occur on Soroban. We want to initially only publish this smart contract on testnet to allow for sufficient time to test the integration together with our partner, and to have as much time as we need to consider the security implications of launching the contract on the public network.
-
 
 ### Legal
 
