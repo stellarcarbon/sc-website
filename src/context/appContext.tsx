@@ -38,11 +38,11 @@ import { AppConfiguration } from "@/app/types";
 console.log(`NEXT_PUBLIC_PRODUCTION: ${process.env.NEXT_PUBLIC_PRODUCTION}`);
 if (process.env.NEXT_PUBLIC_PRODUCTION === "development") {
   OpenAPI.BASE = "http://localhost:8000";
-  // OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
+  // OpenAPI.BASE = "https://api.stellarcarbon.io";
 } else if (process.env.NEXT_PUBLIC_PRODUCTION === "production") {
   OpenAPI.BASE = "https://api.stellarcarbon.io";
 } else {
-  OpenAPI.BASE = "https://api-beta.stellarcarbon.io/test";
+  OpenAPI.BASE = "https://api.stellarcarbon.io/test";
 }
 
 declare global {

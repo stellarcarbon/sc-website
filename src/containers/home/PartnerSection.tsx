@@ -21,7 +21,7 @@ export default function PartnerSection() {
               sed dignissim.
             </p>
             <Link
-              href="https://api-beta.stellarcarbon.io/docs"
+              href="https://api.stellarcarbon.io/docs"
               target="_blank"
               className="underline text-sm"
             >

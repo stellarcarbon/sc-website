@@ -18,7 +18,7 @@ This document first briefly gives an overview of our current service, before goi
 
 ## Current Version
 
-The current Stellarcarbon service has been functional for integration partners, but does not yet offer a usable retail interface. We have a [website](https://www.stellarcarbon.io/) running on a Wordpress platform, and we've run into its limitations regarding further Stellar integration. Separately, our partners have been integrating [our API](https://api-beta.stellarcarbon.io/docs) into their frontends. We've started building a [new website](https://sc-website-eosin.vercel.app) based on the NextJS framework that exposes the kind of interactivity that we want to offer to our users.
+The current Stellarcarbon service has been functional for integration partners, but does not yet offer a usable retail interface. We have a [website](https://www.stellarcarbon.io/) running on a Wordpress platform, and we've run into its limitations regarding further Stellar integration. Separately, our partners have been integrating [our API](https://api.stellarcarbon.io/docs) into their frontends. We've started building a [new website](https://sc-website-eosin.vercel.app) based on the NextJS framework that exposes the kind of interactivity that we want to offer to our users.
 
 Our infrastructure enables the integration between the Stellar network and traditional carbon credit registries. For our pilot project we've built a connection with the Verra Registry, where we hold an inventory of credits (with additional community and biodiversity benefits) that can be retired on behalf of our users.
 

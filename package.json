@@ -13,7 +13,7 @@
     "e2e:headless": "cross-env NODE_ENV=test next build && cross-env NODE_ENV=test start-server-and-test start http://localhost:3000 \"cypress run --e2e\"",
     "test": "vitest",
     "test:ci": "vitest run",
-    "generate-client": "openapi --useOptions --input https://api-beta.stellarcarbon.io/test/openapi.json --output ./src/client --client axios",
+    "generate-client": "openapi --useOptions --input https://api.stellarcarbon.io/test/openapi.json --output ./src/client --client axios",
     "generate-client-local": "openapi --useOptions --input http://localhost:8000/openapi.json --output ./src/client --client axios"
   },
   "dependencies": {

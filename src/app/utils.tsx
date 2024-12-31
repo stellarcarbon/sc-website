@@ -123,10 +123,10 @@ export const mRequestCertificate = async ({
   // jwt used to prove identity for this request
   jwt: string;
 }): Promise<RequestCertificateResponse | undefined> => {
-  let baseUrl = "https://api-beta.stellarcarbon.io";
+  let baseUrl = "https://api.stellarcarbon.io";
   if (process.env.NODE_ENV === "development") {
     baseUrl = "http://localhost:8000";
-    // OpenAPI.BASE = "https://api-beta.stellarcarbon.io";
+    // OpenAPI.BASE = "https://api.stellarcarbon.io";
   }
   const response = await fetch(
     `${baseUrl}/recipients/${recipientAddress}/request-certificate?email=${email}`,
