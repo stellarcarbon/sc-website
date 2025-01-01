@@ -27,7 +27,7 @@ As a bonus achievement, we've launched a working (mainnet) [demo dApp](https://n
 
 ## Soroban Interface
 
-We want to develop a simple smart contract that allows the atomic swap of our payment token (CARBON) for our locked retirement token (CarbonSINK) to be done with Soroban. The Stellar Asset Contract (SAC) will be used to interact with the existing tokens. This will allow further automation through smart contracts, and let integration partners choose between Soroban and a classic Stellar + HTTP API approach, with equivalent functionality.
+We want to develop a simple smart contract that allows the atomic swap of our payment token (CARBON) for our locked retirement token (CarbonSINK) to be done with Soroban. The [Stellar Asset Contract](https://developers.stellar.org/docs/tokens/stellar-asset-contract) (SAC) will be used to interact with the existing tokens. This will allow further automation through smart contracts, and let integration partners choose between Soroban and a classic Stellar + HTTP API approach, with equivalent functionality.
 
 To enable payments through Soroban, we aim to use a Soroswap liquidity pool for CARBON/USDC as an alternative for the built in payment functionality of our API. It will be of limited size (since all our CARBON is fully backed), and the Stellarcarbon backend will automatically replenish the pool to keep its price in line with our primary sales. We'll start with a constant product pool on testnet but we plan to migrate to a concentrated liquidity pool as soon as Soroswap launches it.
 
@@ -39,7 +39,7 @@ This contract is used to interact with the CARBON asset on behalf of the transac
 
 ### SAC for CarbonSINK
 
-This contract is used to interact with the CarbonSINK asset within the sink carbon contract. It needs to be able to execute the authorization sandwitch without needing additional signatures.
+This contract is used to interact with the CarbonSINK asset within the sink carbon contract. It needs to be able to execute the authorization sandwich without needing additional signatures.
 
 **Admin:** sink carbon contract
 
@@ -72,8 +72,8 @@ Arguments:
 
 - funder: Address
 - recipient: Address
-- amount: u64
-- project_id: u32
+- amount: i64
+- project_id: i32
 - memo_text: Bytes
 - email: Bytes
 
@@ -85,7 +85,9 @@ The sub-contract calls to `carbonsink_client.mint` and `carbonsink_client.set_au
 
 We'll panic with custom error codes for common user errors, such as trying to sink an amount of CARBON with an insufficient balance, or having forgotten to set up a CarbonSINK trustline on a recipient account. It would be feasible to do comprehensive validation of project IDs here, but we will initially fall back to the default value in our backend when unknown values are provided. We will point out this behavior to users during the testing phase, and implement the level of validation that they're comfortable with. The memo and email arguments are not required and will allow empty literals as well as values that our backend isn't willing to accept.
 
-TODO: Events!
+Events:
+
+All function call arguments need to be emitted, and stored together with the transaction hash and an ordering attribute to account for multiple calls within a transaction. This is possible with native Soroban events, but we'd prefer to use [Mercury Retroshades](https://www.mercurydata.app/products/retroshades) for our use case to keep the contract and our associated backend code lightweight. Retroshades doesn't yet support all our needs, unfortunately. While we can emit any values we want from our extended contract code, the tx hash and other data added by Core and propagated by the RPC server is not yet available through Retroshades. We'll work with the Mercury team to hopefully add those features, and if this isn't possible in time we'll fall back to native event ingestion.
 
 #### fn reset_admin
 
