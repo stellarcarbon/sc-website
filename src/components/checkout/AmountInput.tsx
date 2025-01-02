@@ -146,9 +146,9 @@ export default function AmountInput({
             <CARBONCurrencyIcon className="" />
           </div>
           <input
-            type="number"
-            inputMode="numeric"
-            className="px-2 py-1 w-full text-black rounded-sm"
+            type="text"
+            inputMode="decimal"
+            className="px-2 pr-9 py-1 w-full text-black rounded-sm text-right"
             {...register("tonnes", {
               validate: () => {
                 return !hasError || "The selected CARBON amount is invalid.";
@@ -168,6 +168,7 @@ export default function AmountInput({
           </div>
           <input
             type="text"
+            inputMode="decimal"
             className="px-2 pl-7 py-1 w-full text-black rounded-sm"
             value={quote || ""}
             onChange={(e) => {
@@ -203,8 +204,8 @@ export default function AmountInput({
             </div>
             {showFractionalWarning && (
               <span className="md:mx-12 text-sm text-center">
-                If you sink a fractional amount of CARBON you cannot receive a
-                personal certificate without either rounding down or up. Read
+                If you sink a fractional amount of CARBON you cannot receive an
+                indvidual certificate without either rounding down or up. Read
                 more <span className="underline">here</span>.
               </span>
             )}
