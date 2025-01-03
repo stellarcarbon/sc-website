@@ -25,6 +25,24 @@ For an extensive description of these milestones, see our [previous architecture
 
 As a bonus achievement, we've launched a working (mainnet) [demo dApp](https://new.stellarcarbon.io/) featuring a flight emissions calculator in time for Meridian 2024. Give it a spin!
 
+## Interaction overview
+
+In this section we provide an overview of the interactions and interfaces in our product system. Our two target audiences "retail users" and "integration partners" use our system in these ways.
+
+The blocks are color coded per service. Red is the website, green is our HTTP API and blue is Soroban.
+
+### Retail user flow
+
+These users visit our website individually looking to compensate CO2 emissions or contribute to biodiversity. They can browse information about Stellarcarbon and easily engage with Stellarcarbon functionality after connecting their wallet.
+
+![Retail user flow](img/retail-user-flow.png)
+
+### Integration partner flow
+
+We provide two options for integration partners that want to provide CO2 compensation methods in their own offerings. Either through a Soroban integration or using our HTTP API. Optionally, they may also use the HTTP API to fetch dynamic information about Stellarcarbon.
+
+![Integration partner flow](img/integration-partner-flow.png)
+
 ## Soroban Interface
 
 We want to develop a simple smart contract that allows the atomic swap of our payment token (CARBON) for our locked retirement token (CarbonSINK) to be done with Soroban. The [Stellar Asset Contract](https://developers.stellar.org/docs/tokens/stellar-asset-contract) (SAC) will be used to interact with the existing tokens. This will allow further automation through smart contracts, and let integration partners choose between Soroban and a classic Stellar + HTTP API approach, with equivalent functionality.
@@ -57,7 +75,7 @@ Our sink carbon contract implements one user-facing function `sink_carbon`. With
 - CarbonSinkID: Address
 - IsActive: bool
 
-#### fn __constructor
+#### fn \_\_constructor
 
 Arguments:
 
