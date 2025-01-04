@@ -4,7 +4,18 @@ We have been building the infrastructure needed to connect legacy carbon markets
 
 This document first briefly gives an overview of our latest progress, before going into detail on what we want to add in our SCF #33 submission.
 
-TODO: TOC
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Progress](#progress)
+- [Interaction Overview](#interaction-overview)
+   * [Retail user flow](#retail-user-flow)
+   * [Integration partner flow](#integration-partner-flow)
+- [Soroban Interface](#soroban-interface)
+   * [SAC for CARBON](#sac-for-carbon)
+   * [SAC for CarbonSINK](#sac-for-carbonsink)
+   * [Sink Carbon Contract](#sink-carbon-contract)
+
+<!-- TOC end -->
 
 ## Progress
 
@@ -25,21 +36,21 @@ For an extensive description of these milestones, see our [previous architecture
 
 As a bonus achievement, we've launched a working (mainnet) [demo dApp](https://new.stellarcarbon.io/) featuring a flight emissions calculator in time for Meridian 2024. Give it a spin!
 
-## Interaction overview
+## Interaction Overview
 
-In this section we provide an overview of the interactions and interfaces in our product system. Our two target audiences "retail users" and "integration partners" use our system in these ways.
+In this section we provide an overview of the interactions and interfaces in our product. Our two target audiences "retail users" and "integration partners" use our system in these ways.
 
-The blocks are color coded per service. Red is the website, green is our HTTP API and blue is Soroban.
+The blocks are color coded per service. Red is a dApp frontend (ours or a partner's), green is our HTTP API and blue is Soroban.
 
 ### Retail user flow
 
-These users visit our website individually looking to compensate CO2 emissions or contribute to biodiversity. They can browse information about Stellarcarbon and easily engage with Stellarcarbon functionality after connecting their wallet.
+These users visit our website individually looking to compensate CO₂ emissions or contribute to biodiversity. They can browse information about Stellarcarbon and easily engage with Stellarcarbon functionality after connecting their wallet.
 
 ![Retail user flow](img/retail-user-flow.png)
 
 ### Integration partner flow
 
-We provide two options for integration partners that want to provide CO2 compensation methods in their own offerings. Either through a Soroban integration or using our HTTP API. Optionally, they may also use the HTTP API to fetch dynamic information about Stellarcarbon.
+We provide two options for integration partners that want to provide CO₂ compensation methods in their own offerings. Either through a Soroban integration or by using our HTTP API. Optionally, they may also use the HTTP API to fetch dynamic information about Stellarcarbon, including the activity of their own users.
 
 ![Integration partner flow](img/integration-partner-flow.png)
 
