@@ -8,12 +8,12 @@ This document first briefly gives an overview of our latest progress, before goi
 
 - [Progress](#progress)
 - [Interaction Overview](#interaction-overview)
-   * [Retail user flow](#retail-user-flow)
-   * [Integration partner flow](#integration-partner-flow)
+  - [Retail user flow](#retail-user-flow)
+  - [Integration partner flow](#integration-partner-flow)
 - [Soroban Interface](#soroban-interface)
-   * [SAC for CARBON](#sac-for-carbon)
-   * [SAC for CarbonSINK](#sac-for-carbonsink)
-   * [Sink Carbon Contract](#sink-carbon-contract)
+  - [SAC for CARBON](#sac-for-carbon)
+  - [SAC for CarbonSINK](#sac-for-carbonsink)
+  - [Sink Carbon Contract](#sink-carbon-contract)
 
 <!-- TOC end -->
 
