@@ -21,16 +21,16 @@ export default function Overview() {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-8 md:mt-12">
         <DashboardTitle>
           Activity summary<span> (testnet)</span>
         </DashboardTitle>
         <TransactionSummary />
       </div>
 
-      <div className="flex flex-col w-full ">
+      <div className="flex flex-col w-full mt-8 md:mt-12">
         <DashboardTitle>Wallet Connection</DashboardTitle>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col items-center gap-6 mt-6 mx-4 md:mx-8">
           <WalletConnectionInfo />
 
           {showContactInformationForm ? (

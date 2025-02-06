@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import TopBar from "@/components/TopBar";
 import { useAppContext } from "@/context/appContext";
 import DemoApp from "../containers/demo/DemoApp";
+import StellarCarbonIcon from "@/components/icons/StellarCarbonIcon";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function App({ children }: { children: React.ReactNode }) {
   const { isDrawerOpen, appConfig } = useAppContext();

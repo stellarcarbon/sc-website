@@ -191,10 +191,10 @@ export default function RoundDownPage() {
       <div className="flex-1 flex flex-col justify-center">
         <div className="flex flex-col p-6 py-8 md:p-12 justify-start items-center gap-6 text-center">
           <FontAwesomeIcon icon={faUserShield} className="text-[48px]" />
-          <span className="">Auth challenge signed and valid.</span>
+          <span>Auth challenge signed and valid.</span>
 
-          <span className="">
-            Commit the request for a certificate of{" "}
+          <span>Commit the request for a certificate of </span>
+          <span className="text-2xl flex items-center gap-1">
             {Math.floor(totalCarbonPending)}
             <CARBONCurrencyIcon className="inline ml-1" />
           </span>

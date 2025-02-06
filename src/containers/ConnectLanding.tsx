@@ -12,8 +12,8 @@ export default function ConnectLanding() {
         wallet that is supported.
       </span>
       <span>
-        Optionally, you can provide us with your contact details so we can
-        create and send personalized certificates to you.
+        Additionally, you can optionally provide us with your contact details so
+        we can create and send personalized certificates to you.
       </span>
       <span>
         All connection data is only stored in your browser and not on our

@@ -73,7 +73,7 @@ export default function RequestCertificate({
   let body = <></>;
   if (step === RequestCertificateStates.info) {
     body = (
-      <div className="p-4 flex flex-col gap-4 items-center">
+      <>
         <h2 className="text-lg font-semibold">Create a personal certificate</h2>
         <span className="text-center">
           Any pending retirements will automatically retire into the community
@@ -106,13 +106,13 @@ export default function RequestCertificate({
         >
           Request certificate
         </Button>
-      </div>
+      </>
     );
   }
 
   if (step === RequestCertificateStates.choose) {
     body = (
-      <div className="p-4 flex flex-col gap-4 items-center">
+      <>
         <div className="relative flex w-full justify-center">
           <h2 className="text-xl font-semibold">Requesting a certificate</h2>
         </div>
@@ -172,13 +172,13 @@ export default function RequestCertificate({
             <CARBONCurrencyIcon className="inline ml-1" />
           </Button>
         </div>
-      </div>
+      </>
     );
   }
 
   if (step === RequestCertificateStates.anonymous) {
     body = (
-      <div className="p-4 flex flex-col gap-4 items-center">
+      <>
         <h2 className="text-lg md:text-lg font-semibold">
           Request certificate
         </h2>
@@ -210,12 +210,12 @@ export default function RequestCertificate({
           </Button>
           {formError && <div className="text-red-500">{formError}</div>}
         </form>
-      </div>
+      </>
     );
   }
 
   return (
-    <div>
+    <div className="p-4 md:p-6 flex flex-col gap-4 items-center">
       {body}
       {step !== RequestCertificateStates.info && (
         <Button

@@ -196,8 +196,12 @@ export default function SelectWallet() {
         </p>
 
         <div
-          className={`!cursor:pointer pl-2 gap-2 flex items-center font-bold border  border-transparent rounded-md 
-        ${tncAccepted ? "bg-primary !border-accentSecondary" : "bg-secondary "}
+          className={`!cursor:pointer pl-2 gap-2 flex items-center font-bold border rounded-md 
+        ${
+          tncAccepted
+            ? "bg-primary border-accentSecondary"
+            : "bg-secondary border-gray-700"
+        }
         `}
         >
           <input

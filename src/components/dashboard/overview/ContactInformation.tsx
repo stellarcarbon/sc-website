@@ -9,7 +9,7 @@ export default function OverviewContactInformation() {
       username and email address.
     </span>
   ) : (
-    <div className="flex flex-col gap-1 mx-4 md:mx-8 my-4">
+    <div className="flex flex-col gap-1 mx-4 md:mx-8 my-4 w-full">
       <div className="flex flex-col gap-3 text-base">
         <div className="flex justify-between items-center border-b border-b-tertiary">
           <span className="text-white md:text-lg font-semibold">Name</span>
