@@ -53,9 +53,9 @@ export default function DemoCheckoutForm() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full mt-6 md:mt-12">
       <DashboardTitle>Sink CARBON</DashboardTitle>
-      <form className="flex flex-col gap-12 md:gap-16 mb-12">
+      <form className="flex flex-col gap-12 md:gap-16 mb-12 mt-6 md:my-12">
         <div className="mx-4 md:mx-8 flex flex-col gap-12 lg:min-w-[80%]">
           <Suspense>
             <AmountInput
