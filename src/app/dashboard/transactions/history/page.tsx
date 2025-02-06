@@ -16,7 +16,7 @@ export default function ActivityHistoryPage() {
   });
 
   return (
-    <div {...swipeHandlers}>
+    <div className="flex-1 flex" {...swipeHandlers}>
       <ActivityHistory />
     </div>
   );
