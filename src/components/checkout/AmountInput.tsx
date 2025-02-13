@@ -44,6 +44,8 @@ export default function AmountInput({
   const [showFractionalWarning, setShowFractionalWarning] =
     useState<boolean>(false);
 
+  const [quoteStr, setQuoteStr] = useState<string>("");
+
   const { call: carbonToUsd, cancel: cancelCarbonToUsd } = useMemo(() => {
     return debounce(async (carbonAmount: number) => {
       if (carbonAmount === 0) {
@@ -64,6 +66,7 @@ export default function AmountInput({
           const newUsdAmount = Number(response.total_cost);
           if (quote !== newUsdAmount) {
             setQuote(Math.round(newUsdAmount * 100) / 100);
+            setQuoteStr(newUsdAmount.toFixed(2));
           }
         })
         .catch((err) => {
@@ -114,7 +117,7 @@ export default function AmountInput({
       setIsLoading(true);
       usdToCarbon(quote);
     }
-  }, [quote]);
+  }, [quote, quoteStr]);
 
   useEffect(() => {
     if (activeInput === "carbon") {
@@ -170,9 +173,12 @@ export default function AmountInput({
             type="text"
             inputMode="decimal"
             className="px-2 pl-7 py-1 w-full text-black rounded-sm"
-            value={quote || ""}
+            value={quoteStr || ""}
             onChange={(e) => {
               setIsLoading(true);
+              if (/^\d*\.?\d*$/.test(e.target.value) || e.target.value === "") {
+                setQuoteStr(e.target.value);
+              }
               setQuote(Number(e.target.value));
               setActiveInput("usd");
             }}
@@ -199,7 +205,7 @@ export default function AmountInput({
               <span className="mx-[2px]">costs approx.</span>
               <div className="flex items-center">
                 <span>$</span>
-                <span className="ml-[1px]"> {quote}</span>
+                <span className="ml-[1px]"> {quote.toFixed(2)}</span>
               </div>
             </div>
             {showFractionalWarning && (
