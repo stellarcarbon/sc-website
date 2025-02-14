@@ -35,8 +35,8 @@ export const walletConnectDialog = async (
         walletType: wallet,
         isAnonymous: false,
       };
-    } catch (e) {
-      throw Error("Something went wrong connecting your wallet. Try again.");
+    } catch (e: any) {
+      throw e.message;
     }
   }
 };

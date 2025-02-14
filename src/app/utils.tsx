@@ -154,3 +154,8 @@ export const mRequestCertificate = async ({
     return result;
   }
 };
+
+export const isValidEmail = (addr: string) => {
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  return regex.test(addr);
+};

@@ -5,8 +5,8 @@ export default function FormError({
   className,
 }: HTMLProps<HTMLParagraphElement>) {
   return (
-    <p className={`text-red-500 py-2 whitespace-pre-wrap ${className}`}>
+    <span className={`text-red-500 whitespace-pre-wrap ${className}`}>
       {children}
-    </p>
+    </span>
   );
 }

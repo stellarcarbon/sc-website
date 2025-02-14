@@ -1,21 +1,11 @@
 import TextInput from "@/components/TextInput";
 import FormError from "@/components/FormError";
+import { useConnectWalletContext } from "./connect_wallet/ConnectWalletContext";
 
-interface ContactInfoFormProps {
-  username: string;
-  setUsername: (name: string) => void;
-  useremail: string;
-  setUseremail: (name: string) => void;
-  emailError: boolean;
-}
+export default function ContactInfoForm() {
+  const { username, setUsername, useremail, setUseremail } =
+    useConnectWalletContext();
 
-export default function ContactInfoForm({
-  username,
-  useremail,
-  setUsername,
-  setUseremail,
-  emailError,
-}: ContactInfoFormProps) {
   const usernameOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };
@@ -25,7 +15,7 @@ export default function ContactInfoForm({
   };
 
   return (
-    <div className="flex flex-col gap-1 items-start md:px-8">
+    <div className="flex flex-col gap-1 items-start">
       <label className="text-xs" htmlFor="username">
         Name
       </label>
@@ -45,9 +35,6 @@ export default function ContactInfoForm({
         value={useremail}
         onChange={useremailOnChange}
       />
-      {emailError && (
-        <FormError className="ml-4 !py-1">{"Invalid email address"}</FormError>
-      )}
     </div>
   );
 }

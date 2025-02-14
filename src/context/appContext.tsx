@@ -34,6 +34,7 @@ import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
 import { AppConfiguration } from "@/app/types";
+import useIsMobile from "@/hooks/useIsMobile";
 
 console.log(`NEXT_PUBLIC_PRODUCTION: ${process.env.NEXT_PUBLIC_PRODUCTION}`);
 if (process.env.NEXT_PUBLIC_PRODUCTION === "development") {
@@ -60,13 +61,11 @@ Date.prototype.addDays = function (days) {
 // A global app context used to write & read state everywhere.
 type AppContext = {
   // Wallet connection
-  connectionError: string | null;
   supportedWallets: ISupportedWallet[];
   walletConnection: WalletConnection | undefined | null;
-  connectWallet: (
-    wallet: ISupportedWallet,
-    personalDetails: PersonalDetails
-  ) => Promise<boolean>;
+  setWalletConnection: Dispatch<
+    SetStateAction<WalletConnection | undefined | null>
+  >;
   disconnectWallet: () => void;
   updateWalletConnection: (
     isAnonymous: boolean,
@@ -97,6 +96,8 @@ type AppContext = {
 
   xlmBalance: number | undefined;
   usdcBalance: number | undefined;
+
+  isMobileDevice: boolean;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -110,11 +111,12 @@ export const useAppContext = () => {
 };
 
 export const AppContextProvider = ({ children }: PropsWithChildren) => {
-  const [connectionError, setConnectionError] = useState<string | null>(null);
   const [supportedWallets, setSupportedWallets] = useState<ISupportedWallet[]>(
     []
   );
   const stellarWalletsKitRef = useRef<StellarWalletsKit | null>(null);
+
+  const isMobileDevice = useIsMobile();
 
   // Null at first, will become undefined after attempting to load from local storage fails.
   const [walletConnection, setWalletConnection] = useState<
@@ -240,60 +242,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     appConfig,
   ]);
 
-  const connectWallet = useCallback(
-    async (
-      wallet: ISupportedWallet,
-      personalDetails: PersonalDetails
-    ): Promise<boolean> => {
-      setConnectionError(null);
-
-      // Build the walletConnection object using wallets-kit
-      let newConn;
-      try {
-        newConn = await walletConnectDialog(wallet, appConfig.network);
-
-        // Some wallets sometimes return empty pubkey on success.
-        if (newConn.stellarPubKey === "") {
-          throw Error();
-        }
-      } catch (error: any) {
-        setConnectionError(
-          "Something went wrong connecting your wallet. Try again."
-        );
-        return false;
-      }
-
-      if (!newConn) return false;
-
-      // Add user details if specified
-      if (personalDetails.useremail !== "") {
-        newConn.personalDetails = personalDetails;
-        newConn.isAnonymous = false;
-      } else {
-        newConn.isAnonymous = true;
-      }
-
-      // Verify if the account exists.
-      try {
-        const accBalance = await TransactionHistoryService.fetchAccountBalance(
-          appConfig.server,
-          newConn.stellarPubKey
-        );
-      } catch (e) {
-        setConnectionError(
-          `Your account was not found on ${appConfig.server.serverURL}`
-        );
-        return false;
-      }
-
-      WalletConnectionStorageService.setWalletConnection(newConn);
-      setWalletConnection(newConn);
-
-      return true;
-    },
-    [appConfig]
-  );
-
   const updateWalletConnection = useCallback(
     (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
       const newWalletConnection: WalletConnection = {
@@ -316,10 +264,10 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const providerValue = useMemo(() => {
     return {
-      connectionError,
       supportedWallets,
       walletConnection,
-      connectWallet,
+      setWalletConnection,
+
       disconnectWallet,
       updateWalletConnection,
 
@@ -342,9 +290,10 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       xlmBalance,
       usdcBalance,
+
+      isMobileDevice,
     };
   }, [
-    connectionError,
     supportedWallets,
     walletConnection,
     isDrawerOpen,
@@ -355,7 +304,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     appConfig,
     xlmBalance,
     usdcBalance,
-    connectWallet,
+    isMobileDevice,
   ]);
 
   return (

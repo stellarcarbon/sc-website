@@ -5,11 +5,12 @@ export default function SelectWalletButtonDesktop({
   isSelected,
   onClick,
   className,
+  disabled,
 }: SelectWalletButtonProps) {
   return (
     <button
       id={`${wallet.type}_SelectWalletButtonDesktop`}
-      className={`w-[32%] h-12 flex bg-accent text-black text-sm items-center shadow-md border border-transparent rounded-md justify-start px-4 w-100
+      className={`h-12 flex bg-accent text-black text-sm items-center shadow-md border border-transparent rounded-md justify-start px-4 w-100
       
        ${
          wallet.isAvailable
@@ -25,7 +26,7 @@ export default function SelectWalletButtonDesktop({
         } 
         ${className}`}
       onClick={onClick}
-      disabled={!wallet.isAvailable}
+      disabled={disabled}
     >
       <img
         className="h-[32px] w-[32px]"

@@ -5,19 +5,19 @@ export default function ConnectLanding() {
   const router = useSCRouter();
 
   return (
-    <div className="py-8 px-4 md:p-12 my-16 bg-primary w-[87%] md:w-[60%] max-w-[800px] min-h-[400px] border border-tertiary rounded-md shadow-xl flex flex-col justify-center gap-8">
-      <h1 className="self-center text-2xl md:text-3xl">Connect a wallet</h1>
+    <div className="py-8 px-4 md:p-12 md:my-16 bg-darker w-full md:w-[60%] max-w-[800px] min-h-[calc(100vh-64px-95px)] md:min-h-[400px] md:border border-tertiary rounded-md shadow-xl flex flex-col justify-center gap-8">
+      <h1 className="self-center text-3xl font-bold">Sink CARBON</h1>
       <span>
-        To sink CARBON with stellarcarbon.io you are required to connect with a
-        wallet that is supported.
+        To sink CARBON with stellarcarbon.io you have to connect with a Stellar
+        wallet.
       </span>
       <span>
         Additionally, you can optionally provide us with your contact details so
         we can create and send personalized certificates to you.
       </span>
-      <span>
-        All connection data is only stored in your browser and not on our
-        servers.
+      <span className="font-bold text-lg text-center">
+        {`All connection data is only stored in your browser and not on our
+        servers.`}
       </span>
       <Button
         onClick={() => router.push("/wallet/connect")}
