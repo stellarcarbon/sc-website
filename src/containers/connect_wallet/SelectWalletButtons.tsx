@@ -1,6 +1,6 @@
 import SelectWalletButton from "@/components/wallet/SelectWalletButton";
 import { useAppContext } from "@/context/appContext";
-import { useConnectWalletContext } from "./ConnectWalletContext";
+import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import { useCallback } from "react";
 import { ISupportedWallet } from "@creit.tech/stellar-wallets-kit";
 import SelectWalletButtonDesktop from "@/components/wallet/SelectWalletButtonDesktop";

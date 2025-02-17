@@ -1,5 +1,5 @@
 import FormError from "@/components/FormError";
-import { useConnectWalletContext } from "./ConnectWalletContext";
+import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 
 export default function AcceptTnC() {
   const { tncError, tncAccepted, setTncAccepted } = useConnectWalletContext();

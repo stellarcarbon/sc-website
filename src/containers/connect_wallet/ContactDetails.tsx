@@ -1,6 +1,6 @@
 import FormError from "@/components/FormError";
 import ContactInfoForm from "../ContactInfoForm";
-import { useConnectWalletContext } from "./ConnectWalletContext";
+import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 
 export default function ContactDetails() {
   const { emailError } = useConnectWalletContext();

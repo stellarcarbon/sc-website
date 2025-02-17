@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import SelectWallet from "./SelectWallet";
 import ContactDetails from "./ContactDetails";
 import AcceptTnC from "./AcceptTnC";
-import { useConnectWalletContext } from "./ConnectWalletContext";
+import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import FormError from "@/components/FormError";
 
 export default function ConnectWalletForm() {

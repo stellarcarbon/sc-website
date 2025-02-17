@@ -1,7 +1,7 @@
 import FormError from "@/components/FormError";
 import LoadingWallets from "@/components/wallet/LoadingWallets";
 import { useAppContext } from "@/context/appContext";
-import { useConnectWalletContext } from "./ConnectWalletContext";
+import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import SelectWalletButtons from "./SelectWalletButtons";
 
 export default function SelectWallet() {

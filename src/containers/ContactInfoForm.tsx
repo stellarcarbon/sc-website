@@ -1,6 +1,6 @@
 import TextInput from "@/components/TextInput";
 import FormError from "@/components/FormError";
-import { useConnectWalletContext } from "./connect_wallet/ConnectWalletContext";
+import { useConnectWalletContext } from "../context/ConnectWalletContext";
 
 export default function ContactInfoForm() {
   const { username, setUsername, useremail, setUseremail } =

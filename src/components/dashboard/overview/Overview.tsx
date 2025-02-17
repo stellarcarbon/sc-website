@@ -6,7 +6,7 @@ import { useState } from "react";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
-import WalletConnectionInfo from "../WalletConnectionInfo";
+import WalletConnectionInfo from "../../WalletConnectionInfo";
 import TransactionSummary from "../TransactionSummary";
 import WalletConnectionButtons from "./wcbuttons";
 import OverviewContactInformationForm from "./ContactInformationForm";

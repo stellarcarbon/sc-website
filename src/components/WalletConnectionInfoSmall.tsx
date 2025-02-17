@@ -1,0 +1,23 @@
+import { useAppContext } from "@/context/appContext";
+import StellarPubKey from "./dashboard/StellarPubKey";
+import { useSCRouter } from "@/app/utils";
+
+export default function WalletConnectionInfoSmall() {
+  const { walletConnection } = useAppContext();
+
+  const router = useSCRouter();
+
+  return (
+    <div
+      onClick={() => router.push("/dashboard")}
+      className="flex bg-darker text-white border border-accentSecondary rounded cursor-pointer hover:bg-secondary"
+    >
+      <div className="flex flex-col items-center border-r border-accentSecondary p-2">
+        <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
+      </div>
+      <div className="flex items-center px-2 text-xs">
+        <StellarPubKey pubKey={walletConnection?.stellarPubKey} />
+      </div>
+    </div>
+  );
+}
