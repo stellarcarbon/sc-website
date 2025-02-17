@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import CTAButton from "../../components/CTAButton";
 import WalletConnectionInfoSmall from "@/components/WalletConnectionInfoSmall";
+import NavBarWallet from "./NavBarWallet";
 
 export default function NavBar() {
   const { openDrawer, walletConnection } = useAppContext();
@@ -55,7 +56,7 @@ export default function NavBar() {
         <TopBarLink href="/transactions">Transactions</TopBarLink>
         <TopBarLink href="/about">About us</TopBarLink>
         <div className="w-4"></div>
-        {walletConnection ? <WalletConnectionInfoSmall /> : <CTAButton />}
+        {walletConnection ? <NavBarWallet /> : <CTAButton />}
       </div>
       <HamburgerButton
         className="p-[22px] md:hidden text-accent"
