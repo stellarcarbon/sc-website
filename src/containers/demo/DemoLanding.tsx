@@ -1,12 +1,9 @@
 "use client";
 
-import CTAButton from "@/components/CTAButton";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import DoubleChevronDownIcon from "@/components/icons/DoubleChevronDownIcon";
 import { useAppContext } from "@/context/appContext";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import DemoTaskbar from "./DemoTaskbar";
+import { useEffect } from "react";
 
 export default function DemoLanding() {
   const { walletConnection } = useAppContext();
