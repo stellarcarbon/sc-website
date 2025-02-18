@@ -2,7 +2,7 @@
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="flex flex-col font-noto py-8 px-4 md:px-32 md:max-w-[1600px] md:mx-auto mt-[64px] md:mt-[80px]">
+    <main className="flex flex-col font-noto py-8 px-4 md:px-32 md:max-w-[1600px] md:mx-auto">
       <style jsx>{`
         h1 {
           font-size: 32px;

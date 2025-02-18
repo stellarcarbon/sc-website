@@ -3,7 +3,7 @@ import Paragraph from "@/components/Paragraph";
 
 export default function AboutPage() {
   return (
-    <main className="flex flex-col items-center font-noto pb-16 mt-[64px] md:mt-[80px]">
+    <main className="flex flex-col items-center font-noto pb-16">
       <div className="flex flex-col p-4 py-12 md:max-w-[1080px] md:m-auto">
         <Header>About us</Header>
         <Paragraph>

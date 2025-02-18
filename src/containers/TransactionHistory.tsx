@@ -83,7 +83,7 @@ export default function TransactionHistory({}) {
     <>
       {!error ? (
         <div className="flex flex-col items-center">
-          <div className="w-full py-8 pb-16 flex flex-col gap-1">
+          <div className="w-full py-8 pb-16 flex flex-col items-center gap-1">
             {transactions.length > 1 ? (
               transactions.map((tx, idx) => {
                 return (

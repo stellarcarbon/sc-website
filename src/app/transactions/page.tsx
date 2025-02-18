@@ -7,7 +7,7 @@ import Paragraph from "@/components/Paragraph";
 
 export default function TransactionsPage() {
   return (
-    <main className="flex flex-col items-center font-noto pb-4 mt-[64px] md:mt-[80px]">
+    <main className="flex flex-col items-center font-noto pb-4">
       <div className="blockchain-bg w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
           <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">

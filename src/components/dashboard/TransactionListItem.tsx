@@ -39,9 +39,9 @@ export default function TransactionListItem({
   return (
     <div
       onClick={onClick}
-      className={`p-2 w-full grid grid-cols-8 md:grid-cols-6 ${
+      className={`p-2 w-full max-w-[700px] grid grid-cols-8 md:grid-cols-6  border border-accentSecondary rounded-md cursor-pointer text-sm ${
         bgPrimary ? "bg-primary" : "bg-secondary"
-      } border border-accentSecondary rounded-md cursor-pointer text-sm`}
+      }`}
     >
       <ItemHeader>Hash</ItemHeader>
       <ItemValue>{transaction.id}</ItemValue>
