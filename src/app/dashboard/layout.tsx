@@ -25,7 +25,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="md:flex md:justify-center md:bg-dalle md:bg-cover md:bg-fixed mt-[64px] md:mt-[80px]">
+    <div className="md:flex md:justify-center md:bg-dalle md:bg-cover md:bg-fixed ">
       <main className="bg-primary min-h-[calc(100dvh-160px)] md:min-h-0 md:border border-tertiary flex flex-col items-center justify-start md:max-w-[780px] md:rounded md:m-6 md:w-[80vw] lg:w-[70vw]">
         <DashboardNavBar />
         {children}

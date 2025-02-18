@@ -4,10 +4,8 @@ export default function WalletLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="flex flex-col mt-[64px] md:mt-[80px] min-h-[calc(100dvh-160px)] md:min-h-[calc(100dvh-176px)] ">
-      <div className="flex-1 flex flex-col justify-center items-center bg-dalle bg-no-repeat bg-fixed bg-cover">
-        {children}
-      </div>
+    <main className="flex-1 flex flex-col justify-center items-center bg-dalle bg-no-repeat bg-fixed bg-cover">
+      {children}
     </main>
   );
 }

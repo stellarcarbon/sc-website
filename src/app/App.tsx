@@ -24,7 +24,9 @@ export default function App({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-secondary flex flex-col">
       <NavBar />
-      <div className="grow text-textColor w-full">{children}</div>
+      <div className="flex-1 mt-[64px] md:mt-[80px] flex flex-col text-textColor w-full">
+        {children}
+      </div>
       <Footer />
     </div>
   );

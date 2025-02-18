@@ -5,7 +5,7 @@ export default function ConnectLanding() {
   const router = useSCRouter();
 
   return (
-    <div className="py-8 px-4 md:p-12 md:my-16 bg-darker w-full md:w-[60%] max-w-[800px] flex-1 md:min-h-[400px] md:border border-tertiary rounded-md shadow-xl flex flex-col justify-center gap-8">
+    <div className="py-8 px-4 md:p-12 md:my-16 bg-darker w-full md:w-[60%] max-w-[800px] flex-1 md:flex-none md:border border-tertiary rounded-md shadow-xl flex flex-col justify-center gap-8">
       <h1 className="text-center text-3xl font-bold">
         Contributing to Stellarcarbon
       </h1>
