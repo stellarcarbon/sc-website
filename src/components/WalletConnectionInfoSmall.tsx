@@ -5,7 +5,7 @@ export default function WalletConnectionInfoSmall() {
   const { walletConnection } = useAppContext();
 
   return (
-    <div className="flex bg-darker text-white  border-accentSecondary rounded cursor-pointer hover:bg-secondary">
+    <div className="flex bg-darker text-white border border-accentSecondary rounded cursor-pointer hover:bg-secondary">
       <div className="flex flex-col items-center border-rl border-accentSecondary p-2">
         <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
       </div>

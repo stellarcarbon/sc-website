@@ -30,7 +30,7 @@ export default function ParallaxDivider({
   mini = false,
   mirrored = false,
   xOffset = 0,
-  yOffset = 0,
+  yOffset = -300,
   roundedBottom = false,
 }: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
@@ -45,7 +45,9 @@ export default function ParallaxDivider({
         -400
       );
 
-      setTransform(newT < 0 ? newT : 0);
+      console.log(yCoordinate, window.scrollY, newT);
+
+      setTransform(newT);
     };
 
     window.addEventListener("scroll", parallaxer);
@@ -53,6 +55,7 @@ export default function ParallaxDivider({
     if (componentRef.current) {
       const rect = componentRef.current.getBoundingClientRect();
       yCoordinate = rect.top + window.scrollY;
+
       setTransform(
         Math.max(Math.min(100, -(yCoordinate - window.scrollY) / 5), -400)
       );
