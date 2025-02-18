@@ -101,9 +101,9 @@ export default function SinkPage() {
           });
         }
         setSubmissionError(otherError.join("\n"));
-      } else {
-        setSubmissionError("An unknown error occurred.");
       }
+    } else {
+      setSubmissionError("An unknown error occurred.");
     }
   }, []);
 
