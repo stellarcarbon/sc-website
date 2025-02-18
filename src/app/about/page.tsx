@@ -1,10 +1,11 @@
+import ContentContainer from "@/components/ContentContainer";
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 
 export default function AboutPage() {
   return (
     <main className="flex flex-col items-center font-noto pb-16">
-      <div className="flex flex-col p-4 py-12 md:max-w-[1080px] md:m-auto">
+      <ContentContainer>
         <Header>About us</Header>
         <Paragraph>
           The vision of our parent company Nature Nexus is to connect people
@@ -97,7 +98,7 @@ export default function AboutPage() {
           get in touch and get involved in making the future of the worlds
           financial network environmentally responsible.
         </Paragraph>
-      </div>
+      </ContentContainer>
     </main>
   );
 }

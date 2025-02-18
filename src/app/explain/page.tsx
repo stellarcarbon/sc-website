@@ -1,3 +1,4 @@
+import ContentContainer from "@/components/ContentContainer";
 import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
@@ -20,7 +21,7 @@ export default function ExplainPage() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 p-4 py-12 w-full md:max-w-[1080px] md:m-auto">
+      <ContentContainer>
         <Header>
           An introduction to{" "}
           <CARBONCurrencyIcon className="inline" width={30} height={40} />
@@ -130,7 +131,7 @@ export default function ExplainPage() {
           </Link>
           .
         </Paragraph>
-      </div>
+      </ContentContainer>
     </main>
   );
 }

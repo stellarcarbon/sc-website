@@ -24,15 +24,12 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {/* Content */}
+      {/* Custom content container */}
       <div className="flex flex-col md:flex-row grow pt-12 md:pt-20 lg:max-w-[900px] xl:max-w-[1200px] px-4">
-        {/* Images */}
-
         <div className="hidden md:block w-full mb-8 md:flex-1  md:mr-16">
           <ShipiboImages />
         </div>
 
-        {/* Text */}
         <div className="md:flex-1">
           <Header>
             About Shipibo Conibo and Cacataibo Indigenous Communities

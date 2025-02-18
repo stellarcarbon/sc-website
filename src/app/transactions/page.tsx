@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import Header from "@/components/Header";
 import TransactionHistory from "@/containers/TransactionHistory";
 import Paragraph from "@/components/Paragraph";
+import ContentContainer from "@/components/ContentContainer";
 
 export default function TransactionsPage() {
   return (
@@ -18,7 +19,7 @@ export default function TransactionsPage() {
           </span>
         </div>
       </div>
-      <div className="p-4 md:p-16 pt-16 flex flex-col md:max-w-[1080px] md:mx-auto bg-secondary rounded-md">
+      <ContentContainer>
         <Header>Transaction history</Header>
         <Paragraph>
           Here you can find the complete history of transactions using
@@ -35,7 +36,7 @@ export default function TransactionsPage() {
         <Suspense>
           <TransactionHistory />
         </Suspense>
-      </div>
+      </ContentContainer>
     </main>
   );
 }
