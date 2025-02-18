@@ -28,7 +28,7 @@ import {
   loadAvailableWalletsMock,
   walletConnectDialog,
 } from "./walletFunctions";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
 import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
@@ -136,6 +136,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [usdcBalance, setUsdcBalance] = useState<number>();
 
   const pathname = usePathname();
+  const router = useRouter();
 
   const appConfig = useMemo(() => {
     return {

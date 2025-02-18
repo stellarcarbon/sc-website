@@ -6,7 +6,7 @@ export default function WalletConnectionInfo() {
 
   return (
     <div className="bg-darker mx-6 md:mx-8 rounded border border-accentSecondary flex">
-      <div className="flex flex-col items-center py-2 border-r border-accentSecondary">
+      <div className="flex flex-col items-center py-2 pl-2 ">
         <div className="p-2">
           <img className="h-8 w-8" src={walletConnection?.walletType.icon} />
         </div>
@@ -14,7 +14,7 @@ export default function WalletConnectionInfo() {
       <div className="flex flex-col justify-center text-center flex-1">
         {/* <div className="">PUBKEY</div> */}
 
-        <div className="p-4 text-wrap break-words px-2 md:text-base">
+        <div className="p-4 text-wrap break-words text-lg text-white">
           <StellarPubKey pubKey={walletConnection?.stellarPubKey} />
         </div>
       </div>

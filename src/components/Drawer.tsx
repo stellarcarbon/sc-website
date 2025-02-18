@@ -8,11 +8,29 @@ import CTAButton from "./CTAButton";
 import StellarCarbonIcon from "./icons/StellarCarbonIcon";
 import Link from "next/link";
 import { useSCRouter } from "@/app/utils";
+import WalletConnectionInfoSmall from "./WalletConnectionInfoSmall";
+import Button from "./Button";
+import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
+import WalletConnectionInfo from "./WalletConnectionInfo";
+import { useCallback } from "react";
+import StellarPubKey from "./dashboard/StellarPubKey";
 
 export default function Drawer() {
-  const { closeDrawer } = useAppContext();
+  const { closeDrawer, walletConnection, disconnectWallet } = useAppContext();
   const pathname = usePathname();
   const router = useSCRouter();
+
+  const onMyStellarClick = useCallback(() => {
+    router.push("/dashboard");
+  }, [router]);
+  const onSinkCarbonClick = useCallback(() => {
+    router.push("/dashboard/sink");
+  }, [router]);
+  const onDisconnectClick = useCallback(() => {
+    disconnectWallet();
+    router.push("/");
+  }, [disconnectWallet, router]);
+
   return (
     <div className="flex flex-col min-w-screen min-h-screen bg-primary border-secondary">
       <div className="flex justify-between items-center pl-[4vw] pr-[12px] h-14 md:h-20 border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)] border-secondary">
@@ -23,7 +41,31 @@ export default function Drawer() {
           <CloseIcon />
         </button>
       </div>
-      <div className="flex flex-col mt-4">
+      {walletConnection && (
+        <div className="flex justify-between items-center p-2 m-2 text-white bg-darker border border-secondary rounded-lg shadow-md">
+          <img
+            className="h-6 w-6 ml-2"
+            src={walletConnection?.walletType.icon}
+            alt="wallet connection"
+          />
+          <div className="text-sm">
+            <StellarPubKey pubKey={walletConnection?.stellarPubKey} />
+          </div>
+          <div className="flex justify-end">
+            <Button
+              onClick={() => {
+                router.push("/dashboard/sink");
+                closeDrawer();
+              }}
+              className="w-full md:w-auto gap-2 border border-secondary"
+            >
+              <div>Sink CARBON</div>
+              <CARBONCurrencyIcon />
+            </Button>
+          </div>
+        </div>
+      )}
+      <div className="flex flex-col">
         <DrawerLink href="/">Home</DrawerLink>
         <DrawerLink href="/explain">What is Stellarcarbon?</DrawerLink>
         <DrawerLink href="/projects">Current projects</DrawerLink>
@@ -31,17 +73,20 @@ export default function Drawer() {
         <DrawerLink href="/about">About us</DrawerLink>
       </div>
       <hr className="w-full my-4 mb-8 border-secondary" />
-      <CTAButton
-        className="self-center"
-        onClick={() => {
-          if (pathname === "/dashboard") {
-            // In case already on that path, have to close the Drawer from here.
-            closeDrawer();
-          } else {
-            router.push("/dashboard");
-          }
-        }}
-      />
+
+      {!walletConnection && (
+        <CTAButton
+          className="self-center"
+          onClick={() => {
+            if (pathname === "/dashboard") {
+              // In case already on that path, have to close the Drawer from here.
+              closeDrawer();
+            } else {
+              router.push("/dashboard");
+            }
+          }}
+        />
+      )}
     </div>
   );
 }
