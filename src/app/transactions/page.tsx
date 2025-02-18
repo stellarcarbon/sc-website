@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import Header from "@/components/Header";
 import TransactionHistory from "@/containers/TransactionHistory";
+import Paragraph from "@/components/Paragraph";
 
 export default function TransactionsPage() {
   return (
@@ -19,21 +20,18 @@ export default function TransactionsPage() {
       </div>
       <div className="p-4 md:p-16 pt-16 flex flex-col md:max-w-[1080px] md:mx-auto bg-secondary rounded-md">
         <Header>Transaction history</Header>
-        <div className="tracking-wide leading-7">
-          <p>
-            Here you can find the complete history of transactions using
-            Stellarcarbon.
-          </p>
-          <p>
-            In ut eros pretium velit congue fringilla. Fusce id commodo nibh.
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-            per inceptos himenaeos. Nullam viverra fringilla purus, ac
-            pellentesque nulla luctus id. Mauris in nisl sapien. Aliquam felis
-            libero, blandit id feugiat et, placerat nec tortor. Aliquam egestas
-            nunc et pellentesque auctor.
-          </p>
-        </div>
-
+        <Paragraph>
+          Here you can find the complete history of transactions using
+          Stellarcarbon.
+        </Paragraph>
+        <Paragraph>
+          In ut eros pretium velit congue fringilla. Fusce id commodo nibh.
+          Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+          per inceptos himenaeos. Nullam viverra fringilla purus, ac
+          pellentesque nulla luctus id. Mauris in nisl sapien. Aliquam felis
+          libero, blandit id feugiat et, placerat nec tortor. Aliquam egestas
+          nunc et pellentesque auctor.
+        </Paragraph>
         <Suspense>
           <TransactionHistory />
         </Suspense>

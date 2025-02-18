@@ -3,6 +3,7 @@
 import { CarbonService } from "@/client";
 import CountUp from "@/components/CountUp";
 import Header from "@/components/Header";
+import Paragraph from "@/components/Paragraph";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Blocks } from "react-loader-spinner";
@@ -29,25 +30,24 @@ export default function ExplainSection() {
       {/* Text */}
       <div className="md:flex-1 flex flex-col justify-center pl-[5%] md:max-w-[40%]">
         <Header>Our mission</Header>
-        <div className="tracking-wide leading-7">
-          <p>
-            Stellarcarbons mission is to provide user with a convenient way to
-            use XLM or other assets in their Stellar wallet to contribute to a
-            vetted biodiversity project. In other words, we provide an easy way
-            for Stellar users to support a trustworthy nature project of their
-            selection.
-            {/* We put a lot of effort into finding trustworthy
+
+        <Paragraph>
+          Stellarcarbons mission is to provide user with a convenient way to use
+          XLM or other assets in their Stellar wallet to contribute to a vetted
+          biodiversity project. In other words, we provide an easy way for
+          Stellar users to support a trustworthy nature project of their
+          selection.
+          {/* We put a lot of effort into finding trustworthy
             biodiversity projects and making it easy to support them for our
             users. */}
-            {/* Stellarcarbon works by
+          {/* Stellarcarbon works by
             combining a cooperation with Verra for reliable carbon compensation
             and the blockchain to enable users to easily use their XLM to
             improve biodiversity and reduce CO2 emissions. */}
-          </p>
-          <Link className="text-sm underline" href="/explain">
-            Read detailed explanation here
-          </Link>
-        </div>
+        </Paragraph>
+        <Link className="text-sm underline" href="/explain">
+          Read detailed explanation here
+        </Link>
       </div>
       {/* Stats */}
       <div className="flex flex-col justify-center items-center mt-8 md:mt-0 md:flex-1">

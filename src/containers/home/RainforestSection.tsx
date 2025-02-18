@@ -86,7 +86,7 @@ export default function RainforestIntro() {
   return (
     <>
       <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full top-0 left-0 z-0 block absolute" />
-      <div className="min-h-[100dvh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
+      <div className="mt-[-64px] md:mt-[-80px] min-h-[100dvh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
         <span className="font-roboto text-4xl md:text-[80px]">
           {/* <CARBONCurrencyIcon width={56} height={56} /> */}
           Stellarcarbon

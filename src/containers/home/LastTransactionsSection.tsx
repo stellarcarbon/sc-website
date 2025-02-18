@@ -9,6 +9,7 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
+import Paragraph from "@/components/Paragraph";
 
 export default function LastTransactionsSection() {
   const [lastTransactions, setLastTransactions] = useState<
@@ -27,18 +28,17 @@ export default function LastTransactionsSection() {
         {/* Text */}
         <div className="m-auto pl-[5%] md:w-[40%] ">
           <Header>Using the blockchain</Header>
-          <div className="tracking-wide leading-7">
-            <p>
-              All sunk CARBON is accounted for by using the Stellar blockchain
-              technology, making it highly transparent that your contribution
-              ends up in the right place.
-              <br />
-              <br /> Check out the most recent transactions on Stellarcarbon.
-            </p>
-            <Link href="/transactions" className="underline text-sm">
-              View the full list here
-            </Link>
-          </div>
+
+          <Paragraph>
+            All sunk CARBON is accounted for by using the Stellar blockchain
+            technology, making it highly transparent that your contribution ends
+            up in the right place.
+            <br />
+            <br /> Check out the most recent transactions on Stellarcarbon.
+          </Paragraph>
+          <Link href="/transactions" className="underline text-sm">
+            View the full list here
+          </Link>
         </div>
 
         {/* Transaction list */}

@@ -1,12 +1,10 @@
 import { HTMLProps } from "react";
 
-interface HomeProps extends HTMLProps<HTMLHeadingElement> {}
-
-export default function Header(props: HomeProps) {
+export default function Header({ children }: HTMLProps<HTMLHeadingElement>) {
   return (
-    <>
-      <h2 className="text-3xl font-noto">{props.children}</h2>
+    <div className="flex flex-col tracking-wide leading-7">
+      <h2 className="text-3xl font-noto">{children}</h2>
       <hr className="my-8 w-[100px] border-2 border-accentSecondary" />
-    </>
+    </div>
   );
 }

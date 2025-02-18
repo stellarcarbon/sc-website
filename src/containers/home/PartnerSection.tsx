@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Paragraph from "@/components/Paragraph";
 import PartnerLogo, { Partners } from "@/components/PartnerLogo";
 import Link from "next/link";
 
@@ -9,25 +10,24 @@ export default function PartnerSection() {
         {/* Text */}
         <div className="m-auto pl-[5%] md:w-[40%]">
           <Header>For business</Header>
-          <div className="tracking-wide leading-7">
-            <p>
-              We also provide an API integration for others building on Stellar
-              who want to make it easy for their users to contribute to
-              biodiversity or compensate for their emissions.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              non euismod quam. Nulla facilisi. Donec dignissim elementum dui
-              sed dignissim.
-            </p>
-            <Link
-              href="https://api.stellarcarbon.io/docs"
-              target="_blank"
-              className="underline text-sm"
-            >
-              Read our API docs here
-            </Link>
-          </div>
+
+          <Paragraph>
+            We also provide an API integration for others building on Stellar
+            who want to make it easy for their users to contribute to
+            biodiversity or compensate for their emissions.
+          </Paragraph>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            non euismod quam. Nulla facilisi. Donec dignissim elementum dui sed
+            dignissim.
+          </Paragraph>
+          <Link
+            href="https://api.stellarcarbon.io/docs"
+            target="_blank"
+            className="underline text-sm"
+          >
+            Read our API docs here
+          </Link>
         </div>
 
         {/* Partners */}
