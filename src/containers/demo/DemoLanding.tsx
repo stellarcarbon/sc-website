@@ -39,7 +39,7 @@ export default function DemoLanding() {
   return (
     <main className="flex flex-col items-center text-white">
       <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full top-0 left-0 z-0 block absolute" />
-      <div className="min-h-[100vh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
+      <div className="min-h-[100dvh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
         <span className="font-noto text-4xl md:text-[80px]">Stellarcarbon</span>
         <div className="flex flex-col gap-8 md:gap-16 text-md px-5 py-12 w-full bg-secondary/[.64]">
           <div className="text-sm md:text-lg lg:text-lg flex flex-col items-center text-center gap-8 leading-8 ">

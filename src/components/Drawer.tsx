@@ -12,24 +12,14 @@ import WalletConnectionInfoSmall from "./WalletConnectionInfoSmall";
 import Button from "./Button";
 import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 import WalletConnectionInfo from "./WalletConnectionInfo";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import StellarPubKey from "./dashboard/StellarPubKey";
 
 export default function Drawer() {
-  const { closeDrawer, walletConnection, disconnectWallet } = useAppContext();
+  const { closeDrawer, walletConnection, disconnectWallet, isDrawerOpen } =
+    useAppContext();
   const pathname = usePathname();
   const router = useSCRouter();
-
-  const onMyStellarClick = useCallback(() => {
-    router.push("/dashboard");
-  }, [router]);
-  const onSinkCarbonClick = useCallback(() => {
-    router.push("/dashboard/sink");
-  }, [router]);
-  const onDisconnectClick = useCallback(() => {
-    disconnectWallet();
-    router.push("/");
-  }, [disconnectWallet, router]);
 
   return (
     <div className="flex flex-col min-w-screen min-h-screen bg-primary border-secondary">
