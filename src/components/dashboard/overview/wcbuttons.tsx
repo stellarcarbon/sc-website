@@ -10,7 +10,7 @@ export default function WalletConnectionButtons({
   onDisconnect,
 }: WalletConnectionButtonsProps) {
   return (
-    <div className="flex mx-4 !text-sm gap-8 justify-center">
+    <div className="flex mt-2 mx-2 !text-xs gap-8 justify-start">
       <Button onClick={onEdit}>Edit contact info</Button>
       <Button onClick={onDisconnect} className="hover:!bg-red-500">
         Disconnect wallet

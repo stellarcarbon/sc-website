@@ -4,7 +4,7 @@ import "../styles/globals.css";
 
 import Drawer from "@/components/Drawer";
 import Footer from "@/components/Footer";
-import TopBar from "@/components/TopBar";
+import NavBar from "@/containers/navbar/NavBar";
 import { useAppContext } from "@/context/appContext";
 import DemoApp from "../containers/demo/DemoApp";
 import StellarCarbonIcon from "@/components/icons/StellarCarbonIcon";
@@ -23,7 +23,7 @@ export default function App({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-secondary flex flex-col">
-      <TopBar />
+      <NavBar />
       <div className="grow text-textColor w-full">{children}</div>
       <Footer />
     </div>

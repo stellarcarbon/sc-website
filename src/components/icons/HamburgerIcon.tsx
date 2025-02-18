@@ -2,8 +2,8 @@ export default function HamburgerIcon() {
   return (
     <svg
       className="stroke-custom"
-      width="36px"
-      height="36px"
+      width="28px"
+      height="28px"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >
