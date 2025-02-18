@@ -45,8 +45,6 @@ export default function ParallaxDivider({
         -400
       );
 
-      console.log(yCoordinate, window.scrollY, newT);
-
       setTransform(newT);
     };
 
