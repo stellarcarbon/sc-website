@@ -1,9 +1,15 @@
+"use client";
+
 import CountUp from "@/components/CountUp";
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
+import ShipiboImages from "@/components/ShipiboImages";
 import Subheader from "@/components/Subheader";
+import { useAppContext } from "@/context/appContext";
 
 export default function ProjectsPage() {
+  const { isMobileDevice } = useAppContext();
+
   return (
     <main className="flex flex-col items-center font-noto">
       {/* Current project title with whale */}
@@ -19,22 +25,13 @@ export default function ProjectsPage() {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col md:flex-row grow pt-12 md:pt-20 max-w-[80%] lg:max-w-[900px] xl:max-w-[1200px] m-auto">
+      <div className="flex flex-col md:flex-row grow pt-12 md:pt-20 lg:max-w-[900px] xl:max-w-[1200px] px-4">
         {/* Images */}
-        <div className="w-full mb-8 md:flex-1  md:mr-16">
-          <div className="m-auto max-w-[80%] mb-[30px] image0">
-            <img
-              src="/forest_from_above_carbonbank_1280x719.jpg"
-              alt="Forest from above"
-            />
-          </div>
-          <div className="max-w-[70%] text-right mr-0 ml-auto mt-[-30%] image1">
-            <img
-              src="/VCS-1360-Comite-de-Vigilancia-y-Control-Comunal-cuidando-las-tierras-indigenas.jpg"
-              alt="Comite de Vigilancia y Control Comunal cuidando las tierras indigenas"
-            />
-          </div>
+
+        <div className="hidden md:block w-full mb-8 md:flex-1  md:mr-16">
+          <ShipiboImages />
         </div>
+
         {/* Text */}
         <div className="md:flex-1">
           <Header>
@@ -88,6 +85,10 @@ export default function ProjectsPage() {
               FSC Certificate GFA-FM/COC-001288
             </a>
           </p>
+
+          <div className="md:hidden px-4">
+            <ShipiboImages />
+          </div>
         </div>
       </div>
 
