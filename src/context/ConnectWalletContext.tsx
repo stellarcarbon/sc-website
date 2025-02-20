@@ -145,7 +145,6 @@ export const ConnectWalletContextProvider = ({
     connectWallet(selectedWallet!).then((didSucceed) => {
       if (!didSucceed) {
         setSelectedWallet(undefined);
-        setTncAccepted(false);
       } else {
         if (appConfig.demo) {
           router.push("/demo/sink");

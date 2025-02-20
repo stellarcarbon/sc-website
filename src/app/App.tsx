@@ -9,6 +9,7 @@ import { useAppContext } from "@/context/appContext";
 import DemoApp from "../containers/demo/DemoApp";
 import StellarCarbonIcon from "@/components/icons/StellarCarbonIcon";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import { SinkingContextProvider } from "@/context/SinkingContext";
 
 export default function App({ children }: { children: React.ReactNode }) {
   const { isDrawerOpen, appConfig } = useAppContext();
@@ -24,9 +25,11 @@ export default function App({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-secondary flex flex-col">
       <NavBar />
-      <div className="flex-1 mt-[64px] md:mt-[80px] flex flex-col text-textColor w-full">
-        {children}
-      </div>
+      <SinkingContextProvider>
+        <div className="flex-1 mt-[64px] md:mt-[80px] flex flex-col text-textColor w-full">
+          {children}
+        </div>
+      </SinkingContextProvider>
       <Footer />
     </div>
   );

@@ -1,10 +1,10 @@
 import { UseFormRegisterReturn } from "react-hook-form";
-import { CheckoutFormData } from "@/app/types";
+import { SinkingFormData } from "@/app/types";
 import { PaymentAsset } from "@/client";
 import { useAppContext } from "@/context/appContext";
 
 interface CurrencySelectProps {
-  register: (name: keyof CheckoutFormData) => UseFormRegisterReturn;
+  register: (name: keyof SinkingFormData) => UseFormRegisterReturn;
 }
 
 export default function CurrencySelect({ register }: CurrencySelectProps) {

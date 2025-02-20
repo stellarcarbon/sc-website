@@ -1,25 +1,35 @@
 "use client";
 
-import { CheckoutFormData, SinkCarbonXdrPostRequest } from "@/app/types";
-import AmountInput from "@/components/checkout/AmountInput";
 import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
-import TransactionPreview from "@/components/checkout/TransactionPreview";
-import DashboardTitle from "@/components/dashboard/DashboardTitle";
+import { SinkingFormData, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
-import { useRouter } from "next/navigation";
-import { Suspense, useCallback, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { FieldErrors, SubmitHandler, useForm } from "react-hook-form";
+import AmountInput from "@/components/checkout/AmountInput";
+import TransactionPreview from "@/components/checkout/TransactionPreview";
+import ParallaxDivider, {
+  ParallaxBackgrounds,
+} from "@/components/ParallaxDivider";
+import { useRouter } from "next/navigation";
+import DashboardTitle from "@/components/dashboard/DashboardTitle";
+import FormError from "@/components/FormError";
 
-export default function DemoCheckoutForm() {
+export default function SinkingForm() {
   const { walletConnection, setSinkRequest } = useAppContext();
-  const { formState, register, handleSubmit, watch, setValue } =
-    useForm<CheckoutFormData>();
+  const { register, handleSubmit, watch, setValue } =
+    useForm<SinkingFormData>();
 
   const router = useRouter();
 
   const [quote, setQuote] = useState<number>(0);
   const [errors, setErrors] = useState<FieldErrors>();
+
+  const reasonErrorLabel: string | undefined = useMemo(() => {
+    return Object.entries(errors ?? {})
+      .find(([field]) => field === "reason")?.[1]
+      ?.message?.toString();
+  }, [errors]);
 
   const tonnes = watch("tonnes");
   const currency = watch("currency");
@@ -37,7 +47,10 @@ export default function DemoCheckoutForm() {
     [walletConnection, setSinkRequest, router]
   );
 
-  const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
+  const onSubmit: SubmitHandler<SinkingFormData> = (
+    data: any,
+    event?: React.BaseSyntheticEvent
+  ) => {
     let payload: SinkCarbonXdrPostRequest = {
       funder: walletConnection?.stellarPubKey!,
       carbonAmount: tonnes,
@@ -53,10 +66,10 @@ export default function DemoCheckoutForm() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full mt-6 md:mt-12">
+    <div className="flex flex-col mt-8 md:mt-12">
       <DashboardTitle>Sink CARBON</DashboardTitle>
-      <form className="flex flex-col gap-12 md:gap-16 mb-12 mt-6 md:my-12">
-        <div className="mx-4 md:mx-8 flex flex-col gap-12 lg:min-w-[80%]">
+      <form className="flex flex-col gap-12 md:gap-20 mt-6">
+        <div className="mx-4 md:mx-8 flex flex-col gap-12 min-w-[80%]">
           <Suspense>
             <AmountInput
               register={register}
@@ -71,31 +84,23 @@ export default function DemoCheckoutForm() {
         <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
           <CurrencySelect register={register} />
         </div>
-
-        <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
+        <div className="mb-2 mx-4 md:mx-8 flex flex-col min-w-[80%]">
           <ReasonSelect register={register} watch={watch} setValue={setValue} />
+          {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
         </div>
 
-        {errors !== undefined && (
-          <div className="flex flex-col items-center text-red-500">
-            {Object.entries(errors).map(([field, err]) => {
-              return (
-                <span
-                  key={`field_${field}`}
-                >{`Validation error: ${err?.message}`}</span>
-              );
-            })}
-          </div>
-        )}
-
-        <div className="flex flex-col items-center gap-4 mx-5 md:mx-8 min-w-[80%]">
-          <TransactionPreview
-            tonnes={tonnes}
-            currency={currency}
-            quote={quote}
-            handleSubmit={() => handleSubmit(onSubmit, onError)()}
-          />
-        </div>
+        <TransactionPreview
+          tonnes={tonnes}
+          currency={currency}
+          quote={quote}
+          handleSubmit={() => handleSubmit(onSubmit, onError)()}
+        />
+        <ParallaxDivider
+          image={ParallaxBackgrounds.RAINFOREST}
+          smallest
+          yOffset={-380}
+          roundedBottom
+        />
       </form>
     </div>
   );

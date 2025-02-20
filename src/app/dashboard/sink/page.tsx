@@ -1,7 +1,7 @@
 "use client";
 
 import { useSwipeable } from "react-swipeable";
-import CheckoutForm from "@/components/checkout/CheckoutForm";
+import SinkingForm from "@/containers/sink/SinkingForm";
 import { useSCRouter } from "@/app/utils";
 
 export default function SinkFormPage() {
@@ -15,7 +15,7 @@ export default function SinkFormPage() {
 
   return (
     <div {...swipeHandlers} className="w-full">
-      <CheckoutForm />
+      <SinkingForm />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckoutFormData } from "@/app/types";
+import { SinkingFormData } from "@/app/types";
 import { debounce } from "@/app/utils";
 import { CarbonService } from "@/client";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -13,9 +13,9 @@ import { useSearchParams } from "next/navigation";
 import { useAppContext } from "@/context/appContext";
 
 interface AmountInputProps {
-  register: UseFormRegister<CheckoutFormData>;
+  register: UseFormRegister<SinkingFormData>;
   watch: (name: string) => number;
-  setValue: (name: keyof CheckoutFormData, value: any) => void;
+  setValue: (name: keyof SinkingFormData, value: any) => void;
   quote: number;
   setQuote: Dispatch<SetStateAction<number>>;
 }

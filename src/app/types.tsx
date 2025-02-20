@@ -23,7 +23,7 @@ export type PersonalDetails = {
   useremail: string;
 };
 
-export interface CheckoutFormData {
+export interface SinkingFormData {
   tonnes: number;
   currency: PaymentAsset;
   reason: ReasonOptions;
