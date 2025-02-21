@@ -148,7 +148,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         process.env.NEXT_PUBLIC_PRODUCTION === "production"
           ? new StellarSdk.Horizon.Server("https://horizon.stellar.org")
           : new StellarSdk.Horizon.Server(
-              "https://horizon-testnet23.stellar.org"
+              "https://horizon-testnet.stellar.org"
             ),
       demo: process.env.NEXT_PUBLIC_DEMO_VERSION === "true",
     };
@@ -217,6 +217,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
           appConfig.server,
           walletConnection.stellarPubKey
         ).then((accountBalance) => {
+          console.log(accountBalance);
           setXlmBalance(accountBalance.xlm);
           setUsdcBalance(accountBalance.usdc);
         });

@@ -16,7 +16,7 @@ import { TransactionBuilder } from "@stellar/stellar-sdk";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 
-export enum SinkingFinalizationSteps {
+export enum CheckoutSteps {
   CREATING = "creating",
   CONFIRM = "confirm",
   SIGN_TRANSACTION = "signTransaction",
@@ -34,8 +34,8 @@ type SinkingContext = {
   sinkCarbonXdr: SinkingResponse | undefined;
   setSinkCarbonXdr: Dispatch<SetStateAction<SinkingResponse | undefined>>;
 
-  step: SinkingFinalizationSteps;
-  setStep: Dispatch<SetStateAction<SinkingFinalizationSteps>>;
+  step: CheckoutSteps;
+  setStep: Dispatch<SetStateAction<CheckoutSteps>>;
 
   completedTransactionHash: string | undefined;
   setCompletedTransactionHash: Dispatch<SetStateAction<string | undefined>>;
@@ -67,13 +67,11 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const [completedTransactionHash, setCompletedTransactionHash] =
     useState<string>();
 
-  const [step, setStep] = useState<SinkingFinalizationSteps>(
-    SinkingFinalizationSteps.CREATING
-  );
+  const [step, setStep] = useState<CheckoutSteps>(CheckoutSteps.CREATING);
 
   useEffect(() => {
     if (submissionError) {
-      setStep(SinkingFinalizationSteps.ERROR);
+      setStep(CheckoutSteps.ERROR);
     }
   }, [submissionError]);
 
@@ -121,7 +119,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         );
 
         setCompletedTransactionHash(result.hash);
-        setStep(SinkingFinalizationSteps.COMPLETED);
+        setStep(CheckoutSteps.COMPLETED);
 
         setTimeout(() => {
           // Refresh personal transactions.
@@ -151,7 +149,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       setSubmissionError("Cannot find signed transaction.");
       return;
     } else {
-      setStep(SinkingFinalizationSteps.SIGN_TRANSACTION);
+      setStep(CheckoutSteps.SIGN_TRANSACTION);
     }
 
     try {
@@ -162,7 +160,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         }
       );
 
-      setStep(SinkingFinalizationSteps.AWAIT_BLOCKCHAIN);
+      setStep(CheckoutSteps.AWAIT_BLOCKCHAIN);
       submitToHorizon(res.signedTxXdr);
     } catch (error) {
       setSubmissionError("Transaction signing failed.");
@@ -181,7 +179,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         try {
           const response = await CarbonService.buildSinkCarbonXdr(request);
           setSinkCarbonXdr(response);
-          setStep(SinkingFinalizationSteps.CONFIRM);
+          setStep(CheckoutSteps.CONFIRM);
           console.log("ok");
         } catch (err: unknown) {
           console.log("err");

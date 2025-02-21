@@ -14,10 +14,7 @@ import ParallaxDivider, {
 import { useRouter } from "next/navigation";
 import DashboardTitle from "../../components/dashboard/DashboardTitle";
 import FormError from "../../components/FormError";
-import {
-  SinkingFinalizationSteps,
-  useSinkingContext,
-} from "@/context/SinkingContext";
+import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
 
 export default function SinkingForm() {
   const { confirmSinkRequest, setStep } = useSinkingContext();
@@ -46,7 +43,7 @@ export default function SinkingForm() {
 
   const onSubmit: SubmitHandler<SinkingFormData> = useCallback(
     (_) => {
-      setStep(SinkingFinalizationSteps.CREATING);
+      setStep(CheckoutSteps.CREATING);
 
       let request: SinkCarbonXdrPostRequest = {
         funder: walletConnection?.stellarPubKey!,

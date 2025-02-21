@@ -9,7 +9,7 @@ export default function ErrorSinking() {
   return (
     <SinkingStep>
       <FormError className="text-center text-base md:text-lg">
-        {submissionError}
+        {submissionError ?? "Unknown error"}
       </FormError>
       <ErrorIcon />
     </SinkingStep>

@@ -1,19 +1,13 @@
-import {
-  SinkingFinalizationSteps,
-  useSinkingContext,
-} from "@/context/SinkingContext";
+import { useSinkingContext } from "@/context/SinkingContext";
 import { Hourglass } from "react-loader-spinner";
-import { SinkStatusDetails } from "../SinkingFinalization";
 import SinkingStep from "./Step";
 
-export default function AwaitSinking() {
+export default function AwaitSinking({ message }: { message: string }) {
   const { step } = useSinkingContext();
 
   return (
     <SinkingStep>
-      <span className="text-center md:text-lg">
-        {SinkStatusDetails[step].message}
-      </span>
+      <span className="text-center md:text-lg">{message}</span>
       <div className="my-4">
         <Hourglass
           visible={true}

@@ -1,10 +1,6 @@
 import Button from "@/components/Button";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import {
-  SinkingFinalizationSteps,
-  useSinkingContext,
-} from "@/context/SinkingContext";
-import { SinkStatusDetails } from "../SinkingFinalization";
+import { useSinkingContext } from "@/context/SinkingContext";
 import SinkingStep from "./Step";
 
 export default function ConfirmSinking() {
@@ -13,7 +9,9 @@ export default function ConfirmSinking() {
   return (
     <SinkingStep>
       <span className="text-center md:text-lg">
-        {SinkStatusDetails[SinkingFinalizationSteps.CONFIRM].message}
+        {
+          "Your transaction is ready and approved by Stellarcarbon. Please confirm the transaction by signing it with your wallet."
+        }
       </span>
       <div className="w-full flex flex-col gap-8 m-6 justify-center items-center bg-secondary border border-tertiary py-6 rounded lg:max-w-[75%]">
         <div className="flex flex-col w-full px-6 items-center gap-2 text-lg">
