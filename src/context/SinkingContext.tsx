@@ -1,5 +1,10 @@
 import { SinkCarbonXdrPostRequest } from "@/app/types";
-import { ApiError, CarbonService, SinkingResponse } from "@/client";
+import {
+  ApiError,
+  CarbonService,
+  PaymentAsset,
+  SinkingResponse,
+} from "@/client";
 import {
   createContext,
   Dispatch,
@@ -15,6 +20,7 @@ import { useAppContext } from "./appContext";
 import { TransactionBuilder } from "@stellar/stellar-sdk";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
+import { useRouter } from "next/navigation";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -66,8 +72,9 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const [submissionError, setSubmissionError] = useState<string>();
   const [completedTransactionHash, setCompletedTransactionHash] =
     useState<string>();
-
   const [step, setStep] = useState<CheckoutSteps>(CheckoutSteps.CREATING);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (submissionError) {
@@ -76,6 +83,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   }, [submissionError]);
 
   const catchHorizonError = useCallback((error: any) => {
+    console.log("catchHorizonError", { error });
     if (error instanceof StellarSdk.NetworkError) {
       setSubmissionError(
         "Network error: Check your internet connection or Horizon server status."
@@ -105,6 +113,8 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       } else {
         setSubmissionError("An unknown error occurred.");
       }
+    } else if (error.message) {
+      setSubmissionError(error.message);
     } else {
       setSubmissionError("An unknown error occurred.");
     }
@@ -114,7 +124,8 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     async (signedTxXdr: string) => {
       // After both parties signed, commit the transaction to Horizon.
       try {
-        const result = await appConfig.server.submitTransaction(
+        const server = appConfig.server;
+        const result = await server.submitTransaction(
           TransactionBuilder.fromXDR(signedTxXdr, appConfig.network)
         );
 
@@ -172,27 +183,28 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
 
   const confirmSinkRequest = useCallback(
     async (request: SinkCarbonXdrPostRequest) => {
-      setSinkRequest(sinkRequest);
-
       // Build the XDR with stellarcarbon API
-      if (request) {
-        try {
-          const response = await CarbonService.buildSinkCarbonXdr(request);
-          setSinkCarbonXdr(response);
-          setStep(CheckoutSteps.CONFIRM);
-          console.log("ok");
-        } catch (err: unknown) {
-          console.log("err");
-          let message = "Unknown error occurred.";
-          if (err instanceof ApiError) {
-            message = err.body["detail"][0]["msg"];
-          }
-          setSubmissionError(message);
+      request.paymentAsset = PaymentAsset.XLM;
+      try {
+        const response = await CarbonService.buildSinkCarbonXdr(request);
+        setSinkCarbonXdr(response);
+        setStep(CheckoutSteps.CONFIRM);
+      } catch (err: unknown) {
+        let message = "Unknown error occurred.";
+        if (err instanceof ApiError) {
+          message = err.body["detail"][0]["msg"];
         }
+        setSubmissionError(message);
       }
     },
-    [sinkRequest]
+    []
   );
+
+  useEffect(() => {
+    if (sinkRequest) {
+      router.push("/sink");
+    }
+  }, [sinkRequest, router]);
 
   const providerValue = useMemo(() => {
     return {

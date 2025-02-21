@@ -11,18 +11,15 @@ import TransactionPreview from "@/components/checkout/TransactionPreview";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
-import { useRouter } from "next/navigation";
 import DashboardTitle from "../../components/dashboard/DashboardTitle";
 import FormError from "../../components/FormError";
 import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
 
 export default function SinkingForm() {
-  const { confirmSinkRequest, setStep } = useSinkingContext();
+  const { setSinkRequest, setStep } = useSinkingContext();
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
     useForm<SinkingFormData>();
-
-  const router = useRouter();
 
   const [quote, setQuote] = useState<number>(0);
   const [errors, setErrors] = useState<FieldErrors>();
@@ -56,18 +53,9 @@ export default function SinkingForm() {
         request.email = walletConnection?.personalDetails?.useremail;
       }
 
-      confirmSinkRequest(request);
-      router.push("/sink");
+      setSinkRequest(request);
     },
-    [
-      walletConnection,
-      tonnes,
-      currency,
-      reason,
-      confirmSinkRequest,
-      router,
-      setStep,
-    ]
+    [walletConnection, tonnes, currency, reason, setSinkRequest, setStep]
   );
 
   return (

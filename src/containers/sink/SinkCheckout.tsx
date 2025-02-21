@@ -1,7 +1,7 @@
 import Modal from "@/components/Modal";
 import ConfirmSinking from "./steps/Confirm";
 import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
-import { ReactNode, useCallback, useMemo } from "react";
+import { ReactNode, useCallback, useEffect, useMemo } from "react";
 import SignSinking from "./steps/Sign";
 import AwaitSinking from "./steps/Await";
 import CompletedSinking from "./steps/Completed";
@@ -16,13 +16,14 @@ export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
   [CheckoutSteps.CONFIRM]: <ConfirmSinking />,
   [CheckoutSteps.SIGN_TRANSACTION]: <SignSinking />,
   [CheckoutSteps.AWAIT_BLOCKCHAIN]: (
-    <AwaitSinking message="Transaction signed.\n Submitting to the Stellar blockchain...." />
+    <AwaitSinking message="Transaction signed. Submitting to the Stellar blockchain...." />
   ),
   [CheckoutSteps.COMPLETED]: <CompletedSinking />,
   [CheckoutSteps.ERROR]: <ErrorSinking />,
 };
-export default function SinkingFinalization() {
-  const { step, setStep } = useSinkingContext();
+export default function SinkCheckout() {
+  const { step, setStep, confirmSinkRequest, sinkRequest } =
+    useSinkingContext();
 
   const router = useRouter();
 
@@ -42,15 +43,25 @@ export default function SinkingFinalization() {
     }
   }, [step]);
 
+  useEffect(() => {
+    if (sinkRequest) {
+      confirmSinkRequest(sinkRequest);
+    } else {
+      router.push("/dashboard");
+    }
+  }, [sinkRequest, confirmSinkRequest, router]);
+
   return (
     <Modal>
       {SinkStatusDetails[step]}
 
       {step !== CheckoutSteps.AWAIT_BLOCKCHAIN && (
-        <Button onClick={onClick}>{label}</Button>
+        <Button className={`mx-auto`} onClick={onClick}>
+          {label}
+        </Button>
       )}
 
-      {true && (
+      {false && (
         <button
           onClick={() => {
             const steps = Object.values(CheckoutSteps);
