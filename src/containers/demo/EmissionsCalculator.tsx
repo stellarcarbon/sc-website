@@ -1,13 +1,10 @@
-"use client";
-
-import Button from "@/components/Button";
-import AirportInput, { AirportOption } from "@/containers/demo/AirportInput";
-import CO2Calculator from "@/containers/demo/CO2Calculator";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
 import { CabinClass, EstimateService, FlightEstimateResponse } from "@/client";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import AirportInput, { AirportOption } from "./AirportInput";
 import Select from "react-select";
-import FlightEstimateTable from "@/containers/demo/emissions/FlightEstimateTable";
+import Button from "@/components/Button";
+import FlightEstimateTable from "./emissions/FlightEstimateTable";
 
 interface FormFieldProps {
   title: string;
@@ -30,7 +27,7 @@ function FormField({ title, helpText, input }: FormFieldProps) {
   );
 }
 
-export default function DemoPage() {
+export default function EmissionsCalculator() {
   const router = useRouter();
 
   const cabinClassOptions = Object.values(CabinClass).map((cabinClass) => {
@@ -74,7 +71,6 @@ export default function DemoPage() {
       cabinClass: cabinClass ?? undefined,
       tripType: tripType ?? undefined,
     }).then((response) => {
-      console.log(response);
       setFlightEstimate(response);
     });
   }, [departureAirport, destinationAirport, cabinClass, tripType]);
@@ -151,7 +147,10 @@ export default function DemoPage() {
         )}
       </div>
       <div className="flex flex-col items-center gap-4 py-6 bg-secondary border-t border-t-accentSecondary w-full">
-        <Button onClick={() => router.push("/demo/sink")} className="text-sm">
+        <Button
+          onClick={() => router.push("/dashboard/sink")}
+          className="text-sm"
+        >
           Continue without estimating emissions
         </Button>
       </div>

@@ -2,25 +2,25 @@
 
 import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
-import { CheckoutFormData, SinkCarbonXdrPostRequest } from "@/app/types";
+import { SinkingFormData, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
-import { Suspense, useCallback, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { FieldErrors, SubmitHandler, useForm } from "react-hook-form";
 import AmountInput from "@/components/checkout/AmountInput";
 import TransactionPreview from "@/components/checkout/TransactionPreview";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
-import Divider from "../Divider";
-import { useRouter } from "next/navigation";
-import DashboardTitle from "../dashboard/DashboardTitle";
+import DashboardTitle from "../../components/dashboard/DashboardTitle";
+import FormError from "../../components/FormError";
+import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
+import { useSearchParams } from "next/navigation";
 
-export default function CheckoutForm() {
-  const { walletConnection, setSinkRequest } = useAppContext();
+export default function SinkingForm() {
+  const { setSinkRequest, setStep } = useSinkingContext();
+  const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue } =
-    useForm<CheckoutFormData>();
-
-  const router = useRouter();
+    useForm<SinkingFormData>();
 
   const [quote, setQuote] = useState<number>(0);
   const [errors, setErrors] = useState<FieldErrors>();
@@ -29,32 +29,38 @@ export default function CheckoutForm() {
   const currency = watch("currency");
   const reason = watch("reason");
 
-  const initializeSubmitSinkingTransaction = useCallback(
-    async (sinkRequest: SinkCarbonXdrPostRequest, quote: number) => {
-      if (!walletConnection?.isAnonymous) {
-        sinkRequest.email = walletConnection?.personalDetails?.useremail;
-      }
+  const searchParams = useSearchParams();
+  console.log(searchParams);
 
-      setSinkRequest(sinkRequest);
-      router.push("/sink");
-    },
-    [walletConnection, setSinkRequest, router]
-  );
-
-  const onSubmit: SubmitHandler<CheckoutFormData> = (data) => {
-    let payload: SinkCarbonXdrPostRequest = {
-      funder: walletConnection?.stellarPubKey!,
-      carbonAmount: tonnes,
-      paymentAsset: currency,
-      memoValue: reason,
-    };
-
-    initializeSubmitSinkingTransaction(payload, quote);
-  };
+  const reasonErrorLabel: string | undefined = useMemo(() => {
+    return Object.entries(errors ?? {})
+      .find(([field]) => field === "reason")?.[1]
+      ?.message?.toString();
+  }, [errors]);
 
   const onError = useCallback((errors: FieldErrors) => {
     setErrors(errors);
   }, []);
+
+  const onSubmit: SubmitHandler<SinkingFormData> = useCallback(
+    (_) => {
+      setStep(CheckoutSteps.CREATING);
+
+      let request: SinkCarbonXdrPostRequest = {
+        funder: walletConnection?.stellarPubKey!,
+        carbonAmount: tonnes,
+        paymentAsset: currency,
+        memoValue: reason,
+      };
+
+      if (!walletConnection?.isAnonymous) {
+        request.email = walletConnection?.personalDetails?.useremail;
+      }
+
+      setSinkRequest(request);
+    },
+    [walletConnection, tonnes, currency, reason, setSinkRequest, setStep]
+  );
 
   return (
     <div className="flex flex-col mt-8 md:mt-12">
@@ -75,21 +81,10 @@ export default function CheckoutForm() {
         <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
           <CurrencySelect register={register} />
         </div>
-        <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
+        <div className="mb-2 mx-4 md:mx-8 flex flex-col min-w-[80%]">
           <ReasonSelect register={register} watch={watch} setValue={setValue} />
+          {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
         </div>
-
-        {errors !== undefined && (
-          <div className="flex flex-col items-center text-red-500">
-            {Object.entries(errors).map(([field, err]) => {
-              return (
-                <span
-                  key={`field_${field}`}
-                >{`Validation error: ${err?.message}`}</span>
-              );
-            })}
-          </div>
-        )}
 
         <TransactionPreview
           tonnes={tonnes}

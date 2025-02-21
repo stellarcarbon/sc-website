@@ -239,26 +239,24 @@ export default function RoundDownPage() {
 
   return (
     <Modal>
-      <div className="flex-1 flex flex-col pb-8 justify-start items-center md:border-y border-tertiary">
-        {error ? (
-          <div className="flex-1 flex flex-col items-center py-8 ">
-            <span className="text-2xl">Error</span>
-            <div className="text-center flex flex-col justify-center flex-1 gap-8 text-red-500">
-              <FontAwesomeIcon icon={faWarning} className="text-[48px]" />
-              {error}
-            </div>
+      {error ? (
+        <div className="flex-1 flex flex-col items-center pt-4">
+          <span className="text-2xl">Error</span>
+          <div className="text-center flex flex-col justify-center flex-1 gap-8 text-red-500">
+            <FontAwesomeIcon icon={faWarning} className="text-[48px]" />
+            {error}
           </div>
-        ) : (
-          body
-        )}
-        {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest /> */}
-        <Button
-          className="h-10 !py-2 mt-auto"
-          onClick={() => router.push("/dashboard/transactions")}
-        >
-          Return to dashboard
-        </Button>
-      </div>
+        </div>
+      ) : (
+        body
+      )}
+      {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest /> */}
+      <Button
+        className="h-10 !py-2 mt-auto"
+        onClick={() => router.push("/dashboard/transactions")}
+      >
+        Return to dashboard
+      </Button>
     </Modal>
   );
 }

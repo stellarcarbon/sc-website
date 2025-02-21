@@ -86,11 +86,19 @@ export default class TransactionHistoryService {
     )?.balance;
 
     const usdcBalance = response.balances.find((balance) => {
-      if (balance.asset_type === "credit_alphanum4") {
+      if (process.env.NEXT_PUBLIC_PRODUCTION === "production") {
         if (
+          balance.asset_type === "credit_alphanum4" &&
           balance.asset_code === "USDC" &&
           balance.asset_issuer ===
             "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
+        ) {
+          return true;
+        }
+      } else {
+        if (
+          balance.asset_type === "credit_alphanum4" &&
+          balance.asset_code === "USDC"
         ) {
           return true;
         }

@@ -1,12 +1,12 @@
-import { CheckoutFormData, ReasonOptions } from "@/app/types";
+import { SinkingFormData, ReasonOptions } from "@/app/types";
 import SelectReasonButton from "./SelectReasonButton";
 import { memo, useEffect, useMemo, useState } from "react";
 import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 
 interface ReasonSelectProps {
-  setValue: (name: keyof CheckoutFormData, value: any) => void;
+  setValue: (name: keyof SinkingFormData, value: any) => void;
   watch: (name: string) => string;
-  register: UseFormRegister<CheckoutFormData>;
+  register: UseFormRegister<SinkingFormData>;
 }
 
 export default function ReasonSelect({
