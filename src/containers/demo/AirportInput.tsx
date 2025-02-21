@@ -58,7 +58,6 @@ export default function AirportInput({ setOption }: AirportInputProps) {
 
   const onChange = useCallback(
     (option: AirportOption | null) => {
-      console.log("?");
       setOption(option);
     },
     [setOption]

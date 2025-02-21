@@ -3,13 +3,28 @@ import LoadingWallets from "@/components/wallet/LoadingWallets";
 import { useAppContext } from "@/context/appContext";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import SelectWalletButtons from "./SelectWalletButtons";
+import { useEffect, useRef } from "react";
 
 export default function SelectWallet() {
   const { supportedWallets } = useAppContext();
   const { selectedWallet, walletSelectError } = useConnectWalletContext();
 
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (walletSelectError && containerRef.current) {
+      const yOffset = -80; // Adjust scroll by -64px
+      const y =
+        containerRef.current.getBoundingClientRect().top +
+        window.scrollY +
+        yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [walletSelectError]);
+
   return (
-    <div className="flex flex-col gap-4">
+    <div ref={containerRef} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1 w-full">
         <h1 className="text-2xl font-bold">Connect your wallet</h1>
 

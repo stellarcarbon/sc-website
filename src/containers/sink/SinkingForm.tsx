@@ -29,9 +29,6 @@ export default function SinkingForm() {
   const currency = watch("currency");
   const reason = watch("reason");
 
-  const searchParams = useSearchParams();
-  console.log(searchParams);
-
   const reasonErrorLabel: string | undefined = useMemo(() => {
     return Object.entries(errors ?? {})
       .find(([field]) => field === "reason")?.[1]

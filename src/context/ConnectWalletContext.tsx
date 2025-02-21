@@ -99,7 +99,6 @@ export const ConnectWalletContextProvider = ({
 
         return true;
       } catch (error: any) {
-        console.log("err", error);
         setConnectionError(error.toString());
         return false;
       }
@@ -155,6 +154,7 @@ export const ConnectWalletContextProvider = ({
     });
   }, [
     selectedWallet,
+    setWalletSelectError,
     setEmailError,
     connectWallet,
     router,
