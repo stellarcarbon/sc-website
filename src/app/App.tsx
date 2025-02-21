@@ -7,15 +7,17 @@ import Footer from "@/components/Footer";
 import NavBar from "@/containers/navbar/NavBar";
 import { useAppContext } from "@/context/appContext";
 import DemoApp from "../containers/demo/DemoApp";
-import StellarCarbonIcon from "@/components/icons/StellarCarbonIcon";
-import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { SinkingContextProvider } from "@/context/SinkingContext";
 
 export default function App({ children }: { children: React.ReactNode }) {
   const { isDrawerOpen, appConfig } = useAppContext();
 
   if (appConfig.demo) {
-    return <DemoApp>{children}</DemoApp>;
+    return (
+      <DemoApp>
+        <SinkingContextProvider>{children}</SinkingContextProvider>
+      </DemoApp>
+    );
   }
 
   if (isDrawerOpen) {

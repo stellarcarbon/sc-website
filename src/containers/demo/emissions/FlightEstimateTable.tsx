@@ -26,7 +26,7 @@ export default function FlightEstimateTable({
       <TableRow mkey="CO2 in tonnes" value={flightEstimate.co2_tonnes} />
       <Button
         onClick={() =>
-          router.push(`/demo/sink?amount=${flightEstimate.co2_tonnes}`, {})
+          router.push(`/dashboard/sink?amount=${flightEstimate.co2_tonnes}`, {})
         }
         className="w-[200px] md:w-[300px] self-center mt-2"
       >

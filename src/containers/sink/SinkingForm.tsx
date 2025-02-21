@@ -14,6 +14,7 @@ import ParallaxDivider, {
 import DashboardTitle from "../../components/dashboard/DashboardTitle";
 import FormError from "../../components/FormError";
 import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
+import { useSearchParams } from "next/navigation";
 
 export default function SinkingForm() {
   const { setSinkRequest, setStep } = useSinkingContext();
@@ -27,6 +28,9 @@ export default function SinkingForm() {
   const tonnes = watch("tonnes");
   const currency = watch("currency");
   const reason = watch("reason");
+
+  const searchParams = useSearchParams();
+  console.log(searchParams);
 
   const reasonErrorLabel: string | undefined = useMemo(() => {
     return Object.entries(errors ?? {})

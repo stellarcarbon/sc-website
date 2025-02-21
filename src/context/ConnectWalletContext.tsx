@@ -147,7 +147,7 @@ export const ConnectWalletContextProvider = ({
         setSelectedWallet(undefined);
       } else {
         if (appConfig.demo) {
-          router.push("/demo/sink");
+          router.push("/emissions");
         } else {
           router.push("/dashboard/sink");
         }
