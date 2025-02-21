@@ -217,7 +217,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
           appConfig.server,
           walletConnection.stellarPubKey
         ).then((accountBalance) => {
-          console.log(accountBalance);
           setXlmBalance(accountBalance.xlm);
           setUsdcBalance(accountBalance.usdc);
         });

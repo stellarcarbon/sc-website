@@ -20,7 +20,7 @@ export default function CompletedSinking() {
             : `https://stellar.expert/explorer/testnet/tx/${completedTransactionHash}`
         }
         target="_blank"
-        className="text-accentSecondary underline mt-3"
+        className="text-accentSecondary underline mt-3 text-center"
       >
         View this transaction on Stellar.expert
       </a>

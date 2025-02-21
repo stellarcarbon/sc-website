@@ -18,14 +18,12 @@ import {
 } from "react";
 import { useAppContext } from "./appContext";
 import { TransactionBuilder } from "@stellar/stellar-sdk";
-import * as StellarSdk from "@stellar/stellar-sdk";
-import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { useRouter } from "next/navigation";
 
 export enum CheckoutSteps {
   CREATING = "creating",
   CONFIRM = "confirm",
-  SIGN_TRANSACTION = "signTransaction",
+  AWAIT_SIGNING = "awaitSigning",
   AWAIT_BLOCKCHAIN = "awaitBlockchain",
   COMPLETED = "success",
   ERROR = "error",
@@ -38,7 +36,6 @@ type SinkingContext = {
   >;
 
   sinkCarbonXdr: SinkingResponse | undefined;
-  setSinkCarbonXdr: Dispatch<SetStateAction<SinkingResponse | undefined>>;
 
   step: CheckoutSteps;
   setStep: Dispatch<SetStateAction<CheckoutSteps>>;
@@ -50,7 +47,6 @@ type SinkingContext = {
   setSubmissionError: Dispatch<SetStateAction<string | undefined>>;
 
   signTransaction: () => void;
-  confirmSinkRequest: (request: SinkCarbonXdrPostRequest) => void;
 };
 
 const SinkingContext = createContext<SinkingContext | null>(null);
@@ -82,20 +78,9 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, [submissionError]);
 
-  const catchHorizonError = useCallback((error: any) => {
-    console.log("catchHorizonError", { error });
-    if (error instanceof StellarSdk.NetworkError) {
-      setSubmissionError(
-        "Network error: Check your internet connection or Horizon server status."
-      );
-    } else if (error instanceof StellarSdk.BadRequestError) {
-      setSubmissionError(
-        "Bad request: There was an issue with the transaction parameters."
-      );
-    } else if (error instanceof StellarSdk.NotFoundError) {
-      setSubmissionError(
-        "Not found: The source or destination account does not exist."
-      );
+  const displayHorizonError = useCallback((error: any) => {
+    if (error.message) {
+      setSubmissionError(error.message);
     } else if (error.response && error.response.data) {
       // Handle any other transaction failure errors
       let otherError = [];
@@ -111,10 +96,8 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         }
         setSubmissionError(otherError.join("\n"));
       } else {
-        setSubmissionError("An unknown error occurred.");
+        setSubmissionError("An unknown transaction failure occurred.");
       }
-    } else if (error.message) {
-      setSubmissionError(error.message);
     } else {
       setSubmissionError("An unknown error occurred.");
     }
@@ -128,39 +111,22 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         const result = await server.submitTransaction(
           TransactionBuilder.fromXDR(signedTxXdr, appConfig.network)
         );
-
         setCompletedTransactionHash(result.hash);
         setStep(CheckoutSteps.COMPLETED);
-
-        setTimeout(() => {
-          // Refresh personal transactions.
-          TransactionHistoryService.fetchAccountHistory(
-            walletConnection?.stellarPubKey!
-          ).then((transactionRecords): void => {
-            setMyTransactions(transactionRecords);
-          });
-        }, 8000);
       } catch (error) {
-        catchHorizonError(error);
+        displayHorizonError(error);
       }
     },
-    [
-      appConfig,
-      catchHorizonError,
-      setCompletedTransactionHash,
-      setStep,
-      setMyTransactions,
-      walletConnection,
-    ]
+    [appConfig, displayHorizonError, setCompletedTransactionHash, setStep]
   );
 
   const signTransaction = useCallback(async () => {
     // Sign the transaction using the Stellar Wallets Kit & submit it to Horizon.
     if (sinkCarbonXdr === undefined) {
-      setSubmissionError("Cannot find signed transaction.");
+      setSubmissionError("Could find transaction to sign.");
       return;
     } else {
-      setStep(CheckoutSteps.SIGN_TRANSACTION);
+      setStep(CheckoutSteps.AWAIT_SIGNING);
     }
 
     try {
@@ -184,7 +150,6 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const confirmSinkRequest = useCallback(
     async (request: SinkCarbonXdrPostRequest) => {
       // Build the XDR with stellarcarbon API
-      request.paymentAsset = PaymentAsset.XLM;
       try {
         const response = await CarbonService.buildSinkCarbonXdr(request);
         setSinkCarbonXdr(response);
@@ -201,24 +166,24 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   );
 
   useEffect(() => {
+    // When the user completes the sink-form a sinkRequest is defined.
     if (sinkRequest) {
+      confirmSinkRequest(sinkRequest);
       router.push("/sink");
     }
-  }, [sinkRequest, router]);
+  }, [sinkRequest, router, confirmSinkRequest]);
 
   const providerValue = useMemo(() => {
     return {
       sinkRequest,
       setSinkRequest,
       sinkCarbonXdr,
-      setSinkCarbonXdr,
       step,
       setStep,
       completedTransactionHash,
       setCompletedTransactionHash,
       submissionError,
       setSubmissionError,
-      confirmSinkRequest,
       signTransaction,
     };
   }, [
@@ -227,7 +192,6 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     step,
     completedTransactionHash,
     submissionError,
-    confirmSinkRequest,
     signTransaction,
   ]);
 

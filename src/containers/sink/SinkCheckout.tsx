@@ -14,7 +14,7 @@ export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
     <AwaitSinking message="Creating your transaction using Stellarcarbon API..." />
   ),
   [CheckoutSteps.CONFIRM]: <ConfirmSinking />,
-  [CheckoutSteps.SIGN_TRANSACTION]: <SignSinking />,
+  [CheckoutSteps.AWAIT_SIGNING]: <SignSinking />,
   [CheckoutSteps.AWAIT_BLOCKCHAIN]: (
     <AwaitSinking message="Transaction signed. Submitting to the Stellar blockchain...." />
   ),
@@ -22,8 +22,7 @@ export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
   [CheckoutSteps.ERROR]: <ErrorSinking />,
 };
 export default function SinkCheckout() {
-  const { step, setStep, confirmSinkRequest, sinkRequest } =
-    useSinkingContext();
+  const { step, setStep, sinkRequest } = useSinkingContext();
 
   const router = useRouter();
 
@@ -44,12 +43,10 @@ export default function SinkCheckout() {
   }, [step]);
 
   useEffect(() => {
-    if (sinkRequest) {
-      confirmSinkRequest(sinkRequest);
-    } else {
+    if (!sinkRequest) {
       router.push("/dashboard");
     }
-  }, [sinkRequest, confirmSinkRequest, router]);
+  }, [sinkRequest, router]);
 
   return (
     <Modal>
