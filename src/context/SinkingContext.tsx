@@ -168,6 +168,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     // When the user completes the sink-form a sinkRequest is defined.
     if (sinkRequest) {
+      setSubmissionError(undefined);
       confirmSinkRequest(sinkRequest);
       router.push("/sink");
     }
