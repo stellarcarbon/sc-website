@@ -1,8 +1,8 @@
 export default function DoubleChevronDownIcon() {
   return (
     <svg
-      width="96px"
-      height="96px"
+      width="72px"
+      height="72px"
       viewBox="0 0 21 21"
       xmlns="http://www.w3.org/2000/svg"
     >

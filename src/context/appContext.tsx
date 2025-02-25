@@ -60,6 +60,7 @@ type AppContext = {
   isDrawerOpen: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;
+  isDrawerClosing: boolean;
 
   // Personal transactions on dashboard
   myTransactions: MyTransactionRecord[] | null;
@@ -111,8 +112,18 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-  const openDrawer = () => setIsDrawerOpen(true);
-  const closeDrawer = () => setIsDrawerOpen(false);
+  const [isDrawerClosing, setIsDrawerClosing] = useState<boolean>(false);
+  const openDrawer = () => {
+    setIsDrawerOpen(true);
+  };
+  const closeDrawer = () => {
+    // setIsDrawerOpen(false);
+    setIsDrawerClosing(true);
+    setTimeout(() => {
+      setIsDrawerOpen(false);
+      setIsDrawerClosing(false);
+    }, 300);
+  };
 
   const [xlmBalance, setXlmBalance] = useState<number>();
   const [usdcBalance, setUsdcBalance] = useState<number>();
@@ -234,6 +245,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       isDrawerOpen,
       openDrawer,
       closeDrawer,
+      isDrawerClosing,
 
       myTransactions,
       setMyTransactions,
@@ -255,6 +267,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     supportedWallets,
     walletConnection,
     isDrawerOpen,
+    isDrawerClosing,
     myTransactions,
     updateWalletConnection,
     hasPendingRounding,

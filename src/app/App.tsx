@@ -21,19 +21,21 @@ export default function App({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (isDrawerOpen) {
-    return <Drawer />;
-  }
+  // if (isDrawerOpen) {
+  //   return <Drawer />;
+  // }
 
   return (
     <div className="min-h-screen bg-secondary flex flex-col">
       <NavBar />
       <SinkingContextProvider>
+        {isDrawerOpen && <Drawer />}
         <div className="flex-1 mt-[64px] lg:mt-[80px] flex flex-col text-textColor w-full">
           {children}
         </div>
+        <Footer />
+        {/* {isDrawerOpen ? <Drawer /> : <></>} */}
       </SinkingContextProvider>
-      <Footer />
     </div>
   );
 }
