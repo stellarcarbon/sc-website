@@ -1,10 +1,10 @@
 "use client";
 
 import { useSwipeable } from "react-swipeable";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
-import { useAppContext } from "@/context/appContext";
+import appConfig from "@/config";
 
 const Overview = dynamic(
   () => import("../../components/dashboard/overview/Overview"),
@@ -14,7 +14,6 @@ const Overview = dynamic(
 );
 
 export default function Dashboard() {
-  const { appConfig } = useAppContext();
   const router = useSCRouter();
 
   const swipeHandlers = useSwipeable({
@@ -28,7 +27,7 @@ export default function Dashboard() {
     if (appConfig.demo) {
       router.push("/dashboard/sink");
     }
-  }, [appConfig, router]);
+  }, [router]);
 
   return (
     <div

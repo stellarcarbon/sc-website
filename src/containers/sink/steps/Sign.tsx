@@ -1,4 +1,4 @@
-import { useViewportWidth } from "@/app/utils";
+import { useViewportWidth } from "@/utils";
 import SignIcon from "@/components/icons/SignIcon";
 import SinkingStep from "./Step";
 

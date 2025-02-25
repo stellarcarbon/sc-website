@@ -8,11 +8,9 @@ import RainforestIntro from "@/containers/home/RainforestSection";
 import LastTransactionsSection from "@/containers/home/LastTransactionsSection";
 import PartnerSection from "@/containers/home/PartnerSection";
 import DemoLanding from "@/containers/demo/DemoLanding";
-import { useAppContext } from "@/context/appContext";
+import appConfig from "@/config";
 
 export default function Home() {
-  const { appConfig } = useAppContext();
-
   if (appConfig.demo) {
     return <DemoLanding />;
   }

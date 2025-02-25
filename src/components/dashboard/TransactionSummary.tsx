@@ -2,7 +2,7 @@ import TransactionsLoading from "@/components/dashboard/transactions/Transaction
 import { useAppContext } from "@/context/appContext";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Link from "next/link";
-import { useViewportWidth } from "@/app/utils";
+import { useViewportWidth } from "@/utils";
 import { useMemo } from "react";
 import { RetirementStatus } from "@/app/types";
 import TransactionListItem from "./TransactionListItem";

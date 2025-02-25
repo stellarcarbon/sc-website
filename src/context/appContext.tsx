@@ -33,8 +33,8 @@ import WalletConnectionStorageService from "@/services/WalletConnectionService";
 import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
-import { AppConfiguration } from "@/app/types";
 import useIsMobile from "@/hooks/useIsMobile";
+import appConfig from "@/config";
 
 console.log(`NEXT_PUBLIC_PRODUCTION: ${process.env.NEXT_PUBLIC_PRODUCTION}`);
 if (process.env.NEXT_PUBLIC_PRODUCTION === "development") {
@@ -92,8 +92,6 @@ type AppContext = {
 
   stellarWalletsKit: StellarWalletsKit | null;
 
-  appConfig: AppConfiguration;
-
   xlmBalance: number | undefined;
   usdcBalance: number | undefined;
 
@@ -137,22 +135,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const pathname = usePathname();
   const router = useRouter();
-
-  const appConfig = useMemo(() => {
-    return {
-      network:
-        process.env.NEXT_PUBLIC_PRODUCTION === "production"
-          ? WalletNetwork.PUBLIC
-          : WalletNetwork.TESTNET,
-      server:
-        process.env.NEXT_PUBLIC_PRODUCTION === "production"
-          ? new StellarSdk.Horizon.Server("https://horizon.stellar.org")
-          : new StellarSdk.Horizon.Server(
-              "https://horizon-testnet.stellar.org"
-            ),
-      demo: process.env.NEXT_PUBLIC_DEMO_VERSION === "true",
-    };
-  }, []);
 
   useEffect(() => {
     closeDrawer();
@@ -235,13 +217,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     };
 
     loadApp();
-  }, [
-    walletConnection,
-    myTransactions,
-    pathname,
-    hasPendingRounding,
-    appConfig,
-  ]);
+  }, [walletConnection, myTransactions, pathname, hasPendingRounding]);
 
   const updateWalletConnection = useCallback(
     (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
@@ -287,8 +263,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       stellarWalletsKit: stellarWalletsKitRef.current,
 
-      appConfig,
-
       xlmBalance,
       usdcBalance,
 
@@ -302,7 +276,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     updateWalletConnection,
     hasPendingRounding,
     sinkRequest,
-    appConfig,
+
     xlmBalance,
     usdcBalance,
     isMobileDevice,

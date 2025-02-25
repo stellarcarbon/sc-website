@@ -3,14 +3,15 @@
 import { useEffect } from "react";
 import DashboardNavBar from "@/components/dashboard/DashboardNavBar";
 import { useAppContext } from "@/context/appContext";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
+import appConfig from "@/config";
 
 export default function DashboardLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
 }) {
-  const { walletConnection, appConfig } = useAppContext();
+  const { walletConnection } = useAppContext();
   const router = useSCRouter();
 
   // Redirect to connect wallet if not connected.

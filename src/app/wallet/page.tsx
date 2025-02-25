@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useAppContext } from "@/context/appContext";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import ConnectLanding from "@/containers/connect_wallet/ConnectLanding";
 
 export default function WalletPage() {

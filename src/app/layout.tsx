@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "../styles/globals.css";
+import "../globals.css";
 import App from "./App";
 import { inter } from "./fonts";
 import { AppContextProvider } from "@/context/appContext";

@@ -1,11 +1,12 @@
 "use client";
 
+import appConfig from "@/config";
 import { useAppContext } from "@/context/appContext";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function DemoWalletConnectionInfo() {
-  const { walletConnection, disconnectWallet, appConfig } = useAppContext();
+  const { walletConnection, disconnectWallet } = useAppContext();
 
   return (
     <div

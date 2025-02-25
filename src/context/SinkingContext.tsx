@@ -19,6 +19,7 @@ import {
 import { useAppContext } from "./appContext";
 import { TransactionBuilder } from "@stellar/stellar-sdk";
 import { useRouter } from "next/navigation";
+import appConfig from "@/config";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -60,8 +61,7 @@ export const useSinkingContext = () => {
 };
 
 export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
-  const { stellarWalletsKit, walletConnection, appConfig, setMyTransactions } =
-    useAppContext();
+  const { stellarWalletsKit, walletConnection } = useAppContext();
 
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
   const [sinkCarbonXdr, setSinkCarbonXdr] = useState<SinkingResponse>();
@@ -117,7 +117,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         displayHorizonError(error);
       }
     },
-    [appConfig, displayHorizonError, setCompletedTransactionHash, setStep]
+    [displayHorizonError, setCompletedTransactionHash, setStep]
   );
 
   const signTransaction = useCallback(async () => {

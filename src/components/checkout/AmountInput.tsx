@@ -1,7 +1,7 @@
 "use client";
 
 import { SinkingFormData } from "@/app/types";
-import { debounce } from "@/app/utils";
+import { debounce } from "@/utils";
 import { CarbonService } from "@/client";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ import { UseFormRegister } from "react-hook-form";
 import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSearchParams } from "next/navigation";
-import { useAppContext } from "@/context/appContext";
+import appConfig from "@/config";
 
 interface AmountInputProps {
   register: UseFormRegister<SinkingFormData>;
@@ -27,8 +27,6 @@ export default function AmountInput({
   quote,
   setQuote,
 }: AmountInputProps) {
-  const { appConfig } = useAppContext();
-
   const tonnes = watch("tonnes");
   const searchParams = useSearchParams();
   const amount = searchParams.get("amount");
@@ -131,7 +129,7 @@ export default function AmountInput({
     if (!appConfig.demo) {
       setShowFractionalWarning(tonnes % 1 != 0);
     }
-  }, [appConfig, tonnes, setShowFractionalWarning]);
+  }, [tonnes, setShowFractionalWarning]);
 
   return (
     <div className="flex flex-col gap-1">

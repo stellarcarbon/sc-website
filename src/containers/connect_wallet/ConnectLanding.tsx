@@ -1,4 +1,4 @@
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import Button from "@/components/Button";
 
 export default function ConnectLanding() {

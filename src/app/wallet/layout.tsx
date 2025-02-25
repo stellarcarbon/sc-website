@@ -1,14 +1,12 @@
 "use client";
 
-import { useAppContext } from "@/context/appContext";
+import appConfig from "@/config";
 
 export default function WalletLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { appConfig } = useAppContext();
-
   return appConfig.demo ? (
     <div className="w-full flex-1">{children}</div>
   ) : (

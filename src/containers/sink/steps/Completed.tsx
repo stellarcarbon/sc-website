@@ -1,11 +1,10 @@
 import SuccessIcon from "@/components/icons/SuccessIcon";
-import { useAppContext } from "@/context/appContext";
 import { useSinkingContext } from "@/context/SinkingContext";
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 import SinkingStep from "./Step";
+import appConfig from "@/config";
 
 export default function CompletedSinking() {
-  const { appConfig } = useAppContext();
   const { completedTransactionHash } = useSinkingContext();
 
   return (

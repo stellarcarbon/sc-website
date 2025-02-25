@@ -1,4 +1,4 @@
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import DropdownOption from "@/components/DropdownOption";
 import WalletConnectionInfoSmall from "@/components/WalletConnectionInfoSmall";
 import { useAppContext } from "@/context/appContext";

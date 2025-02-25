@@ -1,6 +1,6 @@
 "use client";
 
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import { usePathname } from "next/navigation";
 import { HTMLProps, useEffect, useMemo, useState } from "react";
 

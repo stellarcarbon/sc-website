@@ -1,5 +1,5 @@
 import { HTMLProps } from "react";
-import { useSCRouter } from "@/app/utils";
+import { useSCRouter } from "@/utils";
 import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 

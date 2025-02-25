@@ -1,4 +1,4 @@
-import { isValidEmail, useSCRouter } from "@/app/utils";
+import { isValidEmail, useSCRouter } from "@/utils";
 import { useAppContext } from "@/context/appContext";
 import { walletConnectDialog } from "@/context/walletFunctions";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
@@ -14,6 +14,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import appConfig from "@/config";
 
 type ConnectWalletContext = {
   username: string | undefined;
@@ -52,7 +53,7 @@ export const useConnectWalletContext = () => {
 export const ConnectWalletContextProvider = ({
   children,
 }: PropsWithChildren) => {
-  const { appConfig, setWalletConnection } = useAppContext();
+  const { setWalletConnection } = useAppContext();
 
   const [selectedWallet, setSelectedWallet] = useState<ISupportedWallet>();
   const [username, setUsername] = useState<string>();
@@ -103,7 +104,7 @@ export const ConnectWalletContextProvider = ({
         return false;
       }
     },
-    [appConfig, setWalletConnection, username, useremail]
+    [setWalletConnection, username, useremail]
   );
 
   const validateForm = useCallback(() => {
@@ -160,7 +161,6 @@ export const ConnectWalletContextProvider = ({
     router,
     setConnectionError,
     validateForm,
-    appConfig,
   ]);
 
   const providerValue = useMemo(

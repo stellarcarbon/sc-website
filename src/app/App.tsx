@@ -1,6 +1,6 @@
 "use client";
 
-import "../styles/globals.css";
+import "../globals.css";
 
 import Drawer from "@/components/Drawer";
 import Footer from "@/components/Footer";
@@ -8,9 +8,10 @@ import NavBar from "@/containers/navbar/NavBar";
 import { useAppContext } from "@/context/appContext";
 import DemoApp from "../containers/demo/DemoApp";
 import { SinkingContextProvider } from "@/context/SinkingContext";
+import appConfig from "@/config";
 
 export default function App({ children }: { children: React.ReactNode }) {
-  const { isDrawerOpen, appConfig } = useAppContext();
+  const { isDrawerOpen } = useAppContext();
 
   if (appConfig.demo) {
     return (
