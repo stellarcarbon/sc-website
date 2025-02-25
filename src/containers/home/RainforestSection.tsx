@@ -127,7 +127,7 @@ export default function RainforestIntro() {
             based projects. Find out more below.
           </span> */}
         </div>
-        <CTAButton className="self-center" />
+        <CTAButton />
         <div
           ref={chevDown}
           className={`absolute cursor-pointer bottom-0 animate-bounce ${

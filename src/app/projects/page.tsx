@@ -83,7 +83,7 @@ export default function ProjectsPage() {
             </a>
           </p>
 
-          <div className="md:hidden px-4">
+          <div className="md:hidden px-4 my-8 mt-16">
             <ShipiboImages />
           </div>
         </div>

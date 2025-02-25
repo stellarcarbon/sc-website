@@ -11,7 +11,7 @@ import DropdownOption from "./DropdownOption";
 import { useRouter } from "next/navigation";
 
 export default function DrawerWallet() {
-  const { walletConnection, disconnectWallet } = useAppContext();
+  const { walletConnection, disconnectWallet, closeDrawer } = useAppContext();
   const router = useRouter();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -29,6 +29,11 @@ export default function DrawerWallet() {
     }
   }, [showDropdown, dropdownRef]);
 
+  const handleSinkCarbon = useCallback(() => {
+    router.push("/dashboard/sink");
+    setShowDropdown(false);
+  }, [router, setShowDropdown]);
+
   const handleMyStellar = useCallback(() => {
     router.push("/dashboard");
     setShowDropdown(false);
@@ -37,12 +42,8 @@ export default function DrawerWallet() {
   const handleDisconnect = useCallback(() => {
     disconnectWallet();
     setShowDropdown(false);
-  }, [disconnectWallet, setShowDropdown]);
-
-  const handleSinkCarbon = useCallback(() => {
-    router.push("/dashboard/sink");
-    setShowDropdown(false);
-  }, [router, setShowDropdown]);
+    closeDrawer();
+  }, [disconnectWallet, setShowDropdown, closeDrawer]);
 
   return (
     <div className="mx-8">

@@ -18,8 +18,7 @@ import NavBarWallet from "@/containers/navbar/NavBarWallet";
 import DrawerWallet from "./DrawerWallet";
 
 export default function Drawer() {
-  const { closeDrawer, walletConnection, disconnectWallet, isDrawerOpen } =
-    useAppContext();
+  const { closeDrawer, walletConnection } = useAppContext();
   const pathname = usePathname();
   const router = useSCRouter();
 
@@ -48,17 +47,9 @@ export default function Drawer() {
       {walletConnection && <DrawerWallet />}
 
       {!walletConnection && (
-        <CTAButton
-          className="self-center"
-          onClick={() => {
-            if (pathname === "/dashboard") {
-              // In case already on that path, have to close the Drawer from here.
-              closeDrawer();
-            } else {
-              router.push("/dashboard");
-            }
-          }}
-        />
+        <div className="mx-auto">
+          <CTAButton />
+        </div>
       )}
     </div>
   );

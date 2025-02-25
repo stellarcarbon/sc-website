@@ -1,25 +1,30 @@
-import { HTMLProps } from "react";
+import { HTMLProps, useCallback } from "react";
 import { useSCRouter } from "@/utils";
 import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 
-interface CTAButtonProps extends HTMLProps<HTMLButtonElement> {}
-
-export default function CTAButton({ className = "", onClick }: CTAButtonProps) {
+export default function CTAButton() {
   const router = useSCRouter();
   const { walletConnection } = useAppContext();
+
+  const onClick = useCallback(() => {
+    if (walletConnection) {
+      router.push("/dashboard/sink");
+    } else {
+      router.push("/wallet");
+    }
+  }, [walletConnection, router]);
 
   return (
     <button
       type="button"
-      onClick={
-        onClick
-          ? onClick
-          : () => {
-              router.push("/dashboard/sink");
-            }
-      }
-      className={`p-1 w-[220px] flex justify-center bg-darker text-white rounded-xl border border-accentSecondary hover:bg-secondary hover:text-white ${className}`}
+      onClick={onClick}
+      className={`p-1
+        w-[220px]
+        flex justify-center
+        bg-darker hover:bg-secondary rounded-xl
+        text-white
+        border border-accentSecondary`}
     >
       {/* <BuyStellarCarbonIcon /> */}
       <div className=" h-11 flex items-center gap-3">
