@@ -15,36 +15,20 @@ import {
   XBULL_ID,
   allowAllModules,
   StellarWalletsKit,
-  WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
-import * as StellarSdk from "@stellar/stellar-sdk";
 import {
   MyTransactionRecord,
   PersonalDetails,
   SinkCarbonXdrPostRequest,
   WalletConnection,
 } from "@/app/types";
-import {
-  loadAvailableWalletsMock,
-  walletConnectDialog,
-} from "./walletFunctions";
-import { usePathname, useRouter } from "next/navigation";
+import { loadAvailableWalletsMock } from "./walletFunctions";
+import { usePathname } from "next/navigation";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
-import { OpenAPI } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
 import useIsMobile from "@/hooks/useIsMobile";
 import appConfig from "@/config";
-
-console.log(`NEXT_PUBLIC_PRODUCTION: ${process.env.NEXT_PUBLIC_PRODUCTION}`);
-if (process.env.NEXT_PUBLIC_PRODUCTION === "development") {
-  OpenAPI.BASE = "http://localhost:8000";
-  // OpenAPI.BASE = "https://api.stellarcarbon.io";
-} else if (process.env.NEXT_PUBLIC_PRODUCTION === "production") {
-  OpenAPI.BASE = "https://api.stellarcarbon.io";
-} else {
-  OpenAPI.BASE = "https://api.stellarcarbon.io/test";
-}
 
 declare global {
   interface Date {
@@ -134,7 +118,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [usdcBalance, setUsdcBalance] = useState<number>();
 
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     closeDrawer();

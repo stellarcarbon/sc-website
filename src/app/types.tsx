@@ -98,4 +98,5 @@ export interface AppConfiguration {
   network: WalletNetwork;
   server: StellarSdk.Horizon.Server;
   demo: boolean;
+  apiBaseUrl: string;
 }
