@@ -14,6 +14,8 @@ import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 import WalletConnectionInfo from "./WalletConnectionInfo";
 import { useCallback, useEffect } from "react";
 import StellarPubKey from "./dashboard/StellarPubKey";
+import NavBarWallet from "@/containers/navbar/NavBarWallet";
+import DrawerWallet from "./DrawerWallet";
 
 export default function Drawer() {
   const { closeDrawer, walletConnection, disconnectWallet, isDrawerOpen } =
@@ -31,30 +33,7 @@ export default function Drawer() {
           <CloseIcon />
         </button>
       </div>
-      {walletConnection && (
-        <div className="flex justify-between items-center p-2 m-2 text-white bg-darker border border-secondary rounded-lg shadow-md">
-          <img
-            className="h-6 w-6 ml-2"
-            src={walletConnection?.walletType.icon}
-            alt="wallet connection"
-          />
-          <div className="text-sm">
-            <StellarPubKey pubKey={walletConnection?.stellarPubKey} />
-          </div>
-          <div className="flex justify-end">
-            <Button
-              onClick={() => {
-                router.push("/dashboard/sink");
-                closeDrawer();
-              }}
-              className="w-full md:w-auto gap-2 border border-secondary"
-            >
-              <div>Sink CARBON</div>
-              <CARBONCurrencyIcon />
-            </Button>
-          </div>
-        </div>
-      )}
+
       <div className="flex flex-col mt-4 mb-2">
         <DrawerLink href="/">Home</DrawerLink>
         <DrawerLink href="/explain">What is Stellarcarbon?</DrawerLink>
@@ -63,7 +42,10 @@ export default function Drawer() {
         <DrawerLink href="/software">Software ecosystem</DrawerLink>
         <DrawerLink href="/about">About us</DrawerLink>
       </div>
+
       <hr className="w-full my-4 mb-8 border-secondary" />
+
+      {walletConnection && <DrawerWallet />}
 
       {!walletConnection && (
         <CTAButton

@@ -1,4 +1,5 @@
 import { useSCRouter } from "@/app/utils";
+import DropdownOption from "@/components/DropdownOption";
 import WalletConnectionInfoSmall from "@/components/WalletConnectionInfoSmall";
 import { useAppContext } from "@/context/appContext";
 import {
@@ -38,10 +39,16 @@ export default function NavBarWallet() {
     router.push("/dashboard");
     setShowDropdown(false);
   }, [router, setShowDropdown]);
+
   const handleDisconnect = useCallback(() => {
     disconnectWallet();
     setShowDropdown(false);
   }, [disconnectWallet, setShowDropdown]);
+
+  const handleSinkCarbon = useCallback(() => {
+    router.push("/dashboard/sink");
+    setShowDropdown(false);
+  }, [router, setShowDropdown]);
 
   return (
     <>
@@ -54,27 +61,18 @@ export default function NavBarWallet() {
             className="absolute right-0 w-64 top-11 p-2 bg-darker border rounded border-accentSecondary text-white"
             ref={dropdownRef}
           >
-            <MenuOption onClick={handleMyStellar}>My Stellarcarbon</MenuOption>
-            <MenuOption onClick={handleDisconnect}>
+            <DropdownOption onClick={handleSinkCarbon}>
+              Sink CARBON
+            </DropdownOption>
+            <DropdownOption onClick={handleMyStellar}>
+              My Stellarcarbon
+            </DropdownOption>
+            <DropdownOption onClick={handleDisconnect}>
               Disconnect wallet
-            </MenuOption>
+            </DropdownOption>
           </div>
         )}
       </div>
     </>
-  );
-}
-
-function MenuOption({
-  children,
-  onClick,
-}: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
-  return (
-    <div
-      onClick={onClick}
-      className="p-2 px-2 hover:bg-secondary rounded cursor-pointer"
-    >
-      {children}
-    </div>
   );
 }
