@@ -33,7 +33,7 @@ export default function NavBar() {
 
   return (
     <header
-      className={`flex w-full justify-between items-center h-16 md:h-20 z-[100] fixed
+      className={`flex w-full justify-between items-center h-16 lg:h-20 z-[100] fixed
       border-b shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]
     bg-primary border-secondary ${
       pathname === "/"
@@ -49,17 +49,18 @@ export default function NavBar() {
         <StellarCarbonIcon className="pl-[4vw] text-accent" />
       </Link>
 
-      <div className="mr-6 gap-4 items-center hidden md:flex">
+      <div className="mr-6 gap-4 items-center hidden lg:flex">
         <TopBarLink href="/">Home</TopBarLink>
         <TopBarLink href="/explain">Explain</TopBarLink>
         <TopBarLink href="/projects">Projects</TopBarLink>
         <TopBarLink href="/transactions">Transactions</TopBarLink>
+        <TopBarLink href="/software">Software</TopBarLink>
         <TopBarLink href="/about">About us</TopBarLink>
         <div className="w-4"></div>
         {walletConnection ? <NavBarWallet /> : <CTAButton />}
       </div>
       <HamburgerButton
-        className="p-[4vw] md:hidden text-accent"
+        className="p-[4vw] lg:hidden text-accent"
         onClick={openDrawer}
       />
     </header>

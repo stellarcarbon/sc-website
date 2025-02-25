@@ -29,8 +29,8 @@ export default function DashboardLayout({
       {appConfig.demo ? (
         <>{children}</>
       ) : (
-        <div className="md:flex md:justify-center md:bg-dalle md:bg-cover md:bg-fixed ">
-          <main className="bg-primary min-h-[calc(100dvh-160px)] md:min-h-0 md:border border-tertiary flex flex-col items-center justify-start md:max-w-[780px] md:rounded md:m-6 md:w-[80vw] lg:w-[70vw]">
+        <div className="lg:flex lg:justify-center lg:bg-dalle lg:bg-cover lg:bg-fixed ">
+          <main className="bg-primary min-h-[calc(100dvh-160px)] lg:min-h-0 lg:border border-tertiary flex flex-col items-center justify-start lg:max-w-[850px] lg:rounded lg:m-6 lg:w-[70vw]">
             <DashboardNavBar />
             {children}
           </main>
