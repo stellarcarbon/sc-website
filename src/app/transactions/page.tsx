@@ -1,12 +1,14 @@
 "use client";
 
-import { Suspense } from "react";
 import Header from "@/components/Header";
-import TransactionHistory from "@/containers/TransactionHistory";
 import Paragraph from "@/components/Paragraph";
 import ContentContainer from "@/components/ContentContainer";
+import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 
 export default function TransactionsPage() {
+  const router = useRouter();
+
   return (
     <main className="flex flex-col items-center font-noto pb-4">
       <div className="blockchain-bg w-full">
@@ -22,20 +24,13 @@ export default function TransactionsPage() {
       <ContentContainer>
         <Header>Transaction history</Header>
         <Paragraph>
-          Here you can find the complete history of transactions using
-          Stellarcarbon.
+          The complete history of all transactions ever made using Stellarcarbon
+          is visible on the blockchain.
         </Paragraph>
-        <Paragraph>
-          In ut eros pretium velit congue fringilla. Fusce id commodo nibh.
-          Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-          per inceptos himenaeos. Nullam viverra fringilla purus, ac
-          pellentesque nulla luctus id. Mauris in nisl sapien. Aliquam felis
-          libero, blandit id feugiat et, placerat nec tortor. Aliquam egestas
-          nunc et pellentesque auctor.
-        </Paragraph>
-        <Suspense>
-          <TransactionHistory />
-        </Suspense>
+        <Paragraph>Use our transactions explorer to look around!</Paragraph>
+        <Button onClick={() => router.push("/transactions/explorer")}>
+          Explore transactions
+        </Button>
       </ContentContainer>
     </main>
   );

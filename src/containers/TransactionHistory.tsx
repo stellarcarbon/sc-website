@@ -16,7 +16,7 @@ export default function TransactionHistory({}) {
 
   const [transactions, setTransactions] = useState<MyTransactionRecord[]>([]);
   const [error, setError] = useState<string>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const updateSearchParams = useCallback(
     (cursor?: string, order?: "asc" | "desc", limit?: number) => {
@@ -34,6 +34,8 @@ export default function TransactionHistory({}) {
   );
 
   const fetchTransactions = useCallback(async () => {
+    console.log("nu");
+    setIsLoading(true);
     let cursor: string | undefined = undefined;
     if (searchParams.get("cursor") !== null) {
       cursor = searchParams.get("cursor")!;
@@ -61,7 +63,8 @@ export default function TransactionHistory({}) {
       const msg = e.body.detail[0]?.msg;
       setError(msg);
     }
-  }, [searchParams]);
+    setIsLoading(false);
+  }, [searchParams, setIsLoading]);
 
   const goToNextPage = useCallback(async () => {
     const cursorNext = transactions[transactions.length - 1].pagingToken;
@@ -79,17 +82,25 @@ export default function TransactionHistory({}) {
     fetchTransactions();
   }, [fetchTransactions]);
 
+  // if (isLoading) return <TransactionsLoading />;
+
   return (
     <>
       {!error ? (
-        <div className="flex flex-col items-center">
-          <div className="w-full py-8 pb-16 flex flex-col items-center gap-1">
-            {transactions.length > 1 ? (
+        <div className="w-full flex-1 flex flex-col items-center lg:w-[700px] overflow-hidden">
+          <div className="w-full flex justify-between items-center my-4 px-4 !text-xs">
+            <Button onClick={goToPreviousPage}>Previous page</Button>
+            <Button onClick={() => router.push("/transactions/explorer")}>
+              Go back to start
+            </Button>
+            <Button onClick={goToNextPage}>Next page</Button>
+          </div>
+          <div className="w-full flex-1 overflow-auto p-4 flex flex-col items-center gap-1 bg-darker lg:bg-secondary">
+            {transactions.length > 1 && !isLoading ? (
               transactions.map((tx, idx) => {
                 return (
                   <TransactionListItem
                     key={`tx_${idx}`}
-                    onClick={() => {}}
                     transaction={tx}
                     bgPrimary
                   />
@@ -98,21 +109,10 @@ export default function TransactionHistory({}) {
             ) : isLoading ? (
               <TransactionsLoading />
             ) : (
-              <div className="flex flex-col items-center justify-center gap-6">
+              <div className="w-full flex flex-col items-center justify-center gap-6">
                 <span>No more records found.</span>
-                <Link className="underline" href="/transactions">
-                  Go back to start
-                </Link>
               </div>
             )}
-          </div>
-          <div className="w-full px-4 md:px-12 flex justify-between">
-            <Button onClick={goToPreviousPage} className="!text-sm">
-              Previous page
-            </Button>
-            <Button onClick={goToNextPage} className="!text-sm">
-              Next page
-            </Button>
           </div>
         </div>
       ) : (

@@ -3,10 +3,40 @@ import {
   MyTransactionRecord,
   RetirementStatus,
 } from "@/app/types";
-import { AccountService, SinkService, SinkTxListResponse } from "@/client";
+import {
+  AccountService,
+  SinkService,
+  SinkTxItem,
+  SinkTxListResponse,
+} from "@/client";
 import { AccountResponse, Server } from "@stellar/stellar-sdk/lib/horizon";
 
 export default class TransactionHistoryService {
+  private static mapTxResponse(txResponse: SinkTxItem): MyTransactionRecord {
+    let retirementStatus = RetirementStatus.RETIRED;
+    if (!txResponse.retirement_finalized) {
+      if (Number(txResponse.carbon_amount) % 1 === 0) {
+        // if the total amount pending is round, we are only waiting for SC.
+        retirementStatus = RetirementStatus.PENDING_STELLARCARBON;
+      } else {
+        // Otherwise a user action is required.
+        retirementStatus = RetirementStatus.PENDING_USER;
+      }
+    }
+
+    return {
+      id: txResponse.hash,
+      createdAt: txResponse.created_at,
+      memo: txResponse.memo.value,
+      assetAmount: Number(txResponse.source_asset.amount),
+      asset: txResponse.source_asset.code,
+      sinkAmount: Number(txResponse.carbon_amount),
+      retirementStatus,
+      retirements: txResponse.retirements,
+      pagingToken: txResponse.paging_token,
+    } as MyTransactionRecord;
+  }
+
   private static mapTxsResponse(
     txsResponse: SinkTxListResponse,
     order: "asc" | "desc" = "desc"
@@ -15,30 +45,16 @@ export default class TransactionHistoryService {
     if (order === "asc") {
       transactions.reverse();
     }
-    return txsResponse.transactions.map((transaction) => {
-      let retirementStatus = RetirementStatus.RETIRED;
-      if (!transaction.retirement_finalized) {
-        if (Number(transaction.carbon_amount) % 1 === 0) {
-          // if the total amount pending is round, we are only waiting for SC.
-          retirementStatus = RetirementStatus.PENDING_STELLARCARBON;
-        } else {
-          // Otherwise a user action is required.
-          retirementStatus = RetirementStatus.PENDING_USER;
-        }
-      }
+    return txsResponse.transactions.map((transaction) =>
+      this.mapTxResponse(transaction)
+    );
+  }
 
-      return {
-        id: transaction.hash,
-        createdAt: transaction.created_at,
-        memo: transaction.memo.value,
-        assetAmount: Number(transaction.source_asset.amount),
-        asset: transaction.source_asset.code,
-        sinkAmount: Number(transaction.carbon_amount),
-        retirementStatus,
-        retirements: transaction.retirements,
-        pagingToken: transaction.paging_token,
-      } as MyTransactionRecord;
-    });
+  public static async fetchTransaction(
+    txHash: string
+  ): Promise<MyTransactionRecord> {
+    const response = await SinkService.getSinkTxItem({ txHash });
+    return this.mapTxResponse(response);
   }
 
   public static async fetchLedger(

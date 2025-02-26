@@ -1,11 +1,11 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import CountDownTimer from "@/components/CountDownTimer";
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 interface TransactionListItemProps {
   transaction: MyTransactionRecord;
-  onClick: () => void;
   showCountdown?: boolean;
   bgPrimary?: boolean;
 }
@@ -22,10 +22,11 @@ function ItemValue({ children }: { children: ReactNode }) {
 
 export default function TransactionListItem({
   transaction,
-  onClick,
   showCountdown = false,
   bgPrimary = false,
 }: TransactionListItemProps) {
+  const router = useRouter();
+
   const initialDuration = useMemo(() => {
     const txDate = new Date(transaction.createdAt);
     const txDatePlus90 = txDate.addDays(90); // TODO: Make this the actual 90 days
@@ -35,6 +36,10 @@ export default function TransactionListItem({
 
     return outcome / 1000;
   }, [transaction]);
+
+  const onClick = useCallback(() => {
+    router.push(`/transactions/explorer/detail/?id=${transaction.id}`);
+  }, [router, transaction]);
 
   return (
     <div
