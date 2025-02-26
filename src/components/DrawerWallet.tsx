@@ -32,12 +32,14 @@ export default function DrawerWallet() {
   const handleSinkCarbon = useCallback(() => {
     router.push("/dashboard/sink");
     setShowDropdown(false);
-  }, [router, setShowDropdown]);
+    closeDrawer();
+  }, [router, setShowDropdown, closeDrawer]);
 
   const handleMyStellar = useCallback(() => {
     router.push("/dashboard");
     setShowDropdown(false);
-  }, [router, setShowDropdown]);
+    closeDrawer();
+  }, [router, setShowDropdown, closeDrawer]);
 
   const handleDisconnect = useCallback(() => {
     disconnectWallet();

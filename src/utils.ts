@@ -71,7 +71,7 @@ export function useSCRouter() {
     const mergedOptions = { ...defaultNavigationOptions, ...options };
     router.push(url, mergedOptions);
     if (mergedOptions.scroll) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
   };
 

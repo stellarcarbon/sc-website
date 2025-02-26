@@ -131,10 +131,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    closeDrawer();
-  }, [pathname]);
-
-  useEffect(() => {
     const loadApp = async () => {
       const loadStellarWalletsKit = async () => {
         if (typeof window !== "undefined") {
