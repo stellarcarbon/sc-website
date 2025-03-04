@@ -2,7 +2,7 @@
 
 Repository containing code for the https://www.stellarcarbon.io website.
 
-Staging can be found on https://sc-website-eosin.vercel.app/
+Staging can be found on https://test.stellarcarbon.io/
 
 TODO: robots.txt maken
 
@@ -54,6 +54,8 @@ npm run e2e:headless
 
 ### CarbonAPI code generation
 
-The CarbonAPI client is generated based on the OpenAPI schema of the CarbonAPI. Its newest version can be found on https://api.com.
+The CarbonAPI client is generated based on the OpenAPI schema of the CarbonAPI. The latest version can be found on https://api.stellarcarbon.io/docs/.
+
+Generate or update the API client with:
 
 `npm run generate-client`
