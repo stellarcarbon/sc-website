@@ -1,6 +1,8 @@
 import ContentContainer from "@/components/ContentContainer";
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
+import appConfig from "@/config";
+import Link from "next/link";
 
 export default function SoftwarePage() {
   return (
@@ -11,7 +13,7 @@ export default function SoftwarePage() {
             Software
           </span>
           <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
-            Open source ecosystem
+            For integration partners
           </span>
         </div>
       </div>
@@ -19,112 +21,154 @@ export default function SoftwarePage() {
       <ContentContainer>
         <Paragraph>
           At Stellarcarbon, we believe in transparency, accessibility, and
-          innovation in CO2 compensation. Our open-source software ecosystem
-          empowers individuals and businesses to seamlessly integrate carbon
-          compensation into their workflows using blockchain technology. Below
-          is an overview of our core software components.
+          innovation to fund nature-based solutions. Our open-source software
+          empowers businesses and developers to seamlessly integrate eco-credits
+          into their workflows using distributed ledger technology. Below is an 
+          overview of our core software components.
         </Paragraph>
 
         <Header>Stellarcarbon API</Header>
         <Paragraph>
-          Our public backend allows anyone to create sinking transactions via
-          simple HTTP requests. This API is ideal for developers and businesses
-          looking to integrate CO2 compensation into their existing systems.
+          The public interface of our backend allows anyone to create sinking 
+          transactions via simple HTTP requests. This API is ideal for developers 
+          and businesses looking to integrate CO₂ compensation into their 
+          existing products. It is permissionless: you don't need an API key.
+          We publish an OpenAPI schema which can be used to automatically
+          generate API clients for many programming languages, making your
+          integration easy to set up and maintain.
         </Paragraph>
         <Paragraph>
           <ul className="list-disc ml-4">
             <li className="mb-2">
               <b>Functionality: </b>
-              <span>Create and manage sinking transactions</span>
+              <span>Get quotes, build sinking transactions, and manage user accounts.</span>
             </li>
             <li className="mb-2">
               <b>Technology: </b>
-              <span>FastAPI</span>
+              <span>FastAPI, Stellar.</span>
             </li>
             <li className="mb-2">
-              <b>Use case: </b>
-              <span>Website integration options developers</span>
+              <b>Use cases: </b>
+              <span>User-facing integrations, and embedding nature-positive 
+                contributions into internal business processes.</span>
             </li>
           </ul>
-          <div className="underline cursor-pointer my-6">View repository</div>
+          <div className="my-6">
+            <Link
+              className="underline"
+              href={`${appConfig.apiBaseUrl}/docs`}
+              target="_blank"
+            >
+              View API documentation
+            </Link>
+          </div>
         </Paragraph>
 
         <Header>Stellarcarbon Audit</Header>
         <Paragraph>
-          Stellarcarbon Audit ensures full transparency by verifying the
-          balances and transactions within our ecosystem. This tool provides an
-          additional layer of accountability for all stakeholders.
+          To enhance transparency and give users full confidence in our carbon
+          accounting process, we offer an open-source auditing tool available on
+          GitHub. This tool allows anyone to independently verify our carbon
+          balance, track the lifecycle of CARBON and CarbonSINK tokens, and
+          monitor the integrity of our sinking mechanism on the Stellar
+          blockchain. We also use it ourselves behind the scenes to power our
+          API.
         </Paragraph>
 
         <Paragraph>
           <ul className="list-disc ml-4">
             <li className="mb-2">
               <b>Functionality: </b>
-              <span>Audits Stellarcarbon balances and transactions</span>
+              <span>Monitor Stellarcarbon balances and transactions.</span>
             </li>
             <li className="mb-2">
               <b>Technology: </b>
-              <span>???</span>
+              <span>SQLAlchemy, Docker.</span>
             </li>
             <li className="mb-2">
               <b>Use case: </b>
-              <span>Ensuring trust and transparency</span>
+              <span>Provide an additional layer of accountability for all 
+               stakeholders.</span>
             </li>
           </ul>
-          <div className="underline cursor-pointer my-6">View repository</div>
+          <div className="my-6">
+            <Link
+              className="underline"
+              href="https://github.com/stellarcarbon/sc-audit#readme-ov-file"
+              target="_blank"
+            >
+              View code repository
+            </Link>
+          </div>
         </Paragraph>
 
         <Header>Sorocarbon</Header>
         <Paragraph>
           Sorocarbon is a Soroban-based integration that offers a decentralized
-          alternative to our HTTP API. It enables direct blockchain
-          interactions, making it a powerful choice for businesses requiring
-          deep integration.
+          alternative to our HTTP API for sinking carbon. It enables direct smart 
+          contract interactions, making it a powerful choice for developers 
+          requiring deep integration. Call our <code className="bg-tertiary">sink_carbon</code> method
+          from your own contracts, and complement this with the Stellarcarbon
+          API in your frontend.
         </Paragraph>
         <Paragraph>
           <ul className="list-disc ml-4">
             <li className="mb-2">
               <b>Functionality: </b>
-              <span>Blockchain-native integration for CO2 sinking</span>
+              <span>Sink carbon directly from smart contracts.</span>
             </li>
             <li className="mb-2">
               <b>Technology: </b>
-              <span>Soroban smart contracts on Stellar</span>
+              <span>Soroban, Mercury Retroshades.</span>
             </li>
             <li className="mb-2">
               <b>Use case: </b>
-              <span>Heavyweight B2B integration, bypassing the HTTP API</span>
+              <span>Embed Stellarcarbon into your dApp or DeFi protocol.</span>
             </li>
           </ul>
-          <div className="underline cursor-pointer my-6">View repository</div>
+          <div className="my-6">
+            <Link
+              className="underline"
+              href="https://github.com/stellarcarbon/sorocarbon#readme-ov-file"
+              target="_blank"
+            >
+              View code repository
+            </Link>
+          </div>
         </Paragraph>
 
         <Header>Stellarcarbon Website</Header>
         <Paragraph>
-          Our web application is the heart of the Stellarcarbon experience,
-          providing an intuitive interface for users to compensate for their CO2
-          emissions and track their history. It is the website you are visiting
-          right now.
+          Our web app is the heart of the Stellarcarbon experience for our
+          retail audience, providing an intuitive interface through which they
+          contribute to biodiversity and climate action, and track their impact.
+          It is the website you are visiting right now.
         </Paragraph>
         <Paragraph>
           <ul className="list-disc ml-4">
             <li className="mb-2">
               <b>Functionality: </b>
-              <span>CO2 compensation, user dashboard, transaction history</span>
+              <span>Eco-credit retirement, user dashboard, transaction history.</span>
             </li>
             <li className="mb-2">
               <b>Technology: </b>
-              <span>React</span>
+              <span>React, Stellarcarbon API.</span>
             </li>
             <li className="mb-2">
               <b>Use case: </b>
-              <span>
-                Individual users looking for an easy way to offset their carbon
-                footprint
-              </span>
+              <span>Have a positive impact on climate and biodiversity, with
+               one-off or recurring contributions to vetted impact projects.</span>
             </li>
           </ul>
-          <div className="underline cursor-pointer my-6">View repository</div>
+          <div className="my-6">
+            <Link
+              className="underline"
+              href="https://github.com/stellarcarbon/sc-website#readme-ov-file"
+              target="_blank"
+            >
+              View code repository
+            </Link>
+          </div>
         </Paragraph>
       </ContentContainer>
     </main>
