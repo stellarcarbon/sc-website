@@ -32,7 +32,7 @@ export default function SoftwarePage() {
           The public interface of our backend allows anyone to create sinking 
           transactions via simple HTTP requests. This API is ideal for developers 
           and businesses looking to integrate CO₂ compensation into their 
-          existing products. It is permissionless: you don't need an API key.
+          existing products. It is permissionless: you don&apos;t need an API key.
           We publish an OpenAPI schema which can be used to automatically
           generate API clients for many programming languages, making your
           integration easy to set up and maintain.
