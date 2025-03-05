@@ -1,4 +1,3 @@
-'use client';
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import { AppConfiguration } from "./app/types";
