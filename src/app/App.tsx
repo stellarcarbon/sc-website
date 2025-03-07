@@ -22,7 +22,7 @@ export default function App({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-secondary flex flex-col">
+    <div className="min-h-[100dvh] bg-secondary flex flex-col">
       <NavBar />
       <SinkingContextProvider>
         <div className="flex-1 mt-[64px] lg:mt-[80px] flex flex-col text-textColor w-full">
