@@ -26,10 +26,10 @@ export default function LastTransactionsSection() {
   }, []);
 
   return (
-    <div className="bg-tertiary py-12 w-full border-y border-y-secondary">
+    <div className="bg-tertiary py-12 w-full border-y border-y-secondary px-[5%] ">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
-        <div className="m-auto pl-[5%] md:w-[50%] ">
+        <div className="md:w-[50%]">
           <Header>Using the blockchain</Header>
 
           <Paragraph>
@@ -47,18 +47,22 @@ export default function LastTransactionsSection() {
         {/* Transaction list */}
         <>
           {lastTransactions && (
-            <div className="mx-2 md:flex-1 md:max-w-[50%] grid grid-cols-2 items-center justify-center gap-1">
-              {lastTransactions.map((tx, idx) => {
-                return (
-                  <TransactionListItem
-                    key={`tx_${idx}`}
-                    onClick={() => {
-                      router.push(`/transactions/explorer/detail/?id=${tx.id}`);
-                    }}
-                    transaction={tx}
-                  />
-                );
-              })}
+            <div className="mx-2 md:flex-1 flex justify-end">
+              <div className="w-full md:w-[30vw] flex flex-col gap-1">
+                {lastTransactions.map((tx, idx) => {
+                  return (
+                    <TransactionListItem
+                      key={`tx_${idx}`}
+                      onClick={() => {
+                        router.push(
+                          `/transactions/explorer/detail/?id=${tx.id}`
+                        );
+                      }}
+                      transaction={tx}
+                    />
+                  );
+                })}
+              </div>
             </div>
           )}
         </>

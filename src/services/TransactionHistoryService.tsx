@@ -86,7 +86,7 @@ export default class TransactionHistoryService {
     MyTransactionRecord[]
   > {
     const sinkTxsResponse = await SinkService.getSinkTxList({
-      limit: 3,
+      limit: 4,
     });
     return this.mapTxsResponse(sinkTxsResponse);
   }
