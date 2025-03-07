@@ -5,10 +5,14 @@ import {
   faChevronDown,
   faChevronUp,
   faHamburger,
+  faPerson,
+  faRightFromBracket,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useCallback, useEffect, useRef, useState } from "react";
 import DropdownOption from "./DropdownOption";
 import { useRouter } from "next/navigation";
+import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 
 export default function DrawerWallet() {
   const { walletConnection, disconnectWallet, closeDrawer } = useAppContext();
@@ -48,46 +52,52 @@ export default function DrawerWallet() {
   }, [disconnectWallet, setShowDropdown, closeDrawer]);
 
   return (
-    <div className="mx-8">
+    <div
+      className="mx-8
+    border border-accentSecondary rounded shadow-lg"
+    >
       <div
         onClick={toggleDropdown}
         className={`${showDropdown ? "" : ""}
       px-4 py-3
       text-white
-    bg-darker hover:bg-secondary rounded shadow-lg
-      border border-accentSecondary
-      flex items-center gap-4 justify-between
-      cursor-pointer
+    bg-darker rounded-t
+      flex items-center justify-between
+      border-b border-b-accentSecondary
       `}
       >
-        <div>
-          <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
+        <div className="flex items-center gap-3">
+          <div>
+            <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
+          </div>
+          <div className="text-sm">
+            <TruncatedHash pubKey={walletConnection?.stellarPubKey} />
+          </div>
         </div>
-        <div className="text-sm">
-          <TruncatedHash pubKey={walletConnection?.stellarPubKey} />
-        </div>
-        <div className="flex justify-end">
+        {/* <div className="flex justify-end">
           <FontAwesomeIcon icon={showDropdown ? faChevronUp : faChevronDown} />
-        </div>
+        </div> */}
       </div>
 
-      {showDropdown && (
+      {true && (
         <div
           ref={dropdownRef}
           className="text-white
-          mt-1 mb-8 p-2
+           p-2
         bg-darker rounded shadow-lg
-        border border-accentSecondary
         flex flex-col gap-2"
         >
           <DropdownOption onClick={handleSinkCarbon}>
-            Sink CARBON
+            <CARBONCurrencyIcon />
+            <span>Sink CARBON</span>
           </DropdownOption>
           <DropdownOption onClick={handleMyStellar}>
-            My Stellarcarbon
+            <FontAwesomeIcon icon={faUser} width={18} />
+            <span>My Stellarcarbon</span>
           </DropdownOption>
           <DropdownOption onClick={handleDisconnect}>
-            Disconnect wallet
+            <FontAwesomeIcon icon={faRightFromBracket} width={18} />
+            <span>Disconnect wallet</span>
           </DropdownOption>
         </div>
       )}
