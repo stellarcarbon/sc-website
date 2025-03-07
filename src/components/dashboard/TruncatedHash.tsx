@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export default function StellarPubKey({ pubKey }: { pubKey?: string }) {
+export default function TruncatedHash({ pubKey }: { pubKey?: string }) {
   const firstChars = useMemo(() => {
     return pubKey?.slice(0, 4);
   }, [pubKey]);
@@ -9,7 +9,7 @@ export default function StellarPubKey({ pubKey }: { pubKey?: string }) {
   }, [pubKey]);
 
   return (
-    <div>
+    <div className="lowercase">
       <span>{firstChars}</span>
       <span>...</span>
       <span>{lastChars}</span>

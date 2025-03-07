@@ -1,6 +1,6 @@
 import { useAppContext } from "@/context/appContext";
 import { useState } from "react";
-import StellarPubKey from "./StellarPubKey";
+import TruncatedHash from "./TruncatedHash";
 import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
 import KeyValueEntry from "./overview/KeyValueEntry";
 import WalletConnectionButtons from "./overview/wcbuttons";
@@ -29,7 +29,7 @@ const WalletDetails = ({
         </div>
       </KeyValueEntry>
       <KeyValueEntry mkey="Public key">
-        {<StellarPubKey pubKey={walletConnection?.stellarPubKey} />}
+        {<TruncatedHash pubKey={walletConnection?.stellarPubKey} />}
       </KeyValueEntry>
       <div className="mt-4">
         <KeyValueEntry mkey="Contact information">

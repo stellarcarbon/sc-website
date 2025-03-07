@@ -1,5 +1,5 @@
 import { useAppContext } from "@/context/appContext";
-import StellarPubKey from "./dashboard/StellarPubKey";
+import TruncatedHash from "./dashboard/TruncatedHash";
 
 export default function WalletConnectionInfoSmall() {
   const { walletConnection } = useAppContext();
@@ -10,7 +10,7 @@ export default function WalletConnectionInfoSmall() {
         <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
       </div>
       <div className="flex items-center px-2 text-xs">
-        <StellarPubKey pubKey={walletConnection?.stellarPubKey} />
+        <TruncatedHash pubKey={walletConnection?.stellarPubKey} />
       </div>
     </div>
   );

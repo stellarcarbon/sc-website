@@ -5,9 +5,14 @@ import Paragraph from "@/components/Paragraph";
 import ContentContainer from "@/components/ContentContainer";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function TransactionsPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    router.push("/transactions/explorer");
+  }, []);
 
   return (
     <main className="flex flex-col items-center font-noto pb-4">
