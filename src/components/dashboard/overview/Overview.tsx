@@ -6,11 +6,8 @@ import { useState } from "react";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
-import WalletConnectionInfo from "../../WalletConnectionInfo";
 import TransactionSummary from "../TransactionSummary";
-import WalletConnectionButtons from "./wcbuttons";
 import OverviewContactInformationForm from "./ContactInformationForm";
-import OverviewContactInformation from "./ContactInformation";
 import DashboardTitle from "../DashboardTitle";
 import WalletDetails from "../WalletDetails";
 
@@ -22,10 +19,10 @@ export default function Overview() {
 
   return (
     <>
-      <div className="flex flex-col mt-8 md:mt-12">
-        <DashboardTitle>
+      <div className="flex flex-col mt-0 md:mt-4">
+        {/* <DashboardTitle>
           Activity summary<span> (testnet)</span>
-        </DashboardTitle>
+        </DashboardTitle> */}
         <TransactionSummary />
       </div>
 

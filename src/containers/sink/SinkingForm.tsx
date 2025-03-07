@@ -61,8 +61,8 @@ export default function SinkingForm() {
 
   return (
     <div className="flex flex-col mt-8 md:mt-12">
-      <DashboardTitle>Sink CARBON</DashboardTitle>
-      <form className="flex flex-col gap-12 md:gap-20 mt-6">
+      {/* <DashboardTitle>Sink CARBON</DashboardTitle> */}
+      <form className="flex flex-col gap-12 md:gap-20 mt-0">
         <div className="mx-4 md:mx-8 flex flex-col gap-12 min-w-[80%]">
           <Suspense>
             <AmountInput
