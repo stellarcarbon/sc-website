@@ -11,7 +11,7 @@ export default function ConnectWalletForm() {
   const { submitForm, connectionError } = useConnectWalletContext();
 
   return (
-    <div className="w-full md:max-w-[780px] p-6 flex flex-col gap-9 bg-darker md:bg-darker md:border border-tertiary md:rounded">
+    <div className="flex-1 lg:my-8 w-full md:max-w-[780px] p-6 flex flex-col gap-9 bg-darker md:bg-darker md:border border-tertiary md:rounded">
       <SelectWallet />
       <ContactDetails />
       <AcceptTnC />
