@@ -2,7 +2,7 @@
 
 import { MyTransactionRecord } from "@/app/types";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   createContext,
   Dispatch,
@@ -46,6 +46,7 @@ export const TransactionExplorerContextProvider = ({
 
   const searchParams = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
 
   const updateSearchParams = useCallback(
     (cursor?: string, order?: "asc" | "desc", limit?: number) => {
@@ -107,7 +108,7 @@ export const TransactionExplorerContextProvider = ({
   }, [transactions, updateSearchParams]);
 
   useEffect(() => {
-    fetchTransactions();
+    if (!pathname.includes("detail")) fetchTransactions();
   }, [fetchTransactions]);
 
   const providerValue = useMemo(() => {

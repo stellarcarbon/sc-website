@@ -34,7 +34,7 @@ export default function TxRetirementStatusDetail({
   return (
     <div
       className="bg-primary border border-accentSecondary rounded
-    p-2 lg:px-8
+    p-2 lg:px-8 w-full lg:w-auto
     flex flex-col items-center"
     >
       <h1 className="text-xl font-semibold py-2">Retirement status</h1>

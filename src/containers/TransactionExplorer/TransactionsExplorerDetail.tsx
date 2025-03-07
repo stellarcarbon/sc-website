@@ -1,11 +1,9 @@
-import { MyTransactionRecord, RetirementStatus } from "@/app/types";
-import CountDownTimer from "@/components/CountDownTimer";
+import { MyTransactionRecord } from "@/app/types";
 import TruncatedHash from "@/components/dashboard/TruncatedHash";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import StellarCarbonIcon from "@/components/icons/StellarCarbonIcon";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { useSearchParams } from "next/navigation";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import TxRetirementStatusDetail from "./TxRetirementStatusDetail";
 import appConfig from "@/config";
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
@@ -29,17 +27,10 @@ export default function TransactionsExplorerDetail() {
     });
   }, [searchParams]);
 
-  const initialDuration = useMemo(() => {
-    if (transaction !== undefined) {
-      const txDate = new Date(transaction.createdAt);
-      const txDatePlus90 = txDate.addDays(90); // TODO: Make this the actual 90 days
-      const now = new Date();
-
-      const outcome = +txDatePlus90 - +now;
-
-      return outcome / 1000;
-    }
-  }, [transaction]);
+  // const transaction = useMemo(() => {
+  //   const id = searchParams.get("id");
+  //   return transactions.find((tx) => tx.id === id);
+  // }, [searchParams, transactions]);
 
   if (isLoading) {
     return (
@@ -54,10 +45,6 @@ export default function TransactionsExplorerDetail() {
   return (
     <div className="w-full flex flex-col items-center p-2">
       <div className="grid grid-cols-4 w-full">
-        {/* <h1 className="col-span-4 text-xl border-bz border-b-accentSecondary">
-          Transaction details
-        </h1> */}
-
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>
           <div className="inline-flex gap-1 items-center">

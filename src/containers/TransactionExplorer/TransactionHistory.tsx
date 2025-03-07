@@ -1,87 +1,19 @@
 "use client";
 
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
-import { MyTransactionRecord } from "@/app/types";
-import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import TransactionHistoryService from "@/services/TransactionHistoryService";
 import Button from "@/components/Button";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useSCRouter } from "@/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useTransactionExplorerContext } from "@/context/TransactionExplorerContext";
+import IconButton from "@/components/IconButton";
 
 export default function TransactionHistory({}) {
-  const searchParams = useSearchParams();
   const router = useSCRouter();
 
-  const [transactions, setTransactions] = useState<MyTransactionRecord[]>([]);
-  const [error, setError] = useState<string>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const updateSearchParams = useCallback(
-    (cursor?: string, order?: "asc" | "desc", limit?: number) => {
-      const newSearchParams = new URLSearchParams(searchParams.toString());
-
-      if (cursor !== undefined) newSearchParams.set("cursor", cursor);
-
-      if (limit !== undefined) newSearchParams.set("limit", limit.toString());
-
-      if (order !== undefined) newSearchParams.set("order", order);
-
-      router.replace(`?${newSearchParams}`, { scroll: false });
-    },
-    [router, searchParams]
-  );
-
-  const fetchTransactions = useCallback(async () => {
-    console.log("nu");
-    setIsLoading(true);
-    let cursor: string | undefined = undefined;
-    if (searchParams.get("cursor") !== null) {
-      cursor = searchParams.get("cursor")!;
-    }
-
-    let limit: number = 5;
-    if (searchParams.get("limit") !== null) {
-      limit = Number(searchParams.get("limit"));
-    }
-
-    let order: "asc" | "desc" = "desc";
-    if (searchParams.get("order") !== null) {
-      order = searchParams.get("order") as "asc" | "desc";
-    }
-
-    try {
-      const txs = await TransactionHistoryService.fetchLedger(
-        cursor,
-        limit,
-        order
-      );
-
-      setTransactions(txs);
-    } catch (e: any) {
-      const msg = e.body.detail[0]?.msg;
-      setError(msg);
-    }
-    setIsLoading(false);
-  }, [searchParams, setIsLoading]);
-
-  const goToNextPage = useCallback(async () => {
-    const cursorNext = transactions[transactions.length - 1].pagingToken;
-
-    updateSearchParams(cursorNext, "desc");
-  }, [transactions, updateSearchParams]);
-
-  const goToPreviousPage = useCallback(async () => {
-    const cursorPrev = transactions[0].pagingToken;
-
-    updateSearchParams(cursorPrev, "asc");
-  }, [transactions, updateSearchParams]);
-
-  useEffect(() => {
-    fetchTransactions();
-  }, [fetchTransactions]);
+  const { transactions, error, isLoading, goToNextPage, goToPreviousPage } =
+    useTransactionExplorerContext();
 
   if (isLoading)
     return (
@@ -91,19 +23,22 @@ export default function TransactionHistory({}) {
     );
 
   return (
-    <div className="flex flex-col items-center gap-2 h-full">
-      <div className="w-full flex justify-between items-center gap-1 my-2 px-4 !text-xs">
-        <Button onClick={goToPreviousPage}>
+    <div className="flex flex-col items-center h-full">
+      <div className="w-full flex justify-between items-center gap-1 my-4 px-4 !text-xs">
+        <IconButton onClick={goToPreviousPage} className="!text-sm">
           <FontAwesomeIcon icon={faArrowLeft} />
-        </Button>
-        <Button onClick={() => router.push("/transactions/explorer")}>
+        </IconButton>
+        <IconButton
+          onClick={() => router.push("/transactions/explorer")}
+          className="!w-16 !text-sm"
+        >
           Reset
-        </Button>
-        <Button onClick={goToNextPage}>
+        </IconButton>
+        <IconButton onClick={goToNextPage} className="!text-sm">
           <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        </IconButton>
       </div>
-      <div className="w-full overflow-auto p-2 flex flex-col gap-1">
+      <div className="w-full overflow-auto px-2 flex flex-col gap-1">
         {!error ? (
           transactions.length > 1 ? (
             transactions.map((tx, idx) => {
