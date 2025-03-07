@@ -28,7 +28,7 @@ export default function App({ children }: { children: React.ReactNode }) {
         <div className="flex-1 mt-[64px] lg:mt-[80px] flex flex-col text-textColor w-full">
           {children}
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </SinkingContextProvider>
     </div>
   );

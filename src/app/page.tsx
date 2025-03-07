@@ -9,6 +9,7 @@ import LastTransactionsSection from "@/containers/home/LastTransactionsSection";
 import PartnerSection from "@/containers/home/PartnerSection";
 import DemoLanding from "@/containers/demo/DemoLanding";
 import appConfig from "@/config";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   if (appConfig.demo) {
@@ -33,6 +34,7 @@ export default function Home() {
         smaller
         yOffset={-200}
       />
+      <Footer />
 
       {/* <div className="h-[600px] flex flex-col justify-center">
         Some other stuff

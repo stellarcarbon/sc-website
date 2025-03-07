@@ -15,13 +15,12 @@ export default function TransactionExplorerLayout({
       <div
         className="lg:flex lg:flex-col lg:items-center
 lg:bg-dalle lg:bg-cover lg:bg-fixed
-lg:min-h-[calc(100dvh-176px)]"
+lg:min-h-[calc(100dvh-80px)]"
       >
         <main
           className="bg-secondary
 
-  h-[calc(100dvh-160px)]
-  lg:h-[calc(100dvh-176px-48px)] lg:w-[850px]
+ lg:w-[850px]
 
   lg:border border-tertiary
   flex flex-col items-center justify-start
@@ -31,7 +30,7 @@ lg:min-h-[calc(100dvh-176px)]"
 "
         >
           <TransactionExplorerHeader />
-          <div className="w-full bg-darker h-[calc(100dvh-160px-64px)]">
+          <div className="w-full bg-darker h-[calc(100dvh-64px-64px)] lg:h-[calc(100dvh-240px)]">
             {children}
           </div>
         </main>
