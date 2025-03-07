@@ -5,15 +5,16 @@ import { useAppContext } from "@/context/appContext";
 
 export default function CTAButton() {
   const router = useSCRouter();
-  const { walletConnection } = useAppContext();
+  const { walletConnection, isMobileDevice, closeDrawer } = useAppContext();
 
   const onClick = useCallback(() => {
     if (walletConnection) {
       router.push("/dashboard/sink");
     } else {
       router.push("/wallet");
+      if (isMobileDevice) closeDrawer();
     }
-  }, [walletConnection, router]);
+  }, [walletConnection, router, isMobileDevice, closeDrawer]);
 
   return (
     <button

@@ -1,22 +1,52 @@
 "use client";
 
-import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { MyTransactionRecord } from "@/app/types";
-import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
-import Button from "@/components/Button";
-import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
-import { useSCRouter } from "@/utils";
-import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
-export default function TransactionHistory({}) {
-  const searchParams = useSearchParams();
-  const router = useSCRouter();
+type TransactionExplorerContext = {
+  transactions: MyTransactionRecord[];
+  setTransactions: Dispatch<SetStateAction<MyTransactionRecord[]>>;
 
+  goToNextPage: () => Promise<void>;
+  goToPreviousPage: () => Promise<void>;
+
+  error: string | undefined;
+  isLoading: boolean;
+};
+
+const TransactionExplorerContext =
+  createContext<TransactionExplorerContext | null>(null);
+
+export const useTransactionExplorerContext = () => {
+  const context = useContext(TransactionExplorerContext);
+  if (context === null) {
+    throw Error("No TransactionExplorerContext available");
+  }
+  return context;
+};
+
+export const TransactionExplorerContextProvider = ({
+  children,
+}: PropsWithChildren) => {
   const [transactions, setTransactions] = useState<MyTransactionRecord[]>([]);
   const [error, setError] = useState<string>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const updateSearchParams = useCallback(
     (cursor?: string, order?: "asc" | "desc", limit?: number) => {
@@ -34,6 +64,7 @@ export default function TransactionHistory({}) {
   );
 
   const fetchTransactions = useCallback(async () => {
+    setIsLoading(true);
     let cursor: string | undefined = undefined;
     if (searchParams.get("cursor") !== null) {
       cursor = searchParams.get("cursor")!;
@@ -61,7 +92,8 @@ export default function TransactionHistory({}) {
       const msg = e.body.detail[0]?.msg;
       setError(msg);
     }
-  }, [searchParams]);
+    setIsLoading(false);
+  }, [searchParams, setIsLoading]);
 
   const goToNextPage = useCallback(async () => {
     const cursorNext = transactions[transactions.length - 1].pagingToken;
@@ -76,48 +108,23 @@ export default function TransactionHistory({}) {
   }, [transactions, updateSearchParams]);
 
   useEffect(() => {
-    fetchTransactions();
+    if (!pathname.includes("detail")) fetchTransactions();
   }, [fetchTransactions]);
 
+  const providerValue = useMemo(() => {
+    return {
+      transactions,
+      setTransactions,
+      goToNextPage,
+      goToPreviousPage,
+      error,
+      isLoading,
+    };
+  }, [transactions, goToNextPage, goToPreviousPage, error, isLoading]);
+
   return (
-    <>
-      {!error ? (
-        <div className="flex flex-col items-center">
-          <div className="w-full py-8 pb-16 flex flex-col items-center gap-1">
-            {transactions.length > 1 ? (
-              transactions.map((tx, idx) => {
-                return (
-                  <TransactionListItem
-                    key={`tx_${idx}`}
-                    onClick={() => {}}
-                    transaction={tx}
-                    bgPrimary
-                  />
-                );
-              })
-            ) : isLoading ? (
-              <TransactionsLoading />
-            ) : (
-              <div className="flex flex-col items-center justify-center gap-6">
-                <span>No more records found.</span>
-                <Link className="underline" href="/transactions">
-                  Go back to start
-                </Link>
-              </div>
-            )}
-          </div>
-          <div className="w-full px-4 md:px-12 flex justify-between">
-            <Button onClick={goToPreviousPage} className="!text-sm">
-              Previous page
-            </Button>
-            <Button onClick={goToNextPage} className="!text-sm">
-              Next page
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <div className="flex justify-center text-red-500">{error}</div>
-      )}
-    </>
+    <TransactionExplorerContext.Provider value={providerValue}>
+      {children}
+    </TransactionExplorerContext.Provider>
   );
-}
+};

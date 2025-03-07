@@ -1,31 +1,45 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import CountDownTimer from "@/components/CountDownTimer";
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import TruncatedHash from "./TruncatedHash";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowLeft,
+  faArrowLeftLong,
+  faExchange,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface TransactionListItemProps {
   transaction: MyTransactionRecord;
-  onClick: () => void;
   showCountdown?: boolean;
   bgPrimary?: boolean;
+  onClick: () => void;
 }
 
 function ItemHeader({ children }: { children: ReactNode }) {
   return (
-    <div className="col-span-2 md:col-span-1 font-semibold">{children}</div>
+    <div className="col-span-2 md:col-span-1 font-semibold flex items-center">
+      {children}
+    </div>
   );
 }
 
 function ItemValue({ children }: { children: ReactNode }) {
-  return <div className="col-span-6 md:col-span-5 truncate">{children}</div>;
+  return (
+    <div className="col-span-6 md:col-span-5 flex items-center">{children}</div>
+  );
 }
 
 export default function TransactionListItem({
   transaction,
-  onClick,
   showCountdown = false,
   bgPrimary = false,
+  onClick,
 }: TransactionListItemProps) {
+  const router = useRouter();
+
   const initialDuration = useMemo(() => {
     const txDate = new Date(transaction.createdAt);
     const txDatePlus90 = txDate.addDays(90); // TODO: Make this the actual 90 days
@@ -36,40 +50,92 @@ export default function TransactionListItem({
     return outcome / 1000;
   }, [transaction]);
 
+  let myDate = new Date(transaction.createdAt);
+
+  let formattedDate = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  }).format(myDate);
+
   return (
     <div
       onClick={onClick}
-      className={`p-2 w-full max-w-[700px] grid grid-cols-8 md:grid-cols-6  border border-accentSecondary rounded-md cursor-pointer text-sm ${
-        bgPrimary ? "bg-primary" : "bg-secondary"
-      }`}
+      className="w-full max-w-[850px]
+  bg-darker border border-accentSecondary rounded
+  cursor-pointer
+  p-2
+  flex flex-col gap-1"
     >
-      <ItemHeader>Hash</ItemHeader>
-      <ItemValue>{transaction.id}</ItemValue>
+      <div className="flex items-center justify-between text-sm">
+        <span className="">
+          <TruncatedHash pubKey={transaction.id} />
+        </span>
+        <span>{formattedDate}</span>
+      </div>
 
-      <ItemHeader>Date</ItemHeader>
-      <ItemValue>{new Date(transaction.createdAt).toDateString()}</ItemValue>
-
-      <ItemHeader>Sunk</ItemHeader>
-      <ItemValue>
+      <div className="flex items-center justify-between text-base">
+        {/* <span className="text-xs">Retirement reason</span> */}
         <div className="flex items-center gap-1">
           <CARBONCurrencyIcon />
           <span>{transaction.sinkAmount?.toFixed(3)}</span>
         </div>
-      </ItemValue>
 
-      <ItemHeader>Price</ItemHeader>
-      <ItemValue>
-        <div className="flex items-center gap-1">
+        <span className="">{transaction.memo ?? "N/A"}</span>
+      </div>
+    </div>
+  );
+
+  return (
+    <div
+      onClick={onClick}
+      className={`p-2 w-full max-w-[850px] grid grid-cols-8 md:grid-cols-6  border border-accentSecondary rounded-md cursor-pointer text-sm ${
+        bgPrimary ? "bg-primary" : "bg-secondary"
+      }`}
+    >
+      <div className="col-span-8 grid grid-cols-8">
+        <h1 className="col-span-8 flex items-center gap-1 text-lg justify-center">
+          <CARBONCurrencyIcon />
+          <span>{transaction.sinkAmount?.toFixed(3)}</span>
+          <FontAwesomeIcon icon={faExchange} />
           <span>{transaction.assetAmount?.toFixed(2)}</span>
           <span>{transaction.asset}</span>
+        </h1>
+
+        <div className="col-span-8 grid grid-cols-[repeat(16, minmax(0, 1fr))]">
+          <ItemHeader>Hash</ItemHeader>
+          <ItemValue>
+            <TruncatedHash pubKey={transaction.id} />
+          </ItemValue>
+
+          <ItemHeader>Date</ItemHeader>
+          <ItemValue>
+            {new Date(transaction.createdAt).toLocaleDateString()}
+          </ItemValue>
         </div>
-      </ItemValue>
 
-      <ItemHeader>Memo</ItemHeader>
-      <ItemValue>{transaction.memo}</ItemValue>
+        {/* <ItemHeader>Sunk</ItemHeader>
+        <ItemValue>
+          <div className="flex items-center gap-1">
+            <CARBONCurrencyIcon />
+            <span>{transaction.sinkAmount?.toFixed(3)}</span>
+          </div>
+        </ItemValue>
 
-      <ItemHeader>Status</ItemHeader>
-      <ItemValue>{transaction.retirementStatus}</ItemValue>
+        <ItemHeader>Price</ItemHeader>
+        <ItemValue>
+          <div className="flex items-center gap-1">
+            <span>{transaction.assetAmount?.toFixed(2)}</span>
+            <span>{transaction.asset}</span>
+          </div>
+        </ItemValue> */}
+
+        <ItemHeader>Memo</ItemHeader>
+        <ItemValue>{transaction.memo}</ItemValue>
+
+        <ItemHeader>Status</ItemHeader>
+        <ItemValue>{transaction.retirementStatus}</ItemValue>
+      </div>
 
       {transaction.retirementStatus === RetirementStatus.RETIRED && (
         <>
@@ -97,58 +163,6 @@ export default function TransactionListItem({
             <hr className="my-2" />
             <CountDownTimer initialDuration={initialDuration} />
           </div>
-        )}
-    </div>
-  );
-
-  return (
-    <div
-      onClick={onClick}
-      className="flex flex-col text-sm bg-secondary rounded-md  border-accentSecondary p-2 w-full cursor-pointer"
-    >
-      <div className="flex justify-start items-center">
-        <span className="w-20 md:w-32">Hash</span>
-        <span className=" truncate max-w-[60%]">{transaction.id}</span>
-      </div>
-      <div className="flex justify-start items-center">
-        <span className="w-20 md:w-32">Date</span>
-        <span className="">
-          {new Date(transaction.createdAt).toDateString()}
-        </span>
-      </div>
-      <div className="flex justify-start items-center">
-        <span className="w-20 md:w-32">Sunk</span>
-        <div className="flex items-center gap-1">
-          <CARBONCurrencyIcon />
-          <span>{transaction.sinkAmount?.toFixed(2)}</span>
-        </div>
-      </div>
-      <div className="flex justify-start items-center">
-        <span className="w-20 md:w-32">Price</span>
-        <div className="flex gap-1 ">
-          <span>{transaction.assetAmount?.toFixed(2)}</span>
-          <span>{transaction.asset}</span>
-        </div>
-      </div>
-      <div className="flex justify-start items-center">
-        <span className="w-20 md:w-32">Memo</span>
-        <span className=" truncate max-w-[60%]">{transaction.memo}</span>
-      </div>
-
-      <div className="flex justify-start items-center">
-        <span className="w-20 md:w-32">Status</span>
-        <span className="truncate max-w-[60%]">
-          {transaction.retirementStatus}
-        </span>
-      </div>
-
-      {/* TODO: check dit */}
-      {transaction.retirementStatus !== RetirementStatus.RETIRED &&
-        transaction.sinkAmount % 1 != 0 && (
-          <>
-            <hr className="my-2" />
-            <CountDownTimer initialDuration={initialDuration} />
-          </>
         )}
     </div>
   );

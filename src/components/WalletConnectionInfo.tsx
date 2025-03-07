@@ -1,5 +1,5 @@
 import { useAppContext } from "@/context/appContext";
-import StellarPubKey from "./dashboard/StellarPubKey";
+import TruncatedHash from "./dashboard/TruncatedHash";
 
 export default function WalletConnectionInfo() {
   const { walletConnection } = useAppContext();
@@ -15,7 +15,7 @@ export default function WalletConnectionInfo() {
         {/* <div className="">PUBKEY</div> */}
 
         <div className="p-4 text-wrap break-words text-lg text-white">
-          <StellarPubKey pubKey={walletConnection?.stellarPubKey} />
+          <TruncatedHash pubKey={walletConnection?.stellarPubKey} />
         </div>
       </div>
     </div>

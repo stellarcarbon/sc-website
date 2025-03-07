@@ -1,5 +1,5 @@
 import { useAppContext } from "@/context/appContext";
-import StellarPubKey from "./dashboard/StellarPubKey";
+import TruncatedHash from "./dashboard/TruncatedHash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
@@ -64,7 +64,7 @@ export default function DrawerWallet() {
           <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
         </div>
         <div className="text-sm">
-          <StellarPubKey pubKey={walletConnection?.stellarPubKey} />
+          <TruncatedHash pubKey={walletConnection?.stellarPubKey} />
         </div>
         <div className="flex justify-end">
           <FontAwesomeIcon icon={showDropdown ? faChevronUp : faChevronDown} />

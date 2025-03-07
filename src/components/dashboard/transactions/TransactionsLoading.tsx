@@ -2,7 +2,7 @@ import { Blocks } from "react-loader-spinner";
 
 export default function TransactionsLoading() {
   return (
-    <div className="mx-2 text-center flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <Blocks
         height="80"
         width="80"
@@ -12,7 +12,7 @@ export default function TransactionsLoading() {
         wrapperClass="blocks-wrapper"
         visible={true}
       />
-      <span>Fetching your transaction history...</span>
+      <span>Fetching transaction history...</span>
     </div>
   );
 }

@@ -34,14 +34,6 @@ export default function TransactionDetail({ hash }: TransactionDetailProps) {
     return myTransactions?.find((tx) => tx.id === hash);
   }, [myTransactions, hash]);
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => {
-      router.push("/dashboard");
-    },
-    onSwipedRight: () => router.push("/dashboard/transactions"),
-    delta: 100,
-  });
-
   useEffect(() => {
     const getRetirements = async () => {
       const promises: Promise<RetirementDetail>[] = [];
@@ -74,14 +66,14 @@ export default function TransactionDetail({ hash }: TransactionDetailProps) {
 
   if (myTransactions === null) {
     return (
-      <div {...swipeHandlers} className="flex-1 flex flex-col justify-center">
+      <div className="flex-1 flex flex-col justify-center">
         <TransactionsLoading />
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col flex-1 border border-tertiary bg-secondary rounded m-4">
+    <div className="flex flex-col w-[90%] border border-tertiary bg-secondary rounded mx-auto my-8">
       <div className="h-12 px-4 flex items-center border-b-tertiary">
         <Button
           onClick={() => router.push("/dashboard/transactions/history/")}
@@ -108,7 +100,7 @@ export default function TransactionDetail({ hash }: TransactionDetailProps) {
           <div className="flex flex-col px-4 gap-0 flex-1">
             <div className="flex justify-between items-center gap-6">
               <span className="text-md font-bold flex-1">Hash</span>
-              <span className="text-xs break-words min-w-1 text-right">
+              <span className="text-xs break-words min-w-1 text-right truncate">
                 {tx.id}
               </span>
             </div>
