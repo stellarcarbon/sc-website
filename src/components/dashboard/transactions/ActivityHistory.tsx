@@ -8,6 +8,7 @@ import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { useEffect, useMemo, useState } from "react";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { RetirementStatus } from "@/app/types";
+import TransactionsExplorerDetail from "@/containers/TransactionExplorer/TransactionsExplorerDetail";
 
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions, walletConnection } =
@@ -35,8 +36,8 @@ export default function ActivityHistory() {
     );
   }, [myTransactions]);
 
-  if (searchParams.get("hash") !== null) {
-    return <TransactionDetail hash={searchParams.get("hash")!} />;
+  if (searchParams.get("id") !== null) {
+    return <TransactionsExplorerDetail />;
   }
 
   if (isLoading || myTransactions === null) {
@@ -95,7 +96,7 @@ export default function ActivityHistory() {
                 transaction={transaction}
                 onClick={() => {
                   router.push(
-                    `/dashboard/transactions/history/?hash=${transaction.id}`
+                    `/dashboard/transactions/history/?id=${transaction.id}`
                   );
                 }}
               />

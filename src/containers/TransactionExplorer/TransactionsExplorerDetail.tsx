@@ -3,7 +3,7 @@ import TruncatedHash from "@/components/dashboard/TruncatedHash";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { useSearchParams } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import TxRetirementStatusDetail from "./TxRetirementStatusDetail";
 import appConfig from "@/config";
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
@@ -14,6 +14,7 @@ import TransactionsLoading from "@/components/dashboard/transactions/Transaction
 export default function TransactionsExplorerDetail() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [transaction, setTransaction] = useState<MyTransactionRecord>();
+  const [copied, setCopied] = useState(false);
 
   const searchParams = useSearchParams();
 
@@ -27,10 +28,16 @@ export default function TransactionsExplorerDetail() {
     });
   }, [searchParams]);
 
-  // const transaction = useMemo(() => {
-  //   const id = searchParams.get("id");
-  //   return transactions.find((tx) => tx.id === id);
-  // }, [searchParams, transactions]);
+  const handleCopy = useCallback(async () => {
+    if (transaction === undefined) return;
+    try {
+      await navigator.clipboard.writeText(transaction.id);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  }, [transaction]);
 
   if (isLoading) {
     return (
@@ -39,7 +46,6 @@ export default function TransactionsExplorerDetail() {
       </div>
     );
   }
-  console.log(transaction);
 
   if (transaction === undefined) return;
 
@@ -49,7 +55,14 @@ export default function TransactionsExplorerDetail() {
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>
           <div className="inline-flex gap-1 items-center">
-            <FontAwesomeIcon icon={faCopy} />
+            {copied ? (
+              <div className="text-xs">Copied!</div>
+            ) : (
+              <div className="" onClick={handleCopy}>
+                <FontAwesomeIcon icon={faCopy} />
+              </div>
+            )}
+
             <TruncatedHash hash={transaction.id} />
           </div>
         </PropertyValue>
@@ -57,16 +70,16 @@ export default function TransactionsExplorerDetail() {
         <PropertyKey>Date</PropertyKey>
         <PropertyValue>{transaction.createdAt}</PropertyValue>
 
+        <PropertyKey>Sunk</PropertyKey>
+        <PropertyValue>
+          <div className="inline-flex gap-1 items-center">
+            {transaction.sinkAmount} <CARBONCurrencyIcon />
+          </div>
+        </PropertyValue>
+
         <PropertyKey>Price</PropertyKey>
         <PropertyValue>
           {transaction.assetAmount} {transaction.asset}
-        </PropertyValue>
-
-        <PropertyKey>Sunk</PropertyKey>
-        <PropertyValue>
-          <div className="inline-flex gap-2 items-center">
-            {transaction.sinkAmount} <CARBONCurrencyIcon />
-          </div>
         </PropertyValue>
 
         <PropertyKey>Memo</PropertyKey>

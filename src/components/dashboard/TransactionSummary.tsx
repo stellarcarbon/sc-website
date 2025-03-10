@@ -58,7 +58,7 @@ export default function TransactionSummary() {
                 transaction={latestTransaction}
                 onClick={() => {
                   router.push(
-                    `/dashboard/transactions/history/?hash=${latestTransaction.id}`
+                    `/dashboard/transactions/history/?id=${latestTransaction.id}`
                   );
                 }}
               />

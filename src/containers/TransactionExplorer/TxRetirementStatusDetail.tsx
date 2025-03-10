@@ -1,7 +1,11 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
+import { RetirementDetail } from "@/client";
 import CountDownTimer from "@/components/CountDownTimer";
+import RetiredTransaction from "@/components/dashboard/transactions/RetiredTransaction";
+import RetirementDetailCard from "@/components/dashboard/transactions/RetirementDetailCard";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { Blocks } from "react-loader-spinner";
 
 export default function TxRetirementStatusDetail({
   transaction,
@@ -41,7 +45,7 @@ export default function TxRetirementStatusDetail({
     statusMessage =
       "This transaction is waiting for the Stellarcarbon team to finalize the retirement.";
   } else if (transaction.retirementStatus === RetirementStatus.RETIRED) {
-    statusMessage = "retired";
+    statusMessage = <RetiredTransaction transaction={transaction} />;
   }
 
   return (

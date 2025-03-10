@@ -16,7 +16,7 @@ export default function TransactionHistory({}) {
 
   if (isLoading)
     return (
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col items-center">
         <TransactionsLoading />
       </div>
     );

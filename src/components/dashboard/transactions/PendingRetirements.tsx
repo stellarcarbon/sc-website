@@ -73,7 +73,7 @@ export default function PendingRetirements() {
                     transaction={transaction}
                     onClick={() =>
                       router.push(
-                        `/dashboard/transactions/history/?hash=${transaction.id}`
+                        `/dashboard/transactions/history/?id=${transaction.id}`
                       )
                     }
                     showCountdown
