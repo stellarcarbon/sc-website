@@ -6,7 +6,6 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useMemo, useState } from "react";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
-import { useSwipeable } from "react-swipeable";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSCRouter } from "@/utils";
 import { RetirementStatus } from "@/app/types";
