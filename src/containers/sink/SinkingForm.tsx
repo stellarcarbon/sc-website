@@ -67,7 +67,7 @@ export default function SinkingForm() {
           Sink CARBON
         </div>
       )}
-      <form className="flex flex-col gap-12 md:gap-20 mt-0">
+      <form className="flex flex-col gap-12 md:gap-20 mb-12">
         <div className="mx-4 md:mx-8 flex flex-col gap-12 min-w-[80%]">
           <Suspense>
             <AmountInput
@@ -93,12 +93,6 @@ export default function SinkingForm() {
           currency={currency}
           quote={quote}
           handleSubmit={() => handleSubmit(onSubmit, onError)()}
-        />
-        <ParallaxDivider
-          image={ParallaxBackgrounds.RAINFOREST}
-          smallest
-          yOffset={-380}
-          roundedBottom
         />
       </form>
     </div>

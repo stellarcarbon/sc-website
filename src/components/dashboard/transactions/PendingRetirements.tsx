@@ -85,13 +85,6 @@ export default function PendingRetirements() {
           )}
         </div>
       </div>
-
-      <ParallaxDivider
-        image={ParallaxBackgrounds.RAINFOREST}
-        smallest
-        yOffset={-400}
-        roundedBottom
-      />
     </>
   );
 }

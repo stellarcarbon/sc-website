@@ -47,7 +47,7 @@ export default function Overview() {
         </div>
       </div> */}
 
-      <div className="flex flex-col items-center gap-10 px-4 md:px-8 mt-8">
+      <div className="flex flex-col items-center gap-10 px-4 md:px-8 mt-8 mb-16">
         {showContactInformationForm ? (
           <OverviewContactInformationForm
             onClose={() => setShowContactInformationForm(false)}
@@ -58,15 +58,6 @@ export default function Overview() {
             onDisconnect={disconnectWallet}
           />
         )}
-      </div>
-
-      <div className="flex-1 flex items-end">
-        <ParallaxDivider
-          smallest
-          image={ParallaxBackgrounds.RAINFOREST}
-          yOffset={-420}
-          roundedBottom
-        />
       </div>
     </>
   );
