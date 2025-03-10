@@ -41,7 +41,7 @@ export default function TransactionsExplorerDetail() {
 
   if (isLoading) {
     return (
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col items-center w-full">
         <TransactionsLoading />
       </div>
     );
