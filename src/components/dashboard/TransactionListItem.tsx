@@ -69,7 +69,7 @@ export default function TransactionListItem({
     >
       <div className="flex items-center justify-between text-sm">
         <span className="">
-          <TruncatedHash pubKey={transaction.id} />
+          <TruncatedHash hash={transaction.id} />
         </span>
         <span>{formattedDate}</span>
       </div>
@@ -105,7 +105,7 @@ export default function TransactionListItem({
         <div className="col-span-8 grid grid-cols-[repeat(16, minmax(0, 1fr))]">
           <ItemHeader>Hash</ItemHeader>
           <ItemValue>
-            <TruncatedHash pubKey={transaction.id} />
+            <TruncatedHash hash={transaction.id} />
           </ItemValue>
 
           <ItemHeader>Date</ItemHeader>

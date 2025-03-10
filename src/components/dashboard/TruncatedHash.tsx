@@ -1,15 +1,21 @@
 import { useMemo } from "react";
 
-export default function TruncatedHash({ pubKey }: { pubKey?: string }) {
+export default function TruncatedHash({
+  hash,
+  uppercase = false,
+}: {
+  hash?: string;
+  uppercase?: boolean;
+}) {
   const firstChars = useMemo(() => {
-    return pubKey?.slice(0, 4);
-  }, [pubKey]);
+    return hash?.slice(0, 4);
+  }, [hash]);
   const lastChars = useMemo(() => {
-    return pubKey?.slice(-4);
-  }, [pubKey]);
+    return hash?.slice(-4);
+  }, [hash]);
 
   return (
-    <div className="lowercase">
+    <div className={uppercase ? "uppercase" : "lowercase"}>
       <span>{firstChars}</span>
       <span>...</span>
       <span>{lastChars}</span>

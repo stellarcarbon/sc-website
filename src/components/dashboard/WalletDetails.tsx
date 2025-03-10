@@ -29,7 +29,7 @@ const WalletDetails = ({
         </div>
       </KeyValueEntry>
       <KeyValueEntry mkey="Public key">
-        {<TruncatedHash pubKey={walletConnection?.stellarPubKey} />}
+        {<TruncatedHash hash={walletConnection?.stellarPubKey} uppercase />}
       </KeyValueEntry>
       <div className="mt-4">
         <KeyValueEntry mkey="Contact information">

@@ -10,7 +10,7 @@ export default function WalletConnectionInfoSmall() {
         <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
       </div>
       <div className="flex items-center px-2 text-xs">
-        <TruncatedHash pubKey={walletConnection?.stellarPubKey} />
+        <TruncatedHash hash={walletConnection?.stellarPubKey} uppercase />
       </div>
     </div>
   );

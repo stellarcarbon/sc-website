@@ -49,7 +49,7 @@ export default function TransactionsExplorerDetail() {
         <PropertyValue>
           <div className="inline-flex gap-1 items-center">
             <FontAwesomeIcon icon={faCopy} />
-            <TruncatedHash pubKey={transaction.id} />
+            <TruncatedHash hash={transaction.id} />
           </div>
         </PropertyValue>
 

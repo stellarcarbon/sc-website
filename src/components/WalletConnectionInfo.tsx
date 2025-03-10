@@ -15,7 +15,7 @@ export default function WalletConnectionInfo() {
         {/* <div className="">PUBKEY</div> */}
 
         <div className="p-4 text-wrap break-words text-lg text-white">
-          <TruncatedHash pubKey={walletConnection?.stellarPubKey} />
+          <TruncatedHash hash={walletConnection?.stellarPubKey} uppercase />
         </div>
       </div>
     </div>

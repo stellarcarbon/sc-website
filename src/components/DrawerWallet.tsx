@@ -71,7 +71,7 @@ export default function DrawerWallet() {
             <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
           </div>
           <div className="text-sm">
-            <TruncatedHash pubKey={walletConnection?.stellarPubKey} />
+            <TruncatedHash hash={walletConnection?.stellarPubKey} uppercase />
           </div>
         </div>
         {/* <div className="flex justify-end">
