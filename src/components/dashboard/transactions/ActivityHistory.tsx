@@ -1,7 +1,6 @@
 import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import TransactionDetail from "@/components/dashboard/transactions/TransactionDetail";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useSCRouter } from "@/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
