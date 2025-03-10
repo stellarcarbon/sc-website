@@ -1,13 +1,43 @@
-import { HTMLAttributes, PropsWithChildren } from "react";
+import { useSCRouter } from "@/utils";
+import { usePathname } from "next/navigation";
+import { HTMLAttributes, PropsWithChildren, useMemo } from "react";
+import { DrawerLinkProps } from "./DrawerLink";
+import { useAppContext } from "@/context/appContext";
 
 export default function DropdownOption({
+  href,
   children,
-  onClick,
-}: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
+  disconnect,
+}: DrawerLinkProps) {
+  const { disconnectWallet, closeDrawer } = useAppContext();
+  const pathname = usePathname();
+  const router = useSCRouter();
+
+  const isCurrentRoute = useMemo(() => {
+    if (disconnect) return false;
+    if (href === "/") return pathname === "/";
+    return pathname === href + "/";
+  }, [href, pathname, disconnect]);
+
+  const onClick = () => {
+    if (disconnect) {
+      disconnectWallet();
+    } else {
+      router.push(href);
+    }
+
+    closeDrawer();
+  };
+
   return (
     <div
       onClick={onClick}
-      className="p-2 px-2 hover:bg-secondary rounded cursor-pointer flex items-center gap-2"
+      className={`p-3 m-1 px-2 
+        hover:bg-secondary 
+        active:bg-tertiary
+        rounded cursor-pointer
+        flex items-center gap-2
+        ${isCurrentRoute ? "bg-secondary" : ""}`}
     >
       {children}
     </div>

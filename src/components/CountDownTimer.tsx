@@ -55,11 +55,11 @@ export default function CountDownTimer({
   });
 
   return (
-    <div className="flex flex-col items-center text-sm">
+    <div className="flex flex-col items-center">
       {timerComponents.length ? (
         <>
-          <span>This transaction automatically retires in:</span>
-          <span className="font-semibold my-1">{timerComponents}</span>
+          <span className="text-lg font-semibold my-1">{timerComponents}</span>
+          <span className="text-xs">left until community retirement.</span>
         </>
       ) : (
         <span>Time is up!</span>

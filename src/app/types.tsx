@@ -51,6 +51,8 @@ export interface MyTransactionRecord {
   sinkAmount: number;
   retirementStatus: RetirementStatus;
   retirements: RetirementSummary[];
+  recipient: string;
+  funder: string;
 
   pagingToken?: string;
 }

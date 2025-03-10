@@ -39,6 +39,7 @@ export default function TransactionsExplorerDetail() {
       </div>
     );
   }
+  console.log(transaction);
 
   if (transaction === undefined) return;
 
@@ -70,6 +71,20 @@ export default function TransactionsExplorerDetail() {
 
         <PropertyKey>Memo</PropertyKey>
         <PropertyValue>{transaction.memo}</PropertyValue>
+
+        <PropertyKey>Funder</PropertyKey>
+        <PropertyValue>
+          <TruncatedHash hash={transaction.funder} uppercase />
+        </PropertyValue>
+
+        {transaction.funder !== transaction.recipient && (
+          <>
+            <PropertyKey>Recipient</PropertyKey>
+            <PropertyValue>
+              <TruncatedHash hash={transaction.recipient} uppercase />
+            </PropertyValue>
+          </>
+        )}
       </div>
 
       <a

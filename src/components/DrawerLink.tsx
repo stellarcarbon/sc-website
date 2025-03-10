@@ -3,9 +3,10 @@ import { useSCRouter } from "@/utils";
 import { usePathname } from "next/navigation";
 import { ReactNode, useCallback } from "react";
 
-interface DrawerLinkProps {
+export interface DrawerLinkProps {
   children: ReactNode;
   href: string;
+  disconnect?: boolean;
 }
 
 export default function DrawerLink({ children, href }: DrawerLinkProps) {

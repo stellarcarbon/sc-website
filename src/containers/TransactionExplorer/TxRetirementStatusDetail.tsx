@@ -1,5 +1,6 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import CountDownTimer from "@/components/CountDownTimer";
+import Link from "next/link";
 import { useMemo } from "react";
 
 export default function TxRetirementStatusDetail({
@@ -21,7 +22,19 @@ export default function TxRetirementStatusDetail({
 
   let statusMessage;
   if (transaction.retirementStatus === RetirementStatus.PENDING_USER) {
-    statusMessage = "Pending user";
+    statusMessage = (
+      <div className="flex flex-col gap-4">
+        <div>
+          This fractional retirement is pending certificate attribution.
+          {/* Users can optionally create a personal certificate by rounding their
+          transactions up or down. */}
+        </div>
+        <div>
+          Fractional transactions will automatically retire after a period of 90
+          days.
+        </div>
+      </div>
+    );
   } else if (
     transaction.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
   ) {

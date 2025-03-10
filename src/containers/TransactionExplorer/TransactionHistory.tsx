@@ -1,7 +1,6 @@
 "use client";
 
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
-import Button from "@/components/Button";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useSCRouter } from "@/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

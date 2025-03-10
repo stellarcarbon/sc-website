@@ -3,7 +3,7 @@ import { useSCRouter } from "@/utils";
 import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 
-export default function CTAButton() {
+export default function CTAButton({ white }: { white?: boolean }) {
   const router = useSCRouter();
   const { walletConnection, isMobileDevice, closeDrawer } = useAppContext();
 
@@ -23,9 +23,14 @@ export default function CTAButton() {
       className={`p-1
         w-[220px]
         flex justify-center
-        bg-darker hover:bg-secondary rounded-xl
-        text-white
-        border border-accentSecondary`}
+       rounded-xl
+       active:bg-tertiary active:text-white
+        border border-accentSecondary
+        ${
+          white
+            ? "bg-white text-black"
+            : "bg-darker hover:bg-secondary text-white"
+        }`}
     >
       {/* <BuyStellarCarbonIcon /> */}
       <div className=" h-11 flex items-center gap-3">

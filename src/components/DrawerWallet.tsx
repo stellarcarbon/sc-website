@@ -13,6 +13,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import DropdownOption from "./DropdownOption";
 import { useRouter } from "next/navigation";
 import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
+import DrawerLink from "./DrawerLink";
 
 export default function DrawerWallet() {
   const { walletConnection, disconnectWallet, closeDrawer } = useAppContext();
@@ -52,21 +53,17 @@ export default function DrawerWallet() {
   }, [disconnectWallet, setShowDropdown, closeDrawer]);
 
   return (
-    <div
-      className="mx-8
-    border border-accentSecondary rounded shadow-lg"
-    >
+    <div className="flex-1 bg-darker">
       <div
         onClick={toggleDropdown}
         className={`${showDropdown ? "" : ""}
       px-4 py-3
       text-white
-    bg-darker rounded-t
+    
       flex items-center justify-between
-      border-b border-b-accentSecondary
       `}
       >
-        <div className="flex items-center gap-3">
+        <div className="w-full flex justify-center items-center gap-3">
           <div>
             <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
           </div>
@@ -80,22 +77,16 @@ export default function DrawerWallet() {
       </div>
 
       {true && (
-        <div
-          ref={dropdownRef}
-          className="text-white
-           p-2
-        bg-darker rounded shadow-lg
-        flex flex-col gap-2"
-        >
-          <DropdownOption onClick={handleSinkCarbon}>
+        <div ref={dropdownRef} className="text-white p-2 flex flex-col gap-2">
+          <DropdownOption href="/dashboard/sink">
             <CARBONCurrencyIcon />
             <span>Sink CARBON</span>
           </DropdownOption>
-          <DropdownOption onClick={handleMyStellar}>
+          <DropdownOption href="/dashboard">
             <FontAwesomeIcon icon={faUser} width={18} />
             <span>My Stellarcarbon</span>
           </DropdownOption>
-          <DropdownOption onClick={handleDisconnect}>
+          <DropdownOption href="" disconnect>
             <FontAwesomeIcon icon={faRightFromBracket} width={18} />
             <span>Disconnect wallet</span>
           </DropdownOption>
