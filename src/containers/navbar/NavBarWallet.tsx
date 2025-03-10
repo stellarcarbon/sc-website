@@ -1,5 +1,5 @@
 import { useSCRouter } from "@/utils";
-import DropdownOption from "@/components/DropdownOption";
+import DrawerLinkConnected from "@/components/DrawerLinkConnected";
 import WalletConnectionInfoSmall from "@/components/WalletConnectionInfoSmall";
 import { useAppContext } from "@/context/appContext";
 import {
@@ -61,15 +61,15 @@ export default function NavBarWallet() {
             className="absolute right-0 w-64 top-11 p-2 bg-darker border rounded border-accentSecondary text-white"
             ref={dropdownRef}
           >
-            <DropdownOption onClick={handleSinkCarbon}>
+            <DrawerLinkConnected onClick={handleSinkCarbon}>
               Sink CARBON
-            </DropdownOption>
-            <DropdownOption onClick={handleMyStellar}>
+            </DrawerLinkConnected>
+            <DrawerLinkConnected onClick={handleMyStellar}>
               My Stellarcarbon
-            </DropdownOption>
-            <DropdownOption onClick={handleDisconnect}>
+            </DrawerLinkConnected>
+            <DrawerLinkConnected onClick={handleDisconnect}>
               Disconnect wallet
-            </DropdownOption>
+            </DrawerLinkConnected>
           </div>
         )}
       </div>

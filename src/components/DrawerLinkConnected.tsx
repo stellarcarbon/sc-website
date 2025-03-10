@@ -1,10 +1,10 @@
 import { useSCRouter } from "@/utils";
 import { usePathname } from "next/navigation";
-import { HTMLAttributes, PropsWithChildren, useMemo } from "react";
+import { useMemo } from "react";
 import { DrawerLinkProps } from "./DrawerLink";
 import { useAppContext } from "@/context/appContext";
 
-export default function DropdownOption({
+export default function DrawerLinkConnected({
   href,
   children,
   disconnect,

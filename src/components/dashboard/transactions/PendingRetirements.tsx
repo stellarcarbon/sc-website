@@ -58,11 +58,14 @@ export default function PendingRetirements() {
       </div>
 
       <div className="flex-1 flex flex-col px-4 w-full pt-12 pb-12">
-        <div className="flex-1 flex flex-col gap-6">
+        {pendingTransactions?.length > 0 && (
+          <div className="mb-4 text-center">
+            <DashboardTitle>Your pending transactions</DashboardTitle>
+          </div>
+        )}
+        <div className="flex-1 flex flex-col gap-1">
           {pendingTransactions?.length ?? 0 > 0 ? (
             <>
-              <DashboardTitle>Your pending transactions</DashboardTitle>
-
               {pendingTransactions?.map((transaction, index) => {
                 return (
                   <TransactionListItem
