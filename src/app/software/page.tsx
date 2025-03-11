@@ -6,8 +6,14 @@ import Paragraph from "@/components/Paragraph";
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
+
 import appConfig from "@/config";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import Link from "next/link";
+import { ReactNode } from "react";
 
 export default function SoftwarePage() {
   return (
@@ -33,6 +39,7 @@ export default function SoftwarePage() {
         </Paragraph>
 
         <Header>Stellarcarbon API</Header>
+
         <Paragraph>
           The public interface of our backend allows anyone to create sinking
           transactions via simple HTTP requests. This API is ideal for
@@ -42,6 +49,7 @@ export default function SoftwarePage() {
           automatically generate API clients for many programming languages,
           making your integration easy to set up and maintain.
         </Paragraph>
+
         <Paragraph>
           <ul className="list-disc ml-4">
             <li className="mb-2">
@@ -63,16 +71,16 @@ export default function SoftwarePage() {
               </span>
             </li>
           </ul>
-          <div className="my-6">
-            <Link
-              className="underline"
-              href={`${appConfig.apiBaseUrl}/docs`}
-              target="_blank"
-            >
-              View API documentation
-            </Link>
-          </div>
         </Paragraph>
+        <Paragraph>
+          <Link
+            href={`${appConfig.apiBaseUrl}/docs`}
+            className="underline text-lg"
+          >
+            View API documentation
+          </Link>
+        </Paragraph>
+        <SoftwareImage src="/software/scapi_docs4.png" />
 
         <Header>Stellarcarbon Audit</Header>
         <Paragraph>
@@ -103,16 +111,11 @@ export default function SoftwarePage() {
               </span>
             </li>
           </ul>
-          <div className="my-6">
-            <Link
-              className="underline"
-              href="https://github.com/stellarcarbon/sc-audit#readme-ov-file"
-              target="_blank"
-            >
-              View code repository
-            </Link>
-          </div>
         </Paragraph>
+
+        <SoftwareImage src="/scaudit.png" />
+
+        <GithubLink href="https://github.com/stellarcarbon/sc-audit#readme-ov-file" />
 
         <Header>Sorocarbon</Header>
         <Paragraph>
@@ -139,16 +142,11 @@ export default function SoftwarePage() {
               <span>Embed Stellarcarbon into your dApp or DeFi protocol.</span>
             </li>
           </ul>
-          <div className="my-6">
-            <Link
-              className="underline"
-              href="https://github.com/stellarcarbon/sorocarbon#readme-ov-file"
-              target="_blank"
-            >
-              View code repository
-            </Link>
-          </div>
         </Paragraph>
+
+        <SoftwareImage src="/sorocarbon_code.png" />
+
+        <GithubLink href="https://github.com/stellarcarbon/sorocarbon#readme-ov-file"></GithubLink>
 
         <Header>Stellarcarbon Website</Header>
         <Paragraph>
@@ -177,18 +175,42 @@ export default function SoftwarePage() {
               </span>
             </li>
           </ul>
-          <div className="my-6">
-            <Link
-              className="underline"
-              href="https://github.com/stellarcarbon/sc-website#readme-ov-file"
-              target="_blank"
-            >
-              View code repository
-            </Link>
-          </div>
         </Paragraph>
+        <SoftwareImage src="/stellarcarbon_landing.png" />
+        <GithubLink href="https://github.com/stellarcarbon/sc-website#readme-ov-file" />
       </ContentContainer>
       <Footer />
     </main>
+  );
+}
+
+function SoftwareImage({ src }: { src: string }) {
+  return (
+    <div className="w-[358px] h-[145px] relative self-center md:self-start md:ml-4 mb-6">
+      <Image
+        src={src}
+        alt=""
+        // width={350}
+        // height={128}
+        fill
+        className="object-cover object-left rounded border border-accentSecondary shadow"
+      />
+    </div>
+  );
+}
+
+function GithubLink({ href }: { href: string }) {
+  return (
+    <div className="flex">
+      <Link
+        href={href}
+        className="ml-4 p-2 text-2xl flex items-center gap-2 hover:bg-tertiary rounded underline"
+        target="_blank"
+      >
+        <FontAwesomeIcon icon={faGithub} />
+        <div className="text-lg">View code repository</div>
+        {/* <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-lg " /> */}
+      </Link>
+    </div>
   );
 }

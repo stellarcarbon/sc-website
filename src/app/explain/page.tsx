@@ -140,7 +140,7 @@ export default function ExplainPage() {
 
 function UnitExplanationList() {
   return (
-    <ul className="px-8 pt-4 my-4 list-disc bg-primary border border-tertiary rounded-md md:w-[90%] self-center">
+    <ul className="mx-3 px-8 pt-4 my-4 list-disc bg-primary border border-tertiary rounded-md md:w-[90%] self-center">
       <UnitExplanation
         title={`VCU pool on Verra`}
         text={`This is our current inventory of VCU's at Verra.`}

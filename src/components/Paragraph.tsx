@@ -3,5 +3,5 @@ import { HTMLProps } from "react";
 export default function Paragraph({
   children,
 }: HTMLProps<HTMLParagraphElement>) {
-  return <p className="mt-1 tracking-wide px-4 leading-7">{children}</p>;
+  return <div className="tracking-wide px-4 pb-4 leading-7">{children}</div>;
 }
