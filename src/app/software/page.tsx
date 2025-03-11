@@ -113,7 +113,7 @@ export default function SoftwarePage() {
           </ul>
         </Paragraph>
 
-        <SoftwareImage src="/scaudit.png" />
+        <SoftwareImage src="/software/scaudit.png" />
 
         <GithubLink href="https://github.com/stellarcarbon/sc-audit#readme-ov-file" />
 
@@ -144,7 +144,7 @@ export default function SoftwarePage() {
           </ul>
         </Paragraph>
 
-        <SoftwareImage src="/sorocarbon_code.png" />
+        <SoftwareImage src="/software/sorocarbon_code.png" />
 
         <GithubLink href="https://github.com/stellarcarbon/sorocarbon#readme-ov-file"></GithubLink>
 
@@ -176,7 +176,7 @@ export default function SoftwarePage() {
             </li>
           </ul>
         </Paragraph>
-        <SoftwareImage src="/stellarcarbon_landing.png" />
+        <SoftwareImage src="/software/stellarcarbon_landing.png" />
         <GithubLink href="https://github.com/stellarcarbon/sc-website#readme-ov-file" />
       </ContentContainer>
       <Footer />
