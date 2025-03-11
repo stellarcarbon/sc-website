@@ -1,13 +1,17 @@
-'use client';
+"use client";
 import ContentContainer from "@/components/ContentContainer";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
+import ParallaxDivider, {
+  ParallaxBackgrounds,
+} from "@/components/ParallaxDivider";
 import appConfig from "@/config";
 import Link from "next/link";
 
 export default function SoftwarePage() {
   return (
-    <main className="flex flex-col items-center font-noto pb-16">
+    <main className="flex flex-col items-center font-noto">
       <div className="blockchain-bg w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
           <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
@@ -24,25 +28,28 @@ export default function SoftwarePage() {
           At Stellarcarbon, we believe in transparency, accessibility, and
           innovation to fund nature-based solutions. Our open-source software
           empowers businesses and developers to seamlessly integrate eco-credits
-          into their workflows using distributed ledger technology. Below is an 
+          into their workflows using distributed ledger technology. Below is an
           overview of our core software components.
         </Paragraph>
 
         <Header>Stellarcarbon API</Header>
         <Paragraph>
-          The public interface of our backend allows anyone to create sinking 
-          transactions via simple HTTP requests. This API is ideal for developers 
-          and businesses looking to integrate CO₂ compensation into their 
-          existing products. It is permissionless: you don&apos;t need an API key.
-          We publish an OpenAPI schema which can be used to automatically
-          generate API clients for many programming languages, making your
-          integration easy to set up and maintain.
+          The public interface of our backend allows anyone to create sinking
+          transactions via simple HTTP requests. This API is ideal for
+          developers and businesses looking to integrate CO₂ compensation into
+          their existing products. It is permissionless: you don&apos;t need an
+          API key. We publish an OpenAPI schema which can be used to
+          automatically generate API clients for many programming languages,
+          making your integration easy to set up and maintain.
         </Paragraph>
         <Paragraph>
           <ul className="list-disc ml-4">
             <li className="mb-2">
               <b>Functionality: </b>
-              <span>Get quotes, build sinking transactions, and manage user accounts.</span>
+              <span>
+                Get quotes, build sinking transactions, and manage user
+                accounts.
+              </span>
             </li>
             <li className="mb-2">
               <b>Technology: </b>
@@ -50,8 +57,10 @@ export default function SoftwarePage() {
             </li>
             <li className="mb-2">
               <b>Use cases: </b>
-              <span>User-facing integrations, and embedding nature-positive 
-                contributions into internal business processes.</span>
+              <span>
+                User-facing integrations, and embedding nature-positive
+                contributions into internal business processes.
+              </span>
             </li>
           </ul>
           <div className="my-6">
@@ -88,8 +97,10 @@ export default function SoftwarePage() {
             </li>
             <li className="mb-2">
               <b>Use case: </b>
-              <span>Provide an additional layer of accountability for all 
-               stakeholders.</span>
+              <span>
+                Provide an additional layer of accountability for all
+                stakeholders.
+              </span>
             </li>
           </ul>
           <div className="my-6">
@@ -106,11 +117,12 @@ export default function SoftwarePage() {
         <Header>Sorocarbon</Header>
         <Paragraph>
           Sorocarbon is a Soroban-based integration that offers a decentralized
-          alternative to our HTTP API for sinking carbon. It enables direct smart 
-          contract interactions, making it a powerful choice for developers 
-          requiring deep integration. Call our <code className="bg-tertiary">sink_carbon</code> method
-          from your own contracts, and complement this with the Stellarcarbon
-          API in your frontend.
+          alternative to our HTTP API for sinking carbon. It enables direct
+          smart contract interactions, making it a powerful choice for
+          developers requiring deep integration. Call our{" "}
+          <code className="bg-tertiary">sink_carbon</code> method from your own
+          contracts, and complement this with the Stellarcarbon API in your
+          frontend.
         </Paragraph>
         <Paragraph>
           <ul className="list-disc ml-4">
@@ -149,7 +161,9 @@ export default function SoftwarePage() {
           <ul className="list-disc ml-4">
             <li className="mb-2">
               <b>Functionality: </b>
-              <span>Eco-credit retirement, user dashboard, transaction history.</span>
+              <span>
+                Eco-credit retirement, user dashboard, transaction history.
+              </span>
             </li>
             <li className="mb-2">
               <b>Technology: </b>
@@ -157,8 +171,10 @@ export default function SoftwarePage() {
             </li>
             <li className="mb-2">
               <b>Use case: </b>
-              <span>Have a positive impact on climate and biodiversity, with
-               one-off or recurring contributions to vetted impact projects.</span>
+              <span>
+                Have a positive impact on climate and biodiversity, with one-off
+                or recurring contributions to vetted impact projects.
+              </span>
             </li>
           </ul>
           <div className="my-6">
@@ -172,6 +188,7 @@ export default function SoftwarePage() {
           </div>
         </Paragraph>
       </ContentContainer>
+      <Footer />
     </main>
   );
 }

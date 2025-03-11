@@ -1,4 +1,5 @@
 import ContentContainer from "@/components/ContentContainer";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
@@ -8,7 +9,7 @@ import Link from "next/link";
 
 export default function ExplainPage() {
   return (
-    <main className="flex flex-col items-center font-noto pb-16">
+    <main className="flex flex-col items-center font-noto">
       <div className="blockchain-bg w-full">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
           <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
@@ -132,6 +133,7 @@ export default function ExplainPage() {
           .
         </Paragraph>
       </ContentContainer>
+      <Footer />
     </main>
   );
 }

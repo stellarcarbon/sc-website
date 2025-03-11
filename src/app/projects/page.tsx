@@ -1,6 +1,7 @@
 "use client";
 
 import CountUp from "@/components/CountUp";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 import ShipiboImages from "@/components/ShipiboImages";
@@ -118,6 +119,7 @@ export default function ProjectsPage() {
           }
         />
       </div>
+      <Footer />
     </main>
   );
 }

@@ -36,7 +36,11 @@ export default function ActivityHistory() {
   }, [myTransactions]);
 
   if (searchParams.get("id") !== null) {
-    return <TransactionsExplorerDetail />;
+    return (
+      <div className="p-2 w-full">
+        <TransactionsExplorerDetail />
+      </div>
+    );
   }
 
   if (isLoading || myTransactions === null) {

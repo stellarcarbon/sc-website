@@ -10,6 +10,9 @@ import {
   useRef,
   useState,
 } from "react";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBarWallet() {
   const { disconnectWallet } = useAppContext();
@@ -35,21 +38,6 @@ export default function NavBarWallet() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setShowDropdown, dropdownRef]);
 
-  const handleMyStellar = useCallback(() => {
-    router.push("/dashboard");
-    setShowDropdown(false);
-  }, [router, setShowDropdown]);
-
-  const handleDisconnect = useCallback(() => {
-    disconnectWallet();
-    setShowDropdown(false);
-  }, [disconnectWallet, setShowDropdown]);
-
-  const handleSinkCarbon = useCallback(() => {
-    router.push("/dashboard/sink");
-    setShowDropdown(false);
-  }, [router, setShowDropdown]);
-
   return (
     <>
       <div className="relative">
@@ -61,14 +49,17 @@ export default function NavBarWallet() {
             className="absolute right-0 w-64 top-11 p-2 bg-darker border rounded border-accentSecondary text-white"
             ref={dropdownRef}
           >
-            <DrawerLinkConnected onClick={handleSinkCarbon}>
-              Sink CARBON
+            <DrawerLinkConnected href="/dashboard/sink">
+              <CARBONCurrencyIcon />
+              <span>Sink CARBON</span>
             </DrawerLinkConnected>
-            <DrawerLinkConnected onClick={handleMyStellar}>
-              My Stellarcarbon
+            <DrawerLinkConnected href="/dashboard">
+              <FontAwesomeIcon icon={faUser} width={18} />
+              <span>My Stellarcarbon</span>
             </DrawerLinkConnected>
-            <DrawerLinkConnected onClick={handleDisconnect}>
-              Disconnect wallet
+            <DrawerLinkConnected href="" disconnect>
+              <FontAwesomeIcon icon={faRightFromBracket} width={18} />
+              <span>Disconnect wallet</span>
             </DrawerLinkConnected>
           </div>
         )}

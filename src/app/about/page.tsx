@@ -1,10 +1,11 @@
 import ContentContainer from "@/components/ContentContainer";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 
 export default function AboutPage() {
   return (
-    <main className="flex flex-col items-center font-noto pb-16">
+    <main className="flex flex-col items-center font-noto">
       <ContentContainer>
         <Header>About us</Header>
         <Paragraph>
@@ -99,6 +100,7 @@ export default function AboutPage() {
           financial network environmentally responsible.
         </Paragraph>
       </ContentContainer>
+      <Footer />
     </main>
   );
 }
