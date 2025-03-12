@@ -20,8 +20,8 @@ export default function RainforestIntro() {
       ) as HTMLElement | null;
 
       if (rainForestbackground) {
-        rainForestbackground.style.minHeight =
-          viewportHeight > 400 ? `100vh` : "375px";
+        rainForestbackground.style.height =
+          viewportHeight > 400 ? `${viewportHeight}px` : "375px";
       }
 
       const heroText = document.querySelector(
@@ -86,7 +86,8 @@ export default function RainforestIntro() {
 
   return (
     <>
-      <div className="bg-rainforest bg-cover bg-top bg-fixed bg-no-repeat w-full top-0 left-0 z-0 block absolute" />
+      <div className="bg-rainforest bg-cover bg-fixed bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute" />
+
       <div className="mt-[-64px] md:mt-[-80px] min-h-[100dvh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
         <span className="font-roboto text-4xl md:text-[80px]">
           {/* <CARBONCurrencyIcon width={56} height={56} /> */}

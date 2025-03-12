@@ -86,7 +86,7 @@ export default function RequestCertificate({
           this period ends.
         </span>
 
-        <span>
+        <span className="text-center">
           Read more about retirements & certificates{" "}
           <Link href="/explain" className="underline">
             here

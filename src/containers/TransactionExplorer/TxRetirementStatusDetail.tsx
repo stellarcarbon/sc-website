@@ -34,7 +34,7 @@ export default function TxRetirementStatusDetail({
           transactions up or down. */}
         </div>
         <div>
-          Fractional transactions will automatically retire after a period of 90
+          Fractional transactions automatically retire after a period of 90
           days.
         </div>
       </div>

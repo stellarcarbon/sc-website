@@ -37,7 +37,7 @@ export default function ActivityHistory() {
 
   if (searchParams.get("id") !== null) {
     return (
-      <div className="p-2 w-full">
+      <div className="p-2 w-full bg-darker flex-1">
         <TransactionsExplorerDetail />
       </div>
     );
