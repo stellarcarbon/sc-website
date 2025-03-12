@@ -20,7 +20,8 @@ export default function RainforestIntro() {
       ) as HTMLElement | null;
 
       if (rainForestbackground) {
-        rainForestbackground.style.minHeight = `${mHeight}px`;
+        rainForestbackground.style.minHeight =
+          viewportHeight > 400 ? `100dvh` : "375px";
       }
 
       const heroText = document.querySelector(
