@@ -24,7 +24,7 @@ export default function Drawer() {
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className="absolute top-0 left-0 z-[50]"
     >
-      <div className="flex flex-col w-screen h-screen bg-primary border-secondary">
+      <div className="flex flex-col w-screen min-h-[calc(100dvh-64px)] bg-primary border-secondary relative overflow-y-auto">
         <div className="flex flex-col mt-4 mb-2">
           <DrawerLink href="/">Home</DrawerLink>
           <DrawerLink href="/explain">What is Stellarcarbon?</DrawerLink>

@@ -53,7 +53,7 @@ export default function SinkCheckout() {
       {SinkStatusDetails[step]}
 
       {step !== CheckoutSteps.AWAIT_BLOCKCHAIN && (
-        <Button className={`mx-auto`} onClick={onClick}>
+        <Button className={`mx-auto `} onClick={onClick}>
           {label}
         </Button>
       )}

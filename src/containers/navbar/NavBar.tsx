@@ -51,7 +51,7 @@ export default function NavBar() {
         )}
       </header>
       {isDrawerOpen && (
-        <div className="relative">
+        <div className="relative h-[calc(100dvh-64px)] overflow-auto">
           <Drawer />
         </div>
       )}

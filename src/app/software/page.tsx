@@ -76,6 +76,7 @@ export default function SoftwarePage() {
           <Link
             href={`${appConfig.apiBaseUrl}/docs`}
             className="underline text-lg"
+            target="_blank"
           >
             View API documentation
           </Link>
