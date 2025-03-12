@@ -1,12 +1,12 @@
 "use client";
 
-import TransactionHistory from "@/containers/TransactionExplorer/TransactionHistory";
+import TransactionExplorer from "@/containers/TransactionExplorer/TransactionExplorer";
 import { Suspense } from "react";
 
 export default function TransactionsExplorerPage() {
   return (
     <Suspense>
-      <TransactionHistory />
+      <TransactionExplorer />
     </Suspense>
   );
 }
