@@ -24,8 +24,10 @@ export default function ExplainPage() {
 
       <ContentContainer>
         <Header>
-          An introduction to{" "}
-          <CARBONCurrencyIcon className="inline" width={30} height={40} />
+          <div>
+            <span>An introduction to </span>
+            <CARBONCurrencyIcon className="inline" width={30} height={40} />
+          </div>
         </Header>
         <Paragraph>
           At Stellarcarbon, we offer a unique solution for individuals and

@@ -12,15 +12,17 @@ export default function TransactionExplorerHeader() {
   const router = useRouter();
 
   return (
-    <header className="w-full flex items-center gap-4 my-2 px-4">
+    <header className="w-full flex items-center gap-4 h-16 px-4">
       {pathname.includes("detail") ? (
         <>
           <IconButton onClick={() => router.push("/transactions/explorer")}>
             <FontAwesomeIcon icon={faArrowLeft} />
           </IconButton>
-          <h1 className="text-2xl font-semibold my-2 text-center">
-            Transaction Detail
-          </h1>
+          <div className="flex-1">
+            <h1 className="text-2xl font-semibold my-2 text-center">
+              Transaction Detail
+            </h1>
+          </div>
         </>
       ) : (
         <h1 className="text-2xl font-semibold my-2 flex-1 text-center">
