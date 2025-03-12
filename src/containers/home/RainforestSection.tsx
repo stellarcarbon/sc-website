@@ -21,7 +21,7 @@ export default function RainforestIntro() {
 
       if (rainForestbackground) {
         rainForestbackground.style.minHeight =
-          viewportHeight > 400 ? `100dvh` : "375px";
+          viewportHeight > 400 ? `100vh` : "375px";
       }
 
       const heroText = document.querySelector(
