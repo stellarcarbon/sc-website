@@ -54,7 +54,10 @@ export default function TxRetirementStatusDetail({
     p-2 lg:px-8 w-full lg:w-auto
     flex flex-col items-center"
     >
-      <h1 className="text-xl font-semibold py-2">Retirement status</h1>
+      <div className="flex justify-between items-center w-full text-xl font-semibold p-2">
+        <div className="">Retirement status:</div>
+        <span>Retired</span>
+      </div>
 
       <div className="text-sm text-center my-2">{statusMessage}</div>
 

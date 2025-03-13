@@ -35,9 +35,9 @@ export default function RetiredTransaction({
 
   return (
     <div className="flex flex-col mt-6 gap-2 flex-1">
-      <h1 className="text-center text-xl font-semibold">
+      {/* <h1 className="text-center text-xl font-semibold">
         {RetirementStatus.RETIRED}
-      </h1>
+      </h1> */}
       <span className="text-md">
         The CARBON sunk in this transaction has been retired into one or more
         Verra Certificates.

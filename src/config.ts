@@ -9,7 +9,10 @@ function buildConfig(): AppConfiguration {
   let server;
   let apiBaseUrl;
 
-  if (process.env.NEXT_PUBLIC_PRODUCTION === "production") {
+  if (
+    process.env.NEXT_PUBLIC_PRODUCTION === "production" ||
+    process.env.NEXT_PUBLIC_USE_MAINNET === "true"
+  ) {
     network = WalletNetwork.PUBLIC;
     server = new StellarSdk.Horizon.Server("https://horizon.stellar.org");
     apiBaseUrl = "https://api.stellarcarbon.io";

@@ -18,9 +18,23 @@ function Item({ children }: { children: ReactNode }) {
   return <div className="flex flex-col">{children}</div>;
 }
 
+function CertficateKey({ children }: { children: ReactNode }) {
+  return <div className="col-span-2 text-start">{children}</div>;
+}
+function CertficateValue({ children }: { children: ReactNode }) {
+  return <div className="col-span-3 text-end">{children}</div>;
+}
+
 export default function RetirementDetailCard({
   retirement,
 }: RetirementDetailCardProps) {
+  return (
+    <div className="bg-tertiary border border-primary rounded grid grid-cols-5 p-1">
+      <CertficateKey>Certificate ID</CertficateKey>
+      <CertficateValue>{retirement.certificate_id}</CertficateValue>
+    </div>
+  );
+
   return (
     <div className="p-4 flex flex-col gap-2 bg-primary text-sm rounded">
       <Item>

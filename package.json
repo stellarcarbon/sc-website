@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "demo": "NEXT_PUBLIC_DEMO_VERSION=true next dev",
+    "mainnet": "NEXT_PUBLIC_USE_MAINNET=true next dev",
     "build": "next build",
     "start": "next start",
     "start-static": "npx serve@latest out",
