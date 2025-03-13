@@ -2,7 +2,7 @@
 import ContentContainer from "@/components/ContentContainer";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import OpenAPILogo from "@/components/icons/OpenAPILogo";
+import OpenAPILogo from "@/components/icons/OpenApiIcon";
 import Paragraph from "@/components/Paragraph";
 import ParallaxDivider, {
   ParallaxBackgrounds,
@@ -83,7 +83,7 @@ export default function SoftwarePage() {
           </Link>
         </Paragraph>
         {/* <SoftwareImage src="/software/scapi_docs4.png" /> */}
-        <SoftwareImage src="/OpenAPI_Logo_Pantone.png" />
+        <SoftwareImage src="/software/scapi_docs4.png" />
 
         <Header>Stellarcarbon Audit</Header>
         <Paragraph>
