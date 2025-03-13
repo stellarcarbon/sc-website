@@ -20,6 +20,7 @@ import { useAppContext } from "./appContext";
 import { TransactionBuilder } from "@stellar/stellar-sdk";
 import { useRouter } from "next/navigation";
 import appConfig from "@/config";
+import XLMConversionService from "@/services/XLMConversionService";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -48,6 +49,8 @@ type SinkingContext = {
   setSubmissionError: Dispatch<SetStateAction<string | undefined>>;
 
   signTransaction: () => void;
+
+  USDCPerXLM: number | undefined;
 };
 
 const SinkingContext = createContext<SinkingContext | null>(null);
@@ -70,6 +73,8 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     useState<string>();
   const [step, setStep] = useState<CheckoutSteps>(CheckoutSteps.CREATING);
 
+  const [USDCPerXLM, setUSDCPerXLM] = useState<number>();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -77,6 +82,14 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       setStep(CheckoutSteps.ERROR);
     }
   }, [submissionError]);
+
+  useEffect(() => {
+    async function getPrice() {
+      const usdcPerXLM = await XLMConversionService.getUSDCPrice();
+      setUSDCPerXLM(usdcPerXLM);
+    }
+    getPrice();
+  }, []);
 
   const displayHorizonError = useCallback((error: any) => {
     if (error.message) {
@@ -186,6 +199,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       submissionError,
       setSubmissionError,
       signTransaction,
+      USDCPerXLM,
     };
   }, [
     sinkRequest,
@@ -194,6 +208,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     completedTransactionHash,
     submissionError,
     signTransaction,
+    USDCPerXLM,
   ]);
 
   return (

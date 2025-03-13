@@ -11,6 +11,8 @@ import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSearchParams } from "next/navigation";
 import appConfig from "@/config";
+import XLMIcon from "../icons/XLMIcon";
+import { useSinkingContext } from "@/context/SinkingContext";
 
 interface AmountInputProps {
   register: UseFormRegister<SinkingFormData>;
@@ -43,6 +45,15 @@ export default function AmountInput({
     useState<boolean>(false);
 
   const [quoteStr, setQuoteStr] = useState<string>("");
+  const { USDCPerXLM } = useSinkingContext();
+  const [priceInXLM, setPriceInXLM] = useState<string>();
+
+  useEffect(() => {
+    if (USDCPerXLM) {
+      const price = quote / USDCPerXLM;
+      setPriceInXLM(price.toFixed(2));
+    }
+  }, [quote, USDCPerXLM]);
 
   const { call: carbonToUsd, cancel: cancelCarbonToUsd } = useMemo(() => {
     return debounce(async (carbonAmount: number) => {
@@ -204,6 +215,9 @@ export default function AmountInput({
               <div className="flex items-center">
                 <span>$</span>
                 <span className="ml-[1px]"> {quote.toFixed(2)}</span>
+              </div>
+              <div className="text-base flex items-center gap-1">
+                (or {priceInXLM} <XLMIcon />)
               </div>
             </div>
             {showFractionalWarning && (

@@ -1,5 +1,9 @@
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Button from "../Button";
+import XLMIcon from "../icons/XLMIcon";
+import { useEffect, useMemo, useState } from "react";
+import XLMConversionService from "@/services/XLMConversionService";
+import { useSinkingContext } from "@/context/SinkingContext";
 
 interface TransactionPreviewProps {
   tonnes: number;
@@ -14,6 +18,16 @@ export default function TransactionPreview({
   quote,
   handleSubmit,
 }: TransactionPreviewProps) {
+  const { USDCPerXLM } = useSinkingContext();
+  const [priceInXLM, setPriceInXLM] = useState<string>();
+
+  useEffect(() => {
+    if (USDCPerXLM) {
+      const price = quote / USDCPerXLM;
+      setPriceInXLM(price.toFixed(2));
+    }
+  }, [quote, currency, USDCPerXLM]);
+
   return (
     <div className="p-6 w-[90%] md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center bg-darker border border-accentSecondary rounded">
       <h3 className="text-xl md:text-2xl font-bold">Transaction preview</h3>
@@ -35,6 +49,12 @@ export default function TransactionPreview({
         <span className="font-bold text-end text-accent">{`$ ${
           Number.isNaN(quote) ? "" : quote.toFixed(2)
         }`}</span>
+
+        <span className="text-start col-span-2 text-sm">Price in XLM</span>
+        <div className="flex gap-1 items-center justify-end text-accent">
+          <XLMIcon />
+          <span className="font-bold text-end ">{priceInXLM}</span>
+        </div>
       </div>
       <Button
         onClick={handleSubmit}

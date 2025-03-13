@@ -4,7 +4,7 @@ import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
 import { SinkingFormData, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
-import { Suspense, useCallback, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { FieldErrors, SubmitHandler, useForm } from "react-hook-form";
 import AmountInput from "@/components/checkout/AmountInput";
 import TransactionPreview from "@/components/checkout/TransactionPreview";
@@ -16,6 +16,7 @@ import FormError from "../../components/FormError";
 import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
 import { useSearchParams } from "next/navigation";
 import appConfig from "@/config";
+import XLMConversionService from "@/services/XLMConversionService";
 
 export default function SinkingForm() {
   const { setSinkRequest, setStep } = useSinkingContext();
