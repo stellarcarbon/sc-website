@@ -2,19 +2,14 @@
 import ContentContainer from "@/components/ContentContainer";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import OpenAPILogo from "@/components/icons/OpenApiIcon";
+import OpenAPIIcon from "@/components/icons/OpenApiIcon";
 import Paragraph from "@/components/Paragraph";
-import ParallaxDivider, {
-  ParallaxBackgrounds,
-} from "@/components/ParallaxDivider";
 
 import appConfig from "@/config";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
 
 export default function SoftwarePage() {
   return (
@@ -73,17 +68,19 @@ export default function SoftwarePage() {
             </li>
           </ul>
         </Paragraph>
-        <Paragraph>
+
+        <SoftwareImage src="/software/scapi_docs4.png" />
+
+        <div className="flex">
           <Link
             href={`${appConfig.apiBaseUrl}/docs`}
-            className="underline text-lg"
+            className="ml-4 p-2 text-2xl flex items-center gap-2 hover:bg-tertiary rounded underline"
             target="_blank"
           >
-            View API documentation
+           <OpenAPIIcon width={24} height={24}/>
+            <div className="text-lg">View API documentation</div>
           </Link>
-        </Paragraph>
-        {/* <SoftwareImage src="/software/scapi_docs4.png" /> */}
-        <SoftwareImage src="/software/scapi_docs4.png" />
+        </div>
 
         <Header>Stellarcarbon Audit</Header>
         <Paragraph>
@@ -212,7 +209,6 @@ function GithubLink({ href }: { href: string }) {
       >
         <FontAwesomeIcon icon={faGithub} />
         <div className="text-lg">View code repository</div>
-        {/* <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-lg " /> */}
       </Link>
     </div>
   );
