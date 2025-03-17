@@ -206,18 +206,19 @@ export default function AmountInput({
           </span>
         ) : (
           <>
-            <div className="w-full flex justify-center gap-1 items-center text-base md:text-lg text-center">
+            <div className="w-full flex justify-center gap-1 items-center text-sm md:text-lg text-center">
               <div className="flex items-center">
                 <span>Sinking {tonnes}</span>
                 <CARBONCurrencyIcon className="ml-1" />
               </div>
               <span className="mx-[2px]">costs approx.</span>
+
               <div className="flex items-center">
                 <span>$</span>
                 <span className="ml-[1px]"> {quote.toFixed(2)}</span>
               </div>
-              <div className="text-base flex items-center gap-1">
-                (or {priceInXLM} <XLMIcon />)
+              <div className="text-xs md:text-base flex items-center gap-1">
+                ({priceInXLM} <XLMIcon />)
               </div>
             </div>
             {showFractionalWarning && (
