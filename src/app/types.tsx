@@ -44,7 +44,7 @@ export enum RetirementStatus {
 
 export interface MyTransactionRecord {
   id: string;
-  createdAt: string;
+  createdAt: Date;
   memo: string;
   assetAmount: number;
   asset: string;

@@ -14,8 +14,7 @@ export default function TxRetirementStatusDetail({
 }) {
   const initialDuration = useMemo(() => {
     if (transaction !== undefined) {
-      const txDate = new Date(transaction.createdAt);
-      const txDatePlus90 = txDate.addDays(90); // TODO: Make this the actual 90 days
+      const txDatePlus90 = transaction.createdAt.addDays(90); // TODO: Make this the actual 90 days
       const now = new Date();
 
       const outcome = +txDatePlus90 - +now;
@@ -51,15 +50,15 @@ export default function TxRetirementStatusDetail({
   return (
     <div
       className="bg-primary border border-accentSecondary rounded
-    p-2 lg:px-8 w-full lg:w-auto
+    p-4 lg:px-8 w-full lg:w-auto
     flex flex-col items-center"
     >
-      <div className="flex justify-between items-center w-full text-xl font-semibold p-2">
+      {/* <div className="flex justify-between items-center w-full text-xl font-semibold p-2">
         <div className="">Retirement status:</div>
-        <span>Retired</span>
-      </div>
+        <span>{transaction.retirementStatus}</span>
+      </div> */}
 
-      <div className="text-sm text-center my-2">{statusMessage}</div>
+      <div className="text-sm text-center">{statusMessage}</div>
 
       {transaction?.retirementStatus === RetirementStatus.PENDING_USER &&
         initialDuration !== undefined && (

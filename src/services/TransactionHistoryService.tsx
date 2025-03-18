@@ -28,7 +28,7 @@ export default class TransactionHistoryService {
 
     return {
       id: txResponse.hash,
-      createdAt: txResponse.created_at,
+      createdAt: new Date(txResponse.created_at),
       memo: txResponse.memo.value,
       assetAmount: Number(txResponse.source_asset.amount),
       asset: txResponse.source_asset.code,

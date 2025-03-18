@@ -58,7 +58,7 @@ export default function CountDownTimer({
     <div className="flex flex-col items-center">
       {timerComponents.length ? (
         <>
-          <span className="text-lg font-semibold my-1">{timerComponents}</span>
+          <span className="text-lg font-semibold">{timerComponents}</span>
           <span className="text-xs">left until community retirement.</span>
         </>
       ) : (

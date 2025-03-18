@@ -1,10 +1,10 @@
-import { MyTransactionRecord, RetirementStatus } from "@/app/types";
-import { Blocks } from "react-loader-spinner";
-import RetirementDetailCard from "./RetirementDetailCard";
-import { useEffect, useState } from "react";
+import { MyTransactionRecord } from "@/app/types";
 import { RetirementDetail, RetirementService } from "@/client";
+import RetirementDetailCard from "@/components/dashboard/transactions/RetirementDetailCard";
+import { useEffect, useState } from "react";
+import { Blocks } from "react-loader-spinner";
 
-export default function RetiredTransaction({
+export default function RetirementCompleted({
   transaction,
 }: {
   transaction: MyTransactionRecord;
@@ -32,16 +32,12 @@ export default function RetiredTransaction({
 
     getRetirements();
   }, [transaction]);
-
   return (
-    <div className="flex flex-col gap-2 flex-1">
-      {/* <h1 className="text-center text-xl font-semibold">
-        {RetirementStatus.RETIRED}
-      </h1> */}
-      <span className="text-md">
+    <div className="p-2 w-full flex flex-col items-center">
+      <div className="text-sm text-center">
         The CARBON sunk in this transaction has been retired into one or more
-        Verra Certificates.
-      </span>
+        Verra Certificates. View them below.
+      </div>
       {isLoadingRetirements ? (
         <div className="mx-2 mb-4 text-center flex flex-col justify-center items-center flex-1">
           <Blocks
@@ -56,7 +52,7 @@ export default function RetiredTransaction({
           <span>Fetching retirements...</span>
         </div>
       ) : (
-        <div className="flex flex-col">
+        <div className="w-full mt-4">
           {retirementDetails.map((retirement, idx) => {
             return (
               <RetirementDetailCard

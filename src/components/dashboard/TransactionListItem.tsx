@@ -10,6 +10,7 @@ import {
   faArrowLeftLong,
   faExchange,
 } from "@fortawesome/free-solid-svg-icons";
+import { formatDate } from "@/utils";
 
 interface TransactionListItemProps {
   transaction: MyTransactionRecord;
@@ -41,8 +42,7 @@ export default function TransactionListItem({
   const router = useRouter();
 
   const initialDuration = useMemo(() => {
-    const txDate = new Date(transaction.createdAt);
-    const txDatePlus90 = txDate.addDays(90); // TODO: Make this the actual 90 days
+    const txDatePlus90 = transaction.createdAt.addDays(90); // TODO: Make this the actual 90 days
     const now = new Date();
 
     const outcome = +txDatePlus90 - +now;
@@ -50,13 +50,7 @@ export default function TransactionListItem({
     return outcome / 1000;
   }, [transaction]);
 
-  let myDate = new Date(transaction.createdAt);
-
-  let formattedDate = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-  }).format(myDate);
+  let formattedDate = formatDate(transaction.createdAt);
 
   return (
     <div

@@ -10,9 +10,9 @@ import { useEffect } from "react";
 export default function TransactionsPage() {
   const router = useRouter();
 
-  useEffect(() => {
-    router.push("/transactions/explorer");
-  }, []);
+  // useEffect(() => {
+  //   router.push("/transactions/explorer");
+  // }, []);
 
   return (
     <main className="flex flex-col items-center font-noto pb-4">

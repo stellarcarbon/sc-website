@@ -1,6 +1,9 @@
 import { RetirementDetail } from "@/client";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import { ReactNode } from "react";
+import { formatDate } from "@/utils";
+import { ReactNode, useMemo } from "react";
+import TruncatedHash from "../TruncatedHash";
+import Link from "next/link";
 
 interface RetirementDetailCardProps {
   retirement: RetirementDetail;
@@ -19,19 +22,62 @@ function Item({ children }: { children: ReactNode }) {
 }
 
 function CertficateKey({ children }: { children: ReactNode }) {
-  return <div className="col-span-2 text-start">{children}</div>;
+  return (
+    <div className="h-8 col-span-2 text-start inline-flex items-center">
+      {children}
+    </div>
+  );
 }
 function CertficateValue({ children }: { children: ReactNode }) {
-  return <div className="col-span-3 text-end">{children}</div>;
+  return (
+    <div className="min-h-8 col-span-3 text-end inline-flex justify-end items-center">
+      {children}
+    </div>
+  );
 }
 
 export default function RetirementDetailCard({
   retirement,
 }: RetirementDetailCardProps) {
+  const retirementDate = useMemo(() => {
+    const d = new Date(retirement.retirement_date);
+    return formatDate(d);
+  }, [retirement]);
+
   return (
-    <div className="bg-tertiary border border-primary rounded grid grid-cols-5 p-1">
-      <CertficateKey>Certificate ID</CertficateKey>
+    <div className="bg-tertiary border border-primary rounded grid grid-cols-5 p-1 px-3 pb-2">
+      <CertficateKey>ID</CertficateKey>
       <CertficateValue>{retirement.certificate_id}</CertficateValue>
+
+      <CertficateKey>Serial number</CertficateKey>
+      <CertficateValue>
+        <TruncatedHash hash={retirement.serial_number} chars={7} />
+      </CertficateValue>
+
+      <CertficateKey>Amount</CertficateKey>
+      <CertficateValue>
+        <div className="flex items-center">
+          <span className="mr-1">{retirement.vcu_amount}</span>
+          <CARBONCurrencyIcon width={14} height={14} />
+        </div>
+      </CertficateValue>
+
+      <CertficateKey>Retirement Date</CertficateKey>
+      <CertficateValue>{retirementDate}</CertficateValue>
+
+      <CertficateKey>Instrument Type</CertficateKey>
+      <CertficateValue>{retirement.instrument.instrument_type}</CertficateValue>
+
+      <CertficateKey>Project</CertficateKey>
+      <CertficateValue>
+        <Link
+          href={retirement.vcs_project.registry_url}
+          className="text-accent underline"
+          target="_blank"
+        >
+          {retirement.vcs_project.name}
+        </Link>
+      </CertficateValue>
     </div>
   );
 

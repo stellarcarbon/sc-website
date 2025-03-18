@@ -41,7 +41,7 @@ export default function PaymentList() {
                 <div className="flex justify-start items-center">
                   <span className="w-24 md:w-32">Date</span>
                   <span className="">
-                    {new Date(transaction.createdAt).toDateString()}
+                    {transaction.createdAt.toDateString()}
                   </span>
                 </div>
                 <div className="flex justify-start items-center">
