@@ -12,7 +12,7 @@ export default function TransactionExplorerHeader() {
       {pathname.includes("detail") ? (
         <>
           <Button
-            className="absolute hidden md:visible"
+            className="absolute hidden md:block"
             onClick={() => router.push("/transactions/explorer")}
           >
             <FontAwesomeIcon icon={faArrowLeft} />
