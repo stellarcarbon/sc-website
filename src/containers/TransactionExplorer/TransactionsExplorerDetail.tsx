@@ -15,7 +15,9 @@ import RetirementInformation from "./RetirementInformation/RetirementInformation
 export default function TransactionsExplorerDetail() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [transaction, setTransaction] = useState<MyTransactionRecord>();
-  const [copied, setCopied] = useState(false);
+  const [copiedID, setCopiedID] = useState(false);
+  const [copiedFunder, setCopiedFunder] = useState(false);
+  const [copiedRecipient, setCopiedRecipient] = useState(false);
 
   const searchParams = useSearchParams();
 
@@ -29,16 +31,18 @@ export default function TransactionsExplorerDetail() {
     });
   }, [searchParams]);
 
-  const handleCopy = useCallback(async () => {
-    if (transaction === undefined) return;
+  const handleCopy = useCallback(async (text: string) => {
     try {
-      await navigator.clipboard.writeText(transaction.id);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+      await navigator.clipboard.writeText(text);
+      setTimeout(() => {
+        setCopiedID(false);
+        setCopiedFunder(false);
+        setCopiedRecipient(false);
+      }, 2000); // Reset after 2 seconds
     } catch (err) {
       console.error("Failed to copy:", err);
     }
-  }, [transaction]);
+  }, []);
 
   const price = useMemo(() => {
     const amount = transaction?.assetAmount;
@@ -59,22 +63,35 @@ export default function TransactionsExplorerDetail() {
 
   if (transaction === undefined) return;
 
+  const copyID = () => {
+    setCopiedID(true);
+    handleCopy(transaction.id);
+  };
+
+  const copyFunder = () => {
+    setCopiedFunder(true);
+    handleCopy(transaction.funder);
+  };
+
+  const copyRecipient = () => {
+    setCopiedRecipient(true);
+    handleCopy(transaction.recipient);
+  };
+
   return (
     <div className="w-full flex flex-col items-center">
       <div className="grid grid-cols-5 w-full p-2">
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>
-          <div className="inline-flex gap-1 items-center">
-            {copied ? (
-              <div className="text-xs">Copied!</div>
-            ) : (
-              <div className="" onClick={handleCopy}>
-                <FontAwesomeIcon icon={faCopy} />
-              </div>
-            )}
+          {copiedID ? (
+            <div className="text-xs">Copied!</div>
+          ) : (
+            <div className="cursor-pointer" onClick={copyID}>
+              <FontAwesomeIcon icon={faCopy} />
+            </div>
+          )}
 
-            <TruncatedHash hash={transaction.id} />
-          </div>
+          <TruncatedHash hash={transaction.id} />
         </PropertyValue>
 
         <PropertyKey>Date</PropertyKey>
@@ -107,11 +124,25 @@ export default function TransactionsExplorerDetail() {
 
         <PropertyKey>Paid by</PropertyKey>
         <PropertyValue>
+          {copiedFunder ? (
+            <div className="text-xs">Copied!</div>
+          ) : (
+            <div className="cursor-pointer" onClick={copyFunder}>
+              <FontAwesomeIcon icon={faCopy} />
+            </div>
+          )}
           <TruncatedHash hash={transaction.funder} uppercase />
         </PropertyValue>
 
         <PropertyKey>Recipient</PropertyKey>
         <PropertyValue>
+          {copiedRecipient ? (
+            <div className="text-xs">Copied!</div>
+          ) : (
+            <div className="cursor-pointer" onClick={copyRecipient}>
+              <FontAwesomeIcon icon={faCopy} />
+            </div>
+          )}
           <TruncatedHash hash={transaction.recipient} uppercase />
         </PropertyValue>
 
@@ -145,7 +176,7 @@ function PropertyKey({ children }: { children: ReactNode }) {
 
 function PropertyValue({ children }: { children: ReactNode }) {
   return (
-    <div className="col-span-4 h-10 items-center inline-flex justify-end">
+    <div className="col-span-4 h-10 items-center inline-flex justify-end gap-1">
       {children}
     </div>
   );
