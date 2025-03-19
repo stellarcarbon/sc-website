@@ -101,4 +101,6 @@ export interface AppConfiguration {
   server: StellarSdk.Horizon.Server;
   demo: boolean;
   apiBaseUrl: string;
+  usdcXlmLiquidityPoolId?: string;
+  usdcAssetCode?: string;
 }

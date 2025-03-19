@@ -2,12 +2,11 @@ import appConfig from "@/config";
 
 export default class XLMConversionService {
   public static async getUSDCPrice() {
-    const hash =
-      "4cd1f6defba237eecbc5fefe259f89ebc4b5edd49116beb5536c4034fc48d63f";
+    const hash = appConfig.usdcXlmLiquidityPoolId;
+    const usdcAssetCode = appConfig.usdcAssetCode;
+    if (hash === undefined || usdcAssetCode === undefined) return;
 
     const xlmAssetCode = "native";
-    const usdcAssetCode =
-      "USDC:GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5";
 
     const pool = await appConfig.server
       .liquidityPools()
