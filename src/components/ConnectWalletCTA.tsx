@@ -10,20 +10,22 @@ export default function ConnectWalletCTA() {
     <div
       className="m-4 p-4 
     bg-tertiary text-white border border-accent rounded
-    flex items-center gap-2"
+ 
+    flex flex-col items-center justify-center gap-4"
     >
-      <FontAwesomeIcon icon={faWarning} className="text-[56px]" />
-      <div className="flex-1 flex flex-col items-center justify-center gap-4">
+      <div className="flex-1 flex items-center gap-2">
+        <FontAwesomeIcon icon={faWarning} className="text-[56px]" />
         <div className="text-center text-base">
           No wallet connected! To sink CARBON please connect a wallet.
         </div>
-        <Button
-          onClick={() => router.push("/wallet/connect")}
-          className="text-sm"
-        >
-          Connect wallet
-        </Button>
       </div>
+
+      <Button
+        onClick={() => router.push("/wallet/connect")}
+        className="text-sm"
+      >
+        Connect wallet
+      </Button>
     </div>
   );
 }
