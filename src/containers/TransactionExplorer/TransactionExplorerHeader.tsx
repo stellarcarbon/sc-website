@@ -21,10 +21,7 @@ export default function TransactionExplorerHeader() {
       </h1>
 
       {pathname.includes("detail") || pathname.includes("help") ? (
-        <TxHeaderButton
-          onClick={() => router.push("/transactions/")}
-          icon={faArrowLeft}
-        />
+        <TxHeaderButton onClick={() => router.back()} icon={faArrowLeft} />
       ) : (
         <TxHeaderButton
           onClick={() => router.push("/transactions/help")}

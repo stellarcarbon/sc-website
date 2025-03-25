@@ -23,7 +23,7 @@ import {
   WalletConnection,
 } from "@/app/types";
 import { loadAvailableWalletsMock } from "./walletFunctions";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
@@ -129,6 +129,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [usdcBalance, setUsdcBalance] = useState<number>();
 
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const loadApp = async () => {
@@ -223,11 +224,12 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     [walletConnection]
   );
 
-  const disconnectWallet = () => {
+  const disconnectWallet = useCallback(() => {
     WalletConnectionStorageService.removeWalletConnection();
     setWalletConnection(undefined);
     setMyTransactions(null);
-  };
+    router.push("/");
+  }, [router]);
 
   const providerValue = useMemo(() => {
     return {

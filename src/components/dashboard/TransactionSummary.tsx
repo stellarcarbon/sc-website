@@ -9,7 +9,7 @@ import TransactionListItem from "./TransactionListItem";
 import { useRouter } from "next/navigation";
 
 export default function TransactionSummary() {
-  const { myTransactions } = useAppContext();
+  const { myTransactions, walletConnection } = useAppContext();
   const isWide = useViewportWidth();
   const router = useRouter();
 
@@ -42,21 +42,25 @@ export default function TransactionSummary() {
   }, [myTransactions]);
 
   return (
-    <div className="mx-4 md:mx-8 mt-6 flex flex-col gap-8">
-      {myTransactions === null ? (
+    <div className="mx-4 md:mx-8 flex flex-col gap-8">
+      {myTransactions === null && walletConnection ? (
         <div className="flex-1 flex flex-col justify-center min-h-[250px] md:min-h-[400px]">
           <TransactionsLoading />
         </div>
       ) : (
         <>
           <div className="flex flex-col gap-1 text-sm">
-            <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary mb-2">
+            <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary">
               <span className="text-lg md:text-xl">Latest transaction</span>
             </div>
             {latestTransaction ? (
-              <TransactionListItem transaction={latestTransaction} />
+              <div className="mt-2">
+                <TransactionListItem transaction={latestTransaction} />
+              </div>
             ) : (
-              <div>You have not made any transactions yet.</div>
+              <div className="text-xs md:text-sm mt-2">
+                You have not made any transactions yet.
+              </div>
             )}
           </div>
 
@@ -64,7 +68,9 @@ export default function TransactionSummary() {
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
               <span className="text-lg md:text-xl">Total sinked</span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">{totalSinked?.toFixed(3)}</span>
+                <span className="font-normal">
+                  {totalSinked?.toFixed(3) ?? 0}
+                </span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>
@@ -81,7 +87,9 @@ export default function TransactionSummary() {
                 Pending certificate claims
               </span>
               <div className="flex gap-1 items-center text-accent">
-                <span className="font-normal">{totalPending?.toFixed(3)}</span>
+                <span className="font-normal">
+                  {totalPending?.toFixed(3) ?? 0}
+                </span>
                 <CARBONCurrencyIcon width={iconSize} height={iconSize} />
               </div>
             </div>

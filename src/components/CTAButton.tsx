@@ -8,13 +8,10 @@ export default function CTAButton({ white }: { white?: boolean }) {
   const { walletConnection, isMobileDevice, closeDrawer } = useAppContext();
 
   const onClick = useCallback(() => {
-    if (walletConnection) {
-      router.push("/dashboard/sink");
-    } else {
-      router.push("/wallet");
-      if (isMobileDevice) closeDrawer();
-    }
-  }, [walletConnection, router, isMobileDevice, closeDrawer]);
+    router.push("/dashboard/sink");
+
+    if (isMobileDevice) closeDrawer();
+  }, [router, isMobileDevice, closeDrawer]);
 
   return (
     <button

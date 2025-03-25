@@ -1,11 +1,16 @@
 "use client";
 
+import ConnectWalletCTA from "@/components/ConnectWalletCTA";
 import SinkingForm from "@/containers/sink/SinkingForm";
+import { useAppContext } from "@/context/appContext";
 
 export default function SinkFormPage() {
+  const { walletConnection } = useAppContext();
+
   return (
-    <div className="w-full">
+    <>
+      {walletConnection === undefined && <ConnectWalletCTA />}
       <SinkingForm />
-    </div>
+    </>
   );
 }

@@ -10,23 +10,26 @@ import TransactionSummary from "../TransactionSummary";
 import OverviewContactInformationForm from "./ContactInformationForm";
 import DashboardTitle from "../DashboardTitle";
 import WalletDetails from "../WalletDetails";
+import ConnectWalletCTA from "@/components/ConnectWalletCTA";
 
 export default function Overview() {
-  const { disconnectWallet } = useAppContext();
+  const { walletConnection, disconnectWallet } = useAppContext();
 
   const [showContactInformationForm, setShowContactInformationForm] =
     useState<boolean>(false);
 
   return (
     <>
-      <div className="flex flex-col mt-0 md:mt-4">
-        {/* <DashboardTitle>
+      {walletConnection && <div className="mt-6"></div>}
+      <div className="flex flex-col w-full flex-1 gap-10 justify-start">
+        <div className="flex flex-col mt-0 md:mt-4">
+          {/* <DashboardTitle>
           Activity summary<span> (testnet)</span>
         </DashboardTitle> */}
-        <TransactionSummary />
-      </div>
+          <TransactionSummary />
+        </div>
 
-      {/* <div className="flex flex-col w-full mt-8 md:mt-12">
+        {/* <div className="flex flex-col w-full mt-8 md:mt-12">
         <DashboardTitle>Wallet Connection</DashboardTitle>
         <div className="flex flex-col items-center gap-6 mt-6 mx-4 md:mx-8">
           <WalletConnectionInfo />
@@ -47,17 +50,18 @@ export default function Overview() {
         </div>
       </div> */}
 
-      <div className="flex flex-col items-center gap-10 px-4 md:px-8 mt-8 mb-16">
-        {showContactInformationForm ? (
-          <OverviewContactInformationForm
-            onClose={() => setShowContactInformationForm(false)}
-          />
-        ) : (
-          <WalletDetails
-            onEdit={() => setShowContactInformationForm(true)}
-            onDisconnect={disconnectWallet}
-          />
-        )}
+        <div className="flex flex-col items-center gap-10 px-4 md:px-8 mt-8 mb-16">
+          {showContactInformationForm ? (
+            <OverviewContactInformationForm
+              onClose={() => setShowContactInformationForm(false)}
+            />
+          ) : (
+            <WalletDetails
+              onEdit={() => setShowContactInformationForm(true)}
+              onDisconnect={disconnectWallet}
+            />
+          )}
+        </div>
       </div>
     </>
   );

@@ -4,6 +4,8 @@ import { useSCRouter } from "@/utils";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import appConfig from "@/config";
+import ConnectWalletCTA from "@/components/ConnectWalletCTA";
+import { useAppContext } from "@/context/appContext";
 
 const Overview = dynamic(
   () => import("../../components/dashboard/overview/Overview"),
@@ -13,6 +15,8 @@ const Overview = dynamic(
 );
 
 export default function Dashboard() {
+  const { walletConnection } = useAppContext();
+
   const router = useSCRouter();
 
   useEffect(() => {
@@ -23,8 +27,9 @@ export default function Dashboard() {
   }, [router]);
 
   return (
-    <div className="flex flex-col w-full flex-1 gap-10 justify-start">
+    <>
+      {walletConnection === undefined && <ConnectWalletCTA />}
       <Overview />
-    </div>
+    </>
   );
 }

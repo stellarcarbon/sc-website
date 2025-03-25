@@ -4,6 +4,7 @@ import XLMIcon from "../icons/XLMIcon";
 import { useEffect, useMemo, useState } from "react";
 import XLMConversionService from "@/services/XLMConversionService";
 import { useSinkingContext } from "@/context/SinkingContext";
+import { useAppContext } from "@/context/appContext";
 
 interface TransactionPreviewProps {
   tonnes: number;
@@ -18,6 +19,7 @@ export default function TransactionPreview({
   quote,
   handleSubmit,
 }: TransactionPreviewProps) {
+  const { walletConnection } = useAppContext();
   const { USDCPerXLM } = useSinkingContext();
   const [priceInXLM, setPriceInXLM] = useState<string>();
 
@@ -59,7 +61,7 @@ export default function TransactionPreview({
       <Button
         onClick={handleSubmit}
         className="!py-2 !w-[60%] max-w-[200px] mt-1 mb-2 text-md self-center"
-        disabled={false}
+        disabled={!walletConnection}
       >
         Continue to sign
       </Button>
