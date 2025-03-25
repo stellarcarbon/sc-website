@@ -23,14 +23,14 @@ function Item({ children }: { children: ReactNode }) {
 
 function CertficateKey({ children }: { children: ReactNode }) {
   return (
-    <div className="h-8 col-span-2 text-start inline-flex items-center">
+    <div className="h-7 col-span-2 text-start inline-flex items-center text-sm">
       {children}
     </div>
   );
 }
 function CertficateValue({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-8 col-span-3 text-end inline-flex justify-end items-center">
+    <div className="min-h-7 col-span-3 text-end inline-flex justify-end items-center text-sm">
       {children}
     </div>
   );
@@ -45,8 +45,8 @@ export default function RetirementDetailCard({
   }, [retirement]);
 
   return (
-    <div className="bg-tertiary border border-primary rounded grid grid-cols-5 p-1 px-3 pb-2">
-      <CertficateKey>ID</CertficateKey>
+    <div className="bg-tertiary border border-primary rounded grid grid-cols-5 p-1 px-3 pb-2 mx-6">
+      <CertficateKey>Certificate ID</CertficateKey>
       <CertficateValue>{retirement.certificate_id}</CertficateValue>
 
       <CertficateKey>Serial number</CertficateKey>
@@ -72,7 +72,7 @@ export default function RetirementDetailCard({
       <CertficateValue>
         <Link
           href={retirement.vcs_project.registry_url}
-          className="text-accent underline"
+          className="text-accent underline text-sm"
           target="_blank"
         >
           {retirement.vcs_project.name}

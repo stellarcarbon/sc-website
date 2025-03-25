@@ -81,9 +81,6 @@ export default function TransactionExplorer({}) {
                   key={`tx_${idx}`}
                   transaction={tx}
                   bgPrimary
-                  onClick={() => {
-                    router.push(`/transactions/explorer/detail/?id=${tx.id}`);
-                  }}
                 />
               );
             })

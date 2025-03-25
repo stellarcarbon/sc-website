@@ -51,15 +51,7 @@ export default function LastTransactionsSection() {
               <div className="w-full md:w-[30vw] flex flex-col gap-1">
                 {lastTransactions.map((tx, idx) => {
                   return (
-                    <TransactionListItem
-                      key={`tx_${idx}`}
-                      onClick={() => {
-                        router.push(
-                          `/transactions/explorer/detail/?id=${tx.id}`
-                        );
-                      }}
-                      transaction={tx}
-                    />
+                    <TransactionListItem key={`tx_${idx}`} transaction={tx} />
                   );
                 })}
               </div>

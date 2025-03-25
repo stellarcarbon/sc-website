@@ -71,11 +71,6 @@ export default function PendingRetirements() {
                   <TransactionListItem
                     key={transaction.id}
                     transaction={transaction}
-                    onClick={() =>
-                      router.push(
-                        `/dashboard/transactions/history/?id=${transaction.id}`
-                      )
-                    }
                     showCountdown
                   />
                 );

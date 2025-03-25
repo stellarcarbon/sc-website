@@ -16,7 +16,6 @@ interface TransactionListItemProps {
   transaction: MyTransactionRecord;
   showCountdown?: boolean;
   bgPrimary?: boolean;
-  onClick: () => void;
 }
 
 function ItemHeader({ children }: { children: ReactNode }) {
@@ -37,7 +36,6 @@ export default function TransactionListItem({
   transaction,
   showCountdown = false,
   bgPrimary = false,
-  onClick,
 }: TransactionListItemProps) {
   const router = useRouter();
 
@@ -51,6 +49,10 @@ export default function TransactionListItem({
   }, [transaction]);
 
   let formattedDate = formatDate(transaction.createdAt);
+
+  const onClick = () => {
+    router.push(`/transactions/explorer/detail/?id=${transaction.id}`);
+  };
 
   return (
     <div

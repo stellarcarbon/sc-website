@@ -97,11 +97,6 @@ export default function ActivityHistory() {
               <TransactionListItem
                 key={`txlistitem_${index}`}
                 transaction={transaction}
-                onClick={() => {
-                  router.push(
-                    `/dashboard/transactions/history/?id=${transaction.id}`
-                  );
-                }}
               />
             ))}
           </div>

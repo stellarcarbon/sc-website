@@ -11,13 +11,13 @@ export default function TransactionExplorerHeader() {
     <header className="w-full flex items-center gap-4 h-12 md:h-16 px-4 relative">
       {pathname.includes("detail") ? (
         <>
-          <Button
+          {/* <Button
             className="absolute hidden md:block"
             onClick={() => router.push("/transactions/explorer")}
           >
             <FontAwesomeIcon icon={faArrowLeft} />
-            <div className="ml-2">Back to explorer</div>
-          </Button>
+            <div className="ml-2 text-sm">Back to explorer</div>
+          </Button> */}
 
           <div className="flex-1">
             <h1 className="text-xl md:text-2xl font-semibold my-2 text-center">

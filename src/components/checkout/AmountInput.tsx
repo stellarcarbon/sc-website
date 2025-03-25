@@ -217,9 +217,9 @@ export default function AmountInput({
                 <span>$</span>
                 <span className="ml-[1px]"> {quote.toFixed(2)}</span>
               </div>
-              <div className="text-xs md:text-base flex items-center gap-1">
+              {/* <div className="text-xs md:text-base flex items-center gap-1">
                 ({priceInXLM} <XLMIcon />)
-              </div>
+              </div> */}
             </div>
             {showFractionalWarning && (
               <span className="md:mx-12 text-sm text-center">

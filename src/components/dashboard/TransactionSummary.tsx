@@ -54,14 +54,7 @@ export default function TransactionSummary() {
               <span className="text-lg md:text-xl">Latest transaction</span>
             </div>
             {latestTransaction ? (
-              <TransactionListItem
-                transaction={latestTransaction}
-                onClick={() => {
-                  router.push(
-                    `/dashboard/transactions/history/?id=${latestTransaction.id}`
-                  );
-                }}
-              />
+              <TransactionListItem transaction={latestTransaction} />
             ) : (
               <div>You have not made any transactions yet.</div>
             )}

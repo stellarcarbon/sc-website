@@ -23,9 +23,7 @@ export default class XLMConversionService {
     if (usdcAmountStr && xlmAmountStr) {
       const usdcAmount = parseFloat(usdcAmountStr);
       const xlmAmount = parseFloat(xlmAmountStr);
-      console.log(usdcAmount, xlmAmount);
       const price = usdcAmount / xlmAmount;
-      console.log(price);
       return price;
     } else {
       throw Error("Get USDC price response invalid");
