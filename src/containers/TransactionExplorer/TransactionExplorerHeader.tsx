@@ -1,5 +1,10 @@
 import Button from "@/components/Button";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faMagnifyingGlass,
+  faQuestionCircle,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -9,27 +14,40 @@ export default function TransactionExplorerHeader() {
 
   return (
     <header className="w-full flex items-center gap-4 h-12 md:h-16 px-4 relative">
-      {pathname.includes("detail") ? (
-        <>
-          {/* <Button
-            className="absolute hidden md:block"
-            onClick={() => router.push("/transactions/explorer")}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} />
-            <div className="ml-2 text-sm">Back to explorer</div>
-          </Button> */}
+      <h1 className="text-xl md:text-2xl font-semibold my-2 text-center">
+        {pathname.includes("detail")
+          ? "Transaction details"
+          : "Transaction Explorer"}
+      </h1>
 
-          <div className="flex-1">
-            <h1 className="text-xl md:text-2xl font-semibold my-2 text-center">
-              Transaction
-            </h1>
-          </div>
-        </>
+      {pathname.includes("detail") || pathname.includes("help") ? (
+        <TxHeaderButton
+          onClick={() => router.push("/transactions/explorer/")}
+          icon={faArrowLeft}
+        />
       ) : (
-        <h1 className="text-xl md:text-2xl font-semibold my-2 flex-1 text-center">
-          Transaction Explorer
-        </h1>
+        <TxHeaderButton
+          onClick={() => router.push("/transactions/explorer/help")}
+          icon={faQuestionCircle}
+        />
       )}
     </header>
+  );
+}
+
+function TxHeaderButton({
+  onClick,
+  icon,
+}: {
+  onClick: () => void;
+  icon: IconDefinition;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="absolute right-4 text-xl md:text-2xl md:hover:text-accentSecondary"
+    >
+      <FontAwesomeIcon icon={icon} />
+    </button>
   );
 }
