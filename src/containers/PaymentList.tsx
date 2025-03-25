@@ -24,7 +24,7 @@ export default function PaymentList() {
           myTransactions.map((transaction) => {
             return (
               <a
-                href={`https://stellar.expert/explorer/public/tx/${transaction.id}`}
+                href={`https://stellar.expert/public/tx/${transaction.id}`}
                 target="_blank"
                 // onClick={() => {
                 //   router.push(`/wallet/transaction/${transaction.id}`);

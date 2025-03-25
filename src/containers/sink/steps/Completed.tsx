@@ -15,8 +15,8 @@ export default function CompletedSinking() {
       <a
         href={
           appConfig.network === WalletNetwork.PUBLIC
-            ? `https://stellar.expert/explorer/public/tx/${completedTransactionHash}`
-            : `https://stellar.expert/explorer/testnet/tx/${completedTransactionHash}`
+            ? `https://stellar.expert/public/tx/${completedTransactionHash}`
+            : `https://stellar.expert/testnet/tx/${completedTransactionHash}`
         }
         target="_blank"
         className="text-accentSecondary underline mt-3 text-center"

@@ -30,7 +30,7 @@ lg:min-h-[calc(100dvh-80px)]"
 "
         >
           <TransactionExplorerHeader />
-          <div className="w-full bg-darker min-h-[calc(100dvh-64px-48px)] lg:min-h-[calc(100dvh-240px)]">
+          <div className="w-full bg-darker min-h-[calc(100dvh-64px-56px)] lg:min-h-[calc(100dvh-240px)]">
             {children}
           </div>
         </main>

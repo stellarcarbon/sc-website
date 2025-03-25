@@ -51,7 +51,7 @@ export default function TransactionListItem({
   let formattedDate = formatDate(transaction.createdAt);
 
   const onClick = () => {
-    router.push(`/transactions/explorer/detail/?id=${transaction.id}`);
+    router.push(`/transactions/detail/?id=${transaction.id}`);
   };
 
   return (

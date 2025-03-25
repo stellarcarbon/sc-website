@@ -53,7 +53,7 @@ export default function TransactionExplorer({}) {
             <FontAwesomeIcon icon={faArrowRight} />
           </IconButton>
           <IconButton
-            onClick={() => router.push(`/transactions/explorer?limit=${limit}`)}
+            onClick={() => router.push(`/transactions?limit=${limit}`)}
             className="!w-16 !text-sm"
           >
             Reset
