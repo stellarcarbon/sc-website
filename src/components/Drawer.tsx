@@ -34,8 +34,6 @@ export default function Drawer() {
           <DrawerLink href="/about">About us</DrawerLink>
         </div>
 
-        <hr className="w-full my-4 mb-0 border-secondary" />
-
         {walletConnection && <DrawerWallet />}
 
         {!walletConnection && (

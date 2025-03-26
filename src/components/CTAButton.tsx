@@ -3,7 +3,13 @@ import { useSCRouter } from "@/utils";
 import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 
-export default function CTAButton({ white }: { white?: boolean }) {
+export default function CTAButton({
+  white,
+  small,
+}: {
+  white?: boolean;
+  small?: boolean;
+}) {
   const router = useSCRouter();
   const { walletConnection, isMobileDevice, closeDrawer } = useAppContext();
 
@@ -18,26 +24,30 @@ export default function CTAButton({ white }: { white?: boolean }) {
       type="button"
       onClick={onClick}
       className={`p-1
-        w-[220px]
-        flex justify-center
-       rounded-xl
+        flex items-center justify-center 
+       
        active:bg-tertiary active:text-white
         border border-accentSecondary
         ${
           white
             ? "bg-white text-black"
             : "bg-darker hover:bg-secondary text-white"
-        }`}
+        }
+        ${
+          small
+            ? "px-2 text-xs h-8 gap-1 rounded-lg"
+            : "w-[220px] text-lg h-12 gap-3 rounded-xl"
+        }
+        `}
     >
       {/* <BuyStellarCarbonIcon /> */}
-      <div className=" h-11 flex items-center gap-3">
-        <CARBONCurrencyIcon width={28} height={28} />
-        {walletConnection ? (
-          <span className="font-semibold text-lg">Sink CARBON</span>
-        ) : (
-          <span className="font-semibold text-lg">Contribute now!</span>
-        )}
-      </div>
+
+      <CARBONCurrencyIcon width={small ? 18 : 28} height={small ? 18 : 28} />
+      {walletConnection ? (
+        <span className="font-semibold">Sink CARBON</span>
+      ) : (
+        <span className="font-semibold">Contribute now!</span>
+      )}
     </button>
   );
 }

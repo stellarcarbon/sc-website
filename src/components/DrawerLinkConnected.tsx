@@ -33,11 +33,11 @@ export default function DrawerLinkConnected({
     <div
       onClick={onClick}
       className={`p-3 m-1 px-2 
-        hover:bg-secondary 
+        hover:bg-secondary active:text-yellow-100
         active:bg-tertiary
         rounded cursor-pointer
         flex items-center gap-2
-        ${isCurrentRoute ? "bg-secondary" : ""}`}
+        ${isCurrentRoute ? "text-yellow-400" : ""}`}
     >
       {children}
     </div>

@@ -13,10 +13,12 @@ import {
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 
 export default function NavBarWallet() {
-  const { disconnectWallet } = useAppContext();
-  const router = useSCRouter();
+  const { isMobileDevice } = useAppContext();
+
+  const router = useRouter();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const connInfoRef = useRef<HTMLDivElement>(null);
@@ -38,15 +40,23 @@ export default function NavBarWallet() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setShowDropdown, dropdownRef]);
 
+  const onClick = () => {
+    if (!isMobileDevice) {
+      setShowDropdown(!showDropdown);
+    } else {
+      router.push("/dashboard");
+    }
+  };
+
   return (
     <>
       <div className="relative">
-        <div onClick={() => setShowDropdown(!showDropdown)} ref={connInfoRef}>
+        <div onClick={onClick} ref={connInfoRef}>
           <WalletConnectionInfoSmall />
         </div>
         {showDropdown && (
           <div
-            className="absolute right-0 w-64 top-11 p-2 bg-darker border rounded border-accentSecondary text-white"
+            className="absolute right-0 w-64 top-11 p-2 bg-primary border rounded border-accentSecondary text-white"
             ref={dropdownRef}
           >
             <DrawerLinkConnected href="/dashboard/sink">

@@ -29,13 +29,13 @@ export default function DrawerWallet() {
       <div
         onClick={toggleDropdown}
         className={`${showDropdown ? "" : ""}
-
+ pt-4
       text-white
-    
+    border-t border-t-accent
       flex items-center justify-between
       `}
       >
-        <div className="w-full flex justify-center items-center gap-3 bg-darker p-4 ">
+        <div className="flex justify-center items-center gap-3 bg-darker p-2 mx-auto rounded border border-accentSecondary">
           <div>
             <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
           </div>
@@ -46,10 +46,7 @@ export default function DrawerWallet() {
       </div>
 
       {true && (
-        <div
-          ref={dropdownRef}
-          className="text-white p-2 flex flex-col gap-2 bg-darker border-y border-y-secondary shadow-md"
-        >
+        <div ref={dropdownRef} className="text-white p-2 flex flex-col gap-2">
           <DrawerLinkConnected href="/dashboard/sink">
             <CARBONCurrencyIcon />
             <span>Sink CARBON</span>

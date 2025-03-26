@@ -8,7 +8,10 @@ export default function HamburgerButton({
   className,
 }: HamburgerButtonProps) {
   return (
-    <button onClick={onClick} className={`${className}`}>
+    <button
+      onClick={onClick}
+      className={`${className} h-16 w-16 text-accent flex justify-center items-center`}
+    >
       <HamburgerIcon />
     </button>
   );
