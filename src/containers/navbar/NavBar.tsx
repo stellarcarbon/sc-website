@@ -40,8 +40,7 @@ export default function NavBar() {
 
         <div className="flex-1 flex items-center justify-end md:pr-6">
           {/* hidden on larger screens */}
-          {!isDrawerOpen &&
-            (walletConnection ? <NavBarWallet /> : <CTAButton small white />)}
+          {!isDrawerOpen && (walletConnection ? <NavBarWallet /> : <></>)}
           <div className="md:hidden">
             {isDrawerOpen ? (
               <button

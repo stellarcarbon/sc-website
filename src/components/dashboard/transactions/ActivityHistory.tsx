@@ -55,7 +55,7 @@ export default function ActivityHistory() {
         <div className="my-12 mx-4 md:mx-8 flex flex-col items-center">
           {/* <DashboardTitle>Retired transactions</DashboardTitle> */}
 
-          <span className="text-sm text-center md:w-[60%] bg-darker p-4 border rounded border-tertiary">
+          <span className="text-sm text-center md:w-[80%] bg-darker p-4 border rounded border-tertiary">
             Here you can find the transactions that have been retired into one
             or more certificates. Click on them to find out more details about
             the transaction and its corresponding certificate(s).

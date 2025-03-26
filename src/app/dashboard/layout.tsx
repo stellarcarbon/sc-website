@@ -35,7 +35,7 @@ export default function DashboardLayout({
             className="bg-primary lg:border border-tertiary lg:rounded
           min-h-[calc(100dvh-64px)] md:min-h-[60vh]
           flex flex-col items-center justify-start
-          lg:max-w-[850px] lg:w-[70vw]
+          lg:max-w-[600px] lg:w-[70vw]
           lg:m-6"
           >
             <DashboardNavBar />

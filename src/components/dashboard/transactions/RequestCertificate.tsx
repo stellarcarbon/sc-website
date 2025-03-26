@@ -139,7 +139,9 @@ export default function RequestCertificate({
                     <span>
                       Alternatively, you can round down and request a
                       certificate for {Math.floor(totalCarbonPending)}{" "}
-                      <CARBONCurrencyIcon className="inline" />.
+                      <CARBONCurrencyIcon className="inline" />. The remaining{" "}
+                      <CARBONCurrencyIcon className="inline" /> will retire into
+                      a community certificate.
                     </span>
                   )}
                 </li>
