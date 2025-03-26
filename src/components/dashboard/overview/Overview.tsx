@@ -25,34 +25,23 @@ export default function Overview() {
 
   return (
     <>
-      {/* {walletConnection && (
-        <div className="w-full my-4">
+      {walletConnection && (
+        <div className="mt-6 w-full">
           <div
-            className="mx-4 p-2
-        
-        flex items-center justify-between"
+            className="flex items-center justify-between p-2 mx-4
+          bg-secondary border rounded border-accentSecondary"
           >
             <div className="flex items-center gap-2">
-              <img
-                className="h-6 w-6"
-                src={walletConnection?.walletType.icon}
-              />
-              Freighter
-              <div>
-                <TruncatedHash
-                  hash={walletConnection?.stellarPubKey}
-                  uppercase
-                />
-              </div>
+              <img className="h-6 w-6" src={walletConnection.walletType.icon} />
+              <div>Freighter</div>
             </div>
-            <button className="text-sm bg-accent text-black flex items-center p-1 px-2 rounded">
-              <FontAwesomeIcon icon={faRightFromBracket} />
-              Disconnect
-            </button>
+
+            <div>
+              <TruncatedHash hash={walletConnection.stellarPubKey} uppercase />
+            </div>
           </div>
         </div>
-      )} */}
-      {walletConnection && <div className="mt-2"></div>}
+      )}
       <div className="flex flex-col w-full flex-1 gap-10 justify-start">
         <div className="flex flex-col gap-1">
           <div className="p-4">
@@ -108,7 +97,7 @@ export default function Overview() {
           </div>
         )}
 
-        {walletConnection && (
+        {/* {walletConnection && (
           <div className="flex flex-col gap-1 text-sm">
             <div className="bg-darker h-12 flex items-center justify-between px-4 text-lg border-yz border-accentSecondary">
               <div>Wallet</div>
@@ -139,7 +128,7 @@ export default function Overview() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );
