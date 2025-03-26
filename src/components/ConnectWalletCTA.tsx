@@ -9,7 +9,7 @@ export default function ConnectWalletCTA() {
   return (
     <div
       className="m-4 p-4 
-    bg-primary text-white border border-accentSecondary rounded
+    bg-tertiary text-white border border-accentSecondary rounded
  
     flex flex-col items-center justify-center gap-4"
     >
