@@ -79,7 +79,7 @@ export default function ActivityHistory() {
                 </Link>
               </span>
               <span className="text-xs">or...</span>
-              <span>
+              <span className="mb-8">
                 Create a{" "}
                 <Link
                   href="/dashboard/sink"
