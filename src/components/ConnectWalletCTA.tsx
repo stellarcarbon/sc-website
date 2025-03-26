@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWarning } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faWarning } from "@fortawesome/free-solid-svg-icons";
 
 export default function ConnectWalletCTA() {
   const router = useRouter();
@@ -9,7 +9,7 @@ export default function ConnectWalletCTA() {
   return (
     <div
       className="m-4 p-4 
-    bg-tertiary text-white border border-accent rounded
+    bg-primary text-white border border-accentSecondary rounded
  
     flex flex-col items-center justify-center gap-4"
     >
@@ -20,12 +20,13 @@ export default function ConnectWalletCTA() {
         </div>
       </div>
 
-      <Button
+      <button
         onClick={() => router.push("/wallet/connect")}
-        className="text-sm"
+        className="text-sm bg-accent text-black px-2 rounded shadow h-8 flex items-center gap-1"
       >
+        <FontAwesomeIcon icon={faLink} />
         Connect wallet
-      </Button>
+      </button>
     </div>
   );
 }

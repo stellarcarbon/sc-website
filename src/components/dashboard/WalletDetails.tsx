@@ -1,7 +1,5 @@
 import { useAppContext } from "@/context/appContext";
-import { useState } from "react";
 import TruncatedHash from "./TruncatedHash";
-import CARBONCurrencyIcon from "../icons/CARBONCurrencyIcon";
 import KeyValueEntry from "./overview/KeyValueEntry";
 import WalletConnectionButtons from "./overview/wcbuttons";
 

@@ -21,7 +21,9 @@ export default function OverviewContactInformationForm({
   const [formError, setFormError] = useState<string>();
 
   useEffect(() => {
+    console.log("no", walletConnection);
     if (walletConnection?.personalDetails !== undefined) {
+      console.log("hi");
       setFormUsername(walletConnection.personalDetails.username);
       setFormEmail(walletConnection.personalDetails.useremail);
     }
@@ -68,7 +70,7 @@ export default function OverviewContactInformationForm({
   }, [formEmail, formUsername, isValidEmail, onClose, updateWalletConnection]);
 
   return (
-    <div className="w-full relative mx-4 md:mx-8 px-4 md:px-8 py-8 flex flex-col gap-2 items-center bg-darker rounded border border-accentSecondary self-center ">
+    <div className="w-full relative px-4 md:px-8 py-8 flex flex-col gap-2 items-center bg-primary rounded border border-accentSecondary self-center ">
       <span className="md:text-xl font-semibold">
         Update contact information
       </span>

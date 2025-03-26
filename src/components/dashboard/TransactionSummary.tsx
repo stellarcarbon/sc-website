@@ -42,7 +42,7 @@ export default function TransactionSummary() {
   }, [myTransactions]);
 
   return (
-    <div className="mx-4 md:mx-8 flex flex-col gap-8">
+    <div className="flex flex-col gap-8">
       {myTransactions === null && walletConnection ? (
         <div className="flex-1 flex flex-col justify-center min-h-[250px] md:min-h-[400px]">
           <TransactionsLoading />

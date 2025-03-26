@@ -11,6 +11,11 @@ import OverviewContactInformationForm from "./ContactInformationForm";
 import DashboardTitle from "../DashboardTitle";
 import WalletDetails from "../WalletDetails";
 import ConnectWalletCTA from "@/components/ConnectWalletCTA";
+import TruncatedHash from "../TruncatedHash";
+import WalletConnectionButtons from "./wcbuttons";
+import Button from "@/components/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export default function Overview() {
   const { walletConnection, disconnectWallet } = useAppContext();
@@ -20,48 +25,121 @@ export default function Overview() {
 
   return (
     <>
-      {walletConnection && <div className="mt-6"></div>}
-      <div className="flex flex-col w-full flex-1 gap-10 justify-start">
-        <div className="flex flex-col mt-0 md:mt-4">
-          {/* <DashboardTitle>
-          Activity summary<span> (testnet)</span>
-        </DashboardTitle> */}
-          <TransactionSummary />
-        </div>
-
-        {/* <div className="flex flex-col w-full mt-8 md:mt-12">
-        <DashboardTitle>Wallet Connection</DashboardTitle>
-        <div className="flex flex-col items-center gap-6 mt-6 mx-4 md:mx-8">
-          <WalletConnectionInfo />
-
-          {showContactInformationForm ? (
-            <OverviewContactInformationForm
-              onClose={() => setShowContactInformationForm(false)}
-            />
-          ) : (
-            <>
-              <OverviewContactInformation />
-              <WalletConnectionButtons
-                onEdit={() => setShowContactInformationForm(true)}
-                onDisconnect={disconnectWallet}
+      {/* {walletConnection && (
+        <div className="w-full my-4">
+          <div
+            className="mx-4 p-2
+        
+        flex items-center justify-between"
+          >
+            <div className="flex items-center gap-2">
+              <img
+                className="h-6 w-6"
+                src={walletConnection?.walletType.icon}
               />
-            </>
-          )}
+              Freighter
+              <div>
+                <TruncatedHash
+                  hash={walletConnection?.stellarPubKey}
+                  uppercase
+                />
+              </div>
+            </div>
+            <button className="text-sm bg-accent text-black flex items-center p-1 px-2 rounded">
+              <FontAwesomeIcon icon={faRightFromBracket} />
+              Disconnect
+            </button>
+          </div>
         </div>
-      </div> */}
+      )} */}
+      {walletConnection && <div className="mt-2"></div>}
+      <div className="flex flex-col w-full flex-1 gap-10 justify-start">
+        <div className="flex flex-col gap-1">
+          <div className="p-4">
+            <TransactionSummary />
+          </div>
+        </div>
 
-        <div className="flex flex-col items-center gap-10 px-4 md:px-8 mt-8 mb-16">
-          {showContactInformationForm ? (
-            <OverviewContactInformationForm
-              onClose={() => setShowContactInformationForm(false)}
-            />
-          ) : (
-            <WalletDetails
-              onEdit={() => setShowContactInformationForm(true)}
-              onDisconnect={disconnectWallet}
-            />
-          )}
-        </div>
+        {walletConnection && (
+          <div className="flex flex-col gap-1 text-sm ">
+            <div className="bg-darker h-12 flex items-center justify-between px-4 text-lg border-yz border-accentSecondary">
+              <div>Your contact information</div>
+              <button
+                className="bg-accent rounded text-black text-xs flex items-center gap-1 px-2 p-1"
+                onClick={() => setShowContactInformationForm(true)}
+              >
+                <FontAwesomeIcon icon={faEdit} />
+                <div>Edit</div>
+              </button>
+            </div>
+
+            <div className="p-4">
+              {showContactInformationForm ? (
+                <OverviewContactInformationForm
+                  onClose={() => setShowContactInformationForm(false)}
+                />
+              ) : walletConnection?.isAnonymous ? (
+                <div className="text-center">
+                  {
+                    "This account is anonymous. No PDF certificates will be emailed."
+                  }
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <div className="text-xs">
+                    Your contact info will only be used to send you personal
+                    certificates.
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <div className="text-lg font-semibold border-b border-accentSecondary">
+                      Username
+                    </div>
+                    <div>{walletConnection?.personalDetails?.username}</div>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <div className="text-lg font-semibold border-b border-accentSecondary">
+                      Email
+                    </div>
+                    <div>{walletConnection?.personalDetails?.useremail}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {walletConnection && (
+          <div className="flex flex-col gap-1 text-sm">
+            <div className="bg-darker h-12 flex items-center justify-between px-4 text-lg border-yz border-accentSecondary">
+              <div>Wallet</div>
+
+              <button
+                className="bg-accent rounded text-black text-xs flex items-center gap-1 px-2 p-1"
+                onClick={() => setShowContactInformationForm(true)}
+              >
+                <FontAwesomeIcon icon={faRightFromBracket} />
+                <div>Disconnect</div>
+              </button>
+            </div>
+
+            <div className="flex items-center justify-between p-4">
+              <div className="flex items-center gap-2">
+                <img
+                  className="h-6 w-6"
+                  src={walletConnection.walletType.icon}
+                />
+                <div>Freighter</div>
+              </div>
+
+              <div>
+                <TruncatedHash
+                  hash={walletConnection.stellarPubKey}
+                  uppercase
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
