@@ -27,7 +27,8 @@ export default function DrawerLink({ children, href }: DrawerLinkProps) {
   return (
     <div
       className={`${isCurrentRoute() ? "text-yellow-400" : "text-accent"}
-      p-4 font-bold cursor-pointer hover:text-yellow-100`}
+      p-4 font-bold cursor-pointer hover:text-yellow-100
+      select-none`}
       onClick={onClick}
     >
       {children}

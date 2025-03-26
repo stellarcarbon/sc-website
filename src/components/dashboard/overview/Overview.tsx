@@ -24,7 +24,7 @@ export default function Overview() {
     useState<boolean>(false);
 
   return (
-    <>
+    <div className="md:pb-6 md:p-4">
       {walletConnection && (
         <div className="mt-6 w-full">
           <div
@@ -130,6 +130,6 @@ export default function Overview() {
           </div>
         )} */}
       </div>
-    </>
+    </div>
   );
 }
