@@ -7,6 +7,7 @@ import Paragraph from "@/components/Paragraph";
 import ShipiboImages from "@/components/ShipiboImages";
 import Subheader from "@/components/Subheader";
 import { useAppContext } from "@/context/appContext";
+import Link from "next/link";
 
 export default function ProjectsPage() {
   const { isMobileDevice } = useAppContext();
@@ -58,30 +59,30 @@ export default function ProjectsPage() {
             degradation.
           </Paragraph>
           <Paragraph>
-            <a
+            <Link
               href="https://registry.verra.org/app/projectDetail/VCS/1360"
               target="_blank"
               className="underline text-accentSecondary"
             >
               Read more on Verra
-            </a>
+            </Link>
           </Paragraph>
 
           <Subheader>Verification</Subheader>
 
           <p className="flex flex-col underline text-accentSecondary">
-            <a
+            <Link
               href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=44972&IDKEY=j98klasmf8jflkasf8098afnasfkj98f0a9sfsakjflsakjf8dk62016388"
               target="_blank"
             >
               Progress Monitoring report
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://info.fsc.org/details.php?id=a0240000005sSO8AAM&type=certificate"
               target="_blank"
             >
               FSC Certificate GFA-FM/COC-001288
-            </a>
+            </Link>
           </p>
 
           <div className="md:hidden px-4 my-8 mt-16">

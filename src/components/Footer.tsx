@@ -11,9 +11,12 @@ export default function Footer() {
 
         {/* <span>Terms of services</span> */}
         <Link href="/privacy-policy">Privacy Policy</Link>
-        <a className="underline text-sm" href="mailto:support@stellarcarbon.io">
+        <Link
+          className="underline text-sm"
+          href="mailto:support@stellarcarbon.io"
+        >
           support@stellarcarbon.io
-        </a>
+        </Link>
         <img
           className="w-6 h-6"
           src="/x-logo-white.png"

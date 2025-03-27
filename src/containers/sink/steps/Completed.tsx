@@ -3,6 +3,7 @@ import { useSinkingContext } from "@/context/SinkingContext";
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 import SinkingStep from "./Step";
 import appConfig from "@/config";
+import Link from "next/link";
 
 export default function CompletedSinking() {
   const { completedTransactionHash } = useSinkingContext();
@@ -12,7 +13,7 @@ export default function CompletedSinking() {
       <span className="text-center md:text-lg">
         {"Success! Check out the link below to view your transaction."}
       </span>
-      <a
+      <Link
         href={
           appConfig.network === WalletNetwork.PUBLIC
             ? `https://stellar.expert/public/tx/${completedTransactionHash}`
@@ -22,7 +23,7 @@ export default function CompletedSinking() {
         className="text-accentSecondary underline mt-3 text-center"
       >
         View this transaction on Stellar.expert
-      </a>
+      </Link>
       <SuccessIcon />
     </SinkingStep>
   );

@@ -4,6 +4,7 @@ import CTAButton from "@/components/CTAButton";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import DoubleChevronDownIcon from "@/components/icons/DoubleChevronDownIcon";
 import { useAppContext } from "@/context/appContext";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export default function RainforestIntro() {
@@ -99,13 +100,13 @@ export default function RainforestIntro() {
           </h1> */}
           {/* <span className="md:max-w-[50%] self-center leading-8 ">
             We provide a simple way for{" "}
-            <a
+            <Link
               className="underline"
               href="https://stellar.org/"
               target="_blank"
             >
               Stellar
-            </a>{" "}
+            </Link>{" "}
             blockchain users to contribute to high-integrity nature based
             projects, making it effortless to compensate for your remaining
             emissions.
@@ -113,13 +114,13 @@ export default function RainforestIntro() {
           <div className="text-sm md:text-lg lg:text-lg flex flex-col items-center text-center  gap-4 leading-8 ">
             <span>
               We provide a simple way for{" "}
-              <a
+              <Link
                 className="underline"
                 href="https://stellar.org/"
                 target="_blank"
               >
                 Stellar
-              </a>{" "}
+              </Link>{" "}
               blockchain users to contribute to nature based projects.
             </span>
           </div>
