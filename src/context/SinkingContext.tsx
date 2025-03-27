@@ -37,7 +37,7 @@ type SinkingContext = {
     SetStateAction<SinkCarbonXdrPostRequest | undefined>
   >;
 
-  sinkCarbonXdr: SinkingResponse | undefined;
+  sinkResponse: SinkingResponse | undefined;
 
   step: CheckoutSteps;
   setStep: Dispatch<SetStateAction<CheckoutSteps>>;
@@ -67,7 +67,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const { stellarWalletsKit, walletConnection } = useAppContext();
 
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
-  const [sinkCarbonXdr, setSinkCarbonXdr] = useState<SinkingResponse>();
+  const [sinkResponse, setSinkResponse] = useState<SinkingResponse>();
   const [submissionError, setSubmissionError] = useState<string>();
   const [completedTransactionHash, setCompletedTransactionHash] =
     useState<string>();
@@ -135,7 +135,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
 
   const signTransaction = useCallback(async () => {
     // Sign the transaction using the Stellar Wallets Kit & submit it to Horizon.
-    if (sinkCarbonXdr === undefined) {
+    if (sinkResponse === undefined) {
       setSubmissionError("Could find transaction to sign.");
       return;
     } else {
@@ -144,7 +144,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
 
     try {
       const res = await stellarWalletsKit!.signTransaction(
-        sinkCarbonXdr.tx_xdr,
+        sinkResponse.tx_xdr,
         {
           address: walletConnection!.stellarPubKey,
         }
@@ -158,14 +158,14 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
 
     // TODO: Possibly verify the transaction here, before posting to blockchain?
     // Transaction may be expired or signatures not valid?
-  }, [sinkCarbonXdr, walletConnection, stellarWalletsKit, submitToHorizon]);
+  }, [sinkResponse, walletConnection, stellarWalletsKit, submitToHorizon]);
 
   const confirmSinkRequest = useCallback(
     async (request: SinkCarbonXdrPostRequest) => {
       // Build the XDR with stellarcarbon API
       try {
         const response = await CarbonService.buildSinkCarbonXdr(request);
-        setSinkCarbonXdr(response);
+        setSinkResponse(response);
         setStep(CheckoutSteps.CONFIRM);
       } catch (err: unknown) {
         let message = "Unknown error occurred.";
@@ -191,7 +191,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     return {
       sinkRequest,
       setSinkRequest,
-      sinkCarbonXdr,
+      sinkResponse,
       step,
       setStep,
       completedTransactionHash,
@@ -203,7 +203,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     };
   }, [
     sinkRequest,
-    sinkCarbonXdr,
+    sinkResponse,
     step,
     completedTransactionHash,
     submissionError,

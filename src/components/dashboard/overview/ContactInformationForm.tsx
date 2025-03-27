@@ -21,9 +21,7 @@ export default function OverviewContactInformationForm({
   const [formError, setFormError] = useState<string>();
 
   useEffect(() => {
-    console.log("no", walletConnection);
     if (walletConnection?.personalDetails !== undefined) {
-      console.log("hi");
       setFormUsername(walletConnection.personalDetails.username);
       setFormEmail(walletConnection.personalDetails.useremail);
     }

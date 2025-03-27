@@ -10,10 +10,15 @@ export default function ErrorSinking() {
 
   return (
     <SinkingStep>
-      <FormError className="text-center text-base md:text-lg">
+      <FormError className="text-center text-base md:text-lg overflow-y-scroll max-h-[300px]">
         {submissionError ?? "Unknown error"}
       </FormError>
-      <FontAwesomeIcon icon={faWarning} className="text-[48px] text-red-500" />
+      <div className="flex-1 flex items-center">
+        <FontAwesomeIcon
+          icon={faWarning}
+          className="text-[96px] text-red-500"
+        />
+      </div>
       {/* <ErrorIcon /> */}
     </SinkingStep>
   );

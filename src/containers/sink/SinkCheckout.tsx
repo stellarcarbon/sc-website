@@ -8,6 +8,10 @@ import CompletedSinking from "./steps/Completed";
 import ErrorSinking from "./steps/Error";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
+import { faCancel, faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TransactionHistoryService from "@/services/TransactionHistoryService";
+import { useAppContext } from "@/context/appContext";
 
 export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
   [CheckoutSteps.CREATING]: (
@@ -22,12 +26,19 @@ export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
   [CheckoutSteps.ERROR]: <ErrorSinking />,
 };
 export default function SinkCheckout() {
-  const { step, setStep, sinkRequest } = useSinkingContext();
+  const { walletConnection, setMyTransactions } = useAppContext();
+  const { step, setStep, sinkRequest, signTransaction } = useSinkingContext();
 
   const router = useRouter();
 
   const onClick = useCallback(() => {
     if (step === CheckoutSteps.COMPLETED) {
+      // fetch account history as user navigates back
+      TransactionHistoryService.fetchAccountHistory(
+        walletConnection?.stellarPubKey!
+      ).then((transactionRecords): void => {
+        setMyTransactions(transactionRecords);
+      });
       router.push("/dashboard");
     } else {
       router.push("/dashboard/sink");
@@ -50,13 +61,39 @@ export default function SinkCheckout() {
 
   return (
     <Modal>
-      {SinkStatusDetails[step]}
+      <div className="flex-1">{SinkStatusDetails[step]}</div>
 
-      {step !== CheckoutSteps.AWAIT_BLOCKCHAIN && (
-        <Button className={`mx-auto `} onClick={onClick}>
-          {label}
-        </Button>
-      )}
+      <div className="h-16 md:my-3 flex items-center">
+        {step === CheckoutSteps.CONFIRM ? (
+          <>
+            <button
+              onClick={signTransaction}
+              className="flex items-center justify-center gap-2
+                      bg-accent text-black text-sm rounded
+                      p-2 flex-1 mx-4"
+            >
+              <FontAwesomeIcon icon={faPen} />
+              <div>Sign </div>
+            </button>
+            <button
+              onClick={onClick}
+              className="flex items-center justify-center gap-2
+                      bg-accent text-black text-sm rounded
+                      p-2 flex-1 mx-4"
+            >
+              <FontAwesomeIcon icon={faCancel} />
+              <div>Cancel</div>
+            </button>
+          </>
+        ) : (
+          step !== CheckoutSteps.AWAIT_BLOCKCHAIN &&
+          step !== CheckoutSteps.AWAIT_SIGNING && (
+            <Button className={`mx-auto`} onClick={onClick}>
+              {label}
+            </Button>
+          )
+        )}
+      </div>
 
       {false && (
         <button

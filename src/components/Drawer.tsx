@@ -25,7 +25,7 @@ export default function Drawer() {
       className="absolute top-0 left-0 z-[50]"
     >
       <div className="flex flex-col w-screen min-h-[calc(100dvh-64px)] bg-primary border-secondary relative overflow-y-auto">
-        <div className="flex flex-col mt-4 mb-2">
+        <div className="flex flex-col my-4">
           <DrawerLink href="/">Home</DrawerLink>
           <DrawerLink href="/explain">What is Stellarcarbon?</DrawerLink>
           <DrawerLink href="/projects">Current projects</DrawerLink>

@@ -43,11 +43,12 @@ export default function ReasonSelect({
   return (
     <div className="flex flex-col gap-1 md:gap-3">
       <span className="text-xl md:text-2xl font-bold mb-0">
-        Add a label (optional)
+        Offset reason (optional)
       </span>
       <div className="flex flex-col gap-1">
         <span className="text-xs md:text-sm">
-          Select the reason you are creating this offset...
+          Select a reason for creating this offset. Use it to remind yourself
+          why you make this donation.
         </span>
         <div className="flex gap-2 my-2">
           {Object.values(ReasonOptions).map((option) => {

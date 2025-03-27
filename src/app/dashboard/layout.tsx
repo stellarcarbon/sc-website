@@ -14,17 +14,6 @@ export default function DashboardLayout({
   const { walletConnection } = useAppContext();
   const router = useSCRouter();
 
-  // Redirect to connect wallet if not connected.
-  // useEffect(() => {
-  //   if (walletConnection === undefined) {
-  //     router.push("/wallet");
-  //   }
-  // }, [walletConnection, router]);
-
-  // if (walletConnection === undefined) {
-  //   return null;
-  // }
-
   return (
     <>
       {appConfig.demo ? (

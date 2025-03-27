@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 
 export default function SinkingStep({ children }: PropsWithChildren) {
   return (
-    <div className="h-[90%] p-4 gap-8 md:gap-12 flex flex-col justify-center items-center">
+    <div className="mt-8 h-full flex flex-col justify-start items-center min-h-[400px] md:min-h-[480px]">
       {children}
     </div>
   );

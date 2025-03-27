@@ -2,24 +2,14 @@
 
 import { useAppContext } from "@/context/appContext";
 import { useState } from "react";
-
-import ParallaxDivider, {
-  ParallaxBackgrounds,
-} from "@/components/ParallaxDivider";
 import TransactionSummary from "../TransactionSummary";
 import OverviewContactInformationForm from "./ContactInformationForm";
-import DashboardTitle from "../DashboardTitle";
-import WalletDetails from "../WalletDetails";
-import ConnectWalletCTA from "@/components/ConnectWalletCTA";
 import TruncatedHash from "../TruncatedHash";
-import WalletConnectionButtons from "./wcbuttons";
-import Button from "@/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 export default function Overview() {
-  const { walletConnection, disconnectWallet } = useAppContext();
-
+  const { walletConnection } = useAppContext();
   const [showContactInformationForm, setShowContactInformationForm] =
     useState<boolean>(false);
 
@@ -32,8 +22,13 @@ export default function Overview() {
           bg-secondary border rounded border-accentSecondary"
           >
             <div className="flex items-center gap-2">
-              <img className="h-6 w-6" src={walletConnection.walletType.icon} />
-              <div>Freighter</div>
+              <div className="p-1">
+                <img
+                  className="h-6 w-6"
+                  src={walletConnection?.walletType.icon}
+                />
+              </div>
+              <div>{walletConnection?.walletType.name}</div>
             </div>
 
             <div>
@@ -79,17 +74,27 @@ export default function Overview() {
                     Your contact info will only be used to send you personal
                     certificates.
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="text-lg font-semibold border-b border-accentSecondary">
-                      Username
+                  <div className="flex flex-col">
+                    <div className="text-lg font-semibold border-b border-accentSecondary flex justify-between">
+                      <div>Username</div>
+                      <div className="text-accent font-normal">
+                        {walletConnection?.personalDetails?.username}
+                      </div>
                     </div>
-                    <div>{walletConnection?.personalDetails?.username}</div>
+                    <div className="text-xs mt-2">
+                      This name will used on your personal certificates.
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="text-lg font-semibold border-b border-accentSecondary">
-                      Email
+                  <div className="flex flex-col">
+                    <div className="text-lg font-semibold border-b border-accentSecondary flex justify-between">
+                      <div>Email</div>
+                      <div className="text-accent font-normal">
+                        {walletConnection?.personalDetails?.useremail}
+                      </div>
                     </div>
-                    <div>{walletConnection?.personalDetails?.useremail}</div>
+                    <div className="text-xs mt-2">
+                      Your email address is only used to send certificates.
+                    </div>
                   </div>
                 </div>
               )}

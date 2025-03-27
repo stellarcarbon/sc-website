@@ -64,7 +64,7 @@ export default function TransactionSummary() {
             )}
           </div>
 
-          <div className="flex flex-col gap-1 text-sm">
+          <div className="flex flex-col text-sm">
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
               <span className="text-lg md:text-xl">Total sinked</span>
               <div className="flex gap-1 items-center text-accent">
@@ -81,7 +81,7 @@ export default function TransactionSummary() {
             </span>
           </div>
 
-          <div className="flex flex-col gap-1 text-sm">
+          <div className="flex flex-col text-sm">
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
               <span className="text-lg md:text-xl">
                 Pending certificate claims

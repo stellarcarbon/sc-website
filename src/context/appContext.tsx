@@ -144,7 +144,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
             selectedWalletId: XBULL_ID,
             modules: allowAllModules(),
           });
-          console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
+          // console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
 
           // Load supported wallets from stellar wallets kit
           let wallets;
@@ -208,7 +208,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     };
 
     loadApp();
-  }, [walletConnection, myTransactions, pathname, hasPendingRounding]);
+  }, [walletConnection, myTransactions, hasPendingRounding]);
 
   const updateWalletConnection = useCallback(
     (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
