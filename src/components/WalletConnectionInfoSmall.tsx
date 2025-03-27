@@ -4,14 +4,20 @@ import TruncatedHash from "./dashboard/TruncatedHash";
 export default function WalletConnectionInfoSmall() {
   const { walletConnection } = useAppContext();
 
+  if (!walletConnection) {
+    return <div className="w-10 h-10"></div>;
+  }
+
   return (
-    <div className="flex items-center gap-1 bg-darker text-white border border-accentSecondary rounded cursor-pointer md:hover:bg-secondary md:hover:text-white h-8 md:h-10 px-2">
+    <div
+      className={` flex justify-center items-center gap-1 bg-darker text-white border border-accentSecondary rounded cursor-pointer md:hover:bg-secondary md:hover:text-white h-10 min-w-10 md:h-10 px-2`}
+    >
       <img
-        className="h-5 w-5 md:h-6 md:w-6"
+        className="h-4 w-4 md:h-6 md:w-6"
         src={walletConnection?.walletType.icon}
       />
 
-      <div className="flex items-center text-xs md:text-sm">
+      <div className="hidden md:flex items-center text-[10px] md:text-sm">
         <TruncatedHash hash={walletConnection?.stellarPubKey} uppercase />
       </div>
     </div>

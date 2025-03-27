@@ -77,7 +77,12 @@ export default function TransactionListItem({
           <span>{transaction.sinkAmount?.toFixed(3)}</span>
         </div>
 
-        <span className="">{transaction.memo ?? "N/A"}</span>
+        {transaction.memo ? (
+          <div className="text-accentSecondary">{transaction.memo}</div>
+        ) : (
+          <div className="text-xs text-red-400">No reason specified</div>
+        )}
+        {/* <span className="">{transaction.memo ?? "N/A"}</span> */}
       </div>
     </div>
   );
