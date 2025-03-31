@@ -87,20 +87,13 @@ export default function DashboardNavBarItem({
   return (
     <div
       onClick={navigate}
-      className={`relative cursor-pointer p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-[4px]
+      className={`relative cursor-pointer p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-[4px] select-none
       ${isSelected ? "text-accent bg-primary" : "text-accentSecondary"} ${
         first ? "md:rounded-tl" : ""
       } ${last ? "md:rounded-tr" : ""}`}
     >
       {p.icon}
       <span className="text-[12px] md:text-[14px] text-center">{p.label}</span>
-      {
-        // <div
-        //   className={`${
-        //     isSelected ? "animate-navbarstart" : "animate-navbarend"
-        //   } absolute opacity-0 bottom-0 w-full h-1 bg-accentSecondary`}
-        // ></div>
-      }
     </div>
   );
 }
