@@ -35,10 +35,10 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
 
   return (
     <div className="flex flex-col gap-1 md:gap-3">
-      <span className="text-xl md:text-2xl font-bold">
+      <span className="text-xl md:text-2xl font-bold border-b border-tertiary pb-1">
         Choose preferred asset
       </span>
-      <span className="text-xs md:text-sm mb-2">
+      <span className="text-sm mb-2 mt-1">
         {`Choose a preferred payment asset to use or leave it on "No preference". Horizon will create the best offer available.`}
       </span>
 
@@ -50,7 +50,7 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
         {options}
       </select>
 
-      <span className="text-xs">
+      <span className="text-[10px] mx-1">
         Note: payment will default to CARBON if a sufficient balance is
         available.
       </span>

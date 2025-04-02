@@ -55,7 +55,6 @@ export default function ReasonSelect({
 }: ReasonSelectProps) {
   const memo = watch("memo");
   const [selectedReason, setSelectedReason] = useState<ReasonOption>();
-
   const [memoLength, setMemoLength] = useState<number>(0);
 
   const textEncoder = useMemo(() => {
@@ -77,22 +76,23 @@ export default function ReasonSelect({
   };
 
   useEffect(() => {
-    const lengthInBytes = textEncoder.encode(memo).length;
-    setMemoLength(lengthInBytes);
+    if (memo?.length > 0) {
+      const lengthInBytes = textEncoder.encode(memo).length;
+      setMemoLength(lengthInBytes);
+    }
   }, [memo, setMemoLength, textEncoder]);
 
   // TODO: enforce max length of reason message 29 bytes
 
-  console.log(selectedReason);
-
   return (
     <div className="flex flex-col gap-1 md:gap-3">
-      <span className="text-xl md:text-2xl font-bold mb-0">
+      <span className="text-xl md:text-2xl font-bold pb-1 mb-1 border-b border-tertiary">
         Label this contribution
       </span>
       <div className="flex flex-col gap-1">
         <span className="text-sm md:text-sm">
-          Label your contribution to remind yourself and others why you did it.
+          Why are you making this contribution? This memo will be stored on your
+          blockchain entry.
         </span>
         <div className="flex justify-between gap-1 md:gap-4 my-2">
           {Object.values(ReasonOptions).map((option, idx) => {
@@ -117,7 +117,9 @@ export default function ReasonSelect({
           <div className="text-sm">
             {/* <div className="mt-2 mb-4">{selectedReason?.explanation}</div> */}
             <div className="flex flex-col gap-1">
-              <span className="text-xs md:text-sm">Your transaction label</span>
+              <span className="text-xs md:text-sm">
+                Customize your transaction label
+              </span>
               <textarea
                 {...register("memo", {
                   validate: (value) => {

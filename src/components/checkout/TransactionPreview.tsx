@@ -10,6 +10,7 @@ interface TransactionPreviewProps {
   tonnes: number;
   currency: string;
   quote: number;
+  memo: string;
   handleSubmit: () => void;
 }
 
@@ -17,6 +18,7 @@ export default function TransactionPreview({
   tonnes,
   currency,
   quote,
+  memo,
   handleSubmit,
 }: TransactionPreviewProps) {
   const { walletConnection } = useAppContext();
@@ -34,6 +36,15 @@ export default function TransactionPreview({
     <div className="p-6 w-[90%] md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center bg-darker border border-accentSecondary rounded">
       <h3 className="text-xl md:text-2xl font-bold">Transaction preview</h3>
       <div className="grid grid-cols-3 gap-1 text-center w-full">
+        <div className="col-span-1 text-start text-sm">Reason</div>
+        <div className="col-span-2 inline-flex justify-end items-center">
+          {memo === "" ? (
+            <div className="text-xs">No reason specified</div>
+          ) : (
+            memo
+          )}
+        </div>
+
         <span className="text-start col-span-2 text-sm">Amount to sink</span>
         <div className="flex gap-1 items-center justify-end text-accent">
           <CARBONCurrencyIcon />

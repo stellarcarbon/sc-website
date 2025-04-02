@@ -33,8 +33,8 @@ export default function SelectReasonButton({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`cursor-pointer  rounded shadow border border-accentSecondary
-        ${isSelected ? "bg-secondary" : "bg-darker"}
+      className={`cursor-pointer  rounded shadow border border-accent
+        ${isSelected ? "bg-tertiary" : "bg-darker"}
         p-2 w-[80px] md:w-[125px]
         flex flex-col items-center gap-2`}
     >

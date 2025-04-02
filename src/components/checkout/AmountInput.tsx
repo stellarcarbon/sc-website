@@ -1,7 +1,7 @@
 "use client";
 
 import { SinkingFormData } from "@/app/types";
-import { debounce } from "@/utils";
+import { debounce, useSCRouter } from "@/utils";
 import { CarbonService } from "@/client";
 import {
   faArrowRightArrowLeft,
@@ -52,7 +52,7 @@ export default function AmountInput({
   const { USDCPerXLM } = useSinkingContext();
   const [priceInXLM, setPriceInXLM] = useState<string>();
 
-  const router = useRouter();
+  const router = useSCRouter();
 
   useEffect(() => {
     if (USDCPerXLM) {
@@ -150,26 +150,27 @@ export default function AmountInput({
 
   return (
     <div className="flex flex-col gap-1">
-      <h1 className="text-xl md:text-2xl text-start font-bold">
-        CARBON amount
+      <h1 className="text-xl md:text-2xl text-start font-bold border-b border-tertiary pb-1">
+        Input your amount
       </h1>
 
-      <span className="text-xs md:text-sm mt-4">
-        Try the emissions estimation tool to help you determine the amount of
-        CARBON you want to sink.
-      </span>
-
-      <div className="flex justify-center my-4">
-        <Button
-          onClick={() => router.push("/emissions")}
-          className="gap-2 h-8 !px-3"
-        >
-          <FontAwesomeIcon icon={faCalculator} />
-          Estimate emissions
-        </Button>
+      <div className="flex flex-col mt-1 mb-3">
+        <span className="text-sm">
+          Try the emissions estimation tool to help you determine the amount of
+          CARBON you want to sink.
+        </span>
+        <div className="flex justify-center mt-4">
+          <Button
+            onClick={() => router.push("/emissions")}
+            className="gap-2 h-10 !px-3"
+          >
+            <FontAwesomeIcon icon={faCalculator} />
+            Go to emission calculator
+          </Button>
+        </div>
       </div>
 
-      <div className="text-xs md:text-sm">
+      <div className="text-sm">
         ...or manually input the amount of CARBON you want to sink.
       </div>
 

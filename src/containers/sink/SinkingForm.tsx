@@ -71,7 +71,10 @@ export default function SinkingForm() {
         </div>
       )}
       <form className="flex flex-col gap-12 md:gap-20 mb-12">
-        <div className="mb-2 mx-4 md:mx-8 flex flex-col min-w-[80%]">
+        <div className="mx-4 md:mx-8 text-sm">
+          Use this form to contribute to the Stellarcarbon initiative.
+        </div>
+        <div className="mx-4 md:mx-8 flex flex-col min-w-[80%]">
           <ReasonSelectContextProvider>
             <ReasonSelect
               register={register}
@@ -101,6 +104,7 @@ export default function SinkingForm() {
           tonnes={tonnes}
           currency={currency}
           quote={quote}
+          memo={memo}
           handleSubmit={() => handleSubmit(onSubmit, onError)()}
         />
       </form>
