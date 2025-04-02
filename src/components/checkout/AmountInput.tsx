@@ -3,16 +3,20 @@
 import { SinkingFormData } from "@/app/types";
 import { debounce } from "@/utils";
 import { CarbonService } from "@/client";
-import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRightArrowLeft,
+  faCalculator,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import appConfig from "@/config";
 import XLMIcon from "../icons/XLMIcon";
 import { useSinkingContext } from "@/context/SinkingContext";
+import Button from "../Button";
 
 interface AmountInputProps {
   register: UseFormRegister<SinkingFormData>;
@@ -47,6 +51,8 @@ export default function AmountInput({
   const [quoteStr, setQuoteStr] = useState<string>("");
   const { USDCPerXLM } = useSinkingContext();
   const [priceInXLM, setPriceInXLM] = useState<string>();
+
+  const router = useRouter();
 
   useEffect(() => {
     if (USDCPerXLM) {
@@ -147,10 +153,25 @@ export default function AmountInput({
       <h1 className="text-xl md:text-2xl text-start font-bold">
         CARBON amount
       </h1>
-      <span className="text-xs md:text-sm">
-        Use the exchange rate calculator to determine the amount of CARBON you
-        want to sink.
+
+      <span className="text-xs md:text-sm mt-4">
+        Try the emissions estimation tool to help you determine the amount of
+        CARBON you want to sink.
       </span>
+
+      <div className="flex justify-center my-4">
+        <Button
+          onClick={() => router.push("/emissions")}
+          className="gap-2 h-8 !px-3"
+        >
+          <FontAwesomeIcon icon={faCalculator} />
+          Estimate emissions
+        </Button>
+      </div>
+
+      <div className="text-xs md:text-sm">
+        ...or manually input the amount of CARBON you want to sink.
+      </div>
 
       <div className="flex justify-between items-center gap-2 h-16 px-2">
         <div className="relative w-[35%]">
@@ -168,12 +189,10 @@ export default function AmountInput({
             })}
           />
         </div>
-
         <FontAwesomeIcon
           icon={faArrowRightArrowLeft}
           className="px-4 py-4 text-xl"
         />
-
         <div className="relative w-[35%]">
           <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
             $

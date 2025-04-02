@@ -17,6 +17,7 @@ import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
 import { useSearchParams } from "next/navigation";
 import appConfig from "@/config";
 import XLMConversionService from "@/services/XLMConversionService";
+import { ReasonSelectContextProvider } from "@/components/checkout/ReasonSelectContext";
 
 export default function SinkingForm() {
   const { setSinkRequest, setStep } = useSinkingContext();
@@ -29,11 +30,11 @@ export default function SinkingForm() {
 
   const tonnes = watch("tonnes");
   const currency = watch("currency");
-  const reason = watch("reason");
+  const memo = watch("memo");
 
   const reasonErrorLabel: string | undefined = useMemo(() => {
     return Object.entries(errors ?? {})
-      .find(([field]) => field === "reason")?.[1]
+      .find(([field]) => field === "memo")?.[1]
       ?.message?.toString();
   }, [errors]);
 
@@ -49,7 +50,7 @@ export default function SinkingForm() {
         funder: walletConnection?.stellarPubKey!,
         carbonAmount: tonnes,
         paymentAsset: currency,
-        memoValue: reason,
+        memoValue: memo,
       };
 
       if (!walletConnection?.isAnonymous) {
@@ -58,7 +59,7 @@ export default function SinkingForm() {
 
       setSinkRequest(request);
     },
-    [walletConnection, tonnes, currency, reason, setSinkRequest, setStep]
+    [walletConnection, tonnes, currency, memo, setSinkRequest, setStep]
   );
 
   return (
@@ -70,6 +71,16 @@ export default function SinkingForm() {
         </div>
       )}
       <form className="flex flex-col gap-12 md:gap-20 mb-12">
+        <div className="mb-2 mx-4 md:mx-8 flex flex-col min-w-[80%]">
+          <ReasonSelectContextProvider>
+            <ReasonSelect
+              register={register}
+              watch={watch}
+              setValue={setValue}
+            />
+          </ReasonSelectContextProvider>
+          {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
+        </div>
         <div className="mx-4 md:mx-8 flex flex-col gap-12 min-w-[80%]">
           <Suspense>
             <AmountInput
@@ -84,10 +95,6 @@ export default function SinkingForm() {
 
         <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
           <CurrencySelect register={register} />
-        </div>
-        <div className="mb-2 mx-4 md:mx-8 flex flex-col min-w-[80%]">
-          <ReasonSelect register={register} watch={watch} setValue={setValue} />
-          {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
         </div>
 
         <TransactionPreview

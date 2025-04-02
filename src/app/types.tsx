@@ -5,6 +5,7 @@ import {
   SinkingResponse,
   VcsProject,
 } from "@/client";
+import { ReasonOption } from "@/components/checkout/ReasonSelect";
 import {
   ISupportedWallet,
   WalletNetwork,
@@ -26,15 +27,15 @@ export type PersonalDetails = {
 export interface SinkingFormData {
   tonnes: number;
   currency: PaymentAsset;
-  reason: ReasonOptions;
+  memo: string;
 }
 
-export enum ReasonOptions {
-  ENVIRONMENT = "🌎✨🌍💕🌏",
-  HOUSEHOLD = "🏠 household",
-  AIRTRAVEL = "✈️ air travel",
-  ROADTRAVEL = "🛣️ road travel",
-}
+// export enum ReasonOptions {
+//   ENVIRONMENT = "🌎✨🌍💕🌏",
+//   HOUSEHOLD = "🏠 household",
+//   AIRTRAVEL = "✈️ air travel",
+//   ROADTRAVEL = "🛣️ road travel",
+// }
 
 export enum RetirementStatus {
   PENDING_USER = "Pending certificate attribution",
