@@ -169,15 +169,3 @@ export const formatDate = (date: Date): string => {
 
   return `${day} ${month} ${year}`;
 };
-
-export function withLeadingZero(num: number): string {
-  const str = num.toString();
-  // Check if the number starts with a dot (or with "-." for negative numbers)
-  if (str.startsWith(".")) {
-    return "0" + str;
-  }
-  if (str.startsWith("-.")) {
-    return "-0" + str.slice(1);
-  }
-  return str;
-}

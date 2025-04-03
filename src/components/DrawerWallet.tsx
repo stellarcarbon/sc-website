@@ -21,7 +21,7 @@ export default function DrawerWallet() {
         </div>
       </div>
 
-      <div className="text-white p-2 flex flex-col gap-2">
+      <div className="text-white flex flex-col gap-2">
         <DrawerLinkConnected href="/dashboard/sink">
           <CARBONCurrencyIcon />
           <span>Sink CARBON</span>

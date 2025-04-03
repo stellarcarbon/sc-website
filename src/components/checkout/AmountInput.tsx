@@ -154,12 +154,12 @@ export default function AmountInput({
         Set sinking amount
       </h1>
 
-      <div className="flex flex-col mb-3">
+      <div className="flex flex-col">
         <span className="">
           Try the emissions estimation tool to help you determine the amount of
           CARBON you want to sink.
         </span>
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center my-2">
           <Button
             onClick={() => router.push("/emissions")}
             className="gap-2 h-10 !px-3"
