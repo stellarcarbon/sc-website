@@ -9,13 +9,13 @@ import NavBarWallet from "./NavBarWallet";
 import Drawer from "@/components/Drawer";
 
 export default function NavBar() {
-  const { isDrawerOpen } = useAppContext();
+  const { isDrawerOpen, isMobileDevice } = useAppContext();
 
   return (
     <div className="z-[100] fixed w-full">
       <header
         className={`flex justify-between items-center
-          pr-4
+          
         h-16 lg:h-20
         border-b border-secondary
       bg-primary shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]`}
@@ -38,7 +38,11 @@ export default function NavBar() {
           <div className="w-4"></div>
         </div>
 
-        <NavBarWallet />
+        <div className="hidden md:block mr-8">
+          <NavBarWallet />
+        </div>
+
+        {isMobileDevice && <div className="w-16 h-1"></div>}
       </header>
 
       {isDrawerOpen && (
