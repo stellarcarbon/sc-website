@@ -4,6 +4,7 @@ import { memo, useEffect, useMemo, useState } from "react";
 import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 import { useReasonSelectContext } from "./ReasonSelectContext";
 import Button from "../Button";
+import { useSearchParams } from "next/navigation";
 
 interface ReasonSelectProps {
   setValue: (name: keyof SinkingFormData, value: any) => void;
@@ -54,8 +55,23 @@ export default function ReasonSelect({
   register,
 }: ReasonSelectProps) {
   const memo = watch("memo");
+  const searchParams = useSearchParams();
+  const reason = searchParams.get("reason");
+
   const [selectedReason, setSelectedReason] = useState<ReasonOption>();
   const [memoLength, setMemoLength] = useState<number>(0);
+
+  useEffect(() => {
+    if (reason === "airtravel") {
+      setSelectedReason(ReasonOptions.AIRTRAVEL);
+    } else if (reason === "roadtravel") {
+      setSelectedReason(ReasonOptions.ROADTRAVEL);
+    } else if (reason === "household") {
+      setSelectedReason(ReasonOptions.HOUSEHOLD);
+    } else if (reason === "environment") {
+      setSelectedReason(ReasonOptions.ENVIRONMENT);
+    }
+  }, [reason, setSelectedReason]);
 
   const textEncoder = useMemo(() => {
     return new TextEncoder();
@@ -70,10 +86,14 @@ export default function ReasonSelect({
     }
 
     setSelectedReason(reason);
-    setValue("memo", reason.message);
-    const lengthInBytes = textEncoder.encode(reason.message).length;
-    setMemoLength(lengthInBytes);
+    // setValue("memo", reason.message);
+    // const lengthInBytes = textEncoder.encode(reason.message).length;
+    // setMemoLength(lengthInBytes);
   };
+
+  useEffect(() => {
+    if (selectedReason) setValue("memo", selectedReason.message);
+  }, [selectedReason]);
 
   useEffect(() => {
     if (memo?.length > 0) {
@@ -87,7 +107,7 @@ export default function ReasonSelect({
   return (
     <div className="flex flex-col gap-3 p-3 py-6 md:p-6">
       <span className="text-2xl md:text-2xl font-bold pb-1 border-b border-tertiary">
-        Select contribution label
+        Label your contribution
       </span>
       <div className="flex flex-col gap-1">
         <span className="">

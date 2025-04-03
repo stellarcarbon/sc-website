@@ -9,10 +9,14 @@ export interface AirportOption {
 }
 
 interface AirportInputProps {
+  instanceId: string;
   setOption: Dispatch<SetStateAction<AirportOption | null>>;
 }
 
-export default function AirportInput({ setOption }: AirportInputProps) {
+export default function AirportInput({
+  setOption,
+  instanceId,
+}: AirportInputProps) {
   const airportData: AirportOption[] = useMemo(() => {
     // Fix missing labels and sort alphabetically by value.
     const fixedAirports: AirportOption[] = airports.map((airport) => {
@@ -65,6 +69,7 @@ export default function AirportInput({ setOption }: AirportInputProps) {
 
   return (
     <AsyncSelect
+      instanceId={instanceId}
       cacheOptions
       loadOptions={loadOptions}
       defaultOptions

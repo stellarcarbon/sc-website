@@ -86,11 +86,13 @@ export default function SinkingForm() {
         </div>
         <div className="flex flex-col min-w-[80%]">
           <ReasonSelectContextProvider>
-            <ReasonSelect
-              register={register}
-              watch={watch}
-              setValue={setValue}
-            />
+            <Suspense>
+              <ReasonSelect
+                register={register}
+                watch={watch}
+                setValue={setValue}
+              />
+            </Suspense>
           </ReasonSelectContextProvider>
           {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
         </div>
@@ -110,13 +112,15 @@ export default function SinkingForm() {
           <CurrencySelect register={register} />
         </div>
 
-        <TransactionPreview
-          tonnes={tonnes}
-          currency={currency}
-          quote={quote}
-          memo={memo}
-          handleSubmit={() => handleSubmit(onSubmit, onError)()}
-        />
+        <Suspense>
+          <TransactionPreview
+            tonnes={tonnes}
+            currency={currency}
+            quote={quote}
+            memo={memo}
+            handleSubmit={() => handleSubmit(onSubmit, onError)()}
+          />
+        </Suspense>
       </form>
     </div>
   );

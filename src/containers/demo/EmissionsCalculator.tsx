@@ -1,3 +1,5 @@
+"use client";
+
 import { CabinClass, EstimateService, FlightEstimateResponse } from "@/client";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
