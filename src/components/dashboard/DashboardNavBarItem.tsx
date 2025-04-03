@@ -6,7 +6,13 @@ import { usePathname } from "next/navigation";
 import { HTMLProps, ReactNode, useEffect, useMemo, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHouse,
+  faPlane,
+  faReceipt,
+  faTruck,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { useSCRouter } from "@/utils";
 
 interface DashboardNavBarItemProps extends HTMLProps<HTMLDivElement> {
@@ -25,6 +31,9 @@ export enum DashboardTabs {
   OVERVIEW = "overview",
   SINK = "sink",
   HISTORY = "history",
+  FLIGHT = "air travel",
+  HOUSEHOLD = "household",
+  ROAD = "road travel",
 }
 
 const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
@@ -42,6 +51,21 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
     label: "Activity",
     icon: <FontAwesomeIcon icon={faReceipt} fontSize={"17px"} />,
     route: "/dashboard/transactions/",
+  },
+  [DashboardTabs.FLIGHT]: {
+    label: "Air travel",
+    icon: <FontAwesomeIcon icon={faPlane} fontSize={"17px"} />,
+    route: "/estimator/flight/",
+  },
+  [DashboardTabs.HOUSEHOLD]: {
+    label: "Household",
+    icon: <FontAwesomeIcon icon={faHouse} fontSize={"17px"} />,
+    route: "/estimator/household/",
+  },
+  [DashboardTabs.ROAD]: {
+    label: "Road travel",
+    icon: <FontAwesomeIcon icon={faTruck} fontSize={"17px"} />,
+    route: "/estimator/road/",
   },
 };
 

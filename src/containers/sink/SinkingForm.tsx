@@ -17,6 +17,8 @@ import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
 import { useSearchParams } from "next/navigation";
 import appConfig from "@/config";
 import XLMConversionService from "@/services/XLMConversionService";
+import { ReasonSelectContextProvider } from "@/components/checkout/ReasonSelectContext";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function SinkingForm() {
   const { setSinkRequest, setStep } = useSinkingContext();
@@ -29,11 +31,11 @@ export default function SinkingForm() {
 
   const tonnes = watch("tonnes");
   const currency = watch("currency");
-  const reason = watch("reason");
+  const memo = watch("memo");
 
   const reasonErrorLabel: string | undefined = useMemo(() => {
     return Object.entries(errors ?? {})
-      .find(([field]) => field === "reason")?.[1]
+      .find(([field]) => field === "memo")?.[1]
       ?.message?.toString();
   }, [errors]);
 
@@ -49,7 +51,7 @@ export default function SinkingForm() {
         funder: walletConnection?.stellarPubKey!,
         carbonAmount: tonnes,
         paymentAsset: currency,
-        memoValue: reason,
+        memoValue: memo,
       };
 
       if (!walletConnection?.isAnonymous) {
@@ -58,19 +60,42 @@ export default function SinkingForm() {
 
       setSinkRequest(request);
     },
-    [walletConnection, tonnes, currency, reason, setSinkRequest, setStep]
+    [walletConnection, tonnes, currency, memo, setSinkRequest, setStep]
   );
 
   return (
-    <div className="flex flex-col">
-      {walletConnection && <div className="mt-8 md:mt-12"></div>}
+    <div className="flex flex-col mt-8">
       {appConfig.demo && (
         <div className="self-center text-2xl md:text-2xl font-semibold mb-6">
           Sink CARBON
         </div>
       )}
-      <form className="flex flex-col gap-12 md:gap-20 mb-12">
-        <div className="mx-4 md:mx-8 flex flex-col gap-12 min-w-[80%]">
+      <form className="flex flex-col mb-12">
+        <div className="mx-3 md:mx-8 mb-6 text-base md:text-base">
+          <div className="text-center text-xl">
+            Support the Stellarcarbon initiative by sinking CARBON!
+          </div>
+          <div className="mt-4 text-base">
+            {" "}
+            Use this form to specify how much{" "}
+            <CARBONCurrencyIcon className="inline" /> to sink. Try out our new
+            emissions calculator to help get an idea of how much CO2 you are
+            emitting.
+          </div>
+        </div>
+        <div className="flex flex-col min-w-[80%]">
+          <ReasonSelectContextProvider>
+            <Suspense>
+              <ReasonSelect
+                register={register}
+                watch={watch}
+                setValue={setValue}
+              />
+            </Suspense>
+          </ReasonSelectContextProvider>
+          {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
+        </div>
+        <div className="flex flex-col gap-12 min-w-[80%]">
           <Suspense>
             <AmountInput
               register={register}
@@ -82,20 +107,21 @@ export default function SinkingForm() {
           </Suspense>
         </div>
 
-        <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
+        <div className="mb-12 flex flex-col gap-8 min-w-[80%]">
           <CurrencySelect register={register} />
         </div>
-        <div className="mb-2 mx-4 md:mx-8 flex flex-col min-w-[80%]">
-          <ReasonSelect register={register} watch={watch} setValue={setValue} />
-          {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
-        </div>
 
-        <TransactionPreview
-          tonnes={tonnes}
-          currency={currency}
-          quote={quote}
-          handleSubmit={() => handleSubmit(onSubmit, onError)()}
-        />
+        <div className="mx-3">
+          <Suspense>
+            <TransactionPreview
+              tonnes={tonnes}
+              currency={currency}
+              quote={quote}
+              memo={memo}
+              handleSubmit={() => handleSubmit(onSubmit, onError)()}
+            />
+          </Suspense>
+        </div>
       </form>
     </div>
   );

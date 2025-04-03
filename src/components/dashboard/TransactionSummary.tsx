@@ -42,31 +42,29 @@ export default function TransactionSummary() {
   }, [myTransactions]);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 md:gap-12">
       {myTransactions === null && walletConnection ? (
         <div className="flex-1 flex flex-col justify-center min-h-[250px] md:min-h-[400px]">
           <TransactionsLoading />
         </div>
       ) : (
         <>
-          <div className="flex flex-col gap-1 text-sm">
+          <div className="flex flex-col gap-2">
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary">
-              <span className="text-lg md:text-xl">Latest transaction</span>
+              <span className="text-2xl">Latest transaction</span>
             </div>
             {latestTransaction ? (
               <div className="mt-2">
                 <TransactionListItem transaction={latestTransaction} />
               </div>
             ) : (
-              <div className="text-xs md:text-sm mt-2">
-                You have not made any transactions yet.
-              </div>
+              <div className="">You have not made any transactions yet.</div>
             )}
           </div>
 
-          <div className="flex flex-col text-sm">
+          <div className="flex flex-col gap-2">
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
-              <span className="text-lg md:text-xl">Total sinked</span>
+              <span className="text-2xl">Total sinked</span>
               <div className="flex gap-1 items-center text-accent">
                 <span className="font-normal">
                   {totalSinked?.toFixed(3) ?? 0}
@@ -75,17 +73,15 @@ export default function TransactionSummary() {
               </div>
             </div>
 
-            <span className="text-xs md:text-sm mt-2">
+            <span className="">
               This is the total amount of CARBON tokens that have been sinked
               using this wallet.
             </span>
           </div>
 
-          <div className="flex flex-col text-sm">
+          <div className="flex flex-col gap-2">
             <div className="text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-b-tertiary">
-              <span className="text-lg md:text-xl">
-                Pending certificate claims
-              </span>
+              <span className="text-2xl">Pending claims</span>
               <div className="flex gap-1 items-center text-accent">
                 <span className="font-normal">
                   {totalPending?.toFixed(3) ?? 0}
@@ -94,7 +90,7 @@ export default function TransactionSummary() {
               </div>
             </div>
 
-            <span className="text-xs md:text-sm mt-2">
+            <span className="">
               The amount of fractional carbon certificates that are still
               pending a certificate claim.{" "}
               <Link className="underline text-accentSecondary" href="">

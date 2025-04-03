@@ -65,26 +65,19 @@ export default function SinkCheckout() {
 
       <div className="h-16 md:my-3 flex items-center">
         {step === CheckoutSteps.CONFIRM ? (
-          <>
-            <button
-              onClick={signTransaction}
-              className="flex items-center justify-center gap-2
-                      bg-accent text-black text-sm rounded
-                      p-2 flex-1 mx-4"
-            >
+          <div className="flex items-center justify-between w-full">
+            <Button onClick={signTransaction} className="gap-2 !px-2">
               <FontAwesomeIcon icon={faPen} />
-              <div>Sign </div>
-            </button>
-            <button
-              onClick={onClick}
-              className="flex items-center justify-center gap-2
-                      bg-accent text-black text-sm rounded
-                      p-2 flex-1 mx-4"
+              <div>Sign transaction</div>
+            </Button>
+            <Button
+              onClick={() => router.push("/dashboard/sink")}
+              className="gap-1 !px-2 !bg-red-400"
             >
               <FontAwesomeIcon icon={faCancel} />
-              <div>Cancel</div>
-            </button>
-          </>
+              Cancel
+            </Button>
+          </div>
         ) : (
           step !== CheckoutSteps.AWAIT_BLOCKCHAIN &&
           step !== CheckoutSteps.AWAIT_SIGNING && (

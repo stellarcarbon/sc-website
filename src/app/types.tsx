@@ -5,6 +5,7 @@ import {
   SinkingResponse,
   VcsProject,
 } from "@/client";
+import { ReasonOption } from "@/components/checkout/ReasonSelect";
 import {
   ISupportedWallet,
   WalletNetwork,
@@ -26,14 +27,7 @@ export type PersonalDetails = {
 export interface SinkingFormData {
   tonnes: number;
   currency: PaymentAsset;
-  reason: ReasonOptions;
-}
-
-export enum ReasonOptions {
-  ENVIRONMENT = "🌎✨🌍💕🌏",
-  HOUSEHOLD = "🏠 household",
-  AIRTRAVEL = "✈️ air travel",
-  ROADTRAVEL = "🛣️ road travel",
+  memo: string;
 }
 
 export enum RetirementStatus {
