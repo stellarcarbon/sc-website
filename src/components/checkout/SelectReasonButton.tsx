@@ -34,18 +34,18 @@ export default function SelectReasonButton({
       disabled={disabled}
       onClick={onClick}
       className={`cursor-pointer  rounded shadow border border-accent
-        ${isSelected ? "bg-tertiary" : "bg-darker"}
+        ${isSelected ? "bg-tertiary" : "bg-accent text-black"}
         p-2 w-[80px] md:w-[125px]
         flex flex-col items-center gap-2`}
     >
       <div
         className={`text-black shadow-md p-2 border w-16 h-16 rounded ${
-          isSelected ? " border-accent !text-black bg-white" : "bg-accent"
+          isSelected ? " border-accent !text-black bg-white" : "bg-white"
         }`}
       >
         {icon}
       </div>
-      <div className="text-[10px]">{reason.label}</div>
+      <div className="text-[10px] flex-1 flex items-center">{reason.label}</div>
     </button>
   );
 }

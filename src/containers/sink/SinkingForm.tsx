@@ -18,6 +18,7 @@ import { useSearchParams } from "next/navigation";
 import appConfig from "@/config";
 import XLMConversionService from "@/services/XLMConversionService";
 import { ReasonSelectContextProvider } from "@/components/checkout/ReasonSelectContext";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function SinkingForm() {
   const { setSinkRequest, setStep } = useSinkingContext();
@@ -64,17 +65,26 @@ export default function SinkingForm() {
 
   return (
     <div className="flex flex-col">
-      {walletConnection && <div className="mt-8 md:mt-12"></div>}
+      {walletConnection && <div className="mt-6 md:mt-12"></div>}
       {appConfig.demo && (
         <div className="self-center text-2xl md:text-2xl font-semibold mb-6">
           Sink CARBON
         </div>
       )}
-      <form className="flex flex-col gap-12 md:gap-20 mb-12">
-        <div className="mx-4 md:mx-8 text-sm">
-          Use this form to contribute to the Stellarcarbon initiative.
+      <form className="flex flex-col mb-12">
+        <div className="mx-3 md:mx-8 mb-6 text-base md:text-base">
+          <div className="text-center text-xl">
+            Support the Stellarcarbon initiative by sinking CARBON!
+          </div>
+          <div className="mt-4 text-base">
+            {" "}
+            Use this form to specify how much{" "}
+            <CARBONCurrencyIcon className="inline" /> to sink. Try out our new
+            emissions calculator to help get an idea of how much CO2 you are
+            emitting.
+          </div>
         </div>
-        <div className="mx-4 md:mx-8 flex flex-col min-w-[80%]">
+        <div className="flex flex-col min-w-[80%]">
           <ReasonSelectContextProvider>
             <ReasonSelect
               register={register}
@@ -84,7 +94,7 @@ export default function SinkingForm() {
           </ReasonSelectContextProvider>
           {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
         </div>
-        <div className="mx-4 md:mx-8 flex flex-col gap-12 min-w-[80%]">
+        <div className="flex flex-col gap-12 min-w-[80%]">
           <Suspense>
             <AmountInput
               register={register}
@@ -96,7 +106,7 @@ export default function SinkingForm() {
           </Suspense>
         </div>
 
-        <div className="mb-2 mx-4 md:mx-8 flex flex-col gap-8 min-w-[80%]">
+        <div className="mb-12 flex flex-col gap-8 min-w-[80%]">
           <CurrencySelect register={register} />
         </div>
 

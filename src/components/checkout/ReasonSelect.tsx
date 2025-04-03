@@ -14,7 +14,7 @@ interface ReasonSelectProps {
 export const ReasonOptions: Record<ReasonOptionKey, ReasonOption> = {
   ENVIRONMENT: {
     message: "🌎✨🌍💕🌏",
-    label: "Environment & nature",
+    label: "Contribute to environment & nature",
     explanation:
       "Contributing to a healthy planet in general and not compensating specific emissions.",
   },
@@ -85,28 +85,28 @@ export default function ReasonSelect({
   // TODO: enforce max length of reason message 29 bytes
 
   return (
-    <div className="flex flex-col gap-1 md:gap-3">
-      <span className="text-xl md:text-2xl font-bold pb-1 mb-1 border-b border-tertiary">
-        Label this contribution
+    <div className="flex flex-col gap-3 p-3 py-6 md:p-6">
+      <span className="text-2xl md:text-2xl font-bold pb-1 border-b border-tertiary">
+        Select contribution label
       </span>
       <div className="flex flex-col gap-1">
-        <span className="text-sm md:text-sm">
-          Why are you making this contribution? This memo will be stored on your
-          blockchain entry.
+        <span className="">
+          Why are you making this contribution? Leave a public message and it
+          will be stored, reminding you and others why you contributed.
         </span>
-        <div className="flex justify-between gap-1 md:gap-4 my-2">
-          {Object.values(ReasonOptions).map((option, idx) => {
-            console.log(selectedReason, option);
-            return (
-              <SelectReasonButton
-                key={`${idx}_button`}
-                isSelected={selectedReason?.label === option.label}
-                onClick={() => selectReason(option)}
-                reason={option}
-              />
-            );
-          })}
-        </div>
+      </div>
+
+      <div className="flex justify-center md:justify-start gap-2 my-2">
+        {Object.values(ReasonOptions).map((option, idx) => {
+          return (
+            <SelectReasonButton
+              key={`${idx}_button`}
+              isSelected={selectedReason?.label === option.label}
+              onClick={() => selectReason(option)}
+              reason={option}
+            />
+          );
+        })}
       </div>
 
       <div

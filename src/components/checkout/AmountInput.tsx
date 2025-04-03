@@ -149,13 +149,13 @@ export default function AmountInput({
   }, [tonnes, setShowFractionalWarning]);
 
   return (
-    <div className="flex flex-col gap-1">
-      <h1 className="text-xl md:text-2xl text-start font-bold border-b border-tertiary pb-1">
-        Input your amount
+    <div className="flex flex-col gap-3 p-3 py-6 md:p-6">
+      <h1 className="text-2xl md:text-2xl text-start font-bold border-b border-tertiary pb-1">
+        Set sinking amount
       </h1>
 
-      <div className="flex flex-col mt-1 mb-3">
-        <span className="text-sm">
+      <div className="flex flex-col mb-3">
+        <span className="">
           Try the emissions estimation tool to help you determine the amount of
           CARBON you want to sink.
         </span>
@@ -170,86 +170,91 @@ export default function AmountInput({
         </div>
       </div>
 
-      <div className="text-sm">
+      <div className="">
         ...or manually input the amount of CARBON you want to sink.
       </div>
 
-      <div className="flex justify-between items-center gap-2 h-16 px-2">
-        <div className="relative w-[35%]">
-          <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
-            <CARBONCurrencyIcon className="" />
+      <div>
+        <div className="flex justify-between items-center gap-2 h-16 px-2">
+          <div className="relative w-[35%]">
+            <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
+              <CARBONCurrencyIcon className="" />
+            </div>
+            <input
+              type="text"
+              inputMode="decimal"
+              className="px-2 pr-9 py-1 w-full text-black rounded-sm text-right"
+              {...register("tonnes", {
+                validate: () => {
+                  return !hasError || "The selected CARBON amount is invalid.";
+                },
+              })}
+            />
           </div>
-          <input
-            type="text"
-            inputMode="decimal"
-            className="px-2 pr-9 py-1 w-full text-black rounded-sm text-right"
-            {...register("tonnes", {
-              validate: () => {
-                return !hasError || "The selected CARBON amount is invalid.";
-              },
-            })}
+          <FontAwesomeIcon
+            icon={faArrowRightArrowLeft}
+            className="px-4 py-4 text-xl"
           />
-        </div>
-        <FontAwesomeIcon
-          icon={faArrowRightArrowLeft}
-          className="px-4 py-4 text-xl"
-        />
-        <div className="relative w-[35%]">
-          <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
-            $
+          <div className="relative w-[35%]">
+            <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
+              $
+            </div>
+            <input
+              type="text"
+              inputMode="decimal"
+              className="px-2 pl-7 py-1 w-full text-black rounded-sm"
+              value={quoteStr || ""}
+              onChange={(e) => {
+                setIsLoading(true);
+                if (
+                  /^\d*\.?\d*$/.test(e.target.value) ||
+                  e.target.value === ""
+                ) {
+                  setQuoteStr(e.target.value);
+                }
+                setQuote(Number(e.target.value));
+                setActiveInput("usd");
+              }}
+            />
           </div>
-          <input
-            type="text"
-            inputMode="decimal"
-            className="px-2 pl-7 py-1 w-full text-black rounded-sm"
-            value={quoteStr || ""}
-            onChange={(e) => {
-              setIsLoading(true);
-              if (/^\d*\.?\d*$/.test(e.target.value) || e.target.value === "") {
-                setQuoteStr(e.target.value);
-              }
-              setQuote(Number(e.target.value));
-              setActiveInput("usd");
-            }}
-          />
         </div>
-      </div>
 
-      <div
-        className={`px-4 py-6 min-h-20 mt-2 gap-4 flex flex-col justify-center items-center bg-darker border rounded border-accentSecondary`}
-      >
-        {isLoading ? (
-          <Blocks width={48} height={48} />
-        ) : hasError ? (
-          <span className={`text-center mx-6 text-red-500 text-sm`}>
-            {statusMessage}
-          </span>
-        ) : (
-          <>
-            <div className="w-full flex justify-center gap-1 items-center text-sm md:text-lg text-center">
-              <div className="flex items-center">
-                <span>Sinking {tonnes}</span>
-                <CARBONCurrencyIcon className="ml-1" />
-              </div>
-              <span className="mx-[2px]">costs approx.</span>
+        <div
+          className={`px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-darker border rounded border-accentSecondary`}
+        >
+          {isLoading ? (
+            <Blocks width={48} height={48} />
+          ) : hasError ? (
+            <span className={`text-center mx-6 text-red-500 text-sm`}>
+              {statusMessage}
+            </span>
+          ) : (
+            <>
+              <div className="w-full flex justify-center gap-1 items-center md:text-lg text-center">
+                <div className="flex items-center">
+                  <span>Sinking {tonnes}</span>
+                  <CARBONCurrencyIcon className="ml-1" />
+                </div>
+                <span className="mx-[2px]">costs approx.</span>
 
-              <div className="flex items-center">
-                <span>$</span>
-                <span className="ml-[1px]"> {quote.toFixed(2)}</span>
-              </div>
-              {/* <div className="text-xs md:text-base flex items-center gap-1">
+                <div className="flex items-center">
+                  <span>$</span>
+                  <span className="ml-[1px]"> {quote.toFixed(2)}</span>
+                </div>
+                {/* <div className="text-xs md:text-base flex items-center gap-1">
                 ({priceInXLM} <XLMIcon />)
               </div> */}
-            </div>
-            {showFractionalWarning && (
-              <span className="md:mx-12 text-sm text-center">
-                If you sink a fractional amount of CARBON you cannot receive an
-                indvidual certificate without either rounding down or up. Read
-                more <span className="underline">here</span>.
-              </span>
-            )}
-          </>
-        )}
+              </div>
+              {showFractionalWarning && (
+                <span className="md:mx-12 text-xs md:text-sm text-center">
+                  If you sink a fractional amount of CARBON you cannot receive
+                  an indvidual certificate without either rounding down or up.
+                  Read more <span className="underline">here</span>.
+                </span>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
