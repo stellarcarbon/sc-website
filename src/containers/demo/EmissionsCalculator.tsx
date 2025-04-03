@@ -94,14 +94,24 @@ export default function EmissionsCalculator() {
         <FormField
           title="Departure"
           helpText="The airport your flight departed from."
-          input={<AirportInput setOption={setDepartureAirport} />}
+          input={
+            <AirportInput
+              instanceId="departure-select"
+              setOption={setDepartureAirport}
+            />
+          }
         />
 
         {/* Aankomst vluchthaven */}
         <FormField
           title="Destination"
           helpText="The airport your flight landed on."
-          input={<AirportInput setOption={setDestinationAirport} />}
+          input={
+            <AirportInput
+              instanceId="destination-select"
+              setOption={setDestinationAirport}
+            />
+          }
         />
 
         {/* Cabin class */}
@@ -110,6 +120,7 @@ export default function EmissionsCalculator() {
           helpText="Which cabin class did you fly?"
           input={
             <Select
+              instanceId="cabinclass-select"
               options={cabinClassOptions}
               defaultValue={cabinClassOptions[0]}
               onChange={(option) =>
@@ -126,6 +137,7 @@ export default function EmissionsCalculator() {
           helpText="Round trip or just a one way flight?"
           input={
             <Select
+              instanceId="triptype-select"
               options={tripTypeOptions}
               defaultValue={tripTypeOptions[1]}
               onChange={(option) =>
