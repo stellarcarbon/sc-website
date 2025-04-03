@@ -59,8 +59,6 @@ export default function FlightEstimator() {
     });
   }, [departureAirport, destinationAirport, cabinClass, tripType]);
 
-  console.log(flightEstimate);
-
   return (
     <div>
       {isLoading ? (
