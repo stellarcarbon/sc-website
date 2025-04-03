@@ -111,7 +111,7 @@ export default function SinkingForm() {
           <CurrencySelect register={register} />
         </div>
 
-        <div className="mx-3">
+        <div className="mx-3 flex flex-col items-center">
           <Suspense>
             <TransactionPreview
               tonnes={tonnes}
