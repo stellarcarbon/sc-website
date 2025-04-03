@@ -154,13 +154,26 @@ export default function AmountInput({
         Set sinking amount
       </h1>
 
-      <div className="">
-        Input how much CARBON you want to sink.
-        <br /> Try out our emission estimator tool!
+      <div className="flex flex-col gap-1 bg-secondary p-4 rounded">
+        <div className="text-center text-sm">
+          We created tooling to help you estimate your emissions!
+        </div>
+
+        <div className="flex justify-center my-2">
+          <Button
+            onClick={() => router.push("/estimator/flight")}
+            className="gap-2 h-10 !px-3 hover:border !border-accent"
+          >
+            <FontAwesomeIcon icon={faCalculator} />
+            Estimate emissions
+          </Button>
+        </div>
       </div>
 
-      <div>
-        <div className="flex justify-between items-center gap-2 h-16 px-2">
+      <div className="">Input how much CARBON you want to sink.</div>
+
+      <div className="flex flex-col gap-2">
+        <div className="flex justify-between items-center gap-2 h-10 md:px-2">
           <div className="relative w-[35%]">
             <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
               <CARBONCurrencyIcon className="" />
@@ -239,18 +252,6 @@ export default function AmountInput({
               )}
             </>
           )}
-        </div>
-      </div>
-
-      <div className="flex flex-col">
-        <div className="flex justify-center my-2">
-          <Button
-            onClick={() => router.push("/estimator/flight")}
-            className="gap-2 h-10 !px-3"
-          >
-            <FontAwesomeIcon icon={faCalculator} />
-            Go to emission calculator
-          </Button>
         </div>
       </div>
     </div>

@@ -30,13 +30,6 @@ export interface SinkingFormData {
   memo: string;
 }
 
-// export enum ReasonOptions {
-//   ENVIRONMENT = "🌎✨🌍💕🌏",
-//   HOUSEHOLD = "🏠 household",
-//   AIRTRAVEL = "✈️ air travel",
-//   ROADTRAVEL = "🛣️ road travel",
-// }
-
 export enum RetirementStatus {
   PENDING_USER = "Pending certificate attribution",
   PENDING_STELLARCARBON = "Pending finalization by Stellarcarbon",

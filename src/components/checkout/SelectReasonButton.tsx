@@ -33,7 +33,7 @@ export default function SelectReasonButton({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`cursor-pointer  rounded shadow border border-accent
+      className={`cursor-pointer  rounded shadow border border-accent hover:bg-darker hover:text-white
         ${isSelected ? "bg-tertiary" : "bg-accent text-black"}
         p-2 w-[80px] md:w-[125px]
         flex flex-col items-center gap-2`}
@@ -45,7 +45,9 @@ export default function SelectReasonButton({
       >
         {icon}
       </div>
-      <div className="text-[10px] flex-1 flex items-center">{reason.label}</div>
+      <div className="text-[10px] md:text-xs flex-1 flex items-center">
+        {reason.label}
+      </div>
     </button>
   );
 }

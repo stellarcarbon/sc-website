@@ -14,11 +14,14 @@ export default function Overview() {
     useState<boolean>(false);
 
   return (
-    <div className="md:pb-6 md:p-4">
+    <div className="md:pb-6 md:py-4">
       {walletConnection && (
         <div className="mt-6 w-full">
+          <div className="mx-3 mb-3 text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary">
+            <span className="text-2xl">Wallet</span>
+          </div>
           <div
-            className="flex items-center justify-between p-2 mx-4
+            className="flex items-center justify-between p-2 mx-3
           bg-secondary border rounded border-accentSecondary"
           >
             <div className="flex items-center gap-2">
@@ -37,17 +40,15 @@ export default function Overview() {
           </div>
         </div>
       )}
-      <div className="flex flex-col w-full flex-1 gap-10 justify-start">
-        <div className="flex flex-col gap-1">
-          <div className="p-4">
-            <TransactionSummary />
-          </div>
+      <div className="flex flex-col w-full flex-1 justify-start">
+        <div className="p-3 md:my-10">
+          <TransactionSummary />
         </div>
 
         {walletConnection && (
           <div className="flex flex-col gap-1 text-sm ">
-            <div className="bg-darker h-12 flex items-center justify-between px-4 text-lg border-yz border-accentSecondary">
-              <div>Your contact information</div>
+            <div className="bg-darker h-12 flex items-center justify-between px-4 text-2xl border-yz border-accentSecondary">
+              <div>Contact information</div>
               <button
                 className="bg-accent rounded text-black text-xs flex items-center gap-1 px-2 p-1"
                 onClick={() => setShowContactInformationForm(true)}
@@ -63,10 +64,9 @@ export default function Overview() {
                   onClose={() => setShowContactInformationForm(false)}
                 />
               ) : walletConnection?.isAnonymous ? (
-                <div className="text-center">
-                  {
-                    "This account is anonymous. No PDF certificates will be emailed."
-                  }
+                <div className="text-center text-base">
+                  This account is anonymous. No PDF certificates will be
+                  emailed.
                 </div>
               ) : (
                 <div className="flex flex-col gap-4">

@@ -116,7 +116,7 @@ export default function ReasonSelect({
         </span>
       </div>
 
-      <div className="flex justify-center md:justify-start gap-2 my-2">
+      <div className="flex justify-between md:justify-center gap-2 my-2">
         {Object.values(ReasonOptions).map((option, idx) => {
           return (
             <SelectReasonButton

@@ -9,7 +9,7 @@ export default function EstimatorLayout({ children }: { children: ReactNode }) {
           min-h-[calc(100dvh-64px)] md:min-h-[60vh]
           flex flex-col items-center justify-start
           lg:max-w-[740px] lg:w-[70vw]
-          lg:m-6"
+          lg:m-6 pb-8"
       >
         <EstimatorNavBar />
         {children}

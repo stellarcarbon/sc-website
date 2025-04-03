@@ -45,14 +45,14 @@ export default function TransactionPreview({
   const amount = searchParams.get("amount");
 
   useEffect(() => {
-    if (amount === null) {
+    if (amount !== null) {
       const preview = document.getElementById("transaction-preview");
       // scroll to preview
       if (preview) {
-        const extraOffset = 100;
-        const previewTop =
-          preview.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({ top: previewTop + extraOffset, behavior: "smooth" });
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth",
+        });
       }
     }
   }, [amount]);
@@ -60,7 +60,7 @@ export default function TransactionPreview({
   return (
     <div
       id="transaction-preview"
-      className="p-4 py-6 w-[90%] md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center bg-darker border border-accentSecondary rounded"
+      className="p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center bg-darker border border-accentSecondary rounded"
     >
       <h3 className="text-2xl font-bold">Transaction preview</h3>
       <div className="grid grid-cols-5 gap-1 text-center w-full">
@@ -110,7 +110,7 @@ export default function TransactionPreview({
       </div>
       <Button
         onClick={handleSubmit}
-        className="!py-2 mt-1 mb-2 text-md self-center gap-2 bg-tertiary !text-accent border border-accentSecondary hover:!border-accent"
+        className="!py-2 mt-1 mb-2 text-md self-center gap-2 bg-accent !text-black border border-accentSecondary hover:!border-accent hover:!text-white"
         disabled={!walletConnection}
       >
         <FontAwesomeIcon icon={faFileContract} />

@@ -32,7 +32,7 @@ export default function DrawerLinkConnected({
   return (
     <div
       onClick={onClick}
-      className={`py-3 
+      className={`py-3 px-2 
         hover:bg-secondary active:text-yellow-100
         active:bg-tertiary
         rounded cursor-pointer

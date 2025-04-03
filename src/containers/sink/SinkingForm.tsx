@@ -64,8 +64,7 @@ export default function SinkingForm() {
   );
 
   return (
-    <div className="flex flex-col">
-      {walletConnection && <div className="mt-6 md:mt-12"></div>}
+    <div className="flex flex-col mt-8">
       {appConfig.demo && (
         <div className="self-center text-2xl md:text-2xl font-semibold mb-6">
           Sink CARBON
@@ -112,15 +111,17 @@ export default function SinkingForm() {
           <CurrencySelect register={register} />
         </div>
 
-        <Suspense>
-          <TransactionPreview
-            tonnes={tonnes}
-            currency={currency}
-            quote={quote}
-            memo={memo}
-            handleSubmit={() => handleSubmit(onSubmit, onError)()}
-          />
-        </Suspense>
+        <div className="mx-3">
+          <Suspense>
+            <TransactionPreview
+              tonnes={tonnes}
+              currency={currency}
+              quote={quote}
+              memo={memo}
+              handleSubmit={() => handleSubmit(onSubmit, onError)()}
+            />
+          </Suspense>
+        </div>
       </form>
     </div>
   );
