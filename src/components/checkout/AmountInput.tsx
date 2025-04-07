@@ -154,8 +154,8 @@ export default function AmountInput({
         Set sinking amount
       </h1>
 
-      <div className="flex flex-col gap-1 bg-secondary p-4 rounded">
-        <div className="text-center text-sm">
+      <div className="flex flex-col gap-1 bg-darker p-4 px-6 rounded mx-auto border border-accentSecondary">
+        <div className="text-center">
           We created tooling to help you estimate your emissions!
         </div>
 

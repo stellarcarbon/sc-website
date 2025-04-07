@@ -54,7 +54,7 @@ export default function NavBarWallet() {
   };
 
   if (!walletConnection) {
-    return <CTAButton white />;
+    return <CTAButton white small />;
   }
 
   return (

@@ -28,7 +28,11 @@ export default function Dashboard() {
 
   return (
     <>
-      {walletConnection === undefined && <ConnectWalletCTA />}
+      {walletConnection === undefined ? (
+        <ConnectWalletCTA />
+      ) : (
+        <div className="mt-8"></div>
+      )}
       <Overview />
     </>
   );

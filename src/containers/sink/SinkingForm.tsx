@@ -64,7 +64,7 @@ export default function SinkingForm() {
   );
 
   return (
-    <div className="flex flex-col mt-8">
+    <div className="flex flex-col">
       {appConfig.demo && (
         <div className="self-center text-2xl md:text-2xl font-semibold mb-6">
           Sink CARBON

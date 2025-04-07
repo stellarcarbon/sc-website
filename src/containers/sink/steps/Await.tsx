@@ -8,7 +8,7 @@ export default function AwaitSinking({ message }: { message: string }) {
   return (
     <SinkingStep>
       <span className="text-center md:text-xl mt-4">{message}</span>
-      <div className="flex-1 flex items-center">
+      <div className="flex-1 flex items-center justify-center my-16">
         <Hourglass
           visible={true}
           height="80"

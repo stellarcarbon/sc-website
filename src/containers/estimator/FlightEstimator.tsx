@@ -60,7 +60,7 @@ export default function FlightEstimator() {
   }, [departureAirport, destinationAirport, cabinClass, tripType]);
 
   return (
-    <div>
+    <>
       {isLoading ? (
         <div className="flex flex-col justify-center items-center p-8">
           <Blocks />
@@ -75,7 +75,7 @@ export default function FlightEstimator() {
       ) : (
         <>
           {/* Intro */}
-          <div className="flex flex-col gap-2 my-2">
+          <div className="flex flex-col gap-2 my-2 mt-8">
             <h1 className="text-2xl">Estimate your flight emissions</h1>
             <div className="">
               Use this tool to help estimate the amount of carbon emitted in
@@ -84,7 +84,7 @@ export default function FlightEstimator() {
           </div>
 
           {/* Formfields */}
-          <div className="flex flex-col my-4">
+          <div className="flex flex-col my-8">
             <FormField
               title="Departure"
               helpText="The airport your flight departed from."
@@ -150,7 +150,7 @@ export default function FlightEstimator() {
           </div>
         </>
       )}
-    </div>
+    </>
   );
 }
 

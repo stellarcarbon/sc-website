@@ -61,7 +61,7 @@ export default function SinkCheckout() {
 
   return (
     <Modal>
-      <div className="flex-1">{SinkStatusDetails[step]}</div>
+      {SinkStatusDetails[step]}
 
       <div className="h-16 md:my-3 flex items-center">
         {step === CheckoutSteps.CONFIRM ? (

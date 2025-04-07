@@ -8,8 +8,8 @@ export default function ConnectWalletCTA() {
 
   return (
     <div
-      className="m-4 p-4 
-    bg-tertiary text-white border border-accentSecondary rounded
+      className="my-8 p-4 
+    bg-darker text-white border border-accentSecondary rounded
  
     flex flex-col items-center justify-center gap-4"
     >

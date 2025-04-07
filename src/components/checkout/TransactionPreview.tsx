@@ -14,6 +14,7 @@ import {
   faSign,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams } from "next/navigation";
+import TransactionPrice from "./TransactionPrice";
 
 interface TransactionPreviewProps {
   tonnes: number;
@@ -97,16 +98,7 @@ export default function TransactionPreview({
 
         <hr className="col-span-5 my-3 w-[100%]" />
 
-        <TPKey>Price in $</TPKey>
-        <TPValue>{`$ ${Number.isNaN(quote) ? "" : quote.toFixed(2)}`}</TPValue>
-
-        <TPKey>Price in XLM</TPKey>
-        <TPValue>
-          <div className="flex gap-1 items-center">
-            <XLMIcon />
-            {priceInXLM}
-          </div>
-        </TPValue>
+        <TransactionPrice currency={currency} quote={quote} />
       </div>
       <Button
         onClick={handleSubmit}
@@ -120,7 +112,7 @@ export default function TransactionPreview({
   );
 }
 
-function TPKey({ children }: PropsWithChildren) {
+export function TPKey({ children }: PropsWithChildren) {
   return (
     <div className="text-start col-span-2 md:text-lg inline-flex items-start">
       {children}
@@ -128,7 +120,7 @@ function TPKey({ children }: PropsWithChildren) {
   );
 }
 
-function TPValue({ children }: PropsWithChildren) {
+export function TPValue({ children }: PropsWithChildren) {
   return (
     <div className="inline-flex justify-end items-start gap-1 col-span-3 md:text-lg font-bold break-all">
       {children}

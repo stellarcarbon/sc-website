@@ -10,7 +10,7 @@ export default function SignSinking() {
       <span className="text-center md:text-lg mt-4">
         {"Sign the transaction using your wallet in the pop-up."}
       </span>
-      <div className="flex-1 flex items-center">
+      <div className="flex-1 flex items-center justify-center my-16">
         <SignIcon large={isWide} />
       </div>
     </SinkingStep>
