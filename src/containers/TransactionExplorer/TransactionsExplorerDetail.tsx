@@ -150,8 +150,8 @@ export default function TransactionsExplorerDetail() {
         <Link
           href={
             appConfig.network === WalletNetwork.PUBLIC
-              ? `https://stellar.expert/public/tx/${transaction.id}`
-              : `https://stellar.expert/testnet/tx/${transaction.id}`
+              ? `https://stellar.expert/explorer/public/tx/${transaction.id}`
+              : `https://stellar.expert/explorer/testnet/tx/${transaction.id}`
           }
           target="_blank"
           className="text-accentSecondary underline my-4 col-span-5 text-center"
