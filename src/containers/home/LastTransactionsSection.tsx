@@ -39,9 +39,11 @@ export default function LastTransactionsSection() {
             <br />
             <br /> Check out the most recent transactions on Stellarcarbon.
           </Paragraph>
-          <Link href="/transactions" className="underline text-sm">
-            View the full list here
-          </Link>
+          <Paragraph>
+            <Link href="/transactions" className="underline text-sm">
+              View the full list here
+            </Link>
+          </Paragraph>
         </div>
 
         {/* Transaction list */}

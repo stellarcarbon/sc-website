@@ -45,9 +45,11 @@ export default function ExplainSection() {
             and the blockchain to enable users to easily use their XLM to
             improve biodiversity and reduce CO2 emissions. */}
         </Paragraph>
-        <Link className="text-sm underline" href="/explain">
-          Read detailed explanation here
-        </Link>
+        <Paragraph>
+          <Link className="text-sm underline" href="/explain">
+            Read detailed explanation here
+          </Link>
+        </Paragraph>
       </div>
       {/* Stats */}
       <div className="flex flex-col justify-center items-center mt-8 md:mt-0 md:flex-1">

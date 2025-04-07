@@ -70,20 +70,25 @@ export default function ProjectsPage() {
 
           <Subheader>Verification</Subheader>
 
-          <p className="flex flex-col underline text-accentSecondary">
-            <Link
-              href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=44972&IDKEY=j98klasmf8jflkasf8098afnasfkj98f0a9sfsakjflsakjf8dk62016388"
-              target="_blank"
-            >
-              Progress Monitoring report
-            </Link>
-            <Link
-              href="https://info.fsc.org/details.php?id=a0240000005sSO8AAM&type=certificate"
-              target="_blank"
-            >
-              FSC Certificate GFA-FM/COC-001288
-            </Link>
-          </p>
+          {/* <p className="flex flex-col underline text-accentSecondary"> */}
+          <Paragraph>
+            <div className="flex flex-col">
+              <Link
+                className="underline text-accentSecondary"
+                href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=44972&IDKEY=j98klasmf8jflkasf8098afnasfkj98f0a9sfsakjflsakjf8dk62016388"
+                target="_blank"
+              >
+                Progress Monitoring report
+              </Link>
+              <Link
+                className="underline text-accentSecondary"
+                href="https://info.fsc.org/details.php?id=a0240000005sSO8AAM&type=certificate"
+                target="_blank"
+              >
+                FSC Certificate GFA-FM/COC-001288
+              </Link>
+            </div>
+          </Paragraph>
 
           <div className="md:hidden px-4 my-8 mt-16">
             <ShipiboImages />

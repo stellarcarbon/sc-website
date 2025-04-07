@@ -21,13 +21,15 @@ export default function PartnerSection() {
             non euismod quam. Nulla facilisi. Donec dignissim elementum dui sed
             dignissim.
           </Paragraph>
-          <Link
-            href="https://api.stellarcarbon.io/docs"
-            target="_blank"
-            className="underline text-sm"
-          >
-            Read our API docs here
-          </Link>
+          <Paragraph>
+            <Link
+              href="https://api.stellarcarbon.io/docs"
+              target="_blank"
+              className="underline text-sm"
+            >
+              Read our API docs here
+            </Link>
+          </Paragraph>
         </div>
 
         {/* Partners */}
