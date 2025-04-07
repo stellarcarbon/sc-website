@@ -22,7 +22,7 @@ export default function RetirementPending({
   }, [transaction]);
 
   return (
-    <div className="flex flex-col gap-4 text-sm p-2">
+    <div className="flex flex-col gap-4 text-sm p-2 px-3 md:px-4">
       {/* <h1 className="text-lg font-bold">{RetirementStatus.PENDING_USER}</h1> */}
       <div className="grid grid-cols-5 text-base h-10">
         <div className="font-bold items-center inline-flex">Status</div>

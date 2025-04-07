@@ -81,7 +81,7 @@ export default function TransactionsExplorerDetail() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="grid grid-cols-5 w-full p-2">
+      <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>
           {copiedID ? (
@@ -117,7 +117,7 @@ export default function TransactionsExplorerDetail() {
         Payment details
       </div>
 
-      <div className="grid grid-cols-5 w-full p-2">
+      <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>Price</PropertyKey>
         <PropertyValue>
           {price} {transaction.asset}

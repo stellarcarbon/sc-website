@@ -33,7 +33,7 @@ export default function RetirementCompleted({
     getRetirements();
   }, [transaction]);
   return (
-    <div className="p-2 w-full flex flex-col items-center">
+    <div className="p-2 px-3 md:px-4 w-full flex flex-col items-center">
       <div className="text-sm text-center">
         The CARBON sunk in this transaction has been retired into one or more
         Verra Certificates. View them below.
