@@ -117,7 +117,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     setIsDrawerOpen(true);
   };
   const closeDrawer = () => {
-    // setIsDrawerOpen(false);
     setIsDrawerClosing(true);
     setTimeout(() => {
       setIsDrawerOpen(false);

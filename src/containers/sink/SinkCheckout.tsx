@@ -12,6 +12,7 @@ import { faCancel, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { useAppContext } from "@/context/appContext";
+import { MyTransactionRecord } from "@/app/types";
 
 export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
   [CheckoutSteps.CREATING]: (
@@ -26,24 +27,26 @@ export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
   [CheckoutSteps.ERROR]: <ErrorSinking />,
 };
 export default function SinkCheckout() {
-  const { walletConnection, setMyTransactions } = useAppContext();
+  const { walletConnection, myTransactions, setMyTransactions } =
+    useAppContext();
   const { step, setStep, sinkRequest, signTransaction } = useSinkingContext();
 
   const router = useRouter();
 
-  const onClick = useCallback(() => {
+  const onFinish = useCallback(() => {
     if (step === CheckoutSteps.COMPLETED) {
-      // fetch account history as user navigates back
-      TransactionHistoryService.fetchAccountHistory(
+      pollForNewTransaction(
+        myTransactions ?? [],
         walletConnection?.stellarPubKey!
       ).then((transactionRecords): void => {
         setMyTransactions(transactionRecords);
       });
+
       router.push("/dashboard");
     } else {
       router.push("/dashboard/sink");
     }
-  }, [step, router]);
+  }, [step, router, walletConnection, setMyTransactions, myTransactions]);
 
   const label = useMemo(() => {
     if (step === CheckoutSteps.COMPLETED || step === CheckoutSteps.ERROR) {
@@ -81,7 +84,7 @@ export default function SinkCheckout() {
         ) : (
           step !== CheckoutSteps.AWAIT_BLOCKCHAIN &&
           step !== CheckoutSteps.AWAIT_SIGNING && (
-            <Button className={`mx-auto`} onClick={onClick}>
+            <Button className={`mx-auto`} onClick={onFinish}>
               {label}
             </Button>
           )
@@ -105,4 +108,39 @@ export default function SinkCheckout() {
       )}
     </Modal>
   );
+}
+
+async function pollForNewTransaction(
+  oldTransactions: MyTransactionRecord[],
+  walletPubKey: string,
+  maxRetries: number = 5,
+  delay: number = 1000 // delay in milliseconds
+): Promise<MyTransactionRecord[]> {
+  let retries = 0;
+
+  while (retries < maxRetries) {
+    const transactionRecords =
+      await TransactionHistoryService.fetchAccountHistory(walletPubKey);
+
+    if (hasNewItem(transactionRecords)) {
+      return transactionRecords;
+    }
+
+    // Wait for the specified delay before retrying.
+    await new Promise((resolve) => setTimeout(resolve, delay));
+    retries++;
+  }
+
+  throw new Error("Max retries reached without detecting a new transaction");
+
+  function hasNewItem(records: MyTransactionRecord[]): boolean {
+    if (oldTransactions.length > 0) {
+      const newerTx = records.find((tx) => {
+        return Number(tx.pagingToken) > Number(oldTransactions[0].pagingToken);
+      });
+
+      if (newerTx === undefined) return false;
+    }
+    return true;
+  }
 }

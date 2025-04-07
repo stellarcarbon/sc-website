@@ -42,9 +42,6 @@ type SinkingContext = {
   step: CheckoutSteps;
   setStep: Dispatch<SetStateAction<CheckoutSteps>>;
 
-  completedTransactionHash: string | undefined;
-  setCompletedTransactionHash: Dispatch<SetStateAction<string | undefined>>;
-
   submissionError: string | undefined;
   setSubmissionError: Dispatch<SetStateAction<string | undefined>>;
 
@@ -69,8 +66,6 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
   const [sinkResponse, setSinkResponse] = useState<SinkingResponse>();
   const [submissionError, setSubmissionError] = useState<string>();
-  const [completedTransactionHash, setCompletedTransactionHash] =
-    useState<string>();
   const [step, setStep] = useState<CheckoutSteps>(CheckoutSteps.CREATING);
 
   const [USDCPerXLM, setUSDCPerXLM] = useState<number>();
@@ -124,13 +119,12 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         const result = await server.submitTransaction(
           TransactionBuilder.fromXDR(signedTxXdr, appConfig.network)
         );
-        setCompletedTransactionHash(result.hash);
         setStep(CheckoutSteps.COMPLETED);
       } catch (error) {
         displayHorizonError(error);
       }
     },
-    [displayHorizonError, setCompletedTransactionHash, setStep]
+    [displayHorizonError, setStep]
   );
 
   const signTransaction = useCallback(async () => {
@@ -194,8 +188,6 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       sinkResponse,
       step,
       setStep,
-      completedTransactionHash,
-      setCompletedTransactionHash,
       submissionError,
       setSubmissionError,
       signTransaction,
@@ -205,7 +197,6 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     sinkRequest,
     sinkResponse,
     step,
-    completedTransactionHash,
     submissionError,
     signTransaction,
     USDCPerXLM,

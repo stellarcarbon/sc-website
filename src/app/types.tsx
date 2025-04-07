@@ -47,8 +47,7 @@ export interface MyTransactionRecord {
   retirements: RetirementSummary[];
   recipient: string;
   funder: string;
-
-  pagingToken?: string;
+  pagingToken: string;
 }
 
 export interface FrontpageTransactionRecord {

@@ -17,8 +17,6 @@ export default function LastTransactionsSection() {
     MyTransactionRecord[]
   >([]);
 
-  const router = useRouter();
-
   useEffect(() => {
     TransactionHistoryService.fetchRecentTransactions().then((records) => {
       setLastTransactions(records);
