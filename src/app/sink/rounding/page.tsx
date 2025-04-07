@@ -18,6 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SuccessIcon from "@/components/icons/SuccessIcon";
 import RoundingService from "@/services/RoundingService";
+import ModalHeader from "@/components/ModalHeader";
 
 enum RoundDownSteps {
   fetchingChallenge = "Fetching challenge...",
@@ -148,9 +149,10 @@ export default function RoundDownPage() {
   if (step === RoundDownSteps.awaitingAuthentication) {
     body = (
       <>
-        <div className="flex-1 flex flex-col justify-center">
-          <div className="flex flex-col p-6 py-8 md:p-12 justify-start items-center gap-6 text-center bg-primary">
-            <FontAwesomeIcon icon={faFileShield} className="text-[48px] pt-2" />
+        <div className="flex flex-col justify-center my-6">
+          <ModalHeader>Authenticate</ModalHeader>
+          <div className="flex flex-col justify-start items-center gap-6 text-center bg-primary">
+            <FontAwesomeIcon icon={faFileShield} className="text-[48px]" />
             <div>
               To proceed, verify your identity by signing an authentication
               challenge from the Stellarcarbon API.
@@ -190,6 +192,8 @@ export default function RoundDownPage() {
     body = (
       <div className="flex-1 flex flex-col justify-center">
         <div className="flex flex-col p-6 py-8 md:p-12 justify-start items-center gap-6 text-center">
+          <ModalHeader>Authenticated</ModalHeader>
+
           <FontAwesomeIcon icon={faUserShield} className="text-[48px]" />
           <span>Auth challenge signed and valid.</span>
 
@@ -210,8 +214,8 @@ export default function RoundDownPage() {
   }
   if (step === RoundDownSteps.success) {
     body = (
-      <div className="flex-1 flex flex-col justify-center items-center gap-12 text-center">
-        <span className="text-xl md:text-2xl">Success</span>
+      <div className="flex-1 flex flex-col items-center gap-4 text-center my-6">
+        <ModalHeader>Success</ModalHeader>
         <span>
           Your certificate request was received in good order and will be
           created soon.
@@ -232,7 +236,9 @@ export default function RoundDownPage() {
             </span>
           </div>
         </div> */}
-        <SuccessIcon />
+        <div className="my-8">
+          <SuccessIcon />
+        </div>
       </div>
     );
   }
@@ -251,12 +257,15 @@ export default function RoundDownPage() {
         body
       )}
       {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} smallest /> */}
-      <Button
-        className="h-10 !py-2 mt-auto"
-        onClick={() => router.push("/dashboard/transactions")}
-      >
-        Return to dashboard
-      </Button>
+
+      <div className="h-16 md:my-3 flex items-center justify-center">
+        <Button
+          className="h-10 !py-2"
+          onClick={() => router.push("/dashboard/transactions")}
+        >
+          Return to dashboard
+        </Button>
+      </div>
     </Modal>
   );
 }

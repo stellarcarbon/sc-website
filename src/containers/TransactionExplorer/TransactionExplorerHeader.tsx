@@ -13,8 +13,8 @@ export default function TransactionExplorerHeader() {
   const router = useRouter();
 
   return (
-    <header className="w-full flex items-center gap-4 h-14 md:h-16 px-3 md:px-4 relative">
-      <h1 className="text-xl md:text-2xl font-semibold my-2 text-center">
+    <header className="w-full flex items-center gap-4 h-14 md:h-16 px-3 md:px-4 relative bg-secondary">
+      <h1 className="text-xl md:text-2xl font-semibold my-2 text-center ">
         {pathname.includes("detail")
           ? "Transaction details"
           : "Transaction Explorer"}

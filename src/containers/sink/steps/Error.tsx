@@ -4,12 +4,14 @@ import { useSinkingContext } from "@/context/SinkingContext";
 import SinkingStep from "./Step";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
+import ModalHeader from "@/components/ModalHeader";
 
 export default function ErrorSinking() {
   const { submissionError } = useSinkingContext();
 
   return (
     <SinkingStep>
+      <ModalHeader>Error</ModalHeader>
       <FormError className="text-center text-base md:text-lg overflow-y-scroll max-h-[300px]">
         {submissionError ?? "Unknown error"}
       </FormError>

@@ -18,7 +18,7 @@ lg:bg-dalle lg:bg-cover lg:bg-fixed
 lg:min-h-[calc(100dvh-80px)]"
       >
         <main
-          className="bg-secondary
+          className="bg-primary
 
  lg:w-[600px]
 
@@ -30,7 +30,7 @@ lg:min-h-[calc(100dvh-80px)]"
 "
         >
           <TransactionExplorerHeader />
-          <div className="w-full bg-darker">{children}</div>
+          <div className="w-full">{children}</div>
         </main>
       </div>
     </TransactionExplorerContextProvider>

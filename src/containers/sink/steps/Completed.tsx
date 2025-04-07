@@ -1,10 +1,11 @@
 import SuccessIcon from "@/components/icons/SuccessIcon";
 import SinkingStep from "./Step";
+import ModalHeader from "@/components/ModalHeader";
 
 export default function CompletedSinking() {
   return (
     <SinkingStep>
-      <div className="text-3xl text-center">Transaction OK</div>
+      <ModalHeader>Transaction succesful</ModalHeader>
       <div className="text-center mt-4">
         Your transaction was succesfully committed to the Stellar blockchain.
       </div>

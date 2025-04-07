@@ -17,7 +17,7 @@ export default function App({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-[100dvh] bg-secondary flex flex-col">
+    <div className="min-h-[100dvh] bg-primary flex flex-col">
       <NavBar />
       <SinkingContextProvider>
         <div

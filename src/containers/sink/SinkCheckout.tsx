@@ -16,16 +16,17 @@ import { MyTransactionRecord } from "@/app/types";
 
 export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
   [CheckoutSteps.CREATING]: (
-    <AwaitSinking message="Creating your transaction using Stellarcarbon API..." />
+    <AwaitSinking message="Creating your transaction using Stellarcarbon API." />
   ),
   [CheckoutSteps.CONFIRM]: <ConfirmSinking />,
   [CheckoutSteps.AWAIT_SIGNING]: <SignSinking />,
   [CheckoutSteps.AWAIT_BLOCKCHAIN]: (
-    <AwaitSinking message="Transaction signed. Submitting to the Stellar blockchain...." />
+    <AwaitSinking message="Transaction signed. Submitting to the Stellar blockchain." />
   ),
   [CheckoutSteps.COMPLETED]: <CompletedSinking />,
   [CheckoutSteps.ERROR]: <ErrorSinking />,
 };
+
 export default function SinkCheckout() {
   const { walletConnection, myTransactions, setMyTransactions } =
     useAppContext();
@@ -65,17 +66,18 @@ export default function SinkCheckout() {
   return (
     <Modal>
       {SinkStatusDetails[step]}
+      {/* {SinkStatusDetails[CheckoutSteps.ERROR]} */}
 
       <div className="h-16 md:my-3 flex items-center">
         {step === CheckoutSteps.CONFIRM ? (
-          <div className="flex items-center justify-between w-full">
-            <Button onClick={signTransaction} className="gap-2 !px-2">
+          <div className="flex items-center justify-between gap-4 w-full">
+            <Button onClick={signTransaction} className="gap-2 !px-4">
               <FontAwesomeIcon icon={faPen} />
               <div>Sign transaction</div>
             </Button>
             <Button
               onClick={() => router.push("/dashboard/sink")}
-              className="gap-1 !px-2 !bg-red-400"
+              className="gap-1 !px-4 !bg-red-400"
             >
               <FontAwesomeIcon icon={faCancel} />
               Cancel

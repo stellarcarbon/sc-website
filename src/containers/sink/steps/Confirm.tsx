@@ -1,12 +1,11 @@
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSinkingContext } from "@/context/SinkingContext";
 import SinkingStep from "./Step";
-import { useMemo } from "react";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import ModalHeader from "@/components/ModalHeader";
 
 export default function ConfirmSinking() {
-  const { sinkResponse, sinkRequest, signTransaction } = useSinkingContext();
-
-  const price = useMemo(() => {}, []);
+  const { sinkResponse, sinkRequest } = useSinkingContext();
 
   if (sinkResponse === undefined || sinkRequest === undefined) {
     return null;
@@ -14,13 +13,13 @@ export default function ConfirmSinking() {
 
   return (
     <SinkingStep>
-      <div className="flex flex-col gap-4 md:gap-4">
-        <div className="text-lg">
-          Your transaction is signed by Stellarcarbon and ready to go!
-        </div>
+      <ModalHeader>Transaction confirmation</ModalHeader>
+
+      <div className="text-center mt-3 my-1">
+        Your transaction is signed by Stellarcarbon and ready to go!
       </div>
 
-      <div className="w-full flex justify-center bg-darker my-12 p-6 rounded border border-tertiary">
+      <div className="w-full flex justify-center bg-darker my-6 mb-8 md:my-12 p-4 rounded border border-tertiary">
         <div className="flex flex-col gap-6 rounded-b bg-darkers rounded  border-tertiary w-full">
           <div className="grid grid-cols-4 w-full">
             <div className="font-bold text-xl md:text-2xl">Amount</div>
@@ -53,7 +52,7 @@ export default function ConfirmSinking() {
           <div className="flex flex-col">
             <div className="font-bold text-xl md:text-2xl">Sinking reason</div>
             {sinkRequest.memoValue ? (
-              <div className="break-all text-accentSecondary text-center my-4 text-2xl md:text-3xl">
+              <div className="break-all text-accentSecondary text-center mt-3 text-2xl md:text-3xl">
                 {sinkRequest.memoValue}
               </div>
             ) : (

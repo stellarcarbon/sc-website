@@ -7,6 +7,8 @@ import OverviewContactInformationForm from "./ContactInformationForm";
 import TruncatedHash from "../TruncatedHash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import DashboardHeader from "../DashboardHeader";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function Overview() {
   const { walletConnection } = useAppContext();
@@ -15,63 +17,59 @@ export default function Overview() {
 
   return (
     <div className="">
-      <div className="flex flex-col w-full justify-start gap-12 px-3 md:px-6 mb-8">
-        {walletConnection && (
-          <div className="w-full">
-            <div className="mb-3 text-xl md:text-2xl font-bold flex gap-4 justify-between items-center border-b border-tertiary">
-              <span className="text-2xl">Wallet</span>
-            </div>
-            <div
-              className="flex items-center justify-between p-2
-          bg-secondary border rounded border-accentSecondary"
-            >
-              <div className="flex items-center gap-2">
-                <div className="p-1">
-                  <img
-                    className="h-6 w-6"
-                    src={walletConnection?.walletType.icon}
-                  />
-                </div>
-                <div>{walletConnection?.walletType.name}</div>
-              </div>
-
-              <div>
-                <TruncatedHash
-                  hash={walletConnection.stellarPubKey}
-                  uppercase
+      {walletConnection && (
+        <div className="flex flex-col w-full justify-start px-3 md:px-6 mb-8">
+          <DashboardHeader>Connected wallet</DashboardHeader>
+          <div
+            className="flex items-center justify-between p-2
+          bg-darker border rounded border-accentSecondary"
+          >
+            <div className="flex items-center gap-2">
+              <div className="p-1">
+                <img
+                  className="h-6 w-6"
+                  src={walletConnection?.walletType.icon}
                 />
               </div>
+              <div>{walletConnection?.walletType.name}</div>
+            </div>
+
+            <div>
+              <TruncatedHash hash={walletConnection.stellarPubKey} uppercase />
             </div>
           </div>
-        )}
-        <TransactionSummary />
-      </div>
+        </div>
+      )}
+
+      <SectionHeader>Your transactions</SectionHeader>
+
+      <TransactionSummary />
 
       {walletConnection && (
         <div className="flex flex-col gap-1">
-          <div className="bg-darker h-12 md:h-16 flex items-center justify-between px-4 text-2xl border-yz border-accentSecondary">
+          <SectionHeader>
             <div>Contact information</div>
             <button
-              className="bg-accent rounded text-black text-xs md:text-base flex items-center gap-1 px-2 p-1"
+              className="bg-accent rounded text-black text-sm md:text-base flex items-center gap-1 px-2 p-1"
               onClick={() => setShowContactInformationForm(true)}
             >
               <FontAwesomeIcon icon={faEdit} />
               <div>Edit</div>
             </button>
-          </div>
+          </SectionHeader>
 
-          <div className="p-3 md:p-6">
+          <div className="p-3 md:p-6 mb-6">
             {showContactInformationForm ? (
               <OverviewContactInformationForm
                 onClose={() => setShowContactInformationForm(false)}
               />
             ) : walletConnection?.isAnonymous ? (
-              <div className="text-center text-base">
+              <div className="text-center text-sm">
                 This account is anonymous. No PDF certificates will be emailed.
               </div>
             ) : (
               <div className="flex flex-col gap-4">
-                <div className="text-xs">
+                <div className="text-sm">
                   Your contact info will only be used to send you personal
                   certificates.
                 </div>

@@ -31,7 +31,7 @@ export default function Dashboard() {
       {walletConnection === undefined ? (
         <ConnectWalletCTA />
       ) : (
-        <div className="mt-8"></div>
+        <div className="mt-6"></div>
       )}
       <Overview />
     </>

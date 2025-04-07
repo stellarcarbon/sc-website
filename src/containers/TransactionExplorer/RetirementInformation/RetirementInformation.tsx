@@ -11,10 +11,6 @@ export default function RetirementInformation({
 }) {
   return (
     <div className="w-full mb-6">
-      <h2 className="font-bold bg-primary h-12 flex items-center justify-center">
-        Retirement information
-      </h2>
-
       {/* <div className="grid grid-cols-5 my-4">
         <div className="">Status</div>
         <div className="col-span-4 text-end font-bold">

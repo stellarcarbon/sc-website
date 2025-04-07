@@ -2,7 +2,7 @@ import { Blocks } from "react-loader-spinner";
 
 export default function TransactionsLoading() {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center mb-4">
       <Blocks
         height="80"
         width="80"

@@ -72,7 +72,7 @@ export default function SinkingForm() {
       )}
       <form className="flex flex-col mb-12">
         <div className="mx-3 md:mx-8 mb-6 text-base md:text-base">
-          <div className="text-center text-xl">
+          <div className="text-center text-lg font-semibold">
             Support the Stellarcarbon initiative by sinking CARBON!
           </div>
           <div className="mt-4 text-base">

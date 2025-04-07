@@ -1,12 +1,12 @@
 import { useSinkingContext } from "@/context/SinkingContext";
 import { Hourglass } from "react-loader-spinner";
 import SinkingStep from "./Step";
+import ModalHeader from "@/components/ModalHeader";
 
 export default function AwaitSinking({ message }: { message: string }) {
-  const { step } = useSinkingContext();
-
   return (
     <SinkingStep>
+      <ModalHeader>Waiting...</ModalHeader>
       <span className="text-center md:text-xl mt-4">{message}</span>
       <div className="flex-1 flex items-center justify-center my-16">
         <Hourglass

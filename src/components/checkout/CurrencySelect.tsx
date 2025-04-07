@@ -3,6 +3,7 @@ import { SinkingFormData } from "@/app/types";
 import { PaymentAsset } from "@/client";
 import { useAppContext } from "@/context/appContext";
 import { useMemo } from "react";
+import DashboardHeader from "../dashboard/DashboardHeader";
 
 interface CurrencySelectProps {
   register: (name: keyof SinkingFormData) => UseFormRegisterReturn;
@@ -34,26 +35,27 @@ export default function CurrencySelect({ register }: CurrencySelectProps) {
   }, [xlmBalance, usdcBalance]);
 
   return (
-    <div className="flex flex-col gap-3 p-3 py-6 md:p-6">
-      <span className="text-2xl md:text-2xl font-bold border-b border-tertiary pb-1">
-        Choose preferred asset
-      </span>
-      <span className="">
-        {`Choose a preferred payment asset to use or leave it on "No preference". Horizon will create the best offer available.`}
-      </span>
-      <div>
-        <select
-          className="w-full text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
-          defaultValue={PaymentAsset.ANY}
-          {...register("currency")}
-        >
-          {options}
-        </select>
+    <div className="p-3 py-6 md:p-6">
+      <DashboardHeader>Choose preferred asset</DashboardHeader>
 
-        <span className="text-[10px] mx-1">
-          Note: payment will default to CARBON if a sufficient balance is
-          available.
+      <div className="flex flex-col gap-3">
+        <span className="">
+          {`Choose a preferred payment asset to use or leave it on "No preference". Horizon will create the best offer available.`}
         </span>
+        <div>
+          <select
+            className="w-full text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
+            defaultValue={PaymentAsset.ANY}
+            {...register("currency")}
+          >
+            {options}
+          </select>
+
+          <span className="text-[10px] mx-1">
+            Note: payment will default to CARBON if a sufficient balance is
+            available.
+          </span>
+        </div>
       </div>
     </div>
   );

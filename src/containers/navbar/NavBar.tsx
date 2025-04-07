@@ -42,7 +42,7 @@ export default function NavBar() {
           <NavBarWallet />
         </div>
 
-        {isMobileDevice && <div className="w-16 h-1"></div>}
+        <div className="w-16 h-1 md:hidden"></div>
       </header>
 
       {isDrawerOpen && (

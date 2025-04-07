@@ -12,6 +12,7 @@ import TransactionsLoading from "@/components/dashboard/transactions/Transaction
 import { formatDate } from "@/utils";
 import RetirementInformation from "./RetirementInformation/RetirementInformation";
 import Link from "next/link";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function TransactionsExplorerDetail() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -56,7 +57,7 @@ export default function TransactionsExplorerDetail() {
 
   if (isLoading) {
     return (
-      <div className="mt-4 flex flex-col items-center w-full">
+      <div className="md:min-h-[400px] flex items-center justify-center">
         <TransactionsLoading />
       </div>
     );
@@ -80,7 +81,7 @@ export default function TransactionsExplorerDetail() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center bg-primary">
       <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>
@@ -113,9 +114,7 @@ export default function TransactionsExplorerDetail() {
       </div>
 
       {/* <hr className="w-[95%] my-0 border-tertiary" /> */}
-      <div className="bg-primary h-12 flex items-center justify-center w-full font-bold">
-        Payment details
-      </div>
+      <SectionHeader>Payment details</SectionHeader>
 
       <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>Price</PropertyKey>
@@ -162,6 +161,7 @@ export default function TransactionsExplorerDetail() {
         {/* <hr className="col-span-5 my-3" /> */}
       </div>
 
+      <SectionHeader>Retirement information</SectionHeader>
       <RetirementInformation transaction={transaction} />
     </div>
   );

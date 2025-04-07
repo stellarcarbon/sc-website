@@ -36,6 +36,7 @@ export default function ActivityHistory() {
   }, [myTransactions]);
 
   if (searchParams.get("id") !== null) {
+    // TODO: remove this
     return (
       <div className="w-full bg-darker flex-1">
         <TransactionsExplorerDetail />

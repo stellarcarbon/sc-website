@@ -22,7 +22,9 @@ export default function TransactionPrice({
 
   const xlmPrice = (
     <div
-      className={`grid grid-cols-5 gap-1 ${currency === "USDC" && "text-xs"}`}
+      className={`grid grid-cols-5 gap-1 ${
+        currency === "USDC" ? "text-xs" : currency === "XLM" && "text-xl"
+      }`}
     >
       <div className="text-start col-span-2 inline-flex items-start">
         Price in XLM
@@ -35,7 +37,9 @@ export default function TransactionPrice({
 
   const usdcPrice = (
     <div
-      className={`grid grid-cols-5 gap-1 ${currency === "XLM" && "text-xs"}`}
+      className={`grid grid-cols-5 gap-1 ${
+        currency === "XLM" ? "text-xs" : currency === "USDC" && "text-xl"
+      }`}
     >
       <div className="text-start col-span-2 inline-flex items-start">
         Price in $
