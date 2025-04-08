@@ -15,7 +15,7 @@ export default function TransactionSummary() {
   const router = useRouter();
 
   const iconSize = useMemo(() => {
-    return isWide ? 22 : 18;
+    return isWide ? 20 : 20;
   }, [isWide]);
 
   const latestTransaction = useMemo(() => {
@@ -43,7 +43,7 @@ export default function TransactionSummary() {
   }, [myTransactions]);
 
   return (
-    <div className="flex flex-col gap-6 px-3 md:px-6 my-6">
+    <div className="flex flex-col gap-10 px-3 md:px-6 my-6">
       {myTransactions === null && walletConnection ? (
         <div className="flex-1 flex flex-col justify-center min-h-[250px] md:min-h-[400px]">
           <TransactionsLoading />
@@ -60,7 +60,9 @@ export default function TransactionSummary() {
             {latestTransaction ? (
               <TransactionListItem transaction={latestTransaction} />
             ) : (
-              <div>You have not made any transactions yet.</div>
+              <div className="text-start">
+                You have not made any transactions yet.
+              </div>
             )}
           </div>
 
@@ -71,16 +73,15 @@ export default function TransactionSummary() {
               <div className="text-2xl flex gap-4 justify-center items-center">
                 {/* <span className="text-xl">Total</span> */}
                 <div className="flex gap-1 items-center mt-1 mb-4">
-                  <span className="font-normal">
+                  <span className="font-bold">
                     {totalSinked?.toFixed(3) ?? 0}
                   </span>
                   <CARBONCurrencyIcon width={iconSize} height={iconSize} />
                 </div>
               </div>
 
-              <span className="text-sm text-center">
-                The total amount of CARBON tokens that have been sinked using
-                this wallet.
+              <span className="text-start">
+                The total amount of CARBON tokens sinked with this wallet.
               </span>
             </div>
           </div>
@@ -92,14 +93,14 @@ export default function TransactionSummary() {
               <div className="text-2xl flex gap-4 justify-center items-center">
                 {/* <span className="text-xl">Pending claims</span> */}
                 <div className="flex gap-1 items-center mt-1 mb-4">
-                  <span className="font-normal">
+                  <span className="font-bold">
                     {totalPending?.toFixed(3) ?? 0}
                   </span>
                   <CARBONCurrencyIcon width={iconSize} height={iconSize} />
                 </div>
               </div>
 
-              <span className="text-sm text-center">
+              <span className="text-start">
                 The amount of fractional carbon certificates that are still
                 pending a certificate claim.{" "}
                 <Link className="underline text-accentSecondary" href="">

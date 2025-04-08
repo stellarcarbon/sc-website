@@ -26,7 +26,7 @@ export default function Overview() {
           <SectionHeader>
             <div>Contact information</div>
             <button
-              className="bg-accent rounded text-black text-sm md:text-base flex items-center gap-1 px-2 p-1"
+              className="font-normal bg-accent rounded text-black text-sm md:text-base flex items-center gap-1 px-2 p-1"
               onClick={() => setShowContactInformationForm(true)}
             >
               <FontAwesomeIcon icon={faEdit} />
@@ -34,13 +34,13 @@ export default function Overview() {
             </button>
           </SectionHeader>
 
-          <div className="p-3 md:p-6">
+          <div className="p-3 md:p-6 my-1">
             {showContactInformationForm ? (
               <OverviewContactInformationForm
                 onClose={() => setShowContactInformationForm(false)}
               />
             ) : walletConnection?.isAnonymous ? (
-              <div className="text-center text-sm">
+              <div className="text-center">
                 This account is anonymous. No PDF certificates will be emailed.
               </div>
             ) : (
@@ -98,7 +98,7 @@ export default function Overview() {
             <div>Connected wallet</div>
             <button
               onClick={disconnectWallet}
-              className="bg-accent rounded text-black text-sm md:text-base flex items-center gap-1 px-2 p-1"
+              className="font-normal bg-accent rounded text-black text-sm md:text-base flex items-center gap-1 px-2 p-1"
             >
               <FontAwesomeIcon icon={faRightFromBracket} />
               Disconnect
