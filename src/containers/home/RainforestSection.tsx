@@ -12,35 +12,6 @@ export default function RainforestIntro() {
   const chevDown = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function adjustBackgroundSize() {
-      const rainForestbackground = document.querySelector(
-        ".bg-rainforest"
-      ) as HTMLElement | null;
-      const heroText = document.querySelector(
-        ".hero-text"
-      ) as HTMLElement | null;
-
-      const viewportHeight = window.innerHeight;
-      const mHeight = viewportHeight > 400 ? viewportHeight : 375;
-
-      console.log(mHeight);
-
-      if (rainForestbackground) {
-        rainForestbackground.style.height = `${mHeight}px`;
-      }
-
-      if (heroText) {
-        heroText.style.height = `${mHeight}px !important`;
-      }
-    }
-    adjustBackgroundSize();
-
-    // Adjust on resize or orientation changes
-    // window.addEventListener("resize", adjustBackgroundSize);
-    window.addEventListener("orientationchange", adjustBackgroundSize);
-  }, []);
-
-  useEffect(() => {
     const trackScroll = () => {
       const position = window.scrollY;
       setScrollPosition(position);
@@ -88,10 +59,10 @@ export default function RainforestIntro() {
 
   return (
     <>
-      <div className="bg-rainforest bg-cover bg-fixed bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute" />
+      <div className="bg-rainforest bg-fixed bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute h-[100vh]" />
 
-      <div className="mt-[-64px] md:mt-[-80px] h-[100dvh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
-        <span className="font-roboto text-4xl md:text-[80px]">
+      <div className="mt-[-64px] md:mt-[-80px] h-[100vh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
+        <span className="font-roboto text-5xl md:text-[80px]">
           {/* <CARBONCurrencyIcon width={56} height={56} /> */}
           Stellarcarbon
         </span>
@@ -112,7 +83,7 @@ export default function RainforestIntro() {
             projects, making it effortless to compensate for your remaining
             emissions.
           </span> */}
-          <div className="text-sm md:text-lg lg:text-lg flex flex-col items-center text-center  gap-4 leading-8 ">
+          <div className="text-lg  flex flex-col items-center text-center  gap-4 leading-8 ">
             <span>
               We provide a simple way for{" "}
               <Link
