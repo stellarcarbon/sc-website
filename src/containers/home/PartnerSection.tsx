@@ -5,10 +5,10 @@ import Link from "next/link";
 
 export default function PartnerSection() {
   return (
-    <div className="bg-secondary pt-0 pb-12 w-full border-y border-y-tertiary">
+    <div className="bg-secondary pt-4 pb-12 w-full border-y border-y-tertiary">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
-        <div className="m-auto pl-[5%] md:w-[40%]">
+        <div className="m-auto px-3 md:pl-[5%] md:w-[40%]">
           <Header>For business</Header>
 
           <Paragraph>

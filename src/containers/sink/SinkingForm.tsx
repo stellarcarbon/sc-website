@@ -75,8 +75,7 @@ export default function SinkingForm() {
             Use this form to specify how much{" "}
             <CARBONCurrencyIcon className="inline" /> to sink. 1{" "}
             <CARBONCurrencyIcon className="inline" /> garantuees 1 Verified
-            Carbon Unit (VCU) will be burned. Try out our new emissions
-            calculator to help get an idea of how much CO2 you are emitting.
+            Carbon Unit (VCU) will be burned.
           </div>
         </div>
 
