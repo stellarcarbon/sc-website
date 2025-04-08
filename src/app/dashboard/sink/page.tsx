@@ -12,7 +12,7 @@ export default function SinkFormPage() {
       {walletConnection === undefined ? (
         <ConnectWalletCTA />
       ) : (
-        <div className="mt-8"></div>
+        <div className="mt-6"></div>
       )}
       <SinkingForm />
     </>

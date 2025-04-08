@@ -6,6 +6,7 @@ import { useReasonSelectContext } from "./ReasonSelectContext";
 import Button from "../Button";
 import { useSearchParams } from "next/navigation";
 import DashboardHeader from "../dashboard/DashboardHeader";
+import SectionHeader from "../SectionHeader";
 
 interface ReasonSelectProps {
   setValue: (name: keyof SinkingFormData, value: any) => void;
@@ -108,60 +109,64 @@ export default function ReasonSelect({
   // TODO: enforce max length of reason message 29 bytes
 
   return (
-    <div className="p-3 py-6 md:p-6">
-      <DashboardHeader>Label your contribution</DashboardHeader>
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-col gap-1">
-          <span className="">
-            Why are you making this contribution? Leave a public message and it
-            will be stored, reminding you and others why you contributed.
-          </span>
-        </div>
+    <>
+      <SectionHeader>Label your contribution</SectionHeader>
+      <div className="p-3 py-6 md:p-6">
+        {/* <DashboardHeader>Label your contribution</DashboardHeader> */}
 
-        <div className="flex justify-between md:justify-center gap-2 my-2">
-          {Object.values(ReasonOptions).map((option, idx) => {
-            return (
-              <SelectReasonButton
-                key={`${idx}_button`}
-                isSelected={selectedReason?.label === option.label}
-                onClick={() => selectReason(option)}
-                reason={option}
-              />
-            );
-          })}
-        </div>
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <span className="">
+              Why are you making this contribution? Leave a public message and
+              it will be stored, reminding you and others why you contributed.
+            </span>
+          </div>
 
-        <div
-          className="
-      flex flex-col gap-4"
-        >
-          {
-            <div className="text-sm">
-              {/* <div className="mt-2 mb-4">{selectedReason?.explanation}</div> */}
-              <div className="flex flex-col gap-1">
-                <span className="text-xs md:text-sm">
-                  Customize your transaction label
-                </span>
-                <textarea
-                  {...register("memo", {
-                    validate: (value) => {
-                      return memoLength <= 28 || "Reason label is too long.";
-                    },
-                  })}
-                  className=" text-black py-1 px-2 rounded-sm"
+          <div className="flex justify-between md:justify-center gap-2 my-2">
+            {Object.values(ReasonOptions).map((option, idx) => {
+              return (
+                <SelectReasonButton
+                  key={`${idx}_button`}
+                  isSelected={selectedReason?.label === option.label}
+                  onClick={() => selectReason(option)}
+                  reason={option}
                 />
-                <span
-                  className={`self-end text-[10px] leading-[1rem] ${
-                    memoLength > 28 && "text-red-500"
-                  }`}
-                >
-                  {`${memoLength}/28`}
-                </span>
+              );
+            })}
+          </div>
+
+          <div
+            className="
+      flex flex-col gap-4"
+          >
+            {
+              <div className="text-sm">
+                {/* <div className="mt-2 mb-4">{selectedReason?.explanation}</div> */}
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs md:text-sm">
+                    Customize your transaction label
+                  </span>
+                  <textarea
+                    {...register("memo", {
+                      validate: (value) => {
+                        return memoLength <= 28 || "Reason label is too long.";
+                      },
+                    })}
+                    className=" text-black py-1 px-2 rounded-sm"
+                  />
+                  <span
+                    className={`self-end text-[10px] leading-[1rem] ${
+                      memoLength > 28 && "text-red-500"
+                    }`}
+                  >
+                    {`${memoLength}/28`}
+                  </span>
+                </div>
               </div>
-            </div>
-          }
+            }
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

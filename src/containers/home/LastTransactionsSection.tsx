@@ -24,7 +24,7 @@ export default function LastTransactionsSection() {
   }, []);
 
   return (
-    <div className="bg-tertiary py-12 w-full border-y border-y-secondary px-[5%] ">
+    <div className="bg-secondary pt-0 pb-12 w-full border-y border-y-secondary px-3 md:px-[5%]">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
         <div className="md:w-[50%]">
@@ -39,7 +39,7 @@ export default function LastTransactionsSection() {
           </Paragraph>
           <Paragraph>
             <Link href="/transactions" className="underline text-sm">
-              View the full list here
+              View the full list in our transaction explorer
             </Link>
           </Paragraph>
         </div>

@@ -15,27 +15,25 @@ export default function ProjectsPage() {
   return (
     <main className="flex flex-col items-center font-noto">
       {/* Current project title with whale */}
-      <div className="whale-bg pt-4 md:pt-8 w-full">
+      <div className="bg-rainforest bg-cover pt-4 md:pt-8 w-full max-h-[350px]">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-8 m-auto">
-          <span className="text-5xl md:text-[7vw] text-center leading-[56px] md:leading-[8vw] image1">
-            Current Offset Project
+          <span className="text-5xl md:text-[7vw] text-center leading-[56px] md:leading-[8vw] ">
+            Our Offset Project
           </span>
-          <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
+          <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px] image1">
             Land in the rainforest
           </span>
         </div>
       </div>
 
       {/* Custom content container */}
-      <div className="flex flex-col md:flex-row grow pt-12 md:pt-20 lg:max-w-[900px] xl:max-w-[1200px] px-4">
+      <div className="flex flex-col md:flex-row grow md:pt-20 lg:max-w-[900px] xl:max-w-[1200px]">
         <div className="hidden md:block w-full mb-8 md:flex-1  md:mr-16">
           <ShipiboImages />
         </div>
 
-        <div className="md:flex-1">
-          <Header>
-            About Shipibo Conibo and Cacataibo Indigenous Communities
-          </Header>
+        <div className="md:flex-1 md:mt-[-32px]">
+          <Header>About Shipibo Conibo and Cacataibo Communities</Header>
 
           <Paragraph>
             The Ucayali Region is located in the central part of eastern Peru,

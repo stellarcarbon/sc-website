@@ -75,7 +75,7 @@ export default function FlightEstimator() {
       ) : (
         <>
           {/* Intro */}
-          <div className="flex flex-col gap-2 my-2 mt-8">
+          <div className="flex flex-col gap-2 my-2 mt-3">
             <h1 className="text-2xl">Estimate your flight emissions</h1>
             <div className="">
               Use this tool to help estimate the amount of carbon emitted in

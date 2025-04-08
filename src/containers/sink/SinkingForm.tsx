@@ -73,42 +73,39 @@ export default function SinkingForm() {
           <div className="mt-4 text-base">
             {" "}
             Use this form to specify how much{" "}
-            <CARBONCurrencyIcon className="inline" /> to sink. Try out our new
-            emissions calculator to help get an idea of how much CO2 you are
-            emitting.
+            <CARBONCurrencyIcon className="inline" /> to sink. 1{" "}
+            <CARBONCurrencyIcon className="inline" /> garantuees 1 Verified
+            Carbon Unit (VCU) will be burned. Try out our new emissions
+            calculator to help get an idea of how much CO2 you are emitting.
           </div>
         </div>
-        <div className="flex flex-col min-w-[80%]">
-          <ReasonSelectContextProvider>
-            <Suspense>
-              <ReasonSelect
-                register={register}
-                watch={watch}
-                setValue={setValue}
-              />
-            </Suspense>
-          </ReasonSelectContextProvider>
-          {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
-        </div>
-        <div className="flex flex-col gap-12 min-w-[80%]">
+
+        <ReasonSelectContextProvider>
           <Suspense>
-            <AmountInput
+            <ReasonSelect
               register={register}
               watch={watch}
               setValue={setValue}
-              quote={quote}
-              setQuote={setQuote}
             />
           </Suspense>
-        </div>
+        </ReasonSelectContextProvider>
+        {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
 
-        <div className="mb-12 flex flex-col gap-8 min-w-[80%]">
-          <Suspense>
-            <CurrencySelect register={register} setValue={setValue} />
-          </Suspense>
-        </div>
+        <Suspense>
+          <AmountInput
+            register={register}
+            watch={watch}
+            setValue={setValue}
+            quote={quote}
+            setQuote={setQuote}
+          />
+        </Suspense>
 
-        <div className="mx-3 flex flex-col items-center">
+        <Suspense>
+          <CurrencySelect register={register} setValue={setValue} />
+        </Suspense>
+
+        <div className="mt-8 mx-3 flex flex-col items-center">
           <Suspense>
             <TransactionPreview
               tonnes={tonnes}

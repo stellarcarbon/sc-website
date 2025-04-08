@@ -18,6 +18,7 @@ import XLMIcon from "../icons/XLMIcon";
 import { useSinkingContext } from "@/context/SinkingContext";
 import Button from "../Button";
 import DashboardHeader from "../dashboard/DashboardHeader";
+import SectionHeader from "../SectionHeader";
 
 interface AmountInputProps {
   register: UseFormRegister<SinkingFormData>;
@@ -150,23 +151,25 @@ export default function AmountInput({
   }, [tonnes, setShowFractionalWarning]);
 
   return (
-    <div className="p-3 py-6 md:p-6">
-      <DashboardHeader>Set sink amount</DashboardHeader>
+    <>
+      <SectionHeader>Set sink amount</SectionHeader>
+      <div className="p-3 py-6 md:p-6">
+        {/* <DashboardHeader>Set sink amount</DashboardHeader> */}
 
-      <div className="flex flex-col gap-6 mt-3">
-        {/* <div>Set the amount of CARBON you want to sink.</div> */}
-        <div className="">Use our emissions estimator...</div>
-        <Button
-          onClick={() => router.push("/estimator/flight")}
-          className="gap-2 h-10 !px-3 hover:border !border-accent mx-auto"
-        >
-          <FontAwesomeIcon icon={faCalculator} />
-          Go to emissions estimator
-        </Button>
+        <div className="flex flex-col gap-6">
+          {/* <div>Set the amount of CARBON you want to sink.</div> */}
+          <div className="">Using our emissions estimator...</div>
+          <Button
+            onClick={() => router.push("/estimator/flight")}
+            className="gap-2 h-10 !px-3 hover:border !border-accent mx-auto"
+          >
+            <FontAwesomeIcon icon={faCalculator} />
+            Go to emissions estimator
+          </Button>
 
-        <div className="">...or input the amount yourself</div>
+          <div className="">...or by entering the amount yourself.</div>
 
-        {/* <div className="flex flex-col gap-1 bg-darker p-4 px-6 rounded mx-auto border border-accentSecondary">
+          {/* <div className="flex flex-col gap-1 bg-darker p-4 px-6 rounded mx-auto border border-accentSecondary">
           <div className="text-center">
             We created tooling to help you estimate your emissions!
           </div>
@@ -182,93 +185,95 @@ export default function AmountInput({
           </div>
         </div> */}
 
-        {/* <div className="">Input how much CARBON you want to sink.</div> */}
+          {/* <div className="">Input how much CARBON you want to sink.</div> */}
 
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between items-center gap-2 h-10 md:px-2">
-            <div className="relative w-[35%]">
-              <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
-                <CARBONCurrencyIcon className="" />
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-between items-center gap-2 h-10 md:px-2">
+              <div className="relative w-[35%]">
+                <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
+                  <CARBONCurrencyIcon className="" />
+                </div>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  className="px-2 pr-9 py-1 w-full text-black rounded-sm text-right"
+                  {...register("tonnes", {
+                    validate: () => {
+                      return (
+                        !hasError || "The selected CARBON amount is invalid."
+                      );
+                    },
+                  })}
+                />
               </div>
-              <input
-                type="text"
-                inputMode="decimal"
-                className="px-2 pr-9 py-1 w-full text-black rounded-sm text-right"
-                {...register("tonnes", {
-                  validate: () => {
-                    return (
-                      !hasError || "The selected CARBON amount is invalid."
-                    );
-                  },
-                })}
+              <FontAwesomeIcon
+                icon={faArrowRightArrowLeft}
+                className="px-4 py-4 text-xl"
               />
-            </div>
-            <FontAwesomeIcon
-              icon={faArrowRightArrowLeft}
-              className="px-4 py-4 text-xl"
-            />
-            <div className="relative w-[35%]">
-              <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
-                $
+              <div className="relative w-[35%]">
+                <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
+                  $
+                </div>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  className="px-2 pl-7 py-1 w-full text-black rounded-sm"
+                  value={quoteStr || ""}
+                  onChange={(e) => {
+                    setIsLoading(true);
+                    if (
+                      /^\d*\.?\d*$/.test(e.target.value) ||
+                      e.target.value === ""
+                    ) {
+                      setQuoteStr(e.target.value);
+                    }
+                    setQuote(Number(e.target.value));
+                    setActiveInput("usd");
+                  }}
+                />
               </div>
-              <input
-                type="text"
-                inputMode="decimal"
-                className="px-2 pl-7 py-1 w-full text-black rounded-sm"
-                value={quoteStr || ""}
-                onChange={(e) => {
-                  setIsLoading(true);
-                  if (
-                    /^\d*\.?\d*$/.test(e.target.value) ||
-                    e.target.value === ""
-                  ) {
-                    setQuoteStr(e.target.value);
-                  }
-                  setQuote(Number(e.target.value));
-                  setActiveInput("usd");
-                }}
-              />
             </div>
-          </div>
 
-          <div
-            className={`px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-darker border rounded border-accentSecondary`}
-          >
-            {isLoading ? (
-              <Blocks width={48} height={48} />
-            ) : hasError ? (
-              <span className={`text-center mx-6 text-red-500 text-sm`}>
-                {statusMessage}
-              </span>
-            ) : (
-              <>
-                <div className="w-full flex justify-center gap-1 items-center md:text-lg text-center">
-                  <div className="flex items-center">
-                    <span>Sinking {tonnes}</span>
-                    <CARBONCurrencyIcon className="ml-1" />
-                  </div>
-                  <span className="mx-[2px]">costs approx.</span>
+            <div
+              className={`px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-darker border rounded border-accentSecondary`}
+            >
+              {isLoading ? (
+                <Blocks width={48} height={48} />
+              ) : hasError ? (
+                <span className={`text-center mx-6 text-red-500 text-sm`}>
+                  {statusMessage}
+                </span>
+              ) : (
+                <>
+                  <div className="w-full flex justify-center gap-1 items-center md:text-lg text-center">
+                    <div className="flex items-center">
+                      <span>Sinking {tonnes}</span>
+                      <CARBONCurrencyIcon className="ml-1" />
+                    </div>
+                    <span className="mx-[2px]">costs approx.</span>
 
-                  <div className="flex items-center">
-                    <span>$</span>
-                    <span className="ml-[1px]"> {quote.toFixed(2)}</span>
-                  </div>
-                  {/* <div className="text-xs md:text-base flex items-center gap-1">
+                    <div className="flex items-center">
+                      <span>$</span>
+                      <span className="ml-[1px]"> {quote.toFixed(2)}</span>
+                    </div>
+                    {/* <div className="text-xs md:text-base flex items-center gap-1">
                 ({priceInXLM} <XLMIcon />)
               </div> */}
-                </div>
-                {showFractionalWarning && (
-                  <span className="md:mx-12 text-xs md:text-sm text-center">
-                    If you sink a fractional amount of CARBON you cannot receive
-                    an indvidual certificate without either rounding down or up.
-                    Read more <span className="underline">here</span>.
-                  </span>
-                )}
-              </>
-            )}
+                  </div>
+                  {showFractionalWarning && (
+                    <span className="md:mx-12 text-xs md:text-sm text-center">
+                      If you sink a fractional amount of CARBON you cannot
+                      receive an indvidual certificate without either rounding
+                      down or up. Read more{" "}
+                      <span className="underline">here</span>.
+                    </span>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

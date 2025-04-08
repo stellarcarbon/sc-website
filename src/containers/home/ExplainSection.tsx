@@ -26,9 +26,9 @@ export default function ExplainSection() {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row py-12 m-auto w-full border-y border-y-tertiary">
+    <div className="bg-primary flex flex-col md:flex-row pt-4 pb-12 m-auto w-full border-y border-y-tertiary px-3 md:px-0">
       {/* Text */}
-      <div className="md:flex-1 flex flex-col justify-center pl-[5%] md:max-w-[40%]">
+      <div className="md:flex-1 flex flex-col justify-center md:pl-[5%] md:max-w-[40%]">
         <Header>Our mission</Header>
 
         <Paragraph>

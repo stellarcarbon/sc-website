@@ -13,23 +13,24 @@ export default function RainforestIntro() {
 
   useEffect(() => {
     function adjustBackgroundSize() {
-      const viewportHeight = window.innerHeight;
-      const mHeight = viewportHeight > 400 ? viewportHeight : 375;
-
       const rainForestbackground = document.querySelector(
         ".bg-rainforest"
       ) as HTMLElement | null;
-
-      if (rainForestbackground) {
-        rainForestbackground.style.height =
-          viewportHeight > 400 ? `${viewportHeight}px` : "375px";
-      }
-
       const heroText = document.querySelector(
         ".hero-text"
       ) as HTMLElement | null;
+
+      const viewportHeight = window.innerHeight;
+      const mHeight = viewportHeight > 400 ? viewportHeight : 375;
+
+      console.log(mHeight);
+
+      if (rainForestbackground) {
+        rainForestbackground.style.height = `${mHeight}px`;
+      }
+
       if (heroText) {
-        heroText.style.minHeight = `${mHeight}px`;
+        heroText.style.height = `${mHeight}px !important`;
       }
     }
     adjustBackgroundSize();
@@ -89,7 +90,7 @@ export default function RainforestIntro() {
     <>
       <div className="bg-rainforest bg-cover bg-fixed bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute" />
 
-      <div className="mt-[-64px] md:mt-[-80px] min-h-[100dvh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
+      <div className="mt-[-64px] md:mt-[-80px] h-[100dvh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
         <span className="font-roboto text-4xl md:text-[80px]">
           {/* <CARBONCurrencyIcon width={56} height={56} /> */}
           Stellarcarbon

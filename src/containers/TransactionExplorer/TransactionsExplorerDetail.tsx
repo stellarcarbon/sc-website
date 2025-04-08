@@ -114,7 +114,7 @@ export default function TransactionsExplorerDetail() {
       </div>
 
       {/* <hr className="w-[95%] my-0 border-tertiary" /> */}
-      <SectionHeader>Payment details</SectionHeader>
+      <SectionHeader>Payment information</SectionHeader>
 
       <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>Price</PropertyKey>
