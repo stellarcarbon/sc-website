@@ -2,15 +2,31 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import { SinkingFormData } from "@/app/types";
 import { PaymentAsset } from "@/client";
 import { useAppContext } from "@/context/appContext";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import DashboardHeader from "../dashboard/DashboardHeader";
+import { useSearchParams } from "next/navigation";
 
 interface CurrencySelectProps {
   register: (name: keyof SinkingFormData) => UseFormRegisterReturn;
+  setValue: (name: keyof SinkingFormData, value: any) => void;
 }
 
-export default function CurrencySelect({ register }: CurrencySelectProps) {
+export default function CurrencySelect({
+  register,
+  setValue,
+}: CurrencySelectProps) {
   const { xlmBalance, usdcBalance } = useAppContext();
+  const searchParams = useSearchParams();
+  const currency = searchParams.get("asset");
+
+  useEffect(() => {
+    if (currency?.toLowerCase() === PaymentAsset.ANY.toLowerCase())
+      setValue("currency", PaymentAsset.ANY);
+    if (currency?.toLowerCase() === PaymentAsset.USDC.toLowerCase())
+      setValue("currency", PaymentAsset.USDC);
+    if (currency?.toLowerCase() === PaymentAsset.XLM.toLowerCase())
+      setValue("currency", PaymentAsset.XLM);
+  }, [currency, setValue]);
 
   const options = useMemo(() => {
     const paymentAssets = [

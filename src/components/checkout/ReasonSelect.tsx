@@ -71,8 +71,10 @@ export default function ReasonSelect({
       setSelectedReason(ReasonOptions.HOUSEHOLD);
     } else if (reason === "environment") {
       setSelectedReason(ReasonOptions.ENVIRONMENT);
+    } else if (reason !== null) {
+      setValue("memo", reason);
     }
-  }, [reason, setSelectedReason]);
+  }, [reason, setSelectedReason, setValue]);
 
   const textEncoder = useMemo(() => {
     return new TextEncoder();
@@ -94,7 +96,7 @@ export default function ReasonSelect({
 
   useEffect(() => {
     if (selectedReason) setValue("memo", selectedReason.message);
-  }, [selectedReason]);
+  }, [selectedReason, setValue]);
 
   useEffect(() => {
     if (memo?.length > 0) {

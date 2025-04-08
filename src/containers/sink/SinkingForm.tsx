@@ -4,19 +4,14 @@ import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
 import { SinkingFormData, SinkCarbonXdrPostRequest } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
-import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { FieldErrors, SubmitHandler, useForm } from "react-hook-form";
 import AmountInput from "@/components/checkout/AmountInput";
 import TransactionPreview from "@/components/checkout/TransactionPreview";
-import ParallaxDivider, {
-  ParallaxBackgrounds,
-} from "@/components/ParallaxDivider";
-import DashboardTitle from "../../components/dashboard/DashboardTitle";
 import FormError from "../../components/FormError";
 import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
-import { useSearchParams } from "next/navigation";
+
 import appConfig from "@/config";
-import XLMConversionService from "@/services/XLMConversionService";
 import { ReasonSelectContextProvider } from "@/components/checkout/ReasonSelectContext";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
@@ -108,7 +103,9 @@ export default function SinkingForm() {
         </div>
 
         <div className="mb-12 flex flex-col gap-8 min-w-[80%]">
-          <CurrencySelect register={register} />
+          <Suspense>
+            <CurrencySelect register={register} setValue={setValue} />
+          </Suspense>
         </div>
 
         <div className="mx-3 flex flex-col items-center">

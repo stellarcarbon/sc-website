@@ -1,27 +1,40 @@
 import FormError from "@/components/FormError";
-import ErrorIcon from "@/components/icons/ErrorIcon";
 import { useSinkingContext } from "@/context/SinkingContext";
 import SinkingStep from "./Step";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
 import ModalHeader from "@/components/ModalHeader";
+import SinkingStepButtons from "./Buttons";
+import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
 
 export default function ErrorSinking() {
   const { submissionError } = useSinkingContext();
 
+  const router = useRouter();
+
   return (
     <SinkingStep>
       <ModalHeader>Error</ModalHeader>
-      <FormError className="text-center text-base md:text-lg overflow-y-scroll max-h-[300px]">
-        {submissionError ?? "Unknown error"}
-      </FormError>
-      <div className="flex-1 flex justify-center items-center my-4">
-        <FontAwesomeIcon
-          icon={faWarning}
-          className="text-[96px] text-red-500"
-        />
+      <div className="flex flex-col items-center">
+        <FormError className="text-center text-base md:text-lg overflow-y-scroll max-h-[300px]">
+          {submissionError ?? "Unknown error"}
+        </FormError>
+        <div className="flex-1 flex justify-center items-center my-12">
+          <FontAwesomeIcon
+            icon={faWarning}
+            className="text-[96px] text-red-500"
+          />
+        </div>
       </div>
-      {/* <ErrorIcon /> */}
+      <SinkingStepButtons>
+        <Button
+          onClick={() => router.push("/dashboard/sink")}
+          className="mx-auto"
+        >
+          Go back
+        </Button>
+      </SinkingStepButtons>
     </SinkingStep>
   );
 }

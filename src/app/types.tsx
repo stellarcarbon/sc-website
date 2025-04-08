@@ -5,7 +5,10 @@ import {
   SinkingResponse,
   VcsProject,
 } from "@/client";
-import { ReasonOption } from "@/components/checkout/ReasonSelect";
+import {
+  ReasonOption,
+  ReasonOptionKey,
+} from "@/components/checkout/ReasonSelect";
 import {
   ISupportedWallet,
   WalletNetwork,

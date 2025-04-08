@@ -2,6 +2,8 @@ import { useSinkingContext } from "@/context/SinkingContext";
 import { Hourglass } from "react-loader-spinner";
 import SinkingStep from "./Step";
 import ModalHeader from "@/components/ModalHeader";
+import SinkingStepButtons from "./Buttons";
+import Button from "@/components/Button";
 
 export default function AwaitSinking({ message }: { message: string }) {
   return (
@@ -19,6 +21,9 @@ export default function AwaitSinking({ message }: { message: string }) {
           colors={["#d8def2", "#d8def2"]}
         />
       </div>
+      <SinkingStepButtons>
+        {/* <Button className="h-10">Cancel</Button> */}
+      </SinkingStepButtons>
     </SinkingStep>
   );
 }

@@ -17,7 +17,7 @@ import {
   useState,
 } from "react";
 import { useAppContext } from "./appContext";
-import { TransactionBuilder } from "@stellar/stellar-sdk";
+import { Transaction, TransactionBuilder } from "@stellar/stellar-sdk";
 import { useRouter } from "next/navigation";
 import appConfig from "@/config";
 import XLMConversionService from "@/services/XLMConversionService";
@@ -29,6 +29,7 @@ export enum CheckoutSteps {
   AWAIT_BLOCKCHAIN = "awaitBlockchain",
   COMPLETED = "success",
   ERROR = "error",
+  EXPIRED = "expired",
 }
 
 type SinkingContext = {
@@ -127,31 +128,58 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     [displayHorizonError, setStep]
   );
 
+  const isExpired = (xdr: string): boolean => {
+    const transaction = TransactionBuilder.fromXDR(
+      xdr,
+      appConfig.network
+    ) as Transaction;
+
+    if (transaction.timeBounds) {
+      const maxTimeSec = parseInt(transaction.timeBounds.maxTime, 10);
+      const currentTimeSec = Math.floor(Date.now() / 1000);
+
+      if (maxTimeSec - currentTimeSec < 60) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   const signTransaction = useCallback(async () => {
     // Sign the transaction using the Stellar Wallets Kit & submit it to Horizon.
     if (sinkResponse === undefined) {
       setSubmissionError("Could find transaction to sign.");
       return;
-    } else {
-      setStep(CheckoutSteps.AWAIT_SIGNING);
     }
 
+    // Expiry check before signing
+    if (isExpired(sinkResponse.tx_xdr)) {
+      setStep(CheckoutSteps.EXPIRED);
+      return;
+    }
+
+    setStep(CheckoutSteps.AWAIT_SIGNING);
+
     try {
-      const res = await stellarWalletsKit!.signTransaction(
+      const signedTxResult = await stellarWalletsKit!.signTransaction(
         sinkResponse.tx_xdr,
         {
           address: walletConnection!.stellarPubKey,
         }
       );
 
+      // Expiry check after signing
+      if (isExpired(signedTxResult.signedTxXdr)) {
+        setStep(CheckoutSteps.EXPIRED);
+        return;
+      }
+
       setStep(CheckoutSteps.AWAIT_BLOCKCHAIN);
-      submitToHorizon(res.signedTxXdr);
+      submitToHorizon(signedTxResult.signedTxXdr);
     } catch (error) {
       setSubmissionError("Transaction signing failed.");
     }
-
-    // TODO: Possibly verify the transaction here, before posting to blockchain?
-    // Transaction may be expired or signatures not valid?
   }, [sinkResponse, walletConnection, stellarWalletsKit, submitToHorizon]);
 
   const confirmSinkRequest = useCallback(

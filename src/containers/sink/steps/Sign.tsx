@@ -2,6 +2,7 @@ import { useViewportWidth } from "@/utils";
 import SignIcon from "@/components/icons/SignIcon";
 import SinkingStep from "./Step";
 import ModalHeader from "@/components/ModalHeader";
+import SinkingStepButtons from "./Buttons";
 
 export default function SignSinking() {
   const isWide = useViewportWidth();
@@ -15,6 +16,7 @@ export default function SignSinking() {
       <div className="flex-1 flex items-center justify-center my-16">
         <SignIcon large={isWide} />
       </div>
+      <SinkingStepButtons></SinkingStepButtons>
     </SinkingStep>
   );
 }
