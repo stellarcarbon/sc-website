@@ -4,6 +4,7 @@ import { useAppContext } from "@/context/appContext";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import SelectWalletButtons from "./SelectWalletButtons";
 import { useEffect, useRef } from "react";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 
 export default function SelectWallet() {
   const { supportedWallets } = useAppContext();
@@ -25,8 +26,8 @@ export default function SelectWallet() {
 
   return (
     <div ref={containerRef} className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1 w-full">
-        <h1 className="text-2xl font-bold">Connect your wallet</h1>
+      <div className="flex flex-col w-full">
+        <DashboardHeader>Select your wallet</DashboardHeader>
 
         <span className="text-sm mb-1 max-w-[80%] hidden md:block">
           Connect a wallet to be able to create new transactions.
