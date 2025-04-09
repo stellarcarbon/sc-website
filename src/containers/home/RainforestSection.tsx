@@ -4,6 +4,15 @@ import CTAButton from "@/components/CTAButton";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import DoubleChevronDownIcon from "@/components/icons/DoubleChevronDownIcon";
 import { useAppContext } from "@/context/appContext";
+import { faDochub } from "@fortawesome/free-brands-svg-icons";
+import {
+  faChartLine,
+  faFile,
+  faFileContract,
+  faHistory,
+  faSmog,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -96,10 +105,18 @@ export default function RainforestIntro() {
               blockchain carbon neutral
             </div>
             <div className="flex justify-center text-lg">
-              <ul className="list-disc inline-block text-left space-y-2">
-                <li>Offset personal emissions</li>
-                <li>Track your sinking history</li>
-                <li>Integrate our Soroban contract</li>
+              <ul className="list-none inline-block text-left space-y-2">
+                <li className="flex gap-2 items-center">
+                  <FontAwesomeIcon icon={faSmog} /> Offset personal emissions
+                </li>
+                <li className="flex gap-3 items-center">
+                  <FontAwesomeIcon icon={faFile} className="ml-1" />
+                  Track your sinking history
+                </li>
+                <li className="flex gap-3 items-center">
+                  <FontAwesomeIcon icon={faFileContract} className="ml-1" />{" "}
+                  Integrate our Soroban contract
+                </li>
               </ul>
             </div>
           </div>

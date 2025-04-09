@@ -70,20 +70,20 @@ export default function ProjectsPage() {
 
           {/* <p className="flex flex-col underline text-accentSecondary"> */}
           <Paragraph>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-4 mt-2">
               <Link
                 className="underline text-accentSecondary"
-                href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=44972&IDKEY=j98klasmf8jflkasf8098afnasfkj98f0a9sfsakjflsakjf8dk62016388"
+                href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=123849&IDKEY=s903q4jsafkasjfu90amnmasdfkaidflnmdf9348r09dmfasdfk170787771"
                 target="_blank"
               >
                 Progress Monitoring report
               </Link>
               <Link
                 className="underline text-accentSecondary"
-                href="https://info.fsc.org/details.php?id=a0240000005sSO8AAM&type=certificate"
+                href="https://search.fsc.org/en/certificate/a0240000005sSO8AAM/"
                 target="_blank"
               >
-                FSC Certificate GFA-FM/COC-001288
+                FSC Certificate
               </Link>
             </div>
           </Paragraph>
