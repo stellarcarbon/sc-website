@@ -7,11 +7,13 @@ import Button from "../Button";
 import { useSearchParams } from "next/navigation";
 import DashboardHeader from "../dashboard/DashboardHeader";
 import SectionHeader from "../SectionHeader";
+import FormError from "../FormError";
 
 interface ReasonSelectProps {
   setValue: (name: keyof SinkingFormData, value: any) => void;
   watch: (name: string) => string;
   register: UseFormRegister<SinkingFormData>;
+  error?: string;
 }
 
 export const ReasonOptions: Record<ReasonOptionKey, ReasonOption> = {
@@ -55,6 +57,7 @@ export default function ReasonSelect({
   setValue,
   watch,
   register,
+  error,
 }: ReasonSelectProps) {
   const memo = watch("memo");
   const searchParams = useSearchParams();
@@ -166,6 +169,7 @@ export default function ReasonSelect({
             }
           </div>
         </div>
+        <FormError>{error}</FormError>
       </div>
     </>
   );

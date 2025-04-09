@@ -29,6 +29,7 @@ const config: Config = {
         secondary: "#424769",
         tertiary: "#7077A1",
         darker: "#22263d",
+        darkest: "#1b1f33",
         accent: "#d8def2",
         // accentSecondary: "#596FB7",
         accentSecondary: "#8b9dd9",

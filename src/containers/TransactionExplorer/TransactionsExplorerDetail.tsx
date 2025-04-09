@@ -81,7 +81,7 @@ export default function TransactionsExplorerDetail() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center bg-primary">
+    <div className="w-full flex flex-col items-center min-h-[calc(100dvh-64px)] bg-darker">
       <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>
@@ -177,7 +177,7 @@ function PropertyKey({ children }: { children: ReactNode }) {
 
 function PropertyValue({ children }: { children: ReactNode }) {
   return (
-    <div className="col-span-4 h-10 items-center inline-flex justify-end gap-1">
+    <div className="col-span-4 h-10 items-center inline-flex justify-end gap-1 break-all">
       {children}
     </div>
   );

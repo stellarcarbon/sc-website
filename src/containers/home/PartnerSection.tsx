@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function PartnerSection() {
   return (
-    <div className="bg-secondary pt-4 pb-12 w-full border-y border-y-tertiary">
+    <div className="bg-secondary py-8 w-full border-y border-y-tertiary">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
         <div className="m-auto px-3 md:pl-[5%] md:w-[50%]">
@@ -25,11 +25,11 @@ export default function PartnerSection() {
         </div>
 
         {/* Partners */}
-        <div className="mt-8 md:mt-0 md:flex-1 md:max-w-[50%] md:min-h-[300px] flex flex-col items-center justify-center">
+        <div className="mt-8 md:mt-0 md:flex-1 md:max-w-[50%] md:min-h-[300px] flex flex-col items-center justify-center mx-10">
           <h1 className="text-3xl font-noto text-center">
             Join our early adopters
           </h1>
-          <div className="flex flex-col md:flex-row md:flex-wrap md:gap-4 items-center justify-around w-full">
+          <div className=" w-full overflow-x-scroll flex md:gap-6 flex-col items-center md:flex-row">
             {Object.values(Partners).map((partner, idx) => {
               return <PartnerLogo key={`partner_${idx}`} partner={partner} />;
             })}

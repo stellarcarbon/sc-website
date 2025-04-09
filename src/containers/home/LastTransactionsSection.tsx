@@ -24,7 +24,7 @@ export default function LastTransactionsSection() {
   }, []);
 
   return (
-    <div className="bg-secondary pt-4 pb-12 w-full border-y border-y-secondary px-3 md:px-[5%]">
+    <div className="bg-secondary py-8 w-full border-y border-y-secondary px-3 md:px-[5%]">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
         <div className="md:w-[50%]">
@@ -48,7 +48,7 @@ export default function LastTransactionsSection() {
         <>
           {lastTransactions && (
             <div className="mx-3 md:flex-1 flex justify-end">
-              <div className="w-full md:w-[30vw] flex flex-col gap-1">
+              <div className="w-full md:w-[30vw] flex flex-col gap-1 justify-center">
                 {lastTransactions.map((tx, idx) => {
                   return (
                     <TransactionListItem key={`tx_${idx}`} transaction={tx} />

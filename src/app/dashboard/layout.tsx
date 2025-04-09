@@ -25,6 +25,7 @@ export default function DashboardLayout({
           min-h-[calc(100dvh-64px)] md:min-h-[60vh]
           flex flex-col items-center justify-start
           lg:max-w-[740px] lg:w-[70vw]
+          overflow-hidden
           lg:m-6"
           >
             <DashboardNavBar />

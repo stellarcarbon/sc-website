@@ -85,10 +85,10 @@ export default function SinkingForm() {
               register={register}
               watch={watch}
               setValue={setValue}
+              error={reasonErrorLabel}
             />
           </Suspense>
         </ReasonSelectContextProvider>
-        {reasonErrorLabel && <FormError>{reasonErrorLabel}</FormError>}
 
         <Suspense>
           <AmountInput

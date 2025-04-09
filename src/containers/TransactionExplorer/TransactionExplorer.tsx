@@ -72,7 +72,7 @@ export default function TransactionExplorer({}) {
           </select>
         </div>
       </div>
-      <div className="w-full overflow-auto px-2 flex flex-col gap-1">
+      <div className="w-full overflow-auto px-2 flex flex-col gap-1 pb-12">
         {!error ? (
           transactions.length > 1 ? (
             transactions.map((tx, idx) => {

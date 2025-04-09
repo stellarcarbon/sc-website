@@ -31,7 +31,7 @@ export default function CTAButton({
         ${
           white
             ? "bg-white text-black"
-            : "bg-darker hover:bg-secondary text-white"
+            : "bg-darkest hover:bg-accent hover:text-black"
         }
         ${
           small

@@ -21,11 +21,11 @@ export default function NavBar() {
         border-b border-secondary
       bg-primary shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]`}
       >
-        <Link className="mx-4" href="/">
+        <Link className="ml-3" href="/">
           <StellarCarbonIcon className=" text-accent" />
         </Link>
 
-        {/* <div className="ml-10 gap-10 items-center hidden lg:flex">
+        <div className="ml-10 gap-10 items-center hidden lg:flex">
           <TopBarLink href="/">Home</TopBarLink>
           <TopBarLink href="/explain">Explain</TopBarLink>
           <TopBarLink href="/projects">Projects</TopBarLink>
@@ -33,11 +33,11 @@ export default function NavBar() {
           <TopBarLink href="/software">Software</TopBarLink>
           <TopBarLink href="/about">About us</TopBarLink>
           <div className="w-4"></div>
-        </div> */}
-        {/* 
+        </div>
+
         <div className="hidden md:block mr-8">
           <NavBarWallet />
-        </div> */}
+        </div>
 
         <div className="md:hidden">
           <HamburgerButton />

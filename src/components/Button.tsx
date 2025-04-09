@@ -21,7 +21,7 @@ export default function Button({
       ${
         disabled
           ? " text-gray-500 opacity-30"
-          : " text-black transition-colors active:bg-primary active:text-white hover:border-gray-300 hover:bg-accentSecondary hover:text-white hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          : " text-black transition-colors active:bg-primary active:text-white hover:border-gray-300 hover:bg-accentSecondary hover:text-white hover:dark:border-neutral-700 hover:dark:bg-primary"
       } ${className}`}
       {...rest}
     >

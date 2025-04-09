@@ -68,7 +68,7 @@ export default function OverviewContactInformationForm({
   }, [formEmail, formUsername, isValidEmail, onClose, updateWalletConnection]);
 
   return (
-    <div className="w-full relative px-4 md:px-8 py-8 flex flex-col gap-2 items-center bg-darker rounded border border-accentSecondary self-center ">
+    <div className="w-full relative px-4 md:px-8 py-8 flex flex-col gap-2 items-center bg-darkest rounded border border-accentSecondary self-center ">
       <span className="text-xl font-semibold">Update contact information</span>
       <span className="text-sm text-center">
         We do not use this information for any purpose than sending you

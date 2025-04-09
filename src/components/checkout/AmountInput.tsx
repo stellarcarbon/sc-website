@@ -154,10 +154,7 @@ export default function AmountInput({
     <>
       <SectionHeader>Set sink amount</SectionHeader>
       <div className="p-3 py-6 md:p-6">
-        {/* <DashboardHeader>Set sink amount</DashboardHeader> */}
-
         <div className="flex flex-col gap-6">
-          {/* <div>Set the amount of CARBON you want to sink.</div> */}
           <div className="">Using our emissions estimator...</div>
           <Button
             onClick={() => router.push("/estimator/flight")}
@@ -168,24 +165,6 @@ export default function AmountInput({
           </Button>
 
           <div className="">...or by entering the amount yourself.</div>
-
-          {/* <div className="flex flex-col gap-1 bg-darker p-4 px-6 rounded mx-auto border border-accentSecondary">
-          <div className="text-center">
-            We created tooling to help you estimate your emissions!
-          </div>
-
-          <div className="flex justify-center my-2">
-            <Button
-              onClick={() => router.push("/estimator/flight")}
-              className="gap-2 h-10 !px-3 hover:border !border-accent"
-            >
-              <FontAwesomeIcon icon={faCalculator} />
-              Estimate emissions
-            </Button>
-          </div>
-        </div> */}
-
-          {/* <div className="">Input how much CARBON you want to sink.</div> */}
 
           <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center gap-2 h-10 md:px-2">
@@ -235,7 +214,7 @@ export default function AmountInput({
             </div>
 
             <div
-              className={`px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-darker border rounded border-accentSecondary`}
+              className={`px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-darkest border rounded border-accentSecondary`}
             >
               {isLoading ? (
                 <Blocks width={48} height={48} />

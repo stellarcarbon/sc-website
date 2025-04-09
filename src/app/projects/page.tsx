@@ -19,7 +19,7 @@ export default function ProjectsPage() {
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-8 m-auto">
           <span className="text-5xl md:text-[7vw] text-center leading-[56px] md:leading-[8vw] ">
             {/* Our Offset Project */}
-            Nature Projects
+            Current Projects
           </span>
           <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px] image1">
             Land in the rainforest
@@ -37,9 +37,9 @@ export default function ProjectsPage() {
           <Header>Our offset project</Header>
 
           <Paragraph>
-            We currently support one project, which is a rainforest conservation
-            project. Contributing to Stellarcarbon means you will be investing
-            in the positive outcomes of the project.
+            We currently support only one project, which is a rainforest
+            conservation project. Contributing to Stellarcarbon means you will
+            be investing in the positive outcomes of the project.
           </Paragraph>
 
           <Subheader>Ucayali region</Subheader>

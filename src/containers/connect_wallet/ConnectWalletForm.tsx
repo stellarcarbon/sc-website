@@ -13,10 +13,12 @@ export default function ConnectWalletForm() {
 
   return (
     <>
-      <SectionHeader>
-        <div className="text-center text-2xl w-full">Connect wallet</div>
-      </SectionHeader>
-      <div className="flex-1 lg:my-8 w-full md:max-w-[780px] p-3 py-6 pb-12 md:p-6 flex flex-col justify-between gap-9 bg-darker md:rounded">
+      <div className="md:hidden w-full">
+        <SectionHeader>
+          <div className="text-center text-2xl w-full">Connect wallet</div>
+        </SectionHeader>
+      </div>
+      <div className="flex-1 lg:my-8 w-full md:max-w-[780px] p-3 py-6 pb-12 md:p-6 flex flex-col justify-between gap-9 bg-darker md:rounded md:border md:border-tertiary overflow-hidden">
         <SelectWallet />
         <ContactDetails />
         <AcceptTnC />

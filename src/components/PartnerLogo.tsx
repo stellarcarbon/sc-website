@@ -10,7 +10,7 @@ interface PartnerLogoProps {
 
 export default function PartnerLogo({ partner }: PartnerLogoProps) {
   return (
-    <div className="my-8 w-[240px] h-[80px] flex items-center justify-center">
+    <div className="my-8 w-[240px] h-[80px] flex-shrink-0 flex items-center justify-center">
       <img
         className=""
         src={partner}

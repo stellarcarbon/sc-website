@@ -22,10 +22,13 @@ lg:min-h-[calc(100dvh-80px)]"
 
  lg:w-[600px]
 
+    
+
   lg:border border-tertiary
   flex flex-col items-center justify-start
 
   lg:rounded
+  overflow-hidden
   lg:m-6
 "
         >

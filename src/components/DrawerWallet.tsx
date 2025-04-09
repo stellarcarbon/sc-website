@@ -15,7 +15,7 @@ export default function DrawerWallet() {
   return (
     <div className="flex-1 px-2 p-4 border-t border-t-accent">
       <div className="py-4 text-white flex items-center justify-between">
-        <div className="flex justify-center items-center gap-3 bg-darker p-2 mx-auto rounded border border-accentSecondary">
+        <div className="flex justify-center items-center gap-3 bg-darkest p-2 mx-auto rounded border border-accentSecondary">
           <div>
             <img className="h-6 w-6" src={walletConnection?.walletType.icon} />
           </div>

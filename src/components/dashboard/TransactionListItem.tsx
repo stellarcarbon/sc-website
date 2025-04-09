@@ -58,7 +58,7 @@ export default function TransactionListItem({
     <div
       onClick={onClick}
       className="w-full max-w-[95vw]
-  bg-darker border border-accentSecondary rounded
+  bg-darkest border border-accentSecondary rounded
   cursor-pointer
   p-2
   flex flex-col gap-1"
