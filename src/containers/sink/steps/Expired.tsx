@@ -33,7 +33,7 @@ export default function ExpiredSinking() {
   return (
     <SinkingStep>
       <ModalHeader>Expired</ModalHeader>
-      <div className="flex flex-col items-center text-red-500">
+      <div className="flex flex-col items-center">
         <div className="text-center">
           Your transaction expired. Please retry creating it. The transaction is
           only valid for 2 minutes.

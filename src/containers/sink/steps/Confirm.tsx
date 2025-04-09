@@ -5,7 +5,7 @@ import ModalHeader from "@/components/ModalHeader";
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCancel, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren } from "react";
 
@@ -26,7 +26,7 @@ export default function ConfirmSinking() {
         Your transaction is signed by Stellarcarbon and ready to go!
       </div>
 
-      <div className="w-full flex flex-col justify-center gap-10 bg-darker my-6 mb-8 md:my-12 p-4 rounded border border-tertiary">
+      <div className="w-full flex flex-col justify-center gap-6 bg-primary my-6 mb-8 md:my-12 p-4 rounded border border-tertiary">
         <div className="grid grid-cols-5 w-full">
           <ConfirmKey>Amount</ConfirmKey>
           <ConfirmValue>
@@ -34,7 +34,7 @@ export default function ConfirmSinking() {
             <CARBONCurrencyIcon width={22} height={22} />
           </ConfirmValue>
 
-          <div className="mt-10 col-span-5"></div>
+          <div className="mt-6 col-span-5"></div>
 
           <ConfirmKey>Price</ConfirmKey>
           <ConfirmValue>
@@ -66,16 +66,16 @@ export default function ConfirmSinking() {
       </div>
 
       <SinkingStepButtons>
+        <Button
+          onClick={() => router.push("/dashboard/sink")}
+          // className="!bg-red-500"
+        >
+          <FontAwesomeIcon icon={faXmark} className="text-lg" />
+          <div>Cancel</div>
+        </Button>
         <Button onClick={signTransaction}>
           <FontAwesomeIcon icon={faPen} />
           <div>Sign transaction</div>
-        </Button>
-        <Button
-          onClick={() => router.push("/dashboard/sink")}
-          className="!bg-red-500"
-        >
-          <FontAwesomeIcon icon={faCancel} />
-          <div>Cancel</div>
         </Button>
       </SinkingStepButtons>
     </SinkingStep>

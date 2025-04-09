@@ -57,7 +57,7 @@ export default function TransactionListItem({
   return (
     <div
       onClick={onClick}
-      className="w-full max-w-[850px]
+      className="w-full max-w-[95vw]
   bg-darker border border-accentSecondary rounded
   cursor-pointer
   p-2
@@ -70,7 +70,7 @@ export default function TransactionListItem({
         <span>{formattedDate}</span>
       </div>
 
-      <div className="flex items-center justify-between text-base">
+      <div className="flex items-center justify-between gap-4 text-base">
         {/* <span className="text-xs">Retirement reason</span> */}
         <div className="flex items-center gap-1">
           <CARBONCurrencyIcon />
@@ -78,9 +78,11 @@ export default function TransactionListItem({
         </div>
 
         {transaction.memo ? (
-          <div className="text-accentSecondary">{transaction.memo}</div>
+          <div className="text-accentSecondary truncate">
+            {transaction.memo}
+          </div>
         ) : (
-          <div className="text-xs text-red-400">No reason specified</div>
+          <div className="text-xs text-red-500">No reason specified</div>
         )}
         {/* <span className="">{transaction.memo ?? "N/A"}</span> */}
       </div>

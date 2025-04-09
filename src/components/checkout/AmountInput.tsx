@@ -240,7 +240,7 @@ export default function AmountInput({
               {isLoading ? (
                 <Blocks width={48} height={48} />
               ) : hasError ? (
-                <span className={`text-center mx-6 text-red-500 text-sm`}>
+                <span className={`text-center mx-6 text-red-500`}>
                   {statusMessage}
                 </span>
               ) : (

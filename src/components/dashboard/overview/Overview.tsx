@@ -47,18 +47,18 @@ export default function Overview() {
               <>
                 <div className="flex flex-col gap-2 text-lg">
                   <div className="flex justify-between">
-                    <div className="">Username</div>
+                    <div className="">Name</div>
                     <div className="">
                       {walletConnection.personalDetails!.username}
                     </div>
                   </div>
                   <div className="flex justify-between">
-                    <div>Email</div>
+                    <div>E-mail</div>
                     <div>{walletConnection.personalDetails!.useremail}</div>
                   </div>
                   <div className="text-xs">
-                    Your username and email address are only used to send you
-                    your personal certificates.
+                    Your name and e-mail address are only used to send you your
+                    retirement certificates.
                   </div>
                 </div>
                 {/* <div className="flex flex-col gap-4">

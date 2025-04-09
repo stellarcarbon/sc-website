@@ -17,7 +17,7 @@ export default function ErrorSinking() {
     <SinkingStep>
       <ModalHeader>Error</ModalHeader>
       <div className="flex flex-col items-center">
-        <FormError className="text-center text-base md:text-lg overflow-y-scroll max-h-[300px]">
+        <FormError className="text-center text-base md:text-lg max-h-[300px] text-red-500">
           {submissionError ?? "Unknown error"}
         </FormError>
         <div className="flex-1 flex justify-center items-center my-12">

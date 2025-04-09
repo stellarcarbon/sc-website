@@ -18,12 +18,8 @@ export default function PartnerSection() {
           </Paragraph>
 
           <Paragraph>
-            <Link
-              href="https://api.stellarcarbon.io/docs"
-              target="_blank"
-              className="underline text-sm"
-            >
-              Read our API docs here
+            <Link href="/software" className="underline text-sm">
+              Read about integration options here
             </Link>
           </Paragraph>
         </div>

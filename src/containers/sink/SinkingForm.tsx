@@ -74,8 +74,8 @@ export default function SinkingForm() {
             {" "}
             Use this form to specify how much{" "}
             <CARBONCurrencyIcon className="inline" /> to sink. 1{" "}
-            <CARBONCurrencyIcon className="inline" /> garantuees 1 Verified
-            Carbon Unit (VCU) will be burned.
+            <CARBONCurrencyIcon className="inline" /> guarantees 1 Verified
+            Carbon Unit (VCU) will be retired.
           </div>
         </div>
 

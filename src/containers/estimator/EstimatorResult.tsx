@@ -48,10 +48,10 @@ export default function EstimatorResult({
         <div className="">Distance flown</div>
         <div className="flex items-center gap-2 text-[32px] my-1">
           <div>{estimate && Number(estimate.distance_km).toFixed(0)}</div>
-          <div>kilometres</div>
+          <div>kilometers</div>
         </div>
 
-        <div className="text-base">CO2 emitted</div>
+        <div className="text-base">Estimated CO2 emissions</div>
         <div className="flex items-center gap-2 text-[32px] my-1">
           <div>{estimate.co2_tonnes}</div>
           <div>tonnes</div>

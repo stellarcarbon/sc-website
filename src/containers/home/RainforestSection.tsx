@@ -7,10 +7,12 @@ import { useAppContext } from "@/context/appContext";
 import { faDochub } from "@fortawesome/free-brands-svg-icons";
 import {
   faChartLine,
+  faComputer,
   faFile,
   faFileContract,
   faHistory,
   faSmog,
+  faTree,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -71,10 +73,10 @@ export default function RainforestIntro() {
       <div className="bg-rainforest bg-fixed bg-cover bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute h-[100vh]" />
 
       <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-[60px] z-10 text-center w-[100%]">
-        {/* <span className="font-roboto text-5xl md:text-[80px]"> */}
-        {/* <CARBONCurrencyIcon width={56} height={56} /> */}
-        {/* Stellarcarbon */}
-        {/* </span> */}
+        <span className="font-roboto text-5xl md:text-[80px]">
+          {/* <CARBONCurrencyIcon width={56} height={56} /> */}
+          Stellarcarbon
+        </span>
         <div className="flex flex-col gap-8 md:gap-16 text-md px-5 py-10 w-full bg-secondary/[.64]">
           {/* <h1 className="px-4 text-lg font-noto mb-4">
             Sinking CARBON with Stellar
@@ -93,29 +95,42 @@ export default function RainforestIntro() {
             emissions.
           </span> */}
           <div className="flex flex-col gap-8 font-noto">
-            <div className="text-2xl text-center leading-8 ">
-              Making the{" "}
+            {/* <div className="text-2xl text-center leading-8 ">
               <Link
                 className="underline"
                 href="https://stellar.org/"
                 target="_blank"
               >
                 Stellar
-              </Link>{" "}
-              blockchain carbon neutral
+              </Link>
+            </div> */}
+            <div className="text-xl flex flex-col items-center text-center  gap-4 leading-8 ">
+              <div>
+                We provide a simple way to contribute to nature based projects
+                through the{" "}
+                <a
+                  className="underline"
+                  href="https://stellar.org/"
+                  target="_blank"
+                >
+                  Stellar
+                </a>{" "}
+                blockchain
+              </div>
             </div>
-            <div className="flex justify-center text-xl font-bold">
+            <div className="flex justify-center text-base font-bold">
               <ul className="list-none inline-block text-left space-y-6">
                 <li className="flex gap-2 items-center">
-                  <FontAwesomeIcon icon={faSmog} /> Offset personal emissions
+                  <FontAwesomeIcon icon={faTree} /> Contribute to climate and
+                  biodiversity action
                 </li>
                 <li className="flex gap-3 items-center">
                   <FontAwesomeIcon icon={faFile} className="ml-1" />
-                  Track your sinking history
+                  Track your contributions
                 </li>
                 <li className="flex gap-3 items-center">
-                  <FontAwesomeIcon icon={faFileContract} className="ml-1" />{" "}
-                  Integrate our Soroban contract
+                  <FontAwesomeIcon icon={faComputer} className="ml-1" />{" "}
+                  Integrate our software
                 </li>
               </ul>
             </div>

@@ -18,7 +18,8 @@ export default function ProjectsPage() {
       <div className="bg-rainforest bg-cover pt-4 md:pt-8 w-full max-h-[350px]">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-8 m-auto">
           <span className="text-5xl md:text-[7vw] text-center leading-[56px] md:leading-[8vw] ">
-            Our Offset Project
+            {/* Our Offset Project */}
+            Nature Projects
           </span>
           <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px] image1">
             Land in the rainforest
@@ -32,8 +33,37 @@ export default function ProjectsPage() {
           <ShipiboImages />
         </div>
 
-        <div className="md:flex-1 md:mt-[-32px]">
-          <Header>About Shipibo Conibo and Cacataibo Communities</Header>
+        <div className="md:flex-1 md:mt-[-32px] flex flex-col gap-1">
+          <Header>Our offset project</Header>
+
+          <Paragraph>
+            We currently support one project, which is a rainforest conservation
+            project. Contributing to Stellarcarbon means you will be investing
+            in the positive outcomes of the project.
+          </Paragraph>
+
+          <Subheader>Ucayali region</Subheader>
+          <Paragraph>
+            This project, located in Peru's Ucayali region, focuses on forest
+            conservation within the territories of the Shipibo-Conibo and
+            Cacataibo Indigenous communities. The project aims to reduce
+            deforestation and forest degradation while supporting sustainable
+            forest management practices. The Ucayali region, home to a rich
+            diversity of Indigenous cultures and ecosystems, faces increasing
+            pressure from deforestation driven by agricultural expansion and
+            other land-use changes.
+          </Paragraph>
+          <Subheader>Verified Carbon Standard</Subheader>
+          <Paragraph>
+            Through this initiative, the participating communities are working
+            to protect their forests, preserve biodiversity, and generate
+            verified carbon credits under the Verified Carbon Standard (VCS) and
+            Climate, Community & Biodiversity (CCB) standards, contributing to
+            climate change mitigation, the safeguarding of the area’s rich
+            biodiversity, and the protection of Indigenous livelihoods.
+          </Paragraph>
+
+          <Header>About the project area</Header>
 
           <Paragraph>
             The Ucayali Region is located in the central part of eastern Peru,
@@ -66,7 +96,7 @@ export default function ProjectsPage() {
             </Link>
           </Paragraph>
 
-          <Subheader>Verification</Subheader>
+          <Header>Verification links</Header>
 
           {/* <p className="flex flex-col underline text-accentSecondary"> */}
           <Paragraph>

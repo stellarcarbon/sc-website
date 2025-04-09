@@ -2,9 +2,11 @@ import { HTMLProps } from "react";
 import HamburgerIcon from "./icons/HamburgerIcon";
 import { useAppContext } from "@/context/appContext";
 import CloseIcon from "./icons/CloseIcon";
+import WalletConnectionInfoSmall from "./WalletConnectionInfoSmall";
 
 export default function HamburgerButton() {
-  const { closeDrawer, openDrawer, isDrawerOpen } = useAppContext();
+  const { closeDrawer, openDrawer, isDrawerOpen, walletConnection } =
+    useAppContext();
 
   if (isDrawerOpen) {
     return (
@@ -22,7 +24,7 @@ export default function HamburgerButton() {
       onClick={openDrawer}
       className={`h-16 w-16 text-accent flex justify-center items-center`}
     >
-      <HamburgerIcon />
+      {walletConnection ? <WalletConnectionInfoSmall /> : <HamburgerIcon />}
     </button>
   );
 }
