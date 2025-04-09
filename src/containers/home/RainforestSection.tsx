@@ -104,8 +104,8 @@ export default function RainforestIntro() {
               </Link>{" "}
               blockchain carbon neutral
             </div>
-            <div className="flex justify-center text-lg">
-              <ul className="list-none inline-block text-left space-y-2">
+            <div className="flex justify-center text-xl font-bold">
+              <ul className="list-none inline-block text-left space-y-6">
                 <li className="flex gap-2 items-center">
                   <FontAwesomeIcon icon={faSmog} /> Offset personal emissions
                 </li>
@@ -120,13 +120,16 @@ export default function RainforestIntro() {
               </ul>
             </div>
           </div>
+          <div className="flex justify-center mt-4">
+            <CTAButton />
+          </div>
 
           {/* <span className="text-sm md:text-base">
             By sinking CARBON you are contributing to high-integrity nature
             based projects. Find out more below.
           </span> */}
         </div>
-        <CTAButton />
+
         <div
           ref={chevDown}
           className={`absolute cursor-pointer bottom-0 animate-bounce ${
