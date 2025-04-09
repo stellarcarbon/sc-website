@@ -59,9 +59,9 @@ export default function RainforestIntro() {
 
   return (
     <>
-      <div className="bg-rainforest bg-fixed bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute h-[100vh]" />
+      <div className="bg-rainforest bg-fixed bg-cover bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute h-[100vh]" />
 
-      <div className="mt-[-64px] md:mt-[-80px] h-[100vh] hero-text flex flex-col items-center justify-center gap-[80px] z-10 text-center w-[100%]">
+      <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-[60px] z-10 text-center w-[100%]">
         <span className="font-roboto text-5xl md:text-[80px]">
           {/* <CARBONCurrencyIcon width={56} height={56} /> */}
           Stellarcarbon
@@ -85,6 +85,17 @@ export default function RainforestIntro() {
           </span> */}
           <div className="text-lg  flex flex-col items-center text-center  gap-4 leading-8 ">
             <span>
+              Easily contribute to nature or offset your emissions with a{" "}
+              <Link
+                className="underline"
+                href="https://stellar.org/"
+                target="_blank"
+              >
+                Stellar
+              </Link>{" "}
+              wallet.
+            </span>
+            {/* <span>
               We provide a simple way for{" "}
               <Link
                 className="underline"
@@ -94,7 +105,7 @@ export default function RainforestIntro() {
                 Stellar
               </Link>{" "}
               blockchain users to contribute to nature based projects.
-            </span>
+            </span> */}
           </div>
 
           {/* <span className="text-sm md:text-base">
