@@ -8,7 +8,7 @@ export default function PartnerSection() {
     <div className="bg-secondary pt-4 pb-12 w-full border-y border-y-tertiary">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
-        <div className="m-auto px-3 md:pl-[5%] md:w-[40%]">
+        <div className="m-auto px-3 md:pl-[5%] md:w-[50%]">
           <Header>For business</Header>
 
           <Paragraph>
@@ -16,11 +16,7 @@ export default function PartnerSection() {
             who want to make it easy for their users to contribute to
             biodiversity or compensate for their emissions.
           </Paragraph>
-          <Paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            non euismod quam. Nulla facilisi. Donec dignissim elementum dui sed
-            dignissim.
-          </Paragraph>
+
           <Paragraph>
             <Link
               href="https://api.stellarcarbon.io/docs"
@@ -33,7 +29,7 @@ export default function PartnerSection() {
         </div>
 
         {/* Partners */}
-        <div className="mt-8 md:mt-0 md:flex-1 md:max-w-[60%] md:min-h-[300px] flex flex-col items-center justify-center">
+        <div className="mt-8 md:mt-0 md:flex-1 md:max-w-[50%] md:min-h-[300px] flex flex-col items-center justify-center">
           <h1 className="text-3xl font-noto text-center">
             Join our early adopters
           </h1>

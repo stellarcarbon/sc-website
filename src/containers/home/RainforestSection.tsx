@@ -62,11 +62,11 @@ export default function RainforestIntro() {
       <div className="bg-rainforest bg-fixed bg-cover bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute h-[100vh]" />
 
       <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-[60px] z-10 text-center w-[100%]">
-        <span className="font-roboto text-5xl md:text-[80px]">
-          {/* <CARBONCurrencyIcon width={56} height={56} /> */}
-          Stellarcarbon
-        </span>
-        <div className="flex flex-col gap-8 md:gap-16 text-md px-5 py-12 w-full bg-secondary/[.64]">
+        {/* <span className="font-roboto text-5xl md:text-[80px]"> */}
+        {/* <CARBONCurrencyIcon width={56} height={56} /> */}
+        {/* Stellarcarbon */}
+        {/* </span> */}
+        <div className="flex flex-col gap-8 md:gap-16 text-md px-5 py-10 w-full bg-secondary/[.64]">
           {/* <h1 className="px-4 text-lg font-noto mb-4">
             Sinking CARBON with Stellar
           </h1> */}
@@ -83,9 +83,9 @@ export default function RainforestIntro() {
             projects, making it effortless to compensate for your remaining
             emissions.
           </span> */}
-          <div className="text-lg  flex flex-col items-center text-center  gap-4 leading-8 ">
-            <span>
-              Easily contribute to nature or offset your emissions with a{" "}
+          <div className="flex flex-col gap-8 font-noto">
+            <div className="text-2xl text-center leading-8 ">
+              Making the{" "}
               <Link
                 className="underline"
                 href="https://stellar.org/"
@@ -93,19 +93,15 @@ export default function RainforestIntro() {
               >
                 Stellar
               </Link>{" "}
-              wallet.
-            </span>
-            {/* <span>
-              We provide a simple way for{" "}
-              <Link
-                className="underline"
-                href="https://stellar.org/"
-                target="_blank"
-              >
-                Stellar
-              </Link>{" "}
-              blockchain users to contribute to nature based projects.
-            </span> */}
+              blockchain carbon neutral
+            </div>
+            <div className="flex justify-center text-lg">
+              <ul className="list-disc inline-block text-left space-y-2">
+                <li>Offset personal emissions</li>
+                <li>Track your sinking history</li>
+                <li>Integrate our Soroban contract</li>
+              </ul>
+            </div>
           </div>
 
           {/* <span className="text-sm md:text-base">
