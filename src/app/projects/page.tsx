@@ -17,7 +17,7 @@ export default function ProjectsPage() {
       {/* Current project title with whale */}
       <div className="bg-rainforest bg-cover pt-4 md:pt-8 w-full max-h-[350px]">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-8 m-auto">
-          <span className="text-5xl md:text-[7vw] text-center leading-[56px] md:leading-[8vw] ">
+          <span className="text-5xl md:text-[5vw] text-center leading-[56px] md:leading-[8vw] ">
             {/* Our Offset Project */}
             Current Projects
           </span>
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
 
       {/* Custom content container */}
       <div className="flex flex-col md:flex-row grow md:pt-20 lg:max-w-[900px] xl:max-w-[1200px]">
-        <div className="hidden md:block w-full mb-8 md:flex-1  md:mr-16">
+        <div className="hidden w-full mb-8 md:flex-1  md:mr-16 xl:flex items-center">
           <ShipiboImages />
         </div>
 
@@ -62,7 +62,15 @@ export default function ProjectsPage() {
             climate change mitigation, the safeguarding of the area’s rich
             biodiversity, and the protection of Indigenous livelihoods.
           </Paragraph>
-
+        </div>
+      </div>
+      <div className="lg:max-w-[900px] xl:max-w-[1200px]">
+        <div>
+          <div className="xl:hidden px-4 my-8 mt-16 w-full flex justify-center">
+            <div className="max-w-[600px]">
+              <ShipiboImages />
+            </div>
+          </div>
           <Header>About the project area</Header>
 
           <Paragraph>
@@ -117,10 +125,6 @@ export default function ProjectsPage() {
               </Link>
             </div>
           </Paragraph>
-
-          <div className="md:hidden px-4 my-8 mt-16">
-            <ShipiboImages />
-          </div>
         </div>
       </div>
 

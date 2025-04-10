@@ -14,8 +14,8 @@ export default function TransactionExplorerLayout({
     <TransactionExplorerContextProvider>
       <div
         className="lg:flex lg:flex-col lg:items-center
-lg:bg-dalle lg:bg-cover lg:bg-fixed
-lg:min-h-[calc(100dvh-80px)]"
+lg:bg-dalle lg:bg-cover lg:bg-fixed lg:min-h-[calc(100dvh-80px)]
+"
       >
         <main
           className="bg-primary
@@ -29,7 +29,7 @@ lg:min-h-[calc(100dvh-80px)]"
 
   lg:rounded
   overflow-hidden
-  lg:m-6
+  lg:m-6 lg:min-h-[70vh]
 "
         >
           <TransactionExplorerHeader />

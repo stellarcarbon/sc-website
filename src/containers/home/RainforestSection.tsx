@@ -70,14 +70,16 @@ export default function RainforestIntro() {
 
   return (
     <>
-      <div className="bg-rainforest bg-fixed bg-cover bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute h-[100vh]" />
+      <div className="bg-rainforest bg-cover bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute h-[100vh]" />
 
-      <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-[60px] z-10 text-center w-[100%]">
-        <span className="font-roboto text-5xl md:text-[80px]">
-          {/* <CARBONCurrencyIcon width={56} height={56} /> */}
+      <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-8 z-10 text-center w-[100%]">
+        {/* <span className="font-roboto text-5xl md:text-[80px]">
           Stellarcarbon
-        </span>
-        <div className="flex flex-col gap-8 md:gap-16 text-md px-5 py-10 w-full bg-secondary/[.64]">
+        </span> */}
+        <div className="flex flex-col gap-8 md:gap-16 text-md px-5 py-6 md:py-16 w-full bg-secondary/[.64]">
+          <span className="font-roboto text-5xl md:text-[64px]">
+            Stellarcarbon
+          </span>
           {/* <h1 className="px-4 text-lg font-noto mb-4">
             Sinking CARBON with Stellar
           </h1> */}
@@ -95,16 +97,7 @@ export default function RainforestIntro() {
             emissions.
           </span> */}
           <div className="flex flex-col gap-8 font-noto">
-            {/* <div className="text-2xl text-center leading-8 ">
-              <Link
-                className="underline"
-                href="https://stellar.org/"
-                target="_blank"
-              >
-                Stellar
-              </Link>
-            </div> */}
-            <div className="text-xl flex flex-col items-center text-center  gap-4 leading-8 ">
+            <div className="md:text-xl flex flex-col items-center text-center  gap-4 leading-8 ">
               <div>
                 We provide a simple way to contribute to nature based projects
                 through the{" "}
@@ -118,25 +111,36 @@ export default function RainforestIntro() {
                 blockchain
               </div>
             </div>
-            <div className="flex justify-center text-base font-bold">
-              <ul className="list-none inline-block text-left space-y-6">
-                <li className="flex gap-2 items-center">
-                  <FontAwesomeIcon icon={faTree} /> Contribute to climate and
-                  biodiversity action
+            {/* <div className="flex justify-center text-base font-bold mx-10">
+              <ul className="list-none inline-block text-start space-y-1 md:space-y-6">
+                <li className="flex items-center">
+                  <div className="w-10 h-10 flex items-center justify-center">
+                    <FontAwesomeIcon icon={faTree} className="text-2xl" />
+                  </div>
+                  <div className="flex-1">
+                    Contribute to climate and biodiversity action
+                  </div>
                 </li>
-                <li className="flex gap-3 items-center">
-                  <FontAwesomeIcon icon={faFile} className="ml-1" />
-                  Track your contributions
+                <li className="flex items-center">
+                  <div className="w-10 h-10 flex items-center justify-center">
+                    <FontAwesomeIcon icon={faFile} className="ml-1 text-2xl" />
+                  </div>
+                  <div className="flex-1">Track your contributions</div>
                 </li>
-                <li className="flex gap-3 items-center">
-                  <FontAwesomeIcon icon={faComputer} className="ml-1" />{" "}
-                  Integrate our software
+                <li className="flex items-center">
+                  <div className="w-10 h-10 flex items-center justify-center">
+                    <FontAwesomeIcon
+                      icon={faComputer}
+                      className="ml-1 text-2xl"
+                    />
+                  </div>
+                  <div className="flex-1">Integrate our software</div>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
-          <div className="flex justify-center mt-4">
-            <CTAButton />
+          <div className="flex justify-center">
+            <CTAButton huge />
           </div>
 
           {/* <span className="text-sm md:text-base">

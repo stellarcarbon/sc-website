@@ -36,6 +36,10 @@ export default function TransactionExplorer({}) {
 
   return (
     <div className="flex flex-col items-center h-full">
+      {/* <div className="m-3 mb-0">
+        Use this tool to browse historical contribution data. All Stellarcarbon
+        transactions are completely publicly visible.
+      </div> */}
       <div className="w-full flex justify-between items-center gap-1 my-4 px-4 !text-xs">
         <div className="flex items-center gap-4">
           <IconButton

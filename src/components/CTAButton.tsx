@@ -6,9 +6,11 @@ import { useAppContext } from "@/context/appContext";
 export default function CTAButton({
   white,
   small,
+  huge,
 }: {
   white?: boolean;
   small?: boolean;
+  huge?: boolean;
 }) {
   const router = useSCRouter();
   const { walletConnection, isMobileDevice, closeDrawer } = useAppContext();
@@ -36,6 +38,8 @@ export default function CTAButton({
         ${
           small
             ? "px-3 text-sm h-9 gap-1 rounded-lg"
+            : huge
+            ? "p-3 gap-3 text-2xl rounded-lg"
             : "w-[220px] text-lg h-12 gap-3 rounded-xl"
         }
         

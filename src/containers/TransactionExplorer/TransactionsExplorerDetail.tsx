@@ -106,7 +106,7 @@ export default function TransactionsExplorerDetail() {
           </div>
         </PropertyValue>
 
-        <PropertyKey>Reason</PropertyKey>
+        <PropertyKey>Memo</PropertyKey>
         <PropertyValue>{transaction.memo ?? "N/A"}</PropertyValue>
 
         {/* <PropertyKey>Status</PropertyKey>
