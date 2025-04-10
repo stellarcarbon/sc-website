@@ -62,12 +62,12 @@ export default function ProjectsPage() {
           </Paragraph>
           <Subheader>Verified Carbon Standard</Subheader>
           <Paragraph>
-            Through this initiative, the participating communities are working
+            {`Through this initiative, the participating communities are working
             to protect their forests, preserve biodiversity, and generate
             verified carbon credits under the Verified Carbon Standard (VCS) and
             Climate, Community & Biodiversity (CCB) standards, contributing to
             climate change mitigation, the safeguarding of the area’s rich
-            biodiversity, and the protection of Indigenous livelihoods.
+            biodiversity, and the protection of Indigenous livelihoods.`}
           </Paragraph>
         </div>
       </div>
