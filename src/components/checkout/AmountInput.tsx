@@ -153,20 +153,21 @@ export default function AmountInput({
   return (
     <>
       <SectionHeader>Set sink amount</SectionHeader>
-      <div className="p-3 py-6 md:p-6">
-        <div className="flex flex-col gap-6">
-          <div className="">Using our emissions estimator...</div>
-          <Button
-            onClick={() => router.push("/estimator/flight")}
-            className="gap-2 h-10 !px-3 hover:border !border-accent mx-auto"
-          >
-            <FontAwesomeIcon icon={faCalculator} />
-            Go to emissions estimator
-          </Button>
-
-          <div className="">...or by entering the amount yourself.</div>
+      <div className="p-3 py-6 md:p-6 mb-4">
+        <div className="flex flex-col gap-8">
+          <div>
+            <div className="mb-4">Using our emissions estimator...</div>
+            <Button
+              onClick={() => router.push("/estimator/flight")}
+              className="gap-2 h-10 !px-3 hover:border !border-accent mx-auto"
+            >
+              <FontAwesomeIcon icon={faCalculator} />
+              Go to emissions estimator
+            </Button>
+          </div>
 
           <div className="flex flex-col gap-2">
+            <div className="">...or by entering the amount yourself.</div>
             <div className="flex justify-between items-center gap-2 h-10 md:px-2">
               <div className="relative w-[35%]">
                 <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">

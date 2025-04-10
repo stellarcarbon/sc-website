@@ -19,23 +19,20 @@ export default function ConfirmSinking() {
   }
 
   return (
-    <SinkingStep>
-      <ModalHeader>Transaction confirmation</ModalHeader>
-
-      <div className="text-center">
+    <SinkingStep title="Confirm transaction">
+      <div className="text-center font-semibold text-lg">
         Your transaction is signed by Stellarcarbon and ready to go!
       </div>
 
-      <div className="w-full flex flex-col justify-center gap-6 bg-primary my-6 mb-8 md:my-12 p-4 rounded border border-tertiary">
+      <div className="w-full flex flex-col justify-center gap-8 bg-primary my-8 mb-10 md:my-12 p-3 rounded border border-tertiary">
         <div className="grid grid-cols-5 w-full">
           <ConfirmKey>Amount</ConfirmKey>
           <ConfirmValue>
             <div>{Number(sinkResponse?.carbon_amount).toFixed(3)}</div>
             <CARBONCurrencyIcon width={22} height={22} />
           </ConfirmValue>
-
-          <div className="mt-6 col-span-5"></div>
-
+        </div>
+        <div className="grid grid-cols-5 w-full">
           <ConfirmKey>Price</ConfirmKey>
           <ConfirmValue>
             <div>{Number(sinkResponse?.payment_max_amount).toFixed(2)}</div>
@@ -60,7 +57,7 @@ export default function ConfirmSinking() {
               {sinkRequest.memoValue}
             </div>
           ) : (
-            <div className="text-sm">No reason specified</div>
+            <div className="text-sm text-secondary">No reason specified</div>
           )}
         </div>
       </div>

@@ -1,10 +1,5 @@
-import Button from "@/components/Button";
 import {
-  faArrowLeft,
   faCircleArrowLeft,
-  faInfoCircle,
-  faMagnifyingGlass,
-  faQuestion,
   faQuestionCircle,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
@@ -20,8 +15,6 @@ export default function TransactionExplorerHeader() {
       <h1 className="text-xl md:text-2xl font-semibold my-2 text-center ">
         {pathname.includes("detail")
           ? "Transaction details"
-          : pathname.includes("help")
-          ? "Explorer Help"
           : "Transaction Explorer"}
       </h1>
 

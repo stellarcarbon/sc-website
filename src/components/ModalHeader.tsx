@@ -2,9 +2,8 @@ import { PropsWithChildren } from "react";
 
 export default function ModalHeader({ children }: PropsWithChildren) {
   return (
-    <div className="text-2xl mb-4 text-center mx-auto">
-      <div className="px-4">{children}</div>
-      <hr className="mt-2 border-2 border-accentSecondary" />
+    <div className="bg-secondary font-bold h-14 text-2xl flex items-center justify-center w-full px-3 md:px-4">
+      {children}
     </div>
   );
 }

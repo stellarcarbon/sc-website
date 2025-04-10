@@ -31,8 +31,7 @@ export default function ExpiredSinking() {
   }, [router, sinkRequest]);
 
   return (
-    <SinkingStep>
-      <ModalHeader>Expired</ModalHeader>
+    <SinkingStep title="Expired">
       <div className="flex flex-col items-center">
         <div className="text-center">
           Your transaction expired. Please retry creating it. The transaction is
@@ -40,7 +39,7 @@ export default function ExpiredSinking() {
         </div>
         <FontAwesomeIcon
           icon={faTriangleExclamation}
-          className="text-[96px] my-12"
+          className="text-[96px] my-12 text-yellow-500"
         />
       </div>
       <SinkingStepButtons>

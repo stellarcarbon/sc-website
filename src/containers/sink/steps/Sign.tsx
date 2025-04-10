@@ -8,9 +8,8 @@ export default function SignSinking() {
   const isWide = useViewportWidth();
 
   return (
-    <SinkingStep>
-      <ModalHeader>Sign</ModalHeader>
-      <span className="text-center md:text-lg mt-4">
+    <SinkingStep title="Sign transaction">
+      <span className="text-center text-lg font-semibold mt-4">
         {"Sign the transaction using your wallet in the pop-up."}
       </span>
       <div className="flex-1 flex items-center justify-center my-16">

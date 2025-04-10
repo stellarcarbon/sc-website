@@ -1,4 +1,5 @@
 "use client";
+import Banner from "@/components/Banner";
 import ContentContainer from "@/components/ContentContainer";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -14,16 +15,11 @@ import Link from "next/link";
 export default function SoftwarePage() {
   return (
     <main className="flex flex-col items-center font-noto">
-      <div className="blockchain-bg w-full">
-        <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
-          <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
-            Software
-          </span>
-          <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
-            For integration partners
-          </span>
-        </div>
-      </div>
+      <Banner
+        title="Software"
+        subtitle="For integration partners"
+        background="blockchain-bg"
+      />
 
       <ContentContainer>
         <Paragraph>
@@ -77,7 +73,7 @@ export default function SoftwarePage() {
             className="ml-4 p-2 text-2xl flex items-center gap-2 hover:bg-tertiary rounded underline"
             target="_blank"
           >
-           <OpenAPIIcon width={24} height={24}/>
+            <OpenAPIIcon width={24} height={24} />
             <div className="text-lg">View API documentation</div>
           </Link>
         </div>

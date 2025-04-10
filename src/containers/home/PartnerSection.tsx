@@ -5,10 +5,10 @@ import Link from "next/link";
 
 export default function PartnerSection() {
   return (
-    <div className="bg-secondary py-8 w-full border-y border-y-tertiary">
+    <div className="bg-secondary py-12 w-full ">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
         {/* Text */}
-        <div className="m-auto px-3 md:pl-[5%] md:w-[50%]">
+        <div className="px-3 md:pl-[5%] md:w-[50%]">
           <Header>For business</Header>
 
           <Paragraph>
@@ -25,7 +25,7 @@ export default function PartnerSection() {
         </div>
 
         {/* Partners */}
-        <div className="mt-8 md:mt-0 md:flex-1 md:max-w-[50%] md:min-h-[300px] flex flex-col items-center justify-center mx-10">
+        <div className="mt-8 md:mt-0 md:flex-1 md:max-w-[50%] flex flex-col items-center justify-center mx-10">
           <h1 className="text-3xl font-noto text-center">
             Join our early adopters
           </h1>

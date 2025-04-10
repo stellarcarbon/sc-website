@@ -27,9 +27,8 @@ export default function CompletedSinking() {
   }, [myTransactions, walletConnection, router, setMyTransactions]);
 
   return (
-    <SinkingStep>
-      <ModalHeader>Transaction succesful</ModalHeader>
-      <div className="text-center mt-4">
+    <SinkingStep title="Transaction succesful">
+      <div className="text-center mt-4 text-lg font-semibold">
         Your transaction was succesfully committed to the Stellar blockchain.
       </div>
 

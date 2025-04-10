@@ -14,16 +14,15 @@ export default function ErrorSinking() {
   const router = useRouter();
 
   return (
-    <SinkingStep>
-      <ModalHeader>Error</ModalHeader>
+    <SinkingStep title="Something went wrong">
       <div className="flex flex-col items-center">
-        <FormError className="text-center text-base md:text-lg max-h-[300px] text-red-500">
-          {submissionError ?? "Unknown error"}
-        </FormError>
+        <div className="text-lg font-semibold overflow-y-auto max-h-[200px]">
+          {submissionError ?? "Please try again."}
+        </div>
         <div className="flex-1 flex justify-center items-center my-12">
           <FontAwesomeIcon
             icon={faWarning}
-            className="text-[96px] text-red-500"
+            className="text-[96px] text-red-600"
           />
         </div>
       </div>

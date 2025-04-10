@@ -57,7 +57,7 @@ export default function CurrencySelect({
       <div className="p-3 py-6 md:p-6">
         {/* <DashboardHeader>Choose preferred asset</DashboardHeader> */}
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-6">
           <span className="">
             {`Choose a preferred payment asset to use or leave it on "No preference". Horizon will create the best offer available.`}
           </span>

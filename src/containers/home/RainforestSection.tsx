@@ -70,13 +70,13 @@ export default function RainforestIntro() {
 
   return (
     <>
-      <div className="bg-rainforest bg-cover bg-top bg-no-repeat w-full top-0 left-0 z-0 block absolute h-[100vh]" />
+      <div className="bg-forestcreek bg-cover bg-center bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]" />
 
       <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-8 z-10 text-center w-[100%]">
         {/* <span className="font-roboto text-5xl md:text-[80px]">
           Stellarcarbon
         </span> */}
-        <div className="flex flex-col gap-8 md:gap-16 text-md px-5 py-6 md:py-16 w-full bg-secondary/[.64]">
+        <div className="mt-[-64px] flex flex-col gap-8 md:gap-16 text-md px-5 py-10 md:py-16 w-full bg-secondary/[.74] border-y border-accentSecondary">
           <span className="font-roboto text-5xl md:text-[64px]">
             Stellarcarbon
           </span>
@@ -97,8 +97,8 @@ export default function RainforestIntro() {
             emissions.
           </span> */}
           <div className="flex flex-col gap-8 font-noto">
-            <div className="md:text-xl flex flex-col items-center text-center  gap-4 leading-8 ">
-              <div>
+            <div className="md:text-xl flex flex-col items-center text-center  gap-4">
+              <div className=" lg:max-w-[600px] leading-7 lg:leading-10">
                 We provide a simple way to contribute to nature based projects
                 through the{" "}
                 <a
@@ -139,7 +139,7 @@ export default function RainforestIntro() {
               </ul>
             </div> */}
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center my-1">
             <CTAButton huge />
           </div>
 

@@ -68,7 +68,7 @@ export default function TransactionListItem({
           {transaction.memo ? (
             <div className="text-white">{transaction.memo}</div>
           ) : (
-            <div className="text-tertiary">No reason specified</div>
+            <div className="text-secondary italic mr-1">Not specified</div>
           )}
         </div>
       </div>

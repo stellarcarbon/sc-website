@@ -66,14 +66,14 @@ export default function SinkingForm() {
         </div>
       )}
       <form className="flex flex-col mb-12">
-        <div className="mx-3 md:mx-8 mb-6 text-base md:text-base">
+        <div className="mx-3 md:mx-8 my-4">
           <div className="text-center text-lg font-semibold">
             Support the Stellarcarbon initiative by sinking CARBON!
           </div>
-          <div className="mt-4 text-base">
+          <div className="my-8 text-base">
             {" "}
             Use this form to specify how much{" "}
-            <CARBONCurrencyIcon className="inline" /> to sink. 1{" "}
+            <CARBONCurrencyIcon className="inline" /> to sink. Sinking 1{" "}
             <CARBONCurrencyIcon className="inline" /> guarantees 1 Verified
             Carbon Unit (VCU) will be retired.
           </div>

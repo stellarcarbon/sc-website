@@ -31,7 +31,6 @@ export default function Home() {
 
       <ParallaxDivider
         image={ParallaxBackgrounds.AUTUMN_FOREST}
-        smaller
         yOffset={-200}
       />
       <Footer />

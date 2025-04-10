@@ -114,10 +114,10 @@ export default function ReasonSelect({
   return (
     <>
       <SectionHeader>Label your contribution</SectionHeader>
-      <div className="p-3 py-6 md:p-6">
+      <div className="p-3 py-6 md:p-6 mb-4">
         {/* <DashboardHeader>Label your contribution</DashboardHeader> */}
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             <span className="">
               Why are you making this contribution? Leave a public message and

@@ -69,7 +69,7 @@ export default function ParallaxDivider({
   }, [xOffset, yOffset, transform, mirrored]);
 
   const heightSettings = useMemo(() => {
-    let styling = "h-[200px] md:h-[300px]";
+    let styling = "h-[200px] md:h-[150px]";
     if (smaller) {
       styling = "h-[125px] md:h-[175px]";
     }
