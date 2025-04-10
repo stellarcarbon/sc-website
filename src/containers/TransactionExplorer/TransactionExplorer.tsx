@@ -80,13 +80,7 @@ export default function TransactionExplorer({}) {
         {!error ? (
           transactions.length > 1 ? (
             transactions.map((tx, idx) => {
-              return (
-                <TransactionListItem
-                  key={`tx_${idx}`}
-                  transaction={tx}
-                  bgPrimary
-                />
-              );
+              return <TransactionListItem key={`tx_${idx}`} transaction={tx} />;
             })
           ) : (
             <div className="w-full flex flex-col items-center justify-center gap-6">

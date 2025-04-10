@@ -51,14 +51,14 @@ export default function ProjectsPage() {
 
           <Subheader>Ucayali region</Subheader>
           <Paragraph>
-            This project, located in Peru's Ucayali region, focuses on forest
+            {`This project, located in Peru's Ucayali region, focuses on forest
             conservation within the territories of the Shipibo-Conibo and
             Cacataibo Indigenous communities. The project aims to reduce
             deforestation and forest degradation while supporting sustainable
             forest management practices. The Ucayali region, home to a rich
             diversity of Indigenous cultures and ecosystems, faces increasing
             pressure from deforestation driven by agricultural expansion and
-            other land-use changes.
+            other land-use changes.`}
           </Paragraph>
           <Subheader>Verified Carbon Standard</Subheader>
           <Paragraph>
@@ -81,13 +81,13 @@ export default function ProjectsPage() {
           <Header>About the project area</Header>
 
           <Paragraph>
-            The Ucayali Region is located in the central part of eastern Peru,
+            {`The Ucayali Region is located in the central part of eastern Peru,
             with an approximate area of 105 082.69 km2, is the second region,
             after the Loreto Region, to introduce greater extent. Politically
             bounded on the north by the Loreto Region; on the south by the
             Regions of Junín, Cusco and Madre de Dios; on the west by the
             Huánuco and Pasco regions; on the east by the State of Acre –
-            Brazil.
+            Brazil.`}
           </Paragraph>
           <Paragraph>
             It is divided into 4 provinces: Padre Abad, Coronel Portillo and
