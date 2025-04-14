@@ -79,10 +79,6 @@ export default function TxExplorerHelpPage() {
           </FieldContainer>
         </div>
       </div>
-      <SectionHeader>Retirement information</SectionHeader>
-      <div className="p-3">
-        <div>retirement bla</div>
-      </div>
     </div>
   );
 }

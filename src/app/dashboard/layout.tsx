@@ -19,7 +19,7 @@ export default function DashboardLayout({
       {appConfig.demo ? (
         <>{children}</>
       ) : (
-        <div className="lg:flex lg:flex-col lg:items-center lg:bg-dalle lg:bg-cover lg:bg-fixed flex-1">
+        <div className="lg:flex lg:flex-col lg:items-center lg:bg-forestling lg:bg-cover lg:bg-fixed flex-1">
           <main
             className="bg-primary lg:border border-tertiary lg:rounded
           min-h-[calc(100dvh-64px)] md:min-h-[60vh]

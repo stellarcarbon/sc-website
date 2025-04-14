@@ -72,17 +72,14 @@ export default function RainforestIntro() {
     <>
       <div className="bg-forestcreek bg-cover bg-center bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]" />
 
-      <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-8 z-10 text-center w-[100%]">
-        {/* <span className="font-roboto text-5xl md:text-[80px]">
+      <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-16 z-10 text-center w-[100%]">
+        <span className="font-roboto text-5xl md:text-[80px]">
           Stellarcarbon
-        </span> */}
-        <div className="mt-[-64px] flex flex-col gap-8 text-md px-5 py-10 w-full bg-secondary/[.74] border-y border-accentSecondary">
-          <span className="font-roboto text-5xl md:text-[56px]">
-            Stellarcarbon
-          </span>
+        </span>
+        <div className="flex flex-col gap-8 text-md px-5 py-8 md:py-12 w-full bg-secondary/[.74]">
           <div className="flex flex-col gap-8 font-noto">
             <div className="flex flex-col items-center text-center gap-4">
-              <div className="lg:max-w-[600px] leading-7 lg:leading-10 md:text-lg">
+              <div className="lg:max-w-[600px] leading-7 lg:leading-10 md:text-xl">
                 We provide a simple way to contribute to nature based projects
                 through the{" "}
                 <a
@@ -95,9 +92,6 @@ export default function RainforestIntro() {
                 blockchain
               </div>
             </div>
-          </div>
-          <div className="flex justify-center my-1">
-            <CTAButton huge />
           </div>
 
           {/* <div className="flex justify-center text-base font-bold mx-10">
@@ -132,6 +126,9 @@ export default function RainforestIntro() {
             By sinking CARBON you are contributing to high-integrity nature
             based projects. Find out more below.
           </span> */}
+        </div>
+        <div className="flex justify-center my-1">
+          <CTAButton huge />
         </div>
 
         <div

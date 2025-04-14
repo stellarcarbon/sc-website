@@ -22,17 +22,18 @@ export default function Home() {
 
       <ExplainSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-100} />
 
       <LastTransactionsSection />
-      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
+      <ParallaxDivider
+        image={ParallaxBackgrounds.FOREST}
+        yOffset={-400}
+        mirrored
+      />
 
       <PartnerSection />
 
-      <ParallaxDivider
-        image={ParallaxBackgrounds.AUTUMN_FOREST}
-        yOffset={-200}
-      />
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-200} />
       <Footer />
 
       {/* <div className="h-[600px] flex flex-col justify-center">

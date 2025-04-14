@@ -20,7 +20,7 @@ export default function NavBar() {
         border-b border-secondary
       bg-darker shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]`}
       >
-        <Link className="ml-3" href="/">
+        <Link className="ml-3 md:ml-8" href="/">
           <StellarCarbonIcon className=" text-accent" />
         </Link>
 

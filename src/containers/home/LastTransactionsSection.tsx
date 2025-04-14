@@ -24,7 +24,7 @@ export default function LastTransactionsSection() {
   }, []);
 
   return (
-    <div className="bg-secondary py-12 w-full border-y border-y-secondary px-3 md:px-[5%]">
+    <div className="bg-secondary py-12 w-full border-y border-y-secondary px-3 md:px-[5%] shadow-xl z-[10]">
       <div className="flex flex-col gap-8 md:gap-0 md:flex-row md:items-center h-full w-full">
         {/* Text */}
         <div className="md:w-[50%]">
