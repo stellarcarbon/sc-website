@@ -24,7 +24,7 @@ export default function ConfirmSinking() {
         Your transaction is signed by Stellarcarbon and ready to go!
       </div>
 
-      <div className="w-full flex flex-col justify-center gap-8 bg-primary my-8 mb-10 md:my-12 p-3 rounded border border-tertiary">
+      <div className="flex flex-col justify-center gap-8 bg-primary md:mx-8 mb-4 mt-8 p-3 rounded border border-tertiary">
         <div className="grid grid-cols-5 w-full">
           <ConfirmKey>Amount</ConfirmKey>
           <ConfirmValue>
@@ -41,8 +41,10 @@ export default function ConfirmSinking() {
 
           {sinkResponse?.payment_asset !== "USDC" && (
             <>
-              <div className="col-span-2 text-xs">USDC equivalent</div>
-              <div className="col-span-3 flex items-center justify-end text-xs">
+              <div className="col-span-2 text-xs md:text-sm">
+                USDC equivalent
+              </div>
+              <div className="col-span-3 flex items-center justify-end text-xs md:text-sm">
                 <div>$</div>
                 <div>{Number(sinkResponse?.usdc_amount).toFixed(2)}</div>
               </div>
@@ -50,30 +52,34 @@ export default function ConfirmSinking() {
           )}
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <div className="font-bold text-xl md:text-2xl">Reason</div>
           {sinkRequest.memoValue ? (
             <div className="break-all text-accentSecondary text-center mt-3 text-2xl md:text-3xl">
               {sinkRequest.memoValue}
             </div>
           ) : (
-            <div className="text-sm text-secondary">No reason specified</div>
+            <div className="text-sm md:text-base text-tertiary">
+              No reason specified
+            </div>
           )}
         </div>
       </div>
 
       <SinkingStepButtons>
-        <Button
-          onClick={() => router.push("/dashboard/sink")}
-          // className="!bg-red-500"
-        >
-          <FontAwesomeIcon icon={faXmark} className="text-lg" />
-          <div>Cancel</div>
-        </Button>
-        <Button onClick={signTransaction}>
-          <FontAwesomeIcon icon={faPen} />
-          <div>Sign transaction</div>
-        </Button>
+        <div className="flex justify-between md:mx-8 w-full mb-4">
+          <Button
+            onClick={() => router.push("/dashboard/sink")}
+            // className="!bg-red-500"
+          >
+            <FontAwesomeIcon icon={faXmark} className="text-lg" />
+            <div>Cancel</div>
+          </Button>
+          <Button onClick={signTransaction}>
+            <FontAwesomeIcon icon={faPen} />
+            <div>Sign transaction</div>
+          </Button>
+        </div>
       </SinkingStepButtons>
     </SinkingStep>
   );
