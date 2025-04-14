@@ -76,29 +76,13 @@ export default function RainforestIntro() {
         {/* <span className="font-roboto text-5xl md:text-[80px]">
           Stellarcarbon
         </span> */}
-        <div className="mt-[-64px] flex flex-col gap-8 md:gap-16 text-md px-5 py-10 md:py-16 w-full bg-secondary/[.74] border-y border-accentSecondary">
-          <span className="font-roboto text-5xl md:text-[64px]">
+        <div className="mt-[-64px] flex flex-col gap-8 text-md px-5 py-10 w-full bg-secondary/[.74] border-y border-accentSecondary">
+          <span className="font-roboto text-5xl md:text-[56px]">
             Stellarcarbon
           </span>
-          {/* <h1 className="px-4 text-lg font-noto mb-4">
-            Sinking CARBON with Stellar
-          </h1> */}
-          {/* <span className="md:max-w-[50%] self-center leading-8 ">
-            We provide a simple way for{" "}
-            <Link
-              className="underline"
-              href="https://stellar.org/"
-              target="_blank"
-            >
-              Stellar
-            </Link>{" "}
-            blockchain users to contribute to high-integrity nature based
-            projects, making it effortless to compensate for your remaining
-            emissions.
-          </span> */}
           <div className="flex flex-col gap-8 font-noto">
-            <div className="md:text-xl flex flex-col items-center text-center  gap-4">
-              <div className=" lg:max-w-[600px] leading-7 lg:leading-10">
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="lg:max-w-[600px] leading-7 lg:leading-10 md:text-lg">
                 We provide a simple way to contribute to nature based projects
                 through the{" "}
                 <a
@@ -111,7 +95,12 @@ export default function RainforestIntro() {
                 blockchain
               </div>
             </div>
-            {/* <div className="flex justify-center text-base font-bold mx-10">
+          </div>
+          <div className="flex justify-center my-1">
+            <CTAButton huge />
+          </div>
+
+          {/* <div className="flex justify-center text-base font-bold mx-10">
               <ul className="list-none inline-block text-start space-y-1 md:space-y-6">
                 <li className="flex items-center">
                   <div className="w-10 h-10 flex items-center justify-center">
@@ -138,10 +127,6 @@ export default function RainforestIntro() {
                 </li>
               </ul>
             </div> */}
-          </div>
-          <div className="flex justify-center my-1">
-            <CTAButton huge />
-          </div>
 
           {/* <span className="text-sm md:text-base">
             By sinking CARBON you are contributing to high-integrity nature
