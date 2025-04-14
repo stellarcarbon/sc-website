@@ -14,7 +14,7 @@ export default function ExplainPage() {
       <Banner
         title="Stellarcarbon"
         subtitle="Explained"
-        background="blockchain-bg"
+        background="whale-bg"
       />
 
       <ContentContainer>

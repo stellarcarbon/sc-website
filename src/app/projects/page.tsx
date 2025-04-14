@@ -31,7 +31,7 @@ export default function ProjectsPage() {
       <Banner
         title="Current Projects"
         subtitle="Land in the rainforest"
-        background="bg-rainforest"
+        background="rainforest-bg"
       />
 
       {/* Custom content container */}

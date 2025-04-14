@@ -21,6 +21,8 @@ export default function SoftwarePage() {
         background="blockchain-bg"
       />
 
+      <div className="mt-12"></div>
+
       <ContentContainer>
         <Paragraph>
           At Stellarcarbon, we believe in transparency, accessibility, and
