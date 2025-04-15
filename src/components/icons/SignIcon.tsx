@@ -1,5 +1,5 @@
 interface SignIconProps {
-  large: boolean;
+  large?: boolean;
 }
 
 export default function SignIcon({ large }: SignIconProps) {

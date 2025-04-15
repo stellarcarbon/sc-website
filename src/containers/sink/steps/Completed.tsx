@@ -28,12 +28,12 @@ export default function CompletedSinking() {
 
   return (
     <SinkingStep title="Transaction succesful">
-      <div className="text-center mt-4 text-lg font-semibold">
-        Your transaction was succesfully committed to the Stellar blockchain.
-      </div>
+      <div className="mt-6 text-center">
+        <div className="text-lg font-semibold">
+          Your transaction was succesfully committed to the Stellar blockchain.
+        </div>
 
-      <div className="text-center mt-4">
-        Review the transaction on your dashboard!
+        <div className="mt-4">Review the transaction on your dashboard!</div>
       </div>
 
       <div className="flex-1 flex items-center justify-center my-16">

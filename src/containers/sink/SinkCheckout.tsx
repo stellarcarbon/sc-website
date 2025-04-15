@@ -37,7 +37,7 @@ export default function SinkCheckout() {
   return (
     <Modal>
       {SinkStatusDetails[step]}
-      {/* {SinkStatusDetails[CheckoutSteps.ERROR]} */}
+      {/* {SinkStatusDetails[CheckoutSteps.EXPIRED]} */}
     </Modal>
   );
 }

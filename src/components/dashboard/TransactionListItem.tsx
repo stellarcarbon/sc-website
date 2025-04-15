@@ -54,19 +54,19 @@ export default function TransactionListItem({
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-4 mt-1 text-lg">
-        <div>
+      <div className="grid grid-cols-7">
+        <div className="col-span-2">
           <ItemKey>Sink amount</ItemKey>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 text-lg">
             <CARBONCurrencyIcon />
             <span>{transaction.sinkAmount?.toFixed(3)}</span>
           </div>
         </div>
 
-        <div className="flex flex-col items-end truncate">
+        <div className="col-span-5 flex flex-col items-end truncate">
           <ItemKey>Memo</ItemKey>
           {transaction.memo ? (
-            <div className="text-white">{transaction.memo}</div>
+            <div className="text-white text-lg">{transaction.memo}</div>
           ) : (
             <div className="text-secondary italic mr-1">Not specified</div>
           )}

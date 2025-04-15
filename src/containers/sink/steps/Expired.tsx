@@ -32,14 +32,14 @@ export default function ExpiredSinking() {
 
   return (
     <SinkingStep title="Expired">
-      <div className="flex flex-col items-center">
+      <div className="mt-6 flex flex-col items-center">
         <div className="text-center">
           Your transaction expired. Please retry creating it. The transaction is
           only valid for 2 minutes.
         </div>
         <FontAwesomeIcon
           icon={faTriangleExclamation}
-          className="text-[96px] my-12 text-yellow-500"
+          className="text-[96px] my-20 text-yellow-500"
         />
       </div>
       <SinkingStepButtons>

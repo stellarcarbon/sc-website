@@ -10,9 +10,9 @@ export default function SinkingStep({
   children: ReactNode;
 }) {
   return (
-    <div className="h-full flex flex-col justify-start gap-4">
+    <div className="h-full flex flex-col justify-start">
       <ModalHeader>{title}</ModalHeader>
-      <div className="p-4 flex flex-col">{children}</div>
+      <div className="px-4 pb-4 flex flex-col">{children}</div>
     </div>
   );
 }
