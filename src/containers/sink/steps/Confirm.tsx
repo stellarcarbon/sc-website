@@ -52,10 +52,10 @@ export default function ConfirmSinking() {
           )}
         </div>
 
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+        <div className="flex justify-between items-center">
           <div className="font-bold text-xl md:text-2xl">Reason</div>
           {sinkRequest.memoValue ? (
-            <div className="break-all text-accentSecondary text-center mt-3 text-2xl md:text-3xl">
+            <div className="break-all text-accentSecondary text-center text-2xl md:text-3xl">
               {sinkRequest.memoValue}
             </div>
           ) : (
@@ -95,7 +95,7 @@ function ConfirmKey({ children }: PropsWithChildren) {
 
 function ConfirmValue({ children }: PropsWithChildren) {
   return (
-    <div className="col-span-3 inline-flex justify-end gap-1 text-2xl md:text-3xl items-center">
+    <div className="col-span-3 inline-flex justify-end gap-1 text-xl md:text-2xl items-center">
       {children}
     </div>
   );
