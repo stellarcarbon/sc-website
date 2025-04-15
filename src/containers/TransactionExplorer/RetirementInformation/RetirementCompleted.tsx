@@ -32,9 +32,10 @@ export default function RetirementCompleted({
 
     getRetirements();
   }, [transaction]);
+
   return (
-    <div className="p-2 px-3 md:px-4 w-full flex flex-col items-center">
-      <div className="text-sm text-center">
+    <div className="px-3 md:px-4 w-full flex flex-col items-center">
+      <div className="text-center my-6">
         The CARBON sunk in this transaction has been retired into one or more
         Verra Certificates. View them below.
       </div>
@@ -52,12 +53,17 @@ export default function RetirementCompleted({
           <span>Fetching retirements...</span>
         </div>
       ) : (
-        <div className="w-full mt-4">
+        <div className="w-full">
           {retirementDetails.map((retirement, idx) => {
+            const amountFilled = transaction.retirements.find(
+              (ret) => ret.certificate_id === retirement.certificate_id
+            )?.amount_filled;
+
             return (
               <RetirementDetailCard
                 key={`ret_detail_card_${idx}`}
                 retirement={retirement}
+                amountFilled={Number(amountFilled)}
               />
             );
           })}

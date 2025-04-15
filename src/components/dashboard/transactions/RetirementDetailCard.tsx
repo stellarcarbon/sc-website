@@ -1,12 +1,15 @@
 import { RetirementDetail } from "@/client";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { formatDate } from "@/utils";
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 import TruncatedHash from "../TruncatedHash";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 
 interface RetirementDetailCardProps {
   retirement: RetirementDetail;
+  amountFilled: number;
 }
 
 function ItemHeader({ children }: { children: ReactNode }) {
@@ -23,14 +26,14 @@ function Item({ children }: { children: ReactNode }) {
 
 function CertficateKey({ children }: { children: ReactNode }) {
   return (
-    <div className="h-7 col-span-2 text-start inline-flex items-center text-sm">
+    <div className="col-span-2 text-start inline-flex items-center text-base">
       {children}
     </div>
   );
 }
 function CertficateValue({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-7 col-span-3 text-end inline-flex justify-end items-center text-sm">
+    <div className="col-span-3 text-end inline-flex gap-1 justify-end items-center text-base">
       {children}
     </div>
   );
@@ -38,26 +41,61 @@ function CertficateValue({ children }: { children: ReactNode }) {
 
 export default function RetirementDetailCard({
   retirement,
+  amountFilled,
 }: RetirementDetailCardProps) {
+  const [copiedSerialNumber, setCopiedSerialNumber] = useState(false);
+
   const retirementDate = useMemo(() => {
     const d = new Date(retirement.retirement_date);
     return formatDate(d);
   }, [retirement]);
 
-  return (
-    <div className="bg-tertiary border border-primary rounded grid grid-cols-5 p-1 px-3 pb-2 mx-6">
-      <CertficateKey>Certificate ID</CertficateKey>
-      <CertficateValue>{retirement.certificate_id}</CertficateValue>
+  const handleCopy = useCallback(async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setTimeout(() => {
+        setCopiedSerialNumber(false);
+      }, 2000); // Reset after 2 seconds
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  }, []);
 
-      <CertficateKey>Serial number</CertficateKey>
+  const copySerialNumber = () => {
+    setCopiedSerialNumber(true);
+    handleCopy(retirement.serial_number);
+  };
+
+  return (
+    <div className="bg-tertiary border border-primary rounded grid grid-cols-5 gap-2 md:gap-3 p-3 md:p-4 md:mx-12">
+      <CertficateKey>Certificate ID</CertficateKey>
       <CertficateValue>
+        <Link
+          href={retirement.registry_url}
+          target="_blank"
+          className="underline"
+        >
+          {retirement.certificate_id}
+        </Link>
+      </CertficateValue>
+
+      <CertficateKey>Serial Number</CertficateKey>
+      <CertficateValue>
+        {copiedSerialNumber ? (
+          <div className="text-xs">Copied!</div>
+        ) : (
+          <div className="cursor-pointer" onClick={copySerialNumber}>
+            <FontAwesomeIcon icon={faCopy} />
+          </div>
+        )}
+
         <TruncatedHash hash={retirement.serial_number} chars={7} />
       </CertficateValue>
 
-      <CertficateKey>Amount</CertficateKey>
+      <CertficateKey>Amount Filled</CertficateKey>
       <CertficateValue>
         <div className="flex items-center">
-          <span className="mr-1">{retirement.vcu_amount}</span>
+          <span className="mr-1">{amountFilled}</span>
           <CARBONCurrencyIcon width={14} height={14} />
         </div>
       </CertficateValue>
