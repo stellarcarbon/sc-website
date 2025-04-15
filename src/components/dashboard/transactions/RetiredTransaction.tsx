@@ -58,10 +58,15 @@ export default function RetiredTransaction({
       ) : (
         <div className="flex flex-col">
           {retirementDetails.map((retirement, idx) => {
+            const amountFilled = transaction.retirements.find(
+              (ret) => ret.certificate_id === retirement.certificate_id
+            )?.amount_filled;
+
             return (
               <RetirementDetailCard
                 key={`ret_detail_card_${idx}`}
                 retirement={retirement}
+                amountFilled={Number(amountFilled)}
               />
             );
           })}
