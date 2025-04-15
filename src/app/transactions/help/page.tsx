@@ -75,7 +75,10 @@ export default function TxExplorerHelpPage() {
 
           <FieldContainer>
             <FieldKey>Memo</FieldKey>
-            <FieldValue>A note left by the contributor.</FieldValue>
+            <FieldValue>
+              A note left by the contributor, often the reason why they sunk
+              CARBON.
+            </FieldValue>
           </FieldContainer>
         </div>
       </div>

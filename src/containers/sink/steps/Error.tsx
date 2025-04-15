@@ -16,7 +16,7 @@ export default function ErrorSinking() {
   return (
     <SinkingStep title="Something went wrong">
       <div className="flex flex-col items-center">
-        <div className="text-lg font-semibold overflow-y-auto max-h-[200px]">
+        <div className="text-lg font-semibold overflow-y-auto max-h-[200px] text-center">
           {submissionError ?? "Please try again."}
         </div>
         <div className="flex-1 flex justify-center items-center my-12">
