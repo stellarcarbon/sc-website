@@ -34,9 +34,9 @@ export default function RootLayout({
       </head>
       <AppContextProvider>
         <body className={`${inter.className}`}>
-          <PostHogProvider>
-            <App>{children}</App>
-          </PostHogProvider>
+          {/* <PostHogProvider> */}
+          <App>{children}</App>
+          {/* </PostHogProvider> */}
         </body>
       </AppContextProvider>
     </html>

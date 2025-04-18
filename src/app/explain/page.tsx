@@ -1,3 +1,5 @@
+"use client";
+
 import Banner from "@/components/Banner";
 import ContentContainer from "@/components/ContentContainer";
 import Footer from "@/components/Footer";
