@@ -8,12 +8,14 @@ import { usePathname, useSearchParams } from "next/navigation";
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     async function initPosthog() {
-      let apiHost = "https://eu.i.posthog.com";
-      try {
-        await fetch(apiHost, { method: "HEAD", mode: "no-cors" });
-      } catch (error) {
-        apiHost = "/ingest";
-      }
+      // TODO: try to fix this fallback mechanism
+      // let apiHost = "https://eu.i.posthog.com";
+      // try {
+      //   await fetch(apiHost, { method: "HEAD", mode: "no-cors" });
+      // } catch (error) {
+      //   apiHost = "/ingest";
+      // }
+      let apiHost = "/ingest";
 
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
         api_host: apiHost,
