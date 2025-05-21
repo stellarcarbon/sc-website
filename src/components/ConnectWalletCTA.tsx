@@ -19,7 +19,7 @@ export default function ConnectWalletCTA() {
           className="text-[36px] md:text-[56px]"
         />
         <div className="text-center text-sm md:text-base">
-          No wallet connected! To sink CARBON please connect a wallet.
+          No wallet connected! Lets connect your wallet first to continue.
         </div>
       </div>
 

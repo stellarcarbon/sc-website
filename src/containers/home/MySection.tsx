@@ -17,7 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function MySection() {
   return (
     <div className="bg-primary flex flex-col md:flex-row py-12 m-auto w-full px-3 md:px-0 shadow-xl z-[10] border-y border-tertiary">
-      <div className="md:flex-1 pl-[5%] ">
+      <div className="md:flex-1 md:pl-[5%] ">
         <div className="tracking-wide leading-7 text-3xl mb-4">
           <div>Why use Stellarcarbon</div>
           <hr className="mt-4 w-[100px] border-2 border-accentSecondary" />
@@ -51,7 +51,7 @@ export default function MySection() {
           </div>
         </Paragraph>
       </div>
-      <div className="flex flex-col pr-[5%] md:w-[40%]">
+      <div className="flex flex-col md:pr-[5%] md:w-[40%]">
         <div className="tracking-wide leading-7 text-3xl mb-4">
           <div>Creating trust</div>
           <hr className="mt-4 w-[100px] border-2 border-accentSecondary" />
@@ -72,7 +72,7 @@ export default function MySection() {
               <div className="w-10 flex justify-center">
                 <FontAwesomeIcon icon={faReceipt} />
               </div>
-              <div>Only Verified Carbon Units (VCU's)</div>
+              <div>{`Only Verified Carbon Units (VCU's)`}</div>
             </div>
           </div>
         </Paragraph>

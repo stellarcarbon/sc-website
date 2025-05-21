@@ -49,7 +49,7 @@ export default function CTAButton({
 
       <CARBONCurrencyIcon width={small ? 18 : 28} height={small ? 18 : 28} />
       {walletConnection ? (
-        <span className="font-semibold">Go to dApp</span>
+        <span className="font-semibold">Go to dashboard</span>
       ) : (
         <span className="font-semibold">Contribute now!</span>
       )}
