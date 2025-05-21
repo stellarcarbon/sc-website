@@ -15,7 +15,7 @@ export default function ContactInfoForm() {
   };
 
   return (
-    <div className="flex flex-col gap-1 items-start">
+    <div className="flex flex-col gap-1 items-start mx-1 md:mx-0">
       <label className="text-xs" htmlFor="username">
         Name
       </label>

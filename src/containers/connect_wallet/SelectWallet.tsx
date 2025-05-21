@@ -29,13 +29,18 @@ export default function SelectWallet() {
       <div className="flex flex-col w-full">
         <DashboardHeader>Select your wallet</DashboardHeader>
 
-        <span className="text-sm mb-1 max-w-[80%] hidden md:block">
-          Connect a wallet to be able to create new transactions.
-        </span>
-        <span className="text-xs max-w-[80%] md:hidden">
-          {selectedWallet
-            ? `Current selection: ${selectedWallet.name}`
-            : `Tap your wallet choice.`}
+        {/* <span className="mb-1 max-w-[80%] hidden md:block">
+          Select the wallet you will be using to connect to stellarcarbon.io
+        </span> */}
+        <span className="md:hidden my-2">
+          {selectedWallet ? (
+            <div className="flex items-center gap-1 justify-center">
+              <div className="font-bold">{selectedWallet.name}</div>
+              <span className="">selected</span>
+            </div>
+          ) : (
+            <div className="flex justify-center">Choose a wallet </div>
+          )}
         </span>
       </div>
 

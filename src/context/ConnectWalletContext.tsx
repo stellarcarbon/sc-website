@@ -144,7 +144,7 @@ export const ConnectWalletContextProvider = ({
     // Connect
     connectWallet(selectedWallet!).then((didSucceed) => {
       if (!didSucceed) {
-        setSelectedWallet(undefined);
+        // setSelectedWallet(undefined);
       } else {
         if (appConfig.demo) {
           router.push("/emissions");

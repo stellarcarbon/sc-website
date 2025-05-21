@@ -10,7 +10,7 @@ export default function WalletLayout({
   return appConfig.demo ? (
     <>{children}</>
   ) : (
-    <main className="flex-1 flex flex-col justify-center items-center bg-dalle bg-no-repeat bg-fixed bg-cover">
+    <main className="flex-1 flex flex-col justify-start items-center bg-dalle bg-no-repeat bg-fixed bg-cover">
       {children}
     </main>
   );

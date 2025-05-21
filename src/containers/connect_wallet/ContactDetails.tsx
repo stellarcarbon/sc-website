@@ -9,9 +9,9 @@ export default function ContactDetails() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
-        <DashboardHeader>Contact details (optional)</DashboardHeader>
+        <DashboardHeader>Fill in contact details (optional)</DashboardHeader>
 
-        <span className="text-xs md:text-sm max-w-[80%]">
+        <span className="">
           Your contact details will be used to send you a confirmation of your
           purchases. This step is optional.
         </span>

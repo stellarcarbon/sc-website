@@ -18,7 +18,7 @@ export default function ConnectWalletForm() {
           <div className="text-center text-2xl w-full">Connect wallet</div>
         </SectionHeader>
       </div>
-      <div className="flex-1 lg:my-8 w-full md:max-w-[780px] p-3 py-6 pb-12 md:p-6 flex flex-col justify-between gap-9 bg-darker md:rounded md:border md:border-tertiary overflow-hidden">
+      <div className="flex-1 md:flex-none lg:my-8 w-full md:max-w-[780px] p-3 py-6 pb-12 md:p-6 flex flex-col gap-9 bg-darker md:rounded md:border md:border-tertiary overflow-hidden">
         <SelectWallet />
         <ContactDetails />
         <AcceptTnC />
