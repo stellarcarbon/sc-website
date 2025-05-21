@@ -10,6 +10,7 @@ import {
   faMoneyCheckDollar,
   faReceipt,
   faStamp,
+  faTree,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -25,6 +26,12 @@ export default function MySection() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center">
               <div className="w-10 flex justify-center">
+                <FontAwesomeIcon icon={faTree} />
+              </div>
+              <div>Join our effort to preserve rainforests</div>
+            </div>
+            <div className="flex items-center">
+              <div className="w-10 flex justify-center">
                 <FontAwesomeIcon icon={faMoneyCheckDollar} />
               </div>
               <div>Know exactly where your money is going</div>
@@ -33,7 +40,7 @@ export default function MySection() {
               <div className="w-10 flex justify-center">
                 <FontAwesomeIcon icon={faLightbulb} />
               </div>
-              <div>Supereasy, using our dApp</div>
+              <div>Supereasy, using this website</div>
             </div>
             <div className="flex items-center">
               <div className="w-10 flex justify-center">

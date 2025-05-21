@@ -25,6 +25,7 @@ const config: Config = {
         foresttrees: "url('/rainforest_trees.jpg')",
         forestho: "url('/rainforest_hideout.jpg')",
         forestcreek: "url('/rainforest_creek.jpg')",
+        air: "url('/bg-air.png')",
         dalle: "url('/dalle.png')",
         forest: "url('/forest_green.jpg')",
         autumnforest: "url('/forest_autumn.jpeg')",

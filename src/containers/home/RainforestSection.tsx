@@ -70,7 +70,7 @@ export default function RainforestIntro() {
 
   return (
     <>
-      <div className="bg-forestair bg-cover bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]" />
+      <div className="bg-air bg-cover bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]" />
 
       <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-16 z-10 text-center w-[100%]">
         <div className="flex flex-col gap-8 text-md px-5 py-8 md:py-12 w-full bg-darker/[.74]">
