@@ -10,6 +10,7 @@ import PartnerSection from "@/containers/home/PartnerSection";
 import DemoLanding from "@/containers/demo/DemoLanding";
 import appConfig from "@/config";
 import Footer from "@/components/Footer";
+import MySection from "@/containers/home/MySection";
 
 export default function Home() {
   if (appConfig.demo) {
@@ -19,6 +20,10 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center">
       <RainforestIntro />
+
+      <MySection />
+
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
 
       <ExplainSection />
 

@@ -13,21 +13,24 @@ export default function ConnectWalletForm() {
 
   return (
     <>
-      <div className="md:hidden w-full">
+      <div className="flex-1 md:flex-none lg:my-8 w-full md:max-w-[780px] bg-darker md:rounded md:border md:border-tertiary overflow-hidden">
         <SectionHeader>
           <div className="text-center text-2xl w-full">Connect wallet</div>
         </SectionHeader>
-      </div>
-      <div className="flex-1 md:flex-none lg:my-8 w-full md:max-w-[780px] p-3 py-6 pb-12 md:p-6 flex flex-col gap-9 bg-darker md:rounded md:border md:border-tertiary overflow-hidden">
-        <SelectWallet />
-        <ContactDetails />
-        <AcceptTnC />
+        <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-9">
+          <SelectWallet />
+          <ContactDetails />
+          <AcceptTnC />
 
-        {connectionError && <FormError>{connectionError}</FormError>}
+          {connectionError && <FormError>{connectionError}</FormError>}
 
-        <Button className="h-10 self-center" onClick={submitForm}>
-          Connect wallet
-        </Button>
+          <Button
+            className="!bg-white hover:!bg-primary h-10 self-center"
+            onClick={submitForm}
+          >
+            Connect wallet
+          </Button>
+        </div>
       </div>
     </>
   );

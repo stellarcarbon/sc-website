@@ -15,7 +15,7 @@ export default function AcceptTnC() {
       </div>
 
       <div
-        className={`!cursor:pointer pl-2 gap-2 flex items-center font-bold border rounded-md 
+        className={`my-2 !cursor:pointer pl-2 gap-2 flex items-center font-bold border rounded-md 
         ${
           tncAccepted
             ? "bg-primary border-accentSecondary"

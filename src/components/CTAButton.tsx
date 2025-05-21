@@ -32,7 +32,7 @@ export default function CTAButton({
         border border-accentSecondary
         ${
           white
-            ? "bg-white text-black"
+            ? "bg-white hover:scale-[1.1] transition-all duration-200 ease-in-out transform hover:bg-primary hover:text-white text-black"
             : "bg-darkest hover:bg-accent hover:text-black"
         }
         ${
@@ -49,7 +49,7 @@ export default function CTAButton({
 
       <CARBONCurrencyIcon width={small ? 18 : 28} height={small ? 18 : 28} />
       {walletConnection ? (
-        <span className="font-semibold">Sink CARBON</span>
+        <span className="font-semibold">Go to dApp</span>
       ) : (
         <span className="font-semibold">Contribute now!</span>
       )}

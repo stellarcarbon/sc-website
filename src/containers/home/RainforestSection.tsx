@@ -70,16 +70,16 @@ export default function RainforestIntro() {
 
   return (
     <>
-      <div className="bg-forestcreek bg-cover bg-center bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]" />
+      <div className="bg-forestair bg-cover bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]" />
 
       <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-16 z-10 text-center w-[100%]">
-        <span className="font-roboto text-5xl md:text-[80px]">
-          Stellarcarbon
-        </span>
-        <div className="flex flex-col gap-8 text-md px-5 py-8 md:py-12 w-full bg-secondary/[.74]">
+        <div className="flex flex-col gap-8 text-md px-5 py-8 md:py-12 w-full bg-darker/[.74]">
+          <span className="font-roboto text-5xl md:text-[80px]">
+            Stellarcarbon
+          </span>
           <div className="flex flex-col gap-8 font-noto">
             <div className="flex flex-col items-center text-center gap-4">
-              <div className="lg:max-w-[600px] leading-7 lg:leading-10 md:text-xl">
+              {/* <div className="lg:max-w-[600px] leading-7 lg:leading-10 md:text-xl">
                 We provide a simple way to contribute to nature based projects
                 through the{" "}
                 <a
@@ -90,45 +90,16 @@ export default function RainforestIntro() {
                   Stellar
                 </a>{" "}
                 blockchain
+              </div> */}
+              <div className="md:text-xl">
+                Contribute to rainforest conservation projects using the Stellar
+                blockchain.
               </div>
             </div>
           </div>
-
-          {/* <div className="flex justify-center text-base font-bold mx-10">
-              <ul className="list-none inline-block text-start space-y-1 md:space-y-6">
-                <li className="flex items-center">
-                  <div className="w-10 h-10 flex items-center justify-center">
-                    <FontAwesomeIcon icon={faTree} className="text-2xl" />
-                  </div>
-                  <div className="flex-1">
-                    Contribute to climate and biodiversity action
-                  </div>
-                </li>
-                <li className="flex items-center">
-                  <div className="w-10 h-10 flex items-center justify-center">
-                    <FontAwesomeIcon icon={faFile} className="ml-1 text-2xl" />
-                  </div>
-                  <div className="flex-1">Track your contributions</div>
-                </li>
-                <li className="flex items-center">
-                  <div className="w-10 h-10 flex items-center justify-center">
-                    <FontAwesomeIcon
-                      icon={faComputer}
-                      className="ml-1 text-2xl"
-                    />
-                  </div>
-                  <div className="flex-1">Integrate our software</div>
-                </li>
-              </ul>
-            </div> */}
-
-          {/* <span className="text-sm md:text-base">
-            By sinking CARBON you are contributing to high-integrity nature
-            based projects. Find out more below.
-          </span> */}
-        </div>
-        <div className="flex justify-center my-1">
-          <CTAButton huge />
+          <div className="flex justify-center">
+            <CTAButton huge white />
+          </div>
         </div>
 
         <div
