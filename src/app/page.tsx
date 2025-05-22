@@ -10,7 +10,8 @@ import PartnerSection from "@/containers/home/PartnerSection";
 import DemoLanding from "@/containers/demo/DemoLanding";
 import appConfig from "@/config";
 import Footer from "@/components/Footer";
-import MySection from "@/containers/home/MySection";
+import WhySection from "@/containers/home/WhySection";
+import TrustSection from "@/containers/home/TrustSection";
 
 export default function Home() {
   if (appConfig.demo) {
@@ -21,7 +22,11 @@ export default function Home() {
     <main className="flex flex-col items-center">
       <RainforestIntro />
 
-      <MySection />
+      <WhySection />
+
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
+
+      <TrustSection />
 
       <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
 
