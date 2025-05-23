@@ -1,5 +1,4 @@
 import { CabinClass, FlightEstimateResponse } from "@/client";
-import FlightEstimateTable from "../demo/emissions/FlightEstimateTable";
 import { PropsWithChildren } from "react";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Button from "@/components/Button";

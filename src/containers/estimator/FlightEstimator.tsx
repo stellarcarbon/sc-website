@@ -5,7 +5,6 @@ import AirportInput, { AirportOption } from "../demo/AirportInput";
 import { CabinClass, EstimateService, FlightEstimateResponse } from "@/client";
 import Select from "react-select";
 import Button from "@/components/Button";
-import FlightEstimateTable from "../demo/emissions/FlightEstimateTable";
 import { Blocks } from "react-loader-spinner";
 import EstimatorResult from "./EstimatorResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
