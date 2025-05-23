@@ -15,8 +15,8 @@ export default function LandingSection({
         bg-darkest border-y border-tertiary
         py-12 m-auto px-3 md:px-[5%]`}
     >
-      {first}
-      {second}
+      <div className="flex items-center justify-center">{first}</div>
+      <div className="flex items-center justify-center">{second}</div>
     </div>
   );
 }
