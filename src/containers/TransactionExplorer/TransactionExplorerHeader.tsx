@@ -1,5 +1,6 @@
 import {
   faArrowLeft,
+  faCircleQuestion,
   faQuestionCircle,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
@@ -23,7 +24,7 @@ export default function TransactionExplorerHeader() {
       ) : (
         <TxHeaderButton
           onClick={() => router.push("/transactions/help")}
-          icon={faQuestionCircle}
+          icon={faCircleQuestion}
         />
       )}
     </header>

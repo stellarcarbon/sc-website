@@ -15,6 +15,7 @@ export default function TransactionExplorerLayout({
       <div
         className="lg:flex lg:flex-col lg:items-center
 lg:bg-dalle lg:bg-cover lg:bg-fixed lg:min-h-[calc(100dvh-80px)]
+flex-1 md:flex-none bg-darkest
 "
       >
         <main
