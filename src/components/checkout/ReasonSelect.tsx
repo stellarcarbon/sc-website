@@ -79,9 +79,6 @@ export default function ReasonSelect({ error }: ReasonSelectProps) {
     }
 
     setSelectedReason(reason);
-    // setValue("memo", reason.message);
-    // const lengthInBytes = textEncoder.encode(reason.message).length;
-    // setMemoLength(lengthInBytes);
   };
 
   useEffect(() => {
@@ -148,6 +145,7 @@ export default function ReasonSelect({ error }: ReasonSelectProps) {
                       memoLength > 28 && "text-red-500"
                     }`}
                   >
+                    {memoLength > 28 && `Label can have max. 28 characters. `}
                     {`${memoLength}/28`}
                   </span>
                 </div>
