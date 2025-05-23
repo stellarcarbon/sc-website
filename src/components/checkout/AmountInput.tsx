@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useMemo, useState } from "react";
 import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import { useSearchParams } from "next/navigation";
 import appConfig from "@/config";
 import { useSinkingContext } from "@/context/SinkingContext";
 import Button from "../Button";
@@ -20,16 +19,6 @@ import { useSinkFormContext } from "@/context/SinkFormContext";
 export default function AmountInput() {
   const { register, watch, setValue, quote, setQuote } = useSinkFormContext();
   const tonnes = watch("tonnes");
-  const searchParams = useSearchParams();
-  const amount = searchParams.get("amount");
-
-  useEffect(() => {
-    const num = Number(amount);
-
-    if (!Number.isNaN(num) && Number.isFinite(num) && num > 0) {
-      setValue("tonnes", num);
-    }
-  }, [amount, setValue]);
 
   const [activeInput, setActiveInput] = useState<"carbon" | "usd">("carbon");
   const [isLoading, setIsLoading] = useState<boolean>(false);

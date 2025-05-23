@@ -1,24 +1,12 @@
 import { PaymentAsset } from "@/client";
 import { useAppContext } from "@/context/appContext";
-import { useEffect, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import SectionHeader from "../SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 
 export default function CurrencySelect() {
-  const { register, setValue } = useSinkFormContext();
+  const { register } = useSinkFormContext();
   const { xlmBalance, usdcBalance } = useAppContext();
-  const searchParams = useSearchParams();
-  const currency = searchParams.get("asset");
-
-  useEffect(() => {
-    if (currency?.toLowerCase() === PaymentAsset.ANY.toLowerCase())
-      setValue("currency", PaymentAsset.ANY);
-    if (currency?.toLowerCase() === PaymentAsset.USDC.toLowerCase())
-      setValue("currency", PaymentAsset.USDC);
-    if (currency?.toLowerCase() === PaymentAsset.XLM.toLowerCase())
-      setValue("currency", PaymentAsset.XLM);
-  }, [currency, setValue]);
 
   const options = useMemo(() => {
     const paymentAssets = [

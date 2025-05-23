@@ -2,20 +2,11 @@
 
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Button from "../Button";
-import XLMIcon from "../icons/XLMIcon";
-import { PropsWithChildren, useEffect, useMemo, useState } from "react";
-import XLMConversionService from "@/services/XLMConversionService";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { useSinkingContext } from "@/context/SinkingContext";
 import { useAppContext } from "@/context/appContext";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCheck,
-  faFileContract,
-  faPen,
-  faSign,
-} from "@fortawesome/free-solid-svg-icons";
-import { useSearchParams } from "next/navigation";
+import { faFileContract } from "@fortawesome/free-solid-svg-icons";
 import TransactionPrice from "./TransactionPrice";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 
@@ -37,11 +28,8 @@ export default function TransactionPreview() {
     }
   }, [quote, currency, USDCPerXLM]);
 
-  const searchParams = useSearchParams();
-  const amount = searchParams.get("amount");
-
   useEffect(() => {
-    if (amount !== null) {
+    if (tonnes !== 1) {
       const preview = document.getElementById("transaction-preview");
       // scroll to preview
       if (preview) {
@@ -51,7 +39,7 @@ export default function TransactionPreview() {
         });
       }
     }
-  }, [amount]);
+  }, []);
 
   return (
     <div

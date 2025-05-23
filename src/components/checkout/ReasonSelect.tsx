@@ -1,11 +1,5 @@
-import { SinkingFormData } from "@/app/types";
 import SelectReasonButton from "./SelectReasonButton";
-import { memo, useEffect, useMemo, useState } from "react";
-import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
-import { useReasonSelectContext } from "./ReasonSelectContext";
-import Button from "../Button";
-import { useSearchParams } from "next/navigation";
-import DashboardHeader from "../dashboard/DashboardHeader";
+import { useEffect, useMemo, useState } from "react";
 import SectionHeader from "../SectionHeader";
 import FormError from "../FormError";
 import { useSinkFormContext } from "@/context/SinkFormContext";
@@ -55,25 +49,21 @@ export default function ReasonSelect({ error }: ReasonSelectProps) {
   const { watch, setValue, register } = useSinkFormContext();
 
   const memo = watch("memo");
-  const searchParams = useSearchParams();
-  const reason = searchParams.get("reason");
 
   const [selectedReason, setSelectedReason] = useState<ReasonOption>();
   const [memoLength, setMemoLength] = useState<number>(0);
 
   useEffect(() => {
-    if (reason === "airtravel") {
+    if (memo === "✈️ air travel") {
       setSelectedReason(ReasonOptions.AIRTRAVEL);
-    } else if (reason === "roadtravel") {
+    } else if (memo === "🛣️ road travel") {
       setSelectedReason(ReasonOptions.ROADTRAVEL);
-    } else if (reason === "household") {
+    } else if (memo === "🏠 household") {
       setSelectedReason(ReasonOptions.HOUSEHOLD);
-    } else if (reason === "environment") {
+    } else if (memo === "🌎✨🌍💕🌏") {
       setSelectedReason(ReasonOptions.ENVIRONMENT);
-    } else if (reason !== null) {
-      setValue("memo", reason);
     }
-  }, [reason, setSelectedReason, setValue]);
+  }, [memo, setSelectedReason]);
 
   const textEncoder = useMemo(() => {
     return new TextEncoder();

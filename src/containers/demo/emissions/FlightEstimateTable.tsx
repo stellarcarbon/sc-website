@@ -1,5 +1,6 @@
 import { FlightEstimateResponse } from "@/client";
 import Button from "@/components/Button";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 import { useRouter } from "next/navigation";
 
 function TableRow({ mkey, value }: { mkey: string; value: string }) {
@@ -16,7 +17,7 @@ export default function FlightEstimateTable({
 }: {
   flightEstimate: FlightEstimateResponse;
 }) {
-  const router = useRouter();
+  const { overrideFormValues } = useSinkFormContext();
 
   return (
     <div className="bg-secondary border border-accentSecondary p-4 text-xs md:text-sm flex flex-col w-full">
@@ -26,7 +27,12 @@ export default function FlightEstimateTable({
       <TableRow mkey="CO2 in tonnes" value={flightEstimate.co2_tonnes} />
       <Button
         onClick={() =>
-          router.push(`/dashboard/sink?amount=${flightEstimate.co2_tonnes}`, {})
+          // router.push(`/dashboard/sink?amount=${flightEstimate.co2_tonnes}`, {})
+          overrideFormValues(
+            undefined,
+            Number(flightEstimate.co2_tonnes),
+            undefined
+          )
         }
         className="w-[200px] md:w-[300px] self-center mt-2"
       >

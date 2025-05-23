@@ -5,6 +5,7 @@ import IconButton from "@/components/IconButton";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import TextInput from "@/components/TextInput";
 import { useAppContext } from "@/context/appContext";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -26,6 +27,7 @@ export default function RequestCertificate({
 }: RequestCertificateProps) {
   const { updateWalletConnection, walletConnection, setHasPendingRounding } =
     useAppContext();
+  const { overrideFormValues } = useSinkFormContext();
   const router = useRouter();
 
   const [step, setStep] = useState<RequestCertificateStates>(
@@ -68,7 +70,7 @@ export default function RequestCertificate({
   }, [totalCarbonPending]);
 
   const sinkRemaining = () => {
-    router.push(`/dashboard/sink/?amount=${remainingFraction.toFixed(3)}`);
+    overrideFormValues(undefined, remainingFraction, undefined);
   };
 
   let body = <></>;

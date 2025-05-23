@@ -8,6 +8,7 @@ import {
   SetStateAction,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -20,8 +21,9 @@ import {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
-import { CheckoutSteps, useSinkingContext } from "./SinkingContext";
 import { useAppContext } from "./appContext";
+import { PaymentAsset } from "@/client";
+import { useRouter } from "next/navigation";
 
 type SinkFormContext = {
   register: UseFormRegister<SinkingFormData>;
@@ -38,6 +40,12 @@ type SinkFormContext = {
   setQuote: Dispatch<SetStateAction<number>>;
 
   sinkRequest: SinkCarbonXdrPostRequest | undefined;
+
+  overrideFormValues: (
+    memo?: string,
+    amount?: number,
+    currency?: PaymentAsset
+  ) => void;
 };
 
 const SinkFormContext = createContext<SinkFormContext | null>(null);
@@ -55,7 +63,9 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue } = useForm<SinkingFormData>({
     defaultValues: {
+      memo: "",
       tonnes: 1,
+      currency: PaymentAsset.ANY,
     },
   });
 
@@ -63,6 +73,8 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
   const [errors, setErrors] = useState<FieldErrors>();
 
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
+
+  const router = useRouter();
 
   const tonnes = watch("tonnes");
   const currency = watch("currency");
@@ -93,6 +105,24 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
     [walletConnection, tonnes, currency, memo, setSinkRequest]
   );
 
+  const overrideFormValues = useCallback(
+    (memo?: string, tonnes?: number, currency?: PaymentAsset) => {
+      if (memo) setValue("memo", memo);
+      if (tonnes) setValue("tonnes", tonnes);
+      if (currency) setValue("currency", currency);
+      router.push("/dashboard/sink");
+    },
+    [setValue, router]
+  );
+
+  useEffect(() => {
+    if (!walletConnection) {
+      setValue("memo", "");
+      setValue("tonnes", 1);
+      setValue("currency", PaymentAsset.ANY);
+    }
+  }, [walletConnection, setValue]);
+
   const providerValue = useMemo(
     () => ({
       register,
@@ -105,6 +135,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       setQuote,
       errors,
       sinkRequest,
+      overrideFormValues,
     }),
     [
       register,
@@ -116,6 +147,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       quote,
       errors,
       sinkRequest,
+      overrideFormValues,
     ]
   );
 

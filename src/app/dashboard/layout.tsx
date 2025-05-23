@@ -11,9 +11,6 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { walletConnection } = useAppContext();
-  const router = useSCRouter();
-
   return (
     <>
       {appConfig.demo ? (

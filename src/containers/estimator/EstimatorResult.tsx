@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { TripType } from "./FlightEstimator";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
 export default function EstimatorResult({
   estimate,
@@ -24,7 +25,7 @@ export default function EstimatorResult({
   cabinClass: CabinClass;
   refresh: () => void;
 }) {
-  const router = useRouter();
+  const { overrideFormValues } = useSinkFormContext();
 
   return (
     <div className="flex flex-col gap-4">
@@ -68,8 +69,10 @@ export default function EstimatorResult({
         <div className="flex flex-col gap-4 items-center mt-4">
           <Button
             onClick={() =>
-              router.push(
-                `/dashboard/sink/?amount=${estimate.co2_tonnes}&reason=airtravel`
+              overrideFormValues(
+                "✈️ air travel",
+                Number(estimate.co2_tonnes),
+                undefined
               )
             }
           >

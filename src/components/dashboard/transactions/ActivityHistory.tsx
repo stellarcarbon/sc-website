@@ -2,7 +2,6 @@ import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
-import { useSCRouter } from "@/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { useEffect, useMemo, useState } from "react";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
@@ -12,7 +11,6 @@ import TransactionsExplorerDetail from "@/containers/TransactionExplorer/Transac
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions, walletConnection } =
     useAppContext();
-  const router = useSCRouter();
   const searchParams = useSearchParams();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);

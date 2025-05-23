@@ -2,22 +2,38 @@
 
 import CurrencySelect from "@/components/checkout/CurrencySelect";
 import ReasonSelect from "@/components/checkout/ReasonSelect";
-import { SinkingFormData, SinkCarbonXdrPostRequest } from "@/app/types";
-import { useAppContext } from "@/context/appContext";
-import { Suspense, useCallback, useMemo, useState } from "react";
-import { FieldErrors, SubmitHandler, useForm } from "react-hook-form";
+import { useMemo } from "react";
 import AmountInput from "@/components/checkout/AmountInput";
 import TransactionPreview from "@/components/checkout/TransactionPreview";
-import FormError from "../../components/FormError";
-import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
-
 import appConfig from "@/config";
 import { ReasonSelectContextProvider } from "@/components/checkout/ReasonSelectContext";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 
 export default function SinkingForm() {
-  const { errors } = useSinkFormContext();
+  const { errors, setValue } = useSinkFormContext();
+
+  // const searchParams = useSearchParams();
+  // const reason = searchParams.get("reason");
+  // const amount = searchParams.get("amount");
+  // const currency = searchParams.get("asset");
+
+  // useEffect(() => {
+  //   // searchparam stuff
+  //   if (reason !== null) setValue("memo", reason);
+
+  //   const num = Number(amount);
+  //   if (!Number.isNaN(num) && Number.isFinite(num) && num > 0) {
+  //     setValue("tonnes", num);
+  //   }
+
+  //   if (currency?.toLowerCase() === PaymentAsset.ANY.toLowerCase())
+  //     setValue("currency", PaymentAsset.ANY);
+  //   if (currency?.toLowerCase() === PaymentAsset.USDC.toLowerCase())
+  //     setValue("currency", PaymentAsset.USDC);
+  //   if (currency?.toLowerCase() === PaymentAsset.XLM.toLowerCase())
+  //     setValue("currency", PaymentAsset.XLM);
+  // }, [reason, amount, currency, setValue]);
 
   const reasonErrorLabel: string | undefined = useMemo(() => {
     return Object.entries(errors ?? {})
