@@ -80,6 +80,21 @@ body {
   background-position: 50%;
 }
 
+.devs-bg {
+  background-image: url("/devs.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 25%;
+  max-width: 1024px;
+}
+
+.m-bg {
+  background: #22354b; /* your flat background color here */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 25%;
+}
+
 @media only screen and (max-width: 768px) {
   .blockchain-bg {
     background-size: auto;

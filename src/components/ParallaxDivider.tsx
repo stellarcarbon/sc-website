@@ -34,14 +34,20 @@ export default function ParallaxDivider({
   roundedBottom = false,
 }: ParallaxDiverProps) {
   const componentRef = useRef<HTMLDivElement | null>(null);
-  const [transform, setTransform] = useState<number>(0);
+  const [transform, setTransform] = useState<number>();
+  const [yCoordinate, setYCoordinate] = useState<number>(0);
 
   useEffect(() => {
-    let yCoordinate = 0;
+    const el = componentRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setYCoordinate(rect.top + window.scrollY);
+  }, []);
 
+  useEffect(() => {
     const parallaxer = () => {
       const newT = Math.max(
-        Math.min(100, -(yCoordinate - window.scrollY) / 5),
+        Math.min(-yOffset, -(yCoordinate - window.scrollY) / 6),
         -400
       );
 
@@ -49,18 +55,11 @@ export default function ParallaxDivider({
     };
 
     window.addEventListener("scroll", parallaxer);
-
-    if (componentRef.current) {
-      const rect = componentRef.current.getBoundingClientRect();
-      yCoordinate = rect.top + window.scrollY;
-
-      setTransform(
-        Math.max(Math.min(100, -(yCoordinate - window.scrollY) / 5), -400)
-      );
-    }
-  }, []);
+  }, [yCoordinate]);
 
   const t = useMemo(() => {
+    if (!transform) return {};
+
     let transformStyling = `translate(${xOffset}px, ${transform + yOffset}px)`;
     if (mirrored) {
       transformStyling += ` scaleX(-1)`;
@@ -69,7 +68,7 @@ export default function ParallaxDivider({
   }, [xOffset, yOffset, transform, mirrored]);
 
   const heightSettings = useMemo(() => {
-    let styling = "h-[200px] md:h-[200px]";
+    let styling = "h-[150px] md:h-[180px]";
     if (smaller) {
       styling = "h-[125px] md:h-[175px]";
     }

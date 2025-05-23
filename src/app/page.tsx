@@ -11,11 +11,16 @@ import appConfig from "@/config";
 import Footer from "@/components/Footer";
 import WhySection from "@/containers/landing/WhySection";
 import TrustSection from "@/containers/landing/TrustSection";
+import { useEffect } from "react";
 
 export default function Home() {
   if (appConfig.demo) {
     return <DemoLanding />;
   }
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   return (
     <main className="flex flex-col items-center">
@@ -23,7 +28,7 @@ export default function Home() {
 
       <WhySection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
+      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
 
       <TrustSection />
 
@@ -31,12 +36,13 @@ export default function Home() {
 
       <ExplainSection /> */}
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-100} />
+      <ParallaxDivider image={ParallaxBackgrounds.DALLE} yOffset={-250} />
 
       <LastTransactionsSection />
+
       <ParallaxDivider
-        image={ParallaxBackgrounds.FOREST}
-        yOffset={-400}
+        image={ParallaxBackgrounds.RIVER_ESTUARY}
+        yOffset={-200}
         mirrored
       />
 
