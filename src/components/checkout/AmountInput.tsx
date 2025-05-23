@@ -1,6 +1,5 @@
 "use client";
 
-import { SinkingFormData } from "@/app/types";
 import { debounce, useSCRouter } from "@/utils";
 import { CarbonService } from "@/client";
 import {
@@ -8,39 +7,28 @@ import {
   faCalculator,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
-import { UseFormRegister } from "react-hook-form";
+import { useEffect, useMemo, useState } from "react";
 import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import appConfig from "@/config";
-import XLMIcon from "../icons/XLMIcon";
 import { useSinkingContext } from "@/context/SinkingContext";
 import Button from "../Button";
-import DashboardHeader from "../dashboard/DashboardHeader";
 import SectionHeader from "../SectionHeader";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
-interface AmountInputProps {
-  register: UseFormRegister<SinkingFormData>;
-  watch: (name: string) => number;
-  setValue: (name: keyof SinkingFormData, value: any) => void;
-  quote: number;
-  setQuote: Dispatch<SetStateAction<number>>;
-}
-
-export default function AmountInput({
-  register,
-  watch,
-  setValue,
-  quote,
-  setQuote,
-}: AmountInputProps) {
+export default function AmountInput() {
+  const { register, watch, setValue, quote, setQuote } = useSinkFormContext();
   const tonnes = watch("tonnes");
   const searchParams = useSearchParams();
   const amount = searchParams.get("amount");
 
   useEffect(() => {
-    setValue("tonnes", amount !== null ? amount : 1);
+    const num = Number(amount);
+
+    if (!Number.isNaN(num) && Number.isFinite(num) && num > 0) {
+      setValue("tonnes", num);
+    }
   }, [amount, setValue]);
 
   const [activeInput, setActiveInput] = useState<"carbon" | "usd">("carbon");

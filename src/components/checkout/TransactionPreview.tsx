@@ -1,3 +1,5 @@
+"use client";
+
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Button from "../Button";
 import XLMIcon from "../icons/XLMIcon";
@@ -15,25 +17,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams } from "next/navigation";
 import TransactionPrice from "./TransactionPrice";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
-interface TransactionPreviewProps {
-  tonnes: number;
-  currency: string;
-  quote: number;
-  memo: string;
-  handleSubmit: () => void;
-}
-
-export default function TransactionPreview({
-  tonnes,
-  currency,
-  quote,
-  memo,
-  handleSubmit,
-}: TransactionPreviewProps) {
+export default function TransactionPreview() {
+  const { watch, quote, handleSubmit, onSubmit, onError } =
+    useSinkFormContext();
   const { walletConnection } = useAppContext();
   const { USDCPerXLM } = useSinkingContext();
   const [priceInXLM, setPriceInXLM] = useState<string>();
+
+  const tonnes = watch("tonnes");
+  const currency = watch("currency");
+  const memo = watch("memo");
 
   useEffect(() => {
     if (USDCPerXLM) {
@@ -61,7 +56,7 @@ export default function TransactionPreview({
   return (
     <div
       id="transaction-preview"
-      className="bg-secondary p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center border border-accentSecondary rounded"
+      className="bg-primary p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center border border-accentSecondary rounded"
     >
       <h3 className="text-2xl font-bold">Transaction preview</h3>
       <div className="grid grid-cols-5 gap-1 text-center w-full">
@@ -101,7 +96,10 @@ export default function TransactionPreview({
         <TransactionPrice currency={currency} quote={quote} />
       </div>
       <div className="py-1">
-        <Button onClick={handleSubmit} disabled={!walletConnection}>
+        <Button
+          onClick={() => handleSubmit(onSubmit, onError)()}
+          disabled={!walletConnection}
+        >
           <FontAwesomeIcon icon={faFileContract} />
           <div>Continue to signing</div>
         </Button>

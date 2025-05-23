@@ -8,11 +8,9 @@ import { useSearchParams } from "next/navigation";
 import DashboardHeader from "../dashboard/DashboardHeader";
 import SectionHeader from "../SectionHeader";
 import FormError from "../FormError";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
 interface ReasonSelectProps {
-  setValue: (name: keyof SinkingFormData, value: any) => void;
-  watch: (name: string) => string;
-  register: UseFormRegister<SinkingFormData>;
   error?: string;
 }
 
@@ -53,12 +51,9 @@ export type ReasonOption = {
   explanation: string;
 };
 
-export default function ReasonSelect({
-  setValue,
-  watch,
-  register,
-  error,
-}: ReasonSelectProps) {
+export default function ReasonSelect({ error }: ReasonSelectProps) {
+  const { watch, setValue, register } = useSinkFormContext();
+
   const memo = watch("memo");
   const searchParams = useSearchParams();
   const reason = searchParams.get("reason");
@@ -87,7 +82,7 @@ export default function ReasonSelect({
   const selectReason = (reason: ReasonOption) => {
     if (selectedReason === reason) {
       setSelectedReason(undefined);
-      setValue("memo", null);
+      setValue("memo", "");
       setMemoLength(0);
       return;
     }

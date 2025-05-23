@@ -9,8 +9,8 @@ export default function ComingSoon() {
   const router = useRouter();
 
   return (
-    <div>
-      <div className="p-4 w-full text-center">Coming soon</div>
+    <div className="flex flex-col">
+      <div className="my-6 p-4 w-full text-center">Coming soon</div>
       <Button onClick={() => router.push("/dashboard/sink")}>
         <FontAwesomeIcon icon={faArrowLeft} />
         <div>Return to sink form</div>

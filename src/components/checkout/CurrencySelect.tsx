@@ -1,21 +1,12 @@
-import { UseFormRegisterReturn } from "react-hook-form";
-import { SinkingFormData } from "@/app/types";
 import { PaymentAsset } from "@/client";
 import { useAppContext } from "@/context/appContext";
 import { useEffect, useMemo } from "react";
-import DashboardHeader from "../dashboard/DashboardHeader";
 import { useSearchParams } from "next/navigation";
 import SectionHeader from "../SectionHeader";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
-interface CurrencySelectProps {
-  register: (name: keyof SinkingFormData) => UseFormRegisterReturn;
-  setValue: (name: keyof SinkingFormData, value: any) => void;
-}
-
-export default function CurrencySelect({
-  register,
-  setValue,
-}: CurrencySelectProps) {
+export default function CurrencySelect() {
+  const { register, setValue } = useSinkFormContext();
   const { xlmBalance, usdcBalance } = useAppContext();
   const searchParams = useSearchParams();
   const currency = searchParams.get("asset");

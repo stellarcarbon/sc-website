@@ -3,7 +3,6 @@
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
-
 import RainforestIntro from "@/containers/landing/RainforestSection";
 import LastTransactionsSection from "@/containers/landing/LastTransactionsSection";
 import PartnerSection from "@/containers/landing/PartnerSection";
