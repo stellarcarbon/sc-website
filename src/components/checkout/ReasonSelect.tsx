@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import SectionHeader from "../SectionHeader";
 import FormError from "../FormError";
 import { useSinkFormContext } from "@/context/SinkFormContext";
+import { faTag } from "@fortawesome/free-solid-svg-icons";
 
 interface ReasonSelectProps {
   error?: string;
@@ -98,7 +99,7 @@ export default function ReasonSelect({ error }: ReasonSelectProps) {
 
   return (
     <>
-      <SectionHeader>Label your contribution</SectionHeader>
+      <SectionHeader icon={faTag}>Label your contribution</SectionHeader>
       <div className="p-3 py-6 md:p-6 mb-4">
         {/* <DashboardHeader>Label your contribution</DashboardHeader> */}
 

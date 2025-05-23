@@ -5,6 +5,7 @@ import { CarbonService } from "@/client";
 import {
   faArrowRightArrowLeft,
   faCalculator,
+  faTree,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useMemo, useState } from "react";
@@ -15,6 +16,10 @@ import { useSinkingContext } from "@/context/SinkingContext";
 import Button from "../Button";
 import SectionHeader from "../SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
+import Link from "next/link";
+import Header from "../Header";
+import LandingSectionHeader from "@/containers/landing/LandingSectionHeader";
+import DashboardHeader from "../dashboard/DashboardHeader";
 
 export default function AmountInput() {
   const { register, watch, setValue, quote, setQuote } = useSinkFormContext();
@@ -129,70 +134,71 @@ export default function AmountInput() {
 
   return (
     <>
-      <SectionHeader>Set sink amount</SectionHeader>
-      <div className="p-3 py-6 md:p-6 mb-4">
-        <div className="flex flex-col gap-8">
-          <div>
-            Specify how much C to sink. Sinking 1C would let you claim the
-            environmental benefit of reducing 1 tonne of CO2.
-          </div>
-
-          <div>
-            <div className="mb-4">Using our emissions estimator...</div>
-            <Button
-              onClick={() => router.push("/estimator/flight")}
-              className="h-10 mx-auto"
-            >
-              <FontAwesomeIcon icon={faCalculator} />
-              Go to emissions estimator
-            </Button>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="">...or by entering the amount yourself.</div>
-            <div className="flex justify-between items-center gap-2 h-10 md:px-2">
-              <div className="relative w-[35%]">
-                <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
-                  <CARBONCurrencyIcon className="" />
+      <SectionHeader icon={faTree}>Set your sink amount</SectionHeader>
+      <div className="p-3 py-6 md:p-6">
+        <div className="flex flex-col">
+          <div className="flex flex-col gap-4">
+            {/* <div>Or enter the amount yourself.</div> */}
+            {/* <div className="text-xl">
+              <div className="text-start font-semibold">Transaction amount</div>
+              <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
+            </div> */}
+            {/* <div>Specify how much you want to contribute.</div> */}
+            <div className="">
+              Sinking 1 <CARBONCurrencyIcon className="inline" /> would let you
+              claim the environmental benefit of reducing 1 tonne of CO2.
+            </div>
+            <div className="flex justify-between items-center gap-2 md:px-2">
+              <div className="w-[35%] flex flex-col items-start">
+                <div className="text-xs mb-1">Sink amount</div>
+                <div className="relative">
+                  <div className="absolute top-0 right-[10px] text-black h-full flex flex-col justify-center">
+                    <CARBONCurrencyIcon className="" />
+                  </div>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    className="px-2 pr-9 py-1 w-full text-black rounded-sm text-right"
+                    {...register("tonnes", {
+                      validate: () => {
+                        return (
+                          !hasError || "The selected CARBON amount is invalid."
+                        );
+                      },
+                    })}
+                  />
                 </div>
-                <input
-                  type="text"
-                  inputMode="decimal"
-                  className="px-2 pr-9 py-1 w-full text-black rounded-sm text-right"
-                  {...register("tonnes", {
-                    validate: () => {
-                      return (
-                        !hasError || "The selected CARBON amount is invalid."
-                      );
-                    },
-                  })}
+              </div>
+              <div className="">
+                <FontAwesomeIcon
+                  icon={faArrowRightArrowLeft}
+                  className="text-xl"
                 />
               </div>
-              <FontAwesomeIcon
-                icon={faArrowRightArrowLeft}
-                className="px-4 py-4 text-xl"
-              />
-              <div className="relative w-[35%]">
-                <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
-                  $
+              <div className="w-[35%] flex flex-col">
+                <div className="text-xs mb-1">Price in $</div>
+                <div className="relative">
+                  <div className="absolute top-0 left-[10px] text-black h-full flex flex-col justify-center">
+                    $
+                  </div>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    className="px-2 pl-7 py-1 w-full text-black rounded-sm"
+                    value={quoteStr || ""}
+                    onChange={(e) => {
+                      setIsLoading(true);
+                      if (
+                        /^\d*\.?\d*$/.test(e.target.value) ||
+                        e.target.value === ""
+                      ) {
+                        setQuoteStr(e.target.value);
+                      }
+                      setQuote(Number(e.target.value));
+                      setActiveInput("usd");
+                    }}
+                  />
                 </div>
-                <input
-                  type="text"
-                  inputMode="decimal"
-                  className="px-2 pl-7 py-1 w-full text-black rounded-sm"
-                  value={quoteStr || ""}
-                  onChange={(e) => {
-                    setIsLoading(true);
-                    if (
-                      /^\d*\.?\d*$/.test(e.target.value) ||
-                      e.target.value === ""
-                    ) {
-                      setQuoteStr(e.target.value);
-                    }
-                    setQuote(Number(e.target.value));
-                    setActiveInput("usd");
-                  }}
-                />
               </div>
             </div>
 
@@ -233,6 +239,25 @@ export default function AmountInput() {
                 </>
               )}
             </div>
+          </div>
+
+          <div className="text-xl mt-10">
+            <div className="text-start font-semibold">Emissions estimation</div>
+            <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
+          </div>
+          <div className="flex flex-col gap-4 my-4">
+            <div>
+              Optionally use our emissions estimator to help decide on the right
+              amount.
+            </div>
+
+            <Button
+              onClick={() => router.push("/estimator/flight")}
+              className="mx-auto"
+            >
+              <FontAwesomeIcon icon={faCalculator} />
+              Try the emissions estimator
+            </Button>
           </div>
         </div>
       </div>

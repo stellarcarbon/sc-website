@@ -3,6 +3,7 @@ import { useAppContext } from "@/context/appContext";
 import { useMemo } from "react";
 import SectionHeader from "../SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
+import { faDollar, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 
 export default function CurrencySelect() {
   const { register } = useSinkFormContext();
@@ -32,7 +33,7 @@ export default function CurrencySelect() {
 
   return (
     <>
-      <SectionHeader>Choose preferred asset</SectionHeader>
+      <SectionHeader icon={faDollar}>Choose preferred asset</SectionHeader>
       <div className="p-3 py-6 md:p-6">
         {/* <DashboardHeader>Choose preferred asset</DashboardHeader> */}
 
