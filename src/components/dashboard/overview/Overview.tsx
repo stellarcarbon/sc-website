@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import DashboardHeader from "../DashboardHeader";
 import SectionHeader from "@/components/SectionHeader";
+import Button from "@/components/Button";
 
 export default function Overview() {
   const { walletConnection, disconnectWallet } = useAppContext();
@@ -17,21 +18,19 @@ export default function Overview() {
 
   return (
     <div className="">
-      {/* <SectionHeader>Your transactions</SectionHeader> */}
-
       <TransactionSummary />
 
       {walletConnection && (
         <div className="flex flex-col">
           <SectionHeader>
             <div>Contact information</div>
-            <button
-              className="font-normal bg-accent rounded text-black text-sm md:text-base flex items-center gap-1 px-2 p-1"
+            <Button
               onClick={() => setShowContactInformationForm(true)}
+              className="h-8 text-base"
             >
               <FontAwesomeIcon icon={faEdit} />
-              <div>Edit</div>
-            </button>
+              <div className="font-normal">Edit</div>
+            </Button>
           </SectionHeader>
 
           <div className="p-3 md:p-6 my-1">
@@ -96,13 +95,10 @@ export default function Overview() {
         <>
           <SectionHeader>
             <div>Connected wallet</div>
-            <button
-              onClick={disconnectWallet}
-              className="font-normal bg-accent rounded text-black text-sm md:text-base flex items-center gap-1 px-2 p-1"
-            >
+            <Button onClick={disconnectWallet} className="h-8 text-base">
               <FontAwesomeIcon icon={faRightFromBracket} />
-              Disconnect
-            </button>
+              <div className="font-normal">Disconnect</div>
+            </Button>
           </SectionHeader>
 
           <div className="flex flex-col w-full justify-start px-3 md:px-6 my-6">

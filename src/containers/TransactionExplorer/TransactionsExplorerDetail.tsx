@@ -81,7 +81,7 @@ export default function TransactionsExplorerDetail() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center min-h-[calc(100dvh-64px)] md:min-h-0 bg-darker">
+    <div className="w-full flex flex-col items-center min-h-[calc(100dvh-64px)] md:min-h-0 bg-darkest">
       <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>

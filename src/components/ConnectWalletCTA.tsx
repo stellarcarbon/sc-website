@@ -9,7 +9,7 @@ export default function ConnectWalletCTA() {
   return (
     <div
       className="my-8 p-4 mx-4
-    bg-darkest text-white border border-accentSecondary rounded
+    bg-primary text-white border border-accentSecondary rounded
  
     flex flex-col items-center justify-center gap-4"
     >
@@ -23,13 +23,13 @@ export default function ConnectWalletCTA() {
         </div>
       </div>
 
-      <button
+      <Button
         onClick={() => router.push("/wallet/connect")}
-        className="text-sm bg-accent text-black px-4 rounded shadow h-8 flex items-center gap-1"
+        className="h-8 text-sm"
       >
         <FontAwesomeIcon icon={faLink} />
-        Connect wallet
-      </button>
+        <div>Connect wallet</div>
+      </Button>
     </div>
   );
 }

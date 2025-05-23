@@ -164,7 +164,7 @@ export default function AmountInput({
             <div className="mb-4">Using our emissions estimator...</div>
             <Button
               onClick={() => router.push("/estimator/flight")}
-              className="gap-2 h-10 !px-3 hover:border !border-accent mx-auto"
+              className="h-10 mx-auto"
             >
               <FontAwesomeIcon icon={faCalculator} />
               Go to emissions estimator

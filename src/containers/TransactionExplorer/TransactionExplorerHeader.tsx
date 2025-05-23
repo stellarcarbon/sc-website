@@ -1,5 +1,7 @@
 import {
+  faArrowLeft,
   faCircleArrowLeft,
+  faQuestion,
   faQuestionCircle,
   faXmark,
   IconDefinition,
@@ -20,7 +22,7 @@ export default function TransactionExplorerHeader() {
       </h1>
 
       {pathname.includes("detail") || pathname.includes("help") ? (
-        <TxHeaderButton onClick={() => router.back()} icon={faXmark} />
+        <TxHeaderButton onClick={() => router.back()} icon={faArrowLeft} />
       ) : (
         <TxHeaderButton
           onClick={() => router.push("/transactions/help")}
