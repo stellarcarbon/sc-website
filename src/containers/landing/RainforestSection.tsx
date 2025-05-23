@@ -1,26 +1,26 @@
 "use client";
 
 import CTAButton from "@/components/CTAButton";
-import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import DoubleChevronDownIcon from "@/components/icons/DoubleChevronDownIcon";
-import { useAppContext } from "@/context/appContext";
-import { faDochub } from "@fortawesome/free-brands-svg-icons";
-import {
-  faChartLine,
-  faComputer,
-  faFile,
-  faFileContract,
-  faHistory,
-  faSmog,
-  faTree,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export default function RainforestIntro() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const chevDown = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const { top } = containerRef.current.getBoundingClientRect();
+        setOffset(-top);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const trackScroll = () => {
@@ -69,28 +69,19 @@ export default function RainforestIntro() {
   };
 
   return (
-    <>
-      <div className="bg-air bg-cover bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]" />
+    <div className="relative w-full" ref={containerRef}>
+      <div
+        className="bg-air bg-cover bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]"
+        style={{ transform: `translateY(${offset * 0.3}px)` }}
+      />
 
-      <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-16 z-10 text-center w-[100%]">
+      <div className="relative h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-16 z-10 text-center w-[100%]">
         <div className="flex flex-col gap-8 text-md px-5 py-8 md:py-12 w-full bg-darker/[.74]">
           <span className="font-roboto text-5xl md:text-[80px]">
             Stellarcarbon
           </span>
           <div className="flex flex-col gap-8 font-noto">
             <div className="flex flex-col items-center text-center gap-4">
-              {/* <div className="lg:max-w-[600px] leading-7 lg:leading-10 md:text-xl">
-                We provide a simple way to contribute to nature based projects
-                through the{" "}
-                <a
-                  className="underline"
-                  href="https://stellar.org/"
-                  target="_blank"
-                >
-                  Stellar
-                </a>{" "}
-                blockchain
-              </div> */}
               <div className="md:text-xl">
                 Contribute to rainforest conservation projects using the Stellar
                 blockchain.
@@ -112,6 +103,6 @@ export default function RainforestIntro() {
           <DoubleChevronDownIcon />
         </div>
       </div>
-    </>
+    </div>
   );
 }
