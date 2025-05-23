@@ -90,6 +90,9 @@ export const ConnectWalletContextProvider = ({
         }
 
         // Verify if account exists
+        // If it doesnt exist throw "special error message"
+        // "Account ABCD...WXYZ does not exist in {network_name}"
+        // (if testnet make a funding request to friendbot for that pubkey)
         await TransactionHistoryService.fetchAccountBalance(
           appConfig.server,
           newConn.stellarPubKey

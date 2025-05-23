@@ -3,15 +3,15 @@
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
-import ExplainSection from "@/containers/home/ExplainSection";
-import RainforestIntro from "@/containers/home/RainforestSection";
-import LastTransactionsSection from "@/containers/home/LastTransactionsSection";
-import PartnerSection from "@/containers/home/PartnerSection";
+import ExplainSection from "@/containers/landing/ExplainSection";
+import RainforestIntro from "@/containers/landing/RainforestSection";
+import LastTransactionsSection from "@/containers/landing/LastTransactionsSection";
+import PartnerSection from "@/containers/landing/PartnerSection";
 import DemoLanding from "@/containers/demo/DemoLanding";
 import appConfig from "@/config";
 import Footer from "@/components/Footer";
-import WhySection from "@/containers/home/WhySection";
-import TrustSection from "@/containers/home/TrustSection";
+import WhySection from "@/containers/landing/WhySection";
+import TrustSection from "@/containers/landing/TrustSection";
 
 export default function Home() {
   if (appConfig.demo) {
@@ -28,9 +28,9 @@ export default function Home() {
 
       <TrustSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
+      {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
 
-      <ExplainSection />
+      <ExplainSection /> */}
 
       <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-100} />
 

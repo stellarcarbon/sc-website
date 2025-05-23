@@ -156,6 +156,11 @@ export default function AmountInput({
       <div className="p-3 py-6 md:p-6 mb-4">
         <div className="flex flex-col gap-8">
           <div>
+            Specify how much C to sink. Sinking 1C would let you claim the
+            environmental benefit of reducing 1 tonne of CO2.
+          </div>
+
+          <div>
             <div className="mb-4">Using our emissions estimator...</div>
             <Button
               onClick={() => router.push("/estimator/flight")}

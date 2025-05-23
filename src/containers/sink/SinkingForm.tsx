@@ -74,9 +74,8 @@ export default function SinkingForm() {
             <div className="my-8 text-base">
               {" "}
               Use this form to specify how much{" "}
-              <CARBONCurrencyIcon className="inline" /> to sink. Sinking 1{" "}
-              <CARBONCurrencyIcon className="inline" /> guarantees 1 Verified
-              Carbon Unit (VCU) will be retired.
+              <CARBONCurrencyIcon className="inline" /> to sink. You transaction
+              will be stored on the Stellar network.
             </div>
           </div>
         )}
