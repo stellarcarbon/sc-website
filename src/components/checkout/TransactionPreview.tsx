@@ -61,7 +61,7 @@ export default function TransactionPreview({
   return (
     <div
       id="transaction-preview"
-      className="p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center bg-secondary border border-accentSecondary rounded"
+      className="bg-secondary p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center border border-accentSecondary rounded"
     >
       <h3 className="text-2xl font-bold">Transaction preview</h3>
       <div className="grid grid-cols-5 gap-1 text-center w-full">
@@ -100,14 +100,12 @@ export default function TransactionPreview({
 
         <TransactionPrice currency={currency} quote={quote} />
       </div>
-      <Button
-        onClick={handleSubmit}
-        className="!py-2 mt-1 mb-2 text-md self-center gap-2 bg-accent !text-black border border-accentSecondary hover:!border-accent hover:!text-white"
-        disabled={!walletConnection}
-      >
-        <FontAwesomeIcon icon={faFileContract} />
-        Continue to signing
-      </Button>
+      <div className="py-1">
+        <Button onClick={handleSubmit} disabled={!walletConnection}>
+          <FontAwesomeIcon icon={faFileContract} />
+          <div>Continue to signing</div>
+        </Button>
+      </div>
     </div>
   );
 }

@@ -7,6 +7,8 @@ import AcceptTnC from "./AcceptTnC";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import FormError from "@/components/FormError";
 import SectionHeader from "@/components/SectionHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 export default function ConnectWalletForm() {
   const { submitForm, connectionError } = useConnectWalletContext();
@@ -24,11 +26,9 @@ export default function ConnectWalletForm() {
 
           {connectionError && <FormError>{connectionError}</FormError>}
 
-          <Button
-            className="!bg-white hover:!bg-primary h-10 self-center"
-            onClick={submitForm}
-          >
-            Connect wallet
+          <Button className="self-center" onClick={submitForm}>
+            <FontAwesomeIcon icon={faLink} />
+            <div>Connect wallet</div>
           </Button>
         </div>
       </div>

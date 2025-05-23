@@ -68,10 +68,7 @@ export default function ConfirmSinking() {
 
       <SinkingStepButtons>
         <div className="flex justify-between md:mx-8 w-full mb-4">
-          <Button
-            onClick={() => router.push("/dashboard/sink")}
-            // className="!bg-red-500"
-          >
+          <Button onClick={() => router.push("/dashboard/sink")}>
             <FontAwesomeIcon icon={faXmark} className="text-lg" />
             <div>Cancel</div>
           </Button>

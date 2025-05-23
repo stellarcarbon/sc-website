@@ -44,7 +44,7 @@ export default function EstimatorResult({
         <EstimatorValue>{cabinClass}</EstimatorValue>
       </div>
 
-      <div className="bg-secondary rounded border border-accentSecondary mt-3 p-6 flex flex-col items-center gap-4">
+      <div className="bg-primary rounded border border-accentSecondary mt-3 p-6 flex flex-col items-center gap-4">
         <div className="">Distance flown</div>
         <div className="flex items-center gap-2 text-[32px] my-1">
           <div>{estimate && Number(estimate.distance_km).toFixed(0)}</div>
@@ -72,7 +72,6 @@ export default function EstimatorResult({
                 `/dashboard/sink/?amount=${estimate.co2_tonnes}&reason=airtravel`
               )
             }
-            className="gap-2 h-10"
           >
             <FontAwesomeIcon icon={faFileContract} />
             <div>Continue to sink form</div>

@@ -1,9 +1,6 @@
 import {
   faArrowLeft,
-  faCircleArrowLeft,
-  faQuestion,
   faQuestionCircle,
-  faXmark,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,10 +26,6 @@ export default function TransactionExplorerHeader() {
           icon={faQuestionCircle}
         />
       )}
-
-      {/* <div className="absolute right-3">
-        <TButton onClick={() => {}} icon={faInfoCircle}></TButton>
-      </div> */}
     </header>
   );
 }
@@ -50,24 +43,6 @@ function TxHeaderButton({
       className="absolute right-5 text-2xl md:hover:text-accentSecondary"
     >
       <FontAwesomeIcon icon={icon} />
-    </button>
-  );
-}
-
-function TButton({
-  onClick,
-  icon,
-}: {
-  onClick: () => void;
-  icon: IconDefinition;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className="flex items-center gap-2 px-3 py-1 bg-accent rounded shadow-md text-black"
-    >
-      <FontAwesomeIcon icon={icon} />
-      <div>Help</div>
     </button>
   );
 }

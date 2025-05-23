@@ -1,7 +1,10 @@
 import ModalHeader from "@/components/ModalHeader";
 import SinkingStep from "./Step";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
@@ -44,7 +47,8 @@ export default function ExpiredSinking() {
       </div>
       <SinkingStepButtons>
         <Button onClick={returnToForm} className="mx-auto">
-          Go back
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <div>Go back</div>
         </Button>
       </SinkingStepButtons>
     </SinkingStep>

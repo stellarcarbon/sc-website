@@ -143,7 +143,7 @@ export default function FlightEstimator() {
           </div>
           {error && <div className="text-red-500">{error}</div>}
           <div className="flex flex-col items-center">
-            <Button onClick={estimateEmissions} className="gap-2 !px-4">
+            <Button onClick={estimateEmissions}>
               <FontAwesomeIcon icon={faCalculator} />
               <div>Estimate emissions</div>
             </Button>

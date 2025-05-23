@@ -19,10 +19,7 @@ export default function AwaitSinking({ message }: { message: string }) {
         />
       </div>
 
-      <SinkingStepButtons>
-        {/* <Button className="h-10">Cancel</Button> */}
-        <div></div>
-      </SinkingStepButtons>
+      <SinkingStepButtons></SinkingStepButtons>
     </SinkingStep>
   );
 }
