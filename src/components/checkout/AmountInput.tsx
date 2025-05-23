@@ -233,7 +233,10 @@ export default function AmountInput() {
                       If you sink a fractional amount of CARBON you cannot
                       receive an indvidual certificate without either rounding
                       down or up. Read more{" "}
-                      <span className="underline">here</span>.
+                      <Link href="/explain" className="underline">
+                        here
+                      </Link>
+                      .
                     </span>
                   )}
                 </>
