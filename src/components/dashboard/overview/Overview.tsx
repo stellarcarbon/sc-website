@@ -109,7 +109,7 @@ export default function Overview() {
             {/* <DashboardHeader>Connected wallet</DashboardHeader> */}
             <div
               className="flex items-center justify-between p-2
-          bg-darkest border rounded border-accentSecondary"
+          bg-primary border rounded border-accentSecondary"
             >
               <div className="flex items-center gap-2">
                 <div className="p-1">

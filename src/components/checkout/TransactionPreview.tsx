@@ -61,7 +61,7 @@ export default function TransactionPreview({
   return (
     <div
       id="transaction-preview"
-      className="p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center bg-darkest border border-accentSecondary rounded"
+      className="p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center bg-[#282C47] border border-accentSecondary rounded"
     >
       <h3 className="text-2xl font-bold">Transaction preview</h3>
       <div className="grid grid-cols-5 gap-1 text-center w-full">

@@ -13,7 +13,7 @@ export default function ConnectWalletForm() {
 
   return (
     <>
-      <div className="flex-1 md:flex-none lg:my-8 w-full md:max-w-[780px] bg-darker md:rounded md:border md:border-tertiary overflow-hidden">
+      <div className="flex-1 md:flex-none lg:my-8 w-full md:max-w-[780px] bg-darkest md:rounded md:border md:border-tertiary overflow-hidden">
         <SectionHeader>
           <div className="text-center text-2xl w-full">Connect wallet</div>
         </SectionHeader>

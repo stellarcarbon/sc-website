@@ -60,7 +60,7 @@ body {
   background-image: linear-gradient(
       180deg,
       rgba(165, 206, 199, 0.2) 95%,
-      rgba(45, 50, 80, 1) 100%
+      rgba(27, 31, 51, 1) 100%
     ),
     url("/rainforest_mist_carbonbank_1920x784.jpg");
   background-size: cover;
@@ -72,7 +72,7 @@ body {
   background-image: linear-gradient(
       180deg,
       rgba(165, 206, 199, 0) 95%,
-      #2d3250 100%
+      rgba(27, 31, 51, 1) 100%
     ),
     url("/dalle.png");
   background-size: cover;

@@ -1,6 +1,7 @@
 import {
   faCircleArrowLeft,
   faQuestionCircle,
+  faXmark,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,10 +20,7 @@ export default function TransactionExplorerHeader() {
       </h1>
 
       {pathname.includes("detail") || pathname.includes("help") ? (
-        <TxHeaderButton
-          onClick={() => router.back()}
-          icon={faCircleArrowLeft}
-        />
+        <TxHeaderButton onClick={() => router.back()} icon={faXmark} />
       ) : (
         <TxHeaderButton
           onClick={() => router.push("/transactions/help")}

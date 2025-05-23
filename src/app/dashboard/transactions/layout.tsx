@@ -11,7 +11,7 @@ export default function HistoryLayout({
 }) {
   return (
     <main className="flex flex-col items-center justify-start w-full flex-1">
-      <div className="h-12 w-full flex justify-around items-center bg-primary border-b border-b-secondary">
+      <div className="h-12 w-full flex justify-around items-center bg-darkest border-b border-b-secondary">
         <TransactionsNavBarItem item={TransactionsTabs.PENDING} />
         <TransactionsNavBarItem item={TransactionsTabs.HISTORY} />
       </div>

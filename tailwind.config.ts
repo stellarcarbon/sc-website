@@ -37,7 +37,8 @@ const config: Config = {
         "md-inverted": "-2px 2px 15px -10px rgba(0,0,0,0.75)",
       },
       colors: {
-        primary: "#2D3250",
+        // primary: "#2D3250",
+        primary: "#282C47",
         secondary: "#424769",
         tertiary: "#7077A1",
         darker: "#22263d",

@@ -24,7 +24,7 @@ export default function ConfirmSinking() {
         Your transaction is signed by Stellarcarbon and ready to go!
       </div>
 
-      <div className="flex flex-col justify-center gap-8 bg-primary md:mx-8 mb-4 mt-8 p-3 rounded border border-tertiary">
+      <div className="flex flex-col justify-center gap-8 bg-primary md:mx-8 my-12 p-4 rounded border border-tertiary">
         <div className="grid grid-cols-5 w-full">
           <ConfirmKey>Amount</ConfirmKey>
           <ConfirmValue>

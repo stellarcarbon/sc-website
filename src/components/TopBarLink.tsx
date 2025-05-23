@@ -23,7 +23,7 @@ export default function TopBarLink({ children, href }: TopBarLinkProps) {
   return (
     <Link
       className={`hover:text-yellow-100 ${
-        isCurrentRoute() ? "text-yellow-400" : "text-accent"
+        isCurrentRoute() ? "text-yellow-400" : ""
       }`}
       href={href}
     >

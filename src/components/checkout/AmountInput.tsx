@@ -220,7 +220,7 @@ export default function AmountInput({
             </div>
 
             <div
-              className={`px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-darkest border rounded border-accentSecondary`}
+              className={`px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-primary border rounded border-accentSecondary`}
             >
               {isLoading ? (
                 <Blocks width={48} height={48} />

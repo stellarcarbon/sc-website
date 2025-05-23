@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export default function SoftwarePage() {
   return (
-    <main className="flex flex-col items-center font-noto">
+    <main className="flex flex-col items-center font-noto bg-darkest">
       <Banner
         title="Software"
         subtitle="For integration partners"
