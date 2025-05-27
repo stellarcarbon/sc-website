@@ -2,6 +2,7 @@ import FormError from "@/components/FormError";
 import ContactInfoForm from "../ContactInfoForm";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import { ConnectWalletFormError } from "./ConnectWalletForm";
 
 export default function ContactDetails() {
   const { emailError } = useConnectWalletContext();
@@ -9,7 +10,7 @@ export default function ContactDetails() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
-        <DashboardHeader>Fill in contact details (optional)</DashboardHeader>
+        <DashboardHeader>Contact details (optional)</DashboardHeader>
 
         <span className="">
           Your contact details will be used to send you a confirmation of your
@@ -17,9 +18,11 @@ export default function ContactDetails() {
         </span>
       </div>
 
-      <ContactInfoForm />
+      {emailError && (
+        <ConnectWalletFormError message={"Invalid email address"} />
+      )}
 
-      {emailError && <FormError>{"Invalid email address"}</FormError>}
+      <ContactInfoForm />
     </div>
   );
 }

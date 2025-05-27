@@ -1,6 +1,7 @@
 import FormError from "@/components/FormError";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import { ConnectWalletFormError } from "./ConnectWalletForm";
 
 export default function AcceptTnC() {
   const { tncError, tncAccepted, setTncAccepted } = useConnectWalletContext();
@@ -13,6 +14,12 @@ export default function AcceptTnC() {
           Read about our terms & conditions and privacy policy <u>here</u>.
         </span>
       </div>
+
+      {tncError && (
+        <ConnectWalletFormError
+          message={"You have to accept the terms and conditions."}
+        />
+      )}
 
       <div
         className={`my-2 !cursor:pointer pl-2 gap-2 flex items-center font-bold border rounded-md 
@@ -38,10 +45,6 @@ export default function AcceptTnC() {
           policy.
         </label>
       </div>
-
-      {tncError && (
-        <FormError>{"You have to accept the terms and conditions."}</FormError>
-      )}
     </div>
   );
 }

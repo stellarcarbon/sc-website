@@ -15,26 +15,30 @@ export default function ContactInfoForm() {
   };
 
   return (
-    <div className="flex flex-col gap-1 items-start mx-1 md:mx-0">
-      <label className="text-xs" htmlFor="username">
-        Name
-      </label>
-      <TextInput
-        name="username"
-        placeholder="Your name"
-        value={username}
-        onChange={usernameOnChange}
-      />
+    <div className="flex flex-col gap-3 items-start mx-1 md:mx-0 w-full">
+      <div className="flex flex-col gap-1 w-full">
+        <label className="text-xs" htmlFor="username">
+          Name
+        </label>
+        <TextInput
+          name="username"
+          placeholder="Your name"
+          value={username}
+          onChange={usernameOnChange}
+        />
+      </div>
 
-      <label className="text-xs" htmlFor="useremail">
-        E-mail
-      </label>
-      <TextInput
-        name="useremail"
-        placeholder="Your email address"
-        value={useremail}
-        onChange={useremailOnChange}
-      />
+      <div className="flex flex-col gap-1 w-full">
+        <label className="text-xs" htmlFor="useremail">
+          E-mail
+        </label>
+        <TextInput
+          name="useremail"
+          placeholder="Your email address"
+          value={useremail}
+          onChange={useremailOnChange}
+        />
+      </div>
     </div>
   );
 }

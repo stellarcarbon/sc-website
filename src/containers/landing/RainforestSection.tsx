@@ -61,7 +61,6 @@ export default function RainforestIntro() {
   }, []);
 
   const onClickChevDown = useCallback(() => {
-    console.log("???");
     window.scrollTo({
       left: 0,
       top: window.innerHeight - 80,

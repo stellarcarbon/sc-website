@@ -1,10 +1,10 @@
-import FormError from "@/components/FormError";
 import LoadingWallets from "@/components/wallet/LoadingWallets";
 import { useAppContext } from "@/context/appContext";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import SelectWalletButtons from "./SelectWalletButtons";
 import { useEffect, useRef } from "react";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import { ConnectWalletFormError } from "./ConnectWalletForm";
 
 export default function SelectWallet() {
   const { supportedWallets } = useAppContext();
@@ -27,11 +27,11 @@ export default function SelectWallet() {
   return (
     <div ref={containerRef} className="flex flex-col gap-4">
       <div className="flex flex-col w-full">
-        <DashboardHeader>Select your wallet</DashboardHeader>
+        <DashboardHeader>Wallet selection</DashboardHeader>
+        <span className="hidden md:block">
+          Select your wallet – you’ll connect it when you submit the form.
+        </span>
 
-        {/* <span className="mb-1 max-w-[80%] hidden md:block">
-          Select the wallet you will be using to connect to stellarcarbon.io
-        </span> */}
         <span className="md:hidden my-2">
           {selectedWallet ? (
             <div className="flex items-center gap-1 justify-center">
@@ -44,13 +44,15 @@ export default function SelectWallet() {
         </span>
       </div>
 
+      {walletSelectError && (
+        <ConnectWalletFormError message={"Please select a wallet"} />
+      )}
+
       {supportedWallets.length === 0 ? (
         <LoadingWallets />
       ) : (
         <SelectWalletButtons />
       )}
-
-      {walletSelectError && <FormError>{`Please select a wallet`}</FormError>}
     </div>
   );
 }
