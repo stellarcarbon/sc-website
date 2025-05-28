@@ -1,7 +1,7 @@
 import SelectReasonButton from "./SelectReasonButton";
 import { useEffect, useMemo, useState } from "react";
-import SectionHeader from "../SectionHeader";
-import FormError from "../FormError";
+import SectionHeader from "@/components/SectionHeader";
+import FormError from "@/components/FormError";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
 

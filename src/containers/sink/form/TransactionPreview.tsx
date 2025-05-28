@@ -1,7 +1,7 @@
 "use client";
 
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import Button from "../Button";
+import Button from "../../../components/Button";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useSinkingContext } from "@/context/SinkingContext";
 import { useAppContext } from "@/context/appContext";
@@ -83,7 +83,7 @@ export default function TransactionPreview() {
 
         <TransactionPrice currency={currency} quote={quote} />
       </div>
-      <div className="py-1">
+      <div className="py-1 flex flex-col items-center">
         <Button
           onClick={() => handleSubmit(onSubmit, onError)()}
           disabled={!walletConnection}
@@ -91,6 +91,11 @@ export default function TransactionPreview() {
           <FontAwesomeIcon icon={faFileContract} />
           <div>Continue to signing</div>
         </Button>
+        {!walletConnection && (
+          <div className="italic text-gray-500 text-sm mt-1">
+            Connect your wallet to sign
+          </div>
+        )}
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import Paragraph from "@/components/Paragraph";
 import { useEffect, useState } from "react";
 import { Blocks } from "react-loader-spinner";
 import LandingSection from "./LandingSection";
-import LandingSectionHeader from "./LandingSectionHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileContract, faHandshake } from "@fortawesome/free-solid-svg-icons";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
@@ -29,11 +28,14 @@ export default function WhySection() {
 
   const first = (
     <div>
+      <div className="px-4 text-4xl font-bold leading-tight tracking-light mb-2">
+        Trust & Verification
+      </div>
       <Paragraph>
-        Transparency is essential when it comes to climate action. That’s why we
-        only work with projects issuing Verified Carbon Units (VCUs) and use
-        blockchain technology to ensure every transaction is transparent and
-        traceable.
+        Transparency is essential when it comes to online eco contributions.
+        That’s why we only work with projects issuing Verified Carbon Units
+        (VCUs) and use blockchain technology to ensure every transaction is
+        transparent and traceable.
       </Paragraph>
       <Paragraph>
         VCUs are issued through the Verra Registry, the world’s leading standard
@@ -67,7 +69,7 @@ export default function WhySection() {
   );
 
   const third = (
-    <div className="grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 gap-4 mt-6">
+    <div className="grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 gap-4 mt-24">
       <div className="bg-primary border border-accentSecondary rounded flex flex-col items-start p-4">
         <FontAwesomeIcon icon={faFileContract} className="text-xl mb-2" />
         <h2 className="font-bold text-xl mb-2">Verra Registry Integration</h2>
@@ -80,7 +82,7 @@ export default function WhySection() {
           >
             Verra Registry
           </Link>
-          , providing an extra layer auditing and accountability.
+          , providing an solid layer of auditing and accountability.
         </div>
       </div>
       <div className="bg-primary border border-accentSecondary rounded flex flex-col items-start p-4">
@@ -95,8 +97,8 @@ export default function WhySection() {
         <FontAwesomeIcon icon={faHandshake} className="text-xl mb-2" />
         <h2 className="font-bold text-xl mb-2">Viewable transaction records</h2>
         <div>
-          Access a comprehensive history of your contributions, including dates,
-          amounts and memo's, all verifiable on the Stellar blockchain.
+          {`Access a comprehensive history of your contributions, including dates,
+          amounts and memo's, all verifiable on the Stellar blockchain.`}
         </div>
       </div>
     </div>
@@ -104,7 +106,7 @@ export default function WhySection() {
 
   return (
     <LandingSection
-      header={"Trust & Verification"}
+      // header={"Trust & Verification"}
       first={first}
       second={second}
       third={third}

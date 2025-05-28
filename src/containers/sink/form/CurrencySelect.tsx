@@ -1,7 +1,7 @@
 import { PaymentAsset } from "@/client";
 import { useAppContext } from "@/context/appContext";
 import { useMemo } from "react";
-import SectionHeader from "../SectionHeader";
+import SectionHeader from "../../../components/SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 import { faDollar, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 

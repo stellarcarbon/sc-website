@@ -1,16 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import LandingSectionHeader from "./LandingSectionHeader";
-import {
-  faCalculator,
-  faHandshake,
-  faWallet,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHandshake, faWallet } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function HowItWorks() {
   return (
-    <div className="p-4 py-6 rounded bg-primary border border-accentSecondary mx-4">
+    <div className="p-4 py-6 rounded bg-primary border border-accentSecondary mx-4 mt-6">
       {/* <LandingSectionHeader>How It Works</LandingSectionHeader> */}
       <div className="grid grid-cols-[32px_1fr] gap-x-2 ">
         <FontAwesomeIcon icon={faWallet} className="place-self-center" />

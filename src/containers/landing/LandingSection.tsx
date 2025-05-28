@@ -1,17 +1,14 @@
 import { ReactNode } from "react";
-import LandingSectionHeader from "./LandingSectionHeader";
 
 export default function LandingSection({
   first,
   second,
   third,
-  header,
   className,
 }: {
   first: ReactNode;
   second: ReactNode;
   third?: ReactNode;
-  header?: string;
   className?: string;
 }) {
   return (
@@ -21,9 +18,6 @@ export default function LandingSection({
     ${className}
     `}
     >
-      <div className="px-4 text-4xl font-bold leading-tight tracking-light mb-2">
-        {header}
-      </div>
       <div
         className={`grid md:grid-cols-2
         tracking-wide leading-7 text-lg gap-4

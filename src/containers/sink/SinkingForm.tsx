@@ -1,12 +1,12 @@
 "use client";
 
-import CurrencySelect from "@/components/checkout/CurrencySelect";
-import ReasonSelect from "@/components/checkout/ReasonSelect";
+import CurrencySelect from "@/containers/sink/form/CurrencySelect";
+import ReasonSelect from "@/containers/sink/form/ReasonSelect";
 import { useMemo } from "react";
-import AmountInput from "@/components/checkout/AmountInput";
-import TransactionPreview from "@/components/checkout/TransactionPreview";
+import AmountInput from "@/containers/sink/form/AmountInput";
+import TransactionPreview from "@/containers/sink/form/TransactionPreview";
 import appConfig from "@/config";
-import { ReasonSelectContextProvider } from "@/components/checkout/ReasonSelectContext";
+import { ReasonSelectContextProvider } from "@/containers/sink/form/ReasonSelectContext";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 

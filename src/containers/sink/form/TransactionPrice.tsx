@@ -1,5 +1,5 @@
 import { useSinkingContext } from "@/context/SinkingContext";
-import XLMIcon from "../icons/XLMIcon";
+import XLMIcon from "../../../components/icons/XLMIcon";
 import { TPKey, TPValue } from "./TransactionPreview";
 import { useEffect, useState } from "react";
 

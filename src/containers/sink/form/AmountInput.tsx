@@ -13,13 +13,13 @@ import { Blocks } from "react-loader-spinner";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import appConfig from "@/config";
 import { useSinkingContext } from "@/context/SinkingContext";
-import Button from "../Button";
-import SectionHeader from "../SectionHeader";
+import Button from "../../../components/Button";
+import SectionHeader from "../../../components/SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 import Link from "next/link";
-import Header from "../Header";
+import Header from "../../../components/Header";
 import LandingSectionHeader from "@/containers/landing/LandingSectionHeader";
-import DashboardHeader from "../dashboard/DashboardHeader";
+import DashboardHeader from "../../../components/dashboard/DashboardHeader";
 
 export default function AmountInput() {
   const { register, watch, setValue, quote, setQuote } = useSinkFormContext();
@@ -148,7 +148,7 @@ export default function AmountInput() {
               Sinking 1 <CARBONCurrencyIcon className="inline" /> would let you
               claim the environmental benefit of reducing 1 tonne of CO2.
             </div>
-            <div className="flex justify-between items-center gap-2 md:px-2">
+            <div className="flex justify-between items-center gap-2">
               <div className="w-[35%] flex flex-col items-start">
                 <div className="text-xs mb-1">Sink amount</div>
                 <div className="relative">
@@ -169,7 +169,7 @@ export default function AmountInput() {
                   />
                 </div>
               </div>
-              <div className="">
+              <div className="self-end">
                 <FontAwesomeIcon
                   icon={faArrowRightArrowLeft}
                   className="text-xl"
@@ -203,7 +203,7 @@ export default function AmountInput() {
             </div>
 
             <div
-              className={`px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-primary border rounded border-accentSecondary`}
+              className={`self-center w-[80%] px-4 py-6 min-h-20 gap-4 flex flex-col justify-center items-center bg-primary border rounded border-accentSecondary`}
             >
               {isLoading ? (
                 <Blocks width={48} height={48} />
@@ -213,7 +213,7 @@ export default function AmountInput() {
                 </span>
               ) : (
                 <>
-                  <div className="w-full flex justify-center gap-1 items-center md:text-lg text-center">
+                  <div className="flex justify-center gap-1 items-center md:text-lg text-center">
                     <div className="flex items-center">
                       <span>Sinking {tonnes}</span>
                       <CARBONCurrencyIcon className="ml-1" />

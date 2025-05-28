@@ -1,9 +1,7 @@
-import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 import PartnerLogo, { Partners } from "@/components/PartnerLogo";
 import Link from "next/link";
 import LandingSection from "./LandingSection";
-import LandingSectionHeader from "./LandingSectionHeader";
 
 export default function PartnerSection() {
   const first = (

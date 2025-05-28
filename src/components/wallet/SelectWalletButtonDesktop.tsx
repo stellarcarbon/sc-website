@@ -10,14 +10,14 @@ export default function SelectWalletButtonDesktop({
   return (
     <button
       id={`${wallet.type}_SelectWalletButtonDesktop`}
-      className={`  bg-secondary text-white text-sm shadow-md rounded-md border border-transparent
+      className={`  bg-primary text-white text-sm shadow-md rounded-md border border-tertiary
          flex items-center justify-start
           px-4 h-12 w-100
       
        ${
          wallet.isAvailable
            ? !isSelected
-             ? "hover:bg-accentSecondary hover:text-white"
+             ? "hover:bg-secondary hover:text-white"
              : ""
            : "!bg-gray-600 !text-gray-500 border-none"
        } 

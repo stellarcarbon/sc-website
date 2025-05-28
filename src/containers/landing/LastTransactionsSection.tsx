@@ -2,17 +2,11 @@
 
 import { MyTransactionRecord } from "@/app/types";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
-import Header from "@/components/Header";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import { useAppContext } from "@/context/appContext";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
-import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import Paragraph from "@/components/Paragraph";
-import { useRouter } from "next/navigation";
 import LandingSection from "./LandingSection";
-import LandingSectionHeader from "./LandingSectionHeader";
 
 export default function LastTransactionsSection() {
   const [lastTransactions, setLastTransactions] = useState<

@@ -6,22 +6,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LandingSection from "./LandingSection";
-import LandingSectionHeader from "./LandingSectionHeader";
 import HowItWorks from "./HowItWorks";
-import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import CTAButton from "@/components/CTAButton";
 
 export default function WhySection() {
   const first = (
     <div>
+      <div className="px-4 text-4xl font-bold leading-tight tracking-light mb-2">
+        How it works
+      </div>
       <Paragraph>
-        Supporting climate action shouldn't be complicated. With Stellarcarbon,
+        {`Supporting climate action shouldn't be complicated. With Stellarcarbon,
         you can contribute to a real, verified biodiversity project in just a
-        few clicks — with full transparency and total control.
+        few clicks — with full transparency and total control.`}
       </Paragraph>
       <Paragraph>
-        Whether you're an individual or a small business, you can contribute
-        directly to protecting rainforests and natural ecosystems.
+        {`Whether you're an individual or a small business, you can contribute
+        directly to protecting rainforests and natural ecosystems.`}
       </Paragraph>
       <Paragraph>
         Just connect your wallet and start sinking right now!
@@ -61,7 +61,6 @@ export default function WhySection() {
 
   return (
     <LandingSection
-      header={"How it works"}
       first={first}
       second={second}
       className="border-b-0"

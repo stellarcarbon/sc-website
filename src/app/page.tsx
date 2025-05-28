@@ -11,7 +11,6 @@ import appConfig from "@/config";
 import Footer from "@/components/Footer";
 import WhySection from "@/containers/landing/WhySection";
 import TrustSection from "@/containers/landing/TrustSection";
-import { useEffect } from "react";
 
 export default function Home() {
   if (appConfig.demo) {
