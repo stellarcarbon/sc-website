@@ -27,7 +27,9 @@ export default function LastTransactionsSection() {
 
   const first = (
     <div>
-      <LandingSectionHeader>Using the blockchain</LandingSectionHeader>
+      <div className="px-4 text-4xl font-bold leading-tight tracking-light mb-2">
+        Using Stellar
+      </div>
 
       <Paragraph>
         All sunk CARBON is accounted for by using the Stellar blockchain

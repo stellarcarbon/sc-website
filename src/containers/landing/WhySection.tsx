@@ -7,26 +7,33 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LandingSection from "./LandingSection";
 import LandingSectionHeader from "./LandingSectionHeader";
+import HowItWorks from "./HowItWorks";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import CTAButton from "@/components/CTAButton";
 
 export default function WhySection() {
   const first = (
     <div>
-      <LandingSectionHeader>What is Stellarcarbon</LandingSectionHeader>
-      <Paragraph>
-        Stellarcarbon is a platform that lets you easily support high-impact
-        biodiversity projects and offset your CO₂ emissions using your Stellar
-        wallet. Whether you're an individual or a small business, you can
-        contribute directly to protecting rainforests and natural ecosystems.
-      </Paragraph>
       <Paragraph>
         Supporting climate action shouldn't be complicated. With Stellarcarbon,
-        you can contribute to real, verified biodiversity projects in just a few
-        clicks — with full transparency and total control.
+        you can contribute to a real, verified biodiversity project in just a
+        few clicks — with full transparency and total control.
+      </Paragraph>
+      <Paragraph>
+        Whether you're an individual or a small business, you can contribute
+        directly to protecting rainforests and natural ecosystems.
+      </Paragraph>
+      <Paragraph>
+        Just connect your wallet and start sinking right now!
+        {/* <div className="w-full flex justify-center mt-8">
+          <CTAButton white />
+        </div> */}
       </Paragraph>
     </div>
   );
+  const second = <HowItWorks />;
 
-  const second = (
+  const old = (
     <div className="md:text-xl flex justify-center items-center">
       <div className="flex flex-col gap-6 bg-primary mx-4 p-4 md:p-8 rounded-md shadow-md border border-gray-500">
         {/* <div className="self-center text-3xl">Why?</div> */}
@@ -52,5 +59,12 @@ export default function WhySection() {
     </div>
   );
 
-  return <LandingSection first={first} second={second}></LandingSection>;
+  return (
+    <LandingSection
+      header={"How it works"}
+      first={first}
+      second={second}
+      className="border-b-0"
+    ></LandingSection>
+  );
 }

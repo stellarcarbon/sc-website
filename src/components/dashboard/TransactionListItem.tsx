@@ -38,7 +38,7 @@ export default function TransactionListItem({
     <div
       onClick={onClick}
       className={`w-full max-w-[95vw]
-  bg-primary border border-accentSecondary rounded
+  bg-primary hover:bg-secondary border border-accentSecondary rounded
   ${disabled ? "" : "cursor-pointer"}
   p-2
   flex flex-col gap-1`}

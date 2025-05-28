@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import { Blocks } from "react-loader-spinner";
 import LandingSection from "./LandingSection";
 import LandingSectionHeader from "./LandingSectionHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileContract, faHandshake } from "@fortawesome/free-solid-svg-icons";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import Link from "next/link";
 
 export default function WhySection() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -25,7 +29,6 @@ export default function WhySection() {
 
   const first = (
     <div>
-      <LandingSectionHeader>Trustworthy</LandingSectionHeader>
       <Paragraph>
         Transparency is essential when it comes to climate action. That’s why we
         only work with projects issuing Verified Carbon Units (VCUs) and use
@@ -43,7 +46,7 @@ export default function WhySection() {
   );
 
   const second = (
-    <div className="md:text-xl flex flex-col justify-center items-center">
+    <div className="md:text-xl flex flex-col justify-center items-center gap-4">
       {isLoading ? (
         <Blocks />
       ) : (
@@ -63,5 +66,49 @@ export default function WhySection() {
     </div>
   );
 
-  return <LandingSection first={first} second={second} />;
+  const third = (
+    <div className="grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 gap-4 mt-6">
+      <div className="bg-primary border border-accentSecondary rounded flex flex-col items-start p-4">
+        <FontAwesomeIcon icon={faFileContract} className="text-xl mb-2" />
+        <h2 className="font-bold text-xl mb-2">Verra Registry Integration</h2>
+        <div>
+          All transactions are reflected on the{" "}
+          <Link
+            href="https://registry.verra.org/"
+            className="underline text-accentSecondary"
+            target="_blank"
+          >
+            Verra Registry
+          </Link>
+          , providing an extra layer auditing and accountability.
+        </div>
+      </div>
+      <div className="bg-primary border border-accentSecondary rounded flex flex-col items-start p-4">
+        <CARBONCurrencyIcon className="mb-3" height={21} width={21} />
+        <h2 className="font-bold text-xl mb-2">1 CARBON = 1 VCU</h2>
+        <div>
+          Each CARBON token represents one Verified Carbon Unit (VCU), ensuring
+          a direct and measurable contribution to carbon reduction.
+        </div>
+      </div>
+      <div className="bg-primary border border-accentSecondary rounded flex flex-col items-start p-4">
+        <FontAwesomeIcon icon={faHandshake} className="text-xl mb-2" />
+        <h2 className="font-bold text-xl mb-2">Viewable transaction records</h2>
+        <div>
+          Access a comprehensive history of your contributions, including dates,
+          amounts and memo's, all verifiable on the Stellar blockchain.
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <LandingSection
+      header={"Trust & Verification"}
+      first={first}
+      second={second}
+      third={third}
+      className="border-t-0 pt-8"
+    />
+  );
 }

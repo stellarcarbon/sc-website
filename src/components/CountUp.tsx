@@ -75,7 +75,7 @@ export default function CountUp({ value, unit, subject }: CountUpProps) {
   }, [counter]);
 
   return (
-    <div ref={ref} className="my-4 w-full flex flex-col items-center">
+    <div ref={ref} className="mb-4 w-full flex flex-col items-center">
       <span className="mb-4 text-6xl font-noto">
         {toNumberWithCommas(counter)}
       </span>

@@ -24,7 +24,7 @@ export default function Home() {
 
       <WhySection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
+      {/* <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} /> */}
 
       <TrustSection />
 
@@ -32,7 +32,9 @@ export default function Home() {
 
       <ExplainSection /> */}
 
-      <ParallaxDivider image={ParallaxBackgrounds.DALLE} yOffset={-300} />
+      {/* <ParallaxDivider image={ParallaxBackgrounds.DALLE} yOffset={-300} /> */}
+
+      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
 
       <LastTransactionsSection />
 
@@ -44,7 +46,8 @@ export default function Home() {
 
       <PartnerSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-200} />
+      {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-200} /> */}
+
       <Footer />
 
       {/* <div className="h-[600px] flex flex-col justify-center">

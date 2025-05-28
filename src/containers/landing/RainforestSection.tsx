@@ -73,13 +73,14 @@ export default function RainforestIntro() {
 
       <div className="relative h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-16 z-10 text-center w-[100%]">
         <div className="flex flex-col gap-8 text-md px-5 py-8 md:py-12 w-full bg-darker/[.8]">
-          <span className="font-roboto text-5xl md:text-[80px]">
-            Stellarcarbon
+          <span className="font-roboto text-5xl md:text-[64px] max-w-5xl self-center tracking-tight">
+            Protect the rainforest on Stellar
           </span>
           <div className="flex flex-col gap-8 font-noto">
             <div className="flex flex-col items-center text-center gap-4">
               <div className="md:text-2xl">
-                Contribute to rainforest conservation projects on Stellar.
+                Contribute to rainforest conservation with your Stellar wallet
+                or API integration.
               </div>
             </div>
           </div>
