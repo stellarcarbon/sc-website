@@ -2,13 +2,16 @@
 
 import CTAButton from "@/components/CTAButton";
 import DoubleChevronDownIcon from "@/components/icons/DoubleChevronDownIcon";
+import { useAppContext } from "@/context/appContext";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function RainforestIntro() {
+  const { isMobileDevice } = useAppContext();
+
   const [scrollPosition, setScrollPosition] = useState(0);
   const chevDown = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(-80);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,15 +26,8 @@ export default function RainforestIntro() {
   }, []);
 
   useEffect(() => {
-    const trackScroll = () => {
-      const position = window.scrollY;
-      setScrollPosition(position);
-    };
-
-    window.addEventListener("scroll", trackScroll, { passive: true });
-
-    return () => {};
-  }, []);
+    if (isMobileDevice) setOffset(-64);
+  }, [isMobileDevice]);
 
   useEffect(() => {
     const trackScroll = () => {
@@ -82,9 +78,8 @@ export default function RainforestIntro() {
           </span>
           <div className="flex flex-col gap-8 font-noto">
             <div className="flex flex-col items-center text-center gap-4">
-              <div className="md:text-xl">
-                Contribute to rainforest conservation projects using the Stellar
-                blockchain.
+              <div className="md:text-2xl">
+                Contribute to rainforest conservation projects on Stellar.
               </div>
             </div>
           </div>

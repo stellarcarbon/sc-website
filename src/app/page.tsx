@@ -18,10 +18,6 @@ export default function Home() {
     return <DemoLanding />;
   }
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, []);
-
   return (
     <main className="flex flex-col items-center">
       <RainforestIntro />
@@ -36,13 +32,13 @@ export default function Home() {
 
       <ExplainSection /> */}
 
-      <ParallaxDivider image={ParallaxBackgrounds.DALLE} yOffset={-250} />
+      <ParallaxDivider image={ParallaxBackgrounds.DALLE} yOffset={-300} />
 
       <LastTransactionsSection />
 
       <ParallaxDivider
         image={ParallaxBackgrounds.RIVER_ESTUARY}
-        yOffset={-200}
+        yOffset={-300}
         mirrored
       />
 

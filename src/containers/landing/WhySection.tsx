@@ -40,7 +40,7 @@ export default function WhySection() {
           <div className="w-14 flex justify-center">
             <FontAwesomeIcon icon={faLightbulb} />
           </div>
-          <div>Supereasy to contribute using your wallet</div>
+          <div>Supereasy to contribute using your Stellar wallet</div>
         </div>
         <div className="flex items-center">
           <div className="w-14 flex justify-center">
