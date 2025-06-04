@@ -33,7 +33,10 @@ export default function LastTransactionsSection() {
         <br /> Check out the most recent transactions on Stellarcarbon.
       </Paragraph>
       <Paragraph>
-        <Link href="/transactions" className="underline text-sm">
+        <Link
+          href="/transactions"
+          className="underline text-sm text-accentSecondary"
+        >
           View the full list in our transaction explorer
         </Link>
       </Paragraph>
@@ -41,7 +44,7 @@ export default function LastTransactionsSection() {
   );
 
   const second = lastTransactions && (
-    <div className="w-full md:w-[30vw] flex flex-col gap-1 justify-center">
+    <div className="w-full flex flex-col gap-1 items-center *:justify-center">
       {lastTransactions.map((tx, idx) => {
         return <TransactionListItem key={`tx_${idx}`} transaction={tx} />;
       })}

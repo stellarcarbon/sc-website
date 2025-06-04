@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LandingSection from "./LandingSection";
 import HowItWorks from "./HowItWorks";
+import Link from "next/link";
 
 export default function WhySection() {
   const first = (
@@ -24,10 +25,19 @@ export default function WhySection() {
         directly to protecting rainforests and natural ecosystems.`}
       </Paragraph>
       <Paragraph>
-        Just connect your wallet and start sinking right now!
+        Just connect your wallet and start sinking{" "}
+        <Link href="/dashboard/sink" className="underline text-accentSecondary">
+          right now
+        </Link>
+        !
         {/* <div className="w-full flex justify-center mt-8">
           <CTAButton white />
         </div> */}
+      </Paragraph>
+
+      <Paragraph>
+        We also offer API and Sorocarbon integration options for businesses on
+        Stellar.
       </Paragraph>
     </div>
   );

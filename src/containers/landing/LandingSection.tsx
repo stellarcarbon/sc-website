@@ -14,7 +14,7 @@ export default function LandingSection({
   return (
     <div
       className={`bg-darkest border-y border-tertiary
-    z-[10] w-full py-12 pb-14 m-auto px-3 md:px-[5%]
+    z-[10] w-full py-12 m-auto px-1 md:px-[5%] md:py-16
     ${className}
     `}
     >

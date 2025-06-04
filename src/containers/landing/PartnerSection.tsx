@@ -16,7 +16,10 @@ export default function PartnerSection() {
       </Paragraph>
 
       <Paragraph>
-        <Link href="/software" className="underline text-sm">
+        <Link
+          href="/software"
+          className="underline text-sm text-accentSecondary"
+        >
           Read about integration options here
         </Link>
       </Paragraph>

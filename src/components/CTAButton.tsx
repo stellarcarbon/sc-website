@@ -51,7 +51,7 @@ export default function CTAButton({
       {walletConnection ? (
         <span className="font-semibold">Go to dashboard</span>
       ) : (
-        <span className="font-semibold">Contribute now!</span>
+        <span className="font-semibold">Start your impact</span>
       )}
     </button>
   );

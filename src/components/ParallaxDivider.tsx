@@ -94,7 +94,7 @@ export default function ParallaxDivider({
           style={t}
         ></div>
       </div>
-      <div className={`${heightSettings} w-full`}></div>
+      <div className={`relative ${heightSettings} w-full`}></div>
     </div>
   );
 }

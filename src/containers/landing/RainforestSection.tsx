@@ -71,17 +71,22 @@ export default function RainforestIntro() {
         style={{ transform: `translateY(${offset * 0.2}px)` }}
       />
 
-      <div className="relative h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-16 z-10 text-center w-[100%]">
-        <div className="flex flex-col gap-8 text-md px-5 py-8 md:py-12 w-full bg-darker/[.8]">
-          <span className="font-roboto text-5xl md:text-[64px] max-w-5xl self-center tracking-tight">
-            Protect the rainforest with Stellar
+      <div className="relative h-[calc(100svh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-start md:justify-center gap-16 z-10 text-center w-[100%]">
+        <div className="flex flex-col justify-center gap-8 py-8 md:py-12 w-full bg-darker/[.4] h-full md:h-auto">
+          <span className="font-roboto text-5xl md:text-[64px] max-w-6xl self-center tracking-tight leading-snug md:leading-normal">
+            Protect the rainforest with Stellarcarbon
           </span>
           <div className="flex flex-col gap-8 font-noto">
             <div className="flex flex-col items-center text-center gap-4">
-              <div className="md:text-2xl">
-                Contribute to rainforest conservation using our website, HTTP
-                API or smart contract.
+              <div className="text-xl md:text-2xl leading-relaxed">
+                Fund certified rainforest conservation projects with just your
+                Stellar wallet
+                {/* Contributing to rainforest & biodiversity conservation made easy */}
               </div>
+              {/* <div className="md:text-2xl">
+                Connect your wallet and donate, or integrate with our API &
+                Soroban contract.
+              </div> */}
             </div>
           </div>
           <div className="flex justify-center">
@@ -91,7 +96,7 @@ export default function RainforestIntro() {
 
         <div
           ref={chevDown}
-          className={`absolute cursor-pointer bottom-0 animate-bounce ${
+          className={`absolute cursor-pointer bottom-[32px] animate-bounce ${
             scrollPosition > 0 ? "animate-fade" : ""
           }`}
           onClick={onClickChevDown}

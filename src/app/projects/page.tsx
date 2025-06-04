@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 import ShipiboImages from "@/components/ShipiboImages";
 import Subheader from "@/components/Subheader";
-import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
 
 export default function ProjectsPage() {
@@ -16,7 +15,7 @@ export default function ProjectsPage() {
       <Banner
         title="Current Projects"
         subtitle="Land in the rainforest"
-        background="rainforest-bg"
+        background="forest-bg"
       />
 
       {/* Custom content container */}
