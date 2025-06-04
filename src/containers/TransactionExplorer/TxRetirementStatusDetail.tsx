@@ -1,6 +1,11 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
+import { RetirementDetail } from "@/client";
 import CountDownTimer from "@/components/CountDownTimer";
-import { useMemo } from "react";
+import RetiredTransaction from "@/components/dashboard/transactions/RetiredTransaction";
+import RetirementDetailCard from "@/components/dashboard/transactions/RetirementDetailCard";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { Blocks } from "react-loader-spinner";
 
 export default function TxRetirementStatusDetail({
   transaction,
@@ -9,8 +14,7 @@ export default function TxRetirementStatusDetail({
 }) {
   const initialDuration = useMemo(() => {
     if (transaction !== undefined) {
-      const txDate = new Date(transaction.createdAt);
-      const txDatePlus90 = txDate.addDays(90); // TODO: Make this the actual 90 days
+      const txDatePlus90 = transaction.createdAt.addDays(90); // TODO: Make this the actual 90 days
       const now = new Date();
 
       const outcome = +txDatePlus90 - +now;
@@ -21,25 +25,40 @@ export default function TxRetirementStatusDetail({
 
   let statusMessage;
   if (transaction.retirementStatus === RetirementStatus.PENDING_USER) {
-    statusMessage = "Pending user";
+    statusMessage = (
+      <div className="flex flex-col gap-4">
+        <div>
+          This fractional retirement is pending certificate attribution.
+          {/* Users can optionally create a personal certificate by rounding their
+          transactions up or down. */}
+        </div>
+        <div>
+          Fractional transactions automatically retire after a period of 90
+          days.
+        </div>
+      </div>
+    );
   } else if (
     transaction.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
   ) {
     statusMessage =
       "This transaction is waiting for the Stellarcarbon team to finalize the retirement.";
   } else if (transaction.retirementStatus === RetirementStatus.RETIRED) {
-    statusMessage = "retired";
+    statusMessage = <RetiredTransaction transaction={transaction} />;
   }
 
   return (
     <div
       className="bg-primary border border-accentSecondary rounded
-    p-2 lg:px-8 w-full lg:w-auto
+    p-4 lg:px-8 w-full lg:w-auto
     flex flex-col items-center"
     >
-      <h1 className="text-xl font-semibold py-2">Retirement status</h1>
+      {/* <div className="flex justify-between items-center w-full text-xl font-semibold p-2">
+        <div className="">Retirement status:</div>
+        <span>{transaction.retirementStatus}</span>
+      </div> */}
 
-      <div className="text-sm text-center my-2">{statusMessage}</div>
+      <div className="text-sm text-center">{statusMessage}</div>
 
       {transaction?.retirementStatus === RetirementStatus.PENDING_USER &&
         initialDuration !== undefined && (

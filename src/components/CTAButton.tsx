@@ -3,39 +3,56 @@ import { useSCRouter } from "@/utils";
 import CARBONCurrencyIcon from "./icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
 
-export default function CTAButton() {
+export default function CTAButton({
+  white,
+  small,
+  huge,
+}: {
+  white?: boolean;
+  small?: boolean;
+  huge?: boolean;
+}) {
   const router = useSCRouter();
   const { walletConnection, isMobileDevice, closeDrawer } = useAppContext();
 
   const onClick = useCallback(() => {
-    if (walletConnection) {
-      router.push("/dashboard/sink");
-    } else {
-      router.push("/wallet");
-      if (isMobileDevice) closeDrawer();
-    }
-  }, [walletConnection, router, isMobileDevice, closeDrawer]);
+    router.push("/dashboard/sink");
+
+    if (isMobileDevice) closeDrawer();
+  }, [router, isMobileDevice, closeDrawer]);
 
   return (
     <button
       type="button"
       onClick={onClick}
       className={`p-1
-        w-[220px]
-        flex justify-center
-        bg-darker hover:bg-secondary rounded-xl
-        text-white
-        border border-accentSecondary`}
+        flex items-center justify-center 
+       
+       active:bg-tertiary active:text-white
+        border border-accentSecondary
+        ${
+          white
+            ? "bg-white text-black"
+            : "bg-darkest hover:bg-accent hover:text-black"
+        }
+        ${
+          small
+            ? "px-3 text-sm h-9 gap-1 rounded-lg"
+            : huge
+            ? "p-3 gap-3 text-lg md:text-xl rounded-lg"
+            : "w-[220px] text-lg h-12 gap-3 rounded-xl"
+        }
+        
+        `}
     >
       {/* <BuyStellarCarbonIcon /> */}
-      <div className=" h-11 flex items-center gap-3">
-        <CARBONCurrencyIcon width={28} height={28} />
-        {walletConnection ? (
-          <span className="font-semibold text-lg">Sink CARBON</span>
-        ) : (
-          <span className="font-semibold text-lg">Contribute now!</span>
-        )}
-      </div>
+
+      <CARBONCurrencyIcon width={small ? 18 : 28} height={small ? 18 : 28} />
+      {walletConnection ? (
+        <span className="font-semibold">Sink CARBON</span>
+      ) : (
+        <span className="font-semibold">Contribute now!</span>
+      )}
     </button>
   );
 }

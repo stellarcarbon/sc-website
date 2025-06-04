@@ -26,9 +26,9 @@ export default function ExplainSection() {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row py-12 m-auto w-full border-y border-y-tertiary">
+    <div className="bg-primary flex flex-col md:flex-row py-12 m-auto w-full px-3 md:px-0 shadow-xl z-[10] border-y border-tertiary">
       {/* Text */}
-      <div className="md:flex-1 flex flex-col justify-center pl-[5%] md:max-w-[40%]">
+      <div className="md:flex-1 flex flex-col justify-center md:pl-[5%] md:max-w-[40%]">
         <Header>Our mission</Header>
 
         <Paragraph>
@@ -45,9 +45,11 @@ export default function ExplainSection() {
             and the blockchain to enable users to easily use their XLM to
             improve biodiversity and reduce CO2 emissions. */}
         </Paragraph>
-        <Link className="text-sm underline" href="/explain">
-          Read detailed explanation here
-        </Link>
+        <Paragraph>
+          <Link className="text-sm underline" href="/explain">
+            Read detailed explanation here
+          </Link>
+        </Paragraph>
       </div>
       {/* Stats */}
       <div className="flex flex-col justify-center items-center mt-8 md:mt-0 md:flex-1">

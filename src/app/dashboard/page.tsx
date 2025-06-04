@@ -1,10 +1,11 @@
 "use client";
 
-import { useSwipeable } from "react-swipeable";
 import { useSCRouter } from "@/utils";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import appConfig from "@/config";
+import ConnectWalletCTA from "@/components/ConnectWalletCTA";
+import { useAppContext } from "@/context/appContext";
 
 const Overview = dynamic(
   () => import("../../components/dashboard/overview/Overview"),
@@ -14,13 +15,9 @@ const Overview = dynamic(
 );
 
 export default function Dashboard() {
-  const router = useSCRouter();
+  const { walletConnection } = useAppContext();
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => router.push("/dashboard/sink"),
-    onSwipedRight: () => router.push("/dashboard/transactions/history"),
-    delta: 100,
-  });
+  const router = useSCRouter();
 
   useEffect(() => {
     // Demo only supports the sink form
@@ -30,11 +27,13 @@ export default function Dashboard() {
   }, [router]);
 
   return (
-    <div
-      {...swipeHandlers}
-      className="flex flex-col w-full flex-1 gap-10 justify-start"
-    >
+    <>
+      {walletConnection === undefined ? (
+        <ConnectWalletCTA />
+      ) : (
+        <div className="mt-0"></div>
+      )}
       <Overview />
-    </div>
+    </>
   );
 }

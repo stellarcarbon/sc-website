@@ -1,4 +1,8 @@
+"use client";
+
+import Banner from "@/components/Banner";
 import ContentContainer from "@/components/ContentContainer";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
@@ -8,23 +12,19 @@ import Link from "next/link";
 
 export default function ExplainPage() {
   return (
-    <main className="flex flex-col items-center font-noto pb-16">
-      <div className="blockchain-bg w-full">
-        <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-12 m-auto">
-          <span className="text-5xl md:text-[7vw] font-noto text-center leading-[56px] md:leading-[8vw] image1">
-            Stellarcarbon
-          </span>
-          <span className="text-2xl md:text-[2vw] image1">Explained</span>
-          {/* <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
-            For the curious
-          </span> */}
-        </div>
-      </div>
+    <main className="flex flex-col items-center font-noto">
+      <Banner
+        title="Stellarcarbon"
+        subtitle="Explained"
+        background="whale-bg"
+      />
 
       <ContentContainer>
         <Header>
-          An introduction to{" "}
-          <CARBONCurrencyIcon className="inline" width={30} height={40} />
+          <div>
+            <span>An introduction to </span>
+            <CARBONCurrencyIcon className="inline" width={30} height={40} />
+          </div>
         </Header>
         <Paragraph>
           At Stellarcarbon, we offer a unique solution for individuals and
@@ -132,13 +132,14 @@ export default function ExplainPage() {
           .
         </Paragraph>
       </ContentContainer>
+      <Footer />
     </main>
   );
 }
 
 function UnitExplanationList() {
   return (
-    <ul className="px-8 pt-4 my-4 list-disc bg-primary border border-tertiary rounded-md md:w-[90%] self-center">
+    <ul className="mx-3 px-8 pt-4 my-4 list-disc bg-primary border border-tertiary rounded-md md:w-[90%] self-center">
       <UnitExplanation
         title={`VCU pool on Verra`}
         text={`This is our current inventory of VCU's at Verra.`}

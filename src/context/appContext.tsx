@@ -23,7 +23,7 @@ import {
   WalletConnection,
 } from "@/app/types";
 import { loadAvailableWalletsMock } from "./walletFunctions";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
@@ -117,7 +117,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     setIsDrawerOpen(true);
   };
   const closeDrawer = () => {
-    // setIsDrawerOpen(false);
     setIsDrawerClosing(true);
     setTimeout(() => {
       setIsDrawerOpen(false);
@@ -129,6 +128,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [usdcBalance, setUsdcBalance] = useState<number>();
 
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const loadApp = async () => {
@@ -143,7 +143,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
             selectedWalletId: XBULL_ID,
             modules: allowAllModules(),
           });
-          console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
+          // console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
 
           // Load supported wallets from stellar wallets kit
           let wallets;
@@ -207,7 +207,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     };
 
     loadApp();
-  }, [walletConnection, myTransactions, pathname, hasPendingRounding]);
+  }, [walletConnection, myTransactions, hasPendingRounding]);
 
   const updateWalletConnection = useCallback(
     (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
@@ -223,11 +223,12 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     [walletConnection]
   );
 
-  const disconnectWallet = () => {
+  const disconnectWallet = useCallback(() => {
     WalletConnectionStorageService.removeWalletConnection();
     setWalletConnection(undefined);
     setMyTransactions(null);
-  };
+    router.push("/");
+  }, [router]);
 
   const providerValue = useMemo(() => {
     return {

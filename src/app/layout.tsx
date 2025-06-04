@@ -3,6 +3,7 @@ import "../globals.css";
 import App from "./App";
 import { inter } from "./fonts";
 import { AppContextProvider } from "@/context/appContext";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 // The following import prevents a Font Awesome icon server-side rendering bug,
 // where the icons flash from a very large icon down to a properly sized one:
@@ -33,7 +34,9 @@ export default function RootLayout({
       </head>
       <AppContextProvider>
         <body className={`${inter.className}`}>
-          <App>{children}</App>
+          <PostHogProvider>
+            <App>{children}</App>
+          </PostHogProvider>
         </body>
       </AppContextProvider>
     </html>

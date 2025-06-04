@@ -12,7 +12,9 @@ import {
 import { AccountResponse, Server } from "@stellar/stellar-sdk/lib/horizon";
 
 export default class TransactionHistoryService {
-  private static mapTxResponse(txResponse: SinkTxItem): MyTransactionRecord {
+  private static serializeTxResponse(
+    txResponse: SinkTxItem
+  ): MyTransactionRecord {
     let retirementStatus = RetirementStatus.RETIRED;
     if (!txResponse.retirement_finalized) {
       if (Number(txResponse.carbon_amount) % 1 === 0) {
@@ -26,7 +28,7 @@ export default class TransactionHistoryService {
 
     return {
       id: txResponse.hash,
-      createdAt: txResponse.created_at,
+      createdAt: new Date(txResponse.created_at),
       memo: txResponse.memo.value,
       assetAmount: Number(txResponse.source_asset.amount),
       asset: txResponse.source_asset.code,
@@ -34,10 +36,12 @@ export default class TransactionHistoryService {
       retirementStatus,
       retirements: txResponse.retirements,
       pagingToken: txResponse.paging_token,
+      recipient: txResponse.recipient,
+      funder: txResponse.funder,
     } as MyTransactionRecord;
   }
 
-  private static mapTxsResponse(
+  private static serializeTxsResponse(
     txsResponse: SinkTxListResponse,
     order: "asc" | "desc" = "desc"
   ) {
@@ -46,7 +50,7 @@ export default class TransactionHistoryService {
       transactions.reverse();
     }
     return txsResponse.transactions.map((transaction) =>
-      this.mapTxResponse(transaction)
+      this.serializeTxResponse(transaction)
     );
   }
 
@@ -54,7 +58,7 @@ export default class TransactionHistoryService {
     txHash: string
   ): Promise<MyTransactionRecord> {
     const response = await SinkService.getSinkTxItem({ txHash });
-    return this.mapTxResponse(response);
+    return this.serializeTxResponse(response);
   }
 
   public static async fetchLedger(
@@ -69,7 +73,7 @@ export default class TransactionHistoryService {
         order,
       }
     );
-    return this.mapTxsResponse(sinkTxsResponse, order);
+    return this.serializeTxsResponse(sinkTxsResponse, order);
   }
 
   public static async fetchAccountHistory(
@@ -79,7 +83,7 @@ export default class TransactionHistoryService {
       await AccountService.getSinkTxsForRecipient({
         recipientAddress: account,
       });
-    return this.mapTxsResponse(sinkTxsResponse);
+    return this.serializeTxsResponse(sinkTxsResponse);
   }
 
   public static async fetchRecentTransactions(): Promise<
@@ -88,7 +92,7 @@ export default class TransactionHistoryService {
     const sinkTxsResponse = await SinkService.getSinkTxList({
       limit: 4,
     });
-    return this.mapTxsResponse(sinkTxsResponse);
+    return this.serializeTxsResponse(sinkTxsResponse);
   }
 
   public static async fetchAccountBalance(

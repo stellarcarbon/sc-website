@@ -3,9 +3,10 @@ import { useSCRouter } from "@/utils";
 import { usePathname } from "next/navigation";
 import { ReactNode, useCallback } from "react";
 
-interface DrawerLinkProps {
+export interface DrawerLinkProps {
   children: ReactNode;
   href: string;
+  disconnect?: boolean;
 }
 
 export default function DrawerLink({ children, href }: DrawerLinkProps) {
@@ -26,7 +27,8 @@ export default function DrawerLink({ children, href }: DrawerLinkProps) {
   return (
     <div
       className={`${isCurrentRoute() ? "text-yellow-400" : "text-accent"}
-      p-4 font-bold cursor-pointer hover:text-yellow-100`}
+      p-4 font-bold cursor-pointer hover:text-yellow-100
+      select-none`}
       onClick={onClick}
     >
       {children}

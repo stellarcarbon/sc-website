@@ -159,3 +159,13 @@ export const isValidEmail = (addr: string) => {
   const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   return regex.test(addr);
 };
+
+export const formatDate = (date: Date): string => {
+  const day = date.getDate().toString();
+
+  const month = date.toLocaleDateString("en-US", { month: "long" });
+
+  const year = date.getFullYear();
+
+  return `${day} ${month} ${year}`;
+};

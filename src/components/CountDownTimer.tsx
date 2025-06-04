@@ -22,7 +22,7 @@ export default function CountDownTimer({
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
+        // seconds: Math.floor((difference / 1000) % 60),
       };
     }
 
@@ -55,11 +55,11 @@ export default function CountDownTimer({
   });
 
   return (
-    <div className="flex flex-col items-center text-sm">
+    <div className="flex flex-col items-center">
       {timerComponents.length ? (
         <>
-          <span>This transaction automatically retires in:</span>
-          <span className="font-semibold my-1">{timerComponents}</span>
+          <span className="text-lg font-semibold">{timerComponents}</span>
+          <span className="text-xs">left until community retirement.</span>
         </>
       ) : (
         <span>Time is up!</span>

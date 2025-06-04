@@ -1,21 +1,20 @@
 "use client";
 
-import { useSwipeable } from "react-swipeable";
+import ConnectWalletCTA from "@/components/ConnectWalletCTA";
 import SinkingForm from "@/containers/sink/SinkingForm";
-import { useSCRouter } from "@/utils";
+import { useAppContext } from "@/context/appContext";
 
 export default function SinkFormPage() {
-  const router = useSCRouter();
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => router.push("/dashboard/transactions"),
-    onSwipedRight: () => router.push("/dashboard"),
-    delta: 100,
-  });
+  const { walletConnection } = useAppContext();
 
   return (
-    <div {...swipeHandlers} className="w-full">
+    <>
+      {walletConnection === undefined ? (
+        <ConnectWalletCTA />
+      ) : (
+        <div className="mt-6"></div>
+      )}
       <SinkingForm />
-    </div>
+    </>
   );
 }
