@@ -67,8 +67,8 @@ export default function RainforestIntro() {
   return (
     <div className="relative w-full" ref={containerRef}>
       <div
-        className="bg-forestbomen bg-cover bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]"
-        style={{ transform: `translateY(${offset * 0.4}px)` }}
+        className="bg-rainforest bg-cover bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]"
+        style={{ transform: `translateY(${offset * 0.2}px)` }}
       />
 
       <div className="relative h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-center gap-16 z-10 text-center w-[100%]">

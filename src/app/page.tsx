@@ -11,6 +11,7 @@ import appConfig from "@/config";
 import Footer from "@/components/Footer";
 import WhySection from "@/containers/landing/WhySection";
 import TrustSection from "@/containers/landing/TrustSection";
+import WaveDivider from "@/components/WaveDivider";
 
 export default function Home() {
   if (appConfig.demo) {
@@ -24,6 +25,7 @@ export default function Home() {
       <WhySection />
 
       {/* <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} /> */}
+      <WaveDivider />
 
       <TrustSection />
 

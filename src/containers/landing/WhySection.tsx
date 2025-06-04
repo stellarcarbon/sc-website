@@ -63,7 +63,7 @@ export default function WhySection() {
     <LandingSection
       first={first}
       second={second}
-      className="border-b-0"
+      className="border-b-0 !bg-darker"
     ></LandingSection>
   );
 }

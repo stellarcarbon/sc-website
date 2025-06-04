@@ -5,7 +5,7 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
 export default function HowItWorks() {
   return (
-    <div className="p-4 py-6 rounded bg-primary border border-accentSecondary mx-4 mt-6">
+    <div className="p-4 py-6 rounded bg-primary border border-accentSecondary mx-4">
       {/* <LandingSectionHeader>How It Works</LandingSectionHeader> */}
       <div className="grid grid-cols-[32px_1fr] gap-x-2 ">
         <FontAwesomeIcon icon={faWallet} className="place-self-center" />

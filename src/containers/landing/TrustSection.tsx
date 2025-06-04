@@ -110,7 +110,7 @@ export default function WhySection() {
       first={first}
       second={second}
       third={third}
-      className="border-t-0 pt-8"
+      className="border-t-0 pt-8 "
     />
   );
 }
