@@ -9,9 +9,8 @@ import PartnerSection from "@/containers/landing/PartnerSection";
 import DemoLanding from "@/containers/demo/DemoLanding";
 import appConfig from "@/config";
 import Footer from "@/components/Footer";
-import WhySection from "@/containers/landing/WhySection";
+import HowItWorksSection from "@/containers/landing/HowItWorksSection";
 import TrustSection from "@/containers/landing/TrustSection";
-import WaveDivider from "@/components/WaveDivider";
 
 export default function Home() {
   if (appConfig.demo) {
@@ -22,18 +21,9 @@ export default function Home() {
     <main className="flex flex-col items-center">
       <RainforestIntro />
 
-      <WhySection />
-
-      {/* <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} /> */}
-      <WaveDivider />
+      <HowItWorksSection />
 
       <TrustSection />
-
-      {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
-
-      <ExplainSection /> */}
-
-      {/* <ParallaxDivider image={ParallaxBackgrounds.DALLE} yOffset={-300} /> */}
 
       <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
 
@@ -47,13 +37,7 @@ export default function Home() {
 
       <PartnerSection />
 
-      {/* <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-200} /> */}
-
       <Footer />
-
-      {/* <div className="h-[600px] flex flex-col justify-center">
-        Some other stuff
-      </div> */}
     </main>
   );
 }

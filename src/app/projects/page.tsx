@@ -28,9 +28,9 @@ export default function ProjectsPage() {
           <Header>Our offset project</Header>
 
           <Paragraph>
-            We currently support only one project, which is a rainforest
-            conservation project. Contributing to Stellarcarbon means you will
-            be investing in the positive outcomes of the project.
+            We currently support one project, which is a rainforest conservation
+            project. Contributing to Stellarcarbon means you will be investing
+            in the positive outcomes of the project.
           </Paragraph>
 
           <Subheader>Ucayali region</Subheader>
@@ -132,6 +132,7 @@ export default function ProjectsPage() {
           subject={
             "Better biophysical conditions within the lands of indigenous communities."
           }
+          decimals={1}
         />
         <CountUp
           value={350}

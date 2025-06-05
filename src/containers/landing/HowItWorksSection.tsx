@@ -6,10 +6,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LandingSection from "./LandingSection";
-import HowItWorks from "./HowItWorks";
+import HowItWorksFlowChart from "./HowItWorksFlowChart";
 import Link from "next/link";
 
-export default function WhySection() {
+export default function HowItWorksSection() {
   const first = (
     <div>
       <div className="px-4 text-4xl font-bold leading-tight tracking-light mb-2">
@@ -41,7 +41,7 @@ export default function WhySection() {
       </Paragraph>
     </div>
   );
-  const second = <HowItWorks />;
+  const second = <HowItWorksFlowChart />;
 
   const old = (
     <div className="md:text-xl flex justify-center items-center">

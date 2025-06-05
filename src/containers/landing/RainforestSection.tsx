@@ -67,12 +67,12 @@ export default function RainforestIntro() {
   return (
     <div className="relative w-full" ref={containerRef}>
       <div
-        className="bg-rainforest bg-cover bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]"
+        className="bg-foresttrees bg-cover bg-center bg-no-repeat top-0 left-0 w-full z-0 block absolute h-[100vh] md:h-[100vh]"
         style={{ transform: `translateY(${offset * 0.2}px)` }}
       />
 
       <div className="relative h-[calc(100svh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-start md:justify-center gap-16 z-10 text-center w-[100%]">
-        <div className="flex flex-col justify-center gap-8 py-8 md:py-12 w-full bg-darker/[.4] h-full md:h-auto">
+        <div className="flex flex-col justify-center gap-8 py-8 md:py-12 w-full bg-darker/[.6] h-full md:h-auto">
           <span className="font-roboto text-5xl md:text-[64px] max-w-6xl self-center tracking-tight leading-snug md:leading-normal">
             Protect the rainforest with Stellarcarbon
           </span>

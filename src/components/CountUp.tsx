@@ -16,9 +16,15 @@ interface CountUpProps extends HTMLProps<HTMLDivElement> {
   value: number;
   unit: string;
   subject: string;
+  decimals?: number;
 }
 
-export default function CountUp({ value, unit, subject }: CountUpProps) {
+export default function CountUp({
+  value,
+  unit,
+  subject,
+  decimals = 0,
+}: CountUpProps) {
   const [counter, setCounter] = useState<number>(0);
   const [ref, isVisible] = useIntersectionObserver({ threshold: 0.5 });
 
@@ -33,7 +39,7 @@ export default function CountUp({ value, unit, subject }: CountUpProps) {
   } else if (value > 10000 && value <= 99999) {
     step = 100;
   } else if (value > 100000) {
-    step = 1000;
+    step = value / 1000;
   }
 
   intervalInMS = (1000 * step) / value;
@@ -65,7 +71,7 @@ export default function CountUp({ value, unit, subject }: CountUpProps) {
   }, [isVisible]);
 
   const toNumberWithCommas = (x: number) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   useEffect(() => {

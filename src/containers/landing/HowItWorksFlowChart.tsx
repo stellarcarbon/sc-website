@@ -3,7 +3,7 @@ import { faHandshake, faWallet } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 
-export default function HowItWorks() {
+export default function HowItWorksFlowChart() {
   return (
     <div className="p-4 py-6 rounded bg-primary border border-accentSecondary mx-4">
       {/* <LandingSectionHeader>How It Works</LandingSectionHeader> */}
