@@ -25,7 +25,7 @@ export default function RequestRounding() {
           <CARBONCurrencyIcon className="inline ml-1" height={24} width={24} />
         </div>
       </div>
-      <Button onClick={requestCertificate} className="text-base">
+      <Button onClick={requestCertificate} className="text-base font-normal">
         <FontAwesomeIcon icon={faFileLines} />
         <div>Request certificate</div>
       </Button>

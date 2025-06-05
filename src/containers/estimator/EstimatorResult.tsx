@@ -1,5 +1,4 @@
 import { CabinClass, FlightEstimateResponse } from "@/client";
-import FlightEstimateTable from "../demo/emissions/FlightEstimateTable";
 import { PropsWithChildren } from "react";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Button from "@/components/Button";
@@ -12,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { TripType } from "./FlightEstimator";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
 export default function EstimatorResult({
   estimate,
@@ -24,7 +24,7 @@ export default function EstimatorResult({
   cabinClass: CabinClass;
   refresh: () => void;
 }) {
-  const router = useRouter();
+  const { overrideFormValues } = useSinkFormContext();
 
   return (
     <div className="flex flex-col gap-4">
@@ -44,7 +44,7 @@ export default function EstimatorResult({
         <EstimatorValue>{cabinClass}</EstimatorValue>
       </div>
 
-      <div className="bg-secondary rounded border border-accentSecondary mt-3 p-6 flex flex-col items-center gap-4">
+      <div className="bg-primary rounded border border-accentSecondary mt-3 p-6 flex flex-col items-center gap-4">
         <div className="">Distance flown</div>
         <div className="flex items-center gap-2 text-[32px] my-1">
           <div>{estimate && Number(estimate.distance_km).toFixed(0)}</div>
@@ -68,11 +68,12 @@ export default function EstimatorResult({
         <div className="flex flex-col gap-4 items-center mt-4">
           <Button
             onClick={() =>
-              router.push(
-                `/dashboard/sink/?amount=${estimate.co2_tonnes}&reason=airtravel`
+              overrideFormValues(
+                "✈️ air travel",
+                Number(estimate.co2_tonnes),
+                undefined
               )
             }
-            className="gap-2 h-10"
           >
             <FontAwesomeIcon icon={faFileContract} />
             <div>Continue to sink form</div>

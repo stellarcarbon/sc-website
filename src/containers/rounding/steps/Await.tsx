@@ -18,7 +18,7 @@ export default function AwaitRounding() {
         <div className="my-8">
           <FontAwesomeIcon icon={faFileShield} className="text-[72px]" />
         </div>
-        <Button onClick={verifyIdentity} className="text-base">
+        <Button onClick={verifyIdentity} className="text-base font-normal">
           <FontAwesomeIcon icon={faPen} />
           <div>Sign auth challenge</div>
         </Button>

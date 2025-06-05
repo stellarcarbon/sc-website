@@ -46,7 +46,7 @@ export default function PendingRetirements() {
   }, [pendingTransactions]);
 
   return (
-    <>
+    <div className="bg-darkest">
       <div className="w-full px-4 flex flex-col">
         <div className="mt-12 md:mt-12 flex flex-col items-center">
           <DashboardTitle>Pending retirements balance</DashboardTitle>
@@ -85,6 +85,6 @@ export default function PendingRetirements() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

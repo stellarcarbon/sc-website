@@ -3,6 +3,7 @@
 import ConnectWalletCTA from "@/components/ConnectWalletCTA";
 import SinkingForm from "@/containers/sink/SinkingForm";
 import { useAppContext } from "@/context/appContext";
+import { Suspense } from "react";
 
 export default function SinkFormPage() {
   const { walletConnection } = useAppContext();
@@ -14,7 +15,9 @@ export default function SinkFormPage() {
       ) : (
         <div className="mt-6"></div>
       )}
-      <SinkingForm />
+      <Suspense>
+        <SinkingForm />
+      </Suspense>
     </>
   );
 }

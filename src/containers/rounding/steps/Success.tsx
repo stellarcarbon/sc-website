@@ -1,6 +1,8 @@
 import Button from "@/components/Button";
 import SuccessIcon from "@/components/icons/SuccessIcon";
 import SinkingStep from "@/containers/sink/steps/Step";
+import { faArrowLeft, faBackward } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 
 export default function RoundingSuccess() {
@@ -16,11 +18,9 @@ export default function RoundingSuccess() {
         <SuccessIcon />
       </div>
       <div className="h-16 md:my-3 flex items-center justify-center">
-        <Button
-          className="h-10 !py-2"
-          onClick={() => router.push("/dashboard/transactions")}
-        >
-          Return to dashboard
+        <Button onClick={() => router.push("/dashboard/transactions")}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <div>Return to dashboard</div>
         </Button>
       </div>
     </SinkingStep>

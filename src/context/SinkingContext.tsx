@@ -21,6 +21,7 @@ import { Transaction, TransactionBuilder } from "@stellar/stellar-sdk";
 import { useRouter } from "next/navigation";
 import appConfig from "@/config";
 import XLMConversionService from "@/services/XLMConversionService";
+import { useSinkFormContext } from "./SinkFormContext";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -34,10 +35,6 @@ export enum CheckoutSteps {
 
 type SinkingContext = {
   sinkRequest: SinkCarbonXdrPostRequest | undefined;
-  setSinkRequest: Dispatch<
-    SetStateAction<SinkCarbonXdrPostRequest | undefined>
-  >;
-
   sinkResponse: SinkingResponse | undefined;
 
   step: CheckoutSteps;
@@ -63,8 +60,8 @@ export const useSinkingContext = () => {
 
 export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const { stellarWalletsKit, walletConnection } = useAppContext();
+  const { sinkRequest: formSinkRequest } = useSinkFormContext();
 
-  const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
   const [sinkResponse, setSinkResponse] = useState<SinkingResponse>();
   const [submissionError, setSubmissionError] = useState<string>();
   const [step, setStep] = useState<CheckoutSteps>(CheckoutSteps.CREATING);
@@ -72,6 +69,8 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const [USDCPerXLM, setUSDCPerXLM] = useState<number>();
 
   const router = useRouter();
+
+  const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
 
   useEffect(() => {
     if (submissionError) {
@@ -202,17 +201,22 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     // When the user completes the sink-form a sinkRequest is defined.
-    if (sinkRequest) {
+    if (formSinkRequest) {
       setSubmissionError(undefined);
-      confirmSinkRequest(sinkRequest);
+      setSinkRequest(formSinkRequest);
+      confirmSinkRequest(formSinkRequest);
       router.push("/sink");
     }
-  }, [sinkRequest, router, confirmSinkRequest]);
+  }, [
+    formSinkRequest,
+    router,
+    confirmSinkRequest,
+    setSinkRequest,
+    sinkRequest,
+  ]);
 
   const providerValue = useMemo(() => {
     return {
-      sinkRequest,
-      setSinkRequest,
       sinkResponse,
       step,
       setStep,
@@ -220,14 +224,15 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       setSubmissionError,
       signTransaction,
       USDCPerXLM,
+      sinkRequest,
     };
   }, [
-    sinkRequest,
     sinkResponse,
     step,
     submissionError,
     signTransaction,
     USDCPerXLM,
+    sinkRequest,
   ]);
 
   return (

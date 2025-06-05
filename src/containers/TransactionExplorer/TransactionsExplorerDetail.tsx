@@ -13,6 +13,7 @@ import { formatDate } from "@/utils";
 import RetirementInformation from "./RetirementInformation/RetirementInformation";
 import Link from "next/link";
 import SectionHeader from "@/components/SectionHeader";
+import TransactionExplorerHeader from "./TransactionExplorerHeader";
 
 export default function TransactionsExplorerDetail() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -55,13 +56,12 @@ export default function TransactionsExplorerDetail() {
     }
   }, [transaction]);
 
-  if (isLoading) {
+  if (isLoading)
     return (
-      <div className="md:min-h-[400px] flex items-center justify-center">
+      <div className="pt-12 md:mb-12 bg-darkest w-full flex-1 md:rounded md:border border-tertiary">
         <TransactionsLoading />
       </div>
     );
-  }
 
   if (transaction === undefined) return;
 
@@ -81,7 +81,8 @@ export default function TransactionsExplorerDetail() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center min-h-[calc(100dvh-64px)] md:min-h-0 bg-darker">
+    <div className="w-full flex flex-col items-center min-h-[calc(100dvh-64px)] md:min-h-0 bg-darkest md:rounded md:border border-tertiary md:mb-12 pt-2">
+      <TransactionExplorerHeader />
       <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>

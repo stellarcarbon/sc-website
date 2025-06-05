@@ -17,12 +17,12 @@ export default function App({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-[100dvh] bg-primary flex flex-col">
+    <div className="min-h-[100dvh] bg-primary text-textColor flex flex-col">
       <NavBar />
       <SinkingContextProvider>
         <div
           id="app_container"
-          className="flex-1 mt-[64px] lg:mt-[80px] flex flex-col text-textColor w-full"
+          className="flex-1 mt-[64px] lg:mt-[80px] flex flex-col w-full"
         >
           {children}
         </div>

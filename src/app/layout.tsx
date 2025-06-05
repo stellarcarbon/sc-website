@@ -10,6 +10,7 @@ import { PostHogProvider } from "@/components/PostHogProvider";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 // Prevent fontawesome from adding its CSS since we did it manually above:
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { SinkFormContextProvider } from "@/context/SinkFormContext";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -33,11 +34,13 @@ export default function RootLayout({
         ></script>
       </head>
       <AppContextProvider>
-        <body className={`${inter.className}`}>
-          <PostHogProvider>
-            <App>{children}</App>
-          </PostHogProvider>
-        </body>
+        <SinkFormContextProvider>
+          <body className={`${inter.className}`}>
+            <PostHogProvider>
+              <App>{children}</App>
+            </PostHogProvider>
+          </body>
+        </SinkFormContextProvider>
       </AppContextProvider>
     </html>
   );

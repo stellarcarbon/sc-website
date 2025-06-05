@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export default function ExplainPage() {
   return (
-    <main className="flex flex-col items-center font-noto">
+    <main className="flex flex-col items-center font-noto bg-darkest">
       <Banner
         title="Stellarcarbon"
         subtitle="Explained"

@@ -112,7 +112,7 @@ export default function DashboardNavBarItem({
     <div
       onClick={navigate}
       className={`relative cursor-pointer p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-[4px] select-none
-      ${isSelected ? "text-accent bg-primary" : "text-accentSecondary"} ${
+      ${isSelected ? "text-accent bg-darkest" : "text-accentSecondary"} ${
         first ? "md:rounded-tl" : ""
       } ${last ? "md:rounded-tr" : ""}`}
     >

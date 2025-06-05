@@ -8,7 +8,7 @@ import {
 import {
   ReasonOption,
   ReasonOptionKey,
-} from "@/components/checkout/ReasonSelect";
+} from "@/containers/sink/form/ReasonSelect";
 import {
   ISupportedWallet,
   WalletNetwork,

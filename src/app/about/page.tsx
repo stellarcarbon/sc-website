@@ -1,3 +1,4 @@
+import Banner from "@/components/Banner";
 import ContentContainer from "@/components/ContentContainer";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -5,7 +6,8 @@ import Paragraph from "@/components/Paragraph";
 
 export default function AboutPage() {
   return (
-    <main className="flex flex-col items-center font-noto">
+    <main className="flex flex-col items-center font-noto bg-darkest">
+      <Banner title="About us" subtitle="Origin story" background="devs-bg" />
       <ContentContainer>
         <Header>About us</Header>
         <Paragraph>

@@ -1,4 +1,3 @@
-import EmissionsCalculator from "@/containers/demo/EmissionsCalculator";
 import FlightEstimator from "@/containers/estimator/FlightEstimator";
 
 export default function FlightPage() {

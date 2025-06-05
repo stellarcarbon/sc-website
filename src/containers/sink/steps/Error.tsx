@@ -2,7 +2,7 @@ import FormError from "@/components/FormError";
 import { useSinkingContext } from "@/context/SinkingContext";
 import SinkingStep from "./Step";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWarning } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faWarning } from "@fortawesome/free-solid-svg-icons";
 import ModalHeader from "@/components/ModalHeader";
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
@@ -31,7 +31,8 @@ export default function ErrorSinking() {
           onClick={() => router.push("/dashboard/sink")}
           className="mx-auto"
         >
-          Go back
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <div>Go back</div>
         </Button>
       </SinkingStepButtons>
     </SinkingStep>

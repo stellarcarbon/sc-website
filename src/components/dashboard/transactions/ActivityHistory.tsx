@@ -2,7 +2,6 @@ import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
-import { useSCRouter } from "@/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { useEffect, useMemo, useState } from "react";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
@@ -12,7 +11,6 @@ import TransactionsExplorerDetail from "@/containers/TransactionExplorer/Transac
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions, walletConnection } =
     useAppContext();
-  const router = useSCRouter();
   const searchParams = useSearchParams();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -56,7 +54,7 @@ export default function ActivityHistory() {
         <div className="my-12 mx-4 md:mx-8 flex flex-col items-center">
           {/* <DashboardTitle>Retired transactions</DashboardTitle> */}
 
-          <span className="text-sm text-center md:w-[80%] bg-darker p-4 border rounded border-tertiary">
+          <span className="text-sm text-center md:w-[80%] bg-primary p-4 border rounded border-tertiary">
             Here you can find the transactions that have been retired into one
             or more certificates. Click on them to find out more details about
             the transaction and its corresponding certificate(s).
