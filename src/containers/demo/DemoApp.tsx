@@ -14,7 +14,7 @@ export default function DemoApp({ children }: { children: ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (walletConnection === undefined && pathname !== "/wallet/connect/") {
+    if (walletConnection === undefined && pathname !== "/connect/") {
       if (pathname !== "/") {
         router.push("/");
       }

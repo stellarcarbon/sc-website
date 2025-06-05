@@ -2,7 +2,7 @@
 
 import appConfig from "@/config";
 
-export default function WalletLayout({
+export default function ConnectLayout({
   children,
 }: {
   children: React.ReactNode;
