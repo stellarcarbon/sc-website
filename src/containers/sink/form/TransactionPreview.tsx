@@ -28,24 +28,8 @@ export default function TransactionPreview() {
     }
   }, [quote, currency, USDCPerXLM]);
 
-  useEffect(() => {
-    if (tonnes !== 1) {
-      const preview = document.getElementById("transaction-preview");
-      // scroll to preview
-      if (preview) {
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: "smooth",
-        });
-      }
-    }
-  }, []);
-
   return (
-    <div
-      id="transaction-preview"
-      className="bg-primary p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center border border-accentSecondary rounded"
-    >
+    <div className="bg-primary p-4 py-6 w-full md:max-w-[500px] self-center flex flex-col gap-6 items-center justify-center border border-accentSecondary rounded">
       <h3 className="text-2xl font-bold">Transaction preview</h3>
       <div className="grid grid-cols-5 gap-1 text-center w-full">
         <TPKey>Reason</TPKey>

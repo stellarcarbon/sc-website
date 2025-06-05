@@ -21,9 +21,8 @@ export default function SoftwarePage() {
         background="blockchain-bg"
       />
 
-      <div className="mt-12"></div>
-
       <ContentContainer>
+        <Header>Open source</Header>
         <Paragraph>
           At Stellarcarbon, we believe in transparency, accessibility, and
           innovation to fund nature-based solutions. Our open-source software

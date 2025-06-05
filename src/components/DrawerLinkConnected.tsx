@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 import { DrawerLinkProps } from "./DrawerLink";
 import { useAppContext } from "@/context/appContext";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
 export default function DrawerLinkConnected({
   href,
@@ -10,6 +11,7 @@ export default function DrawerLinkConnected({
   disconnect,
 }: DrawerLinkProps) {
   const { disconnectWallet, closeDrawer } = useAppContext();
+  const { resetSinkForm } = useSinkFormContext();
   const pathname = usePathname();
   const router = useSCRouter();
 
@@ -21,6 +23,7 @@ export default function DrawerLinkConnected({
 
   const onClick = () => {
     if (disconnect) {
+      resetSinkForm();
       disconnectWallet();
     } else {
       router.push(href);

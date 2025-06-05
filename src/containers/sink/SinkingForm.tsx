@@ -2,22 +2,41 @@
 
 import CurrencySelect from "@/containers/sink/form/CurrencySelect";
 import ReasonSelect from "@/containers/sink/form/ReasonSelect";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import AmountInput from "@/containers/sink/form/AmountInput";
 import TransactionPreview from "@/containers/sink/form/TransactionPreview";
 import appConfig from "@/config";
 import { ReasonSelectContextProvider } from "@/containers/sink/form/ReasonSelectContext";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSinkFormContext } from "@/context/SinkFormContext";
+import Link from "next/link";
 
 export default function SinkingForm() {
-  const { errors } = useSinkFormContext();
+  const { errors, watch } = useSinkFormContext();
+  const tonnes = watch("tonnes");
 
   const reasonErrorLabel: string | undefined = useMemo(() => {
     return Object.entries(errors ?? {})
       .find(([field]) => field === "memo")?.[1]
       ?.message?.toString();
   }, [errors]);
+
+  // Not sure if we should use this effect
+  //
+  // useEffect(() => {
+  //   if (tonnes !== 1) {
+  //     const amountInputDiv = document.getElementById(
+  //       "transaction-amount-input"
+  //     );
+  //     if (amountInputDiv) {
+  //       console.log("!!");
+  //       window.scrollTo({
+  //         top: 500,
+  //         behavior: "smooth",
+  //       });
+  //     }
+  //   }
+  // }, []);
 
   return (
     <div className="flex flex-col">
@@ -27,14 +46,18 @@ export default function SinkingForm() {
         </div>
       )}
       <form className="flex flex-col mb-12">
-        <div className="mx-3 md:mx-8 my-4">
-          <div className="text-center text-lg font-semibold">
+        <div className="mx-3 md:mx-8 mb-4">
+          {/* <div className="text-center text-lg font-semibold">
             Support the Stellarcarbon initiative by sinking CARBON!
-          </div>
-          <div className="my-8 text-base">
+          </div> */}
+          <div className="my-3 text-base">
             Use this form to specify how much{" "}
-            <CARBONCurrencyIcon className="inline" /> to sink. You transaction
-            will be stored on the Stellar network.
+            <CARBONCurrencyIcon className="inline" /> to sink. Your contribution
+            directly supports the rainforest conservation{" "}
+            <Link href="/projects" className="underline text-accentSecondary">
+              project
+            </Link>
+            .
           </div>
         </div>
 
@@ -42,7 +65,9 @@ export default function SinkingForm() {
           <ReasonSelect error={reasonErrorLabel} />
         </ReasonSelectContextProvider>
 
-        <AmountInput />
+        <div id="transaction-amount-input">
+          <AmountInput />
+        </div>
 
         <CurrencySelect />
 

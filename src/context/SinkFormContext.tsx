@@ -18,6 +18,7 @@ import {
   useForm,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormReset,
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
@@ -46,6 +47,8 @@ type SinkFormContext = {
     amount?: number,
     currency?: PaymentAsset
   ) => void;
+
+  resetSinkForm: UseFormReset<SinkingFormData>;
 };
 
 const SinkFormContext = createContext<SinkFormContext | null>(null);
@@ -61,13 +64,14 @@ export const useSinkFormContext = () => {
 export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
   // const { setSinkRequest, setStep } = useSinkingContext();
   const { walletConnection } = useAppContext();
-  const { register, handleSubmit, watch, setValue } = useForm<SinkingFormData>({
-    defaultValues: {
-      memo: "",
-      tonnes: 1,
-      currency: PaymentAsset.ANY,
-    },
-  });
+  const { register, handleSubmit, watch, setValue, reset } =
+    useForm<SinkingFormData>({
+      defaultValues: {
+        memo: "",
+        tonnes: 1,
+        currency: PaymentAsset.ANY,
+      },
+    });
 
   const [quote, setQuote] = useState<number>(0);
   const [errors, setErrors] = useState<FieldErrors>();
@@ -136,6 +140,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       errors,
       sinkRequest,
       overrideFormValues,
+      resetSinkForm: reset,
     }),
     [
       register,
