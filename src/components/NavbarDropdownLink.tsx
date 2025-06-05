@@ -11,6 +11,7 @@ export default function NavbarDropdownLink({
   disconnect,
 }: DrawerLinkProps) {
   const { disconnectWallet, setIsDropdownOpen } = useAppContext();
+  const { resetSinkForm } = useSinkFormContext();
 
   const pathname = usePathname();
   const router = useSCRouter();
@@ -25,6 +26,7 @@ export default function NavbarDropdownLink({
     if (!disconnect) {
       router.push(href);
     } else {
+      resetSinkForm();
       disconnectWallet();
     }
 

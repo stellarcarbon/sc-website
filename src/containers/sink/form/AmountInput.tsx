@@ -137,17 +137,13 @@ export default function AmountInput() {
       <SectionHeader icon={faTree}>Set your sink amount</SectionHeader>
       <div className="p-3 py-6 md:p-6">
         <div className="flex flex-col">
-          <div className="flex flex-col gap-4">
-            {/* <div>Or enter the amount yourself.</div> */}
-            {/* <div className="text-xl">
-              <div className="text-start font-semibold">Transaction amount</div>
-              <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
-            </div> */}
-            {/* <div>Specify how much you want to contribute.</div> */}
-            <div className="">
-              Sinking 1 <CARBONCurrencyIcon className="inline" /> would let you
-              claim the environmental benefit of reducing 1 tonne of CO2.
-            </div>
+          <div></div>
+          <div className="">
+            Set the sink amount of your contribution. Sinking 1{" "}
+            <CARBONCurrencyIcon className="inline" /> would let you claim the
+            environmental benefit of reducing 1 tonne of CO2.
+          </div>
+          <div className="flex flex-col gap-4 my-8 mb-12">
             <div className="flex justify-between items-center gap-2">
               <div className="w-[35%] flex flex-col items-start">
                 <div className="text-xs mb-1">Sink amount</div>
@@ -244,14 +240,14 @@ export default function AmountInput() {
             </div>
           </div>
 
-          <div className="text-xl mt-10">
-            <div className="text-start font-semibold">Emissions estimation</div>
+          <div className="text-xl">
+            <div className="text-start font-semibold">Estimate emissions</div>
             <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
           </div>
           <div className="flex flex-col gap-4 my-4">
             <div>
-              Optionally use our emissions estimator to help decide on the right
-              amount.
+              Optionally try out our emissions estimator to help you decide on
+              the right amount.
             </div>
 
             <Button

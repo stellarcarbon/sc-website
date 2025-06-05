@@ -10,10 +10,13 @@ import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { useAppContext } from "@/context/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
 export default function CompletedSinking() {
   const { walletConnection, myTransactions, setMyTransactions } =
     useAppContext();
+
+  const { resetSinkForm } = useSinkFormContext();
 
   const router = useRouter();
 
@@ -24,6 +27,8 @@ export default function CompletedSinking() {
     ).then((transactionRecords): void => {
       setMyTransactions(transactionRecords);
     });
+
+    resetSinkForm();
 
     router.push("/dashboard");
   }, [myTransactions, walletConnection, router, setMyTransactions]);
