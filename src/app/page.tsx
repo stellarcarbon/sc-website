@@ -3,13 +3,14 @@
 import ParallaxDivider, {
   ParallaxBackgrounds,
 } from "@/components/ParallaxDivider";
-import ExplainSection from "@/containers/home/ExplainSection";
-import RainforestIntro from "@/containers/home/RainforestSection";
-import LastTransactionsSection from "@/containers/home/LastTransactionsSection";
-import PartnerSection from "@/containers/home/PartnerSection";
+import RainforestIntro from "@/containers/landing/RainforestSection";
+import LastTransactionsSection from "@/containers/landing/LastTransactionsSection";
+import PartnerSection from "@/containers/landing/PartnerSection";
 import DemoLanding from "@/containers/demo/DemoLanding";
 import appConfig from "@/config";
 import Footer from "@/components/Footer";
+import HowItWorksSection from "@/containers/landing/HowItWorksSection";
+import TrustSection from "@/containers/landing/TrustSection";
 
 export default function Home() {
   if (appConfig.demo) {
@@ -20,25 +21,23 @@ export default function Home() {
     <main className="flex flex-col items-center">
       <RainforestIntro />
 
-      <ExplainSection />
+      <HowItWorksSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-100} />
+      <TrustSection />
+
+      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
 
       <LastTransactionsSection />
+
       <ParallaxDivider
-        image={ParallaxBackgrounds.FOREST}
-        yOffset={-400}
+        image={ParallaxBackgrounds.RIVER_ESTUARY}
+        yOffset={-300}
         mirrored
       />
 
       <PartnerSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.FOREST} yOffset={-200} />
       <Footer />
-
-      {/* <div className="h-[600px] flex flex-col justify-center">
-        Some other stuff
-      </div> */}
     </main>
   );
 }

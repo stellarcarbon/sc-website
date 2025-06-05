@@ -81,6 +81,9 @@ type AppContext = {
   usdcBalance: number | undefined;
 
   isMobileDevice: boolean;
+
+  isDropdownOpen: boolean;
+  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -123,6 +126,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       setIsDrawerClosing(false);
     }, 300);
   };
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const [xlmBalance, setXlmBalance] = useState<number>();
   const [usdcBalance, setUsdcBalance] = useState<number>();
@@ -259,6 +264,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       usdcBalance,
 
       isMobileDevice,
+
+      isDropdownOpen,
+      setIsDropdownOpen,
     };
   }, [
     supportedWallets,
@@ -273,6 +281,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     xlmBalance,
     usdcBalance,
     isMobileDevice,
+    isDropdownOpen,
+    disconnectWallet,
   ]);
 
   return (

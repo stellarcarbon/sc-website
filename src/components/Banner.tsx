@@ -8,12 +8,17 @@ export default function Banner({
   background: string;
 }) {
   return (
-    <div className={`${background} w-full h-[300px] lg:h-[340px] flex`}>
-      <div className="flex flex-col items-center justify-center gap-8 md:gap-16 max-w-[80%] md:max-w-[65%] m-auto">
-        <span className="text-4xl md:text-[5vw] text-center ">{title}</span>
-        <span className="text-xl md:text-[2vw] uppercase font-sans font-[700] text-center tracking-[8px] leading-[40px] image1 mt-4">
-          {subtitle}
-        </span>
+    <div className="relative bg-[#21354A] w-full flex justify-center">
+      <div
+        className={`absolute ${background} w-full h-[200px] lg:h-[300px] flex`}
+      ></div>
+      <div className="relative h-[200px] lg:h-[300px] w-full flex items-center">
+        <div className="flex flex-col items-center justify-center gap-2 md:gap-8 w-full p-4 bg-primary/[.3] h-full">
+          <span className="text-4xl md:text-[4vw] text-center ">{title}</span>
+          <span className="text-xl md:text-[2vw] uppercase font-sans font-[700] text-center tracking-[8px] leading-[32px] image1">
+            {subtitle}
+          </span>
+        </div>
       </div>
     </div>
   );

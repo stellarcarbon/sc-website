@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useTransactionExplorerContext } from "@/context/TransactionExplorerContext";
 import IconButton from "@/components/IconButton";
+import TransactionExplorerHeader from "./TransactionExplorerHeader";
 
 export default function TransactionExplorer({}) {
   const router = useSCRouter();
@@ -29,17 +30,27 @@ export default function TransactionExplorer({}) {
 
   if (isLoading)
     return (
-      <div className="mt-4 flex flex-col items-center">
+      <div className="pt-12 md:mb-12 bg-darkest w-full flex-1 md:rounded md:border border-tertiary">
         <TransactionsLoading />
       </div>
     );
 
   return (
-    <div className="flex flex-col items-center h-full">
+    <div
+      className={`flex flex-col items-center
+     h-full w-full flex-1 md:flex-none
+     pt-2 md:px-2 md:mb-12
+     bg-darkest md:bg-darkest md:rounded md:border border-secondary`}
+    >
       {/* <div className="m-3 mb-0">
         Use this tool to browse historical contribution data. All Stellarcarbon
         transactions are completely publicly visible.
       </div> */}
+      <TransactionExplorerHeader />
+      <div className="mx-4">
+        Use the controls to navigate the Stellarcarbon blockchain ledger. Click
+        on a transaction to view its details.
+      </div>
       <div className="w-full flex justify-between items-center gap-1 my-4 px-4 !text-xs">
         <div className="flex items-center gap-4">
           <IconButton
@@ -76,7 +87,7 @@ export default function TransactionExplorer({}) {
           </select>
         </div>
       </div>
-      <div className="w-full overflow-auto px-2 flex flex-col gap-1 pb-12">
+      <div className="w-full overflow-auto px-3 flex flex-col items-center gap-1 pb-12">
         {!error ? (
           transactions.length > 1 ? (
             transactions.map((tx, idx) => {

@@ -3,7 +3,7 @@ import RoundingStep from "./Step";
 import { useRouter } from "next/navigation";
 import { useRoundingContext } from "@/context/RoundingContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWarning } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faWarning } from "@fortawesome/free-solid-svg-icons";
 
 export default function ErrorRounding() {
   const { error } = useRoundingContext();
@@ -26,9 +26,10 @@ export default function ErrorRounding() {
 
       <Button
         onClick={() => router.push("/dashboard/transactions")}
-        className="mx-auto text-base"
+        className="mx-auto text-base font-normal"
       >
-        Back to dashboard
+        <FontAwesomeIcon icon={faArrowLeft} />
+        <div>Back to dashboard</div>
       </Button>
     </RoundingStep>
   );

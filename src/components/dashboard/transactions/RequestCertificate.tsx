@@ -1,9 +1,11 @@
 "use client";
 
 import Button from "@/components/Button";
+import IconButton from "@/components/IconButton";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import TextInput from "@/components/TextInput";
 import { useAppContext } from "@/context/appContext";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -25,6 +27,7 @@ export default function RequestCertificate({
 }: RequestCertificateProps) {
   const { updateWalletConnection, walletConnection, setHasPendingRounding } =
     useAppContext();
+  const { overrideFormValues } = useSinkFormContext();
   const router = useRouter();
 
   const [step, setStep] = useState<RequestCertificateStates>(
@@ -67,7 +70,7 @@ export default function RequestCertificate({
   }, [totalCarbonPending]);
 
   const sinkRemaining = () => {
-    router.push(`/dashboard/sink/?amount=${remainingFraction.toFixed(3)}`);
+    overrideFormValues(undefined, remainingFraction, undefined);
   };
 
   let body = <></>;
@@ -160,8 +163,10 @@ export default function RequestCertificate({
         </span>
         <div className="flex flex-wrap justify-around gap-4 w-full">
           <Button onClick={sinkRemaining} className="text-sm">
-            Add {remainingFraction.toFixed(3)}
-            <CARBONCurrencyIcon className="inline ml-1" />
+            <div className="flex items-center">
+              Add {remainingFraction.toFixed(3)}
+              <CARBONCurrencyIcon className="inline ml-1" />
+            </div>
           </Button>
           <Button
             className="text-sm"
@@ -170,8 +175,10 @@ export default function RequestCertificate({
               router.push("/sink/rounding");
             }}
           >
-            Round down to {Math.floor(totalCarbonPending).toFixed(3)}{" "}
-            <CARBONCurrencyIcon className="inline ml-1" />
+            <div className="flex items-center">
+              Round down to {Math.floor(totalCarbonPending).toFixed(3)}
+              <CARBONCurrencyIcon className="inline ml-1" />
+            </div>
           </Button>
         </div>
       </>
@@ -217,15 +224,15 @@ export default function RequestCertificate({
   }
 
   return (
-    <div className="p-4 md:p-6 flex flex-col gap-4 items-center">
+    <div className="p-4 flex flex-col gap-4 items-center">
       {body}
       {step !== RequestCertificateStates.info && (
-        <Button
-          className="absolute top-[10px] left-[calc(100%-32px)] w-[24px] !py-1 !px-2 bg-tertiary text-white"
+        <IconButton
+          className="absolute top-[10px] left-[calc(100%-32px)] w-[24px] h-[24px]"
           onClick={() => setStep(RequestCertificateStates.info)}
         >
           <FontAwesomeIcon icon={faClose} />
-        </Button>
+        </IconButton>
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
+import IconButton from "@/components/IconButton";
 import TextInput from "@/components/TextInput";
 import { useAppContext } from "@/context/appContext";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
@@ -68,9 +69,9 @@ export default function OverviewContactInformationForm({
   }, [formEmail, formUsername, isValidEmail, onClose, updateWalletConnection]);
 
   return (
-    <div className="w-full relative px-4 md:px-8 py-8 flex flex-col gap-2 items-center bg-darkest rounded border border-accentSecondary self-center ">
-      <span className="text-xl font-semibold">Update contact information</span>
-      <span className="text-sm text-center">
+    <div className="w-full relative px-4 md:px-8 py-12 md:py-6 flex flex-col gap-2 items-center bg-darkest rounded border border-accentSecondary self-center ">
+      <span className="text-2xl font-semibold">Update contact information</span>
+      <span className="text-center">
         We do not use this information for any purpose than sending you
         personalized certificates.
       </span>
@@ -92,15 +93,21 @@ export default function OverviewContactInformationForm({
           placeholder="Your email address"
         />
       </div>
-      <Button onClick={submitForm} className="mt-3 !text-sm">
+      <Button onClick={submitForm} className="mt-3">
         Update contact info
       </Button>
-      <Button
+      {/* <Button
         className="absolute top-[10px] left-[calc(100%-32px)] w-[24px] !py-1 !px-2 bg-secondary text-white"
         onClick={onClose}
       >
         <FontAwesomeIcon icon={faClose} />
-      </Button>
+      </Button> */}
+      <IconButton
+        onClick={onClose}
+        className="absolute top-[10px] left-[calc(100%-32px)] w-[24px] h-[24px]"
+      >
+        <FontAwesomeIcon icon={faClose} />
+      </IconButton>
       {formError && <div className="text-red-500 mt-2">{formError}</div>}
     </div>
   );

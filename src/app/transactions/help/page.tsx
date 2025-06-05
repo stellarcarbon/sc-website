@@ -3,6 +3,7 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import SectionHeader from "@/components/SectionHeader";
+import TransactionExplorerHeader from "@/containers/TransactionExplorer/TransactionExplorerHeader";
 import { useAppContext } from "@/context/appContext";
 import { PropsWithChildren } from "react";
 
@@ -22,8 +23,9 @@ export default function TxExplorerHelpPage() {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="p-3 my-1 mb-4 flex flex-col gap-4">
+    <div className="flex flex-col bg-darkest md:border border-tertiary md:rounded pt-2 pb-12 md:px-2 md:mb-8">
+      <TransactionExplorerHeader />
+      <div className="px-3 my-1 mb-4 flex flex-col gap-4">
         <div>
           Use this tool to browse historical contribution data. All
           Stellarcarbon transactions are completely publicly visible.
@@ -40,8 +42,11 @@ export default function TxExplorerHelpPage() {
         Stellarcarbon to retire eco-credits on the user’s behalf.
       </div> */}
 
-      <SectionHeader>Transactions</SectionHeader>
-      <div className="p-3 flex flex-col gap-3">
+      {/* <div className="px-3 text-xl md:text-2xl font-semibold my-2">
+        Transactions
+      </div> */}
+      <div className="px-3 flex flex-col gap-3">
+        <div className="">Take a look at this transaction tile:</div>
         <div className="my-4">
           <TransactionListItem transaction={demoTransaction} disabled />
         </div>
@@ -91,7 +96,11 @@ function FieldContainer({ children }: PropsWithChildren) {
 }
 
 function FieldKey({ children }: PropsWithChildren) {
-  return <div className="font-bold pr-1 text-xl">{children}</div>;
+  return (
+    <div className="font-bold pr-1 text-xl text-accentSecondary">
+      {children}
+    </div>
+  );
 }
 
 function FieldValue({ children }: PropsWithChildren) {

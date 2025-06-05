@@ -5,11 +5,11 @@ import AirportInput, { AirportOption } from "../demo/AirportInput";
 import { CabinClass, EstimateService, FlightEstimateResponse } from "@/client";
 import Select from "react-select";
 import Button from "@/components/Button";
-import FlightEstimateTable from "../demo/emissions/FlightEstimateTable";
 import { Blocks } from "react-loader-spinner";
 import EstimatorResult from "./EstimatorResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalculator } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faCalculator } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 
 export default function FlightEstimator() {
   const [departureAirport, setDepartureAirport] =
@@ -28,6 +28,8 @@ export default function FlightEstimator() {
   const [error, setError] = useState<string>();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const estimateEmissions = useCallback(() => {
     if (departureAirport === null) {
@@ -84,7 +86,7 @@ export default function FlightEstimator() {
           </div>
 
           {/* Formfields */}
-          <div className="flex flex-col my-8">
+          <div className="flex flex-col my-8 bg-primary p-4 rounded border border-gray-600">
             <FormField
               title="Departure"
               helpText="The airport your flight departed from."
@@ -140,12 +142,24 @@ export default function FlightEstimator() {
                 />
               }
             />
+
+            <div className="self-center">
+              <Button onClick={estimateEmissions}>
+                <FontAwesomeIcon icon={faCalculator} />
+                <div>Estimate emissions</div>
+              </Button>
+            </div>
           </div>
           {error && <div className="text-red-500">{error}</div>}
           <div className="flex flex-col items-center">
-            <Button onClick={estimateEmissions} className="gap-2 !px-4">
+            {/* <Button onClick={estimateEmissions}>
               <FontAwesomeIcon icon={faCalculator} />
               <div>Estimate emissions</div>
+            </Button>
+            <hr className="w-[90%] my-4 border-1 border-accentSecondary" /> */}
+            <Button onClick={() => router.push("/dashboard/sink")}>
+              <FontAwesomeIcon icon={faArrowLeft} />
+              <div>Return to sink form</div>
             </Button>
           </div>
         </>

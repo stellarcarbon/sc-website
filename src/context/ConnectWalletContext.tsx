@@ -37,7 +37,9 @@ type ConnectWalletContext = {
   setTncError: Dispatch<SetStateAction<boolean>>;
   emailError: boolean;
   setEmailError: Dispatch<SetStateAction<boolean>>;
-  connectionError: string | undefined;
+
+  walletsKitError: string | undefined;
+  noWalletError: boolean;
 };
 
 const ConnectWalletContext = createContext<ConnectWalletContext | null>(null);
@@ -62,7 +64,8 @@ export const ConnectWalletContextProvider = ({
   const [walletSelectError, setWalletSelectError] = useState<boolean>(false);
   const [tncError, setTncError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
-  const [connectionError, setConnectionError] = useState<string>();
+  const [walletsKitError, setWalletsKitError] = useState<string>();
+  const [noWalletError, setNoWalletError] = useState<boolean>(false);
 
   const router = useSCRouter();
 
@@ -90,17 +93,25 @@ export const ConnectWalletContextProvider = ({
         }
 
         // Verify if account exists
-        await TransactionHistoryService.fetchAccountBalance(
-          appConfig.server,
-          newConn.stellarPubKey
-        );
+        // If it doesnt exist throw "special error message"
+        // "Account ABCD...WXYZ does not exist in {network_name}"
+        // (if testnet make a funding request to friendbot for that pubkey)
+        try {
+          await TransactionHistoryService.fetchAccountBalance(
+            appConfig.server,
+            newConn.stellarPubKey
+          );
+        } catch (error: any) {
+          setNoWalletError(true);
+          return false;
+        }
 
         WalletConnectionStorageService.setWalletConnection(newConn);
         setWalletConnection(newConn);
 
         return true;
       } catch (error: any) {
-        setConnectionError(error.toString());
+        setWalletsKitError(error.toString());
         return false;
       }
     },
@@ -134,7 +145,9 @@ export const ConnectWalletContextProvider = ({
     setWalletSelectError(false);
     setEmailError(false);
     setTncError(false);
-    setConnectionError(undefined);
+
+    setNoWalletError(false);
+    setWalletsKitError(undefined);
 
     // Validate form
     if (!validateForm()) {
@@ -144,7 +157,7 @@ export const ConnectWalletContextProvider = ({
     // Connect
     connectWallet(selectedWallet!).then((didSucceed) => {
       if (!didSucceed) {
-        setSelectedWallet(undefined);
+        // setSelectedWallet(undefined);
       } else {
         if (appConfig.demo) {
           router.push("/emissions");
@@ -159,7 +172,7 @@ export const ConnectWalletContextProvider = ({
     setEmailError,
     connectWallet,
     router,
-    setConnectionError,
+    setWalletsKitError,
     validateForm,
   ]);
 
@@ -180,7 +193,8 @@ export const ConnectWalletContextProvider = ({
       setTncError,
       emailError,
       setEmailError,
-      connectionError,
+      walletsKitError,
+      noWalletError,
     }),
     [
       username,
@@ -190,7 +204,8 @@ export const ConnectWalletContextProvider = ({
       walletSelectError,
       tncError,
       emailError,
-      connectionError,
+      walletsKitError,
+      noWalletError,
       submitForm,
     ]
   );

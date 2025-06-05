@@ -8,6 +8,8 @@ import { useCallback } from "react";
 import { MyTransactionRecord } from "@/app/types";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { useAppContext } from "@/context/appContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function CompletedSinking() {
   const { walletConnection, myTransactions, setMyTransactions } =
@@ -42,7 +44,8 @@ export default function CompletedSinking() {
 
       <SinkingStepButtons>
         <Button onClick={onFinish} className="mx-auto">
-          Go back
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <div>Go back</div>
         </Button>
       </SinkingStepButtons>
     </SinkingStep>
