@@ -17,7 +17,7 @@ export default function PartnerSection() {
 
       <Paragraph>
         <Link
-          href="/software"
+          href="/explain/integration"
           className="underline text-sm text-accentSecondary"
         >
           Read about integration options here

@@ -8,9 +8,81 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
 import Subheader from "@/components/Subheader";
 import AuditTable from "@/containers/AuditTable";
+import ExplainContainer from "@/containers/explain/ExplainContainer";
+import {
+  mExplainConfig,
+  Tier2NavItems,
+  useExplainContext,
+} from "@/context/ExplainContext";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function ExplainPage() {
+  const { setSelectedTier2 } = useExplainContext();
+
+  useEffect(() => {
+    setSelectedTier2(mExplainConfig[Tier2NavItems.INTRODUCTION]);
+  });
+
+  return (
+    <div className="flex flex-col">
+      <Header>
+        <div>
+          <span>An introduction to </span>
+          <CARBONCurrencyIcon className="inline" width={30} height={40} />
+        </div>
+      </Header>
+      <Paragraph>
+        At Stellarcarbon, we offer a simple solution for individuals and
+        businesses to take direct climate action. You can simply pay us and we
+        will make sure 95% of your money will go to a vetted rainforest
+        conversation project. Behind the scenes we use a{" "}
+        <Link
+          href="/explain/how-it-works/sinking-process"
+          className="underline text-accentSecondary"
+        >
+          sinking
+        </Link>{" "}
+        mechanism to make sure the corresponding Verified Carbon Units (VCU) are
+        retired on the Verra registry.
+      </Paragraph>
+      <Subheader>Why rainforest conservation matters</Subheader>
+      <Paragraph>bla bla</Paragraph>
+      <Subheader>Keeping it simple</Subheader>
+      <Paragraph>
+        If you are just looking to make a contribution to the Stellarcarbon
+        initiative, that's all you need to know. Just connect your Stellar
+        wallet{" "}
+        <Link href="/connect" className="underline text-accentSecondary">
+          here
+        </Link>
+        .
+      </Paragraph>
+
+      <Paragraph>
+        Otherwise, have a look around on this explain page where we try be as
+        transparent as possible about the accounting mechanisms behind
+        Stellarcarbon.
+      </Paragraph>
+      {/* <Subheader>Our impact to date</Subheader>
+      <Paragraph>Show metrics from the blockhain here.</Paragraph> */}
+      {/* 
+      <Subheader>Glossary of key terms</Subheader>
+      <Paragraph>
+        <ul className="list-disc ml-6">
+          <li>
+            <div>CARBON</div>
+            <div>CARBON is een token enzo</div>
+          </li>
+          <li>CarbonSINK</li>
+          <li>Sinking</li>
+          <li>Retirements</li>
+          <li></li>
+        </ul>
+      </Paragraph> */}
+    </div>
+  );
+
   return (
     <main className="flex flex-col items-center font-noto bg-darkest">
       <Banner
@@ -137,11 +209,11 @@ export default function ExplainPage() {
   );
 }
 
-function UnitExplanationList() {
+export function UnitExplanationList() {
   return (
     <ul className="mx-3 px-8 pt-4 my-4 list-disc bg-primary border border-tertiary rounded-md md:w-[90%] self-center">
       <UnitExplanation
-        title={`VCU pool on Verra`}
+        title={`Carbon pool on Verra`}
         text={`This is our current inventory of VCU's at Verra.`}
       />
       <UnitExplanation
