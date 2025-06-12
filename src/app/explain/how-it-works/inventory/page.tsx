@@ -12,8 +12,8 @@ import {
   useExplainContext,
 } from "@/context/ExplainContext";
 import { useEffect } from "react";
-import { UnitExplanationList } from "../../page";
 import Subheader from "@/components/Subheader";
+import AuditTable2 from "@/containers/AuditTable2";
 
 export default function ExplainInventoryPage() {
   const { setSelectedTier2, setSelectedTier3 } = useExplainContext();
@@ -35,14 +35,8 @@ export default function ExplainInventoryPage() {
       <Paragraph>Waarom is dit in balans?</Paragraph>
       <Subheader>Current inventory</Subheader>
       <Paragraph>Have a look at our current inventory (realtime!):</Paragraph>
-      <div className="m-auto md:w-[900px] mb-10">
-        <AuditTable />
-        <div className="text-center py-2 font-semibold w-full text-xs">
-          {`1000 kg = 1 ton = 1 VCU = 1 CARBON = 1`}
-          <CARBONCurrencyIcon className="inline ml-1" />
-          {` = 1 CarbonSINK`}
-        </div>
-      </div>
+
+      <AuditTable2 />
 
       <Paragraph>
         {`Any difference between the inventories on the blockchain and Verra are

@@ -24,7 +24,7 @@ export default function ExplainNav() {
         <Tier2Item item={mExplainConfig[Tier2NavItems.HOWITWORKS]} />
         <Tier2Item item={mExplainConfig[Tier2NavItems.TRUST]} />
         <Tier2Item item={mExplainConfig[Tier2NavItems.BUSINESS]} />
-        <Tier2Item item={mExplainConfig[Tier2NavItems.FAQ]} />
+        <Tier2Item item={mExplainConfig[Tier2NavItems.GLOSSARY]} />
       </ul>
     </nav>
   );

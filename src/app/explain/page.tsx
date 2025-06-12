@@ -46,13 +46,10 @@ export default function ExplainPage() {
         mechanism to make sure the corresponding Verified Carbon Units (VCU) are
         retired on the Verra registry.
       </Paragraph>
-      <Subheader>Why rainforest conservation matters</Subheader>
-      <Paragraph>bla bla</Paragraph>
-      <Subheader>Keeping it simple</Subheader>
       <Paragraph>
-        If you are just looking to make a contribution to the Stellarcarbon
+        {`If you are just looking to make a contribution to the Stellarcarbon
         initiative, that's all you need to know. Just connect your Stellar
-        wallet{" "}
+        wallet `}
         <Link href="/connect" className="underline text-accentSecondary">
           here
         </Link>
@@ -64,6 +61,10 @@ export default function ExplainPage() {
         transparent as possible about the accounting mechanisms behind
         Stellarcarbon.
       </Paragraph>
+
+      <Subheader>Why rainforest conservation matters</Subheader>
+      <Paragraph>bla bla</Paragraph>
+
       {/* <Subheader>Our impact to date</Subheader>
       <Paragraph>Show metrics from the blockhain here.</Paragraph> */}
       {/* 

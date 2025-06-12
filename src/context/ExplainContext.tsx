@@ -23,13 +23,14 @@ export enum Tier2NavItems {
   INTRODUCTION = "introduction",
   HOWITWORKS = "howitworks",
   TRUST = "trust",
-  FAQ = "faq",
+  GLOSSARY = "glossary",
   BUSINESS = "business",
 }
 
 export enum Tier3NavItems {
   SINKINGPROCESS = "process",
   INVENTORY = "inventory",
+  RETIREMENT = "retirement",
 }
 
 export const mExplainTier3Config: Record<Tier3NavItems, Tier3NavItem> = {
@@ -39,7 +40,11 @@ export const mExplainTier3Config: Record<Tier3NavItems, Tier3NavItem> = {
   },
   [Tier3NavItems.INVENTORY]: {
     label: "Token balance",
-    href: "/explain/how-it-works/inventory",
+    href: "/explain/how-it-works/inventory/",
+  },
+  [Tier3NavItems.RETIREMENT]: {
+    label: "Retirement",
+    href: "/explain/how-it-works/retirement/",
   },
 };
 
@@ -50,11 +55,12 @@ export const mExplainConfig: Record<Tier2NavItems, Tier2NavItem> = {
     children: [
       mExplainTier3Config[Tier3NavItems.SINKINGPROCESS],
       mExplainTier3Config[Tier3NavItems.INVENTORY],
+      mExplainTier3Config[Tier3NavItems.RETIREMENT],
     ],
   },
-  [Tier2NavItems.FAQ]: {
-    label: "FAQ",
-    href: "/explain/faq/",
+  [Tier2NavItems.GLOSSARY]: {
+    label: "Glossary of key terms",
+    href: "/explain/glossary/",
   },
   [Tier2NavItems.INTRODUCTION]: {
     label: "Introduction",

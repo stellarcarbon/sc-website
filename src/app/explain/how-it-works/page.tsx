@@ -31,6 +31,12 @@ export default function ExplainHowItWorks() {
         a commitment for Stellarcarbon to retire an equivalent amount of
         Verified Carbon Units (VCU) on Verra.
       </Paragraph>
+
+      <img
+        className="max-w-[80%] mx-auto"
+        src="/explain_stellar_verra_integration.png"
+        alt="Stellar Verra integration"
+      />
     </div>
   );
 }
