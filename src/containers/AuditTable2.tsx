@@ -42,8 +42,8 @@ export default function AuditTable2() {
   });
 
   return (
-    <div className="mx-auto w-[1000px] p-4">
-      <div className="grid grid-cols-[37.5%,37.5%,25%] bg-primary rounded border border-accentSecondary text-xl p-3">
+    <div className="mx-auto w-full md:w-[1000px] p-4">
+      <div className="grid grid-cols-[37.5%,37.5%,25%] bg-primary rounded border border-accentSecondary text-xs md:text-xl p-3">
         <div className="col-span-2 grid grid-cols-[40%,10%,40%,10%] grid-rows-2">
           <TableStat
             label={"VCU pool on Verra"}
@@ -117,8 +117,8 @@ function TableStat({ label, unit, amount, tooltip }: TableStateProps) {
   return (
     <div className="relative flex flex-col items-center py-3">
       <div className="peer">
-        <div className="text-base mb-1">{label}</div>
-        <div className="flex gap-1 items-center justify-center text-xl">
+        <div className="mb-1">{label}</div>
+        <div className="flex gap-1 items-center justify-center text-xs md:text-xl">
           <div className="font-bold">{amount?.toFixed(3) ?? "?"}</div>
           {unit === "CARBON" ? (
             <CARBONCurrencyIcon className="inline" />
@@ -130,8 +130,8 @@ function TableStat({ label, unit, amount, tooltip }: TableStateProps) {
 
       {/* Tooltip */}
       {tooltip && (
-        <div className="absolute bottom-full left-1/2 w-max -translate-x-1/2 opacity-0 transition-opacity peer-hover:opacity-100 pointer-events-none">
-          <div className="bg-gray-800 text-white text-xs rounded py-2 px-3 whitespace-nowrap">
+        <div className="absolute bottom-full left-1/2  w-[100px] md:w-max -translate-x-1/2 opacity-0 transition-opacity peer-hover:opacity-100 pointer-events-none">
+          <div className="bg-gray-800 text-white text-xs rounded py-2 px-3 md:whitespace-nowrap">
             {tooltip}
           </div>
         </div>

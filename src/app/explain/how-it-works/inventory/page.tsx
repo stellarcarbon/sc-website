@@ -19,6 +19,7 @@ export default function ExplainInventoryPage() {
   const { setSelectedTier2, setSelectedTier3, setIsOpen } = useExplainContext();
 
   useEffect(() => {
+    console.log("in");
     setSelectedTier2(mExplainConfig[Tier2NavItems.HOWITWORKS]);
     setSelectedTier3(mExplainTier3Config[Tier3NavItems.INVENTORY]);
     setIsOpen(true);

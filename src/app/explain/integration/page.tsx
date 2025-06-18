@@ -13,10 +13,11 @@ import {
 import { useEffect } from "react";
 
 export default function ExplainIntegrationPage() {
-  const { setSelectedTier2 } = useExplainContext();
+  const { setSelectedTier2, setSelectedTier3 } = useExplainContext();
 
   useEffect(() => {
     setSelectedTier2(mExplainConfig[Tier2NavItems.BUSINESS]);
+    setSelectedTier3(undefined);
   }, []);
 
   return (

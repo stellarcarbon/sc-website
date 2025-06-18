@@ -18,7 +18,7 @@ import { useEffect } from "react";
 
 export default function ExplainNav() {
   return (
-    <nav className="bg-primary w-[330px] sticky p-4">
+    <nav className="bg-primary w-full h-full md:w-[330px] sticky p-4">
       <ul className="space-y-2">
         <Tier2Item item={mExplainConfig[Tier2NavItems.INTRODUCTION]} />
         <Tier2Item item={mExplainConfig[Tier2NavItems.HOWITWORKS]} />
@@ -31,18 +31,25 @@ export default function ExplainNav() {
 }
 
 function Tier2Item({ item }: { item: Tier2NavItem }) {
-  const { selectedTier2, setSelectedTier3, isOpen, setIsOpen } =
-    useExplainContext();
+  const {
+    selectedTier2,
+    setSelectedTier3,
+    isOpen,
+    setIsOpen,
+    setMobileNavOpen,
+  } = useExplainContext();
   const { children, href, label } = item;
 
   const router = useRouter();
 
   const onClick = () => {
     setSelectedTier3(undefined);
+
     if (item.children && !isOpen) {
       setIsOpen(true);
     } else {
       setIsOpen(false);
+      setMobileNavOpen(false);
     }
     router.push(href);
   };
@@ -85,11 +92,12 @@ function Tier2Item({ item }: { item: Tier2NavItem }) {
 }
 
 function Tier3Item({ item }: { item: Tier3NavItem }) {
-  const { selectedTier3 } = useExplainContext();
+  const { selectedTier3, setMobileNavOpen } = useExplainContext();
 
   const router = useRouter();
 
   const onClick = () => {
+    setMobileNavOpen(false);
     router.push(item.href);
   };
 

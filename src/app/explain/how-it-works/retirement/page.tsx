@@ -3,7 +3,6 @@
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 import Subheader from "@/components/Subheader";
-import Glossary from "@/containers/Glossary";
 import {
   mExplainConfig,
   mExplainTier3Config,
@@ -25,10 +24,10 @@ export default function ExplainRetirementPage() {
     <div className="flex flex-col">
       <Header>Retirement process</Header>
       <Paragraph>
-        When a user makes a transaction on Stellarcarbon, an equal amount of
+        {`When a user makes a transaction on Stellarcarbon, an equal amount of
         VCU's in the Verra registry has to be retired. This retirement leads a
         to certificate that can be added your personal or business balance sheet
-        to show prove you are offsetting emissions.
+        to show prove you are offsetting emissions.`}
       </Paragraph>
       <Subheader>What is retirement?</Subheader>
       <Paragraph>

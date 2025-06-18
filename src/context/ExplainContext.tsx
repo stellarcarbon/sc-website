@@ -85,6 +85,9 @@ type ExplainContext = {
 
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+
+  mobileNavOpen: boolean;
+  setMobileNavOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const ExplainContext = createContext<ExplainContext | null>(null);
@@ -101,6 +104,7 @@ export const ExplainContextProvider = ({ children }: PropsWithChildren) => {
   const [selectedTier2, setSelectedTier2] = useState<Tier2NavItem>();
   const [selectedTier3, setSelectedTier3] = useState<Tier3NavItem>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(true);
 
   console.log(selectedTier3, isOpen);
 
@@ -112,8 +116,10 @@ export const ExplainContextProvider = ({ children }: PropsWithChildren) => {
       setSelectedTier3,
       isOpen,
       setIsOpen,
+      mobileNavOpen,
+      setMobileNavOpen,
     }),
-    [selectedTier2, selectedTier3, isOpen]
+    [selectedTier2, selectedTier3, isOpen, mobileNavOpen, setMobileNavOpen]
   );
 
   return (

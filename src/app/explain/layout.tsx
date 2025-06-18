@@ -2,7 +2,9 @@
 
 import Banner from "@/components/Banner";
 import ExplainContainer from "@/containers/explain/ExplainContainer";
+import ExplainMobile from "@/containers/explain/ExplainMobile";
 import ExplainNav from "@/containers/explain/ExplainNav";
+import ExplainBreadcrumb from "@/containers/explain/ExplainBreadcrumb";
 import { ExplainContextProvider } from "@/context/ExplainContext";
 
 export default function ExplainLayout({
@@ -19,13 +21,15 @@ export default function ExplainLayout({
       />
 
       <ExplainContextProvider>
-        <div className="h-[calc(100vh-80px-200px)] flex w-full border-t border-secondary">
-          {/* <div className="hidden md:block"> */}
+        <div className="hidden md:flex h-[calc(100vh-80px-200px)] w-full border-t border-secondary">
           <ExplainNav />
-          {/* </div> */}
+
           <div className="bg-darkest flex-1 overflow-y-auto">
             <ExplainContainer>{children}</ExplainContainer>
           </div>
+        </div>
+        <div className="md:hidden w-full flex-1">
+          <ExplainMobile>{children}</ExplainMobile>
         </div>
       </ExplainContextProvider>
     </main>
