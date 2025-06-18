@@ -1,11 +1,7 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
-import { RetirementDetail } from "@/client";
 import CountDownTimer from "@/components/CountDownTimer";
 import RetiredTransaction from "@/components/dashboard/transactions/RetiredTransaction";
-import RetirementDetailCard from "@/components/dashboard/transactions/RetirementDetailCard";
-import Link from "next/link";
-import { useMemo, useState } from "react";
-import { Blocks } from "react-loader-spinner";
+import { useMemo } from "react";
 
 export default function TxRetirementStatusDetail({
   transaction,

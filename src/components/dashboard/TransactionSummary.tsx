@@ -1,13 +1,13 @@
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useAppContext } from "@/context/appContext";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import Link from "next/link";
 import { useViewportWidth } from "@/utils";
 import { useMemo } from "react";
 import { RetirementStatus } from "@/app/types";
 import TransactionListItem from "./TransactionListItem";
 import { useRouter } from "next/navigation";
 import DashboardHeader from "./DashboardHeader";
+import SCLink from "../SCLink";
 
 export default function TransactionSummary() {
   const { myTransactions, walletConnection } = useAppContext();
@@ -103,9 +103,9 @@ export default function TransactionSummary() {
               <span className="text-start">
                 The amount of fractional carbon certificates that are still
                 pending a certificate claim.{" "}
-                <Link className="underline text-accentSecondary" href="">
+                <SCLink href="/explain/how-it-works/retirement">
                   What does this mean?
-                </Link>
+                </SCLink>
               </span>
             </div>
           </div>

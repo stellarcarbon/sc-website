@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LandingSection from "./LandingSection";
 import HowItWorksFlowChart from "./HowItWorksFlowChart";
-import Link from "next/link";
+import SCLink from "@/components/SCLink";
 
 export default function HowItWorksSection() {
   const first = (
@@ -26,10 +26,7 @@ export default function HowItWorksSection() {
       </Paragraph>
       <Paragraph>
         Just connect your wallet and start sinking{" "}
-        <Link href="/dashboard/sink" className="underline text-accentSecondary">
-          right now
-        </Link>
-        !
+        <SCLink href="/dashboard/sink">right now</SCLink>!
         {/* <div className="w-full flex justify-center mt-8">
           <CTAButton white />
         </div> */}

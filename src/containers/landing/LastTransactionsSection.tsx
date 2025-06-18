@@ -2,11 +2,11 @@
 
 import { MyTransactionRecord } from "@/app/types";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import Paragraph from "@/components/Paragraph";
 import LandingSection from "./LandingSection";
+import SCLink from "@/components/SCLink";
 
 export default function LastTransactionsSection() {
   const [lastTransactions, setLastTransactions] = useState<
@@ -33,12 +33,9 @@ export default function LastTransactionsSection() {
         <br /> Check out the most recent transactions on Stellarcarbon.
       </Paragraph>
       <Paragraph>
-        <Link
-          href="/transactions"
-          className="underline text-sm text-accentSecondary"
-        >
+        <SCLink href="/transactions" className="text-sm">
           View the full list in our transaction explorer
-        </Link>
+        </SCLink>
       </Paragraph>
     </div>
   );

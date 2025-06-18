@@ -1,5 +1,4 @@
 import { useAppContext } from "@/context/appContext";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
@@ -7,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { RetirementStatus } from "@/app/types";
 import TransactionsExplorerDetail from "@/containers/TransactionExplorer/TransactionsExplorerDetail";
+import SCLink from "@/components/SCLink";
 
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions, walletConnection } =
@@ -70,22 +70,14 @@ export default function ActivityHistory() {
             <div className="flex flex-col gap-2 md:gap-6">
               <span>
                 Maybe your transaction is{" "}
-                <Link
-                  href="/dashboard/transactions"
-                  className="underline text-accentSecondary"
-                >
+                <SCLink href="/dashboard/transactions">
                   pending retirement
-                </Link>
+                </SCLink>
               </span>
               <span className="text-xs">or...</span>
               <span className="mb-8">
                 Create a{" "}
-                <Link
-                  href="/dashboard/sink"
-                  className="underline text-accentSecondary"
-                >
-                  new sinking transaction
-                </Link>{" "}
+                <SCLink href="/dashboard/sink">new sinking transaction</SCLink>{" "}
                 to contribute to the Stellarcarbon initiative.
               </span>
             </div>

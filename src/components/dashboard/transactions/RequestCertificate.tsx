@@ -3,12 +3,12 @@
 import Button from "@/components/Button";
 import IconButton from "@/components/IconButton";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import SCLink from "@/components/SCLink";
 import TextInput from "@/components/TextInput";
 import { useAppContext } from "@/context/appContext";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
@@ -91,10 +91,7 @@ export default function RequestCertificate({
 
         <span className="text-center">
           Read more about retirements & certificates{" "}
-          <Link href="/explain" className="underline">
-            here
-          </Link>
-          .
+          <SCLink href="/explain">here</SCLink>.
         </span>
 
         <Button

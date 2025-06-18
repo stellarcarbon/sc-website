@@ -11,9 +11,9 @@ import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { formatDate } from "@/utils";
 import RetirementInformation from "./RetirementInformation/RetirementInformation";
-import Link from "next/link";
 import SectionHeader from "@/components/SectionHeader";
 import TransactionExplorerHeader from "./TransactionExplorerHeader";
+import SCLink from "@/components/SCLink";
 
 export default function TransactionsExplorerDetail() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -147,17 +147,17 @@ export default function TransactionsExplorerDetail() {
           <TruncatedHash hash={transaction.recipient} uppercase />
         </PropertyValue>
 
-        <Link
+        <SCLink
           href={
             appConfig.network === WalletNetwork.PUBLIC
               ? `https://stellar.expert/explorer/public/tx/${transaction.id}`
               : `https://stellar.expert/explorer/testnet/tx/${transaction.id}`
           }
           target="_blank"
-          className="text-accentSecondary underline my-4 col-span-5 text-center"
+          className="my-4 col-span-5 text-center"
         >
           View this transaction on Stellar.expert
-        </Link>
+        </SCLink>
 
         {/* <hr className="col-span-5 my-3" /> */}
       </div>

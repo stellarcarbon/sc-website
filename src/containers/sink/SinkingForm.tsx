@@ -2,14 +2,14 @@
 
 import CurrencySelect from "@/containers/sink/form/CurrencySelect";
 import ReasonSelect from "@/containers/sink/form/ReasonSelect";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import AmountInput from "@/containers/sink/form/AmountInput";
 import TransactionPreview from "@/containers/sink/form/TransactionPreview";
 import appConfig from "@/config";
 import { ReasonSelectContextProvider } from "@/containers/sink/form/ReasonSelectContext";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSinkFormContext } from "@/context/SinkFormContext";
-import Link from "next/link";
+import SCLink from "@/components/SCLink";
 
 export default function SinkingForm() {
   const { errors, watch } = useSinkFormContext();
@@ -54,10 +54,7 @@ export default function SinkingForm() {
             Use this form to specify how much{" "}
             <CARBONCurrencyIcon className="inline" /> to sink. Your contribution
             directly supports the rainforest conservation{" "}
-            <Link href="/projects" className="underline text-accentSecondary">
-              project
-            </Link>
-            .
+            <SCLink href="/projects">project</SCLink>.
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import CountDownTimer from "@/components/CountDownTimer";
-import Link from "next/link";
+import SCLink from "@/components/SCLink";
 import { useMemo } from "react";
 
 export default function RetirementPending({
@@ -43,11 +43,7 @@ export default function RetirementPending({
       <CountDownTimer initialDuration={initialDuration} />
       <div className="text-center my-2">
         All transactions are eventually coupled to a retirement. Find out more
-        about the retirement process{" "}
-        <Link href="/explain" className="underline text-accentSecondary">
-          here
-        </Link>
-        .
+        about the retirement process <SCLink href="/explain">here</SCLink>.
       </div>
     </div>
   );

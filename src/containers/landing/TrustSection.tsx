@@ -7,7 +7,7 @@ import LandingSection from "./LandingSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileContract, faHandshake } from "@fortawesome/free-solid-svg-icons";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
-import Link from "next/link";
+import SCLink from "@/components/SCLink";
 
 export default function WhySection() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -75,13 +75,9 @@ export default function WhySection() {
         <h2 className="font-bold text-xl mb-2">Verra Registry Integration</h2>
         <div>
           All transactions are reflected on the{" "}
-          <Link
-            href="https://registry.verra.org/"
-            className="underline text-accentSecondary"
-            target="_blank"
-          >
+          <SCLink href="https://registry.verra.org/" target="_blank">
             Verra Registry
-          </Link>
+          </SCLink>
           , providing an solid layer of auditing and accountability.
         </div>
       </div>

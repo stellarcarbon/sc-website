@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandshake, faWallet } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import SCLink from "@/components/SCLink";
 
 export default function HowItWorksFlowChart() {
   return (
@@ -32,10 +32,7 @@ export default function HowItWorksFlowChart() {
         <div></div>
         <div className="">
           Finalize the transaction to support the{" "}
-          <Link href="/explain" className="underline text-accentSecondary">
-            rainforest project
-          </Link>
-          .
+          <SCLink href="/explain">rainforest project</SCLink>.
         </div>
       </div>
     </div>

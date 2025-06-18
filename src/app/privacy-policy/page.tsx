@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import SCLink from "@/components/SCLink";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -60,13 +60,13 @@ export default function PrivacyPolicyPage() {
         the Service, You agree to the collection and use of information in
         accordance with this Privacy Policy. This Privacy Policy has been
         created with the help of the<span>&nbsp;</span>
-        <Link
+        <SCLink
           href="https://www.privacypolicies.com/privacy-policy-generator/"
           target="_blank"
           rel="noopener"
         >
           Privacy Policy Generator
-        </Link>
+        </SCLink>
         .
       </p>
       <h1>Interpretation and Definitions</h1>
@@ -161,13 +161,13 @@ export default function PrivacyPolicyPage() {
             <strong>Website</strong>
             <span>&nbsp;</span>refers to Carbonbank, accessible from
             <span>&nbsp;</span>
-            <Link
+            <SCLink
               href="https://www.stellarcarbon.io/"
               rel="external nofollow noopener"
               target="_blank"
             >
               https://www.stellarcarbon.io
-            </Link>
+            </SCLink>
           </p>
         </li>
         <li>
@@ -244,14 +244,13 @@ export default function PrivacyPolicyPage() {
           Cookies. For more information on how You can delete Flash Cookies,
           please read “Where can I change the settings for disabling, or
           deleting local shared objects?” available <span>&nbsp;</span>
-          <Link
+          <SCLink
             href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
             rel="external nofollow noopener"
             target="_blank"
-            className="underline"
           >
             here
-          </Link>
+          </SCLink>
           .
         </li>
         <li>
@@ -270,13 +269,13 @@ export default function PrivacyPolicyPage() {
         remain on Your personal computer or mobile device when You go offline,
         while Session Cookies are deleted as soon as You close Your web browser.
         Learn more about cookies:<span>&nbsp;</span>
-        <Link
+        <SCLink
           href="https://www.privacypolicies.com/blog/cookies/"
           target="_blank"
           rel="noopener"
         >
           What Are Cookies?
-        </Link>
+        </SCLink>
         .
       </p>
       <p>
@@ -574,9 +573,9 @@ export default function PrivacyPolicyPage() {
       <p>
         If you have any questions about this Privacy Policy, You can contact us
         via email{" "}
-        <Link className="underline" href="mailto:support@stellarcarbon.io">
+        <SCLink href="mailto:support@stellarcarbon.io">
           support@stellarcarbon.io
-        </Link>
+        </SCLink>
         .
       </p>
     </main>
