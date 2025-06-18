@@ -5,9 +5,9 @@ import CountUp from "@/components/CountUp";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
+import SCLink from "@/components/SCLink";
 import ShipiboImages from "@/components/ShipiboImages";
 import Subheader from "@/components/Subheader";
-import Link from "next/link";
 
 export default function ProjectsPage() {
   return (
@@ -86,13 +86,12 @@ export default function ProjectsPage() {
             degradation.
           </Paragraph>
           <Paragraph>
-            <Link
+            <SCLink
               href="https://registry.verra.org/app/projectDetail/VCS/1360"
               target="_blank"
-              className="underline text-accentSecondary"
             >
               Read more on Verra
-            </Link>
+            </SCLink>
           </Paragraph>
 
           <Header>Verification links</Header>
@@ -100,20 +99,18 @@ export default function ProjectsPage() {
           {/* <p className="flex flex-col underline text-accentSecondary"> */}
           <Paragraph>
             <div className="flex flex-col gap-4 mt-2">
-              <Link
-                className="underline text-accentSecondary"
+              <SCLink
                 href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=123849&IDKEY=s903q4jsafkasjfu90amnmasdfkaidflnmdf9348r09dmfasdfk170787771"
                 target="_blank"
               >
                 Progress Monitoring report
-              </Link>
-              <Link
-                className="underline text-accentSecondary"
+              </SCLink>
+              <SCLink
                 href="https://search.fsc.org/en/certificate/a0240000005sSO8AAM/"
                 target="_blank"
               >
                 FSC Certificate
-              </Link>
+              </SCLink>
             </div>
           </Paragraph>
         </div>

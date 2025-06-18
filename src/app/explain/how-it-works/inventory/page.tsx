@@ -16,11 +16,12 @@ import Subheader from "@/components/Subheader";
 import AuditTable2 from "@/containers/AuditTable2";
 
 export default function ExplainInventoryPage() {
-  const { setSelectedTier2, setSelectedTier3 } = useExplainContext();
+  const { setSelectedTier2, setSelectedTier3, setIsOpen } = useExplainContext();
 
   useEffect(() => {
     setSelectedTier2(mExplainConfig[Tier2NavItems.HOWITWORKS]);
     setSelectedTier3(mExplainTier3Config[Tier3NavItems.INVENTORY]);
+    setIsOpen(true);
   }, []);
 
   return (
@@ -32,7 +33,6 @@ export default function ExplainInventoryPage() {
         <CARBONCurrencyIcon className="inline" />, CarbonSINK tokens are minted
         and we will retire an equal amount of VCU credits in the Verra registry.
       </Paragraph>
-      <Paragraph>Waarom is dit in balans?</Paragraph>
       <Subheader>Current inventory</Subheader>
       <Paragraph>Have a look at our current inventory (realtime!):</Paragraph>
 

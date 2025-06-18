@@ -97,11 +97,11 @@ export default function AuditTable2() {
           />
         </div>
       </div>
-      <div className="text-center py-2 font-semibold w-full text-xs">
+      <em className="block text-center text-sm text-tertiary mt-1">
         {`1000 kg = 1 ton = 1 VCU = 1 CARBON = 1`}
         <CARBONCurrencyIcon className="inline ml-1" />
         {` = 1 CarbonSINK`}
-      </div>
+      </em>
     </div>
   );
 }
@@ -115,24 +115,27 @@ interface TableStateProps extends HTMLProps<HTMLDivElement> {
 
 function TableStat({ label, unit, amount, tooltip }: TableStateProps) {
   return (
-    <div className="group relative flex flex-col items-center py-3">
+    <div className="relative flex flex-col items-center py-3">
+      <div className="peer">
+        <div className="text-base mb-1">{label}</div>
+        <div className="flex gap-1 items-center justify-center text-xl">
+          <div className="font-bold">{amount?.toFixed(3) ?? "?"}</div>
+          {unit === "CARBON" ? (
+            <CARBONCurrencyIcon className="inline" />
+          ) : (
+            <div>{unit}</div>
+          )}
+        </div>
+      </div>
+
       {/* Tooltip */}
       {tooltip && (
-        <div className="absolute bottom-full left-1/2 mb-2 w-max -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
+        <div className="absolute bottom-full left-1/2 w-max -translate-x-1/2 opacity-0 transition-opacity peer-hover:opacity-100 pointer-events-none">
           <div className="bg-gray-800 text-white text-xs rounded py-2 px-3 whitespace-nowrap">
             {tooltip}
           </div>
         </div>
       )}
-      <div className="text-base mb-1">{label}</div>
-      <div className="flex gap-1 items-center justify-center text-xl">
-        <div className="font-bold">{amount?.toFixed(3) ?? "?"}</div>
-        {unit === "CARBON" ? (
-          <CARBONCurrencyIcon className="inline" />
-        ) : (
-          <div>{unit}</div>
-        )}
-      </div>
     </div>
   );
 }

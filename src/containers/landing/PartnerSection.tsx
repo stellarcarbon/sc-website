@@ -1,7 +1,7 @@
 import Paragraph from "@/components/Paragraph";
 import PartnerLogo, { Partners } from "@/components/PartnerLogo";
-import Link from "next/link";
 import LandingSection from "./LandingSection";
+import SCLink from "@/components/SCLink";
 
 export default function PartnerSection() {
   const first = (
@@ -16,12 +16,9 @@ export default function PartnerSection() {
       </Paragraph>
 
       <Paragraph>
-        <Link
-          href="/explain/integration"
-          className="underline text-sm text-accentSecondary"
-        >
+        <SCLink href="/explain/integration" className="text-sm">
           Read about integration options here
-        </Link>
+        </SCLink>
       </Paragraph>
     </div>
   );

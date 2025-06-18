@@ -14,15 +14,16 @@ import {
 import { useEffect } from "react";
 
 export default function ExplainSinkingProcessPage() {
-  const { setSelectedTier3, setSelectedTier2 } = useExplainContext();
+  const { setSelectedTier3, setSelectedTier2, setIsOpen } = useExplainContext();
 
   useEffect(() => {
     setSelectedTier2(mExplainConfig[Tier2NavItems.HOWITWORKS]);
     setSelectedTier3(mExplainTier3Config[Tier3NavItems.SINKINGPROCESS]);
+    setIsOpen(true);
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col">
       <Header>Sinking process</Header>
 
       <Paragraph>
@@ -39,6 +40,24 @@ export default function ExplainSinkingProcessPage() {
           real-world CO₂ reduction and support credible, vetted projects that make
           a measurable impact on the environment. Each token represents an
           estimated 1 tonne of CO₂ emission equivalent. */}
+      </Paragraph>
+
+      <Subheader>Key guarantees for blockchain experts</Subheader>
+      <Paragraph>
+        <ul className="list-disc mx-6 space-y-2">
+          <li>
+            <b>Atomicity</b>: both token burn and mint occur in a single Ledger
+            transaction.
+          </li>
+          <li>
+            <b>Transparency</b>: every sink is publicly visible on Stellar’s
+            block explorer and in our audit tool.
+          </li>
+          <li>
+            <b>Traceability</b>: on-chain events are correlated to off-chain
+            retirements via requestId.
+          </li>
+        </ul>
       </Paragraph>
     </div>
   );

@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
+import SCLink from "@/components/SCLink";
 import Subheader from "@/components/Subheader";
 import AuditTable from "@/containers/AuditTable";
 import ExplainContainer from "@/containers/explain/ExplainContainer";
@@ -14,7 +15,6 @@ import {
   Tier2NavItems,
   useExplainContext,
 } from "@/context/ExplainContext";
-import Link from "next/link";
 import { useEffect } from "react";
 
 export default function ExplainPage() {
@@ -37,12 +37,7 @@ export default function ExplainPage() {
         businesses to take direct climate action. You can simply pay us and we
         will make sure 95% of your money will go to a vetted rainforest
         conversation project. Behind the scenes we use a{" "}
-        <Link
-          href="/explain/how-it-works/sinking-process"
-          className="underline text-accentSecondary"
-        >
-          sinking
-        </Link>{" "}
+        <SCLink href="/explain/how-it-works/sinking-process">sinking</SCLink>{" "}
         mechanism to make sure the corresponding Verified Carbon Units (VCU) are
         retired on the Verra registry.
       </Paragraph>
@@ -50,10 +45,7 @@ export default function ExplainPage() {
         {`If you are just looking to make a contribution to the Stellarcarbon
         initiative, that's all you need to know. Just connect your Stellar
         wallet `}
-        <Link href="/connect" className="underline text-accentSecondary">
-          here
-        </Link>
-        .
+        <SCLink href="/connect">here</SCLink>.
       </Paragraph>
 
       <Paragraph>
@@ -195,13 +187,12 @@ export default function ExplainPage() {
           API.
           <br />
           <br /> Check it out{" "}
-          <Link
-            className="underline"
+          <SCLink
             href="https://github.com/stellarcarbon/sc-audit"
             target="_blank"
           >
             here
-          </Link>
+          </SCLink>
           .
         </Paragraph>
       </ContentContainer>

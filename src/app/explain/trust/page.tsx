@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
+import SCLink from "@/components/SCLink";
 import Subheader from "@/components/Subheader";
 import {
   mExplainConfig,
@@ -29,11 +30,27 @@ export default function ExplainTrustPage() {
         contact with each of our projects making sure project goals are met.
       </Paragraph>
       <Subheader>Why Verra?</Subheader>
-      <Paragraph>lorem</Paragraph>
-      <Subheader>Project Vetting Criteria </Subheader>
-      <Paragraph>lorem</Paragraph>
-      <Subheader>Meet Our Projects</Subheader>
-      <Paragraph>lorem</Paragraph>
+      <Paragraph>
+        Verra’s Verified Carbon Standard (VCS) is the industry benchmark for
+        voluntary carbon markets, thanks to its rigorous, science-based
+        methodologies and multi-stage third-party validation process. By
+        requiring each project to demonstrate clear baselines, additionality,
+        and permanence before credits are issued, Verra ensures that every tonne
+        of CO₂ reduction is real and measurable. Its public registry offers full
+        transparency so anyone can audit our offsets at any time.{" "}
+      </Paragraph>
+
+      <Subheader>Meet Our Project(s)</Subheader>
+      <Paragraph>
+        In our current stage of operations we only support one project. We hope
+        to offer our users a selection of projects in the future.
+      </Paragraph>
+      <Paragraph>
+        Our current project a is focussed on prevent deforestation and
+        degradation of the forests in the Ucayali region. We have a dedicated
+        page on the website with more information. Check it out{" "}
+        <SCLink href={"/projects"}>here</SCLink>.
+      </Paragraph>
     </div>
   );
 }

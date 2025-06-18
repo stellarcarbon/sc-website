@@ -1,5 +1,4 @@
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
-import Link from "next/link";
 import RetirementPending from "./RetirementPending";
 import RetirementPendingSC from "./RetirementPendingSC";
 import RetirementCompleted from "./RetirementCompleted";

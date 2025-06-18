@@ -14,11 +14,12 @@ import {
 import { useEffect } from "react";
 
 export default function ExplainRetirementPage() {
-  const { setSelectedTier2, setSelectedTier3 } = useExplainContext();
+  const { setSelectedTier2, setSelectedTier3, setIsOpen } = useExplainContext();
 
   useEffect(() => {
     setSelectedTier2(mExplainConfig[Tier2NavItems.HOWITWORKS]);
     setSelectedTier3(mExplainTier3Config[Tier3NavItems.RETIREMENT]);
+    setIsOpen(true);
   }, []);
   return (
     <div className="flex flex-col">
@@ -49,6 +50,10 @@ export default function ExplainRetirementPage() {
         src="/explain_retirement.png"
         alt="retirement process"
       />
+      <em className="block text-center text-sm text-tertiary mt-1">
+        Figure: Fractional transactions are eventually retired into a community
+        certificate.
+      </em>
     </div>
   );
 }
