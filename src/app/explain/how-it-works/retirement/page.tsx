@@ -38,11 +38,11 @@ export default function ExplainRetirementPage() {
       </Paragraph>
       <Subheader>Fractional retirements</Subheader>
       <Paragraph>
-        Retirement on the Verra registry only happens in whole units, but we
-        also provide the option to make 'fractional retirements'. We allow users
-        to create a retirement of 1.5 tonnes for example, which is not possible
-        on Verra directly. Stellarcarbon built a mechanism that retires the
-        remaining fractions into a community retirement.
+        Retirement on the Verra registry only happens in whole units, but
+        Stellarcarbon also provides the option to make fractional retirements.
+        We allow users to create a retirement of 1.5 tonnes for example, which
+        is not possible on Verra directly. Stellarcarbon built a mechanism that
+        retires the remaining fractions into a community retirement.
       </Paragraph>
       <img
         className="max-w-[80%] mx-auto"

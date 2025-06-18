@@ -61,7 +61,6 @@ export default function AuditTable2() {
             }
           />
           <div className="flex items-center justify-center font-bold">=</div>
-          {/* next line */}
           <TableStat
             label={"CarbonSINK on Stellar"}
             unit={"CarbonSINK"}
