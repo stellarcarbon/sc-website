@@ -203,17 +203,12 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     // When the user completes the sink-form a sinkRequest is defined.
     if (formSinkRequest) {
       setSubmissionError(undefined);
+      setStep(CheckoutSteps.CREATING);
       setSinkRequest(formSinkRequest);
       confirmSinkRequest(formSinkRequest);
       router.push("/sink");
     }
-  }, [
-    formSinkRequest,
-    router,
-    confirmSinkRequest,
-    setSinkRequest,
-    sinkRequest,
-  ]);
+  }, [formSinkRequest, router, confirmSinkRequest, setSinkRequest]);
 
   const providerValue = useMemo(() => {
     return {

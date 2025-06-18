@@ -1,6 +1,5 @@
 import SuccessIcon from "@/components/icons/SuccessIcon";
 import SinkingStep from "./Step";
-import ModalHeader from "@/components/ModalHeader";
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
@@ -11,6 +10,7 @@ import { useAppContext } from "@/context/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useSinkFormContext } from "@/context/SinkFormContext";
+import { CheckoutSteps, useSinkingContext } from "@/context/SinkingContext";
 
 export default function CompletedSinking() {
   const { walletConnection, myTransactions, setMyTransactions } =
@@ -31,7 +31,13 @@ export default function CompletedSinking() {
     resetSinkForm();
 
     router.push("/dashboard");
-  }, [myTransactions, walletConnection, router, setMyTransactions]);
+  }, [
+    myTransactions,
+    walletConnection,
+    router,
+    setMyTransactions,
+    resetSinkForm,
+  ]);
 
   return (
     <SinkingStep title="Transaction succesful">
