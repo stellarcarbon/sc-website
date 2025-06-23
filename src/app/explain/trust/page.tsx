@@ -24,10 +24,13 @@ export default function ExplainTrustPage() {
       <Paragraph>
         Providing a trustworthy solution to CO2 reduction so our users can
         compensate their emissions with confidence is our top priority. We do
-        this by only working with projects that are enlisted in the Verra
-        registry. The Verra registry is an accredited project registry with a
-        Verified Carbon Standard. On top of that, Stellarcarbon is in direct
-        contact with each of our projects making sure project goals are met.
+        this by only working with projects that are enlisted in the{" "}
+        <SCLink href="https://verra.org" target="_blank">
+          Verra registry
+        </SCLink>
+        . The Verra registry is an accredited project registry with a Verified
+        Carbon Standard. On top of that, Stellarcarbon is in direct contact with
+        each of our projects making sure project goals are met.
       </Paragraph>
       <Subheader>Why Verra?</Subheader>
       <Paragraph>
@@ -46,7 +49,7 @@ export default function ExplainTrustPage() {
         to offer our users a selection of projects in the future.
       </Paragraph>
       <Paragraph>
-        Our current project a is focussed on prevent deforestation and
+        Our current project a is focussed on preventing deforestation and
         degradation of the forests in the Ucayali region. We have a dedicated
         page on the website with more information. Check it out{" "}
         <SCLink href={"/projects"}>here</SCLink>.

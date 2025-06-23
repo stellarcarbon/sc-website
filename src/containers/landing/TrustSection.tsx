@@ -69,7 +69,7 @@ export default function WhySection() {
   );
 
   const third = (
-    <div className="grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 gap-4 mt-12 md:mt-24">
+    <div className="grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 gap-4 mt-12 md:mt-20">
       <div className="bg-primary border border-accentSecondary rounded flex flex-col items-start p-4">
         <FontAwesomeIcon icon={faFileContract} className="text-xl mb-2" />
         <h2 className="font-bold text-xl mb-2">Verra Registry Integration</h2>

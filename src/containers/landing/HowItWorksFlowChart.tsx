@@ -12,7 +12,10 @@ export default function HowItWorksFlowChart() {
         <div className="text-xl font-bold">Connect Wallet</div>
 
         <div className="w-[1.5px] bg-gray-500 self-stretch place-self-center"></div>
-        <div className="pb-8">Connect your Stellar wallet to the platform.</div>
+        <div className="pb-8">
+          <SCLink href="/connect">Connect</SCLink> your Stellar wallet to the
+          platform.
+        </div>
 
         {/* <FontAwesomeIcon icon={faCalculator} className="place-self-center" /> */}
         <div className="flex items-center justify-center">

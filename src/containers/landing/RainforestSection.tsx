@@ -72,17 +72,17 @@ export default function RainforestIntro() {
       />
 
       <div className="relative h-[calc(100svh-64px)] md:h-[calc(100vh-80px)] hero-text flex flex-col items-center justify-start md:justify-center gap-16 z-10 text-center w-[100%]">
-        <div className="flex flex-col justify-center gap-8 py-8 md:py-12 w-full bg-darker/[.3] md:bg-darker/[.6] h-full md:h-auto">
-          <span className="font-roboto text-5xl md:text-[64px] max-w-6xl self-center tracking-tight leading-snug md:leading-normal">
+        <div className="flex flex-col justify-center gap-8 py-8 md:py-12 w-full bg-darker/[.3] md:bg-gray-900/[.4] h-full md:h-full">
+          <span className="font-noto font-bold text-5xl md:text-[64px] max-w-5xl self-center tracking-normal leading-snug md:leading-normal">
             Protect the rainforest with Stellarcarbon
           </span>
           <div className="flex flex-col gap-8 font-noto">
             <div className="flex flex-col items-center text-center gap-4">
-              <div className="text-xl md:text-2xl leading-relaxed">
+              {/* <div className="text-xl md:text-2xl leading-relaxed">
                 Fund certified rainforest conservation projects with just your
                 Stellar wallet
-                {/* Contributing to rainforest & biodiversity conservation made easy */}
-              </div>
+                
+              </div> */}
               {/* <div className="md:text-2xl">
                 Connect your wallet and donate, or integrate with our API &
                 Soroban contract.

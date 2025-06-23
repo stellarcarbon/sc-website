@@ -106,8 +106,6 @@ export const ExplainContextProvider = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(true);
 
-  console.log(selectedTier3, isOpen);
-
   const providerValue = useMemo(
     () => ({
       selectedTier2,

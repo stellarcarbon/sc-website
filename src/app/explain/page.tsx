@@ -55,7 +55,13 @@ export default function ExplainPage() {
       </Paragraph>
 
       <Subheader>Why rainforest conservation matters</Subheader>
-      <Paragraph>bla bla</Paragraph>
+      <Paragraph>
+        Rainforests cover under 2 % of Earth’s land but store 25 % of its carbon
+        and house over half of all land species. Protecting them locks away CO₂,
+        regulates rainfall, and prevents erosion. Importantly, conservation
+        projects hire local residents as forest keepers, offering stable,
+        well-paid jobs that align community welfare with ecosystem protection.
+      </Paragraph>
 
       {/* <Subheader>Our impact to date</Subheader>
       <Paragraph>Show metrics from the blockhain here.</Paragraph> */}

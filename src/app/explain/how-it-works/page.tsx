@@ -28,7 +28,11 @@ export default function ExplainHowItWorks() {
         call) you’re doing two things in one seamless transaction. First, the
         CARBON token is removed from circulation on the Stellar ledger. At the
         same time, that same transaction creates an on-chain commitment for us
-        to retire one Verified Carbon Unit (VCU) on Verra’s registry.
+        to retire one Verified Carbon Unit (VCU) on the{" "}
+        <SCLink href="https://verra.org" target="_blank">
+          Verra Registry
+        </SCLink>
+        .
       </Paragraph>
 
       <Paragraph>
