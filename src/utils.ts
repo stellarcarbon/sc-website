@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, RefObject } from "react";
 import { useRouter } from "next/navigation";
 import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { RequestCertificateResponse } from "@/client";
+import { isEmail } from "validator";
 
 export function debounce<T extends (...args: any[]) => void>(
   func: T,
@@ -155,11 +156,6 @@ export const mRequestCertificate = async ({
   }
 };
 
-export const isValidEmail = (addr: string) => {
-  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  return regex.test(addr);
-};
-
 export const formatDate = (date: Date): string => {
   const day = date.getDate().toString();
 
@@ -169,3 +165,12 @@ export const formatDate = (date: Date): string => {
 
   return `${day} ${month} ${year}`;
 };
+
+export function validateEmail(email: string): boolean {
+  console.log("validate email");
+  return isEmail(email, {
+    allow_utf8_local_part: false,
+    allow_ip_domain: false,
+    require_tld: true,
+  });
+}

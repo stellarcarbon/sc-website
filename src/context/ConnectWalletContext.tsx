@@ -1,4 +1,4 @@
-import { isValidEmail, useSCRouter } from "@/utils";
+import { useSCRouter, validateEmail } from "@/utils";
 import { useAppContext } from "@/context/appContext";
 import { walletConnectDialog } from "@/context/walletFunctions";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
@@ -126,7 +126,7 @@ export const ConnectWalletContextProvider = ({
       if (useremail === undefined) {
         emailErr = useremail === undefined;
       } else {
-        emailErr = !isValidEmail(useremail);
+        emailErr = !validateEmail(useremail);
       }
     }
 

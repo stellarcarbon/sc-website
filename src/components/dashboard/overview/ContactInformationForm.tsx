@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import IconButton from "@/components/IconButton";
 import TextInput from "@/components/TextInput";
 import { useAppContext } from "@/context/appContext";
+import { validateEmail } from "@/utils";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useEffect, useState } from "react";
@@ -42,11 +43,6 @@ export default function OverviewContactInformationForm({
     [setFormEmail]
   );
 
-  const isValidEmail = useCallback((addr: string) => {
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    return regex.test(addr);
-  }, []);
-
   const submitForm = useCallback(() => {
     if (formUsername === "" && formEmail === "") {
       updateWalletConnection(true);
@@ -55,7 +51,7 @@ export default function OverviewContactInformationForm({
       return;
     }
 
-    if (!isValidEmail(formEmail)) {
+    if (!validateEmail(formEmail)) {
       setFormError("Invalid email address");
       return;
     }
@@ -66,7 +62,7 @@ export default function OverviewContactInformationForm({
     });
     onClose();
     setFormError(undefined);
-  }, [formEmail, formUsername, isValidEmail, onClose, updateWalletConnection]);
+  }, [formEmail, formUsername, onClose, updateWalletConnection]);
 
   return (
     <div className="w-full relative px-4 md:px-8 py-12 md:py-6 flex flex-col gap-2 items-center bg-darkest rounded border border-accentSecondary self-center ">
