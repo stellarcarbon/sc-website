@@ -67,7 +67,7 @@ export default function RetirementDetailCard({
   };
 
   return (
-    <div className="bg-tertiary border border-primary rounded grid grid-cols-5 gap-2 md:gap-3 p-3 md:p-4 md:mx-12">
+    <div className="bg-secondary border border-tertiary rounded grid grid-cols-5 gap-2 md:gap-3 p-3 md:p-4 md:mx-12">
       <CertficateKey>Certificate ID</CertficateKey>
       <CertficateValue>
         <Link

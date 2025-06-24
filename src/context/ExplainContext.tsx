@@ -120,6 +120,10 @@ export const ExplainContextProvider = ({ children }: PropsWithChildren) => {
       setIsOpen(true);
     }
 
+    if (tier2Key) {
+      setMobileNavOpen(false);
+    }
+
     setSelectedTier2(
       tier2Key ? tier2Config[tier2Key as Tier2NavRoutes] : undefined
     );

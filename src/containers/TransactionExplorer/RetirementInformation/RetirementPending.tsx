@@ -43,7 +43,8 @@ export default function RetirementPending({
       <CountDownTimer initialDuration={initialDuration} />
       <div className="text-center my-2">
         All transactions are eventually coupled to a retirement. Find out more
-        about the retirement process <SCLink href="/explain">here</SCLink>.
+        about the retirement process{" "}
+        <SCLink href="/explain/how-it-works/retirement">here</SCLink>.
       </div>
     </div>
   );
