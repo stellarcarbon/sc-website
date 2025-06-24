@@ -16,13 +16,18 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       //   apiHost = "/ingest";
       // }
       let apiHost = "/prettylog";
-
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+        autocapture: false,
         api_host: apiHost,
         ui_host: "https://eu.posthog.com",
+        persistence: "localStorage",
         capture_pageview: false, // We capture pageviews manually
         capture_pageleave: true, // Enable pageleave capture
       });
+
+      if (posthog.has_opted_in_capturing()) {
+        posthog.set_config({ autocapture: true });
+      }
     }
 
     initPosthog();

@@ -161,7 +161,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
             selectedWalletId: XBULL_ID,
             modules: allowAllModules(),
           });
-          // console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
 
           // Load supported wallets from stellar wallets kit
           let wallets;

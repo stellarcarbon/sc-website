@@ -11,6 +11,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 // Prevent fontawesome from adding its CSS since we did it manually above:
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { SinkFormContextProvider } from "@/context/SinkFormContext";
+import AnalyticsConsent from "@/components/AnalyticsConsent";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         <SinkFormContextProvider>
           <body className={`${inter.className}`}>
             <PostHogProvider>
+              <AnalyticsConsent />
               <App>{children}</App>
             </PostHogProvider>
           </body>
