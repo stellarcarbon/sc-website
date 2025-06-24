@@ -4,16 +4,8 @@ import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
 import Subheader from "@/components/Subheader";
-import { useExplainContext } from "@/context/ExplainContext";
-import { useEffect } from "react";
 
 export default function ExplainSinkingProcessPage() {
-  const { setIsOpen } = useExplainContext();
-
-  useEffect(() => {
-    setIsOpen(true);
-  }, []);
-
   return (
     <div className="flex flex-col">
       <Header>Sinking process</Header>

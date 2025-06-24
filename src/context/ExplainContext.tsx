@@ -116,6 +116,10 @@ export const ExplainContextProvider = ({ children }: PropsWithChildren) => {
     const tier2Key = segments[1] || Tier2NavRoutes.INTRODUCTION;
     const tier3Key = segments[2] || null;
 
+    if (tier3Key) {
+      setIsOpen(true);
+    }
+
     setSelectedTier2(tier2Config[tier2Key as Tier2NavRoutes]);
     setSelectedTier3(
       tier3Key ? tier3Config[tier3Key as Tier3NavRoutes] : undefined

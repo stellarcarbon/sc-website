@@ -61,10 +61,6 @@ function Tier2Item({ route }: { route: Tier2NavRoutes }) {
     }
   }, [selectedTier2, item, setIsOpen]);
 
-  console.log(isOpen, selectedTier2, item);
-
-  console.log(item.children && isOpen && selectedTier2 === item);
-
   return (
     <li>
       <button
