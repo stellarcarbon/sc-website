@@ -15,7 +15,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       // } catch (error) {
       //   apiHost = "/ingest";
       // }
-      let apiHost = "/ingest";
+      let apiHost = "/prettylog";
 
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
         api_host: apiHost,
