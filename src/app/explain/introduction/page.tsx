@@ -48,35 +48,3 @@ export default function ExplainIntroductionPage() {
     </div>
   );
 }
-
-export function UnitExplanationList() {
-  return (
-    <ul className="mx-3 px-8 pt-4 my-4 list-disc bg-primary border border-tertiary rounded-md md:w-[90%] self-center">
-      <UnitExplanation
-        title={`Carbon pool on Verra`}
-        text={`This is our current inventory of VCU's at Verra.`}
-      />
-      <UnitExplanation
-        title={`VCU's burned on Verra`}
-        text={`These VCU's have been 'burned' at the Verra registry, making them no longer tradeable.`}
-      />
-      <UnitExplanation
-        title={`CARBON on Stellar`}
-        text={`The amount CARBON currently for available for sale on the Stellar blockchain.`}
-      />
-      <UnitExplanation
-        title={`CarbonSINK on Stellar`}
-        text={`When CARBON is sold, CarbonSINK is created and the CARBON is sunk, indicating this token can no longer be sold.`}
-      />
-    </ul>
-  );
-}
-
-function UnitExplanation({ title, text }: { title: string; text: string }) {
-  return (
-    <li className="mb-4">
-      <h3 className="text-xl">{title}</h3>
-      <span className="text-sm">{text}</span>
-    </li>
-  );
-}
