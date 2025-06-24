@@ -25,7 +25,7 @@ export default function Home() {
 
       <TrustSection />
 
-      <ParallaxDivider image={ParallaxBackgrounds.LAFAYETTE} />
+      <ParallaxDivider image={ParallaxBackgrounds.FOREST} />
 
       <LastTransactionsSection />
 
