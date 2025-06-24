@@ -17,9 +17,6 @@ import Button from "../../../components/Button";
 import SectionHeader from "../../../components/SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 import Link from "next/link";
-import Header from "../../../components/Header";
-import LandingSectionHeader from "@/containers/landing/LandingSectionHeader";
-import DashboardHeader from "../../../components/dashboard/DashboardHeader";
 
 export default function AmountInput() {
   const { register, watch, setValue, quote, setQuote } = useSinkFormContext();

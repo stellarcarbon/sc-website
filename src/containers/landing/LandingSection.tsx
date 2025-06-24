@@ -14,7 +14,7 @@ export default function LandingSection({
   return (
     <div
       className={`bg-darkest border-y border-tertiary
-    z-[10] w-full py-12 m-auto px-1 md:px-[5%] md:py-16
+    z-[10] w-full py-12 m-auto px-1 md:px-[5%] md:py-20
     ${className}
     `}
     >
@@ -26,7 +26,7 @@ export default function LandingSection({
         <div className="flex items-start justify-center">{first}</div>
         <div className="flex items-center justify-center">{second}</div>
       </div>
-      {third && <div className="px-4 mt-12">{third}</div>}
+      {third && <div className="px-4">{third}</div>}
     </div>
   );
 }

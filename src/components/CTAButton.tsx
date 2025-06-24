@@ -37,7 +37,7 @@ export default function CTAButton({
         }
         ${
           small
-            ? "px-3 text-sm h-9 gap-1 rounded-lg"
+            ? "px-3 text-sm h-9 gap-2 rounded-lg w-[175px]"
             : huge
             ? "p-3 gap-3 text-lg md:text-xl rounded-lg"
             : "w-[220px] text-lg h-12 gap-3 rounded-xl"
