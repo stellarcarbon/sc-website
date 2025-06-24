@@ -7,6 +7,7 @@ import SCLink from "@/components/SCLink";
 import TextInput from "@/components/TextInput";
 import { useAppContext } from "@/context/appContext";
 import { useSinkFormContext } from "@/context/SinkFormContext";
+import { validateEmail } from "@/utils";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
@@ -46,13 +47,8 @@ export default function RequestCertificate({
     setFormEmail(event.target.value);
   };
 
-  const isValidEmail = (addr: string) => {
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    return regex.test(addr);
-  };
-
   const submitForm = () => {
-    if (!isValidEmail(formEmail)) {
+    if (!validateEmail(formEmail)) {
       setFormError("Invalid email address");
       return;
     }

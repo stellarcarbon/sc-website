@@ -26,6 +26,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@hookform/error-message": "^2.0.1",
     "@stellar/stellar-sdk": "^12.2.0",
+    "@types/validator": "^13.15.2",
     "framer-motion": "^12.4.7",
     "google-fonts-plugin": "^5.0.2",
     "i": "^0.3.7",
@@ -38,7 +39,8 @@
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
     "react-loader-spinner": "^6.1.6",
-    "react-select": "^5.8.1"
+    "react-select": "^5.8.1",
+    "validator": "^13.15.15"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
