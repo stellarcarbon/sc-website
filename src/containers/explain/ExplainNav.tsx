@@ -118,7 +118,6 @@ function Tier3Item({ route }: { route: Tier3NavRoutes }) {
           selected ? "text-yellow-400 bg-secondary/50" : ""
         }`}
       >
-        {/* {selected && <FontAwesomeIcon icon={faCircle} height={6} width={6} />} */}
         {item.label}
       </button>
     </li>

@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
 import Subheader from "@/components/Subheader";
-import AuditTable2 from "@/containers/AuditTable2";
+import AuditTable from "@/containers/AuditTable";
 
 export default function ExplainInventoryPage() {
   return (
@@ -19,7 +19,7 @@ export default function ExplainInventoryPage() {
       <Subheader>Current inventory</Subheader>
       <Paragraph>Have a look at our current inventory (realtime!):</Paragraph>
 
-      <AuditTable2 />
+      <AuditTable />
 
       <Paragraph>
         {`Any difference between the inventories on the blockchain and Verra are
