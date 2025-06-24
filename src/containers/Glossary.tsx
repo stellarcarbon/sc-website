@@ -22,9 +22,9 @@ export default function Glossary() {
         concept: "Sinking",
         definition: (
           <div>
-            The core function of Stellarcarbon. You don't just buy a token, we
+            {`The core function of Stellarcarbon. You don't just buy a token, we
             also immediatly remove it from circulation by creating CarbonSINK.
-            Read more about this process{" "}
+            Read more about this process `}
             <SCLink href="/explain/how-it-works/sinking-process">here</SCLink>.
           </div>
         ),

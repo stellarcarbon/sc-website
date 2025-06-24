@@ -26,7 +26,7 @@ export default function NavBar() {
 
         <div className="ml-10 gap-10 items-center hidden lg:flex">
           <TopBarLink href="/">Home</TopBarLink>
-          <TopBarLink href="/explain">Explain</TopBarLink>
+          <TopBarLink href="/explain/introduction">Explain</TopBarLink>
           <TopBarLink href="/projects">Projects</TopBarLink>
           <TopBarLink href="/transactions">Transactions</TopBarLink>
           <TopBarLink href="/software">Software</TopBarLink>

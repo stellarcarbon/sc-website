@@ -1,3 +1,4 @@
+import { useAppContext } from "@/context/appContext";
 import {
   tier2Config,
   Tier2NavRoutes,
@@ -14,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useRouter } from "next/navigation";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export default function ExplainNav() {
   return (

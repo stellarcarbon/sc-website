@@ -11,7 +11,7 @@ import {
 } from "react";
 
 export enum Tier2NavRoutes {
-  INTRODUCTION = "",
+  INTRODUCTION = "introduction",
   HOWITWORKS = "how-it-works",
   TRUST = "trust",
   GLOSSARY = "glossary",
@@ -113,18 +113,22 @@ export const ExplainContextProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const segments = pathname.replace(/^\/+|\/+$/g, "").split("/"); // ["explain","how-it-works","sinking"]
 
-    const tier2Key = segments[1] || Tier2NavRoutes.INTRODUCTION;
+    const tier2Key = segments[1] || null;
     const tier3Key = segments[2] || null;
 
     if (tier3Key) {
       setIsOpen(true);
     }
 
-    setSelectedTier2(tier2Config[tier2Key as Tier2NavRoutes]);
+    setSelectedTier2(
+      tier2Key ? tier2Config[tier2Key as Tier2NavRoutes] : undefined
+    );
     setSelectedTier3(
       tier3Key ? tier3Config[tier3Key as Tier3NavRoutes] : undefined
     );
   }, [pathname]);
+
+  console.log(selectedTier2);
 
   const providerValue = useMemo(
     () => ({
