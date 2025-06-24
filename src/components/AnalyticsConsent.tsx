@@ -4,7 +4,7 @@ import posthog from "posthog-js";
 import { useState, useEffect } from "react";
 
 export default function AnalyticsConsent() {
-  const STORAGE_KEY = "analytics_consent";
+  const STORAGE_KEY = "sb";
   const [visible, setVisible] = useState(false);
 
   // Check localStorage on mount
@@ -16,15 +16,15 @@ export default function AnalyticsConsent() {
   }, []);
 
   const handleChoice = (consent: boolean) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, consent ? "opt_in" : "opt_out");
-    } catch (e) {
-      console.error("Failed to save analytics consent", e);
-    }
+    localStorage.setItem(STORAGE_KEY, "1");
+
     setVisible(false);
-    // Optionally initialize analytics here if consent === true
-    if (!consent) {
+    if (consent) {
+      posthog.opt_in_capturing();
+      posthog.set_config({ autocapture: true });
+    } else {
       posthog.opt_out_capturing();
+      posthog.set_config({ autocapture: false });
     }
   };
 
