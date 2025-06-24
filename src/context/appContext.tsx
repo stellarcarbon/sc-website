@@ -29,6 +29,7 @@ import TransactionHistoryService from "@/services/TransactionHistoryService";
 import RoundingService from "@/services/RoundingService";
 import useIsMobile from "@/hooks/useIsMobile";
 import appConfig from "@/config";
+import { useTransactionHistory } from "@/hooks/useTransactionHistory";
 
 declare global {
   interface Date {
@@ -64,7 +65,13 @@ type AppContext = {
 
   // Personal transactions on dashboard
   myTransactions: MyTransactionRecord[] | null;
-  setMyTransactions: Dispatch<SetStateAction<MyTransactionRecord[] | null>>;
+  pollForNewTransaction: (
+    maxRetries?: number,
+    delayMs?: number
+  ) => Promise<MyTransactionRecord[]>;
+  refetchTransactions: () => void;
+  totalPending: number;
+  totalSunk: number;
 
   // Round down support
   hasPendingRounding: boolean | undefined;
@@ -108,9 +115,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [walletConnection, setWalletConnection] = useState<
     WalletConnection | null | undefined
   >(null);
-  const [myTransactions, setMyTransactions] = useState<
-    MyTransactionRecord[] | null
-  >(null);
+
   const [hasPendingRounding, setHasPendingRounding] = useState<boolean>();
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
 
@@ -134,6 +139,14 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const pathname = usePathname();
   const router = useRouter();
+
+  const {
+    myTransactions,
+    totalPending,
+    totalSunk,
+    pollForNewTransaction,
+    refetch: refetchTransactions,
+  } = useTransactionHistory(walletConnection?.stellarPubKey);
 
   useEffect(() => {
     const loadApp = async () => {
@@ -178,18 +191,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         loadWalletConnection();
       } else if (walletConnection === undefined) {
       } else {
-        if (
-          myTransactions === null &&
-          pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
-        ) {
-          // Load personal transactions.
-          TransactionHistoryService.fetchAccountHistory(
-            walletConnection.stellarPubKey!
-          ).then((transactionRecords): void => {
-            setMyTransactions(transactionRecords);
-          });
-        }
-
         TransactionHistoryService.fetchAccountBalance(
           appConfig.server,
           walletConnection.stellarPubKey
@@ -231,7 +232,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const disconnectWallet = useCallback(() => {
     WalletConnectionStorageService.removeWalletConnection();
     setWalletConnection(undefined);
-    setMyTransactions(null);
+    // setMyTransactions(null);
     router.push("/");
   }, [router]);
 
@@ -250,7 +251,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       isDrawerClosing,
 
       myTransactions,
-      setMyTransactions,
+      pollForNewTransaction,
+      refetchTransactions,
+      totalPending,
+      totalSunk,
+      // setMyTransactions,
 
       hasPendingRounding,
       setHasPendingRounding,
@@ -274,6 +279,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     isDrawerOpen,
     isDrawerClosing,
     myTransactions,
+    pollForNewTransaction,
+    refetchTransactions,
+    totalPending,
+    totalSunk,
+
     updateWalletConnection,
     hasPendingRounding,
     sinkRequest,

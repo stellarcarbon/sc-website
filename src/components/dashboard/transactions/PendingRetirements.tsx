@@ -1,9 +1,6 @@
 "use client";
 
 import { RetirementStatus } from "@/app/types";
-import ParallaxDivider, {
-  ParallaxBackgrounds,
-} from "@/components/ParallaxDivider";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
@@ -11,13 +8,15 @@ import { useEffect, useMemo } from "react";
 import RoundingService from "@/services/RoundingService";
 import DashboardTitle from "../DashboardTitle";
 import PendingRetirementsInfo from "./PendingRetirementsInfo";
-import { useRouter } from "next/navigation";
 import DashboardHeader from "../DashboardHeader";
 
 export default function PendingRetirements() {
-  const { myTransactions, walletConnection, setHasPendingRounding } =
-    useAppContext();
-  const router = useRouter();
+  const {
+    myTransactions,
+    walletConnection,
+    setHasPendingRounding,
+    totalPending,
+  } = useAppContext();
 
   const pendingTransactions = useMemo(() => {
     if (myTransactions === null) {
@@ -39,30 +38,21 @@ export default function PendingRetirements() {
     }
   }, [setHasPendingRounding, walletConnection]);
 
-  const totalCarbonPending = useMemo(() => {
-    return (
-      pendingTransactions?.reduce((sum, tx) => sum + tx.sinkAmount, 0) ?? 0
-    );
-  }, [pendingTransactions]);
-
   return (
     <div className="bg-darkest">
       <div className="w-full px-4 flex flex-col">
         <div className="mt-12 md:mt-12 flex flex-col items-center">
           <DashboardTitle>Pending retirements balance</DashboardTitle>
           <div className="flex items-center justify-center gap-3 text-[48px] mb-8">
-            <span>{totalCarbonPending.toFixed(3)}</span>
+            <span>{totalPending.toFixed(3)}</span>
             <CARBONCurrencyIcon width={40} height={40} />
           </div>
-          <PendingRetirementsInfo totalCarbonPending={totalCarbonPending} />
+          <PendingRetirementsInfo totalCarbonPending={totalPending} />
         </div>
       </div>
 
       <div className="flex-1 flex flex-col px-4 w-full pt-12 pb-12">
         {pendingTransactions?.length > 0 && (
-          // <div className="mb-4 text-center">
-          //   <DashboardTitle>Your pending transactions</DashboardTitle>
-          // </div>
           <DashboardHeader>Your pending transactions</DashboardHeader>
         )}
         <div className="flex-1 flex flex-col gap-1">

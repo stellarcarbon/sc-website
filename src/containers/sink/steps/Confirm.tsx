@@ -24,7 +24,7 @@ export default function ConfirmSinking() {
         Your transaction is signed by Stellarcarbon and ready to go!
       </div>
 
-      <div className="flex flex-col justify-center gap-8 bg-primary md:mx-8 my-12 p-4 rounded border border-tertiary">
+      <div className="flex flex-col justify-center gap-8 bg-primary mx-4 md:mx-8 my-12 p-4 rounded border border-tertiary">
         <div className="grid grid-cols-5 w-full">
           <ConfirmKey>Amount</ConfirmKey>
           <ConfirmValue>
@@ -67,7 +67,7 @@ export default function ConfirmSinking() {
       </div>
 
       <SinkingStepButtons>
-        <div className="flex justify-between md:mx-8 w-full mb-4">
+        <div className="flex justify-between mx-4 md:mx-8 w-full mb-4">
           <Button onClick={() => router.push("/dashboard/sink")}>
             <FontAwesomeIcon icon={faXmark} className="text-lg" />
             <div>Cancel</div>

@@ -12,7 +12,7 @@ import {
 import { AccountResponse, Server } from "@stellar/stellar-sdk/lib/horizon";
 
 export default class TransactionHistoryService {
-  private static serializeTxResponse(
+  public static serializeTxResponse(
     txResponse: SinkTxItem
   ): MyTransactionRecord {
     let retirementStatus = RetirementStatus.RETIRED;
@@ -41,7 +41,7 @@ export default class TransactionHistoryService {
     } as MyTransactionRecord;
   }
 
-  private static serializeTxsResponse(
+  public static serializeTxsResponse(
     txsResponse: SinkTxListResponse,
     order: "asc" | "desc" = "desc"
   ) {

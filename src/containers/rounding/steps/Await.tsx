@@ -12,8 +12,11 @@ export default function AwaitRounding() {
     <RoundingStep title="Authenticate">
       <div className="flex flex-col justify-start items-center gap-6 text-center">
         <div>
-          To proceed, verify your identity by signing an authentication
-          challenge with your wallet.
+          To continue rouding down your pending balance, we need to verify your
+          identity.
+        </div>
+        <div>
+          This is done by signing an authentication challenge with your wallet.
         </div>
         <div className="my-8">
           <FontAwesomeIcon icon={faFileShield} className="text-[72px]" />

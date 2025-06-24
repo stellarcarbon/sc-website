@@ -10,7 +10,7 @@ export default function RoundingSuccess() {
 
   return (
     <SinkingStep title="Success">
-      <div className="font-semibold text-lg text-center">
+      <div className="mt-6 font-semibold text-lg text-center">
         Your certificate request was received in good order and will be created
         soon.
       </div>

@@ -1,29 +1,18 @@
 import { useAppContext } from "@/context/appContext";
-import { useSearchParams } from "next/navigation";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { useEffect, useMemo, useState } from "react";
-import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { RetirementStatus } from "@/app/types";
-import TransactionsExplorerDetail from "@/containers/TransactionExplorer/TransactionsExplorerDetail";
 import SCLink from "@/components/SCLink";
 
 export default function ActivityHistory() {
-  const { myTransactions, setMyTransactions, walletConnection } =
-    useAppContext();
-  const searchParams = useSearchParams();
+  const { myTransactions, refetchTransactions } = useAppContext();
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    // Reload personal transactions on page visit
-    TransactionHistoryService.fetchAccountHistory(
-      walletConnection?.stellarPubKey!
-    ).then((transactionRecords): void => {
-      setMyTransactions(transactionRecords);
-      setIsLoading(false);
-    });
-  }, [setMyTransactions, walletConnection]);
+    refetchTransactions();
+  }, [refetchTransactions]);
 
   const retiredTransactions = useMemo(() => {
     return (
@@ -32,15 +21,6 @@ export default function ActivityHistory() {
       ) ?? []
     );
   }, [myTransactions]);
-
-  if (searchParams.get("id") !== null) {
-    // TODO: remove this
-    return (
-      <div className="w-full flex-1">
-        <TransactionsExplorerDetail />
-      </div>
-    );
-  }
 
   if (isLoading || myTransactions === null) {
     return (

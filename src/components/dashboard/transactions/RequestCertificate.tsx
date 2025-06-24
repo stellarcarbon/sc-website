@@ -91,7 +91,7 @@ export default function RequestCertificate({
 
         <span className="text-center">
           Read more about retirements & certificates{" "}
-          <SCLink href="/explain">here</SCLink>.
+          <SCLink href="/explain/how-it-works/retirement">here</SCLink>.
         </span>
 
         <Button
