@@ -30,7 +30,7 @@ export default function NavBar() {
           <TopBarLink href="/projects">Projects</TopBarLink>
           <TopBarLink href="/transactions">Transactions</TopBarLink>
           <TopBarLink href="/software">Software</TopBarLink>
-          <TopBarLink href="/about">About us</TopBarLink>
+          {/* <TopBarLink href="/about">About us</TopBarLink> */}
 
           <div className="w-4"></div>
         </div>
