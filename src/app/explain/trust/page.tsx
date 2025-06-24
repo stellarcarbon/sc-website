@@ -4,20 +4,8 @@ import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 import SCLink from "@/components/SCLink";
 import Subheader from "@/components/Subheader";
-import {
-  mExplainConfig,
-  Tier2NavItems,
-  useExplainContext,
-} from "@/context/ExplainContext";
-import { useEffect } from "react";
 
 export default function ExplainTrustPage() {
-  const { setSelectedTier2 } = useExplainContext();
-
-  useEffect(() => {
-    setSelectedTier2(mExplainConfig[Tier2NavItems.TRUST]);
-  }, []);
-
   return (
     <div className="flex flex-col">
       <Header>Trust & Verification</Header>

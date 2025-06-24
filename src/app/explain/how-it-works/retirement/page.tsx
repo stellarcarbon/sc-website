@@ -3,21 +3,13 @@
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 import Subheader from "@/components/Subheader";
-import {
-  mExplainConfig,
-  mExplainTier3Config,
-  Tier2NavItems,
-  Tier3NavItems,
-  useExplainContext,
-} from "@/context/ExplainContext";
+import { useExplainContext } from "@/context/ExplainContext";
 import { useEffect } from "react";
 
 export default function ExplainRetirementPage() {
-  const { setSelectedTier2, setSelectedTier3, setIsOpen } = useExplainContext();
+  const { setIsOpen } = useExplainContext();
 
   useEffect(() => {
-    setSelectedTier2(mExplainConfig[Tier2NavItems.HOWITWORKS]);
-    setSelectedTier3(mExplainTier3Config[Tier3NavItems.RETIREMENT]);
     setIsOpen(true);
   }, []);
   return (

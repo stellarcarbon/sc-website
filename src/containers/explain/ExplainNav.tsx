@@ -1,8 +1,8 @@
 import {
-  mExplainConfig,
-  Tier2NavItem,
-  Tier2NavItems,
-  Tier3NavItem,
+  tier2Config,
+  Tier2NavRoutes,
+  tier3Config,
+  Tier3NavRoutes,
   useExplainContext,
 } from "@/context/ExplainContext";
 import {
@@ -20,17 +20,17 @@ export default function ExplainNav() {
   return (
     <nav className="bg-primary w-full h-full md:w-[330px] sticky p-4">
       <ul className="space-y-2">
-        <Tier2Item item={mExplainConfig[Tier2NavItems.INTRODUCTION]} />
-        <Tier2Item item={mExplainConfig[Tier2NavItems.HOWITWORKS]} />
-        <Tier2Item item={mExplainConfig[Tier2NavItems.TRUST]} />
-        <Tier2Item item={mExplainConfig[Tier2NavItems.BUSINESS]} />
-        <Tier2Item item={mExplainConfig[Tier2NavItems.GLOSSARY]} />
+        <Tier2Item route={Tier2NavRoutes.INTRODUCTION} />
+        <Tier2Item route={Tier2NavRoutes.HOWITWORKS} />
+        <Tier2Item route={Tier2NavRoutes.TRUST} />
+        <Tier2Item route={Tier2NavRoutes.BUSINESS} />
+        <Tier2Item route={Tier2NavRoutes.GLOSSARY} />
       </ul>
     </nav>
   );
 }
 
-function Tier2Item({ item }: { item: Tier2NavItem }) {
+function Tier2Item({ route }: { route: Tier2NavRoutes }) {
   const {
     selectedTier2,
     setSelectedTier3,
@@ -38,7 +38,8 @@ function Tier2Item({ item }: { item: Tier2NavItem }) {
     setIsOpen,
     setMobileNavOpen,
   } = useExplainContext();
-  const { children, href, label } = item;
+
+  const item = tier2Config[route];
 
   const router = useRouter();
 
@@ -51,7 +52,7 @@ function Tier2Item({ item }: { item: Tier2NavItem }) {
       setIsOpen(false);
       setMobileNavOpen(false);
     }
-    router.push(href);
+    router.push(`/explain/${route}`);
   };
 
   useEffect(() => {
@@ -59,6 +60,10 @@ function Tier2Item({ item }: { item: Tier2NavItem }) {
       setIsOpen(true);
     }
   }, [selectedTier2, item, setIsOpen]);
+
+  console.log(isOpen, selectedTier2, item);
+
+  console.log(item.children && isOpen && selectedTier2 === item);
 
   return (
     <li>
@@ -68,8 +73,8 @@ function Tier2Item({ item }: { item: Tier2NavItem }) {
           selectedTier2 === item ? "text-yellow-400 bg-secondary/50" : ""
         }`}
       >
-        <span>{label}</span>
-        {children ? (
+        <span>{item.label}</span>
+        {item.children ? (
           isOpen && selectedTier2 === item ? (
             <FontAwesomeIcon icon={faChevronDown} />
           ) : (
@@ -78,11 +83,14 @@ function Tier2Item({ item }: { item: Tier2NavItem }) {
         ) : null}
       </button>
 
-      {children && isOpen && selectedTier2 === item && (
+      {item.children && isOpen && selectedTier2 === item && (
         <ul className="mt-1 ml-6 space-y-1">
-          {children?.map((t3item, idx) => {
+          {item.children?.map((t3item, idx) => {
             return (
-              <Tier3Item key={`${label}_${idx}`} item={t3item}></Tier3Item>
+              <Tier3Item
+                key={`${item.label}_${idx}`}
+                route={t3item.key}
+              ></Tier3Item>
             );
           })}
         </ul>
@@ -91,14 +99,17 @@ function Tier2Item({ item }: { item: Tier2NavItem }) {
   );
 }
 
-function Tier3Item({ item }: { item: Tier3NavItem }) {
-  const { selectedTier3, setMobileNavOpen } = useExplainContext();
+function Tier3Item({ route }: { route: Tier3NavRoutes }) {
+  const { selectedTier2, selectedTier3, setMobileNavOpen } =
+    useExplainContext();
+
+  const item = tier3Config[route];
 
   const router = useRouter();
 
   const onClick = () => {
     setMobileNavOpen(false);
-    router.push(item.href);
+    router.push(`/explain/${selectedTier2?.key}/${item.key}`);
   };
 
   const selected = selectedTier3 === item;

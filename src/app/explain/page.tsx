@@ -9,21 +9,8 @@ import Paragraph from "@/components/Paragraph";
 import SCLink from "@/components/SCLink";
 import Subheader from "@/components/Subheader";
 import AuditTable from "@/containers/AuditTable";
-import ExplainContainer from "@/containers/explain/ExplainContainer";
-import {
-  mExplainConfig,
-  Tier2NavItems,
-  useExplainContext,
-} from "@/context/ExplainContext";
-import { useEffect } from "react";
 
 export default function ExplainPage() {
-  const { setSelectedTier2 } = useExplainContext();
-
-  useEffect(() => {
-    setSelectedTier2(mExplainConfig[Tier2NavItems.INTRODUCTION]);
-  });
-
   return (
     <div className="flex flex-col">
       <Header>

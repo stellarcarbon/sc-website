@@ -4,21 +4,13 @@ import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
 import Subheader from "@/components/Subheader";
-import {
-  mExplainTier3Config,
-  mExplainConfig,
-  Tier2NavItems,
-  Tier3NavItems,
-  useExplainContext,
-} from "@/context/ExplainContext";
+import { useExplainContext } from "@/context/ExplainContext";
 import { useEffect } from "react";
 
 export default function ExplainSinkingProcessPage() {
-  const { setSelectedTier3, setSelectedTier2, setIsOpen } = useExplainContext();
+  const { setIsOpen } = useExplainContext();
 
   useEffect(() => {
-    setSelectedTier2(mExplainConfig[Tier2NavItems.HOWITWORKS]);
-    setSelectedTier3(mExplainTier3Config[Tier3NavItems.SINKINGPROCESS]);
     setIsOpen(true);
   }, []);
 

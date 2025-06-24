@@ -3,25 +3,15 @@
 import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
-import AuditTable from "@/containers/AuditTable";
-import {
-  mExplainTier3Config,
-  mExplainConfig,
-  Tier2NavItems,
-  Tier3NavItems,
-  useExplainContext,
-} from "@/context/ExplainContext";
+import { useExplainContext } from "@/context/ExplainContext";
 import { useEffect } from "react";
 import Subheader from "@/components/Subheader";
 import AuditTable2 from "@/containers/AuditTable2";
 
 export default function ExplainInventoryPage() {
-  const { setSelectedTier2, setSelectedTier3, setIsOpen } = useExplainContext();
+  const { setIsOpen } = useExplainContext();
 
   useEffect(() => {
-    console.log("in");
-    setSelectedTier2(mExplainConfig[Tier2NavItems.HOWITWORKS]);
-    setSelectedTier3(mExplainTier3Config[Tier3NavItems.INVENTORY]);
     setIsOpen(true);
   }, []);
 

@@ -1,87 +1,89 @@
+import { usePathname } from "next/navigation";
 import {
   createContext,
   Dispatch,
   PropsWithChildren,
   SetStateAction,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
 
-export interface Tier3NavItem {
-  label: string;
-  href: string;
-}
-
-export interface Tier2NavItem {
-  label: string;
-  href: string;
-  children?: Tier3NavItem[];
-}
-
-export enum Tier2NavItems {
-  INTRODUCTION = "introduction",
-  HOWITWORKS = "howitworks",
+export enum Tier2NavRoutes {
+  INTRODUCTION = "",
+  HOWITWORKS = "how-it-works",
   TRUST = "trust",
   GLOSSARY = "glossary",
-  BUSINESS = "business",
+  BUSINESS = "integration",
 }
 
-export enum Tier3NavItems {
-  SINKINGPROCESS = "process",
+export enum Tier3NavRoutes {
+  SINKINGPROCESS = "sinking-process",
   INVENTORY = "inventory",
   RETIREMENT = "retirement",
 }
 
-export const mExplainTier3Config: Record<Tier3NavItems, Tier3NavItem> = {
-  [Tier3NavItems.SINKINGPROCESS]: {
+export interface Tier3Item {
+  key: Tier3NavRoutes;
+  label: string;
+}
+
+export interface Tier2Item {
+  key: Tier2NavRoutes;
+  label: string;
+  children?: Tier3Item[];
+}
+
+export const tier3Config: Record<Tier3NavRoutes, Tier3Item> = {
+  [Tier3NavRoutes.SINKINGPROCESS]: {
+    key: Tier3NavRoutes.SINKINGPROCESS,
     label: "Sinking process",
-    href: "/explain/how-it-works/sinking-process/",
   },
-  [Tier3NavItems.INVENTORY]: {
-    label: "Token balance",
-    href: "/explain/how-it-works/inventory/",
-  },
-  [Tier3NavItems.RETIREMENT]: {
+  [Tier3NavRoutes.RETIREMENT]: {
+    key: Tier3NavRoutes.RETIREMENT,
     label: "Retirement",
-    href: "/explain/how-it-works/retirement/",
+  },
+  [Tier3NavRoutes.INVENTORY]: {
+    key: Tier3NavRoutes.INVENTORY,
+    label: "Token balance",
   },
 };
 
-export const mExplainConfig: Record<Tier2NavItems, Tier2NavItem> = {
-  [Tier2NavItems.HOWITWORKS]: {
-    label: "How it works",
-    href: "/explain/how-it-works/",
-    children: [
-      mExplainTier3Config[Tier3NavItems.SINKINGPROCESS],
-      mExplainTier3Config[Tier3NavItems.INVENTORY],
-      mExplainTier3Config[Tier3NavItems.RETIREMENT],
-    ],
-  },
-  [Tier2NavItems.GLOSSARY]: {
-    label: "Glossary of key terms",
-    href: "/explain/glossary/",
-  },
-  [Tier2NavItems.INTRODUCTION]: {
+export const tier2Config: Record<Tier2NavRoutes, Tier2Item> = {
+  [Tier2NavRoutes.INTRODUCTION]: {
+    key: Tier2NavRoutes.INTRODUCTION,
     label: "Introduction",
-    href: "/explain/",
   },
-  [Tier2NavItems.TRUST]: {
+  [Tier2NavRoutes.GLOSSARY]: {
+    key: Tier2NavRoutes.GLOSSARY,
+    label: "Glossary of key terms",
+  },
+  [Tier2NavRoutes.TRUST]: {
+    key: Tier2NavRoutes.TRUST,
     label: "Trust & verification",
-    href: "/explain/trust/",
   },
-  [Tier2NavItems.BUSINESS]: {
+  [Tier2NavRoutes.BUSINESS]: {
+    key: Tier2NavRoutes.BUSINESS,
     label: "For business",
-    href: "/explain/integration",
+  },
+  [Tier2NavRoutes.HOWITWORKS]: {
+    key: Tier2NavRoutes.HOWITWORKS,
+    label: "How it works",
+    children: [
+      tier3Config[Tier3NavRoutes.SINKINGPROCESS],
+      tier3Config[Tier3NavRoutes.INVENTORY],
+      tier3Config[Tier3NavRoutes.RETIREMENT],
+    ],
   },
 };
 
 type ExplainContext = {
-  selectedTier2: Tier2NavItem | undefined;
-  setSelectedTier2: Dispatch<SetStateAction<Tier2NavItem | undefined>>;
+  selectedTier2: Tier2Item | undefined;
+  setSelectedTier2: Dispatch<SetStateAction<Tier2Item | undefined>>;
 
-  selectedTier3: Tier3NavItem | undefined;
-  setSelectedTier3: Dispatch<SetStateAction<Tier3NavItem | undefined>>;
+  selectedTier3: Tier3Item | undefined;
+  setSelectedTier3: Dispatch<SetStateAction<Tier3Item | undefined>>;
 
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -101,10 +103,24 @@ export const useExplainContext = () => {
 };
 
 export const ExplainContextProvider = ({ children }: PropsWithChildren) => {
-  const [selectedTier2, setSelectedTier2] = useState<Tier2NavItem>();
-  const [selectedTier3, setSelectedTier3] = useState<Tier3NavItem>();
+  const [selectedTier2, setSelectedTier2] = useState<Tier2Item>();
+  const [selectedTier3, setSelectedTier3] = useState<Tier3Item>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(true);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const segments = pathname.replace(/^\/+|\/+$/g, "").split("/"); // ["explain","how-it-works","sinking"]
+
+    const tier2Key = segments[1] || Tier2NavRoutes.INTRODUCTION;
+    const tier3Key = segments[2] || null;
+
+    setSelectedTier2(tier2Config[tier2Key as Tier2NavRoutes]);
+    setSelectedTier3(
+      tier3Key ? tier3Config[tier3Key as Tier3NavRoutes] : undefined
+    );
+  }, [pathname]);
 
   const providerValue = useMemo(
     () => ({

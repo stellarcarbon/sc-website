@@ -4,21 +4,8 @@ import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
 import SCLink from "@/components/SCLink";
-import {
-  mExplainConfig,
-  Tier2NavItems,
-  useExplainContext,
-} from "@/context/ExplainContext";
-import { useEffect } from "react";
 
 export default function ExplainHowItWorks() {
-  const { setSelectedTier2, setSelectedTier3 } = useExplainContext();
-
-  useEffect(() => {
-    setSelectedTier2(mExplainConfig[Tier2NavItems.HOWITWORKS]);
-    setSelectedTier3(undefined);
-  });
-
   return (
     <div className="flex flex-col">
       <Header>How it works</Header>
