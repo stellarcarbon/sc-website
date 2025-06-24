@@ -33,7 +33,7 @@ export default function SelectReasonButton({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`cursor-pointer  rounded shadow border border-tertiary md:hover:bg-secondary hover:text-white
+      className={`cursor-pointer rounded shadow border border-tertiary md:hover:bg-secondary hover:text-white
         ${
           isSelected
             ? "bg-accent text-black hover:!bg-accent hover:!text-black"

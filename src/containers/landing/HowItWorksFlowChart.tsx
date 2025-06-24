@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandshake, faWallet } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import SCLink from "@/components/SCLink";
 
 export default function HowItWorksFlowChart() {
   return (
@@ -12,7 +12,10 @@ export default function HowItWorksFlowChart() {
         <div className="text-xl font-bold">Connect Wallet</div>
 
         <div className="w-[1.5px] bg-gray-500 self-stretch place-self-center"></div>
-        <div className="pb-8">Connect your Stellar wallet to the platform.</div>
+        <div className="pb-8">
+          <SCLink href="/connect">Connect</SCLink> your Stellar wallet to the
+          platform.
+        </div>
 
         {/* <FontAwesomeIcon icon={faCalculator} className="place-self-center" /> */}
         <div className="flex items-center justify-center">
@@ -32,10 +35,7 @@ export default function HowItWorksFlowChart() {
         <div></div>
         <div className="">
           Finalize the transaction to support the{" "}
-          <Link href="/explain" className="underline text-accentSecondary">
-            rainforest project
-          </Link>
-          .
+          <SCLink href="/explain">rainforest project</SCLink>.
         </div>
       </div>
     </div>

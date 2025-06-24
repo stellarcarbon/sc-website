@@ -8,7 +8,7 @@ import {
   faRightFromBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import CTAButton from "@/components/CTAButton";
 import NavbarDropdownLink from "@/components/NavbarDropdownLink";
 
@@ -20,6 +20,7 @@ export default function NavBarWallet() {
     setIsDropdownOpen,
   } = useAppContext();
 
+  const pathname = usePathname();
   const router = useRouter();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -49,6 +50,9 @@ export default function NavBarWallet() {
     }
   };
 
+  if (!walletConnection && pathname === "/") {
+    return <div className="w-[175px] h-1"></div>;
+  }
   if (!walletConnection) {
     return <CTAButton white small />;
   }
