@@ -31,7 +31,7 @@ export default function Drawer() {
           <DrawerLink href="/projects">Current projects</DrawerLink>
           <DrawerLink href="/transactions">Transactions</DrawerLink>
           <DrawerLink href="/software">Software integration</DrawerLink>
-          <DrawerLink href="/about">About us</DrawerLink>
+          {/* <DrawerLink href="/about">About us</DrawerLink> */}
         </div>
 
         {walletConnection && <DrawerWallet />}
