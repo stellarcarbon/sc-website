@@ -1,29 +1,85 @@
 import SuccessIcon from "@/components/icons/SuccessIcon";
-import { useSinkingContext } from "@/context/SinkingContext";
-import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 import SinkingStep from "./Step";
-import appConfig from "@/config";
+import ModalHeader from "@/components/ModalHeader";
+import SinkingStepButtons from "./Buttons";
+import Button from "@/components/Button";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { MyTransactionRecord } from "@/app/types";
+import TransactionHistoryService from "@/services/TransactionHistoryService";
+import { useAppContext } from "@/context/appContext";
 
 export default function CompletedSinking() {
-  const { completedTransactionHash } = useSinkingContext();
+  const { walletConnection, myTransactions, setMyTransactions } =
+    useAppContext();
+
+  const router = useRouter();
+
+  const onFinish = useCallback(() => {
+    pollForNewTransaction(
+      myTransactions ?? [],
+      walletConnection?.stellarPubKey!
+    ).then((transactionRecords): void => {
+      setMyTransactions(transactionRecords);
+    });
+
+    router.push("/dashboard");
+  }, [myTransactions, walletConnection, router, setMyTransactions]);
 
   return (
-    <SinkingStep>
-      <span className="text-center md:text-lg">
-        {"Success! Check out the link below to view your transaction."}
-      </span>
-      <a
-        href={
-          appConfig.network === WalletNetwork.PUBLIC
-            ? `https://stellar.expert/explorer/public/tx/${completedTransactionHash}`
-            : `https://stellar.expert/explorer/testnet/tx/${completedTransactionHash}`
-        }
-        target="_blank"
-        className="text-accentSecondary underline mt-3 text-center"
-      >
-        View this transaction on Stellar.expert
-      </a>
-      <SuccessIcon />
+    <SinkingStep title="Transaction succesful">
+      <div className="mt-6 text-center">
+        <div className="text-lg font-semibold">
+          Your transaction was succesfully committed to the Stellar blockchain.
+        </div>
+
+        <div className="mt-4">Review the transaction on your dashboard!</div>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center my-16">
+        <SuccessIcon />
+      </div>
+
+      <SinkingStepButtons>
+        <Button onClick={onFinish} className="mx-auto">
+          Go back
+        </Button>
+      </SinkingStepButtons>
     </SinkingStep>
   );
+}
+
+async function pollForNewTransaction(
+  oldTransactions: MyTransactionRecord[],
+  walletPubKey: string,
+  maxRetries: number = 5,
+  delay: number = 1000 // delay in milliseconds
+): Promise<MyTransactionRecord[]> {
+  let retries = 0;
+
+  while (retries < maxRetries) {
+    const transactionRecords =
+      await TransactionHistoryService.fetchAccountHistory(walletPubKey);
+
+    if (hasNewItem(transactionRecords)) {
+      return transactionRecords;
+    }
+
+    // Wait for the specified delay before retrying.
+    await new Promise((resolve) => setTimeout(resolve, delay));
+    retries++;
+  }
+
+  throw new Error("Max retries reached without detecting a new transaction");
+
+  function hasNewItem(records: MyTransactionRecord[]): boolean {
+    if (oldTransactions.length > 0) {
+      const newerTx = records.find((tx) => {
+        return Number(tx.pagingToken) > Number(oldTransactions[0].pagingToken);
+      });
+
+      if (newerTx === undefined) return false;
+    }
+    return true;
+  }
 }

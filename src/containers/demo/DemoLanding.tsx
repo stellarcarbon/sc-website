@@ -2,6 +2,7 @@
 
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -45,13 +46,13 @@ export default function DemoLanding() {
           <div className="text-sm md:text-lg lg:text-lg flex flex-col items-center text-center gap-8 leading-8 ">
             <span>
               We provide a simple way for{" "}
-              <a
+              <Link
                 className="underline"
                 href="https://stellar.org/"
                 target="_blank"
               >
                 Stellar
-              </a>{" "}
+              </Link>{" "}
               blockchain users to contribute to nature based projects.
             </span>
             <span className="">

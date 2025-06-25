@@ -1,18 +1,17 @@
-import { useViewportWidth } from "@/utils";
 import SignIcon from "@/components/icons/SignIcon";
 import SinkingStep from "./Step";
+import SinkingStepButtons from "./Buttons";
 
 export default function SignSinking() {
-  const isWide = useViewportWidth();
-
   return (
-    <SinkingStep>
-      <span className="text-center md:text-lg">
+    <SinkingStep title="Sign transaction">
+      <span className="text-center text-lg font-semibold mt-6">
         {"Sign the transaction using your wallet in the pop-up."}
       </span>
-      <div className="my-4">
-        <SignIcon large={isWide} />
+      <div className="flex-1 flex items-center justify-center my-20">
+        <SignIcon />
       </div>
+      <SinkingStepButtons></SinkingStepButtons>
     </SinkingStep>
   );
 }

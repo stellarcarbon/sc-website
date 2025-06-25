@@ -1,13 +1,13 @@
 import { useAppContext } from "@/context/appContext";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import TransactionDetail from "@/components/dashboard/transactions/TransactionDetail";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { useSCRouter } from "@/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import { useEffect, useMemo, useState } from "react";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { RetirementStatus } from "@/app/types";
+import TransactionsExplorerDetail from "@/containers/TransactionExplorer/TransactionsExplorerDetail";
 
 export default function ActivityHistory() {
   const { myTransactions, setMyTransactions, walletConnection } =
@@ -35,8 +35,13 @@ export default function ActivityHistory() {
     );
   }, [myTransactions]);
 
-  if (searchParams.get("hash") !== null) {
-    return <TransactionDetail hash={searchParams.get("hash")!} />;
+  if (searchParams.get("id") !== null) {
+    // TODO: remove this
+    return (
+      <div className="w-full flex-1">
+        <TransactionsExplorerDetail />
+      </div>
+    );
   }
 
   if (isLoading || myTransactions === null) {
@@ -51,7 +56,7 @@ export default function ActivityHistory() {
         <div className="my-12 mx-4 md:mx-8 flex flex-col items-center">
           {/* <DashboardTitle>Retired transactions</DashboardTitle> */}
 
-          <span className="text-sm text-center md:w-[60%] bg-darker p-4 border rounded border-tertiary">
+          <span className="text-sm text-center md:w-[80%] bg-darker p-4 border rounded border-tertiary">
             Here you can find the transactions that have been retired into one
             or more certificates. Click on them to find out more details about
             the transaction and its corresponding certificate(s).
@@ -75,7 +80,7 @@ export default function ActivityHistory() {
                 </Link>
               </span>
               <span className="text-xs">or...</span>
-              <span>
+              <span className="mb-8">
                 Create a{" "}
                 <Link
                   href="/dashboard/sink"
@@ -93,11 +98,6 @@ export default function ActivityHistory() {
               <TransactionListItem
                 key={`txlistitem_${index}`}
                 transaction={transaction}
-                onClick={() => {
-                  router.push(
-                    `/dashboard/transactions/history/?hash=${transaction.id}`
-                  );
-                }}
               />
             ))}
           </div>

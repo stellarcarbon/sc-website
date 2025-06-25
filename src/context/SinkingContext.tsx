@@ -17,9 +17,10 @@ import {
   useState,
 } from "react";
 import { useAppContext } from "./appContext";
-import { TransactionBuilder } from "@stellar/stellar-sdk";
+import { Transaction, TransactionBuilder } from "@stellar/stellar-sdk";
 import { useRouter } from "next/navigation";
 import appConfig from "@/config";
+import XLMConversionService from "@/services/XLMConversionService";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -28,6 +29,7 @@ export enum CheckoutSteps {
   AWAIT_BLOCKCHAIN = "awaitBlockchain",
   COMPLETED = "success",
   ERROR = "error",
+  EXPIRED = "expired",
 }
 
 type SinkingContext = {
@@ -36,18 +38,17 @@ type SinkingContext = {
     SetStateAction<SinkCarbonXdrPostRequest | undefined>
   >;
 
-  sinkCarbonXdr: SinkingResponse | undefined;
+  sinkResponse: SinkingResponse | undefined;
 
   step: CheckoutSteps;
   setStep: Dispatch<SetStateAction<CheckoutSteps>>;
-
-  completedTransactionHash: string | undefined;
-  setCompletedTransactionHash: Dispatch<SetStateAction<string | undefined>>;
 
   submissionError: string | undefined;
   setSubmissionError: Dispatch<SetStateAction<string | undefined>>;
 
   signTransaction: () => void;
+
+  USDCPerXLM: number | undefined;
 };
 
 const SinkingContext = createContext<SinkingContext | null>(null);
@@ -64,11 +65,11 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const { stellarWalletsKit, walletConnection } = useAppContext();
 
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
-  const [sinkCarbonXdr, setSinkCarbonXdr] = useState<SinkingResponse>();
+  const [sinkResponse, setSinkResponse] = useState<SinkingResponse>();
   const [submissionError, setSubmissionError] = useState<string>();
-  const [completedTransactionHash, setCompletedTransactionHash] =
-    useState<string>();
   const [step, setStep] = useState<CheckoutSteps>(CheckoutSteps.CREATING);
+
+  const [USDCPerXLM, setUSDCPerXLM] = useState<number>();
 
   const router = useRouter();
 
@@ -77,6 +78,14 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       setStep(CheckoutSteps.ERROR);
     }
   }, [submissionError]);
+
+  useEffect(() => {
+    async function getPrice() {
+      const usdcPerXLM = await XLMConversionService.getUSDCPrice();
+      setUSDCPerXLM(usdcPerXLM);
+    }
+    getPrice();
+  }, []);
 
   const displayHorizonError = useCallback((error: any) => {
     if (error.message) {
@@ -111,48 +120,74 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         const result = await server.submitTransaction(
           TransactionBuilder.fromXDR(signedTxXdr, appConfig.network)
         );
-        setCompletedTransactionHash(result.hash);
         setStep(CheckoutSteps.COMPLETED);
       } catch (error) {
         displayHorizonError(error);
       }
     },
-    [displayHorizonError, setCompletedTransactionHash, setStep]
+    [displayHorizonError, setStep]
   );
+
+  const isExpired = (xdr: string): boolean => {
+    const transaction = TransactionBuilder.fromXDR(
+      xdr,
+      appConfig.network
+    ) as Transaction;
+
+    if (transaction.timeBounds) {
+      const maxTimeSec = parseInt(transaction.timeBounds.maxTime, 10);
+      const currentTimeSec = Math.floor(Date.now() / 1000);
+
+      if (maxTimeSec - currentTimeSec < 60) {
+        return true;
+      }
+    }
+
+    return false;
+  };
 
   const signTransaction = useCallback(async () => {
     // Sign the transaction using the Stellar Wallets Kit & submit it to Horizon.
-    if (sinkCarbonXdr === undefined) {
+    if (sinkResponse === undefined) {
       setSubmissionError("Could find transaction to sign.");
       return;
-    } else {
-      setStep(CheckoutSteps.AWAIT_SIGNING);
     }
 
+    // Expiry check before signing
+    if (isExpired(sinkResponse.tx_xdr)) {
+      setStep(CheckoutSteps.EXPIRED);
+      return;
+    }
+
+    setStep(CheckoutSteps.AWAIT_SIGNING);
+
     try {
-      const res = await stellarWalletsKit!.signTransaction(
-        sinkCarbonXdr.tx_xdr,
+      const signedTxResult = await stellarWalletsKit!.signTransaction(
+        sinkResponse.tx_xdr,
         {
           address: walletConnection!.stellarPubKey,
         }
       );
 
+      // Expiry check after signing
+      if (isExpired(signedTxResult.signedTxXdr)) {
+        setStep(CheckoutSteps.EXPIRED);
+        return;
+      }
+
       setStep(CheckoutSteps.AWAIT_BLOCKCHAIN);
-      submitToHorizon(res.signedTxXdr);
+      submitToHorizon(signedTxResult.signedTxXdr);
     } catch (error) {
       setSubmissionError("Transaction signing failed.");
     }
-
-    // TODO: Possibly verify the transaction here, before posting to blockchain?
-    // Transaction may be expired or signatures not valid?
-  }, [sinkCarbonXdr, walletConnection, stellarWalletsKit, submitToHorizon]);
+  }, [sinkResponse, walletConnection, stellarWalletsKit, submitToHorizon]);
 
   const confirmSinkRequest = useCallback(
     async (request: SinkCarbonXdrPostRequest) => {
       // Build the XDR with stellarcarbon API
       try {
         const response = await CarbonService.buildSinkCarbonXdr(request);
-        setSinkCarbonXdr(response);
+        setSinkResponse(response);
         setStep(CheckoutSteps.CONFIRM);
       } catch (err: unknown) {
         let message = "Unknown error occurred.";
@@ -178,22 +213,21 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     return {
       sinkRequest,
       setSinkRequest,
-      sinkCarbonXdr,
+      sinkResponse,
       step,
       setStep,
-      completedTransactionHash,
-      setCompletedTransactionHash,
       submissionError,
       setSubmissionError,
       signTransaction,
+      USDCPerXLM,
     };
   }, [
     sinkRequest,
-    sinkCarbonXdr,
+    sinkResponse,
     step,
-    completedTransactionHash,
     submissionError,
     signTransaction,
+    USDCPerXLM,
   ]);
 
   return (

@@ -6,6 +6,10 @@ import {
   VcsProject,
 } from "@/client";
 import {
+  ReasonOption,
+  ReasonOptionKey,
+} from "@/components/checkout/ReasonSelect";
+import {
   ISupportedWallet,
   WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
@@ -26,14 +30,7 @@ export type PersonalDetails = {
 export interface SinkingFormData {
   tonnes: number;
   currency: PaymentAsset;
-  reason: ReasonOptions;
-}
-
-export enum ReasonOptions {
-  ENVIRONMENT = "🌎✨🌍💕🌏",
-  HOUSEHOLD = "🏠 household",
-  AIRTRAVEL = "✈️ air travel",
-  ROADTRAVEL = "🛣️ road travel",
+  memo: string;
 }
 
 export enum RetirementStatus {
@@ -44,15 +41,16 @@ export enum RetirementStatus {
 
 export interface MyTransactionRecord {
   id: string;
-  createdAt: string;
+  createdAt: Date;
   memo: string;
   assetAmount: number;
   asset: string;
   sinkAmount: number;
   retirementStatus: RetirementStatus;
   retirements: RetirementSummary[];
-
-  pagingToken?: string;
+  recipient: string;
+  funder: string;
+  pagingToken: string;
 }
 
 export interface FrontpageTransactionRecord {
@@ -99,4 +97,6 @@ export interface AppConfiguration {
   server: StellarSdk.Horizon.Server;
   demo: boolean;
   apiBaseUrl: string;
+  usdcXlmLiquidityPoolId?: string;
+  usdcAssetCode?: string;
 }

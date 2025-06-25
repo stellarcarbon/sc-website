@@ -17,8 +17,6 @@ export default function LastTransactionsSection() {
     MyTransactionRecord[]
   >([]);
 
-  const router = useRouter();
-
   useEffect(() => {
     TransactionHistoryService.fetchRecentTransactions().then((records) => {
       setLastTransactions(records);
@@ -26,8 +24,8 @@ export default function LastTransactionsSection() {
   }, []);
 
   return (
-    <div className="bg-tertiary py-12 w-full border-y border-y-secondary px-[5%] ">
-      <div className="flex flex-col gap-8 md:gap-0 md:flex-row h-full w-full">
+    <div className="bg-secondary py-12 w-full px-3 md:px-[5%] shadow-xl z-[10] border-y border-tertiary">
+      <div className="flex flex-col gap-8 md:gap-0 md:flex-row md:items-center h-full w-full">
         {/* Text */}
         <div className="md:w-[50%]">
           <Header>Using the blockchain</Header>
@@ -39,27 +37,21 @@ export default function LastTransactionsSection() {
             <br />
             <br /> Check out the most recent transactions on Stellarcarbon.
           </Paragraph>
-          <Link href="/transactions" className="underline text-sm">
-            View the full list here
-          </Link>
+          <Paragraph>
+            <Link href="/transactions" className="underline text-sm">
+              View the full list in our transaction explorer
+            </Link>
+          </Paragraph>
         </div>
 
         {/* Transaction list */}
         <>
           {lastTransactions && (
-            <div className="mx-2 md:flex-1 flex justify-end">
-              <div className="w-full md:w-[30vw] flex flex-col gap-1">
+            <div className="mx-3 md:flex-1 flex justify-end">
+              <div className="w-full md:w-[30vw] flex flex-col gap-1 justify-center">
                 {lastTransactions.map((tx, idx) => {
                   return (
-                    <TransactionListItem
-                      key={`tx_${idx}`}
-                      onClick={() => {
-                        router.push(
-                          `/transactions/explorer/detail/?id=${tx.id}`
-                        );
-                      }}
-                      transaction={tx}
-                    />
+                    <TransactionListItem key={`tx_${idx}`} transaction={tx} />
                   );
                 })}
               </div>

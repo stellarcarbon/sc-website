@@ -6,7 +6,13 @@ import { usePathname } from "next/navigation";
 import { HTMLProps, ReactNode, useEffect, useMemo, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHouse,
+  faPlane,
+  faReceipt,
+  faTruck,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { useSCRouter } from "@/utils";
 
 interface DashboardNavBarItemProps extends HTMLProps<HTMLDivElement> {
@@ -25,6 +31,9 @@ export enum DashboardTabs {
   OVERVIEW = "overview",
   SINK = "sink",
   HISTORY = "history",
+  FLIGHT = "air travel",
+  HOUSEHOLD = "household",
+  ROAD = "road travel",
 }
 
 const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
@@ -42,6 +51,21 @@ const DashboardTabPropsConfig: Record<DashboardTabs, DashboardTabProps> = {
     label: "Activity",
     icon: <FontAwesomeIcon icon={faReceipt} fontSize={"17px"} />,
     route: "/dashboard/transactions/",
+  },
+  [DashboardTabs.FLIGHT]: {
+    label: "Air travel",
+    icon: <FontAwesomeIcon icon={faPlane} fontSize={"17px"} />,
+    route: "/estimator/flight/",
+  },
+  [DashboardTabs.HOUSEHOLD]: {
+    label: "Household",
+    icon: <FontAwesomeIcon icon={faHouse} fontSize={"17px"} />,
+    route: "/estimator/household/",
+  },
+  [DashboardTabs.ROAD]: {
+    label: "Road travel",
+    icon: <FontAwesomeIcon icon={faTruck} fontSize={"17px"} />,
+    route: "/estimator/road/",
   },
 };
 
@@ -87,20 +111,13 @@ export default function DashboardNavBarItem({
   return (
     <div
       onClick={navigate}
-      className={`relative cursor-pointer p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-[4px]
+      className={`relative cursor-pointer p-2 bg-red w-[33%] h-full flex flex-col justify-end items-center gap-[4px] select-none
       ${isSelected ? "text-accent bg-primary" : "text-accentSecondary"} ${
         first ? "md:rounded-tl" : ""
       } ${last ? "md:rounded-tr" : ""}`}
     >
       {p.icon}
       <span className="text-[12px] md:text-[14px] text-center">{p.label}</span>
-      {
-        // <div
-        //   className={`${
-        //     isSelected ? "animate-navbarstart" : "animate-navbarend"
-        //   } absolute opacity-0 bottom-0 w-full h-1 bg-accentSecondary`}
-        // ></div>
-      }
     </div>
   );
 }

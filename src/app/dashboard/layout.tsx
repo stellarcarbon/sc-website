@@ -14,28 +14,18 @@ export default function DashboardLayout({
   const { walletConnection } = useAppContext();
   const router = useSCRouter();
 
-  // Redirect to connect wallet if not connected.
-  useEffect(() => {
-    if (walletConnection === undefined) {
-      router.push("/wallet");
-    }
-  }, [walletConnection, router]);
-
-  if (walletConnection === undefined) {
-    return null;
-  }
-
   return (
     <>
       {appConfig.demo ? (
         <>{children}</>
       ) : (
-        <div className="lg:flex lg:flex-col lg:items-center lg:bg-dalle lg:bg-cover lg:bg-fixed flex-1">
+        <div className="lg:flex lg:flex-col lg:items-center lg:bg-forestling lg:bg-cover lg:bg-fixed flex-1">
           <main
             className="bg-primary lg:border border-tertiary lg:rounded
-          min-h-[calc(100dvh-64px)]
+          min-h-[calc(100dvh-64px)] md:min-h-[60vh]
           flex flex-col items-center justify-start
-          lg:max-w-[850px] lg:w-[70vw]
+          lg:max-w-[740px] lg:w-[70vw]
+          overflow-hidden
           lg:m-6"
           >
             <DashboardNavBar />

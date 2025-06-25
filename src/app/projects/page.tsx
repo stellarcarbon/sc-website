@@ -1,11 +1,14 @@
 "use client";
 
+import Banner from "@/components/Banner";
 import CountUp from "@/components/CountUp";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Paragraph from "@/components/Paragraph";
 import ShipiboImages from "@/components/ShipiboImages";
 import Subheader from "@/components/Subheader";
 import { useAppContext } from "@/context/appContext";
+import Link from "next/link";
 
 export default function ProjectsPage() {
   const { isMobileDevice } = useAppContext();
@@ -13,36 +16,78 @@ export default function ProjectsPage() {
   return (
     <main className="flex flex-col items-center font-noto">
       {/* Current project title with whale */}
-      <div className="whale-bg pt-4 md:pt-8 w-full">
+      {/* <div className="bg-rainforest bg-cover pt-4 md:pt-8 w-full max-h-[350px]">
         <div className="flex flex-col items-center gap-10 max-w-[80%] md:max-w-[65%] py-8 m-auto">
-          <span className="text-5xl md:text-[7vw] text-center leading-[56px] md:leading-[8vw] image1">
-            Current Offset Project
+          <span className="text-5xl md:text-[5vw] text-center leading-[56px] md:leading-[8vw] ">
+            
+            Current Projects
           </span>
-          <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px]">
+          <span className="text-2xl uppercase font-sans font-[700] text-center tracking-[8px] leading-[44px] image1">
             Land in the rainforest
           </span>
         </div>
-      </div>
+      </div> */}
+
+      <Banner
+        title="Current Projects"
+        subtitle="Land in the rainforest"
+        background="rainforest-bg"
+      />
 
       {/* Custom content container */}
-      <div className="flex flex-col md:flex-row grow pt-12 md:pt-20 lg:max-w-[900px] xl:max-w-[1200px] px-4">
-        <div className="hidden md:block w-full mb-8 md:flex-1  md:mr-16">
+      <div className="flex flex-col md:flex-row grow md:pt-20 lg:max-w-[900px] xl:max-w-[1200px]">
+        <div className="hidden w-full mb-8 md:flex-1  md:mr-16 xl:flex items-center">
           <ShipiboImages />
         </div>
 
-        <div className="md:flex-1">
-          <Header>
-            About Shipibo Conibo and Cacataibo Indigenous Communities
-          </Header>
+        <div className="md:flex-1 md:mt-[-32px] flex flex-col gap-1">
+          <Header>Our offset project</Header>
 
           <Paragraph>
-            The Ucayali Region is located in the central part of eastern Peru,
+            We currently support only one project, which is a rainforest
+            conservation project. Contributing to Stellarcarbon means you will
+            be investing in the positive outcomes of the project.
+          </Paragraph>
+
+          <Subheader>Ucayali region</Subheader>
+          <Paragraph>
+            {`This project, located in Peru's Ucayali region, focuses on forest
+            conservation within the territories of the Shipibo-Conibo and
+            Cacataibo Indigenous communities. The project aims to reduce
+            deforestation and forest degradation while supporting sustainable
+            forest management practices. The Ucayali region, home to a rich
+            diversity of Indigenous cultures and ecosystems, faces increasing
+            pressure from deforestation driven by agricultural expansion and
+            other land-use changes.`}
+          </Paragraph>
+          <Subheader>Verified Carbon Standard</Subheader>
+          <Paragraph>
+            {`Through this initiative, the participating communities are working
+            to protect their forests, preserve biodiversity, and generate
+            verified carbon credits under the Verified Carbon Standard (VCS) and
+            Climate, Community & Biodiversity (CCB) standards, contributing to
+            climate change mitigation, the safeguarding of the area’s rich
+            biodiversity, and the protection of Indigenous livelihoods.`}
+          </Paragraph>
+        </div>
+      </div>
+      <div className="lg:max-w-[900px] xl:max-w-[1200px]">
+        <div>
+          <div className="xl:hidden px-4 my-8 mt-16 w-full flex justify-center">
+            <div className="max-w-[600px]">
+              <ShipiboImages />
+            </div>
+          </div>
+          <Header>About the project area</Header>
+
+          <Paragraph>
+            {`The Ucayali Region is located in the central part of eastern Peru,
             with an approximate area of 105 082.69 km2, is the second region,
             after the Loreto Region, to introduce greater extent. Politically
             bounded on the north by the Loreto Region; on the south by the
             Regions of Junín, Cusco and Madre de Dios; on the west by the
             Huánuco and Pasco regions; on the east by the State of Acre –
-            Brazil.
+            Brazil.`}
           </Paragraph>
           <Paragraph>
             It is divided into 4 provinces: Padre Abad, Coronel Portillo and
@@ -57,35 +102,36 @@ export default function ProjectsPage() {
             degradation.
           </Paragraph>
           <Paragraph>
-            <a
+            <Link
               href="https://registry.verra.org/app/projectDetail/VCS/1360"
               target="_blank"
               className="underline text-accentSecondary"
             >
               Read more on Verra
-            </a>
+            </Link>
           </Paragraph>
 
-          <Subheader>Verification</Subheader>
+          <Header>Verification links</Header>
 
-          <p className="flex flex-col underline text-accentSecondary">
-            <a
-              href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=44972&IDKEY=j98klasmf8jflkasf8098afnasfkj98f0a9sfsakjflsakjf8dk62016388"
-              target="_blank"
-            >
-              Progress Monitoring report
-            </a>
-            <a
-              href="https://info.fsc.org/details.php?id=a0240000005sSO8AAM&type=certificate"
-              target="_blank"
-            >
-              FSC Certificate GFA-FM/COC-001288
-            </a>
-          </p>
-
-          <div className="md:hidden px-4 my-8 mt-16">
-            <ShipiboImages />
-          </div>
+          {/* <p className="flex flex-col underline text-accentSecondary"> */}
+          <Paragraph>
+            <div className="flex flex-col gap-4 mt-2">
+              <Link
+                className="underline text-accentSecondary"
+                href="https://registry.verra.org/mymodule/ProjectDoc/Project_ViewFile.asp?FileID=123849&IDKEY=s903q4jsafkasjfu90amnmasdfkaidflnmdf9348r09dmfasdfk170787771"
+                target="_blank"
+              >
+                Progress Monitoring report
+              </Link>
+              <Link
+                className="underline text-accentSecondary"
+                href="https://search.fsc.org/en/certificate/a0240000005sSO8AAM/"
+                target="_blank"
+              >
+                FSC Certificate
+              </Link>
+            </div>
+          </Paragraph>
         </div>
       </div>
 
@@ -118,6 +164,7 @@ export default function ProjectsPage() {
           }
         />
       </div>
+      <Footer />
     </main>
   );
 }

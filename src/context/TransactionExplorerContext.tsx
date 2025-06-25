@@ -24,6 +24,10 @@ type TransactionExplorerContext = {
 
   error: string | undefined;
   isLoading: boolean;
+
+  cursor: string | undefined;
+  limit: number;
+  setLimit: (limit: number) => void;
 };
 
 const TransactionExplorerContext =
@@ -63,22 +67,20 @@ export const TransactionExplorerContextProvider = ({
     [router, searchParams]
   );
 
+  const cursor = useMemo(() => {
+    return searchParams.get("cursor") ?? undefined;
+  }, [searchParams]);
+
+  const limit = useMemo(() => {
+    return Number(searchParams.get("limit") ?? 5);
+  }, [searchParams]);
+
+  const order = useMemo(() => {
+    return (searchParams.get("order") as "asc" | "desc") ?? "desc";
+  }, [searchParams]);
+
   const fetchTransactions = useCallback(async () => {
     setIsLoading(true);
-    let cursor: string | undefined = undefined;
-    if (searchParams.get("cursor") !== null) {
-      cursor = searchParams.get("cursor")!;
-    }
-
-    let limit: number = 5;
-    if (searchParams.get("limit") !== null) {
-      limit = Number(searchParams.get("limit"));
-    }
-
-    let order: "asc" | "desc" = "desc";
-    if (searchParams.get("order") !== null) {
-      order = searchParams.get("order") as "asc" | "desc";
-    }
 
     try {
       const txs = await TransactionHistoryService.fetchLedger(
@@ -93,7 +95,7 @@ export const TransactionExplorerContextProvider = ({
       setError(msg);
     }
     setIsLoading(false);
-  }, [searchParams, setIsLoading]);
+  }, [setIsLoading, cursor, limit, order]);
 
   const goToNextPage = useCallback(async () => {
     const cursorNext = transactions[transactions.length - 1].pagingToken;
@@ -107,9 +109,16 @@ export const TransactionExplorerContextProvider = ({
     updateSearchParams(cursorPrev, "asc");
   }, [transactions, updateSearchParams]);
 
+  const setLimit = useCallback(
+    (newLimit: number) => {
+      updateSearchParams(cursor, order, newLimit);
+    },
+    [updateSearchParams, cursor, order]
+  );
+
   useEffect(() => {
     if (!pathname.includes("detail")) fetchTransactions();
-  }, [fetchTransactions]);
+  }, [fetchTransactions, pathname]);
 
   const providerValue = useMemo(() => {
     return {
@@ -119,8 +128,20 @@ export const TransactionExplorerContextProvider = ({
       goToPreviousPage,
       error,
       isLoading,
+      cursor,
+      limit,
+      setLimit,
     };
-  }, [transactions, goToNextPage, goToPreviousPage, error, isLoading]);
+  }, [
+    transactions,
+    goToNextPage,
+    goToPreviousPage,
+    error,
+    isLoading,
+    cursor,
+    limit,
+    setLimit,
+  ]);
 
   return (
     <TransactionExplorerContext.Provider value={providerValue}>

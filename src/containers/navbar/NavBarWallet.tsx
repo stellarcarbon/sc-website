@@ -1,5 +1,5 @@
 import { useSCRouter } from "@/utils";
-import DropdownOption from "@/components/DropdownOption";
+import DrawerLinkConnected from "@/components/DrawerLinkConnected";
 import WalletConnectionInfoSmall from "@/components/WalletConnectionInfoSmall";
 import { useAppContext } from "@/context/appContext";
 import {
@@ -10,10 +10,20 @@ import {
   useRef,
   useState,
 } from "react";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalculator,
+  faRightFromBracket,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
+import CTAButton from "@/components/CTAButton";
 
 export default function NavBarWallet() {
-  const { disconnectWallet } = useAppContext();
-  const router = useSCRouter();
+  const { isMobileDevice, walletConnection } = useAppContext();
+
+  const router = useRouter();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const connInfoRef = useRef<HTMLDivElement>(null);
@@ -35,44 +45,46 @@ export default function NavBarWallet() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setShowDropdown, dropdownRef]);
 
-  const handleMyStellar = useCallback(() => {
-    router.push("/dashboard");
-    setShowDropdown(false);
-  }, [router, setShowDropdown]);
+  const onClick = () => {
+    if (!isMobileDevice) {
+      setShowDropdown(!showDropdown);
+    } else {
+      router.push("/dashboard");
+    }
+  };
 
-  const handleDisconnect = useCallback(() => {
-    disconnectWallet();
-    setShowDropdown(false);
-  }, [disconnectWallet, setShowDropdown]);
-
-  const handleSinkCarbon = useCallback(() => {
-    router.push("/dashboard/sink");
-    setShowDropdown(false);
-  }, [router, setShowDropdown]);
+  if (!walletConnection) {
+    return <CTAButton white small />;
+  }
 
   return (
-    <>
-      <div className="relative">
-        <div onClick={() => setShowDropdown(!showDropdown)} ref={connInfoRef}>
-          <WalletConnectionInfoSmall />
-        </div>
-        {showDropdown && (
-          <div
-            className="absolute right-0 w-64 top-11 p-2 bg-darker border rounded border-accentSecondary text-white"
-            ref={dropdownRef}
-          >
-            <DropdownOption onClick={handleSinkCarbon}>
-              Sink CARBON
-            </DropdownOption>
-            <DropdownOption onClick={handleMyStellar}>
-              My Stellarcarbon
-            </DropdownOption>
-            <DropdownOption onClick={handleDisconnect}>
-              Disconnect wallet
-            </DropdownOption>
-          </div>
-        )}
+    <div className="relative">
+      <div onClick={onClick} ref={connInfoRef}>
+        <WalletConnectionInfoSmall />
       </div>
-    </>
+      {showDropdown && (
+        <div
+          className="absolute right-0 w-64 top-11 p-2 bg-primary border rounded border-accentSecondary text-white"
+          ref={dropdownRef}
+        >
+          <DrawerLinkConnected href="/dashboard/sink">
+            <CARBONCurrencyIcon />
+            <span>Sink CARBON</span>
+          </DrawerLinkConnected>
+          <DrawerLinkConnected href="/estimator/flight">
+            <FontAwesomeIcon icon={faCalculator} />
+            <span>Emission estimator</span>
+          </DrawerLinkConnected>
+          <DrawerLinkConnected href="/dashboard">
+            <FontAwesomeIcon icon={faUser} width={18} />
+            <span>My Stellarcarbon</span>
+          </DrawerLinkConnected>
+          <DrawerLinkConnected href="" disconnect>
+            <FontAwesomeIcon icon={faRightFromBracket} width={18} />
+            <span>Disconnect wallet</span>
+          </DrawerLinkConnected>
+        </div>
+      )}
+    </div>
   );
 }

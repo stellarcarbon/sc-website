@@ -12,6 +12,7 @@ import RoundingService from "@/services/RoundingService";
 import DashboardTitle from "../DashboardTitle";
 import PendingRetirementsInfo from "./PendingRetirementsInfo";
 import { useRouter } from "next/navigation";
+import DashboardHeader from "../DashboardHeader";
 
 export default function PendingRetirements() {
   const { myTransactions, walletConnection, setHasPendingRounding } =
@@ -58,21 +59,20 @@ export default function PendingRetirements() {
       </div>
 
       <div className="flex-1 flex flex-col px-4 w-full pt-12 pb-12">
-        <div className="flex-1 flex flex-col gap-6">
+        {pendingTransactions?.length > 0 && (
+          // <div className="mb-4 text-center">
+          //   <DashboardTitle>Your pending transactions</DashboardTitle>
+          // </div>
+          <DashboardHeader>Your pending transactions</DashboardHeader>
+        )}
+        <div className="flex-1 flex flex-col gap-1">
           {pendingTransactions?.length ?? 0 > 0 ? (
             <>
-              <DashboardTitle>Your pending transactions</DashboardTitle>
-
               {pendingTransactions?.map((transaction, index) => {
                 return (
                   <TransactionListItem
                     key={transaction.id}
                     transaction={transaction}
-                    onClick={() =>
-                      router.push(
-                        `/dashboard/transactions/history/?hash=${transaction.id}`
-                      )
-                    }
                     showCountdown
                   />
                 );
@@ -85,13 +85,6 @@ export default function PendingRetirements() {
           )}
         </div>
       </div>
-
-      <ParallaxDivider
-        image={ParallaxBackgrounds.RAINFOREST}
-        smallest
-        yOffset={-400}
-        roundedBottom
-      />
     </>
   );
 }

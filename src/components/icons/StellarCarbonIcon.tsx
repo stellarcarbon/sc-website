@@ -7,7 +7,7 @@ export default function StellarCarbonIcon({
 }: StellarCarbonIconProps) {
   return (
     <svg
-      className={`h-10 md:h-12 lg:h-14 ${className}`}
+      className={`h-9 md:h-12 lg:h-14 ${className}`}
       fill="currentColor"
       viewBox="0 0 340 100"
       xmlns="http://www.w3.org/2000/svg"

@@ -24,8 +24,8 @@ export default function Drawer() {
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className="absolute top-0 left-0 z-[50]"
     >
-      <div className="flex flex-col w-screen h-screen bg-primary border-secondary">
-        <div className="flex flex-col mt-4 mb-2">
+      <div className="flex flex-col w-screen min-h-[calc(100dvh-64px)] bg-darker border-secondary relative overflow-y-auto">
+        <div className="flex flex-col my-4">
           <DrawerLink href="/">Home</DrawerLink>
           <DrawerLink href="/explain">What is Stellarcarbon?</DrawerLink>
           <DrawerLink href="/projects">Current projects</DrawerLink>
@@ -34,13 +34,11 @@ export default function Drawer() {
           <DrawerLink href="/about">About us</DrawerLink>
         </div>
 
-        <hr className="w-full my-4 mb-8 border-secondary" />
-
         {walletConnection && <DrawerWallet />}
 
         {!walletConnection && (
-          <div className="mx-auto">
-            <CTAButton />
+          <div className="flex-1 bg-darker flex flex-col items-center pt-8">
+            <CTAButton white />
           </div>
         )}
       </div>

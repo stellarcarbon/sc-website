@@ -1,13 +1,14 @@
 import FormError from "@/components/FormError";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
 
 export default function AcceptTnC() {
   const { tncError, tncAccepted, setTncAccepted } = useConnectWalletContext();
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-xl md:text-2xl font-bold">Privacy policy</h1>
+      <div className="flex flex-col">
+        <DashboardHeader>Privacy policy</DashboardHeader>
         <span className="text-xs md:text-sm max-w-[80%]">
           Read about our terms & conditions and privacy policy <u>here</u>.
         </span>
