@@ -23,7 +23,7 @@ function buildConfig(): AppConfiguration {
     server = new StellarSdk.Horizon.Server(
       "https://horizon-testnet.stellar.org"
     );
-    apiBaseUrl = "https://api.stellarcarbon.io/test";
+    apiBaseUrl = "https://testnet-api.stellarcarbon.io";
   }
 
   OpenAPI.BASE = apiBaseUrl;

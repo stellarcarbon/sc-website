@@ -131,7 +131,7 @@ export const mRequestCertificate = async ({
   } else if (process.env.NEXT_PUBLIC_PRODUCTION === "production") {
     baseUrl = "https://api.stellarcarbon.io";
   } else {
-    baseUrl = "https://api.stellarcarbon.io/test";
+    baseUrl = "https://testnet-api.stellarcarbon.io";
   }
 
   const response = await fetch(
