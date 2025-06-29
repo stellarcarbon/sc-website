@@ -1,6 +1,6 @@
 import { MyTransactionRecord } from "@/app/types";
 import { RetirementDetail, RetirementService } from "@/client";
-import RetirementDetailCard from "@/components/dashboard/transactions/RetirementDetailCard";
+import RetirementDetailCard from "@/containers/TransactionExplorer/RetirementInformation/RetirementDetailCard";
 import { useEffect, useState } from "react";
 
 export default function TxDetailCertificates({

@@ -167,7 +167,6 @@ export const formatDate = (date: Date): string => {
 };
 
 export function validateEmail(email: string): boolean {
-  console.log("validate email");
   return isEmail(email, {
     allow_utf8_local_part: false,
     allow_ip_domain: false,

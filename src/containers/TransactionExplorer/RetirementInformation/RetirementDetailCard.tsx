@@ -2,7 +2,7 @@ import { RetirementDetail } from "@/client";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { formatDate } from "@/utils";
 import { ReactNode, useCallback, useMemo, useState } from "react";
-import TruncatedHash from "../TruncatedHash";
+import TruncatedHash from "../../../components/dashboard/TruncatedHash";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
@@ -67,7 +67,7 @@ export default function RetirementDetailCard({
   };
 
   return (
-    <div className="bg-secondary border border-tertiary rounded grid grid-cols-5 gap-2 md:gap-3 p-3 md:p-4 md:mx-12">
+    <div className="bg-secondary border border-tertiary rounded grid grid-cols-5 gap-2 md:gap-3 p-3 md:p-4">
       <CertficateKey>Certificate ID</CertficateKey>
       <CertficateValue>
         <Link
@@ -92,7 +92,13 @@ export default function RetirementDetailCard({
         <TruncatedHash hash={retirement.serial_number} chars={7} />
       </CertficateValue>
 
-      <CertficateKey>Amount Filled</CertficateKey>
+      <CertficateKey>VCU Amount</CertficateKey>
+      <CertficateValue>
+        <span>{retirement.vcu_amount}</span>
+        <CARBONCurrencyIcon width={14} height={14} />
+      </CertficateValue>
+
+      <CertficateKey>Contributed by this transaction</CertficateKey>
       <CertficateValue>
         <div className="flex items-center">
           <span className="mr-1">{amountFilled}</span>

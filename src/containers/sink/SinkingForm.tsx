@@ -13,30 +13,12 @@ import SCLink from "@/components/SCLink";
 
 export default function SinkingForm() {
   const { errors, watch } = useSinkFormContext();
-  const tonnes = watch("tonnes");
 
   const reasonErrorLabel: string | undefined = useMemo(() => {
     return Object.entries(errors ?? {})
       .find(([field]) => field === "memo")?.[1]
       ?.message?.toString();
   }, [errors]);
-
-  // Not sure if we should use this effect
-  //
-  // useEffect(() => {
-  //   if (tonnes !== 1) {
-  //     const amountInputDiv = document.getElementById(
-  //       "transaction-amount-input"
-  //     );
-  //     if (amountInputDiv) {
-  //       console.log("!!");
-  //       window.scrollTo({
-  //         top: 500,
-  //         behavior: "smooth",
-  //       });
-  //     }
-  //   }
-  // }, []);
 
   return (
     <div className="flex flex-col">
