@@ -2,6 +2,7 @@ import { MyTransactionRecord } from "@/app/types";
 import { RetirementDetail, RetirementService } from "@/client";
 import RetirementDetailCard from "@/containers/TransactionExplorer/RetirementInformation/RetirementDetailCard";
 import { useEffect, useState } from "react";
+import { Blocks } from "react-loader-spinner";
 
 export default function TxDetailCertificates({
   transaction,
@@ -31,6 +32,14 @@ export default function TxDetailCertificates({
 
     getRetirements();
   }, [transaction]);
+
+  if (isLoadingRetirements) {
+    return (
+      <div className="w-full flex justify-center">
+        <Blocks />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center gap-4 w-full">

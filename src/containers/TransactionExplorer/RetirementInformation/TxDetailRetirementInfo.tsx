@@ -16,7 +16,7 @@ export default function TxDetailRetirementInfo({
       if (transaction.retirements.length > 0) {
         return "Partially retired";
       } else {
-        return "Pending certificate attribution";
+        return "Not retired yet";
       }
     }
   }, [transaction]);
@@ -33,10 +33,10 @@ export default function TxDetailRetirementInfo({
       <div className="grid grid-cols-2">
         {status === "Fully retired" && (
           <>
-            <div className="h-10 font-bold items-center inline-flex text-xl mb-3">
-              Sink status
+            <div className="h-10 font-bold items-center inline-flex">
+              Status
             </div>
-            <div className="h-10 items-center inline-flex text-end justify-end text-lg mb-3">
+            <div className="h-10 text-end items-center inline-flex justify-end gap-1">
               {status}
             </div>
           </>
@@ -73,7 +73,7 @@ export default function TxDetailRetirementInfo({
           </>
         )}
 
-        {status === "Pending certificate attribution" && (
+        {status === "Not retired yet" && (
           <>
             <div className="h-10 font-bold inline-flex items-center">
               Sink status
