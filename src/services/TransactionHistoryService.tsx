@@ -38,6 +38,7 @@ export default class TransactionHistoryService {
       pagingToken: txResponse.paging_token,
       recipient: txResponse.recipient,
       funder: txResponse.funder,
+      finalized: txResponse.retirement_finalized,
     } as MyTransactionRecord;
   }
 

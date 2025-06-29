@@ -37,8 +37,6 @@ type RoundingContext = {
 
   requestCertificate: () => Promise<void>;
 
-  totalCarbonPending: number;
-
   error: string | undefined;
   setError: Dispatch<SetStateAction<string | undefined>>;
 };
@@ -54,7 +52,7 @@ export const useRoundingContext = () => {
 };
 
 export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
-  const { walletConnection, stellarWalletsKit, myTransactions } =
+  const { walletConnection, stellarWalletsKit, myTransactions, totalPending } =
     useAppContext();
 
   const [step, setStep] = useState<RoundDownSteps>(
@@ -65,17 +63,6 @@ export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
   const [error, setError] = useState<string>();
 
   const router = useRouter();
-
-  const totalCarbonPending = useMemo(() => {
-    const filteredTransactions = myTransactions?.filter(
-      (tx) =>
-        tx.retirementStatus === RetirementStatus.PENDING_USER ||
-        tx.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
-    );
-    return (
-      filteredTransactions?.reduce((sum, tx) => sum + tx.sinkAmount, 0) ?? 0
-    );
-  }, [myTransactions]);
 
   useEffect(() => {
     // Redirect if no personal walletConnection is available
@@ -137,11 +124,11 @@ export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
       step,
       verifyIdentity,
       requestCertificate,
-      totalCarbonPending,
+
       error,
       setError,
     }),
-    [step, verifyIdentity, requestCertificate, totalCarbonPending, error]
+    [step, verifyIdentity, requestCertificate, error]
   );
 
   return (

@@ -132,8 +132,6 @@ export const ExplainContextProvider = ({ children }: PropsWithChildren) => {
     );
   }, [pathname]);
 
-  console.log(selectedTier2);
-
   const providerValue = useMemo(
     () => ({
       selectedTier2,
