@@ -1,6 +1,5 @@
 "use client";
 
-import { useSCRouter } from "@/utils";
 import PendingRetirements from "@/components/dashboard/transactions/PendingRetirements";
 import ConnectWalletCTA from "@/components/ConnectWalletCTA";
 import { useAppContext } from "@/context/appContext";

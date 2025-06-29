@@ -1,6 +1,5 @@
 "use client";
 
-import { RetirementStatus } from "@/app/types";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useAppContext } from "@/context/appContext";
@@ -22,11 +21,7 @@ export default function PendingRetirements() {
     if (myTransactions === null) {
       return [];
     }
-    return myTransactions.filter(
-      (tx) =>
-        tx.retirementStatus === RetirementStatus.PENDING_USER ||
-        tx.retirementStatus === RetirementStatus.PENDING_STELLARCARBON
-    );
+    return myTransactions.filter((tx) => !tx.finalized);
   }, [myTransactions]);
 
   useEffect(() => {

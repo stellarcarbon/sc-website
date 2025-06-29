@@ -49,6 +49,8 @@ export function useTransactionHistory(
     const serializedTransactions =
       TransactionHistoryService.serializeTxsResponse(sinkTxsResponse);
 
+    console.log(serializedTransactions);
+
     setData({
       myTransactions: serializedTransactions,
       totalSunk: Number(sinkTxsResponse.total_carbon_sunk),

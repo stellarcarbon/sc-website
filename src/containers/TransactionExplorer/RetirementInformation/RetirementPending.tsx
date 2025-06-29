@@ -1,5 +1,6 @@
-import { MyTransactionRecord, RetirementStatus } from "@/app/types";
+import { MyTransactionRecord } from "@/app/types";
 import CountDownTimer from "@/components/CountDownTimer";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import SCLink from "@/components/SCLink";
 import { useMemo } from "react";
 
@@ -22,30 +23,26 @@ export default function RetirementPending({
   }, [transaction]);
 
   return (
-    <div className="flex flex-col gap-4 text-sm p-2 px-3 md:px-4">
-      {/* <h1 className="text-lg font-bold">{RetirementStatus.PENDING_USER}</h1> */}
-      <div className="grid grid-cols-5 text-base h-10">
-        <div className="font-bold items-center inline-flex">Status</div>
-        <div className="col-span-4 text-end items-center inline-flex justify-end">
-          {RetirementStatus.PENDING_USER}
+    <div>
+      <div>
+        <div className="mb-4">
+          All transactions are eventually coupled to a{" "}
+          <SCLink href="/explain/how-it-works/retirement">retirement</SCLink>.
+          This transaction will be retired into a certificate when:
         </div>
+        <ul className="list-disc ml-4 space-y-2">
+          <li>The community retirement timer has passed</li>
+          <li className="flex items-center uppercase text-xs tracking-wide">
+            or
+          </li>
+          <li>
+            When the recipient of the transaction rounds down their pending
+            balance to receive a personal certificate.
+          </li>
+        </ul>
       </div>
-
-      {/* <div>
-        This fractional retirement is pending certificate attribution. Users can
-        optionally create a personal certificate by rounding their transactions
-        up or down.
-      </div> */}
-      {/* <div>
-        Fractional transactions automatically retire after a period of 90 days.
-      </div> */}
 
       <CountDownTimer initialDuration={initialDuration} />
-      <div className="text-center my-2">
-        All transactions are eventually coupled to a retirement. Find out more
-        about the retirement process{" "}
-        <SCLink href="/explain/how-it-works/retirement">here</SCLink>.
-      </div>
     </div>
   );
 }

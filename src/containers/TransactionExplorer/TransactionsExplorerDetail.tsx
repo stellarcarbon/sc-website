@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { formatDate } from "@/utils";
-import RetirementInformation from "./RetirementInformation/RetirementInformation";
+import TxDetailRetirementInfo from "./RetirementInformation/TxDetailRetirementInfo";
 import SectionHeader from "@/components/SectionHeader";
 import TransactionExplorerHeader from "./TransactionExplorerHeader";
 import SCLink from "@/components/SCLink";
@@ -163,7 +163,7 @@ export default function TransactionsExplorerDetail() {
       </div>
 
       <SectionHeader>Retirement information</SectionHeader>
-      <RetirementInformation transaction={transaction} />
+      <TxDetailRetirementInfo transaction={transaction} />
     </div>
   );
 }

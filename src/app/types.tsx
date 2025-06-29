@@ -51,6 +51,7 @@ export interface MyTransactionRecord {
   recipient: string;
   funder: string;
   pagingToken: string;
+  finalized: boolean;
 }
 
 export interface FrontpageTransactionRecord {

@@ -20,6 +20,7 @@ export default function TxExplorerHelpPage() {
     recipient: "recipient",
     funder: "funder",
     pagingToken: "000",
+    finalized: false,
   };
 
   return (

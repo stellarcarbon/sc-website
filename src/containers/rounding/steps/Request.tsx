@@ -4,9 +4,11 @@ import { useRoundingContext } from "@/context/RoundingContext";
 import { faFileLines } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RoundingStep from "./Step";
+import { useAppContext } from "@/context/appContext";
 
 export default function RequestRounding() {
-  const { requestCertificate, totalCarbonPending } = useRoundingContext();
+  const { totalPending } = useAppContext();
+  const { requestCertificate } = useRoundingContext();
 
   return (
     <RoundingStep title="Challenge verified">
@@ -21,7 +23,7 @@ export default function RequestRounding() {
         <div>Amount</div>
         {/* <div className="text-center">Confirm the request</div> */}
         <div className="text-3xl flex items-center gap-1 justify-center">
-          {Math.floor(totalCarbonPending)}
+          {Math.floor(totalPending)}
           <CARBONCurrencyIcon className="inline ml-1" height={24} width={24} />
         </div>
       </div>
