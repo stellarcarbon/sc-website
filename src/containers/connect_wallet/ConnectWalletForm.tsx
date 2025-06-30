@@ -48,7 +48,6 @@ function WalletsKitError({ message }: { message: string }) {
         <div className="text-red-800 font-semibold text-center">
           Something went wrong
         </div>
-        <FontAwesomeIcon className="text-red-800" icon={faWarning} />
       </div>
       <div className="mt-2 text-red-700 text-center text-sm">{message}</div>
     </div>

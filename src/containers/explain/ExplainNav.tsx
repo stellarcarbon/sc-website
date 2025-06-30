@@ -19,7 +19,7 @@ import { useEffect, useMemo } from "react";
 
 export default function ExplainNav() {
   return (
-    <nav className="bg-primary w-full h-full md:w-[330px] sticky p-4">
+    <nav className="bg-darker w-full h-full md:w-[330px] sticky p-4">
       <ul className="space-y-2">
         <Tier2Item route={Tier2NavRoutes.INTRODUCTION} />
         <Tier2Item route={Tier2NavRoutes.HOWITWORKS} />

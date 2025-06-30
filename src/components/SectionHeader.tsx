@@ -11,7 +11,7 @@ export default function SectionHeader({
 }) {
   if (icon) {
     return (
-      <div className="bg-secondary font-bold h-14 text-xl flex items-center gap-2 w-full px-3 md:px-4">
+      <div className="bg-secondary font-bold h-14 text-xl flex items-center gap-2 w-full px-4 mt-6">
         <FontAwesomeIcon icon={icon} />
         {children}
       </div>

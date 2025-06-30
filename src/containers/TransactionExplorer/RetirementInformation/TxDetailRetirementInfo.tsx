@@ -30,7 +30,7 @@ export default function TxDetailRetirementInfo({
 
   return (
     <div className="w-full flex flex-col gap-4 p-2 px-3 md:px-4">
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-4 mb-8">
         {status === "Fully retired" && (
           <>
             <div className="h-10 font-bold items-center inline-flex">
@@ -92,11 +92,11 @@ export default function TxDetailRetirementInfo({
 
         {transaction.retirements.length > 0 && (
           <>
-            <div className="h-10 text-xl mt-3 font-bold inline-flex items-center col-span-2">
+            <div className="h-10 text-xl font-bold inline-flex items-center col-span-2">
               Related certificates
             </div>
 
-            <div className="col-span-2 my-4 mx-4">
+            <div className="col-span-2">
               <TxDetailCertificates transaction={transaction} />
             </div>
           </>

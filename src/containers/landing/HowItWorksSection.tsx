@@ -13,7 +13,7 @@ export default function HowItWorksSection() {
   const first = (
     <div>
       <div className="px-4 text-4xl font-bold leading-tight tracking-light mb-2">
-        How it works
+        What we do
       </div>
       <Paragraph>
         {`Supporting climate action shouldn't be complicated. With Stellarcarbon,
@@ -44,7 +44,7 @@ export default function HowItWorksSection() {
     <LandingSection
       first={first}
       second={second}
-      className="border-b-0 !bg-darker"
+      className="border-b-0 "
     ></LandingSection>
   );
 }

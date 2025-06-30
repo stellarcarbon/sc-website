@@ -26,7 +26,7 @@ export default function Button({
           ? " !text-gray-500 opacity-30"
           : `text-black transition-colors
           active:bg-primary active:text-white
-          hover:bg-primary hover:text-white`
+          hover:bg-darker hover:text-white`
       } ${className}`}
       {...rest}
     >

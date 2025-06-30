@@ -8,7 +8,7 @@ export default function Banner({
   background: string;
 }) {
   return (
-    <div className="relative bg-[#21354A] w-full flex justify-center">
+    <div className="relative bg-[#21354A] w-full flex justify-center border-b border-secondary">
       <div
         className={`absolute ${background} w-full h-[200px] lg:h-[200px] flex`}
       ></div>

@@ -11,7 +11,7 @@ export default function RoundingStep({
   return (
     <div className="h-full ">
       <ModalHeader>{title}</ModalHeader>
-      <div className="p-4 my-4 flex flex-col items-center gap-4 text-lg font-semibold">
+      <div className="p-4 my-4 flex flex-col items-center gap-4">
         {children}
       </div>
     </div>

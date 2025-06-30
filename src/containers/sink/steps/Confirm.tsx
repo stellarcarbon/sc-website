@@ -20,11 +20,11 @@ export default function ConfirmSinking() {
 
   return (
     <SinkingStep title="Confirm transaction">
-      <div className="mt-6 text-center font-semibold text-lg">
+      <div className="my-6 text-center font-semibold text-lg">
         Your transaction is signed by Stellarcarbon and ready to go!
       </div>
 
-      <div className="flex flex-col justify-center gap-8 bg-primary mx-4 md:mx-8 my-12 p-4 rounded border border-tertiary">
+      <div className="flex flex-col justify-center gap-8 bg-primary mx-4 md:mx-8 mb-8 p-4 rounded border border-tertiary">
         <div className="grid grid-cols-5 w-full">
           <ConfirmKey>Amount</ConfirmKey>
           <ConfirmValue>
@@ -55,7 +55,7 @@ export default function ConfirmSinking() {
         <div className="flex justify-between items-center">
           <div className="font-bold text-xl md:text-2xl">Reason</div>
           {sinkRequest.memoValue ? (
-            <div className="break-all text-accentSecondary text-center text-2xl md:text-3xl">
+            <div className="break-all text-accentSecondary text-center text-xl md:text-3xl">
               {sinkRequest.memoValue}
             </div>
           ) : (

@@ -97,15 +97,11 @@ export default function ReasonSelect({ error }: ReasonSelectProps) {
   return (
     <>
       <SectionHeader icon={faTag}>Label your contribution</SectionHeader>
-      <div className="p-3 py-6 md:p-6 mb-4">
-        {/* <DashboardHeader>Label your contribution</DashboardHeader> */}
-
+      <div className="mx-3 py-6 md:p-6 mb-4">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
-            <span className="">
-              Why are you making this contribution? Leave a public message and
-              it will be stored, reminding you and others why you contributed.
-            </span>
+            Why are you making this contribution? Leave a public message and it
+            will be stored, reminding you and others why you contributed.
           </div>
 
           <div className="flex justify-center gap-4 md:gap-2 my-2">

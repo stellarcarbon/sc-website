@@ -41,11 +41,13 @@ const config: Config = {
       },
       colors: {
         // primary: "#2D3250",
-        primary: "#282C47",
+        // primary: "#282C47",
+        primary: "#22263d",
         secondary: "#424769",
         tertiary: "#7077A1",
-        darker: "#22263d",
-        darkest: "#1b1f33",
+
+        darker: "#1b1f33",
+        darkest: "#141726",
         accent: "#d8def2",
         // accentSecondary: "#596FB7",
         accentSecondary: "#8b9dd9",
