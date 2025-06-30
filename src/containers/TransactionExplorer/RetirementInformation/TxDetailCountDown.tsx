@@ -1,4 +1,5 @@
 import { MyTransactionRecord } from "@/app/types";
+import { useAppContext } from "@/context/appContext";
 import { useEffect, useMemo, useState } from "react";
 
 export default function TxDetailCountdown({
@@ -6,9 +7,11 @@ export default function TxDetailCountdown({
 }: {
   transaction: MyTransactionRecord;
 }) {
+  const { retirementGraceDays } = useAppContext();
+
   const initialDuration = useMemo(() => {
     if (transaction !== undefined) {
-      const txDatePlus90 = transaction.createdAt.addDays(90); // TODO: Make this the actual 90 days
+      const txDatePlus90 = transaction.createdAt.addDays(retirementGraceDays);
       const now = new Date();
 
       const outcome = +txDatePlus90 - +now;
@@ -17,7 +20,7 @@ export default function TxDetailCountdown({
     } else {
       return 0;
     }
-  }, [transaction]);
+  }, [transaction, retirementGraceDays]);
 
   const calculateTimeLeft = (targetDate: Date) => {
     const difference = +new Date(targetDate) - +new Date();

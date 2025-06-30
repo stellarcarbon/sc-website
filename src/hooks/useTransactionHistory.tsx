@@ -7,12 +7,14 @@ type TransactionHistoryData = {
   myTransactions: MyTransactionRecord[];
   totalSunk: number;
   totalPending: number;
+  retirementGraceDays: number;
 };
 
 interface TransactionData {
   myTransactions: MyTransactionRecord[];
   totalSunk: number;
   totalPending: number;
+  retirementGraceDays: number;
 }
 
 interface UseMyTransactionsResult extends TransactionData {
@@ -29,6 +31,7 @@ const defaultData: TransactionHistoryData = {
   myTransactions: [],
   totalSunk: 0,
   totalPending: 0,
+  retirementGraceDays: 7,
 };
 
 export function useTransactionHistory(
@@ -53,6 +56,7 @@ export function useTransactionHistory(
       myTransactions: serializedTransactions,
       totalSunk: Number(sinkTxsResponse.total_carbon_sunk),
       totalPending: Number(sinkTxsResponse.total_carbon_pending),
+      retirementGraceDays: sinkTxsResponse.retirement_grace_days,
     });
 
     setLoading(false);
@@ -112,6 +116,7 @@ export function useTransactionHistory(
     myTransactions: data.myTransactions,
     totalSunk: data.totalSunk,
     totalPending: data.totalPending,
+    retirementGraceDays: data.retirementGraceDays,
     loading,
     refetch,
     pollForNewTransaction,

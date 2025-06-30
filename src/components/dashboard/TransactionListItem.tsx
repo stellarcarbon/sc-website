@@ -5,6 +5,7 @@ import { PropsWithChildren, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import TruncatedHash from "./TruncatedHash";
 import { formatDate } from "@/utils";
+import { useAppContext } from "@/context/appContext";
 
 interface TransactionListItemProps {
   transaction: MyTransactionRecord;
@@ -17,16 +18,17 @@ export default function TransactionListItem({
   showCountdown = false,
   disabled = false,
 }: TransactionListItemProps) {
+  const { retirementGraceDays } = useAppContext();
   const router = useRouter();
 
   const initialDuration = useMemo(() => {
-    const txDatePlus90 = transaction.createdAt.addDays(90); // TODO: Make this the actual 90 days
+    const txDatePlus90 = transaction.createdAt.addDays(retirementGraceDays);
     const now = new Date();
 
     const outcome = +txDatePlus90 - +now;
 
     return outcome / 1000;
-  }, [transaction]);
+  }, [transaction, retirementGraceDays]);
 
   let formattedDate = formatDate(transaction.createdAt);
 

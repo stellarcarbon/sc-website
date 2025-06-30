@@ -17,7 +17,7 @@ export class AuthService {
     public static getSep10Challenge({
         account,
         memo,
-        homeDomain = 'stellarcarbon.io',
+        homeDomain = 'test.stellarcarbon.io',
         clientDomain,
     }: {
         account: string,

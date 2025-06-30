@@ -4,14 +4,9 @@
 /* eslint-disable */
 export type InstrumentItem = {
     issuance_date: string;
-    instrument_type: InstrumentItem.instrument_type;
+    instrument_type: string;
     vintage_start: string;
     vintage_end: string;
     total_vintage_quantity: number;
 };
-export namespace InstrumentItem {
-    export enum instrument_type {
-        VCU = 'VCU',
-    }
-}
 

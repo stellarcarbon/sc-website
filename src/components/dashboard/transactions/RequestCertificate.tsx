@@ -26,7 +26,7 @@ enum RequestCertificateStates {
 export default function RequestCertificate({
   totalCarbonPending,
 }: RequestCertificateProps) {
-  const { updateWalletConnection, walletConnection, setHasPendingRounding } =
+  const { updateWalletConnection, walletConnection, retirementGraceDays } =
     useAppContext();
   const { overrideFormValues } = useSinkFormContext();
   const router = useRouter();
@@ -75,9 +75,9 @@ export default function RequestCertificate({
       <>
         <h2 className="text-lg font-semibold">Create a personal certificate</h2>
         <span className="text-center">
-          Any pending retirements will automatically retire into the community
-          pool after 90 days, which means you can no longer attain a personal
-          certificate.
+          {`Any pending retirements will automatically retire into the community
+          pool after ${retirementGraceDays} days, which means you can no longer attain a personal
+          certificate.`}
         </span>
 
         <span className="text-center">
@@ -144,8 +144,8 @@ export default function RequestCertificate({
               </>
             )}
             <li>
-              Do nothing. Your transaction will be retired into a community
-              certificate within 90 days of the transaction date.
+              {`Do nothing. Your transaction will be retired into a community
+              certificate within ${retirementGraceDays} days of the transaction date.`}
             </li>
           </ul>
         </>

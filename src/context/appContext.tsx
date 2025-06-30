@@ -91,6 +91,8 @@ type AppContext = {
 
   isDropdownOpen: boolean;
   setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
+
+  retirementGraceDays: number;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -144,6 +146,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     myTransactions,
     totalPending,
     totalSunk,
+    retirementGraceDays,
     pollForNewTransaction,
     refetch: refetchTransactions,
   } = useTransactionHistory(walletConnection?.stellarPubKey);
@@ -271,6 +274,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       isDropdownOpen,
       setIsDropdownOpen,
+
+      retirementGraceDays,
     };
   }, [
     supportedWallets,
@@ -292,6 +297,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     isMobileDevice,
     isDropdownOpen,
     disconnectWallet,
+    retirementGraceDays,
   ]);
 
   return (

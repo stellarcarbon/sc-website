@@ -16,7 +16,7 @@ export class EstimateService {
     public static getFlightEstimate({
         departure,
         destination,
-        cabinClass,
+        cabinClass = 'economy',
         tripType = 'round-trip',
     }: {
         departure: string,
