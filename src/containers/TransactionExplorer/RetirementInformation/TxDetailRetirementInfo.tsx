@@ -51,14 +51,14 @@ export default function TxDetailRetirementInfo({
               {status}
             </div>
             <div className="h-10 font-bold items-center inline-flex">
-              Sink amount filled
+              Amount filled
             </div>
             <div className="h-10 text-end items-center inline-flex justify-end gap-1">
               <span>{filledAmount}</span>
               <CARBONCurrencyIcon width={14} height={14} />
             </div>
             <div className="h-10 font-bold items-center inline-flex">
-              Sink amount pending
+              Amount pending
             </div>
             <div className="h-10 text-end items-center inline-flex justify-end gap-1">
               <span>{(transaction.sinkAmount - filledAmount).toFixed(3)}</span>
