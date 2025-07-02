@@ -11,7 +11,7 @@ export default function RoundingSuccess() {
 
   return (
     <RoundingStep title="Success">
-      <div className="font-semibold text-lg text-center">
+      <div className="text-center">
         Your certificate request was received in good order and will be created
         soon.
       </div>

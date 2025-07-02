@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import TransactionListItem from "./TransactionListItem";
 import DashboardHeader from "./DashboardHeader";
 import SCLink from "../SCLink";
+import { Blocks } from "react-loader-spinner";
 
 export default function TransactionSummary() {
   const { myTransactions, walletConnection, totalPending, totalSunk } =

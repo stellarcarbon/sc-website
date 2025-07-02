@@ -24,7 +24,7 @@ interface UseMyTransactionsResult extends TransactionData {
   pollForNewTransaction: (
     maxRetries?: number,
     delayMs?: number
-  ) => Promise<MyTransactionRecord[]>;
+  ) => Promise<void>;
 }
 
 const defaultData: TransactionHistoryData = {
@@ -65,7 +65,7 @@ export function useTransactionHistory(
   async function pollForNewTransaction(
     maxRetries: number = 5,
     delay: number = 1000 // delay in milliseconds
-  ): Promise<MyTransactionRecord[]> {
+  ): Promise<void> {
     if (!account) throw new Error("No account for polling");
 
     let retries = 0;
@@ -76,7 +76,10 @@ export function useTransactionHistory(
         await TransactionHistoryService.fetchAccountHistory(account);
 
       if (hasNewItem(transactionRecords)) {
-        return transactionRecords;
+        setData((prev) => {
+          return { ...prev, myTransactions: transactionRecords };
+        });
+        return;
       }
 
       // Wait for the specified delay before retrying.

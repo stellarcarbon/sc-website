@@ -68,7 +68,7 @@ type AppContext = {
   pollForNewTransaction: (
     maxRetries?: number,
     delayMs?: number
-  ) => Promise<MyTransactionRecord[]>;
+  ) => Promise<void>;
   refetchTransactions: () => void;
   totalPending: number;
   totalSunk: number;
@@ -257,7 +257,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       refetchTransactions,
       totalPending,
       totalSunk,
-      // setMyTransactions,
 
       hasPendingRounding,
       setHasPendingRounding,

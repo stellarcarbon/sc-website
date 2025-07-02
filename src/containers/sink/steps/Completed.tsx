@@ -3,7 +3,7 @@ import SinkingStep from "./Step";
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useAppContext } from "@/context/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -16,12 +16,14 @@ export default function CompletedSinking() {
   const router = useRouter();
 
   const onFinish = useCallback(() => {
-    pollForNewTransaction();
-
     resetSinkForm();
 
     router.push("/dashboard");
-  }, [router, resetSinkForm, pollForNewTransaction]);
+  }, [router, resetSinkForm]);
+
+  useEffect(() => {
+    pollForNewTransaction();
+  }, []);
 
   return (
     <SinkingStep title="Transaction succesful">
