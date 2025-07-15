@@ -11,11 +11,21 @@ export default function ExplainSinkingProcessPage() {
       <Header>Sinking process</Header>
 
       <Paragraph>
-        As a user you can {`"sink"`} <CARBONCurrencyIcon className="inline" />{" "}
-        tokens, meaning you buy the token and immediatly lock it in. This
-        locking or sinking means the <CARBONCurrencyIcon className="inline" />{" "}
-        no longer a tradeable object and we will commit to the actual investment
-        into the project.
+        Customers can sink <CARBONCurrencyIcon className="inline" /> tokens,
+        meaning they buy the token and immediatly {`"lock it in"`}. This locking
+        means the <CARBONCurrencyIcon className="inline" /> is no longer a
+        tradeable object and the investment into the project is now funded.
+      </Paragraph>
+
+      <Subheader>Sinking</Subheader>
+      <Paragraph>
+        The locking mechanism is contained within each transaction.
+        Stellarcarbon only offers transactions that immediately retires the{" "}
+        <CARBONCurrencyIcon className="inline" /> in exchange for CarbonSINK. As
+        such, the customer will receive CarbonSINK in their wallet, not the{" "}
+        <CARBONCurrencyIcon className="inline" /> itself. The CarbonSINK asset
+        represents an equal amount of <CARBONCurrencyIcon className="inline" />{" "}
+        sunk and has no inherent value.
       </Paragraph>
 
       <Subheader>Key guarantees for blockchain experts</Subheader>
