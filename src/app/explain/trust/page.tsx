@@ -31,16 +31,22 @@ export default function ExplainTrustPage() {
         transparency so anyone can audit our offsets at any time.{" "}
       </Paragraph>
 
-      <Subheader>Meet Our Project(s)</Subheader>
+      <Subheader>Why Stellarcarbon?</Subheader>
+      <Paragraph>
+        We make it easy for Stellar wallet owners to make verifiable
+        contributions to sustainability projects. Think of it as a middleman
+        taking care of all the administration and verification work for you.
+      </Paragraph>
+
+      <Subheader>Our Project(s)</Subheader>
       <Paragraph>
         In our current stage of operations we only support one project. We hope
         to offer our users a selection of projects in the future.
       </Paragraph>
       <Paragraph>
-        Our current project a is focussed on preventing deforestation and
+        The current project is focussed on preventing deforestation and
         degradation of the forests in the Ucayali region. We have a dedicated
-        page on the website with more information. Check it out{" "}
-        <SCLink href={"/projects"}>here</SCLink>.
+        page with more information <SCLink href={"/projects"}>here</SCLink>.
       </Paragraph>
     </div>
   );

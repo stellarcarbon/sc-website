@@ -24,7 +24,7 @@ export default function ExplainLayout({
         <div className="hidden md:flex h-[calc(100vh-80px-200px)] w-full">
           <ExplainNav />
 
-          <div className="bg-darkest flex-1 overflow-y-auto">
+          <div className="bg-darkest flex-1 overflow-y-auto overflow-x-clip">
             <ExplainContainer>{children}</ExplainContainer>
           </div>
         </div>

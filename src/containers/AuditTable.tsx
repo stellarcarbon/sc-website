@@ -125,7 +125,7 @@ function TableStat({ label, unit, amount, tooltip }: TableStateProps) {
   return (
     <div className="relative flex flex-col items-center py-3">
       <div className="peer">
-        <div className="mb-1">{label}</div>
+        <div className="mb-1 text-center md:text-base">{label}</div>
         <div className="flex gap-1 items-center justify-center text-xs md:text-xl">
           <div className="font-bold">{amount?.toFixed(3) ?? "?"}</div>
           {unit === "CARBON" ? (
