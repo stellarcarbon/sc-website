@@ -50,7 +50,7 @@ export default function AuditTable() {
   }
 
   return (
-    <div className="mx-auto w-full md:max-w-[1000px] p-4">
+    <div className="mx-auto w-full md:max-w-[1000px] p-4 py-8">
       <div className="grid grid-cols-[37.5%,37.5%,25%] bg-primary rounded border border-accentSecondary text-xs md:text-xl p-3">
         <div className="col-span-2 grid grid-cols-[40%,10%,40%,10%] grid-rows-2">
           <TableStat

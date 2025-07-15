@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
 import Subheader from "@/components/Subheader";
 
@@ -9,14 +10,15 @@ export default function ExplainRetirementPage() {
     <div className="flex flex-col">
       <Header>Retirement process</Header>
       <Paragraph>
-        {`When a user makes a transaction on Stellarcarbon, an equal amount of
-        VCU's in the Verra registry has to be retired. This retirement leads a
-        to certificate that can be added your personal or business balance sheet
-        to show prove you are offsetting emissions.`}
+        When users sink <CARBONCurrencyIcon className="inline" />, an equal
+        amount of {`VCU's`} in the Verra registry has to be retired. When
+        retiring {`VCU's`} at Verra, a certificate is generated that can be
+        added your personal or business balance sheet to show prove you are
+        offsetting emissions.
       </Paragraph>
       <Subheader>What is retirement?</Subheader>
       <Paragraph>
-        Retiring a VCU permanently removes it from circulation—turning it from
+        Retiring a VCU permanently removes it from circulation, turning it from
         transferable inventory into an exclusive, claimable one-tonne CO₂e
         reduction on your balance sheet. Until its retired, a VCU remains merely
         a tradable credit with no impact on anyone’s carbon accounting.
@@ -29,15 +31,17 @@ export default function ExplainRetirementPage() {
         is not possible on Verra directly. Stellarcarbon built a mechanism that
         retires the remaining fractions into a community retirement.
       </Paragraph>
-      <img
-        className="max-w-[80%] mx-auto"
-        src="/explain_retirement.png"
-        alt="retirement process"
-      />
-      <em className="block text-center text-sm text-tertiary mt-1">
-        Figure: Fractional transactions are eventually retired into a community
-        certificate.
-      </em>
+      <div className="py-8">
+        <img
+          className="max-w-[80%] mx-auto"
+          src="/explain_retirement.png"
+          alt="retirement process"
+        />
+        <em className="block text-center text-sm text-tertiary mt-1">
+          Figure: Fractional transactions are eventually retired into a
+          community certificate.
+        </em>
+      </div>
     </div>
   );
 }

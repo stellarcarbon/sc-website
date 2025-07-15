@@ -32,15 +32,17 @@ export default function ExplainHowItWorks() {
         stay in sync.
       </Paragraph>
 
-      <img
-        className="max-w-[80%] mx-auto"
-        src="/explain_stellar_verra_integration.png"
-        alt="Diagram: burning a CARBON token on Stellar triggers retirement of one Verra VCU"
-      />
-      <em className="block text-center text-sm text-tertiary mt-1">
-        Figure: CARBON ↔︎ CarbonSINK on-chain burn paired 1:1 with VCU
-        retirement on Verra
-      </em>
+      <div className="py-8">
+        <img
+          className="max-w-[80%] mx-auto"
+          src="/explain_stellar_verra_integration.png"
+          alt="Diagram: burning a CARBON token on Stellar triggers retirement of one Verra VCU"
+        />
+        <em className="block text-center text-sm text-tertiary mt-1">
+          Figure: CARBON ↔︎ CarbonSINK on-chain burn paired 1:1 with VCU
+          retirement on Verra
+        </em>
+      </div>
     </div>
   );
 }

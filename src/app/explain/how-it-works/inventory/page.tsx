@@ -17,7 +17,9 @@ export default function ExplainInventoryPage() {
         and we will retire an equal amount of VCU credits in the Verra registry.
       </Paragraph>
       <Subheader>Current inventory</Subheader>
-      <Paragraph>Have a look at our current inventory (realtime!):</Paragraph>
+      <Paragraph className="!pb-0">
+        Have a look at our current inventory (realtime!):
+      </Paragraph>
 
       <AuditTable />
 

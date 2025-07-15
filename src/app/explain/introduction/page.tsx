@@ -17,8 +17,8 @@ export default function ExplainIntroductionPage() {
       </Header>
       <Paragraph>
         At Stellarcarbon, we offer a simple solution for individuals and
-        businesses to take direct climate action. Customers can simply, connect
-        a Stellar wallet, create a transaction and we will make sure 95% of that
+        businesses to take direct climate action. Customers can simply connect a
+        Stellar wallet, create a transaction and we will make sure 95% of that
         money goes towards{" "}
         <SCLink href="/projects">rainforest conservation</SCLink>. Behind the
         scenes we use a{" "}

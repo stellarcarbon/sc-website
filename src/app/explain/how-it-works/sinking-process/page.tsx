@@ -3,6 +3,7 @@
 import Header from "@/components/Header";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Paragraph from "@/components/Paragraph";
+import SCLink from "@/components/SCLink";
 import Subheader from "@/components/Subheader";
 
 export default function ExplainSinkingProcessPage() {
@@ -20,12 +21,14 @@ export default function ExplainSinkingProcessPage() {
       <Subheader>Sinking</Subheader>
       <Paragraph>
         The locking mechanism is contained within each transaction.
-        Stellarcarbon only offers transactions that immediately retires the{" "}
+        Stellarcarbon only offers transactions that retire the purchased{" "}
         <CARBONCurrencyIcon className="inline" /> in exchange for CarbonSINK. As
-        such, the customer will receive CarbonSINK in their wallet, not the{" "}
-        <CARBONCurrencyIcon className="inline" /> itself. The CarbonSINK asset
-        represents an equal amount of <CARBONCurrencyIcon className="inline" />{" "}
-        sunk and has no inherent value.
+        such, the customer will receive CarbonSINK in their wallet (not the{" "}
+        <CARBONCurrencyIcon className="inline" /> itself) after the{" "}
+        <SCLink href="/explain/how-it-works/retirement">retirement</SCLink> is
+        completed. The CarbonSINK asset represents an equal amount of{" "}
+        <CARBONCurrencyIcon className="inline" /> sunk and has no inherent
+        value.
       </Paragraph>
 
       <Subheader>Key guarantees for blockchain experts</Subheader>
