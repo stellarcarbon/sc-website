@@ -17,33 +17,40 @@ export default function ExplainIntroductionPage() {
       </Header>
       <Paragraph>
         At Stellarcarbon, we offer a simple solution for individuals and
-        businesses to take direct climate action. You can simply pay us and we
-        will make sure 95% of your money will go to a vetted rainforest
-        conversation project. Behind the scenes we use a{" "}
-        <SCLink href="/explain/how-it-works/sinking-process">sinking</SCLink>{" "}
-        mechanism to make sure the corresponding Verified Carbon Units (VCU) are
-        retired on the Verra registry.
+        businesses to take direct climate action. Customers can simply, connect
+        a Stellar wallet, create a transaction and we will make sure 95% of that
+        money goes towards{" "}
+        <SCLink href="/projects">rainforest conservation</SCLink>. Behind the
+        scenes we use a{" "}
+        <SCLink href="/explain/how-it-works/sinking-process">
+          sinking mechanism
+        </SCLink>{" "}
+        to make sure the corresponding Verified Carbon Units (VCU) are retired
+        on the Verra registry in a transparent way. This makes it very easy for
+        Stellar users to compensate for their CO2 emissions or contribute to
+        nature conservation projects.
       </Paragraph>
       <Paragraph>
-        {`If you are just looking to make a contribution to the Stellarcarbon
-        initiative, that's all you need to know. Just connect your Stellar
-        wallet `}
-        <SCLink href="/connect">here</SCLink>.
+        {`That's all you need to know to contribute to the Stellarcarbon initiative. Just `}
+        <SCLink href="/connect">connect your Stellar wallet</SCLink>. Otherwise,
+        keep exploring!
       </Paragraph>
 
-      <Paragraph>
+      {/* <Paragraph>
         Otherwise, have a look around on this explain page where we try be as
         transparent as possible about the accounting mechanisms behind
         Stellarcarbon.
-      </Paragraph>
+      </Paragraph> */}
 
       <Subheader>Why rainforest conservation matters</Subheader>
       <Paragraph>
-        Rainforests cover under 2 % of Earth’s land but store 25 % of its carbon
-        and house over half of all land species. Protecting them locks away CO₂,
-        regulates rainfall, and prevents erosion. Importantly, conservation
-        projects hire local residents as forest keepers, offering stable,
-        well-paid jobs that align community welfare with ecosystem protection.
+        Rainforests cover just 2 % of land yet hold 25 % of its land-based
+        carbon and shelter over half of all land species. If the forests in
+        Ucayali & Huánuco were to be removed it would be disastrous from an
+        ecological viewpoint. Without protection, developers could clear them
+        for farms, ranches or roads, releasing massive CO₂ and fragmenting
+        habitat. By chipping in, you ensure the forest stays intact and the
+        carbon stays locked away.
       </Paragraph>
     </div>
   );
