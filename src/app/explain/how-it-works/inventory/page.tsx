@@ -14,11 +14,11 @@ export default function ExplainInventoryPage() {
         At Stellarcarbon we keep an inventory of VCU credits and{" "}
         <CARBONCurrencyIcon className="inline" /> tokens. When you sink{" "}
         <CARBONCurrencyIcon className="inline" />, CarbonSINK tokens are minted
-        and we will retire an equal amount of VCU credits in the Verra registry.
+        and we retire an equal amount of VCU credits in the Verra Registry.
       </Paragraph>
       <Subheader>Current inventory</Subheader>
       <Paragraph className="!pb-0">
-        Have a look at our current inventory (realtime!):
+        Have a look at our real-time inventory:
       </Paragraph>
 
       <AuditTable />

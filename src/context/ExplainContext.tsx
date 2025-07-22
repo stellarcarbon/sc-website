@@ -65,7 +65,7 @@ export const tier2Config: Record<Tier2NavRoutes, Tier2Item> = {
   },
   [Tier2NavRoutes.BUSINESS]: {
     key: Tier2NavRoutes.BUSINESS,
-    label: "For business",
+    label: "Stellarcarbon for business",
   },
   [Tier2NavRoutes.HOWITWORKS]: {
     key: Tier2NavRoutes.HOWITWORKS,

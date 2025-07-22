@@ -11,10 +11,10 @@ export default function ExplainRetirementPage() {
       <Header>Retirement process</Header>
       <Paragraph>
         When users sink <CARBONCurrencyIcon className="inline" />, an equal
-        amount of {`VCU's`} in the Verra registry has to be retired. When
-        retiring {`VCU's`} at Verra, a certificate is generated that can be
-        added your personal or business balance sheet to show prove you are
-        offsetting emissions.
+        amount of VCUs in the Verra Registry has to be retired. When retiring
+        VCUs at Verra, a certificate is generated that can be added your
+        personal or business balance sheet to show prove you are offsetting
+        emissions.
       </Paragraph>
       <Subheader>What is retirement?</Subheader>
       <Paragraph>
@@ -25,7 +25,7 @@ export default function ExplainRetirementPage() {
       </Paragraph>
       <Subheader>Fractional retirements</Subheader>
       <Paragraph>
-        Retirement on the Verra registry only happens in whole units, but
+        Retirement in the Verra Registry only happens in whole units, but
         Stellarcarbon also provides the option to make fractional retirements.
         We allow users to create a retirement of 1.5 tonnes for example, which
         is not possible on Verra directly. Stellarcarbon built a mechanism that

@@ -9,7 +9,7 @@ import Subheader from "@/components/Subheader";
 export default function ExplainIntegrationPage() {
   return (
     <div className="flex flex-col">
-      <Header>For business</Header>
+      <Header>Stellarcarbon for business</Header>
       <Paragraph>
         Enable your product or platform to automatically channel value into
         rainforest and ecosystem projects. Whether you run a web app, mobile

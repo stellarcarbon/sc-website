@@ -18,15 +18,15 @@ export default function ExplainIntroductionPage() {
       <Paragraph>
         At Stellarcarbon, we offer a simple solution for individuals and
         businesses to take direct climate action. Customers can simply connect a
-        Stellar wallet, create a transaction and we will make sure 95% of that
-        money goes towards{" "}
-        <SCLink href="/projects">rainforest conservation</SCLink>. Behind the
-        scenes we use a{" "}
+        Stellar wallet, create a transaction and we will make sure your
+        contribution goes towards a verified{" "}
+        <SCLink href="/projects">rainforest conservation project</SCLink>.
+        Behind the scenes we use a{" "}
         <SCLink href="/explain/how-it-works/sinking-process">
           sinking mechanism
         </SCLink>{" "}
         to make sure the corresponding Verified Carbon Units (VCU) are retired
-        on the Verra registry in a transparent way. This makes it very easy for
+        on the Verra Registry in a transparent way. This makes it very easy for
         Stellar users to compensate for their CO2 emissions or contribute to
         nature conservation projects.
       </Paragraph>

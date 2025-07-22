@@ -115,7 +115,7 @@ export default function RequestCertificate({
         <span className="text-center">
           To create a personalized certificate we have to submit a whole number
           of CARBON (
-          <CARBONCurrencyIcon className="inline" />) to the Verra registry.
+          <CARBONCurrencyIcon className="inline" />) to the Verra Registry.
         </span>{" "}
         <span className="self-start">Your options:</span>
         <>
@@ -150,7 +150,7 @@ export default function RequestCertificate({
           </ul>
         </>
         <span className="text-center">
-          Creating a personal certificate at the Verra registry is completely
+          Creating a personal certificate at the Verra Registry is completely
           optional. All CARBON transactions will eventually be retired using
           community certificates.
         </span>

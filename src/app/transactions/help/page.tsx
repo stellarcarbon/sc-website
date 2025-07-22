@@ -34,7 +34,7 @@ export default function TxExplorerHelpPage() {
         <div>
           Each transaction represents an individual contribution to the
           Stellarcarbon initiative. All contributions will be retired into
-          eco-credits on the Verra registry.
+          eco-credits on the Verra Registry.
         </div>
       </div>
       {/* <div>

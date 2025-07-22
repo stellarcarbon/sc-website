@@ -55,7 +55,7 @@ export default function AuditTable() {
         <div className="col-span-2 grid grid-cols-[40%,10%,40%,10%] grid-rows-2">
           <TableStat
             label={"VCU pool on Verra"}
-            unit={"VCU's"}
+            unit={"VCU"}
             amount={carbonpoolVerra}
             tooltip={"This is our current inventory of VCU's at Verra."}
           />
@@ -74,17 +74,15 @@ export default function AuditTable() {
             unit={"CarbonSINK"}
             amount={carbonsinkStellar}
             tooltip={
-              "When CARBON is sold, CarbonSINK is created and the CARBON is sunk, indicating this token can no longer be sold."
+              "When CARBON is sunk, CarbonSINK is created and the CARBON is destroyed, indicating this token can no longer be sold."
             }
           />
           <div className="flex items-center justify-center font-bold">-</div>
           <TableStat
-            label={"VCU's sunk on Verra"}
+            label={"VCUs retired on Verra"}
             unit={"VCU"}
             amount={carbonsinkVerra}
-            tooltip={
-              "These VCU's have been 'burned' at the Verra registry, making them no longer tradeable."
-            }
+            tooltip={"These VCUs have been retired in the Verra Registry."}
           />
           <div className="flex items-center justify-center font-bold">=</div>
         </div>
@@ -92,21 +90,24 @@ export default function AuditTable() {
         <div className="grid grid-rows-2">
           <TableStat
             label="Pending retirement"
-            unit="tonnes"
+            unit="ton"
             amount={amountPendingPool}
             tooltip={
-              "The pending retirement amount will eventually return to zero as we retire Stellarcarbon transactions on the Verra registry."
+              "The pending retirement amount declines as we retire Stellarcarbon transactions in the Verra Registry."
             }
           />
           <TableStat
             label="Pending retirement"
-            unit="tonnes"
+            unit="ton"
             amount={amountPendingSink}
+            tooltip={
+              "The pending retirement amount declines as we retire Stellarcarbon transactions in the Verra Registry."
+            }
           />
         </div>
       </div>
       <em className="block text-center text-sm text-tertiary mt-1">
-        {`1000 kg = 1 ton = 1 VCU = 1 CARBON = 1`}
+        {`1 tCO2e = 1 VCU = 1 CARBON = 1`}
         <CARBONCurrencyIcon className="inline ml-1" />
         {` = 1 CarbonSINK`}
       </em>

@@ -18,6 +18,10 @@ export default function ExplainSinkingProcessPage() {
         tradeable object and the investment into the project is now funded.
       </Paragraph>
 
+      <Paragraph>
+        We {`don't`} like the term burn so we use sinking instead.
+      </Paragraph>
+
       <Subheader>Sinking</Subheader>
       <Paragraph>
         The locking mechanism is contained within each transaction.
@@ -27,8 +31,7 @@ export default function ExplainSinkingProcessPage() {
         <CARBONCurrencyIcon className="inline" /> itself) after the{" "}
         <SCLink href="/explain/how-it-works/retirement">retirement</SCLink> is
         completed. The CarbonSINK asset represents an equal amount of{" "}
-        <CARBONCurrencyIcon className="inline" /> sunk and has no inherent
-        value.
+        <CARBONCurrencyIcon className="inline" /> sunk and cannot be traded.
       </Paragraph>
 
       <Subheader>Key guarantees for blockchain experts</Subheader>
