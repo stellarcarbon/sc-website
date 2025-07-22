@@ -121,12 +121,12 @@ export default function ProjectsPage() {
             methodology . REDD+ stands for Reducing Emissions from Deforestation
             and Forest Degradation, with the “+” referring to the role of
             conservation, sustainable forest management, and enhancement of
-            forest carbon stocks in developing countries. It's a UN-backed
+            forest carbon stocks in developing countries. {`It's a`} UN-backed
             framework designed to financially reward efforts that protect
             forests and reduce carbon emissions. Key pillars of REDD+ include{" "}
-            <b>additionality</b> (ensuring emissions reductions wouldn't happen
-            without the project), <b>permanence</b> (making sure the carbon
-            stays stored over time), and <b>leakage</b> (preventing
+            <b>additionality</b> (ensuring emissions reductions {`wouldn't`}{" "}
+            happen without the project), <b>permanence</b> (making sure the
+            carbon stays stored over time), and <b>leakage</b> (preventing
             deforestation from simply shifting to another area).
           </Paragraph>
 
