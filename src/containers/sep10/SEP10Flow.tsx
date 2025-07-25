@@ -25,7 +25,6 @@ export default function SEP10Flow() {
 
   return (
     <Modal>
-      {" "}
       {error ? (
         <ErrorSEP10 />
       ) : step === SEP10Steps.fetchingChallenge ? (
