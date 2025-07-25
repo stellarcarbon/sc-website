@@ -1,10 +1,8 @@
-import { Blocks } from "react-loader-spinner";
-import RoundingStep from "./Step";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SignIcon from "@/components/icons/SignIcon";
 import { useViewportWidth } from "@/utils";
+import RoundingStep from "../rounding/steps/Step";
+import SignIcon from "@/components/icons/SignIcon";
 
-export default function SignRounding() {
+export default function SigningSEP10() {
   const isWide = useViewportWidth();
   return (
     <RoundingStep title="Signing">

@@ -1,11 +1,11 @@
-import SinkingStep from "@/containers/sink/steps/Step";
 import { Blocks } from "react-loader-spinner";
+import RoundingStep from "../rounding/steps/Step";
 
-export default function FetchChallenge() {
+export default function FetchingSEP10() {
   return (
-    <SinkingStep title="Fetching">
-      <div className="text-center font-semibold text-lg">
-        Requesting round down...
+    <RoundingStep title="Fetching">
+      <div className="mt-6 text-center font-semibold text-lg">
+        Requesting SEP10 challenge...
       </div>
       <div className="my-12 flex justify-center">
         <Blocks
@@ -18,6 +18,6 @@ export default function FetchChallenge() {
           visible={true}
         />
       </div>
-    </SinkingStep>
+    </RoundingStep>
   );
 }

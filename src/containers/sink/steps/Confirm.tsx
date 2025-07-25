@@ -20,7 +20,7 @@ export default function ConfirmSinking() {
 
   return (
     <SinkingStep title="Confirm transaction">
-      <div className="my-6 text-center font-semibold text-lg">
+      <div className="my-6 text-center text-base">
         Your transaction is signed by Stellarcarbon and ready to go!
       </div>
 

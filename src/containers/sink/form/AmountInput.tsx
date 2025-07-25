@@ -141,7 +141,7 @@ export default function AmountInput() {
             environmental benefit of reducing 1 tonne of CO2.
           </div>
           <div className="flex flex-col gap-4 my-8 mb-12">
-            <div className="flex justify-between items-center gap-2">
+            <div className="flex justify-between items-center gap-2 mb-3 md:mb-6">
               <div className="w-[35%] flex flex-col items-start">
                 <div className="text-xs mb-1">Sink amount</div>
                 <div className="relative">

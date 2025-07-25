@@ -11,16 +11,13 @@ export default function RequestRounding() {
   const { requestCertificate } = useRoundingContext();
 
   return (
-    <RoundingStep title="Challenge verified">
-      <div className="">Auth challenge signed and valid.</div>
-
-      <div className="text-base font-bold text-center">
+    <RoundingStep title="Confirm certificate creation">
+      <div className="text-base text-center">
         Please confirm the creation of your personalized certificate.
       </div>
 
       <div className="mt-2 mb-6 flex justify-center items-center gap-8">
         <div className="font-bold text-2xl">Sink amount</div>
-        {/* <div className="text-center">Confirm the request</div> */}
         <div className="text-3xl flex items-center gap-1 justify-center">
           {Math.floor(totalPending)}
           <CARBONCurrencyIcon className="inline ml-1" height={24} width={24} />

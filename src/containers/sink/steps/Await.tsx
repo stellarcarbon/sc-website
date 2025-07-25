@@ -6,7 +6,7 @@ import SinkingStepButtons from "./Buttons";
 export default function AwaitSinking({ message }: { message: string }) {
   return (
     <SinkingStep title="Waiting for API">
-      <span className="text-center text-lg font-semibold mt-6">{message}</span>
+      <span className="text-center text-lg mt-6">{message}</span>
       <div className="flex-1 flex items-center justify-center my-20">
         <Hourglass
           visible={true}
