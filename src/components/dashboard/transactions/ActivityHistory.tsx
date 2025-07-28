@@ -1,18 +1,14 @@
 import { useAppContext } from "@/context/appContext";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { RetirementStatus } from "@/app/types";
 import SCLink from "@/components/SCLink";
 
 export default function ActivityHistory() {
-  const { myTransactions, refetchTransactions } = useAppContext();
+  const { myTransactions } = useAppContext();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    refetchTransactions();
-  }, [refetchTransactions]);
 
   const retiredTransactions = useMemo(() => {
     return (

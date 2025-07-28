@@ -87,7 +87,7 @@ export function useTransactionHistory(
       retries++;
     }
 
-    throw new Error("Max retries reached without detecting a new transaction");
+    // throw new Error("Max retries reached without detecting a new transaction");
 
     function hasNewItem(records: MyTransactionRecord[]): boolean {
       if (oldTransactions.length > 0) {

@@ -1,13 +1,17 @@
 import Button from "@/components/Button";
 import SuccessIcon from "@/components/icons/SuccessIcon";
-import SinkingStep from "@/containers/sink/steps/Step";
-import { faArrowLeft, faBackward } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import RoundingStep from "./Step";
+import { useCallback } from "react";
 
 export default function RoundingSuccess() {
   const router = useRouter();
+
+  const onClick = useCallback(() => {
+    router.push("/dashboard/transactions");
+  }, [router]);
 
   return (
     <RoundingStep title="Success">
@@ -19,7 +23,7 @@ export default function RoundingSuccess() {
         <SuccessIcon />
       </div>
       <div className="flex items-center justify-center">
-        <Button onClick={() => router.push("/dashboard/transactions")}>
+        <Button onClick={onClick}>
           <FontAwesomeIcon icon={faArrowLeft} />
           <div>Return to dashboard</div>
         </Button>
