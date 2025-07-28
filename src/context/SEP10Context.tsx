@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthService, SEP10ChallengeResponse } from "@/client";
-import { SEP10Steps } from "@/hooks/useSEP10";
+
 import {
   createContext,
   PropsWithChildren,
@@ -12,10 +12,13 @@ import {
   useState,
 } from "react";
 import { useAppContext } from "./appContext";
+import { useSEP10JWT } from "@/hooks/useSEP10JWT";
+import { SEP10Steps } from "@/containers/sep10/SEP10Flow";
 
 type SEP10Context = {
   challenge: SEP10ChallengeResponse | undefined;
   jwt: string | undefined;
+  expired: boolean;
   step: SEP10Steps;
   error: string | undefined;
   signChallenge: () => Promise<void>;
@@ -35,9 +38,10 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
   const { walletConnection, stellarWalletsKit } = useAppContext();
 
   const [challenge, setChallenge] = useState<SEP10ChallengeResponse>();
-  const [jwt, setJwt] = useState<string>();
   const [step, setStep] = useState<SEP10Steps>(SEP10Steps.fetchingChallenge);
   const [error, setError] = useState<string>();
+
+  const { jwt, updateJwt, expired } = useSEP10JWT();
 
   useEffect(() => {
     const getChallenge = async () => {
@@ -79,17 +83,17 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
           transaction: signedTxXdr,
         });
 
-        setJwt(response.token);
+        updateJwt(response.token);
         setStep(SEP10Steps.success);
       } catch (e) {
         setError("SEP10 challenge not validated.");
       }
     }
-  }, [challenge, stellarWalletsKit, walletConnection]);
+  }, [challenge, stellarWalletsKit, walletConnection, updateJwt]);
 
   const providerValue = useMemo(
-    () => ({ challenge, jwt, step, error, signChallenge }),
-    [challenge, jwt, step, error, signChallenge]
+    () => ({ challenge, jwt, expired, step, error, signChallenge }),
+    [challenge, jwt, expired, step, error, signChallenge]
   );
 
   return (
