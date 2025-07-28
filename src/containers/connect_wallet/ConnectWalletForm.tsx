@@ -2,7 +2,6 @@
 
 import Button from "@/components/Button";
 import SelectWallet from "./SelectWallet";
-import ContactDetails from "./ContactDetails";
 import AcceptTnC from "./AcceptTnC";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import SectionHeader from "@/components/SectionHeader";
@@ -21,7 +20,7 @@ export default function ConnectWalletForm() {
         </SectionHeader>
         <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-9">
           <SelectWallet />
-          <ContactDetails />
+          {/* <ContactDetails /> */}
           <AcceptTnC />
 
           {walletsKitError && (

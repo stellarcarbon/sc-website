@@ -27,6 +27,8 @@ export default function SEP10Flow() {
   useEffect(() => {
     if (redirect === "rounding") {
       setTargetHref("/sink/rounding");
+    } else if (redirect === "contact-details") {
+      setTargetHref("/connect/contact-details");
     }
   }, [redirect]);
 

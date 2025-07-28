@@ -2,7 +2,6 @@
 
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -23,13 +22,11 @@ import {
   WalletConnection,
 } from "@/app/types";
 import { loadAvailableWalletsMock } from "./walletFunctions";
-import { usePathname, useRouter } from "next/navigation";
-import WalletConnectionStorageService from "@/services/WalletConnectionService";
-import TransactionHistoryService from "@/services/TransactionHistoryService";
-import RoundingService from "@/services/RoundingService";
+
 import useIsMobile from "@/hooks/useIsMobile";
 import appConfig from "@/config";
 import { useTransactionHistory } from "@/hooks/useTransactionHistory";
+import { useWalletConnection } from "@/hooks/useWalletConnection";
 
 declare global {
   interface Date {
@@ -113,12 +110,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const isMobileDevice = useIsMobile();
 
-  // Null at first, will become undefined after attempting to load from local storage fails.
-  const [walletConnection, setWalletConnection] = useState<
-    WalletConnection | null | undefined
-  >(null);
-
-  const [hasPendingRounding, setHasPendingRounding] = useState<boolean>();
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -136,11 +127,16 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
-  const [xlmBalance, setXlmBalance] = useState<number>();
-  const [usdcBalance, setUsdcBalance] = useState<number>();
-
-  const pathname = usePathname();
-  const router = useRouter();
+  const {
+    walletConnection,
+    setWalletConnection,
+    updateWalletConnection,
+    disconnectWallet,
+    xlmBalance,
+    usdcBalance,
+    hasPendingRounding,
+    setHasPendingRounding,
+  } = useWalletConnection(stellarWalletsKitRef.current);
 
   const {
     myTransactions,
@@ -177,66 +173,13 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
         }
       };
 
-      const loadWalletConnection = () => {
-        const wc = WalletConnectionStorageService.loadWalletConnection();
-        if (wc !== undefined) {
-          stellarWalletsKitRef.current?.setWallet(wc.walletType.id);
-        }
-        setWalletConnection(wc);
-      };
-
       if (stellarWalletsKitRef.current === null) {
         await loadStellarWalletsKit();
-      }
-
-      if (walletConnection === null) {
-        loadWalletConnection();
-      } else if (walletConnection === undefined) {
-      } else {
-        TransactionHistoryService.fetchAccountBalance(
-          appConfig.server,
-          walletConnection.stellarPubKey
-        ).then((accountBalance) => {
-          setXlmBalance(accountBalance.xlm);
-          setUsdcBalance(accountBalance.usdc);
-        });
-
-        // Pending rounding check
-        if (
-          walletConnection !== undefined &&
-          hasPendingRounding === undefined &&
-          pathname !== "/dashboard/transactions/" // This path will fetch on its own.
-        ) {
-          RoundingService.hasPendingRounding(
-            walletConnection.stellarPubKey
-          ).then((isPending) => setHasPendingRounding(isPending));
-        }
       }
     };
 
     loadApp();
-  }, [walletConnection, myTransactions, hasPendingRounding]);
-
-  const updateWalletConnection = useCallback(
-    (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
-      const newWalletConnection: WalletConnection = {
-        ...walletConnection!,
-        personalDetails,
-        isAnonymous,
-      };
-
-      WalletConnectionStorageService.setWalletConnection(newWalletConnection);
-      setWalletConnection(newWalletConnection);
-    },
-    [walletConnection]
-  );
-
-  const disconnectWallet = useCallback(() => {
-    WalletConnectionStorageService.removeWalletConnection();
-    setWalletConnection(undefined);
-    // setMyTransactions(null);
-    router.push("/");
-  }, [router]);
+  }, [myTransactions]);
 
   const providerValue = useMemo(() => {
     return {

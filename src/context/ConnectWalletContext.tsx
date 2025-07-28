@@ -106,6 +106,7 @@ export const ConnectWalletContextProvider = ({
           return false;
         }
 
+        // TODO: move this to later in the flow?
         WalletConnectionStorageService.setWalletConnection(newConn);
         setWalletConnection(newConn);
 
@@ -162,7 +163,7 @@ export const ConnectWalletContextProvider = ({
         if (appConfig.demo) {
           router.push("/emissions");
         } else {
-          router.push("/dashboard/sink");
+          router.push("/sep10?redirect=contact-details");
         }
       }
     });
