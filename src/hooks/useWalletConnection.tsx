@@ -1,6 +1,5 @@
 import { PersonalDetails, WalletConnection } from "@/app/types";
 import appConfig from "@/config";
-import { useAppContext } from "@/context/appContext";
 import RoundingService from "@/services/RoundingService";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";

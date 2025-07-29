@@ -222,6 +222,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   }, [
     supportedWallets,
     walletConnection,
+    setWalletConnection,
     isDrawerOpen,
     isDrawerClosing,
     myTransactions,
@@ -232,6 +233,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
     updateWalletConnection,
     hasPendingRounding,
+    setHasPendingRounding,
     sinkRequest,
 
     xlmBalance,
