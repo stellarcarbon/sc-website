@@ -1,7 +1,7 @@
 "use client";
 
-import { CarbonService } from "@/client";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
+import { getCarbonStats } from "@stellarcarbon/sc-sdk";
 import { HTMLProps, useEffect, useState } from "react";
 import { Blocks } from "react-loader-spinner";
 
@@ -18,14 +18,16 @@ export default function AuditTable() {
   const [amountPendingSink, setAmountPendingSink] = useState<number>();
 
   useEffect(() => {
-    CarbonService.getCarbonStats()
+    getCarbonStats()
       .then((response) => {
         setIsLoading(false);
         setError(undefined);
 
-        const carbonRetired = parseFloat(response.carbon_retired);
-        const carbonStored = parseFloat(response.carbon_stored);
-        const carbonSunk = parseFloat(response.carbon_sunk);
+        if (response.data === undefined) return;
+
+        const carbonRetired = parseFloat(response.data.carbon_retired);
+        const carbonStored = parseFloat(response.data.carbon_stored);
+        const carbonSunk = parseFloat(response.data.carbon_sunk);
 
         setCarbonpoolStellar(carbonStored - carbonSunk);
         setCarbonpoolVerra(carbonStored - carbonRetired);

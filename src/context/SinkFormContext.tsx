@@ -23,8 +23,8 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { useAppContext } from "./appContext";
-import { PaymentAsset } from "@/client";
 import { useRouter } from "next/navigation";
+import { PaymentAsset } from "@stellarcarbon/sc-sdk";
 
 type SinkFormContext = {
   register: UseFormRegister<SinkingFormData>;
@@ -69,7 +69,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       defaultValues: {
         memo: "",
         tonnes: 1,
-        currency: PaymentAsset.ANY,
+        currency: "any",
       },
     });
 
@@ -123,7 +123,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
     if (!walletConnection) {
       setValue("memo", "");
       setValue("tonnes", 1);
-      setValue("currency", PaymentAsset.ANY);
+      setValue("currency", "any");
     }
   }, [walletConnection, setValue]);
 
@@ -153,6 +153,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       errors,
       sinkRequest,
       overrideFormValues,
+      reset,
     ]
   );
 

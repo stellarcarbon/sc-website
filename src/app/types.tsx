@@ -1,19 +1,14 @@
 import {
-  MemoType,
-  PaymentAsset,
-  RetirementSummary,
-  SinkingResponse,
-  VcsProject,
-} from "@/client";
-import {
-  ReasonOption,
-  ReasonOptionKey,
-} from "@/containers/sink/form/ReasonSelect";
-import {
   ISupportedWallet,
   WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
 import * as StellarSdk from "@stellar/stellar-sdk";
+import {
+  PaymentAsset,
+  RetirementSummary,
+  SinkingResponse,
+  VcsProject,
+} from "@stellarcarbon/sc-sdk";
 
 export type WalletConnection = {
   stellarPubKey: string;
@@ -78,7 +73,7 @@ export interface SinkCarbonXdrPostRequest {
   carbonAmount?: number;
   paymentAsset?: PaymentAsset;
   vcsProjectId?: VcsProject;
-  memoType?: MemoType;
+  memoType?: StellarSdk.MemoType;
   memoValue?: string;
   email?: string;
 }

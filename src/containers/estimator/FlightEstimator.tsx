@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from "react";
 import AirportInput, { AirportOption } from "../demo/AirportInput";
-import { CabinClass, EstimateService, FlightEstimateResponse } from "@/client";
 import Select from "react-select";
 import Button from "@/components/Button";
 import { Blocks } from "react-loader-spinner";
@@ -10,6 +9,12 @@ import EstimatorResult from "./EstimatorResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faCalculator } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
+import {
+  CabinClass,
+  CabinClassSchema,
+  FlightEstimateResponse,
+  getFlightEstimate,
+} from "@stellarcarbon/sc-sdk";
 
 export default function FlightEstimator() {
   const [departureAirport, setDepartureAirport] =
@@ -50,13 +55,15 @@ export default function FlightEstimator() {
 
     setIsLoading(true);
 
-    EstimateService.getFlightEstimate({
-      departure: departureAirport!.value,
-      destination: destinationAirport!.value,
-      cabinClass: cabinClass,
-      tripType: tripType,
+    getFlightEstimate({
+      query: {
+        departure: departureAirport!.value,
+        destination: destinationAirport!.value,
+        cabin_class: cabinClass,
+        trip_type: tripType,
+      },
     }).then((response) => {
-      setFlightEstimate(response);
+      setFlightEstimate(response.data);
       setIsLoading(false);
     });
   }, [departureAirport, destinationAirport, cabinClass, tripType]);
@@ -168,12 +175,14 @@ export default function FlightEstimator() {
   );
 }
 
-const cabinClassOptions = Object.values(CabinClass).map((cabinClass) => {
-  return {
-    value: cabinClass,
-    label: cabinClass,
-  };
-});
+const cabinClassOptions = Object.values(CabinClassSchema.enum).map(
+  (cabinClass) => {
+    return {
+      value: cabinClass,
+      label: cabinClass,
+    };
+  }
+);
 
 export enum TripType {
   ONEWAY = "one-way",

@@ -3,13 +3,14 @@ import {
   MyTransactionRecord,
   RetirementStatus,
 } from "@/app/types";
+import { AccountResponse, Server } from "@stellar/stellar-sdk/lib/horizon";
 import {
-  AccountService,
-  SinkService,
+  getSinkTxItem,
+  getSinkTxList,
+  getSinkTxsForRecipient,
   SinkTxItem,
   SinkTxListResponse,
-} from "@/client";
-import { AccountResponse, Server } from "@stellar/stellar-sdk/lib/horizon";
+} from "@stellarcarbon/sc-sdk";
 
 export default class TransactionHistoryService {
   public static serializeTxResponse(
@@ -57,9 +58,12 @@ export default class TransactionHistoryService {
 
   public static async fetchTransaction(
     txHash: string
-  ): Promise<MyTransactionRecord> {
-    const response = await SinkService.getSinkTxItem({ txHash });
-    return this.serializeTxResponse(response);
+  ): Promise<MyTransactionRecord | undefined> {
+    const response = await getSinkTxItem({ path: { tx_hash: txHash } });
+
+    if (response.data === undefined) return;
+
+    return this.serializeTxResponse(response.data);
   }
 
   public static async fetchLedger(
@@ -67,33 +71,43 @@ export default class TransactionHistoryService {
     limit?: number,
     order?: "asc" | "desc"
   ): Promise<MyTransactionRecord[]> {
-    const sinkTxsResponse: SinkTxListResponse = await SinkService.getSinkTxList(
-      {
+    const response = await getSinkTxList({
+      query: {
         cursor,
         limit,
         order,
-      }
-    );
-    return this.serializeTxsResponse(sinkTxsResponse, order);
+      },
+    });
+
+    if (response.data === undefined) return [];
+
+    return this.serializeTxsResponse(response.data, order);
   }
 
   public static async fetchAccountHistory(
     account: string
   ): Promise<MyTransactionRecord[]> {
-    const sinkTxsResponse: SinkTxListResponse =
-      await AccountService.getSinkTxsForRecipient({
-        recipientAddress: account,
-      });
-    return this.serializeTxsResponse(sinkTxsResponse);
+    const response = await getSinkTxsForRecipient({
+      path: {
+        recipient_address: account,
+      },
+    });
+
+    if (response.data === undefined) return [];
+    return this.serializeTxsResponse(response.data);
   }
 
   public static async fetchRecentTransactions(): Promise<
     MyTransactionRecord[]
   > {
-    const sinkTxsResponse = await SinkService.getSinkTxList({
-      limit: 4,
+    const response = await getSinkTxList({
+      query: {
+        limit: 4,
+      },
     });
-    return this.serializeTxsResponse(sinkTxsResponse);
+
+    if (response.data === undefined) return [];
+    return this.serializeTxsResponse(response.data);
   }
 
   public static async fetchAccountBalance(

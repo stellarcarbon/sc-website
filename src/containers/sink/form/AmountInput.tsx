@@ -1,7 +1,6 @@
 "use client";
 
 import { debounce, useSCRouter } from "@/utils";
-import { CarbonService } from "@/client";
 import {
   faArrowRightArrowLeft,
   faCalculator,
@@ -17,6 +16,7 @@ import Button from "../../../components/Button";
 import SectionHeader from "../../../components/SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 import Link from "next/link";
+import { getCarbonQuote, getUsdQuote } from "@stellarcarbon/sc-sdk";
 
 export default function AmountInput() {
   const { register, watch, setValue, quote, setQuote } = useSinkFormContext();
@@ -53,13 +53,22 @@ export default function AmountInput() {
         return;
       }
 
-      CarbonService.getCarbonQuote({
-        carbonAmount,
+      getCarbonQuote({
+        query: {
+          carbon_amount: carbonAmount,
+        },
       })
         .then((response) => {
           setIsLoading(false);
           setHasError(false);
-          const newUsdAmount = Number(response.total_cost);
+
+          if (response.data === undefined) {
+            setHasError(true);
+            setStatusMessage("Could not get CARBON quote.");
+            return;
+          }
+
+          const newUsdAmount = Number(response.data.total_cost);
           if (quote !== newUsdAmount) {
             setQuote(Math.round(newUsdAmount * 100) / 100);
             setQuoteStr(newUsdAmount.toFixed(2));
@@ -87,13 +96,22 @@ export default function AmountInput() {
         return;
       }
 
-      CarbonService.getUsdQuote({
-        usdAmount,
+      getUsdQuote({
+        query: {
+          usd_amount: usdAmount,
+        },
       })
         .then((response) => {
           setIsLoading(false);
           setHasError(false);
-          const newCarbonAmount = Number(response.total_carbon);
+
+          if (response.data === undefined) {
+            setHasError(true);
+            setStatusMessage("Could not get USDC quote");
+            return;
+          }
+
+          const newCarbonAmount = Number(response.data.total_carbon);
           if (tonnes !== newCarbonAmount) {
             setValue("tonnes", newCarbonAmount);
           }

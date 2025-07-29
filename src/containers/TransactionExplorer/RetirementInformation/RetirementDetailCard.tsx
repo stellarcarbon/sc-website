@@ -1,4 +1,3 @@
-import { RetirementDetail } from "@/client";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { formatDate } from "@/utils";
 import { ReactNode, useCallback, useMemo, useState } from "react";
@@ -6,6 +5,7 @@ import TruncatedHash from "../../../components/dashboard/TruncatedHash";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { RetirementDetail } from "@stellarcarbon/sc-sdk";
 
 interface RetirementDetailCardProps {
   retirement: RetirementDetail;

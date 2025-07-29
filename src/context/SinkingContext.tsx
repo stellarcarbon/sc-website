@@ -1,11 +1,5 @@
 import { SinkCarbonXdrPostRequest } from "@/app/types";
 import {
-  ApiError,
-  CarbonService,
-  PaymentAsset,
-  SinkingResponse,
-} from "@/client";
-import {
   createContext,
   Dispatch,
   PropsWithChildren,
@@ -22,6 +16,7 @@ import { useRouter } from "next/navigation";
 import appConfig from "@/config";
 import XLMConversionService from "@/services/XLMConversionService";
 import { useSinkFormContext } from "./SinkFormContext";
+import { buildSinkCarbonXdr, SinkingResponse } from "@stellarcarbon/sc-sdk";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -185,14 +180,14 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     async (request: SinkCarbonXdrPostRequest) => {
       // Build the XDR with stellarcarbon API
       try {
-        const response = await CarbonService.buildSinkCarbonXdr(request);
-        setSinkResponse(response);
+        const response = await buildSinkCarbonXdr({ query: request });
+
+        if (response.data === undefined) throw Error();
+
+        setSinkResponse(response.data);
         setStep(CheckoutSteps.CONFIRM);
       } catch (err: unknown) {
-        let message = "Unknown error occurred.";
-        if (err instanceof ApiError) {
-          message = err.body["detail"][0]["msg"];
-        }
+        let message = "Error occurred during XDR building.";
         setSubmissionError(message);
       }
     },
