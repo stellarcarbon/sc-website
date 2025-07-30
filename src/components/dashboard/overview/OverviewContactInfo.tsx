@@ -64,9 +64,9 @@ export default function OverviewContactInfo() {
       <div className="p-3 md:p-6 md:py-3">
         {showForm ? (
           <ContactDetailsContextProvider mode="update">
-            <div className="text-sm my-2">
+            {/* <div className="my-2">
               Use this form to update your contact details.
-            </div>
+            </div> */}
 
             <ContactDetailsForm />
           </ContactDetailsContextProvider>

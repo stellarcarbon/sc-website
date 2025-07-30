@@ -49,29 +49,22 @@ export default function ContactDetailsForm() {
     }
   };
 
-  const validateForm = useCallback(
-    (allowDelete?: boolean) => {
-      let emailErr: boolean = false;
+  const validateForm = useCallback(() => {
+    let emailErr: boolean = false;
 
-      if (useremail === "") {
-        if (allowDelete) {
-          // deleteAccount();
-        } else {
-          emailErr = true;
-        }
-      } else {
-        emailErr = !validateEmail(useremail);
-      }
+    if (useremail === "") {
+      emailErr = true;
+    } else {
+      emailErr = !validateEmail(useremail);
+    }
 
-      if (emailErr) {
-        setEmailError(emailErr);
-        return false;
-      }
+    if (emailErr) {
+      setEmailError(emailErr);
+      return false;
+    }
 
-      return true;
-    },
-    [useremail, setEmailError]
-  );
+    return true;
+  }, [useremail, setEmailError]);
 
   const onSubmit = useCallback(() => {
     setEmailError(false);
@@ -80,7 +73,7 @@ export default function ContactDetailsForm() {
       if (!validateForm()) return;
       createAccount(walletConnection!.stellarPubKey, useremail, username);
     } else if (mode === "update") {
-      if (!validateForm(true)) return;
+      if (!validateForm()) return;
       setShowForm(false);
       if (walletConnection!.recipient) {
         updateAccount(useremail, username);
@@ -119,7 +112,7 @@ export default function ContactDetailsForm() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col gap-4 my-2">
+      <div className="flex flex-col gap-4 my-2 md:my-3">
         <div className="flex flex-col gap-1 w-full">
           <label className="text-sm" htmlFor="useremail">
             E-mail
@@ -150,7 +143,7 @@ export default function ContactDetailsForm() {
       </div>
 
       {mode === "create" && (
-        <div className="mt-3 mb-4 flex justify-between md:justify-start gap-2">
+        <div className="mt-5 mb-4 flex justify-between md:justify-start gap-2">
           <Button onClick={onSubmit}>
             <FontAwesomeIcon icon={faFloppyDisk} />
             Save contact details

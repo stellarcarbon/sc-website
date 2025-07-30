@@ -19,7 +19,7 @@ export default function SuccessSEP10() {
   return (
     <RoundingStep title="Success">
       <div className="text-center">
-        All set. We know this wallet belongs to you.
+        All set. You proved this wallet belongs to you.
       </div>
       <div className="my-1 flex justify-center">
         <SuccessIcon />
