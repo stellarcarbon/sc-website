@@ -53,9 +53,12 @@ export default function RequestCertificate({
       return;
     }
 
-    updateWalletConnection(false, {
-      username: formUsername,
-      useremail: formEmail,
+    updateWalletConnection({
+      name: formUsername,
+      email: formEmail,
+
+      // TODO: update to useSCAccount
+      modified_at: Date().toString(),
     });
 
     setStep(RequestCertificateStates.choose);
@@ -93,10 +96,10 @@ export default function RequestCertificate({
         <Button
           className="w-[250px]"
           onClick={() => {
-            if (walletConnection?.isAnonymous) {
-              setStep(RequestCertificateStates.anonymous);
-            } else {
+            if (walletConnection?.recipient) {
               setStep(RequestCertificateStates.choose);
+            } else {
+              setStep(RequestCertificateStates.anonymous);
             }
           }}
         >

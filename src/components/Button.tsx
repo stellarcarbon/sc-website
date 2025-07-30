@@ -18,7 +18,7 @@ export default function Button({
       disabled={disabled}
       onClick={onClick}
       className={`flex justify-center items-center gap-2
-        bg-accent rounded-md shadow-md
+        bg-white rounded-md shadow-md
         py-2 px-3
         border border-accent
       ${

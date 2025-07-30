@@ -4,10 +4,8 @@ import RoundingStep from "../rounding/steps/Step";
 export default function FetchingSEP10() {
   return (
     <RoundingStep title="Fetching">
-      <div className="mt-6 text-center font-semibold text-lg">
-        Requesting SEP10 challenge...
-      </div>
-      <div className="my-12 flex justify-center">
+      <div className="text-center text-lg">Requesting SEP10 challenge...</div>
+      <div className="my-4 flex justify-center">
         <Blocks
           height="120"
           width="120"

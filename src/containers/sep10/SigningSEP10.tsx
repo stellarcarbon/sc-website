@@ -6,8 +6,8 @@ export default function SigningSEP10() {
   const isWide = useViewportWidth();
   return (
     <RoundingStep title="Signing">
-      <div>Signing challenge...</div>
-      <div className="flex-1 flex items-center justify-center my-16">
+      <div className="text-lg">Signing challenge...</div>
+      <div className="my-4 flex justify-center">
         <SignIcon large={isWide} />
       </div>
     </RoundingStep>

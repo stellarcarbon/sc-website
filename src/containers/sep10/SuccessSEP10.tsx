@@ -4,6 +4,8 @@ import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useSEP10Context } from "@/context/SEP10Context";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faForward } from "@fortawesome/free-solid-svg-icons";
 
 export default function SuccessSEP10() {
   const { targetHref } = useSEP10Context();
@@ -17,13 +19,14 @@ export default function SuccessSEP10() {
   return (
     <RoundingStep title="Success">
       <div className="text-center">
-        Authentication challenge completed succesfully.
+        All set. We know this wallet belongs to you.
       </div>
-      <div className="my-8 flex justify-center">
+      <div className="my-1 flex justify-center">
         <SuccessIcon />
       </div>
-      <div className="flex items-center justify-center">
+      <div className="my-2 flex items-center justify-center">
         <Button onClick={onClick}>
+          <FontAwesomeIcon icon={faForward} />
           <div>Continue</div>
         </Button>
       </div>

@@ -73,7 +73,7 @@ export default class RoundingService {
   ) {
     return await mRequestCertificate({
       recipientAddress: walletConnection.stellarPubKey,
-      email: walletConnection.personalDetails!.useremail,
+      email: walletConnection.recipient!.email,
       jwt: token,
     });
   }

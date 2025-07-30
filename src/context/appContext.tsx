@@ -17,7 +17,6 @@ import {
 } from "@creit.tech/stellar-wallets-kit";
 import {
   MyTransactionRecord,
-  PersonalDetails,
   SinkCarbonXdrPostRequest,
   WalletConnection,
 } from "@/app/types";
@@ -27,6 +26,8 @@ import useIsMobile from "@/hooks/useIsMobile";
 import appConfig from "@/config";
 import { useTransactionHistory } from "@/hooks/useTransactionHistory";
 import { useWalletConnection } from "@/hooks/useWalletConnection";
+import { Recipient } from "@stellarcarbon/sc-sdk";
+import { useSEP10JWT } from "@/hooks/useSEP10JWT";
 
 declare global {
   interface Date {
@@ -49,10 +50,7 @@ type AppContext = {
     SetStateAction<WalletConnection | undefined | null>
   >;
   disconnectWallet: () => void;
-  updateWalletConnection: (
-    isAnonymous: boolean,
-    personalDetails?: PersonalDetails
-  ) => void;
+  updateWalletConnection: (recipient?: Recipient) => void;
 
   // Drawer
   isDrawerOpen: boolean;
@@ -114,6 +112,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const isMobileDevice = useIsMobile();
 
   const [jwt, setJwt] = useState<string>();
+  useSEP10JWT(jwt, setJwt);
+
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);

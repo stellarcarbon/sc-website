@@ -7,6 +7,7 @@ import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { SEP10JWTService } from "./useSEP10JWT";
+import { Recipient } from "@stellarcarbon/sc-sdk";
 
 export function useWalletConnection(
   stellarWalletsKit: StellarWalletsKit | null
@@ -56,15 +57,14 @@ export function useWalletConnection(
   }, [walletConnection, hasPendingRounding, stellarWalletsKit]);
 
   const updateWalletConnection = useCallback(
-    (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
+    (recipient?: Recipient) => {
       // console.log(walletConnection);
       // TODO: add /recipients POST/PATCH here
-      console.log("updateWalletConn", isAnonymous, personalDetails);
+      console.log("updateWalletConn", recipient);
 
       const newWalletConnection: WalletConnection = {
         ...walletConnection!,
-        personalDetails,
-        isAnonymous,
+        recipient,
       };
 
       WalletConnectionStorageService.setWalletConnection(newWalletConnection);

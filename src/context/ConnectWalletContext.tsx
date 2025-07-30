@@ -81,18 +81,7 @@ export const ConnectWalletContextProvider = ({
           throw Error();
         }
 
-        // Add user details if specified
-        if (useremail) {
-          newConn.personalDetails = {
-            username: username ?? "",
-            useremail,
-          };
-          newConn.isAnonymous = false;
-        } else {
-          newConn.isAnonymous = true;
-        }
-
-        // Verify if account exists
+        // Verify if wallet exists
         // If it doesnt exist throw "special error message"
         // "Account ABCD...WXYZ does not exist in {network_name}"
         // (if testnet make a funding request to friendbot for that pubkey)
@@ -116,7 +105,7 @@ export const ConnectWalletContextProvider = ({
         return false;
       }
     },
-    [setWalletConnection, username, useremail]
+    [setWalletConnection]
   );
 
   const validateForm = useCallback(() => {
@@ -163,7 +152,7 @@ export const ConnectWalletContextProvider = ({
         if (appConfig.demo) {
           router.push("/emissions");
         } else {
-          router.push("/sep10?redirect=contact-details");
+          router.push("/sep10?target=account-registration");
         }
       }
     });

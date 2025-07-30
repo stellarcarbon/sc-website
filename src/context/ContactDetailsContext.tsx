@@ -16,6 +16,8 @@ type ContactDetailsContext = {
 
   emailError: boolean;
   setEmailError: Dispatch<SetStateAction<boolean>>;
+
+  mode: "create" | "update";
 };
 
 const ContactDetailsContext = createContext<ContactDetailsContext | null>(null);
@@ -28,9 +30,14 @@ export const useContactDetailsContext = () => {
   return context;
 };
 
+type ContactDetailsContextProviderProps = PropsWithChildren<{
+  mode: "create" | "update";
+}>;
+
 export const ContactDetailsContextProvider = ({
   children,
-}: PropsWithChildren) => {
+  mode,
+}: ContactDetailsContextProviderProps) => {
   const [username, setUsername] = useState<string>("");
   const [useremail, setUseremail] = useState<string>("");
   const [emailError, setEmailError] = useState<boolean>(false);
@@ -43,8 +50,17 @@ export const ContactDetailsContextProvider = ({
       setUseremail,
       emailError,
       setEmailError,
+      mode,
     }),
-    [username, setUsername, useremail, setUseremail, emailError, setEmailError]
+    [
+      username,
+      setUsername,
+      useremail,
+      setUseremail,
+      emailError,
+      setEmailError,
+      mode,
+    ]
   );
 
   return (

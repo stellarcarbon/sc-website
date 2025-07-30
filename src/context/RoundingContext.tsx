@@ -40,7 +40,7 @@ export const useRoundingContext = () => {
 
 export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
   const { walletConnection } = useAppContext();
-  const { jwt } = useSEP10Context();
+  const { jwt } = useAppContext();
   const [step, setStep] = useState<RoundDownSteps>(
     RoundDownSteps.requestCertificate
   );

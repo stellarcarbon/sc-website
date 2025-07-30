@@ -33,7 +33,6 @@ export const walletConnectDialog = async (
       return {
         stellarPubKey: pubKey,
         walletType: wallet,
-        isAnonymous: false,
       };
     } catch (e: any) {
       throw e.message;

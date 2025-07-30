@@ -9,18 +9,29 @@ export default function AwaitingSEP10({
   signChallenge: () => Promise<void>;
 }) {
   return (
-    <RoundingStep title="Authenticate">
+    <RoundingStep title="Verify your wallet">
       <div className="flex flex-col justify-start items-center gap-6 text-center">
-        <div>
-          Complete the SEP10 authentication challenge to verify your identity.
+        <div className="flex flex-col gap-4">
+          <div>
+            To continue, please sign a message to prove ownership of your
+            wallet.
+          </div>
+          <div>
+            This is not a payment or transaction, just a secure way to verify
+            your identity.
+          </div>
         </div>
-        <div>This is done by signing it with your wallet.</div>
-        <div className="my-8">
+        {/* <div>
+          This confirms your identity and allows access to protected actions
+          like account setup.
+        </div> */}
+        {/* <div>Do you want to share your address with stellarcarbon.io?</div> */}
+        {/* <div className="my-4">
           <FontAwesomeIcon icon={faFileShield} className="text-[72px]" />
-        </div>
-        <Button onClick={signChallenge} className="text-base font-normal">
-          <FontAwesomeIcon icon={faPen} />
-          <div>Sign auth challenge</div>
+        </div> */}
+        <Button onClick={signChallenge} className="text-base font-normal my-2">
+          <FontAwesomeIcon icon={faFileShield} />
+          <div>Sign message</div>
         </Button>
       </div>
     </RoundingStep>

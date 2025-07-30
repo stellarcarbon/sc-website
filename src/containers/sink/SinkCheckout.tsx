@@ -25,16 +25,16 @@ export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
 };
 
 export default function SinkCheckout() {
-  const { sinkRequest } = useSinkFormContext();
+  const { formSinkRequest } = useSinkFormContext();
   const { step } = useSinkingContext();
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!sinkRequest) {
+    if (!formSinkRequest) {
       router.push("/dashboard");
     }
-  }, [sinkRequest, router]);
+  }, [formSinkRequest, router]);
 
   return (
     <Modal>

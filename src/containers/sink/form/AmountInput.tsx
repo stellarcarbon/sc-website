@@ -158,7 +158,7 @@ export default function AmountInput() {
             <CARBONCurrencyIcon className="inline" /> would let you claim the
             environmental benefit of reducing 1 tonne of CO2.
           </div>
-          <div className="flex flex-col gap-4 my-8 mb-12">
+          <div className="flex flex-col gap-4 my-8">
             <div className="flex justify-between items-center gap-2 mb-3 md:mb-6">
               <div className="w-[35%] flex flex-col items-start">
                 <div className="text-xs mb-1">Sink amount</div>
@@ -259,7 +259,7 @@ export default function AmountInput() {
             <div className="text-start font-semibold">Estimate emissions</div>
             <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
           </div>
-          <div className="flex flex-col gap-4 my-4">
+          <div className="flex flex-col gap-6 mt-4">
             <div>
               Optionally try out our emissions estimator to help you decide on
               the right amount.

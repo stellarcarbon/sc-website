@@ -4,17 +4,18 @@ import {
 } from "@creit.tech/stellar-wallets-kit";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import {
+  buildSinkCarbonXdr,
+  getUsdQuote,
   PaymentAsset,
+  Recipient,
   RetirementSummary,
-  SinkingResponse,
   VcsProject,
 } from "@stellarcarbon/sc-sdk";
 
 export type WalletConnection = {
   stellarPubKey: string;
   walletType: ISupportedWallet;
-  personalDetails?: PersonalDetails;
-  isAnonymous: boolean;
+  recipient?: Recipient;
 };
 
 export type PersonalDetails = {
@@ -67,6 +68,8 @@ export const CARBON_SINK_ACCOUNT =
 export const CARBON_ACCOUNT =
   "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";
 
+// const r = buildSinkCarbonXdr();
+
 export interface SinkCarbonXdrPostRequest {
   funder: string;
   recipient?: string;
@@ -78,10 +81,10 @@ export interface SinkCarbonXdrPostRequest {
   email?: string;
 }
 
-export interface SinkingTransaction {
-  transactionPostRequest?: SinkCarbonXdrPostRequest;
-  transactionPostResponse?: SinkingResponse;
-}
+// export interface SinkingTransaction {
+//   transactionPostRequest?: SinkCarbonXdrPostRequest;
+//   transactionPostResponse?: SinkingResponse;
+// }
 
 export interface AccountBalance {
   xlm: number;

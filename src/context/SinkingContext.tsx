@@ -16,7 +16,11 @@ import { useRouter } from "next/navigation";
 import appConfig from "@/config";
 import XLMConversionService from "@/services/XLMConversionService";
 import { useSinkFormContext } from "./SinkFormContext";
-import { buildSinkCarbonXdr, SinkingResponse } from "@stellarcarbon/sc-sdk";
+import {
+  buildSinkCarbonXdr,
+  BuildSinkCarbonXdrData,
+  SinkingResponse,
+} from "@stellarcarbon/sc-sdk";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -29,7 +33,7 @@ export enum CheckoutSteps {
 }
 
 type SinkingContext = {
-  sinkRequest: SinkCarbonXdrPostRequest | undefined;
+  sinkRequest: BuildSinkCarbonXdrData | undefined;
   sinkResponse: SinkingResponse | undefined;
 
   step: CheckoutSteps;
@@ -55,7 +59,7 @@ export const useSinkingContext = () => {
 
 export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const { stellarWalletsKit, walletConnection } = useAppContext();
-  const { sinkRequest: formSinkRequest } = useSinkFormContext();
+  const { formSinkRequest } = useSinkFormContext();
 
   const [sinkResponse, setSinkResponse] = useState<SinkingResponse>();
   const [submissionError, setSubmissionError] = useState<string>();
@@ -65,7 +69,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
 
   const router = useRouter();
 
-  const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
+  const [sinkRequest, setSinkRequest] = useState<BuildSinkCarbonXdrData>();
 
   useEffect(() => {
     if (submissionError) {
@@ -143,7 +147,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const signTransaction = useCallback(async () => {
     // Sign the transaction using the Stellar Wallets Kit & submit it to Horizon.
     if (sinkResponse === undefined) {
-      setSubmissionError("Could find transaction to sign.");
+      setSubmissionError("Could not find transaction to sign.");
       return;
     }
 
@@ -177,10 +181,11 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   }, [sinkResponse, walletConnection, stellarWalletsKit, submitToHorizon]);
 
   const confirmSinkRequest = useCallback(
-    async (request: SinkCarbonXdrPostRequest) => {
+    async (request: BuildSinkCarbonXdrData) => {
       // Build the XDR with stellarcarbon API
+      console.log(request);
       try {
-        const response = await buildSinkCarbonXdr({ query: request });
+        const response = await buildSinkCarbonXdr(request);
 
         if (response.data === undefined) throw Error();
 

@@ -71,7 +71,7 @@ export function useTransactionHistory(
 
   async function pollForNewTransaction(
     maxRetries: number = 5,
-    delay: number = 1000 // delay in milliseconds
+    delay: number = 3000 // delay in milliseconds
   ): Promise<void> {
     if (!account) throw new Error("No account for polling");
 

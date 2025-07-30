@@ -1,11 +1,10 @@
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useSinkingContext } from "@/context/SinkingContext";
 import SinkingStep from "./Step";
-import ModalHeader from "@/components/ModalHeader";
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCancel, faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren } from "react";
 
@@ -54,9 +53,9 @@ export default function ConfirmSinking() {
 
         <div className="flex justify-between items-center">
           <div className="font-bold text-xl md:text-2xl">Reason</div>
-          {sinkRequest.memoValue ? (
+          {sinkRequest.query.memo_value ? (
             <div className="break-all text-accentSecondary text-center text-xl md:text-3xl">
-              {sinkRequest.memoValue}
+              {sinkRequest.query.memo_value}
             </div>
           ) : (
             <div className="text-sm md:text-base text-tertiary">

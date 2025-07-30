@@ -21,6 +21,7 @@ import {
   validateSep10Challenge,
 } from "@stellarcarbon/sc-sdk";
 import { useSCAccount } from "@/hooks/useSCAccount";
+import { useSearchParams } from "next/navigation";
 
 type SEP10Context = {
   targetHref: string;
@@ -29,6 +30,7 @@ type SEP10Context = {
   jwt: string | undefined;
   expired: boolean;
   step: SEP10Steps;
+  setStep: Dispatch<SetStateAction<SEP10Steps>>;
   error: string | undefined;
   signChallenge: () => Promise<void>;
 };
@@ -44,14 +46,30 @@ export const useSEP10Context = () => {
 };
 
 export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
-  const { jwt, walletConnection, stellarWalletsKit } = useAppContext();
+  const { jwt, setJwt, walletConnection, stellarWalletsKit } = useAppContext();
 
+  const [target, setTarget] = useState<string>();
   const [targetHref, setTargetHref] = useState<string>("/dashboard");
   const [challenge, setChallenge] = useState<Sep10ChallengeResponse>();
   const [step, setStep] = useState<SEP10Steps>(SEP10Steps.fetchingChallenge);
   const [error, setError] = useState<string>();
+  const { updateJwt, expired } = useSEP10JWT(jwt, setJwt);
 
-  const { updateJwt, expired } = useSEP10JWT();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    setTarget(searchParams.get("target") ?? undefined);
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (target === "rounding") {
+      setTargetHref("/sink/rounding");
+    } else if (target === "account-registration") {
+      setTargetHref("/connect/account-registration");
+    } else {
+      setTargetHref("/dashboard");
+    }
+  }, [target]);
 
   useEffect(() => {
     const getChallenge = async () => {
@@ -108,13 +126,15 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
         const jwtToken = response.data.token;
         updateJwt(jwtToken);
 
+        console.log("hier", jwtToken);
         const account = await loadAccount(jwtToken);
-        if (account) {
-          // TODO: add condition for stale accounts
 
-          setTargetHref("/dashboard");
-        } else {
-          setTargetHref("/connect/contact-details");
+        if (target === "account-registration") {
+          if (account) {
+            setTargetHref("/connect/update");
+          } else {
+            setTargetHref("/connect/account-registration");
+          }
         }
 
         setStep(SEP10Steps.success);
@@ -122,14 +142,22 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
         setError("SEP10 challenge not validated.");
       }
     }
-  }, [challenge, stellarWalletsKit, walletConnection, updateJwt, loadAccount]);
+  }, [
+    challenge,
+    stellarWalletsKit,
+    walletConnection,
+    updateJwt,
+    loadAccount,
+    target,
+  ]);
 
-  useEffect(() => {
-    // Always update current account as jwt changes.
-    if (jwt) {
-      loadAccount(jwt);
-    }
-  }, [jwt]);
+  // useEffect(() => {
+  //   // Always update current account as jwt changes.
+  //   if (jwt) {
+  //     console.log("deze");
+  //     loadAccount(jwt);
+  //   }
+  // }, [jwt]);
 
   const providerValue = useMemo(
     () => ({
@@ -139,6 +167,7 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
       jwt,
       expired,
       step,
+      setStep,
       error,
       signChallenge,
     }),

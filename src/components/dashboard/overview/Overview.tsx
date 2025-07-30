@@ -1,94 +1,26 @@
 "use client";
 
 import { useAppContext } from "@/context/appContext";
-import { useState } from "react";
 import TransactionSummary from "../TransactionSummary";
-import OverviewContactInformationForm from "./OverviewContactInformationForm";
 import TruncatedHash from "../TruncatedHash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import DashboardHeader from "../DashboardHeader";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "@/components/SectionHeader";
 import Button from "@/components/Button";
+import OverviewContactInfo from "./OverviewContactInfo";
+import { OverviewContactInfoContextProvider } from "@/context/OverviewContactInfoContext";
 
 export default function Overview() {
   const { walletConnection, disconnectWallet } = useAppContext();
-  const [showContactInformationForm, setShowContactInformationForm] =
-    useState<boolean>(false);
 
   return (
-    <div className="">
+    <div className="w-full">
       <TransactionSummary />
 
       {walletConnection && (
-        <div className="flex flex-col">
-          <SectionHeader>
-            <div>Contact information</div>
-            <Button
-              onClick={() => setShowContactInformationForm(true)}
-              className="h-8 text-base"
-            >
-              <FontAwesomeIcon icon={faEdit} />
-              <div className="font-normal">Edit</div>
-            </Button>
-          </SectionHeader>
-
-          <div className="p-3 md:p-6 my-1">
-            {showContactInformationForm ? (
-              <OverviewContactInformationForm
-                onClose={() => setShowContactInformationForm(false)}
-              />
-            ) : walletConnection?.isAnonymous ? (
-              <div className="text-center">
-                This account is anonymous. No PDF certificates will be emailed.
-              </div>
-            ) : (
-              <>
-                <div className="flex flex-col gap-2 text-lg">
-                  <div className="flex justify-between">
-                    <div className="">Name</div>
-                    <div className="">
-                      {walletConnection.personalDetails!.username}
-                    </div>
-                  </div>
-                  <div className="flex justify-between">
-                    <div>E-mail</div>
-                    <div>{walletConnection.personalDetails!.useremail}</div>
-                  </div>
-                  <div className="text-xs">
-                    Your name and e-mail address are only used to send you your
-                    retirement certificates.
-                  </div>
-                </div>
-                {/* <div className="flex flex-col gap-4">
-                  <div className="flex flex-col">
-                    <div className="text-lg font-semibold flex justify-between">
-                      <div>Username</div>
-                      <div className="font-normal">
-                        {walletConnection?.personalDetails?.username}
-                      </div>
-                    </div>
-                    <hr className="mt-1 border border-accentSecondary w-[110px]" />
-                    <div className="text-xs mt-2">
-                      This name is used to personalize your certificates.
-                    </div>
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="text-lg font-semibold border-b-2 border-accentSecondary flex justify-between">
-                      <div>Email</div>
-                      <div className="font-normal">
-                        {walletConnection?.personalDetails?.useremail}
-                      </div>
-                    </div>
-                    <div className="text-xs mt-2">
-                      Your email address is only used to send certificates.
-                    </div>
-                  </div>
-                </div> */}
-              </>
-            )}
-          </div>
-        </div>
+        <OverviewContactInfoContextProvider>
+          <OverviewContactInfo />
+        </OverviewContactInfoContextProvider>
       )}
 
       {walletConnection && (
@@ -96,7 +28,7 @@ export default function Overview() {
           <SectionHeader>
             <div>Connected wallet</div>
             <Button onClick={disconnectWallet} className="h-8 text-base">
-              <FontAwesomeIcon icon={faRightFromBracket} />
+              <FontAwesomeIcon className="text-sm" icon={faRightFromBracket} />
               <div className="font-normal">Disconnect</div>
             </Button>
           </SectionHeader>

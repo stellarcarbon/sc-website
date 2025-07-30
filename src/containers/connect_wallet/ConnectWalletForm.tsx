@@ -14,11 +14,11 @@ export default function ConnectWalletForm() {
 
   return (
     <>
-      <div className="flex-1 md:flex-none md:my-8 w-full md:max-w-[780px] bg-darkest md:rounded md:border md:border-tertiary overflow-hidden">
+      <div>
         <SectionHeader>
           <div className="text-center text-2xl w-full">Connect wallet</div>
         </SectionHeader>
-        <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-9">
+        <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-16">
           <SelectWallet />
           {/* <ContactDetails /> */}
           <AcceptTnC />
@@ -64,5 +64,5 @@ function NoWalletError() {
 }
 
 export function ConnectWalletFormError({ message }: { message: string }) {
-  return <div className="text-red-500">{message}</div>;
+  return <div className="text-red-500 text-sm">{message}</div>;
 }

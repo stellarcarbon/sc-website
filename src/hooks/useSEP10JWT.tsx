@@ -1,9 +1,17 @@
 import { useAppContext } from "@/context/appContext";
-import { useCallback, useEffect, useMemo } from "react";
+import { buildSinkCarbonXdr } from "@stellarcarbon/sc-sdk";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+} from "react";
 
-export function useSEP10JWT() {
-  const { jwt, setJwt } = useAppContext();
-
+export function useSEP10JWT(
+  jwt: string | undefined,
+  setJwt: Dispatch<SetStateAction<string | undefined>>
+) {
   const updateJwt = useCallback(
     (newJwt: string) => {
       SEP10JWTService.setJWT(newJwt);

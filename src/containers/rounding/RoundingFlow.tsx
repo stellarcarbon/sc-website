@@ -4,8 +4,8 @@ import Modal from "@/components/Modal";
 import { RoundDownSteps, useRoundingContext } from "@/context/RoundingContext";
 import RequestRounding from "./steps/Request";
 import ErrorRounding from "./steps/Error";
-import { useSEP10Context } from "@/context/SEP10Context";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/context/appContext";
 
 const RoundFlowDetails: Record<RoundDownSteps, ReactNode> = {
   [RoundDownSteps.success]: <RoundingSuccess />,
@@ -14,14 +14,14 @@ const RoundFlowDetails: Record<RoundDownSteps, ReactNode> = {
 };
 
 export default function RoundingFlow() {
-  const { jwt } = useSEP10Context();
+  const { jwt } = useAppContext();
   const { step } = useRoundingContext();
 
   const router = useRouter();
 
   useEffect(() => {
     if (!jwt) {
-      router.push("/sep10?redirect=rounding");
+      router.push("/sep10?target=rounding");
     }
   }, [jwt, router]);
 

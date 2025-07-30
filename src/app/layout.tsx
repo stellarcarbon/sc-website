@@ -12,7 +12,6 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { SinkFormContextProvider } from "@/context/SinkFormContext";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
-import { SEP10ContextProvider } from "@/context/SEP10Context";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -36,16 +35,14 @@ export default function RootLayout({
         ></script>
       </head>
       <AppContextProvider>
-        <SEP10ContextProvider>
-          <SinkFormContextProvider>
-            <body className={`${inter.className}`}>
-              <PostHogProvider>
-                <AnalyticsConsent />
-                <App>{children}</App>
-              </PostHogProvider>
-            </body>
-          </SinkFormContextProvider>
-        </SEP10ContextProvider>
+        <SinkFormContextProvider>
+          <body className={`${inter.className}`}>
+            <PostHogProvider>
+              <AnalyticsConsent />
+              <App>{children}</App>
+            </PostHogProvider>
+          </body>
+        </SinkFormContextProvider>
       </AppContextProvider>
     </html>
   );

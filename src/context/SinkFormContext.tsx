@@ -24,7 +24,7 @@ import {
 } from "react-hook-form";
 import { useAppContext } from "./appContext";
 import { useRouter } from "next/navigation";
-import { PaymentAsset } from "@stellarcarbon/sc-sdk";
+import { BuildSinkCarbonXdrData, PaymentAsset } from "@stellarcarbon/sc-sdk";
 
 type SinkFormContext = {
   register: UseFormRegister<SinkingFormData>;
@@ -40,7 +40,7 @@ type SinkFormContext = {
   quote: number;
   setQuote: Dispatch<SetStateAction<number>>;
 
-  sinkRequest: SinkCarbonXdrPostRequest | undefined;
+  formSinkRequest: BuildSinkCarbonXdrData | undefined;
 
   overrideFormValues: (
     memo?: string,
@@ -76,7 +76,8 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
   const [quote, setQuote] = useState<number>(0);
   const [errors, setErrors] = useState<FieldErrors>();
 
-  const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
+  const [formSinkRequest, setFormSinkRequest] =
+    useState<BuildSinkCarbonXdrData>();
 
   const router = useRouter();
 
@@ -90,23 +91,26 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
 
   const onSubmit: SubmitHandler<SinkingFormData> = useCallback(
     (_) => {
-      // setStep(CheckoutSteps.CREATING);
+      if (!walletConnection) return;
 
-      let request: SinkCarbonXdrPostRequest = {
-        funder: walletConnection?.stellarPubKey!,
-        carbonAmount: tonnes,
-        paymentAsset: currency,
-        memoValue: memo,
+      let request: BuildSinkCarbonXdrData = {
+        query: {
+          funder: walletConnection.stellarPubKey,
+          carbon_amount: tonnes,
+          payment_asset: currency,
+          memo_value: memo,
+        },
+        url: "/carbon/sink-carbon/xdr",
       };
 
-      if (!walletConnection?.isAnonymous) {
-        request.email = walletConnection?.personalDetails?.useremail;
+      if (walletConnection.recipient) {
+        request.query.email = walletConnection.recipient.email;
       }
 
-      setSinkRequest(request);
+      setFormSinkRequest(request);
       // TODO: Effect in SinkingContext will pick this up.
     },
-    [walletConnection, tonnes, currency, memo, setSinkRequest]
+    [walletConnection, tonnes, currency, memo, setFormSinkRequest]
   );
 
   const overrideFormValues = useCallback(
@@ -138,7 +142,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       quote,
       setQuote,
       errors,
-      sinkRequest,
+      formSinkRequest,
       overrideFormValues,
       resetSinkForm: reset,
     }),
@@ -151,7 +155,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       onError,
       quote,
       errors,
-      sinkRequest,
+      formSinkRequest,
       overrideFormValues,
       reset,
     ]
