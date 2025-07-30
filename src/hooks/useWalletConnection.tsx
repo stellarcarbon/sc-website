@@ -24,11 +24,19 @@ export function useWalletConnection(
 
   const [hasPendingRounding, setHasPendingRounding] = useState<boolean>();
 
+  const loadWalletConnection = useCallback((swk: StellarWalletsKit) => {
+    const wc = WalletConnectionStorageService.loadWalletConnection();
+    if (wc !== undefined) {
+      swk.setWallet(wc.walletType.id);
+    }
+    setWalletConnection(wc);
+  }, []);
+
   // Load existing wallet connection
   useEffect(() => {
     if (stellarWalletsKit === null) return;
 
-    const loadWalletConnection = () => {
+    const lwcn = () => {
       const wc = WalletConnectionStorageService.loadWalletConnection();
       if (wc !== undefined) {
         stellarWalletsKit.setWallet(wc.walletType.id);
@@ -37,7 +45,7 @@ export function useWalletConnection(
     };
 
     if (walletConnection === null) {
-      loadWalletConnection();
+      lwcn();
     } else if (walletConnection !== undefined) {
       TransactionHistoryService.fetchAccountBalance(
         appConfig.server,
@@ -90,6 +98,8 @@ export function useWalletConnection(
 
     hasPendingRounding,
     setHasPendingRounding,
+
+    loadWalletConnection,
 
     xlmBalance,
     usdcBalance,

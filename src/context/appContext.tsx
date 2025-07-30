@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -28,6 +29,7 @@ import { useTransactionHistory } from "@/hooks/useTransactionHistory";
 import { useWalletConnection } from "@/hooks/useWalletConnection";
 import { Recipient } from "@stellarcarbon/sc-sdk";
 import { useSEP10JWT } from "@/hooks/useSEP10JWT";
+import WalletConnectionStorageService from "@/services/WalletConnectionService";
 
 declare global {
   interface Date {
@@ -140,6 +142,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     usdcBalance,
     hasPendingRounding,
     setHasPendingRounding,
+    loadWalletConnection,
   } = useWalletConnection(stellarWalletsKitRef.current);
 
   const {
@@ -153,37 +156,34 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     const loadApp = async () => {
-      const loadStellarWalletsKit = async () => {
-        if (typeof window !== "undefined") {
-          // This import makes sure assigning the kit to the ref happens client side.
-          const { StellarWalletsKit } = await import(
-            "@creit.tech/stellar-wallets-kit"
-          );
-          stellarWalletsKitRef.current = new StellarWalletsKit({
-            network: appConfig.network,
-            selectedWalletId: XBULL_ID,
-            modules: allowAllModules(),
-          });
+      console.log("loadApp");
+      if (typeof window !== "undefined") {
+        // This import makes sure assigning the kit to the ref happens client side.
+        const { StellarWalletsKit } = await import(
+          "@creit.tech/stellar-wallets-kit"
+        );
+        const swk = new StellarWalletsKit({
+          network: appConfig.network,
+          selectedWalletId: XBULL_ID,
+          modules: allowAllModules(),
+        });
+        stellarWalletsKitRef.current = swk;
+        loadWalletConnection(swk);
 
-          // Load supported wallets from stellar wallets kit
-          let wallets;
-          if (window.Cypress) {
-            wallets = await loadAvailableWalletsMock();
-          } else {
-            wallets =
-              (await stellarWalletsKitRef.current?.getSupportedWallets()) ?? [];
-          }
-          setSupportedWallets(wallets);
+        // Load supported wallets from stellar wallets kit
+        let wallets;
+        if (window.Cypress) {
+          wallets = await loadAvailableWalletsMock();
+        } else {
+          wallets =
+            (await stellarWalletsKitRef.current?.getSupportedWallets()) ?? [];
         }
-      };
-
-      if (stellarWalletsKitRef.current === null) {
-        await loadStellarWalletsKit();
+        setSupportedWallets(wallets);
       }
     };
 
     loadApp();
-  }, [myTransactions]);
+  }, []);
 
   const providerValue = useMemo(() => {
     return {
