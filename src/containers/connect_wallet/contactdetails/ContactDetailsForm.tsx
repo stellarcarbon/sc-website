@@ -27,7 +27,8 @@ export default function ContactDetailsForm() {
     setEmailError,
     mode,
   } = useContactDetailsContext();
-  const { setShowForm } = useOverviewContactInfoContext();
+  const { setShowForm, setShowDeleteAccountDialog } =
+    useOverviewContactInfoContext();
 
   const { createAccount, updateAccount, deleteAccount } = useSCAccount();
 
@@ -119,12 +120,6 @@ export default function ContactDetailsForm() {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-4 my-2">
-        <div className="grid grid-cols-1">
-          <div className="text-sm">Use this form to update your account.</div>
-          {/* <Button className="!bg-red-500 text-xs h-8 mx-8">
-            <FontAwesomeIcon icon={faTrash} /> Delete
-          </Button> */}
-        </div>
         <div className="flex flex-col gap-1 w-full">
           <label className="text-sm" htmlFor="useremail">
             E-mail
@@ -167,10 +162,18 @@ export default function ContactDetailsForm() {
       )}
 
       {mode === "update" && (
-        <div className="mt-3 mb-4 flex justify-between">
+        <div className="mt-5 mb-12 flex justify-between">
           <Button onClick={onSubmit} className="h-8 text-sm">
-            <FontAwesomeIcon icon={faCheckCircle} /> Update contact details
+            <FontAwesomeIcon icon={faCheckCircle} /> Update registration
           </Button>
+          {walletConnection?.recipient && (
+            <Button
+              className="!bg-red-500 hover:!bg-red-600 text-sm text-white h-8 border-0"
+              onClick={() => setShowDeleteAccountDialog(true)}
+            >
+              <FontAwesomeIcon icon={faTrash} /> Delete
+            </Button>
+          )}
         </div>
       )}
     </div>

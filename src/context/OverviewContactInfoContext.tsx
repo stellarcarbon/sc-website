@@ -11,11 +11,16 @@ import {
 type OverviewContactInfoContext = {
   showForm: boolean;
   setShowForm: Dispatch<SetStateAction<boolean>>;
+
+  showDeleteAccountDialog: boolean;
+  setShowDeleteAccountDialog: Dispatch<SetStateAction<boolean>>;
 };
 
 const defaultContext: OverviewContactInfoContext = {
   showForm: false,
-  setShowForm: () => {}, // no-op
+  setShowForm: () => {},
+  showDeleteAccountDialog: false,
+  setShowDeleteAccountDialog: () => {},
 };
 
 const OverviewContactInfoContext =
@@ -29,7 +34,18 @@ export const OverviewContactInfoContextProvider = ({
   children,
 }: PropsWithChildren) => {
   const [showForm, setShowForm] = useState<boolean>(false);
-  const providerValue = useMemo(() => ({ showForm, setShowForm }), [showForm]);
+  const [showDeleteAccountDialog, setShowDeleteAccountDialog] =
+    useState<boolean>(false);
+
+  const providerValue = useMemo(
+    () => ({
+      showForm,
+      setShowForm,
+      showDeleteAccountDialog,
+      setShowDeleteAccountDialog,
+    }),
+    [showForm, setShowForm, showDeleteAccountDialog, setShowDeleteAccountDialog]
+  );
 
   return (
     <OverviewContactInfoContext.Provider value={providerValue}>

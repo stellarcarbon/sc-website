@@ -29,7 +29,7 @@ export default function Overview() {
             <div>Connected wallet</div>
             <Button onClick={disconnectWallet} className="h-8 text-base">
               <FontAwesomeIcon className="text-sm" icon={faRightFromBracket} />
-              <div className="font-normal">Disconnect</div>
+              <div className="font-normal text-sm">Disconnect</div>
             </Button>
           </SectionHeader>
 

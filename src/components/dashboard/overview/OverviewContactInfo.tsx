@@ -13,12 +13,14 @@ import { useCallback, useState } from "react";
 
 export default function OverviewContactInfo() {
   const { jwt, walletConnection } = useAppContext();
-  const { showForm, setShowForm } = useOverviewContactInfoContext();
+  const {
+    showForm,
+    setShowForm,
+    showDeleteAccountDialog,
+    setShowDeleteAccountDialog,
+  } = useOverviewContactInfoContext();
 
   const { deleteAccount } = useSCAccount();
-
-  const [showDeleteAccountDialog, setShowDeleteAccountDialog] =
-    useState<boolean>(false);
 
   const router = useRouter();
 
@@ -43,24 +45,18 @@ export default function OverviewContactInfo() {
   return (
     <div className="flex flex-col">
       <SectionHeader>
-        <div>{showForm ? "Update account" : "Account details"}</div>
+        <div>{showForm ? "Update registration" : "Registration details"}</div>
 
         {showForm ? (
           <div className="flex gap-2">
-            <Button
-              className="!bg-red-500 hover:!bg-red-600 text-xs text-white h-8 border-0"
-              onClick={() => setShowDeleteAccountDialog(true)}
-            >
-              <FontAwesomeIcon icon={faTrash} /> Delete
-            </Button>
             <Button onClick={onClickClose} className="h-8 w-8">
-              <FontAwesomeIcon icon={faXmark} />
+              <FontAwesomeIcon icon={faXmark} className="text-base" />
             </Button>
           </div>
         ) : (
           <Button onClick={onClickEdit} className="h-8 text-base">
             <FontAwesomeIcon className="text-sm" icon={faEdit} />
-            <div className="font-normal">Edit</div>
+            <div className="font-normal text-sm">Edit</div>
           </Button>
         )}
       </SectionHeader>
@@ -68,6 +64,10 @@ export default function OverviewContactInfo() {
       <div className="p-3 md:p-6 md:py-3">
         {showForm ? (
           <ContactDetailsContextProvider mode="update">
+            <div className="text-sm my-2">
+              Use this form to update your contact details.
+            </div>
+
             <ContactDetailsForm />
           </ContactDetailsContextProvider>
         ) : (
