@@ -1,13 +1,11 @@
 import { Hourglass } from "react-loader-spinner";
-import SinkingStep from "./Step";
-
-import SinkingStepButtons from "./Buttons";
+import RoundingStep from "@/containers/rounding/steps/Step";
 
 export default function AwaitSinking({ message }: { message: string }) {
   return (
-    <SinkingStep title="Waiting for API">
-      <span className="text-center text-lg mt-6">{message}</span>
-      <div className="flex-1 flex items-center justify-center my-20">
+    <RoundingStep title="Waiting for API">
+      <span className="text-center">{message}</span>
+      <div className="flex-1 flex items-center justify-center my-4">
         <Hourglass
           visible={true}
           height="80"
@@ -18,8 +16,6 @@ export default function AwaitSinking({ message }: { message: string }) {
           colors={["#d8def2", "#d8def2"]}
         />
       </div>
-
-      <SinkingStepButtons></SinkingStepButtons>
-    </SinkingStep>
+    </RoundingStep>
   );
 }

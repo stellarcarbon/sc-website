@@ -17,7 +17,7 @@ export default function AwaitingSEP10({
             wallet.
           </div>
           <div>
-            This is not a payment or transaction, just a secure way to verify
+            This is not a payment or transaction, but a secure way to verify
             your identity.
           </div>
         </div>

@@ -5,6 +5,7 @@ import ContactDetailsForm from "@/containers/connect_wallet/contactdetails/Conta
 import { useAppContext } from "@/context/appContext";
 import { ContactDetailsContextProvider } from "@/context/ContactDetailsContext";
 import { useOverviewContactInfoContext } from "@/context/OverviewContactInfoContext";
+import { useSCAccount } from "@/hooks/useSCAccount";
 import { faEdit, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
@@ -13,6 +14,8 @@ import { useCallback, useState } from "react";
 export default function OverviewContactInfo() {
   const { jwt, walletConnection } = useAppContext();
   const { showForm, setShowForm } = useOverviewContactInfoContext();
+
+  const { deleteAccount } = useSCAccount();
 
   const [showDeleteAccountDialog, setShowDeleteAccountDialog] =
     useState<boolean>(false);
@@ -29,9 +32,12 @@ export default function OverviewContactInfo() {
 
   const onClickClose = useCallback(() => {
     setShowForm(false);
-  }, []);
+  }, [setShowForm]);
 
-  const handleDelete = () => {};
+  const handleDelete = useCallback(() => {
+    deleteAccount();
+    setShowForm(false);
+  }, [setShowForm, deleteAccount]);
 
   return (
     <div className="flex flex-col">
@@ -78,7 +84,11 @@ export default function OverviewContactInfo() {
                   </div>
                   <div className="flex justify-between">
                     <div className="">Name</div>
-                    <div className="">{walletConnection.recipient.name}</div>
+                    <div className="">
+                      {walletConnection.recipient.name ?? (
+                        <div>Not specified</div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </>

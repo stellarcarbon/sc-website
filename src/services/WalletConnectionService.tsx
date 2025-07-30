@@ -16,6 +16,7 @@ export default class WalletConnectionStorageService {
   }
 
   public static setWalletConnection(walletConnection: WalletConnection): void {
+    console.log(JSON.stringify(walletConnection));
     localStorage.setItem(
       this.LOCAL_STORAGE_KEY,
       JSON.stringify(walletConnection)

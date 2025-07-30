@@ -1,12 +1,12 @@
-import FormError from "@/components/FormError";
 import { useSinkingContext } from "@/context/SinkingContext";
-import SinkingStep from "./Step";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faWarning } from "@fortawesome/free-solid-svg-icons";
-import ModalHeader from "@/components/ModalHeader";
+
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
+import RoundingStep from "@/containers/rounding/steps/Step";
 
 export default function ErrorSinking() {
   const { submissionError } = useSinkingContext();
@@ -14,17 +14,17 @@ export default function ErrorSinking() {
   const router = useRouter();
 
   return (
-    <SinkingStep title="Something went wrong">
-      <div className="mt-6 flex flex-col items-center">
-        <div className="text-lg font-semibold overflow-y-auto max-h-[200px] text-center">
+    <RoundingStep title="Something went wrong">
+      <div className="flex flex-col items-center">
+        <div className="overflow-y-auto max-h-[200px] text-center">
           {submissionError ?? "Please try again."}
         </div>
-        <div className="flex-1 flex justify-center items-center my-16">
-          <FontAwesomeIcon
-            icon={faWarning}
-            className="text-[96px] text-red-600"
-          />
-        </div>
+      </div>
+      <div className="flex justify-center items-center my-4">
+        <FontAwesomeIcon
+          icon={faWarning}
+          className="text-[64px] text-red-600"
+        />
       </div>
       <SinkingStepButtons>
         <Button
@@ -35,6 +35,6 @@ export default function ErrorSinking() {
           <div>Go back</div>
         </Button>
       </SinkingStepButtons>
-    </SinkingStep>
+    </RoundingStep>
   );
 }

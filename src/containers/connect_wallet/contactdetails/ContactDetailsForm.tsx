@@ -81,7 +81,11 @@ export default function ContactDetailsForm() {
     } else if (mode === "update") {
       if (!validateForm(true)) return;
       setShowForm(false);
-      updateAccount(useremail, username);
+      if (walletConnection!.recipient) {
+        updateAccount(useremail, username);
+      } else {
+        createAccount(walletConnection!.stellarPubKey, useremail, username);
+      }
     }
 
     router.push("/dashboard");

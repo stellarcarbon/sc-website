@@ -4,11 +4,11 @@ import RoundingStep from "../rounding/steps/Step";
 export default function FetchingSEP10() {
   return (
     <RoundingStep title="Fetching">
-      <div className="text-center text-lg">Requesting SEP10 challenge...</div>
+      <div className="text-center">Requesting SEP10 challenge...</div>
       <div className="my-4 flex justify-center">
         <Blocks
-          height="120"
-          width="120"
+          height="80"
+          width="80"
           color="#ff0000"
           ariaLabel="blocks-loading"
           wrapperStyle={{}}

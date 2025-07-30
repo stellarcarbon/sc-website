@@ -1,5 +1,3 @@
-import ModalHeader from "@/components/ModalHeader";
-import SinkingStep from "./Step";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
@@ -10,6 +8,7 @@ import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useSinkingContext } from "@/context/SinkingContext";
+import RoundingStep from "@/containers/rounding/steps/Step";
 
 export default function ExpiredSinking() {
   const { sinkRequest } = useSinkingContext();
@@ -18,39 +17,39 @@ export default function ExpiredSinking() {
   const returnToForm = useCallback(() => {
     const params = new URLSearchParams();
 
-    if (sinkRequest?.carbonAmount !== undefined) {
-      params.set("amount", sinkRequest.carbonAmount.toString());
+    if (sinkRequest?.query.carbon_amount !== undefined) {
+      params.set("amount", sinkRequest.query.carbon_amount.toString());
     }
 
-    if (sinkRequest?.memoValue !== undefined) {
-      params.set("reason", sinkRequest.memoValue);
+    if (sinkRequest?.query.memo_value) {
+      params.set("reason", sinkRequest.query.memo_value);
     }
 
-    if (sinkRequest?.paymentAsset !== undefined) {
-      params.set("asset", sinkRequest.paymentAsset);
+    if (sinkRequest?.query.payment_asset) {
+      params.set("asset", sinkRequest.query.payment_asset);
     }
 
     router.push(`/dashboard/sink/?${params}`);
   }, [router, sinkRequest]);
 
   return (
-    <SinkingStep title="Expired">
-      <div className="mt-6 flex flex-col items-center">
+    <RoundingStep title="Expired">
+      <div className="flex flex-col items-center">
         <div className="text-center">
           Your transaction expired. Please retry creating it. The transaction is
           only valid for 2 minutes.
         </div>
-        <FontAwesomeIcon
-          icon={faTriangleExclamation}
-          className="text-[96px] my-20 text-yellow-500"
-        />
       </div>
+      <FontAwesomeIcon
+        icon={faTriangleExclamation}
+        className="text-[64px] my-4 text-yellow-500"
+      />
       <SinkingStepButtons>
         <Button onClick={returnToForm} className="mx-auto">
           <FontAwesomeIcon icon={faArrowLeft} />
           <div>Go back</div>
         </Button>
       </SinkingStepButtons>
-    </SinkingStep>
+    </RoundingStep>
   );
 }
