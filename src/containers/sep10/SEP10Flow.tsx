@@ -6,7 +6,7 @@ import SigningSEP10 from "./SigningSEP10";
 import SuccessSEP10 from "./SuccessSEP10";
 import Modal from "@/components/Modal";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ErrorSEP10 from "./ErrorSEP10";
 
 export enum SEP10Steps {
@@ -17,11 +17,9 @@ export enum SEP10Steps {
 }
 
 export default function SEP10Flow() {
-  const { step, signChallenge, error } = useSEP10Context();
-  const [targetHref, setTargetHref] = useState<string>("/dashboard");
+  const { step, signChallenge, error, setTargetHref } = useSEP10Context();
 
   const searchParams = useSearchParams();
-
   const redirect = searchParams.get("redirect");
 
   useEffect(() => {
@@ -30,7 +28,7 @@ export default function SEP10Flow() {
     } else if (redirect === "contact-details") {
       setTargetHref("/connect/contact-details");
     }
-  }, [redirect]);
+  }, [redirect, setTargetHref]);
 
   return (
     <Modal>
@@ -43,7 +41,7 @@ export default function SEP10Flow() {
       ) : step === SEP10Steps.signingChallenge ? (
         <SigningSEP10 />
       ) : step === SEP10Steps.success ? (
-        <SuccessSEP10 targetHref={targetHref} />
+        <SuccessSEP10 />
       ) : null}
     </Modal>
   );

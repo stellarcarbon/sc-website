@@ -6,6 +6,7 @@ import WalletConnectionStorageService from "@/services/WalletConnectionService";
 import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { SEP10JWTService } from "./useSEP10JWT";
 
 export function useWalletConnection(
   stellarWalletsKit: StellarWalletsKit | null
@@ -58,6 +59,7 @@ export function useWalletConnection(
     (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
       // console.log(walletConnection);
       // TODO: add /recipients POST/PATCH here
+      console.log("updateWalletConn", isAnonymous, personalDetails);
 
       const newWalletConnection: WalletConnection = {
         ...walletConnection!,
@@ -73,6 +75,7 @@ export function useWalletConnection(
 
   const disconnectWallet = useCallback(() => {
     WalletConnectionStorageService.removeWalletConnection();
+    SEP10JWTService.removeJWT();
     setWalletConnection(undefined);
     // setMyTransactions(null);
     router.push("/");

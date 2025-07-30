@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import IconButton from "@/components/IconButton";
 import TextInput from "@/components/TextInput";
 import { useAppContext } from "@/context/appContext";
+import { useSCAccount } from "@/hooks/useSCAccount";
 import { validateEmail } from "@/utils";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,11 +17,13 @@ interface OverviewContactInformationForm {
 export default function OverviewContactInformationForm({
   onClose,
 }: OverviewContactInformationForm) {
-  const { updateWalletConnection, walletConnection } = useAppContext();
+  const { walletConnection } = useAppContext();
 
   const [formUsername, setFormUsername] = useState<string>("");
   const [formEmail, setFormEmail] = useState<string>("");
   const [formError, setFormError] = useState<string>();
+
+  const { updateAccount, deleteAccount } = useSCAccount();
 
   useEffect(() => {
     if (walletConnection?.personalDetails !== undefined) {
@@ -45,7 +48,7 @@ export default function OverviewContactInformationForm({
 
   const submitForm = useCallback(() => {
     if (formUsername === "" && formEmail === "") {
-      updateWalletConnection(true);
+      deleteAccount();
       onClose();
       setFormError(undefined);
       return;
@@ -56,13 +59,10 @@ export default function OverviewContactInformationForm({
       return;
     }
 
-    updateWalletConnection(false, {
-      username: formUsername,
-      useremail: formEmail,
-    });
+    updateAccount(formEmail, formUsername);
     onClose();
     setFormError(undefined);
-  }, [formEmail, formUsername, onClose, updateWalletConnection]);
+  }, [formEmail, formUsername, onClose, updateAccount, deleteAccount]);
 
   return (
     <div className="w-full relative px-4 md:px-8 py-12 md:py-6 flex flex-col gap-2 items-center bg-darkest rounded border border-accentSecondary self-center ">

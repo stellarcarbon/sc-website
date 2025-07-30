@@ -74,6 +74,9 @@ type AppContext = {
   hasPendingRounding: boolean | undefined;
   setHasPendingRounding: Dispatch<SetStateAction<boolean | undefined>>;
 
+  jwt: string | undefined;
+  setJwt: Dispatch<SetStateAction<string | undefined>>;
+
   sinkRequest: SinkCarbonXdrPostRequest | undefined;
   setSinkRequest: Dispatch<
     SetStateAction<SinkCarbonXdrPostRequest | undefined>
@@ -110,6 +113,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const isMobileDevice = useIsMobile();
 
+  const [jwt, setJwt] = useState<string>();
   const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -204,6 +208,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       hasPendingRounding,
       setHasPendingRounding,
 
+      jwt,
+      setJwt,
+
       sinkRequest,
       setSinkRequest,
 
@@ -234,6 +241,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     updateWalletConnection,
     hasPendingRounding,
     setHasPendingRounding,
+
+    jwt,
+    setJwt,
     sinkRequest,
 
     xlmBalance,

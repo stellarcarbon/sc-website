@@ -3,7 +3,7 @@
 import { useAppContext } from "@/context/appContext";
 import { useState } from "react";
 import TransactionSummary from "../TransactionSummary";
-import OverviewContactInformationForm from "./ContactInformationForm";
+import OverviewContactInformationForm from "./OverviewContactInformationForm";
 import TruncatedHash from "../TruncatedHash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";

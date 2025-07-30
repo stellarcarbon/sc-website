@@ -8,9 +8,10 @@ import { useCallback } from "react";
 import { useAppContext } from "@/context/appContext";
 import { validateEmail } from "@/utils";
 import { useRouter } from "next/navigation";
+import { useSCAccount } from "@/hooks/useSCAccount";
 
 export default function ContactDetailsForm() {
-  const { updateWalletConnection } = useAppContext();
+  const { updateWalletConnection, walletConnection } = useAppContext();
   const {
     username,
     setUsername,
@@ -19,6 +20,8 @@ export default function ContactDetailsForm() {
     emailError,
     setEmailError,
   } = useContactDetailsContext();
+
+  const { createAccount } = useSCAccount();
 
   const router = useRouter();
 
@@ -51,15 +54,17 @@ export default function ContactDetailsForm() {
 
     if (!validateForm()) return;
 
-    updateWalletConnection(false, { username, useremail });
+    createAccount(walletConnection!.stellarPubKey, useremail, username);
+
     router.push("/dashboard");
   }, [
+    walletConnection,
     username,
     useremail,
-    updateWalletConnection,
     validateForm,
     setEmailError,
     router,
+    createAccount,
   ]);
 
   const onSkip = useCallback(() => {

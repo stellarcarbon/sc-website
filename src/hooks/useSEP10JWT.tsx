@@ -1,12 +1,16 @@
-import { useCallback, useMemo, useState } from "react";
+import { useAppContext } from "@/context/appContext";
+import { useCallback, useEffect, useMemo } from "react";
 
 export function useSEP10JWT() {
-  const [jwt, setJwt] = useState<string>();
+  const { jwt, setJwt } = useAppContext();
 
-  const updateJwt = useCallback((newJwt: string) => {
-    SEP10JWTService.setJWT(newJwt);
-    setJwt(newJwt);
-  }, []);
+  const updateJwt = useCallback(
+    (newJwt: string) => {
+      SEP10JWTService.setJWT(newJwt);
+      setJwt(newJwt);
+    },
+    [setJwt]
+  );
 
   const expired = useMemo(() => {
     if (!jwt) return true;
@@ -23,14 +27,20 @@ export function useSEP10JWT() {
     }
   }, [jwt]);
 
+  useEffect(() => {
+    const storedToken = SEP10JWTService.getJWT();
+    if (storedToken !== null) {
+      setJwt(storedToken);
+    }
+  }, [setJwt]);
+
   return {
-    jwt,
     updateJwt,
     expired,
   };
 }
 
-class SEP10JWTService {
+export class SEP10JWTService {
   private static LOCAL_STORAGE_KEY = "sc_account_token";
 
   public static setJWT(jwt: string): void {

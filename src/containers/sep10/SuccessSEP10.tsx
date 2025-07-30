@@ -1,12 +1,18 @@
 import SuccessIcon from "@/components/icons/SuccessIcon";
 import RoundingStep from "../rounding/steps/Step";
 import Button from "@/components/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { useSEP10Context } from "@/context/SEP10Context";
 
-export default function SuccessSEP10({ targetHref }: { targetHref: string }) {
+export default function SuccessSEP10() {
+  const { targetHref } = useSEP10Context();
+
   const router = useRouter();
+
+  const onClick = useCallback(() => {
+    router.push(targetHref);
+  }, [router, targetHref]);
 
   return (
     <RoundingStep title="Success">
@@ -17,7 +23,7 @@ export default function SuccessSEP10({ targetHref }: { targetHref: string }) {
         <SuccessIcon />
       </div>
       <div className="flex items-center justify-center">
-        <Button onClick={() => router.push(targetHref)}>
+        <Button onClick={onClick}>
           <div>Continue</div>
         </Button>
       </div>
