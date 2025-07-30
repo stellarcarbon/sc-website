@@ -36,8 +36,9 @@ export default function OverviewContactInfo() {
 
   const handleDelete = useCallback(() => {
     deleteAccount();
+    setShowDeleteAccountDialog(false);
     setShowForm(false);
-  }, [setShowForm, deleteAccount]);
+  }, [setShowDeleteAccountDialog, setShowForm, deleteAccount]);
 
   return (
     <div className="flex flex-col">

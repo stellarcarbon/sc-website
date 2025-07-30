@@ -1,17 +1,15 @@
-import { PersonalDetails, WalletConnection } from "@/app/types";
+import { WalletConnection } from "@/app/types";
 import appConfig from "@/config";
 import RoundingService from "@/services/RoundingService";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
 import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { SEP10JWTService } from "./useSEP10JWT";
 import { Recipient } from "@stellarcarbon/sc-sdk";
 
-export function useWalletConnection(
-  stellarWalletsKit: StellarWalletsKit | null
-) {
+export function useWalletConnection() {
   const router = useRouter();
 
   // Null at first, will become undefined after attempting to load from local storage fails.
@@ -30,39 +28,21 @@ export function useWalletConnection(
       swk.setWallet(wc.walletType.id);
     }
     setWalletConnection(wc);
-  }, []);
 
-  // Load existing wallet connection
-  useEffect(() => {
-    if (stellarWalletsKit === null) return;
-
-    const lwcn = () => {
-      const wc = WalletConnectionStorageService.loadWalletConnection();
-      if (wc !== undefined) {
-        stellarWalletsKit.setWallet(wc.walletType.id);
-      }
-      setWalletConnection(wc);
-    };
-
-    if (walletConnection === null) {
-      lwcn();
-    } else if (walletConnection !== undefined) {
+    if (wc) {
       TransactionHistoryService.fetchAccountBalance(
         appConfig.server,
-        walletConnection.stellarPubKey
+        wc.stellarPubKey
       ).then((accountBalance) => {
         setXlmBalance(accountBalance.xlm);
         setUsdcBalance(accountBalance.usdc);
       });
 
-      // Pending rounding check
-      if (walletConnection !== undefined && hasPendingRounding === undefined) {
-        RoundingService.hasPendingRounding(walletConnection.stellarPubKey).then(
-          (isPending) => setHasPendingRounding(isPending)
-        );
-      }
+      RoundingService.hasPendingRounding(wc.stellarPubKey).then((isPending) =>
+        setHasPendingRounding(isPending)
+      );
     }
-  }, [walletConnection, hasPendingRounding, stellarWalletsKit]);
+  }, []);
 
   const updateWalletConnection = useCallback(
     (recipient?: Recipient) => {

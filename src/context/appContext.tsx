@@ -143,7 +143,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     hasPendingRounding,
     setHasPendingRounding,
     loadWalletConnection,
-  } = useWalletConnection(stellarWalletsKitRef.current);
+  } = useWalletConnection();
 
   const {
     myTransactions,
