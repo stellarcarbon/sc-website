@@ -1,4 +1,3 @@
-import { SinkCarbonXdrPostRequest } from "@/app/types";
 import {
   createContext,
   Dispatch,

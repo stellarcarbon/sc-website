@@ -1,6 +1,6 @@
 "use client";
 
-import { SinkCarbonXdrPostRequest, SinkingFormData } from "@/app/types";
+import { SinkingFormData } from "@/app/types";
 import {
   createContext,
   Dispatch,
@@ -62,7 +62,6 @@ export const useSinkFormContext = () => {
 };
 
 export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
-  // const { setSinkRequest, setStep } = useSinkingContext();
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue, reset } =
     useForm<SinkingFormData>({

@@ -68,24 +68,6 @@ export const CARBON_SINK_ACCOUNT =
 export const CARBON_ACCOUNT =
   "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";
 
-// const r = buildSinkCarbonXdr();
-
-export interface SinkCarbonXdrPostRequest {
-  funder: string;
-  recipient?: string;
-  carbonAmount?: number;
-  paymentAsset?: PaymentAsset;
-  vcsProjectId?: VcsProject;
-  memoType?: StellarSdk.MemoType;
-  memoValue?: string;
-  email?: string;
-}
-
-// export interface SinkingTransaction {
-//   transactionPostRequest?: SinkCarbonXdrPostRequest;
-//   transactionPostResponse?: SinkingResponse;
-// }
-
 export interface AccountBalance {
   xlm: number;
   usdc: number;
