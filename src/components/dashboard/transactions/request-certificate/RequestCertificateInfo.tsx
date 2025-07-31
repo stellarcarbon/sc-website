@@ -6,11 +6,15 @@ import {
   RequestCertificateSteps,
   useRequestCertificateContext,
 } from "@/context/RequestCertificateContext";
+import { useRouter } from "next/navigation";
 
 export default function RequestCertficateInfo() {
-  const { walletConnection, retirementGraceDays } = useAppContext();
+  const { walletConnection, retirementGraceDays, jwt, setSep10Target } =
+    useAppContext();
   const { setStep } = useRequestCertificateContext();
   const { setShowForm } = useInlineContactInfoContext();
+
+  const router = useRouter();
 
   return (
     <>
@@ -34,10 +38,15 @@ export default function RequestCertficateInfo() {
       <Button
         className="w-[250px]"
         onClick={() => {
-          if (!walletConnection?.recipient) {
-            setShowForm(true);
+          if (jwt) {
+            if (!walletConnection?.recipient) {
+              setShowForm(true);
+            }
+            setStep(RequestCertificateSteps.choose);
+          } else {
+            setSep10Target("rounding");
+            router.push("/sep10");
           }
-          setStep(RequestCertificateSteps.choose);
         }}
       >
         Request certificate

@@ -55,7 +55,7 @@ export const useConnectWalletContext = () => {
 export const ConnectWalletContextProvider = ({
   children,
 }: PropsWithChildren) => {
-  const { setWalletConnection } = useAppContext();
+  const { setWalletConnection, setSep10Target } = useAppContext();
 
   const [selectedWallet, setSelectedWallet] = useState<ISupportedWallet>();
   const [username, setUsername] = useState<string>();
@@ -152,7 +152,8 @@ export const ConnectWalletContextProvider = ({
         if (appConfig.demo) {
           router.push("/emissions");
         } else {
-          router.push("/sep10?target=account-registration");
+          setSep10Target("register");
+          router.push("/sep10");
         }
       }
     });
@@ -164,6 +165,7 @@ export const ConnectWalletContextProvider = ({
     router,
     setWalletsKitError,
     validateForm,
+    setSep10Target,
   ]);
 
   const providerValue = useMemo(

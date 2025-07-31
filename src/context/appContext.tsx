@@ -27,9 +27,9 @@ import useIsMobile from "@/hooks/useIsMobile";
 import appConfig from "@/config";
 import { useTransactionHistory } from "@/hooks/useTransactionHistory";
 import { useWalletConnection } from "@/hooks/useWalletConnection";
-import { Recipient } from "@stellarcarbon/sc-sdk";
+import { getRecipient, Recipient } from "@stellarcarbon/sc-sdk";
 import { useSEP10JWT } from "@/hooks/useSEP10JWT";
-import WalletConnectionStorageService from "@/services/WalletConnectionService";
+import { SEP10Target } from "./SEP10Context";
 
 declare global {
   interface Date {
@@ -93,6 +93,9 @@ type AppContext = {
   setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
 
   retirementGraceDays: number;
+
+  sep10Target: SEP10Target;
+  setSep10Target: Dispatch<SetStateAction<SEP10Target>>;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -111,8 +114,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   );
   const stellarWalletsKitRef = useRef<StellarWalletsKit | null>(null);
 
+  // const [swk, setSwk] = useState<StellarWalletsKit | null>(null);
+
   const isMobileDevice = useIsMobile();
 
+  const [sep10Target, setSep10Target] = useState<SEP10Target>("dashboard"); // where the sep10 flow will eventually redirect to
   const [jwt, setJwt] = useState<string>();
   useSEP10JWT(jwt, setJwt);
 
@@ -154,36 +160,81 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     refetch: refetchTransactions,
   } = useTransactionHistory(walletConnection?.stellarPubKey);
 
+  const loadAccount = useCallback(
+    async (token: string): Promise<Recipient | undefined> => {
+      if (!walletConnection) return;
+
+      const res = await getRecipient({
+        path: { recipient_address: walletConnection.stellarPubKey },
+        fetch: (request: Request) => {
+          const authRequest = new Request(request, {
+            headers: {
+              ...Object.fromEntries(request.headers.entries()),
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          return fetch(authRequest);
+        },
+      });
+
+      if (res.response.status === 404 && walletConnection.recipient) {
+        // Account doesn't exist
+        updateWalletConnection();
+      } else if (res.data) {
+        updateWalletConnection(res.data);
+        return res.data;
+      }
+    },
+    [walletConnection, updateWalletConnection]
+  );
+
+  const [isKitReady, setIsKitReady] = useState(false);
+
+  // Load wallets kit
   useEffect(() => {
-    const loadApp = async () => {
-      console.log("loadApp");
+    const loadWalletsKit = async () => {
+      console.log("initialize app");
       if (typeof window !== "undefined") {
         // This import makes sure assigning the kit to the ref happens client side.
         const { StellarWalletsKit } = await import(
           "@creit.tech/stellar-wallets-kit"
         );
-        const swk = new StellarWalletsKit({
+        const newSwk = new StellarWalletsKit({
           network: appConfig.network,
           selectedWalletId: XBULL_ID,
           modules: allowAllModules(),
         });
-        stellarWalletsKitRef.current = swk;
-        loadWalletConnection(swk);
+        stellarWalletsKitRef.current = newSwk;
 
-        // Load supported wallets from stellar wallets kit
-        let wallets;
-        if (window.Cypress) {
-          wallets = await loadAvailableWalletsMock();
-        } else {
-          wallets =
-            (await stellarWalletsKitRef.current?.getSupportedWallets()) ?? [];
-        }
-        setSupportedWallets(wallets);
+        setIsKitReady(true);
       }
     };
 
-    loadApp();
+    loadWalletsKit();
   }, []);
+
+  // Load supported wallets from stellar wallets kit
+  useEffect(() => {
+    if (!isKitReady) return;
+
+    stellarWalletsKitRef
+      .current!.getSupportedWallets()
+      .then((wallets) => setSupportedWallets(wallets));
+  }, [isKitReady]);
+
+  // Load wallet connection & JWT from storage
+  useEffect(() => {
+    if (!isKitReady) return;
+
+    loadWalletConnection(stellarWalletsKitRef.current!);
+  }, [isKitReady, loadWalletConnection]);
+
+  useEffect(() => {
+    if (!jwt) return;
+
+    console.log("hier");
+    loadAccount(jwt);
+  }, [jwt]);
 
   const providerValue = useMemo(() => {
     return {
@@ -225,6 +276,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       setIsDropdownOpen,
 
       retirementGraceDays,
+
+      sep10Target,
+      setSep10Target,
     };
   }, [
     supportedWallets,
@@ -252,6 +306,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     isDropdownOpen,
     disconnectWallet,
     retirementGraceDays,
+    sep10Target,
   ]);
 
   return (

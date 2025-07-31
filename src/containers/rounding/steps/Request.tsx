@@ -7,22 +7,52 @@ import RoundingStep from "./Step";
 import { useAppContext } from "@/context/appContext";
 
 export default function RequestRounding() {
-  const { totalPending } = useAppContext();
+  const { totalPending, walletConnection } = useAppContext();
   const { requestCertificate } = useRoundingContext();
+
+  if (!walletConnection?.recipient) return;
 
   return (
     <RoundingStep title="Confirm certificate creation">
       <div className="text-base text-center">
-        Please confirm the creation of your personalized certificate.
+        Please confirm the creation of a personalized certificate from your
+        pending balance.
       </div>
 
-      <div className="mt-2 mb-6 flex justify-center items-center gap-8">
-        <div className="font-bold text-2xl">Sink amount</div>
+      <div className="flex flex-col items-center gap-4 w-full text-xl my-4 mb-6">
+        <div className="flex justify-between w-full">
+          <div className="font-bold">Amount</div>
+          <div>
+            {Math.floor(totalPending)}
+            <CARBONCurrencyIcon
+              className="inline ml-1"
+              height={24}
+              width={24}
+            />
+          </div>
+        </div>
+        <div className="flex justify-between w-full">
+          <div className="font-bold">E-mail</div>
+          <div className="break-words whitespace-normal text-right max-w-[75%] overflow-hidden">
+            {/* aslfklskflaskfasflkjasflaksflaassdasdasdasdskfaslkfsalfksalfkaslfaskflakslfkas */}
+            {walletConnection.recipient.email}
+          </div>
+        </div>
+        <div className="flex justify-between w-full">
+          <div className="font-bold">Name</div>
+          <div className="break-words whitespace-normal text-right max-w-[75%] overflow-hidden">
+            {walletConnection.recipient.name}
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="mt-2 mb-6 flex justify-center items-center gap-8">
+        <div className="font-bold text-2xl">CARBON amount</div>
         <div className="text-3xl flex items-center gap-1 justify-center">
           {Math.floor(totalPending)}
           <CARBONCurrencyIcon className="inline ml-1" height={24} width={24} />
         </div>
-      </div>
+      </div> */}
       <Button onClick={requestCertificate} className="text-base font-normal">
         <FontAwesomeIcon icon={faFileLines} />
         <div>Request certificate</div>

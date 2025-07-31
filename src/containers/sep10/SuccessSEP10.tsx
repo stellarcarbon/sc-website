@@ -3,18 +3,32 @@ import RoundingStep from "../rounding/steps/Step";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
-import { useSEP10Context } from "@/context/SEP10Context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward } from "@fortawesome/free-solid-svg-icons";
+import { useAppContext } from "@/context/appContext";
+import { useSCAccount } from "@/hooks/useSCAccount";
 
 export default function SuccessSEP10() {
-  const { targetHref } = useSEP10Context();
+  const { sep10Target } = useAppContext();
+  const { isStale } = useSCAccount();
 
   const router = useRouter();
 
   const onClick = useCallback(() => {
+    let targetHref = "/dashboard";
+
+    if (sep10Target === "register") {
+      if (isStale) {
+        targetHref = "/connect/update";
+      } else {
+        targetHref = "/connect/account-registration";
+      }
+    } else if (sep10Target === "rounding") {
+      targetHref = "/dashboard/transactions";
+    }
+
     router.push(targetHref);
-  }, [router, targetHref]);
+  }, [router, sep10Target, isStale]);
 
   return (
     <RoundingStep title="Success">

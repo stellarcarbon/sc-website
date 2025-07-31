@@ -64,7 +64,9 @@ export default function OverviewContactInfo() {
       <div className="p-3 md:p-6 md:py-3">
         {showForm ? (
           <ContactDetailsContextProvider mode="overview">
-            <ContactDetailsForm />
+            <div className="mb-2">
+              <ContactDetailsForm />
+            </div>
           </ContactDetailsContextProvider>
         ) : (
           <div className="my-2">

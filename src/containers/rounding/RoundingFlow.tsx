@@ -14,16 +14,17 @@ const RoundFlowDetails: Record<RoundDownSteps, ReactNode> = {
 };
 
 export default function RoundingFlow() {
-  const { jwt } = useAppContext();
+  const { jwt, setSep10Target } = useAppContext();
   const { step } = useRoundingContext();
 
   const router = useRouter();
 
   useEffect(() => {
     if (!jwt) {
-      router.push("/sep10?target=rounding");
+      setSep10Target("rounding");
+      router.push("/sep10");
     }
-  }, [jwt, router]);
+  }, [jwt, router, setSep10Target]);
 
   if (!jwt) {
     return;

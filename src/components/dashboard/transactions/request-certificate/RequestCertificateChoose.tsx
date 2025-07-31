@@ -21,7 +21,7 @@ export default function RequestCertificateChoose() {
       <div className="relative flex w-full justify-center">
         <h2 className="text-xl font-semibold">Requesting a certificate</h2>
       </div>
-      <div className="grid grid-cols-5 text-base">
+      <div className="grid grid-cols-5 text-base w-full">
         <div>E-mail</div>
         <div className="col-span-4 flex justify-end">
           <div className="break-words whitespace-normal text-right max-w-full overflow-hidden">

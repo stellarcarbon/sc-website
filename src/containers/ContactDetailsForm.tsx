@@ -77,6 +77,8 @@ export default function ContactDetailsForm() {
     } else if (mode === "update") {
       updateAccount(useremail, username);
     }
+
+    router.push("/dashboard");
   }, [
     walletConnection,
     useremail,
@@ -86,6 +88,7 @@ export default function ContactDetailsForm() {
     setEmailError,
     validateForm,
     mode,
+    router,
   ]);
 
   const onSubmitInline = useCallback(() => {
@@ -127,7 +130,7 @@ export default function ContactDetailsForm() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col gap-4 my-2 md:my-3 mb-6">
+      <div className="flex flex-col gap-4 my-2 md:my-3 mb-6 md:mb-6">
         <div className="flex flex-col gap-1 w-full">
           <label className="text-sm" htmlFor="useremail">
             E-mail
@@ -191,7 +194,7 @@ export default function ContactDetailsForm() {
 
 function SaveButton({ onClick }: { onClick: () => void }) {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} className="h-8 text-sm">
       <FontAwesomeIcon icon={faFloppyDisk} />
       Save contact details
     </Button>
@@ -206,7 +209,7 @@ function SkipButton({
   disabled: boolean;
 }) {
   return (
-    <Button disabled={disabled} onClick={onClick}>
+    <Button disabled={disabled} onClick={onClick} className="h-8 text-sm">
       <FontAwesomeIcon icon={faForwardFast} /> Skip registration
     </Button>
   );
