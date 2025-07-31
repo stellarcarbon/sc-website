@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-type OverviewContactInfoContext = {
+type InlineContactInfoContext = {
   showForm: boolean;
   setShowForm: Dispatch<SetStateAction<boolean>>;
 
@@ -16,21 +16,21 @@ type OverviewContactInfoContext = {
   setShowDeleteAccountDialog: Dispatch<SetStateAction<boolean>>;
 };
 
-const defaultContext: OverviewContactInfoContext = {
+const defaultContext: InlineContactInfoContext = {
   showForm: false,
   setShowForm: () => {},
   showDeleteAccountDialog: false,
   setShowDeleteAccountDialog: () => {},
 };
 
-const OverviewContactInfoContext =
-  createContext<OverviewContactInfoContext>(defaultContext);
+const InlineContactInfoContext =
+  createContext<InlineContactInfoContext>(defaultContext);
 
-export const useOverviewContactInfoContext = () => {
-  return useContext(OverviewContactInfoContext);
+export const useInlineContactInfoContext = () => {
+  return useContext(InlineContactInfoContext);
 };
 
-export const OverviewContactInfoContextProvider = ({
+export const InlineContactInfoContextProvider = ({
   children,
 }: PropsWithChildren) => {
   const [showForm, setShowForm] = useState<boolean>(false);
@@ -48,8 +48,8 @@ export const OverviewContactInfoContextProvider = ({
   );
 
   return (
-    <OverviewContactInfoContext.Provider value={providerValue}>
+    <InlineContactInfoContext.Provider value={providerValue}>
       {children}
-    </OverviewContactInfoContext.Provider>
+    </InlineContactInfoContext.Provider>
   );
 };

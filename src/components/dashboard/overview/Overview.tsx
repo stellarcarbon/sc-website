@@ -8,7 +8,7 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "@/components/SectionHeader";
 import Button from "@/components/Button";
 import OverviewContactInfo from "./OverviewContactInfo";
-import { OverviewContactInfoContextProvider } from "@/context/OverviewContactInfoContext";
+import { InlineContactInfoContextProvider } from "@/context/InlineContactInfoContext";
 
 export default function Overview() {
   const { walletConnection, disconnectWallet } = useAppContext();
@@ -18,9 +18,9 @@ export default function Overview() {
       <TransactionSummary />
 
       {walletConnection && (
-        <OverviewContactInfoContextProvider>
+        <InlineContactInfoContextProvider>
           <OverviewContactInfo />
-        </OverviewContactInfoContextProvider>
+        </InlineContactInfoContextProvider>
       )}
 
       {walletConnection && (

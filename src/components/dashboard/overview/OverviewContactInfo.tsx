@@ -1,15 +1,15 @@
 import Button from "@/components/Button";
 import ConfirmDialog from "@/components/ConfirmDialog";
 import SectionHeader from "@/components/SectionHeader";
-import ContactDetailsForm from "@/containers/connect_wallet/contactdetails/ContactDetailsForm";
+import ContactDetailsForm from "@/containers/ContactDetailsForm";
 import { useAppContext } from "@/context/appContext";
 import { ContactDetailsContextProvider } from "@/context/ContactDetailsContext";
-import { useOverviewContactInfoContext } from "@/context/OverviewContactInfoContext";
+import { useInlineContactInfoContext } from "@/context/InlineContactInfoContext";
 import { useSCAccount } from "@/hooks/useSCAccount";
-import { faEdit, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 export default function OverviewContactInfo() {
   const { jwt, walletConnection } = useAppContext();
@@ -18,7 +18,7 @@ export default function OverviewContactInfo() {
     setShowForm,
     showDeleteAccountDialog,
     setShowDeleteAccountDialog,
-  } = useOverviewContactInfoContext();
+  } = useInlineContactInfoContext();
 
   const { deleteAccount } = useSCAccount();
 
@@ -63,11 +63,7 @@ export default function OverviewContactInfo() {
 
       <div className="p-3 md:p-6 md:py-3">
         {showForm ? (
-          <ContactDetailsContextProvider mode="update">
-            {/* <div className="my-2">
-              Use this form to update your contact details.
-            </div> */}
-
+          <ContactDetailsContextProvider mode="overview">
             <ContactDetailsForm />
           </ContactDetailsContextProvider>
         ) : (
@@ -99,8 +95,8 @@ export default function OverviewContactInfo() {
       </div>
       {showDeleteAccountDialog && (
         <ConfirmDialog
-          title="Delete item"
-          message="Are you sure you want to delete this? This action cannot be undone."
+          title="Delete registration"
+          message="Are you sure you want to delete your Stellarcarbon registration?"
           onCancel={() => setShowDeleteAccountDialog(false)}
           onConfirm={handleDelete}
         />

@@ -1,4 +1,4 @@
-import { ConnectWalletFormError } from "../ConnectWalletForm";
+import { ConnectWalletFormError } from "./connect_wallet/ConnectWalletForm";
 import { useContactDetailsContext } from "@/context/ContactDetailsContext";
 import TextInput from "@/components/TextInput";
 import Button from "@/components/Button";
@@ -14,7 +14,7 @@ import {
   faForwardFast,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { useOverviewContactInfoContext } from "@/context/OverviewContactInfoContext";
+import { useInlineContactInfoContext } from "@/context/InlineContactInfoContext";
 
 export default function ContactDetailsForm() {
   const { updateWalletConnection, walletConnection } = useAppContext();
@@ -28,9 +28,9 @@ export default function ContactDetailsForm() {
     mode,
   } = useContactDetailsContext();
   const { setShowForm, setShowDeleteAccountDialog } =
-    useOverviewContactInfoContext();
+    useInlineContactInfoContext();
 
-  const { createAccount, updateAccount, deleteAccount } = useSCAccount();
+  const { createAccount, updateAccount } = useSCAccount();
 
   const router = useRouter();
 
@@ -51,6 +51,7 @@ export default function ContactDetailsForm() {
 
   const validateForm = useCallback(() => {
     let emailErr: boolean = false;
+    console.log(useremail);
 
     if (useremail === "") {
       emailErr = true;
@@ -66,33 +67,47 @@ export default function ContactDetailsForm() {
     return true;
   }, [useremail, setEmailError]);
 
-  const onSubmit = useCallback(() => {
+  const onSubmitRegistration = useCallback(() => {
     setEmailError(false);
 
-    if (mode === "create") {
-      if (!validateForm()) return;
-      createAccount(walletConnection!.stellarPubKey, useremail, username);
-    } else if (mode === "update") {
-      if (!validateForm()) return;
-      setShowForm(false);
-      if (walletConnection!.recipient) {
-        updateAccount(useremail, username);
-      } else {
-        createAccount(walletConnection!.stellarPubKey, useremail, username);
-      }
-    }
+    if (!validateForm() || !walletConnection) return;
 
-    router.push("/dashboard");
+    if (mode === "create") {
+      createAccount(walletConnection.stellarPubKey, useremail, username);
+    } else if (mode === "update") {
+      updateAccount(useremail, username);
+    }
   }, [
     walletConnection,
-    username,
     useremail,
-    validateForm,
-    setEmailError,
-    router,
+    username,
     createAccount,
     updateAccount,
+    setEmailError,
+    validateForm,
     mode,
+  ]);
+
+  const onSubmitInline = useCallback(() => {
+    setEmailError(false);
+
+    if (!validateForm() || !walletConnection) return;
+
+    setShowForm(false);
+
+    if (walletConnection.recipient) {
+      updateAccount(useremail, username);
+    } else {
+      createAccount(walletConnection.stellarPubKey, useremail, username);
+    }
+  }, [
+    walletConnection,
+    useremail,
+    username,
+    createAccount,
+    updateAccount,
+    setEmailError,
+    validateForm,
     setShowForm,
   ]);
 
@@ -104,7 +119,7 @@ export default function ContactDetailsForm() {
   }, [setEmailError, updateWalletConnection, router]);
 
   useEffect(() => {
-    if (mode === "update" && walletConnection?.recipient) {
+    if (mode !== "create" && walletConnection?.recipient) {
       setUseremail(walletConnection.recipient.email);
       setUsername(walletConnection.recipient?.name ?? "");
     }
@@ -112,7 +127,7 @@ export default function ContactDetailsForm() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col gap-4 my-2 md:my-3">
+      <div className="flex flex-col gap-4 my-2 md:my-3 mb-6">
         <div className="flex flex-col gap-1 w-full">
           <label className="text-sm" htmlFor="useremail">
             E-mail
@@ -142,33 +157,76 @@ export default function ContactDetailsForm() {
         </div>
       </div>
 
-      {mode === "create" && (
-        <div className="mt-5 mb-4 flex justify-between md:justify-start gap-2">
-          <Button onClick={onSubmit}>
-            <FontAwesomeIcon icon={faFloppyDisk} />
-            Save contact details
-          </Button>
-          <Button disabled={useremail !== ""} onClick={onSkip}>
-            <FontAwesomeIcon icon={faForwardFast} /> Skip registration
-          </Button>
-        </div>
-      )}
+      <div className="mb-4 flex justify-between">
+        {mode === "create" && (
+          <>
+            <SaveButton onClick={onSubmitRegistration} />
+            <SkipButton disabled={useremail !== ""} onClick={onSkip} />
+          </>
+        )}
 
-      {mode === "update" && (
-        <div className="mt-5 mb-12 flex justify-between">
-          <Button onClick={onSubmit} className="h-8 text-sm">
-            <FontAwesomeIcon icon={faCheckCircle} /> Update registration
-          </Button>
-          {walletConnection?.recipient && (
-            <Button
-              className="!bg-red-500 hover:!bg-red-600 text-sm text-white h-8 border-0"
-              onClick={() => setShowDeleteAccountDialog(true)}
-            >
-              <FontAwesomeIcon icon={faTrash} /> Delete
-            </Button>
-          )}
-        </div>
-      )}
+        {mode === "update" && (
+          <>
+            <UpdateButton onClick={onSubmitRegistration} />
+            {walletConnection?.recipient && (
+              <DeleteButton onClick={() => setShowDeleteAccountDialog(true)} />
+            )}
+          </>
+        )}
+
+        {mode === "overview" && (
+          <>
+            <UpdateButton onClick={onSubmitInline} />
+            {walletConnection?.recipient && (
+              <DeleteButton onClick={() => setShowDeleteAccountDialog(true)} />
+            )}
+          </>
+        )}
+
+        {mode === "rounddown" && <SaveButton onClick={onSubmitInline} />}
+      </div>
     </div>
+  );
+}
+
+function SaveButton({ onClick }: { onClick: () => void }) {
+  return (
+    <Button onClick={onClick}>
+      <FontAwesomeIcon icon={faFloppyDisk} />
+      Save contact details
+    </Button>
+  );
+}
+
+function SkipButton({
+  onClick,
+  disabled,
+}: {
+  onClick: () => void;
+  disabled: boolean;
+}) {
+  return (
+    <Button disabled={disabled} onClick={onClick}>
+      <FontAwesomeIcon icon={faForwardFast} /> Skip registration
+    </Button>
+  );
+}
+
+function UpdateButton({ onClick }: { onClick: () => void }) {
+  return (
+    <Button onClick={onClick} className="h-8 text-sm">
+      <FontAwesomeIcon icon={faCheckCircle} /> Update registration
+    </Button>
+  );
+}
+
+function DeleteButton({ onClick }: { onClick: () => void }) {
+  return (
+    <Button
+      className="!bg-red-500 hover:!bg-red-600 text-sm text-white h-8 border-0"
+      onClick={onClick}
+    >
+      <FontAwesomeIcon icon={faTrash} /> Delete
+    </Button>
   );
 }

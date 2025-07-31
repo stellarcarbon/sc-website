@@ -1,7 +1,7 @@
 "use client";
 
 import SectionHeader from "@/components/SectionHeader";
-import ContactDetailsForm from "@/containers/connect_wallet/contactdetails/ContactDetailsForm";
+import ContactDetailsForm from "@/containers/ContactDetailsForm";
 import { ContactDetailsContextProvider } from "@/context/ContactDetailsContext";
 
 export default function UpdateAccountPage() {

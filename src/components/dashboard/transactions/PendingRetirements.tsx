@@ -34,15 +34,15 @@ export default function PendingRetirements() {
   }, [setHasPendingRounding, walletConnection]);
 
   return (
-    <div className="bg-darkest">
-      <div className="w-full px-4 flex flex-col">
+    <div className="bg-darkest w-full">
+      <div className="px-4 flex flex-col">
         <div className="mt-12 md:mt-12 flex flex-col items-center">
           <DashboardTitle>Pending retirements balance</DashboardTitle>
           <div className="flex items-center justify-center gap-3 text-[48px] mb-8">
             <span>{totalPending.toFixed(3)}</span>
             <CARBONCurrencyIcon width={40} height={40} />
           </div>
-          <PendingRetirementsInfo totalCarbonPending={totalPending} />
+          <PendingRetirementsInfo />
         </div>
       </div>
 

@@ -116,7 +116,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
   const overrideFormValues = useCallback(
     (memo?: string, tonnes?: number, currency?: PaymentAsset) => {
       if (memo) setValue("memo", memo);
-      if (tonnes) setValue("tonnes", tonnes);
+      if (tonnes) setValue("tonnes", Number(tonnes.toFixed(3)));
       if (currency) setValue("currency", currency);
       router.push("/dashboard/sink");
     },

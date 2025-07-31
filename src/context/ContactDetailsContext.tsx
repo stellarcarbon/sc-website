@@ -8,6 +8,8 @@ import {
   useState,
 } from "react";
 
+type ContactDetailsMode = "create" | "update" | "overview" | "rounddown";
+
 type ContactDetailsContext = {
   username: string;
   setUsername: Dispatch<SetStateAction<string>>;
@@ -17,7 +19,7 @@ type ContactDetailsContext = {
   emailError: boolean;
   setEmailError: Dispatch<SetStateAction<boolean>>;
 
-  mode: "create" | "update";
+  mode: ContactDetailsMode;
 };
 
 const ContactDetailsContext = createContext<ContactDetailsContext | null>(null);
@@ -31,7 +33,7 @@ export const useContactDetailsContext = () => {
 };
 
 type ContactDetailsContextProviderProps = PropsWithChildren<{
-  mode: "create" | "update";
+  mode: ContactDetailsMode;
 }>;
 
 export const ContactDetailsContextProvider = ({
