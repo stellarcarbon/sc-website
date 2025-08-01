@@ -102,12 +102,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
         url: "/carbon/sink-carbon/xdr",
       };
 
-      if (walletConnection.recipient) {
-        request.query.email = walletConnection.recipient.email;
-      }
-
       setFormSinkRequest(request);
-      // TODO: Effect in SinkingContext will pick this up.
     },
     [walletConnection, tonnes, currency, memo, setFormSinkRequest]
   );

@@ -4,12 +4,9 @@ import {
 } from "@creit.tech/stellar-wallets-kit";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import {
-  buildSinkCarbonXdr,
-  getUsdQuote,
   PaymentAsset,
   Recipient,
   RetirementSummary,
-  VcsProject,
 } from "@stellarcarbon/sc-sdk";
 
 export type WalletConnection = {
