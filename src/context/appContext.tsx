@@ -156,7 +156,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (walletConnection && !isWalletConnectionReady) {
-      console.log("update wallet connection ready");
       setIsWalletConnectionReady(true);
     }
   }, [walletConnection, isWalletConnectionReady]);

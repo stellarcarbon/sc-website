@@ -34,7 +34,6 @@ export default function RequestRounding() {
         <div className="flex justify-between w-full">
           <div className="font-bold">E-mail</div>
           <div className="break-words whitespace-normal text-right max-w-[75%] overflow-hidden">
-            {/* aslfklskflaskfasflkjasflaksflaassdasdasdasdskfaslkfsalfksalfkaslfaskflakslfkas */}
             {walletConnection.recipient.email}
           </div>
         </div>
@@ -46,13 +45,6 @@ export default function RequestRounding() {
         </div>
       </div>
 
-      {/* <div className="mt-2 mb-6 flex justify-center items-center gap-8">
-        <div className="font-bold text-2xl">CARBON amount</div>
-        <div className="text-3xl flex items-center gap-1 justify-center">
-          {Math.floor(totalPending)}
-          <CARBONCurrencyIcon className="inline ml-1" height={24} width={24} />
-        </div>
-      </div> */}
       <Button onClick={requestCertificate} className="text-base font-normal">
         <FontAwesomeIcon icon={faFileLines} />
         <div>Request certificate</div>

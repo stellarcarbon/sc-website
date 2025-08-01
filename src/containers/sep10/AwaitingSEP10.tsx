@@ -1,5 +1,5 @@
 import RoundingStep from "../rounding/steps/Step";
-import { faFileShield, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faFileShield } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "@/components/Button";
 
@@ -21,14 +21,6 @@ export default function AwaitingSEP10({
             your identity.
           </div>
         </div>
-        {/* <div>
-          This confirms your identity and allows access to protected actions
-          like account setup.
-        </div> */}
-        {/* <div>Do you want to share your address with stellarcarbon.io?</div> */}
-        {/* <div className="my-4">
-          <FontAwesomeIcon icon={faFileShield} className="text-[72px]" />
-        </div> */}
         <Button onClick={signChallenge} className="text-base font-normal my-2">
           <FontAwesomeIcon icon={faFileShield} />
           <div>Sign message</div>

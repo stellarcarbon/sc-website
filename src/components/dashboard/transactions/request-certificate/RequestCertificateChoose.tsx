@@ -38,20 +38,6 @@ export default function RequestCertificateChoose() {
           </div>
         </div>
       </div>
-      {/* <div className="flex flex-col text-base w-full">
-        <div>E-mail</div>
-        <div className="col-span-4 flex">
-          <div className="break-words whitespace-normal max-w-full overflow-hidden">
-            {walletConnection?.recipient?.email}
-          </div>
-        </div>
-        <div>Name</div>
-        <div className="col-span-4 flex justify-end break-words whitespace-pre-wrap">
-          <div className="break-words whitespace-normal text-right max-w-full overflow-hidden">
-            {walletConnection?.recipient?.name}
-          </div>
-        </div>
-      </div> */}
       <span className="text-center">
         To create a personalized certificate we have to submit a whole number of
         CARBON (

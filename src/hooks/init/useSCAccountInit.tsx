@@ -46,7 +46,6 @@ export function useSCAccountInit({
   useEffect(() => {
     if (!jwt || !isWalletConnectionReady) return;
 
-    console.log("oi", walletConnection);
     loadAccount(jwt);
   }, [jwt, isWalletConnectionReady]);
 }

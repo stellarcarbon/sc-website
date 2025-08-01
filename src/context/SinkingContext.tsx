@@ -182,7 +182,6 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const confirmSinkRequest = useCallback(
     async (request: BuildSinkCarbonXdrData) => {
       // Build the XDR with stellarcarbon API
-      console.log(request);
       try {
         const response = await buildSinkCarbonXdr(request);
 

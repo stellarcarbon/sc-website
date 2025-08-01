@@ -20,7 +20,6 @@ export default function ConnectWalletForm() {
         </SectionHeader>
         <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-8 md:gap-16">
           <SelectWallet />
-          {/* <ContactDetails /> */}
           <AcceptTnC />
 
           {walletsKitError && (

@@ -46,10 +46,6 @@ export function useWalletConnection() {
 
   const updateWalletConnection = useCallback(
     (recipient?: Recipient) => {
-      // console.log(walletConnection);
-      // TODO: add /recipients POST/PATCH here
-      console.log("updateWalletConn", recipient);
-
       const newWalletConnection: WalletConnection = {
         ...walletConnection!,
         recipient,

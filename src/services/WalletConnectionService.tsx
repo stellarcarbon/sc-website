@@ -23,7 +23,6 @@ export default class WalletConnectionStorageService {
   }
 
   public static removeWalletConnection() {
-    console.log("remove?");
     localStorage.removeItem(this.LOCAL_STORAGE_KEY);
   }
 }

@@ -52,7 +52,6 @@ export default function ContactDetailsForm() {
 
   const validateForm = useCallback(() => {
     let emailErr: boolean = false;
-    console.log(useremail);
 
     if (useremail === "") {
       emailErr = true;

@@ -25,7 +25,6 @@ export function useSCAccount() {
 
   const createAccount = useCallback(
     async (address: string, email: string, name: string | undefined) => {
-      console.log("create", jwt);
       const res = await createRecipient({
         body: {
           address,
@@ -52,7 +51,6 @@ export function useSCAccount() {
 
   const updateAccount = useCallback(
     async (email: string, name?: string) => {
-      console.log("ua");
       if (!walletConnection) return;
 
       const res = await updateRecipient({

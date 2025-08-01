@@ -15,7 +15,6 @@ export function useSWKInit({ ref, setIsKitReady }: Props) {
   // Load wallets kit
   useEffect(() => {
     const loadWalletsKit = async () => {
-      console.log("initialize app");
       if (typeof window !== "undefined") {
         // This import makes sure assigning the kit to the ref happens client side.
         const { StellarWalletsKit } = await import(
