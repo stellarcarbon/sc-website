@@ -7,7 +7,6 @@ import {
 } from "react";
 
 export function useSEP10JWT(
-  jwt: string | undefined,
   setJwt: Dispatch<SetStateAction<string | undefined>>
 ) {
   const updateJwt = useCallback(
@@ -18,31 +17,34 @@ export function useSEP10JWT(
     [setJwt]
   );
 
-  const expired = useMemo(() => {
-    if (!jwt) return true;
-
+  const isJwtExpired = useCallback((token: string) => {
     try {
-      const [, payload] = jwt.split(".");
+      const [, payload] = token.split(".");
       const decoded = JSON.parse(atob(payload));
       if (!decoded.exp) return true;
 
       const now = Math.floor(Date.now() / 1000);
-      return decoded.exp < now;
+      const safetyMargin = 3 * 3600; // Make sure there is a least 3 hours remaining
+      return decoded.exp < now + safetyMargin;
     } catch {
       return true;
     }
-  }, [jwt]);
+  }, []);
 
   useEffect(() => {
     const storedToken = SEP10JWTService.getJWT();
-    if (storedToken !== null) {
-      setJwt(storedToken);
+    if (storedToken === null) return;
+
+    if (isJwtExpired(storedToken)) {
+      SEP10JWTService.removeJWT();
+      return;
     }
-  }, [setJwt]);
+
+    setJwt(storedToken);
+  }, [setJwt, isJwtExpired]);
 
   return {
     updateJwt,
-    expired,
   };
 }
 

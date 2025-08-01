@@ -6,12 +6,14 @@ type Props = {
   jwt: string | undefined;
   walletConnection: WalletConnection | undefined | null;
   updateWalletConnection: (recipient?: Recipient) => void;
+  isWalletConnectionReady: boolean;
 };
 
 export function useSCAccountInit({
   jwt,
   walletConnection,
   updateWalletConnection,
+  isWalletConnectionReady,
 }: Props) {
   const loadAccount = useCallback(
     async (token: string): Promise<Recipient | undefined> => {
@@ -42,8 +44,9 @@ export function useSCAccountInit({
   );
 
   useEffect(() => {
-    if (!jwt) return;
+    if (!jwt || !isWalletConnectionReady) return;
 
+    console.log("oi", walletConnection);
     loadAccount(jwt);
-  }, [jwt]);
+  }, [jwt, isWalletConnectionReady]);
 }

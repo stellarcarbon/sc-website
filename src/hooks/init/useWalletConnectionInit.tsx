@@ -1,5 +1,5 @@
 import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit";
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 type Props = {
   ref: React.MutableRefObject<StellarWalletsKit | null>;

@@ -1,12 +1,17 @@
 import Button from "@/components/Button";
 import ConfirmDialog from "@/components/ConfirmDialog";
+import MessageBox from "@/components/MessageBox";
 import SectionHeader from "@/components/SectionHeader";
 import ContactDetailsForm from "@/containers/ContactDetailsForm";
 import { useAppContext } from "@/context/appContext";
 import { ContactDetailsContextProvider } from "@/context/ContactDetailsContext";
 import { useInlineContactInfoContext } from "@/context/InlineContactInfoContext";
 import { useSCAccount } from "@/hooks/useSCAccount";
-import { faEdit, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faEdit,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
@@ -20,7 +25,7 @@ export default function OverviewContactInfo() {
     setShowDeleteAccountDialog,
   } = useInlineContactInfoContext();
 
-  const { deleteAccount } = useSCAccount();
+  const { deleteAccount, isStale, updateAccount } = useSCAccount();
 
   const router = useRouter();
 
@@ -35,6 +40,13 @@ export default function OverviewContactInfo() {
   const onClickClose = useCallback(() => {
     setShowForm(false);
   }, [setShowForm]);
+
+  const onClickConfirmRegistration = useCallback(() => {
+    updateAccount(
+      walletConnection!.recipient!.email,
+      walletConnection?.recipient?.name ?? undefined
+    );
+  }, [walletConnection, updateAccount]);
 
   const handleDelete = useCallback(() => {
     deleteAccount();
@@ -89,6 +101,29 @@ export default function OverviewContactInfo() {
                       )}
                     </div>
                   </div>
+                  {isStale && (
+                    <MessageBox>
+                      <div className="text-center mb-4 text-sm">
+                        {/* You {`haven't`} updated your contact details for a
+                        while. Please confirm their correctness. */}
+                        {`Is this still the email address where you'd like to
+                        receive your retirement certificates?`}
+                      </div>
+                      <div className="flex justify-between">
+                        <Button
+                          onClick={onClickConfirmRegistration}
+                          className="h-8 text-sm"
+                        >
+                          <FontAwesomeIcon icon={faCircleCheck} />
+                          Confirm registration
+                        </Button>
+                        <Button onClick={onClickEdit} className="h-8 text-sm">
+                          <FontAwesomeIcon icon={faEdit} />
+                          <div className="font-normal">Edit registration</div>
+                        </Button>
+                      </div>
+                    </MessageBox>
+                  )}
                 </div>
               </>
             )}

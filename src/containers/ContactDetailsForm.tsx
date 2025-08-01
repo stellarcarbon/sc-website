@@ -15,6 +15,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useInlineContactInfoContext } from "@/context/InlineContactInfoContext";
+import MessageBox from "@/components/MessageBox";
 
 export default function ContactDetailsForm() {
   const { updateWalletConnection, walletConnection } = useAppContext();
@@ -179,7 +180,12 @@ export default function ContactDetailsForm() {
 
         {mode === "overview" && (
           <>
-            <UpdateButton onClick={onSubmitInline} />
+            {walletConnection?.recipient ? (
+              <UpdateButton onClick={onSubmitInline} />
+            ) : (
+              <SaveButton onClick={onSubmitInline} />
+            )}
+
             {walletConnection?.recipient && (
               <DeleteButton onClick={() => setShowDeleteAccountDialog(true)} />
             )}

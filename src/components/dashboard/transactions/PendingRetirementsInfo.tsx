@@ -33,7 +33,7 @@ export default function PendingRetirementsInfo() {
 
   return (
     <div
-      className={`md:w-[80%] self-center relative text-sm border border-tertiary rounded bg-primary`}
+      className={`self-center relative text-sm md:text-base border border-tertiary rounded bg-secondary`}
     >
       {body}
     </div>

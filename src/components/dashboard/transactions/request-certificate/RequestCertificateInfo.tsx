@@ -18,7 +18,9 @@ export default function RequestCertficateInfo() {
 
   return (
     <>
-      <h2 className="text-lg font-semibold">Create a personal certificate</h2>
+      <h2 className="text-lg md:text-xl font-semibold">
+        Create a personal certificate
+      </h2>
       <span className="text-center">
         {`Any pending retirements will automatically retire into the community
            pool after ${retirementGraceDays} days, which means you can no longer attain a personal

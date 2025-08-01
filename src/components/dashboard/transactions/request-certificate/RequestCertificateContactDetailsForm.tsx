@@ -18,7 +18,7 @@ export default function RequestCertificateContactDetailsForm() {
 
   return (
     <>
-      <h2 className="text-lg md:text-lg font-semibold">Account registration</h2>
+      <h2 className="text-lg md:text-xl font-semibold">Account registration</h2>
       <span className="text-center">
         You need to register your Stellar wallet to receive personal
         certificates.

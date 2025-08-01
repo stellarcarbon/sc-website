@@ -109,13 +109,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   );
   const stellarWalletsKitRef = useRef<StellarWalletsKit | null>(null);
 
-  // const [swk, setSwk] = useState<StellarWalletsKit | null>(null);
-
   const isMobileDevice = useIsMobile();
 
   const [sep10Target, setSep10Target] = useState<SEP10Target>("dashboard"); // where the sep10 flow will eventually redirect to
   const [jwt, setJwt] = useState<string>();
-  useSEP10JWT(jwt, setJwt);
+  useSEP10JWT(setJwt);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -154,6 +152,15 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   // Initialization logic
   const [isKitReady, setIsKitReady] = useState(false);
+  const [isWalletConnectionReady, setIsWalletConnectionReady] = useState(false);
+
+  useEffect(() => {
+    if (walletConnection && !isWalletConnectionReady) {
+      console.log("update wallet connection ready");
+      setIsWalletConnectionReady(true);
+    }
+  }, [walletConnection, isWalletConnectionReady]);
+
   useSWKInit({ ref: stellarWalletsKitRef, setIsKitReady });
   useSupportedWalletsInit({
     ref: stellarWalletsKitRef,
@@ -165,7 +172,12 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     isKitReady,
     loadWalletConnection,
   });
-  useSCAccountInit({ jwt, walletConnection, updateWalletConnection });
+  useSCAccountInit({
+    jwt,
+    walletConnection,
+    updateWalletConnection,
+    isWalletConnectionReady,
+  });
 
   const providerValue = useMemo(() => {
     return {

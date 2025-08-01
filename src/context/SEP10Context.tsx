@@ -25,7 +25,6 @@ export type SEP10Target = "dashboard" | "register" | "update" | "rounding";
 type SEP10Context = {
   challenge: Sep10ChallengeResponse | undefined;
   jwt: string | undefined;
-  expired: boolean;
   step: SEP10Steps;
   setStep: Dispatch<SetStateAction<SEP10Steps>>;
   error: string | undefined;
@@ -48,7 +47,7 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
   const [challenge, setChallenge] = useState<Sep10ChallengeResponse>();
   const [step, setStep] = useState<SEP10Steps>(SEP10Steps.fetchingChallenge);
   const [error, setError] = useState<string>();
-  const { updateJwt, expired } = useSEP10JWT(jwt, setJwt);
+  const { updateJwt } = useSEP10JWT(setJwt);
 
   useEffect(() => {
     const getChallenge = async () => {
@@ -114,13 +113,12 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
     () => ({
       challenge,
       jwt,
-      expired,
       step,
       setStep,
       error,
       signChallenge,
     }),
-    [challenge, jwt, expired, step, error, signChallenge]
+    [challenge, jwt, step, error, signChallenge]
   );
 
   return (

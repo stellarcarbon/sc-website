@@ -51,7 +51,7 @@ export function useSCAccount() {
   );
 
   const updateAccount = useCallback(
-    async (email: string, name: string | undefined) => {
+    async (email: string, name?: string) => {
       console.log("ua");
       if (!walletConnection) return;
 
