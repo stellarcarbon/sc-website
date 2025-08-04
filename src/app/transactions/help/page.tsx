@@ -2,9 +2,7 @@
 
 import { MyTransactionRecord, RetirementStatus } from "@/app/types";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
-import SectionHeader from "@/components/SectionHeader";
 import TransactionExplorerHeader from "@/containers/TransactionExplorer/TransactionExplorerHeader";
-import { useAppContext } from "@/context/appContext";
 import { PropsWithChildren } from "react";
 
 export default function TxExplorerHelpPage() {
