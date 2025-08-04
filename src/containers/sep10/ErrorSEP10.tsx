@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RoundingStep from "../rounding/steps/Step";
+import ModalStep from "../../components/ModalStep";
 import { faArrowLeft, faWarning } from "@fortawesome/free-solid-svg-icons";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,7 @@ export default function ErrorSEP10() {
   const router = useRouter();
 
   return (
-    <RoundingStep title="Something went wrong">
+    <ModalStep title="Something went wrong">
       <div className="flex flex-col items-center">
         <div className="text-center text-lg overflow-y-auto max-h-[200px]">
           {error ?? "Please try again."}
@@ -31,6 +31,6 @@ export default function ErrorSEP10() {
         <FontAwesomeIcon icon={faArrowLeft} />
         <div>Back to dashboard</div>
       </Button>
-    </RoundingStep>
+    </ModalStep>
   );
 }

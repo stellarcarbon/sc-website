@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren } from "react";
-import RoundingStep from "@/containers/rounding/steps/Step";
+import ModalStep from "@/components/ModalStep";
 
 export default function ConfirmSinking() {
   const { sinkResponse, sinkRequest, signTransaction } = useSinkingContext();
@@ -18,7 +18,7 @@ export default function ConfirmSinking() {
   }
 
   return (
-    <RoundingStep title="Confirm transaction">
+    <ModalStep title="Confirm transaction">
       <div className="text-center">
         Your transaction is signed by Stellarcarbon and ready to go!
       </div>
@@ -79,7 +79,7 @@ export default function ConfirmSinking() {
           </Button>
         </div>
       </SinkingStepButtons>
-    </RoundingStep>
+    </ModalStep>
   );
 }
 

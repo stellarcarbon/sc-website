@@ -1,7 +1,7 @@
 import ModalHeader from "@/components/ModalHeader";
 import { ReactNode } from "react";
 
-export default function RoundingStep({
+export default function ModalStep({
   title,
   children,
 }: {

@@ -3,7 +3,7 @@ import SuccessIcon from "@/components/icons/SuccessIcon";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import RoundingStep from "./Step";
+import ModalStep from "../../../components/ModalStep";
 import { useCallback } from "react";
 
 export default function RoundingSuccess() {
@@ -14,7 +14,7 @@ export default function RoundingSuccess() {
   }, [router]);
 
   return (
-    <RoundingStep title="Success">
+    <ModalStep title="Success">
       <div className="text-center">
         Your certificate request was received in good order and will be created
         soon.
@@ -28,6 +28,6 @@ export default function RoundingSuccess() {
           <div>Return to dashboard</div>
         </Button>
       </div>
-    </RoundingStep>
+    </ModalStep>
   );
 }

@@ -61,7 +61,6 @@ export function useWalletConnection() {
     WalletConnectionStorageService.removeWalletConnection();
     SEP10JWTService.removeJWT();
     setWalletConnection(undefined);
-    // setMyTransactions(null);
     router.push("/");
   }, [router]);
 

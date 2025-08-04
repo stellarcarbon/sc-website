@@ -1,5 +1,5 @@
 import SuccessIcon from "@/components/icons/SuccessIcon";
-import RoundingStep from "../rounding/steps/Step";
+import ModalStep from "../../components/ModalStep";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
@@ -31,7 +31,7 @@ export default function SuccessSEP10() {
   }, [router, sep10Target, isStale]);
 
   return (
-    <RoundingStep title="Success">
+    <ModalStep title="Success">
       <div className="text-center">
         All set. You proved this wallet belongs to you.
       </div>
@@ -44,6 +44,6 @@ export default function SuccessSEP10() {
           <div>Continue</div>
         </Button>
       </div>
-    </RoundingStep>
+    </ModalStep>
   );
 }

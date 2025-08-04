@@ -1,4 +1,4 @@
-import RoundingStep from "../rounding/steps/Step";
+import ModalStep from "../../components/ModalStep";
 import { faFileShield } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "@/components/Button";
@@ -9,7 +9,7 @@ export default function AwaitingSEP10({
   signChallenge: () => Promise<void>;
 }) {
   return (
-    <RoundingStep title="Verify your wallet">
+    <ModalStep title="Verify your wallet">
       <div className="flex flex-col justify-start items-center gap-6 text-center">
         <div className="flex flex-col gap-4">
           <div>
@@ -26,6 +26,6 @@ export default function AwaitingSEP10({
           <div>Sign message</div>
         </Button>
       </div>
-    </RoundingStep>
+    </ModalStep>
   );
 }

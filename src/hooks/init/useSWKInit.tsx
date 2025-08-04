@@ -12,7 +12,6 @@ type Props = {
 };
 
 export function useSWKInit({ ref, setIsKitReady }: Props) {
-  // Load wallets kit
   useEffect(() => {
     const loadWalletsKit = async () => {
       if (typeof window !== "undefined") {

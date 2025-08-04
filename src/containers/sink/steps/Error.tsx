@@ -6,7 +6,7 @@ import { faArrowLeft, faWarning } from "@fortawesome/free-solid-svg-icons";
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
-import RoundingStep from "@/containers/rounding/steps/Step";
+import ModalStep from "@/components/ModalStep";
 
 export default function ErrorSinking() {
   const { submissionError } = useSinkingContext();
@@ -14,7 +14,7 @@ export default function ErrorSinking() {
   const router = useRouter();
 
   return (
-    <RoundingStep title="Something went wrong">
+    <ModalStep title="Something went wrong">
       <div className="flex flex-col items-center">
         <div className="overflow-y-auto max-h-[200px] text-center">
           {submissionError ?? "Please try again."}
@@ -35,6 +35,6 @@ export default function ErrorSinking() {
           <div>Go back</div>
         </Button>
       </SinkingStepButtons>
-    </RoundingStep>
+    </ModalStep>
   );
 }

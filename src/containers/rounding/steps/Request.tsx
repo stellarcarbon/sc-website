@@ -3,7 +3,7 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useRoundingContext } from "@/context/RoundingContext";
 import { faFileLines } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RoundingStep from "./Step";
+import ModalStep from "../../../components/ModalStep";
 import { useAppContext } from "@/context/appContext";
 
 export default function RequestRounding() {
@@ -13,7 +13,7 @@ export default function RequestRounding() {
   if (!walletConnection?.recipient) return;
 
   return (
-    <RoundingStep title="Confirm certificate creation">
+    <ModalStep title="Confirm certificate creation">
       <div className="text-base text-center">
         Please confirm the creation of a personalized certificate from your
         pending balance.
@@ -49,6 +49,6 @@ export default function RequestRounding() {
         <FontAwesomeIcon icon={faFileLines} />
         <div>Request certificate</div>
       </Button>
-    </RoundingStep>
+    </ModalStep>
   );
 }

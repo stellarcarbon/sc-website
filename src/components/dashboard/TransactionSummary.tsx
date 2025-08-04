@@ -6,7 +6,6 @@ import { useMemo } from "react";
 import TransactionListItem from "./TransactionListItem";
 import DashboardHeader from "./DashboardHeader";
 import SCLink from "../SCLink";
-import { Blocks } from "react-loader-spinner";
 import SectionHeader from "../SectionHeader";
 
 export default function TransactionSummary() {

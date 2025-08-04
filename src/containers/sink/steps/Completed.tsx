@@ -7,7 +7,7 @@ import { useAppContext } from "@/context/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useSinkFormContext } from "@/context/SinkFormContext";
-import RoundingStep from "@/containers/rounding/steps/Step";
+import ModalStep from "@/components/ModalStep";
 
 export default function CompletedSinking() {
   const { pollForNewTransaction } = useAppContext();
@@ -26,7 +26,7 @@ export default function CompletedSinking() {
   }, []);
 
   return (
-    <RoundingStep title="Transaction succesful">
+    <ModalStep title="Transaction succesful">
       <div className="text-center">
         <div className="">
           Your transaction was succesfully committed to the Stellar blockchain.
@@ -45,6 +45,6 @@ export default function CompletedSinking() {
           <div>Go back</div>
         </Button>
       </SinkingStepButtons>
-    </RoundingStep>
+    </ModalStep>
   );
 }

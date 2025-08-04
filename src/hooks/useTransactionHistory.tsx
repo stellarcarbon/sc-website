@@ -1,9 +1,6 @@
 import { MyTransactionRecord } from "@/app/types";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
-import {
-  getSinkTxsForRecipient,
-  SinkTxListResponse,
-} from "@stellarcarbon/sc-sdk";
+import { getSinkTxsForRecipient } from "@stellarcarbon/sc-sdk";
 import { useCallback, useEffect, useState } from "react";
 
 type TransactionHistoryData = {
@@ -93,8 +90,6 @@ export function useTransactionHistory(
       await new Promise((resolve) => setTimeout(resolve, delay));
       retries++;
     }
-
-    // throw new Error("Max retries reached without detecting a new transaction");
 
     function hasNewItem(records: MyTransactionRecord[]): boolean {
       if (oldTransactions.length > 0) {

@@ -104,8 +104,6 @@ export default function OverviewContactInfo() {
                   {isStale && (
                     <MessageBox>
                       <div className="text-center mb-4 text-sm">
-                        {/* You {`haven't`} updated your contact details for a
-                        while. Please confirm their correctness. */}
                         {`Is this still the email address where you'd like to
                         receive your retirement certificates?`}
                       </div>

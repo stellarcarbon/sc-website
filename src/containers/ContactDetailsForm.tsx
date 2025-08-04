@@ -15,7 +15,6 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useInlineContactInfoContext } from "@/context/InlineContactInfoContext";
-import MessageBox from "@/components/MessageBox";
 
 export default function ContactDetailsForm() {
   const { updateWalletConnection, walletConnection } = useAppContext();

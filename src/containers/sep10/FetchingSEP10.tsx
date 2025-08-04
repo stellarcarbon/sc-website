@@ -1,9 +1,9 @@
 import { Blocks } from "react-loader-spinner";
-import RoundingStep from "../rounding/steps/Step";
+import ModalStep from "../../components/ModalStep";
 
 export default function FetchingSEP10() {
   return (
-    <RoundingStep title="Fetching">
+    <ModalStep title="Fetching">
       <div className="text-center">Requesting SEP10 challenge...</div>
       <div className="my-4 flex justify-center">
         <Blocks
@@ -16,6 +16,6 @@ export default function FetchingSEP10() {
           visible={true}
         />
       </div>
-    </RoundingStep>
+    </ModalStep>
   );
 }

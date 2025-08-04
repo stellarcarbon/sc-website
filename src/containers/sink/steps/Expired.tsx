@@ -8,7 +8,7 @@ import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useSinkingContext } from "@/context/SinkingContext";
-import RoundingStep from "@/containers/rounding/steps/Step";
+import ModalStep from "@/components/ModalStep";
 
 export default function ExpiredSinking() {
   const { sinkRequest } = useSinkingContext();
@@ -33,7 +33,7 @@ export default function ExpiredSinking() {
   }, [router, sinkRequest]);
 
   return (
-    <RoundingStep title="Expired">
+    <ModalStep title="Expired">
       <div className="flex flex-col items-center">
         <div className="text-center">
           Your transaction expired. Please retry creating it. The transaction is
@@ -50,6 +50,6 @@ export default function ExpiredSinking() {
           <div>Go back</div>
         </Button>
       </SinkingStepButtons>
-    </RoundingStep>
+    </ModalStep>
   );
 }
