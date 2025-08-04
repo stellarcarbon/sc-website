@@ -24,7 +24,7 @@ export default function RequestCertificateContactDetailsForm() {
         certificates.
       </span>
 
-      <form className="flex-1 flex flex-col justify-center gap-6 items-center w-full">
+      <form className="flex-1 flex flex-col justify-center gap-2 items-center w-full">
         <span className="text-center">
           Add your contact information to create a personal certificate.
         </span>

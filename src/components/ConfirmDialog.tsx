@@ -32,7 +32,7 @@ export default function ConfirmDialog({
         <div className="flex justify-center gap-4">
           <Button onClick={onCancel}>Cancel</Button>
           <Button
-            className="bg-red-500 hover:bg-red-600 text-white border-0"
+            className="!bg-red-500 hover:!bg-red-700 text-white border-0"
             onClick={onConfirm}
           >
             Yes, delete

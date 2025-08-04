@@ -10,7 +10,7 @@ export default function ContactDetailsPage() {
       <SectionHeader>
         <div className="text-center text-2xl w-full">Account registration</div>
       </SectionHeader>
-      <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-4 mb-16">
+      <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-4">
         <div className="flex flex-col gap-4">
           <div>
             Register your Stellar account with Stellarcarbon by filling in your
