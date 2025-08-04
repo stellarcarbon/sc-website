@@ -24,7 +24,7 @@ export default function ConnectWalletCTA() {
         </div>
       </div>
 
-      <Button onClick={() => router.push("/connect")} className="h-8 text-sm">
+      <Button onClick={() => router.push("/connect")}>
         <FontAwesomeIcon icon={faLink} />
         <div>Connect wallet</div>
       </Button>
