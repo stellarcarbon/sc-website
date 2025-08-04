@@ -62,7 +62,7 @@ export default function OverviewContactInfo() {
         {showForm ? (
           <div className="flex gap-2">
             <Button onClick={onClickClose} className="h-8 w-8">
-              <FontAwesomeIcon icon={faXmark} className="text-base" />
+              <FontAwesomeIcon icon={faXmark} className="text-lg" />
             </Button>
           </div>
         ) : (

@@ -179,13 +179,16 @@ export default function ContactDetailsForm() {
         {mode === "overview" && (
           <>
             {walletConnection?.recipient ? (
-              <UpdateButton onClick={onSubmitInline} />
+              <UpdateButton small onClick={onSubmitInline} />
             ) : (
-              <SaveButton onClick={onSubmitInline} />
+              <SaveButton small onClick={onSubmitInline} />
             )}
 
             {walletConnection?.recipient && (
-              <DeleteButton onClick={() => setShowDeleteAccountDialog(true)} />
+              <DeleteButton
+                small
+                onClick={() => setShowDeleteAccountDialog(true)}
+              />
             )}
           </>
         )}
@@ -196,9 +199,15 @@ export default function ContactDetailsForm() {
   );
 }
 
-function SaveButton({ onClick }: { onClick: () => void }) {
+function SaveButton({
+  onClick,
+  small = false,
+}: {
+  onClick: () => void;
+  small?: boolean;
+}) {
   return (
-    <Button onClick={onClick} className="h-8 text-sm">
+    <Button onClick={onClick} className={small ? "h-8 text-sm" : ""}>
       <FontAwesomeIcon icon={faFloppyDisk} />
       Save contact details
     </Button>
@@ -213,24 +222,38 @@ function SkipButton({
   disabled: boolean;
 }) {
   return (
-    <Button disabled={disabled} onClick={onClick} className="h-8 text-sm">
+    <Button disabled={disabled} onClick={onClick}>
       <FontAwesomeIcon icon={faForwardFast} /> Skip registration
     </Button>
   );
 }
 
-function UpdateButton({ onClick }: { onClick: () => void }) {
+function UpdateButton({
+  onClick,
+  small = false,
+}: {
+  onClick: () => void;
+  small?: boolean;
+}) {
   return (
-    <Button onClick={onClick} className="h-8 text-sm">
+    <Button onClick={onClick} className={small ? "h-8 text-sm" : ""}>
       <FontAwesomeIcon icon={faCheckCircle} /> Update registration
     </Button>
   );
 }
 
-function DeleteButton({ onClick }: { onClick: () => void }) {
+function DeleteButton({
+  onClick,
+  small = false,
+}: {
+  onClick: () => void;
+  small?: boolean;
+}) {
   return (
     <Button
-      className="!bg-red-500 hover:!bg-red-600 text-sm text-white h-8 border-0"
+      className={`!bg-red-500 hover:!bg-red-600 text-white border-0 ${
+        small && "h-8 text-sm"
+      }`}
       onClick={onClick}
     >
       <FontAwesomeIcon icon={faTrash} /> Delete
