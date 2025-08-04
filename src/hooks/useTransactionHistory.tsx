@@ -1,6 +1,6 @@
 import { MyTransactionRecord } from "@/app/types";
-import { AccountService, SinkTxListResponse } from "@/client";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
+import { getSinkTxsForRecipient } from "@stellarcarbon/sc-sdk";
 import { useCallback, useEffect, useState } from "react";
 
 type TransactionHistoryData = {
@@ -44,19 +44,23 @@ export function useTransactionHistory(
     if (!account) return;
     setLoading(true);
 
-    const sinkTxsResponse: SinkTxListResponse =
-      await AccountService.getSinkTxsForRecipient({
-        recipientAddress: account,
-      });
+    const response = await getSinkTxsForRecipient({
+      path: { recipient_address: account },
+    });
+
+    if (response.data === undefined) {
+      setLoading(false);
+      return;
+    }
 
     const serializedTransactions =
-      TransactionHistoryService.serializeTxsResponse(sinkTxsResponse);
+      TransactionHistoryService.serializeTxsResponse(response.data);
 
     setData({
       myTransactions: serializedTransactions,
-      totalSunk: Number(sinkTxsResponse.total_carbon_sunk),
-      totalPending: Number(sinkTxsResponse.total_carbon_pending),
-      retirementGraceDays: sinkTxsResponse.retirement_grace_days,
+      totalSunk: Number(response.data.total_carbon_sunk),
+      totalPending: Number(response.data.total_carbon_pending),
+      retirementGraceDays: response.data.retirement_grace_days,
     });
 
     setLoading(false);
@@ -64,7 +68,7 @@ export function useTransactionHistory(
 
   async function pollForNewTransaction(
     maxRetries: number = 5,
-    delay: number = 1000 // delay in milliseconds
+    delay: number = 3000 // delay in milliseconds
   ): Promise<void> {
     if (!account) throw new Error("No account for polling");
 
@@ -86,8 +90,6 @@ export function useTransactionHistory(
       await new Promise((resolve) => setTimeout(resolve, delay));
       retries++;
     }
-
-    // throw new Error("Max retries reached without detecting a new transaction");
 
     function hasNewItem(records: MyTransactionRecord[]): boolean {
       if (oldTransactions.length > 0) {

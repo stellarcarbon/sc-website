@@ -1,20 +1,16 @@
 import { useAppContext } from "@/context/appContext";
-import RequestCertificate from "./RequestCertificate";
+import RequestCertificate from "./request-certificate/RequestCertificate";
 import PendingRounding from "../PendingRounding";
+import { InlineContactInfoContextProvider } from "@/context/InlineContactInfoContext";
+import { RequestCertificateContextProvider } from "@/context/RequestCertificateContext";
 
-interface PendingRetirementsInfoProps {
-  totalCarbonPending: number;
-}
-
-export default function PendingRetirementsInfo({
-  totalCarbonPending,
-}: PendingRetirementsInfoProps) {
-  const { hasPendingRounding } = useAppContext();
+export default function PendingRetirementsInfo() {
+  const { hasPendingRounding, totalPending } = useAppContext();
 
   let body;
-  if (totalCarbonPending === 0) {
+  if (totalPending === 0) {
     return null;
-  } else if (totalCarbonPending % 1 === 0) {
+  } else if (totalPending % 1 === 0) {
     body = (
       <div className="text-center p-2">
         Your pending balance is a round number, so we can automatically
@@ -27,13 +23,17 @@ export default function PendingRetirementsInfo({
     body = hasPendingRounding ? (
       <PendingRounding />
     ) : (
-      <RequestCertificate totalCarbonPending={totalCarbonPending} />
+      <InlineContactInfoContextProvider>
+        <RequestCertificateContextProvider>
+          <RequestCertificate />
+        </RequestCertificateContextProvider>
+      </InlineContactInfoContextProvider>
     );
   }
 
   return (
     <div
-      className={`md:w-[80%] self-center relative text-sm border border-tertiary rounded bg-primary`}
+      className={`self-center relative text-sm md:text-base border border-tertiary rounded bg-secondary`}
     >
       {body}
     </div>

@@ -1,20 +1,16 @@
-import { PaymentAsset } from "@/client";
 import { useAppContext } from "@/context/appContext";
 import { useMemo } from "react";
 import SectionHeader from "../../../components/SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 import { faDollar, faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import { PaymentAssetSchema } from "@stellarcarbon/sc-sdk";
 
 export default function CurrencySelect() {
   const { register } = useSinkFormContext();
   const { xlmBalance, usdcBalance } = useAppContext();
 
   const options = useMemo(() => {
-    const paymentAssets = [
-      PaymentAsset.ANY,
-      PaymentAsset.XLM,
-      PaymentAsset.USDC,
-    ];
+    const paymentAssets = PaymentAssetSchema.enum;
     return paymentAssets.map((option) => {
       let optionLabel = option.toString();
       if (optionLabel === "any") optionLabel = "No preference";
@@ -44,7 +40,7 @@ export default function CurrencySelect() {
           <div>
             <select
               className="w-full text-black border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:border-black"
-              defaultValue={PaymentAsset.ANY}
+              defaultValue={"any"}
               {...register("currency")}
             >
               {options}

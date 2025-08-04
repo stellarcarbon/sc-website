@@ -55,7 +55,7 @@ export const useConnectWalletContext = () => {
 export const ConnectWalletContextProvider = ({
   children,
 }: PropsWithChildren) => {
-  const { setWalletConnection } = useAppContext();
+  const { setWalletConnection, setSep10Target } = useAppContext();
 
   const [selectedWallet, setSelectedWallet] = useState<ISupportedWallet>();
   const [username, setUsername] = useState<string>();
@@ -81,18 +81,7 @@ export const ConnectWalletContextProvider = ({
           throw Error();
         }
 
-        // Add user details if specified
-        if (useremail) {
-          newConn.personalDetails = {
-            username: username ?? "",
-            useremail,
-          };
-          newConn.isAnonymous = false;
-        } else {
-          newConn.isAnonymous = true;
-        }
-
-        // Verify if account exists
+        // Verify if wallet exists
         // If it doesnt exist throw "special error message"
         // "Account ABCD...WXYZ does not exist in {network_name}"
         // (if testnet make a funding request to friendbot for that pubkey)
@@ -106,6 +95,7 @@ export const ConnectWalletContextProvider = ({
           return false;
         }
 
+        // TODO: move this to later in the flow?
         WalletConnectionStorageService.setWalletConnection(newConn);
         setWalletConnection(newConn);
 
@@ -115,7 +105,7 @@ export const ConnectWalletContextProvider = ({
         return false;
       }
     },
-    [setWalletConnection, username, useremail]
+    [setWalletConnection]
   );
 
   const validateForm = useCallback(() => {
@@ -162,7 +152,8 @@ export const ConnectWalletContextProvider = ({
         if (appConfig.demo) {
           router.push("/emissions");
         } else {
-          router.push("/dashboard/sink");
+          setSep10Target("register");
+          router.push("/sep10");
         }
       }
     });
@@ -174,6 +165,7 @@ export const ConnectWalletContextProvider = ({
     router,
     setWalletsKitError,
     validateForm,
+    setSep10Target,
   ]);
 
   const providerValue = useMemo(

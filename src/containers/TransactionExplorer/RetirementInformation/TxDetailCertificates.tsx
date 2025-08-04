@@ -1,6 +1,6 @@
 import { MyTransactionRecord } from "@/app/types";
-import { RetirementDetail, RetirementService } from "@/client";
 import RetirementDetailCard from "@/containers/TransactionExplorer/RetirementInformation/RetirementDetailCard";
+import { getRetirementItem, RetirementDetail } from "@stellarcarbon/sc-sdk";
 import { useEffect, useState } from "react";
 import { Blocks } from "react-loader-spinner";
 
@@ -17,15 +17,26 @@ export default function TxDetailCertificates({
 
   useEffect(() => {
     const getRetirements = async () => {
-      const promises: Promise<RetirementDetail>[] = [];
+      const promises: Promise<{
+        data: RetirementDetail | undefined;
+        error: undefined | unknown;
+      }>[] = [];
       transaction.retirements.forEach((ret) => {
         promises.push(
-          RetirementService.getRetirementItem({
-            certificateId: ret.certificate_id,
+          getRetirementItem({
+            path: {
+              certificate_id: ret.certificate_id,
+            },
           })
         );
       });
-      setRetirementDetails(await Promise.all(promises));
+
+      const res = await Promise.all(promises);
+      setRetirementDetails(
+        res
+          .map((r) => r.data)
+          .filter((data): data is RetirementDetail => data !== undefined)
+      );
       setIsLoadingRetirements(false);
       // RetirementService.getRetirementItem({ certificateId: })
     };

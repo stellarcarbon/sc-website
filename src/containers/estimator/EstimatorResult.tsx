@@ -1,17 +1,11 @@
-import { CabinClass, FlightEstimateResponse } from "@/client";
 import { PropsWithChildren } from "react";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import Button from "@/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faContactCard,
-  faFileContract,
-  faRefresh,
-} from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/navigation";
+import { faFileContract } from "@fortawesome/free-solid-svg-icons";
 import { TripType } from "./FlightEstimator";
 import { useSinkFormContext } from "@/context/SinkFormContext";
+import { CabinClass, FlightEstimateResponse } from "@stellarcarbon/sc-sdk";
 
 export default function EstimatorResult({
   estimate,

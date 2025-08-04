@@ -24,7 +24,7 @@ export default function HistoryLayout({
         <TransactionsNavBarItem item={TransactionsTabs.HISTORY} />
       </div>
 
-      <div className="flex flex-col bg-darkest md:rounded-b-md flex-1 md:min-h-[70vh]">
+      <div className="flex flex-col bg-darkest md:rounded-b-md flex-1 md:min-h-[70vh] w-full">
         {children}
       </div>
     </main>

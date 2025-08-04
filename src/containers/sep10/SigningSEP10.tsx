@@ -1,15 +1,15 @@
 import { useViewportWidth } from "@/utils";
-import RoundingStep from "../rounding/steps/Step";
+import ModalStep from "../../components/ModalStep";
 import SignIcon from "@/components/icons/SignIcon";
 
 export default function SigningSEP10() {
   const isWide = useViewportWidth();
   return (
-    <RoundingStep title="Signing">
-      <div>Signing challenge...</div>
-      <div className="flex-1 flex items-center justify-center my-16">
+    <ModalStep title="Signing">
+      <div className="text-lg">Signing challenge...</div>
+      <div className="my-4 flex justify-center">
         <SignIcon large={isWide} />
       </div>
-    </RoundingStep>
+    </ModalStep>
   );
 }

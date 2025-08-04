@@ -10,26 +10,21 @@ export default function ConnectWalletCTA() {
     <div
       className="my-8 p-4 mx-4
     bg-secondary text-white border border-accentSecondary rounded
-      md:max-w-[80%]
+      md:w-[80%]
     flex flex-col items-center justify-center gap-4"
     >
-      <div className="flex-1 flex items-center gap-2">
+      <div className="flex-1 flex items-center gap-2 w-full">
         <FontAwesomeIcon
           icon={faWarning}
           className="text-[36px] md:text-[56px]"
         />
 
-        <div className="mt-2 w-full">
-          <div className="text-center text-sm md:text-base">
-            No wallet connected! Lets connect your wallet first to continue.
-          </div>
+        <div className="flex-1 text-center text-sm md:text-base px-2">
+          No wallet connected! {`Let's`} connect your wallet first to continue.
         </div>
       </div>
 
-      <Button
-        onClick={() => router.push("/connect")}
-        className="h-10 text-base"
-      >
+      <Button onClick={() => router.push("/connect")} className="h-8 text-sm">
         <FontAwesomeIcon icon={faLink} />
         <div>Connect wallet</div>
       </Button>

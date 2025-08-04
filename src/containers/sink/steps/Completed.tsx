@@ -1,5 +1,4 @@
 import SuccessIcon from "@/components/icons/SuccessIcon";
-import SinkingStep from "./Step";
 import SinkingStepButtons from "./Buttons";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
@@ -8,6 +7,7 @@ import { useAppContext } from "@/context/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useSinkFormContext } from "@/context/SinkFormContext";
+import ModalStep from "@/components/ModalStep";
 
 export default function CompletedSinking() {
   const { pollForNewTransaction } = useAppContext();
@@ -26,8 +26,8 @@ export default function CompletedSinking() {
   }, []);
 
   return (
-    <SinkingStep title="Transaction succesful">
-      <div className="mt-6 text-center">
+    <ModalStep title="Transaction succesful">
+      <div className="text-center">
         <div className="">
           Your transaction was succesfully committed to the Stellar blockchain.
         </div>
@@ -35,7 +35,7 @@ export default function CompletedSinking() {
         <div className="mt-4">Review the transaction on your dashboard!</div>
       </div>
 
-      <div className="flex-1 flex items-center justify-center my-16">
+      <div className="flex-1 flex items-center justify-center my-4">
         <SuccessIcon />
       </div>
 
@@ -45,6 +45,6 @@ export default function CompletedSinking() {
           <div>Go back</div>
         </Button>
       </SinkingStepButtons>
-    </SinkingStep>
+    </ModalStep>
   );
 }

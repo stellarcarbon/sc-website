@@ -1,4 +1,3 @@
-import { CarbonService } from "@/client";
 import CountUp from "@/components/CountUp";
 import Paragraph from "@/components/Paragraph";
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileContract, faHandshake } from "@fortawesome/free-solid-svg-icons";
 import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import SCLink from "@/components/SCLink";
+import { getCarbonStats } from "@stellarcarbon/sc-sdk";
 
 export default function WhySection() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -15,10 +15,12 @@ export default function WhySection() {
   const [carbonSunk, setCarbonSunk] = useState<number>(0);
 
   useEffect(() => {
-    CarbonService.getCarbonStats()
+    getCarbonStats()
       .then((response) => {
-        const cStored = parseFloat(response.carbon_stored);
-        const cSunk = parseFloat(response.carbon_sunk);
+        if (response.data === undefined) return;
+
+        const cStored = parseFloat(response.data.carbon_stored);
+        const cSunk = parseFloat(response.data.carbon_sunk);
         setCarbonStored(cStored);
         setCarbonSunk(cSunk);
         setIsLoading(false);

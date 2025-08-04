@@ -1,24 +1,25 @@
-import {
-  AccountService,
-  AuthService,
-  RetirementItem,
-  SEP10ChallengeResponse,
-} from "@/client";
 import { WalletConnection } from "@/app/types";
 import { mRequestCertificate } from "@/utils";
-import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit";
+import {
+  getRetirementsForBeneficiary,
+  RetirementItem,
+} from "@stellarcarbon/sc-sdk";
 
 export default class RoundingService {
   private static LOCAL_STORAGE_KEY = "rd";
 
   public static async setLatestRetirement(pubKey: string) {
-    const retirementList = await AccountService.getRetirementsForBeneficiary({
-      beneficiaryAddress: pubKey,
-      order: "desc",
+    const response = await getRetirementsForBeneficiary({
+      path: {
+        beneficiary_address: pubKey,
+      },
+      query: {
+        order: "desc",
+      },
     });
 
     const latestRetirement: RetirementItem | null =
-      retirementList.retirements[0] ?? null;
+      response.data?.retirements[0] ?? null;
 
     localStorage.setItem(
       this.LOCAL_STORAGE_KEY,
@@ -35,12 +36,18 @@ export default class RoundingService {
       return false;
     }
 
-    const retirementList = await AccountService.getRetirementsForBeneficiary({
-      beneficiaryAddress: pubKey,
-      order: "desc",
+    const response = await getRetirementsForBeneficiary({
+      path: {
+        beneficiary_address: pubKey,
+      },
+      query: {
+        order: "desc",
+      },
     });
+
     const latestRetirement: RetirementItem | null =
-      retirementList.retirements[0] ?? null;
+      response.data?.retirements[0] ?? null;
+
     if (latestRetirement === null) {
       // No previous retirements found, but we know one is pending from local storage.
       return true;
@@ -60,35 +67,13 @@ export default class RoundingService {
     return true;
   }
 
-  public static async getChallenge(walletConnection: WalletConnection) {
-    return await AuthService.getSep10Challenge({
-      account: walletConnection.stellarPubKey,
-    });
-  }
-
-  public static async signChallenge(
-    stellarWalletsKit: StellarWalletsKit,
-    stellarPubKey: string,
-    challenge: SEP10ChallengeResponse
-  ) {
-    return await stellarWalletsKit.signTransaction(challenge.transaction, {
-      address: stellarPubKey,
-    });
-  }
-
-  public static async validateChallenge(signedXDR: string) {
-    return await AuthService.validateSep10Challenge({
-      transaction: signedXDR,
-    });
-  }
-
   public static async requestCertificate(
     walletConnection: WalletConnection,
     token: string
   ) {
     return await mRequestCertificate({
       recipientAddress: walletConnection.stellarPubKey,
-      email: walletConnection.personalDetails!.useremail,
+      email: walletConnection.recipient!.email,
       jwt: token,
     });
   }

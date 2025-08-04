@@ -1,6 +1,6 @@
 "use client";
 
-import { SinkCarbonXdrPostRequest, SinkingFormData } from "@/app/types";
+import { SinkingFormData } from "@/app/types";
 import {
   createContext,
   Dispatch,
@@ -23,8 +23,8 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { useAppContext } from "./appContext";
-import { PaymentAsset } from "@/client";
 import { useRouter } from "next/navigation";
+import { BuildSinkCarbonXdrData, PaymentAsset } from "@stellarcarbon/sc-sdk";
 
 type SinkFormContext = {
   register: UseFormRegister<SinkingFormData>;
@@ -40,7 +40,7 @@ type SinkFormContext = {
   quote: number;
   setQuote: Dispatch<SetStateAction<number>>;
 
-  sinkRequest: SinkCarbonXdrPostRequest | undefined;
+  formSinkRequest: BuildSinkCarbonXdrData | undefined;
 
   overrideFormValues: (
     memo?: string,
@@ -62,21 +62,21 @@ export const useSinkFormContext = () => {
 };
 
 export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
-  // const { setSinkRequest, setStep } = useSinkingContext();
   const { walletConnection } = useAppContext();
   const { register, handleSubmit, watch, setValue, reset } =
     useForm<SinkingFormData>({
       defaultValues: {
         memo: "",
         tonnes: 1,
-        currency: PaymentAsset.ANY,
+        currency: "any",
       },
     });
 
   const [quote, setQuote] = useState<number>(0);
   const [errors, setErrors] = useState<FieldErrors>();
 
-  const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
+  const [formSinkRequest, setFormSinkRequest] =
+    useState<BuildSinkCarbonXdrData>();
 
   const router = useRouter();
 
@@ -90,29 +90,27 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
 
   const onSubmit: SubmitHandler<SinkingFormData> = useCallback(
     (_) => {
-      // setStep(CheckoutSteps.CREATING);
+      if (!walletConnection) return;
 
-      let request: SinkCarbonXdrPostRequest = {
-        funder: walletConnection?.stellarPubKey!,
-        carbonAmount: tonnes,
-        paymentAsset: currency,
-        memoValue: memo,
+      let request: BuildSinkCarbonXdrData = {
+        query: {
+          funder: walletConnection.stellarPubKey,
+          carbon_amount: tonnes,
+          payment_asset: currency,
+          memo_value: memo,
+        },
+        url: "/carbon/sink-carbon/xdr",
       };
 
-      if (!walletConnection?.isAnonymous) {
-        request.email = walletConnection?.personalDetails?.useremail;
-      }
-
-      setSinkRequest(request);
-      // TODO: Effect in SinkingContext will pick this up.
+      setFormSinkRequest(request);
     },
-    [walletConnection, tonnes, currency, memo, setSinkRequest]
+    [walletConnection, tonnes, currency, memo, setFormSinkRequest]
   );
 
   const overrideFormValues = useCallback(
     (memo?: string, tonnes?: number, currency?: PaymentAsset) => {
       if (memo) setValue("memo", memo);
-      if (tonnes) setValue("tonnes", tonnes);
+      if (tonnes) setValue("tonnes", Number(tonnes.toFixed(3)));
       if (currency) setValue("currency", currency);
       router.push("/dashboard/sink");
     },
@@ -123,7 +121,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
     if (!walletConnection) {
       setValue("memo", "");
       setValue("tonnes", 1);
-      setValue("currency", PaymentAsset.ANY);
+      setValue("currency", "any");
     }
   }, [walletConnection, setValue]);
 
@@ -138,7 +136,7 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       quote,
       setQuote,
       errors,
-      sinkRequest,
+      formSinkRequest,
       overrideFormValues,
       resetSinkForm: reset,
     }),
@@ -151,8 +149,9 @@ export const SinkFormContextProvider = ({ children }: PropsWithChildren) => {
       onError,
       quote,
       errors,
-      sinkRequest,
+      formSinkRequest,
       overrideFormValues,
+      reset,
     ]
   );
 

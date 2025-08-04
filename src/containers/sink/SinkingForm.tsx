@@ -28,10 +28,7 @@ export default function SinkingForm() {
         </div>
       )}
       <form className="flex flex-col mb-12">
-        <div className="mx-3 md:mx-8 mb-4">
-          {/* <div className="text-center text-lg font-semibold">
-            Support the Stellarcarbon initiative by sinking CARBON!
-          </div> */}
+        <div className="mx-3 md:mx-8">
           <div className="my-3 text-base">
             Use this form to specify how much{" "}
             <CARBONCurrencyIcon className="inline" /> to sink. Your contribution

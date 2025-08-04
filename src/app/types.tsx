@@ -1,25 +1,18 @@
 import {
-  MemoType,
-  PaymentAsset,
-  RetirementSummary,
-  SinkingResponse,
-  VcsProject,
-} from "@/client";
-import {
-  ReasonOption,
-  ReasonOptionKey,
-} from "@/containers/sink/form/ReasonSelect";
-import {
   ISupportedWallet,
   WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
 import * as StellarSdk from "@stellar/stellar-sdk";
+import {
+  PaymentAsset,
+  Recipient,
+  RetirementSummary,
+} from "@stellarcarbon/sc-sdk";
 
 export type WalletConnection = {
   stellarPubKey: string;
   walletType: ISupportedWallet;
-  personalDetails?: PersonalDetails;
-  isAnonymous: boolean;
+  recipient?: Recipient;
 };
 
 export type PersonalDetails = {
@@ -71,22 +64,6 @@ export const CARBON_SINK_ACCOUNT =
 
 export const CARBON_ACCOUNT =
   "GCBOATLWKXACOWKRRWORARDI2HFDSYPALMTS23YBZKHOB6XLW6CARBON";
-
-export interface SinkCarbonXdrPostRequest {
-  funder: string;
-  recipient?: string;
-  carbonAmount?: number;
-  paymentAsset?: PaymentAsset;
-  vcsProjectId?: VcsProject;
-  memoType?: MemoType;
-  memoValue?: string;
-  email?: string;
-}
-
-export interface SinkingTransaction {
-  transactionPostRequest?: SinkCarbonXdrPostRequest;
-  transactionPostResponse?: SinkingResponse;
-}
 
 export interface AccountBalance {
   xlm: number;

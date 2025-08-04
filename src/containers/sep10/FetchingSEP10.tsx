@@ -1,16 +1,14 @@
 import { Blocks } from "react-loader-spinner";
-import RoundingStep from "../rounding/steps/Step";
+import ModalStep from "../../components/ModalStep";
 
 export default function FetchingSEP10() {
   return (
-    <RoundingStep title="Fetching">
-      <div className="mt-6 text-center font-semibold text-lg">
-        Requesting SEP10 challenge...
-      </div>
-      <div className="my-12 flex justify-center">
+    <ModalStep title="Fetching">
+      <div className="text-center">Requesting SEP10 challenge...</div>
+      <div className="my-4 flex justify-center">
         <Blocks
-          height="120"
-          width="120"
+          height="80"
+          width="80"
           color="#ff0000"
           ariaLabel="blocks-loading"
           wrapperStyle={{}}
@@ -18,6 +16,6 @@ export default function FetchingSEP10() {
           visible={true}
         />
       </div>
-    </RoundingStep>
+    </ModalStep>
   );
 }

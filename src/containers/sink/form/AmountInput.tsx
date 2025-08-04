@@ -1,7 +1,6 @@
 "use client";
 
 import { debounce, useSCRouter } from "@/utils";
-import { CarbonService } from "@/client";
 import {
   faArrowRightArrowLeft,
   faCalculator,
@@ -17,6 +16,7 @@ import Button from "../../../components/Button";
 import SectionHeader from "../../../components/SectionHeader";
 import { useSinkFormContext } from "@/context/SinkFormContext";
 import Link from "next/link";
+import { getCarbonQuote, getUsdQuote } from "@stellarcarbon/sc-sdk";
 
 export default function AmountInput() {
   const { register, watch, setValue, quote, setQuote } = useSinkFormContext();
@@ -53,13 +53,22 @@ export default function AmountInput() {
         return;
       }
 
-      CarbonService.getCarbonQuote({
-        carbonAmount,
+      getCarbonQuote({
+        query: {
+          carbon_amount: carbonAmount,
+        },
       })
         .then((response) => {
           setIsLoading(false);
           setHasError(false);
-          const newUsdAmount = Number(response.total_cost);
+
+          if (response.data === undefined) {
+            setHasError(true);
+            setStatusMessage("Could not get CARBON quote.");
+            return;
+          }
+
+          const newUsdAmount = Number(response.data.total_cost);
           if (quote !== newUsdAmount) {
             setQuote(Math.round(newUsdAmount * 100) / 100);
             setQuoteStr(newUsdAmount.toFixed(2));
@@ -87,13 +96,22 @@ export default function AmountInput() {
         return;
       }
 
-      CarbonService.getUsdQuote({
-        usdAmount,
+      getUsdQuote({
+        query: {
+          usd_amount: usdAmount,
+        },
       })
         .then((response) => {
           setIsLoading(false);
           setHasError(false);
-          const newCarbonAmount = Number(response.total_carbon);
+
+          if (response.data === undefined) {
+            setHasError(true);
+            setStatusMessage("Could not get USDC quote");
+            return;
+          }
+
+          const newCarbonAmount = Number(response.data.total_carbon);
           if (tonnes !== newCarbonAmount) {
             setValue("tonnes", newCarbonAmount);
           }
@@ -131,7 +149,7 @@ export default function AmountInput() {
 
   return (
     <>
-      <SectionHeader icon={faTree}>Set your sink amount</SectionHeader>
+      <SectionHeader icon={faTree}>Set the sink amount</SectionHeader>
       <div className="p-3 py-6 md:p-6">
         <div className="flex flex-col">
           <div></div>
@@ -140,7 +158,7 @@ export default function AmountInput() {
             <CARBONCurrencyIcon className="inline" /> would let you claim the
             environmental benefit of reducing 1 tonne of CO2.
           </div>
-          <div className="flex flex-col gap-4 my-8 mb-12">
+          <div className="flex flex-col gap-4 my-8">
             <div className="flex justify-between items-center gap-2 mb-3 md:mb-6">
               <div className="w-[35%] flex flex-col items-start">
                 <div className="text-xs mb-1">Sink amount</div>
@@ -241,7 +259,7 @@ export default function AmountInput() {
             <div className="text-start font-semibold">Estimate emissions</div>
             <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
           </div>
-          <div className="flex flex-col gap-4 my-4">
+          <div className="flex flex-col gap-6 mt-4">
             <div>
               Optionally try out our emissions estimator to help you decide on
               the right amount.

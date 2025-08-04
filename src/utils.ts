@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, RefObject } from "react";
 import { useRouter } from "next/navigation";
 import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { RequestCertificateResponse } from "@/client";
 import { isEmail } from "validator";
+import { RequestCertificateResponse } from "@stellarcarbon/sc-sdk";
 
 export function debounce<T extends (...args: any[]) => void>(
   func: T,

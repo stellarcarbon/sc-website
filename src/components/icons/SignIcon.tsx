@@ -5,8 +5,8 @@ interface SignIconProps {
 export default function SignIcon({ large }: SignIconProps) {
   return (
     <svg
-      width={large ? "120px" : "80px"}
-      height={large ? "120px" : "80px"}
+      width={"64px"}
+      height={"64px"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
