@@ -18,7 +18,7 @@ export default function ConnectWalletForm() {
         <SectionHeader>
           <div className="text-center text-2xl w-full">Connect wallet</div>
         </SectionHeader>
-        <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-8 md:gap-16">
+        <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-8">
           <SelectWallet />
           <AcceptTnC />
 
@@ -28,7 +28,7 @@ export default function ConnectWalletForm() {
 
           {noWalletError && <NoWalletError />}
 
-          <Button className="self-center mt-4" onClick={submitForm}>
+          <Button className="self-center" onClick={submitForm}>
             <FontAwesomeIcon icon={faLink} />
             <div>Connect wallet</div>
           </Button>

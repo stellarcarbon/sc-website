@@ -33,7 +33,7 @@ export default function SuccessSEP10() {
   return (
     <ModalStep title="Success">
       <div className="text-center">
-        All set. You proved this wallet belongs to you.
+        {`Authentication successful. You've verified ownership of this wallet.`}
       </div>
       <div className="my-1 flex justify-center">
         <SuccessIcon />

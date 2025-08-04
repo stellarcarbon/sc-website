@@ -13,8 +13,8 @@ export default function AwaitingSEP10({
       <div className="flex flex-col justify-start items-center gap-6 text-center">
         <div className="flex flex-col gap-4">
           <div>
-            To continue, please sign a message to prove ownership of your
-            wallet.
+            To continue, we need to verify that you own this wallet. Please sign
+            a message to prove ownership.
           </div>
           <div>
             This is not a payment or transaction, but a secure way to verify
