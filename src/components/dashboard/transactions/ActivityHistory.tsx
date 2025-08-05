@@ -1,31 +1,14 @@
 import { useAppContext } from "@/context/appContext";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
-import { useSCRouter } from "@/utils";
 import TransactionListItem from "@/components/dashboard/TransactionListItem";
-import { useEffect, useMemo, useState } from "react";
-import TransactionHistoryService from "@/services/TransactionHistoryService";
+import { useMemo, useState } from "react";
 import { RetirementStatus } from "@/app/types";
-import TransactionsExplorerDetail from "@/containers/TransactionExplorer/TransactionsExplorerDetail";
+import SCLink from "@/components/SCLink";
 
 export default function ActivityHistory() {
-  const { myTransactions, setMyTransactions, walletConnection } =
-    useAppContext();
-  const router = useSCRouter();
-  const searchParams = useSearchParams();
+  const { myTransactions } = useAppContext();
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    // Reload personal transactions on page visit
-    TransactionHistoryService.fetchAccountHistory(
-      walletConnection?.stellarPubKey!
-    ).then((transactionRecords): void => {
-      setMyTransactions(transactionRecords);
-      setIsLoading(false);
-    });
-  }, [setMyTransactions, walletConnection]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const retiredTransactions = useMemo(() => {
     return (
@@ -34,15 +17,6 @@ export default function ActivityHistory() {
       ) ?? []
     );
   }, [myTransactions]);
-
-  if (searchParams.get("id") !== null) {
-    // TODO: remove this
-    return (
-      <div className="w-full flex-1">
-        <TransactionsExplorerDetail />
-      </div>
-    );
-  }
 
   if (isLoading || myTransactions === null) {
     return (
@@ -56,7 +30,7 @@ export default function ActivityHistory() {
         <div className="my-12 mx-4 md:mx-8 flex flex-col items-center">
           {/* <DashboardTitle>Retired transactions</DashboardTitle> */}
 
-          <span className="text-sm text-center md:w-[80%] bg-darker p-4 border rounded border-tertiary">
+          <span className="text-sm text-center md:w-[80%] bg-primary p-4 border rounded border-tertiary">
             Here you can find the transactions that have been retired into one
             or more certificates. Click on them to find out more details about
             the transaction and its corresponding certificate(s).
@@ -72,22 +46,14 @@ export default function ActivityHistory() {
             <div className="flex flex-col gap-2 md:gap-6">
               <span>
                 Maybe your transaction is{" "}
-                <Link
-                  href="/dashboard/transactions"
-                  className="underline text-accentSecondary"
-                >
+                <SCLink href="/dashboard/transactions">
                   pending retirement
-                </Link>
+                </SCLink>
               </span>
               <span className="text-xs">or...</span>
               <span className="mb-8">
                 Create a{" "}
-                <Link
-                  href="/dashboard/sink"
-                  className="underline text-accentSecondary"
-                >
-                  new sinking transaction
-                </Link>{" "}
+                <SCLink href="/dashboard/sink">new sinking transaction</SCLink>{" "}
                 to contribute to the Stellarcarbon initiative.
               </span>
             </div>

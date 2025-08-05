@@ -11,19 +11,21 @@ type TopBarLinkProps = {
 
 export default function TopBarLink({ children, href }: TopBarLinkProps) {
   const pathname = usePathname();
-  // Define a function to check if the given path is the current route
+
   const isCurrentRoute = () => {
-    if (href === "/dashboard" && pathname.startsWith("/wallet")) {
+    if (href === "/dashboard" && pathname.startsWith("/connect")) {
       return true;
     }
+    if (href === "/explain/introduction")
+      return pathname.startsWith("/explain");
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
   return (
     <Link
-      className={`hover:text-yellow-100 ${
-        isCurrentRoute() ? "text-yellow-400" : "text-accent"
+      className={`hover:text-yellow-200 ${
+        isCurrentRoute() ? "text-yellow-400" : ""
       }`}
       href={href}
     >

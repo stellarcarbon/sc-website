@@ -18,7 +18,7 @@ export default function NavBar() {
         
         h-16 lg:h-20
         border-b border-secondary
-      bg-darker shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]`}
+      bg-primary shadow-[0px_15px_12px_-20px_rgba(0,0,0,0.5)]`}
       >
         <Link className="ml-3 md:ml-8" href="/">
           <StellarCarbonIcon className=" text-accent" />
@@ -26,11 +26,12 @@ export default function NavBar() {
 
         <div className="ml-10 gap-10 items-center hidden lg:flex">
           <TopBarLink href="/">Home</TopBarLink>
-          <TopBarLink href="/explain">Explain</TopBarLink>
+          <TopBarLink href="/explain/introduction">Explain</TopBarLink>
           <TopBarLink href="/projects">Projects</TopBarLink>
           <TopBarLink href="/transactions">Transactions</TopBarLink>
           <TopBarLink href="/software">Software</TopBarLink>
-          <TopBarLink href="/about">About us</TopBarLink>
+          {/* <TopBarLink href="/about">About us</TopBarLink> */}
+
           <div className="w-4"></div>
         </div>
 

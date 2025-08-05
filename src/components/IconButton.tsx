@@ -13,12 +13,13 @@ export default function IconButton({
       className={`flex justify-center items-center
         bg-accent rounded-md shadow-md 
         h-8 w-8 text-base
+        border border-accent
         ${
           disabled
             ? "text-gray-500 opacity-30"
             : `text-black transition-colors
             active:bg-primary active:text-white
-            hover:border-gray-300 hover:bg-accentSecondary hover:text-white hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30`
+            hover:bg-primary hover:text-white`
         }
         ${className}`}
     >

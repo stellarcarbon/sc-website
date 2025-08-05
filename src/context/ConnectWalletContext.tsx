@@ -1,4 +1,4 @@
-import { isValidEmail, useSCRouter } from "@/utils";
+import { useSCRouter, validateEmail } from "@/utils";
 import { useAppContext } from "@/context/appContext";
 import { walletConnectDialog } from "@/context/walletFunctions";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
@@ -37,7 +37,9 @@ type ConnectWalletContext = {
   setTncError: Dispatch<SetStateAction<boolean>>;
   emailError: boolean;
   setEmailError: Dispatch<SetStateAction<boolean>>;
-  connectionError: string | undefined;
+
+  walletsKitError: string | undefined;
+  noWalletError: boolean;
 };
 
 const ConnectWalletContext = createContext<ConnectWalletContext | null>(null);
@@ -53,7 +55,7 @@ export const useConnectWalletContext = () => {
 export const ConnectWalletContextProvider = ({
   children,
 }: PropsWithChildren) => {
-  const { setWalletConnection } = useAppContext();
+  const { setWalletConnection, setSep10Target } = useAppContext();
 
   const [selectedWallet, setSelectedWallet] = useState<ISupportedWallet>();
   const [username, setUsername] = useState<string>();
@@ -62,7 +64,8 @@ export const ConnectWalletContextProvider = ({
   const [walletSelectError, setWalletSelectError] = useState<boolean>(false);
   const [tncError, setTncError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
-  const [connectionError, setConnectionError] = useState<string>();
+  const [walletsKitError, setWalletsKitError] = useState<string>();
+  const [noWalletError, setNoWalletError] = useState<boolean>(false);
 
   const router = useSCRouter();
 
@@ -78,33 +81,31 @@ export const ConnectWalletContextProvider = ({
           throw Error();
         }
 
-        // Add user details if specified
-        if (useremail) {
-          newConn.personalDetails = {
-            username: username ?? "",
-            useremail,
-          };
-          newConn.isAnonymous = false;
-        } else {
-          newConn.isAnonymous = true;
+        // Verify if wallet exists
+        // If it doesnt exist throw "special error message"
+        // "Account ABCD...WXYZ does not exist in {network_name}"
+        // (if testnet make a funding request to friendbot for that pubkey)
+        try {
+          await TransactionHistoryService.fetchAccountBalance(
+            appConfig.server,
+            newConn.stellarPubKey
+          );
+        } catch (error: any) {
+          setNoWalletError(true);
+          return false;
         }
 
-        // Verify if account exists
-        await TransactionHistoryService.fetchAccountBalance(
-          appConfig.server,
-          newConn.stellarPubKey
-        );
-
+        // TODO: move this to later in the flow?
         WalletConnectionStorageService.setWalletConnection(newConn);
         setWalletConnection(newConn);
 
         return true;
       } catch (error: any) {
-        setConnectionError(error.toString());
+        setWalletsKitError(error.toString());
         return false;
       }
     },
-    [setWalletConnection, username, useremail]
+    [setWalletConnection]
   );
 
   const validateForm = useCallback(() => {
@@ -115,7 +116,7 @@ export const ConnectWalletContextProvider = ({
       if (useremail === undefined) {
         emailErr = useremail === undefined;
       } else {
-        emailErr = !isValidEmail(useremail);
+        emailErr = !validateEmail(useremail);
       }
     }
 
@@ -134,7 +135,9 @@ export const ConnectWalletContextProvider = ({
     setWalletSelectError(false);
     setEmailError(false);
     setTncError(false);
-    setConnectionError(undefined);
+
+    setNoWalletError(false);
+    setWalletsKitError(undefined);
 
     // Validate form
     if (!validateForm()) {
@@ -144,12 +147,13 @@ export const ConnectWalletContextProvider = ({
     // Connect
     connectWallet(selectedWallet!).then((didSucceed) => {
       if (!didSucceed) {
-        setSelectedWallet(undefined);
+        // setSelectedWallet(undefined);
       } else {
         if (appConfig.demo) {
           router.push("/emissions");
         } else {
-          router.push("/dashboard/sink");
+          setSep10Target("register");
+          router.push("/sep10");
         }
       }
     });
@@ -159,8 +163,9 @@ export const ConnectWalletContextProvider = ({
     setEmailError,
     connectWallet,
     router,
-    setConnectionError,
+    setWalletsKitError,
     validateForm,
+    setSep10Target,
   ]);
 
   const providerValue = useMemo(
@@ -180,7 +185,8 @@ export const ConnectWalletContextProvider = ({
       setTncError,
       emailError,
       setEmailError,
-      connectionError,
+      walletsKitError,
+      noWalletError,
     }),
     [
       username,
@@ -190,7 +196,8 @@ export const ConnectWalletContextProvider = ({
       walletSelectError,
       tncError,
       emailError,
-      connectionError,
+      walletsKitError,
+      noWalletError,
       submitForm,
     ]
   );

@@ -16,19 +16,20 @@ import {
   allowAllModules,
   StellarWalletsKit,
 } from "@creit.tech/stellar-wallets-kit";
-import {
-  MyTransactionRecord,
-  PersonalDetails,
-  SinkCarbonXdrPostRequest,
-  WalletConnection,
-} from "@/app/types";
+import { MyTransactionRecord, WalletConnection } from "@/app/types";
 import { loadAvailableWalletsMock } from "./walletFunctions";
-import { usePathname, useRouter } from "next/navigation";
-import WalletConnectionStorageService from "@/services/WalletConnectionService";
-import TransactionHistoryService from "@/services/TransactionHistoryService";
-import RoundingService from "@/services/RoundingService";
+
 import useIsMobile from "@/hooks/useIsMobile";
 import appConfig from "@/config";
+import { useTransactionHistory } from "@/hooks/useTransactionHistory";
+import { useWalletConnection } from "@/hooks/useWalletConnection";
+import { getRecipient, Recipient } from "@stellarcarbon/sc-sdk";
+import { useSEP10JWT } from "@/hooks/useSEP10JWT";
+import { SEP10Target } from "./SEP10Context";
+import { useSWKInit } from "@/hooks/init/useSWKInit";
+import { useSupportedWalletsInit } from "@/hooks/init/useSupportedWalletsInit";
+import { useWalletConnectionInit } from "@/hooks/init/useWalletConnectionInit";
+import { useSCAccountInit } from "@/hooks/init/useSCAccountInit";
 
 declare global {
   interface Date {
@@ -51,10 +52,7 @@ type AppContext = {
     SetStateAction<WalletConnection | undefined | null>
   >;
   disconnectWallet: () => void;
-  updateWalletConnection: (
-    isAnonymous: boolean,
-    personalDetails?: PersonalDetails
-  ) => void;
+  updateWalletConnection: (recipient?: Recipient) => void;
 
   // Drawer
   isDrawerOpen: boolean;
@@ -64,16 +62,20 @@ type AppContext = {
 
   // Personal transactions on dashboard
   myTransactions: MyTransactionRecord[] | null;
-  setMyTransactions: Dispatch<SetStateAction<MyTransactionRecord[] | null>>;
+  pollForNewTransaction: (
+    maxRetries?: number,
+    delayMs?: number
+  ) => Promise<void>;
+  refetchTransactions: () => void;
+  totalPending: number;
+  totalSunk: number;
 
   // Round down support
   hasPendingRounding: boolean | undefined;
   setHasPendingRounding: Dispatch<SetStateAction<boolean | undefined>>;
 
-  sinkRequest: SinkCarbonXdrPostRequest | undefined;
-  setSinkRequest: Dispatch<
-    SetStateAction<SinkCarbonXdrPostRequest | undefined>
-  >;
+  jwt: string | undefined;
+  setJwt: Dispatch<SetStateAction<string | undefined>>;
 
   stellarWalletsKit: StellarWalletsKit | null;
 
@@ -81,6 +83,14 @@ type AppContext = {
   usdcBalance: number | undefined;
 
   isMobileDevice: boolean;
+
+  isDropdownOpen: boolean;
+  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
+
+  retirementGraceDays: number;
+
+  sep10Target: SEP10Target;
+  setSep10Target: Dispatch<SetStateAction<SEP10Target>>;
 };
 
 const AppContext = createContext<AppContext | null>(null);
@@ -101,16 +111,11 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
   const isMobileDevice = useIsMobile();
 
-  // Null at first, will become undefined after attempting to load from local storage fails.
-  const [walletConnection, setWalletConnection] = useState<
-    WalletConnection | null | undefined
-  >(null);
-  const [myTransactions, setMyTransactions] = useState<
-    MyTransactionRecord[] | null
-  >(null);
-  const [hasPendingRounding, setHasPendingRounding] = useState<boolean>();
-  const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
+  const [sep10Target, setSep10Target] = useState<SEP10Target>("dashboard"); // where the sep10 flow will eventually redirect to
+  const [jwt, setJwt] = useState<string>();
+  useSEP10JWT(setJwt);
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isDrawerClosing, setIsDrawerClosing] = useState<boolean>(false);
   const openDrawer = () => {
@@ -124,111 +129,54 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     }, 300);
   };
 
-  const [xlmBalance, setXlmBalance] = useState<number>();
-  const [usdcBalance, setUsdcBalance] = useState<number>();
+  const {
+    walletConnection,
+    setWalletConnection,
+    updateWalletConnection,
+    disconnectWallet,
+    xlmBalance,
+    usdcBalance,
+    hasPendingRounding,
+    setHasPendingRounding,
+    loadWalletConnection,
+  } = useWalletConnection();
 
-  const pathname = usePathname();
-  const router = useRouter();
+  const {
+    myTransactions,
+    totalPending,
+    totalSunk,
+    retirementGraceDays,
+    pollForNewTransaction,
+    refetch: refetchTransactions,
+  } = useTransactionHistory(walletConnection?.stellarPubKey);
+
+  // Initialization logic
+  const [isKitReady, setIsKitReady] = useState(false);
+  const [isWalletConnectionReady, setIsWalletConnectionReady] = useState(false);
 
   useEffect(() => {
-    const loadApp = async () => {
-      const loadStellarWalletsKit = async () => {
-        if (typeof window !== "undefined") {
-          // This import makes sure assigning the kit to the ref happens client side.
-          const { StellarWalletsKit } = await import(
-            "@creit.tech/stellar-wallets-kit"
-          );
-          stellarWalletsKitRef.current = new StellarWalletsKit({
-            network: appConfig.network,
-            selectedWalletId: XBULL_ID,
-            modules: allowAllModules(),
-          });
-          // console.log("StellarWalletsKit loaded", stellarWalletsKitRef.current);
+    if (walletConnection && !isWalletConnectionReady) {
+      setIsWalletConnectionReady(true);
+    }
+  }, [walletConnection, isWalletConnectionReady]);
 
-          // Load supported wallets from stellar wallets kit
-          let wallets;
-          if (window.Cypress) {
-            wallets = await loadAvailableWalletsMock();
-          } else {
-            wallets =
-              (await stellarWalletsKitRef.current?.getSupportedWallets()) ?? [];
-          }
-          setSupportedWallets(wallets);
-        }
-      };
-
-      const loadWalletConnection = () => {
-        const wc = WalletConnectionStorageService.loadWalletConnection();
-        if (wc !== undefined) {
-          stellarWalletsKitRef.current?.setWallet(wc.walletType.id);
-        }
-        setWalletConnection(wc);
-      };
-
-      if (stellarWalletsKitRef.current === null) {
-        await loadStellarWalletsKit();
-      }
-
-      if (walletConnection === null) {
-        loadWalletConnection();
-      } else if (walletConnection === undefined) {
-      } else {
-        if (
-          myTransactions === null &&
-          pathname !== "/dashboard/transactions/history/" // This path will fetch on its own.
-        ) {
-          // Load personal transactions.
-          TransactionHistoryService.fetchAccountHistory(
-            walletConnection.stellarPubKey!
-          ).then((transactionRecords): void => {
-            setMyTransactions(transactionRecords);
-          });
-        }
-
-        TransactionHistoryService.fetchAccountBalance(
-          appConfig.server,
-          walletConnection.stellarPubKey
-        ).then((accountBalance) => {
-          setXlmBalance(accountBalance.xlm);
-          setUsdcBalance(accountBalance.usdc);
-        });
-
-        // Pending rounding check
-        if (
-          walletConnection !== undefined &&
-          hasPendingRounding === undefined &&
-          pathname !== "/dashboard/transactions/" // This path will fetch on its own.
-        ) {
-          RoundingService.hasPendingRounding(
-            walletConnection.stellarPubKey
-          ).then((isPending) => setHasPendingRounding(isPending));
-        }
-      }
-    };
-
-    loadApp();
-  }, [walletConnection, myTransactions, hasPendingRounding]);
-
-  const updateWalletConnection = useCallback(
-    (isAnonymous: boolean, personalDetails?: PersonalDetails) => {
-      const newWalletConnection: WalletConnection = {
-        ...walletConnection!,
-        personalDetails,
-        isAnonymous,
-      };
-
-      WalletConnectionStorageService.setWalletConnection(newWalletConnection);
-      setWalletConnection(newWalletConnection);
-    },
-    [walletConnection]
-  );
-
-  const disconnectWallet = useCallback(() => {
-    WalletConnectionStorageService.removeWalletConnection();
-    setWalletConnection(undefined);
-    setMyTransactions(null);
-    router.push("/");
-  }, [router]);
+  useSWKInit({ ref: stellarWalletsKitRef, setIsKitReady });
+  useSupportedWalletsInit({
+    ref: stellarWalletsKitRef,
+    isKitReady,
+    setSupportedWallets,
+  });
+  useWalletConnectionInit({
+    ref: stellarWalletsKitRef,
+    isKitReady,
+    loadWalletConnection,
+  });
+  useSCAccountInit({
+    jwt,
+    walletConnection,
+    updateWalletConnection,
+    isWalletConnectionReady,
+  });
 
   const providerValue = useMemo(() => {
     return {
@@ -245,13 +193,16 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       isDrawerClosing,
 
       myTransactions,
-      setMyTransactions,
+      pollForNewTransaction,
+      refetchTransactions,
+      totalPending,
+      totalSunk,
 
       hasPendingRounding,
       setHasPendingRounding,
 
-      sinkRequest,
-      setSinkRequest,
+      jwt,
+      setJwt,
 
       stellarWalletsKit: stellarWalletsKitRef.current,
 
@@ -259,20 +210,41 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
       usdcBalance,
 
       isMobileDevice,
+
+      isDropdownOpen,
+      setIsDropdownOpen,
+
+      retirementGraceDays,
+
+      sep10Target,
+      setSep10Target,
     };
   }, [
     supportedWallets,
     walletConnection,
+    setWalletConnection,
     isDrawerOpen,
     isDrawerClosing,
     myTransactions,
+    pollForNewTransaction,
+    refetchTransactions,
+    totalPending,
+    totalSunk,
+
     updateWalletConnection,
     hasPendingRounding,
-    sinkRequest,
+    setHasPendingRounding,
+
+    jwt,
+    setJwt,
 
     xlmBalance,
     usdcBalance,
     isMobileDevice,
+    isDropdownOpen,
+    disconnectWallet,
+    retirementGraceDays,
+    sep10Target,
   ]);
 
   return (

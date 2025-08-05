@@ -32,12 +32,12 @@ export default function CTAButton({
         border border-accentSecondary
         ${
           white
-            ? "bg-white text-black"
+            ? "bg-white hover:scale-[1.1] transition-all duration-200 ease-in-out transform hover:bg-primary hover:text-white text-black"
             : "bg-darkest hover:bg-accent hover:text-black"
         }
         ${
           small
-            ? "px-3 text-sm h-9 gap-1 rounded-lg"
+            ? "px-3 text-sm h-9 gap-2 rounded-lg w-[175px]"
             : huge
             ? "p-3 gap-3 text-lg md:text-xl rounded-lg"
             : "w-[220px] text-lg h-12 gap-3 rounded-xl"
@@ -49,9 +49,9 @@ export default function CTAButton({
 
       <CARBONCurrencyIcon width={small ? 18 : 28} height={small ? 18 : 28} />
       {walletConnection ? (
-        <span className="font-semibold">Sink CARBON</span>
+        <span className="font-semibold">Go to dashboard</span>
       ) : (
-        <span className="font-semibold">Contribute now!</span>
+        <span className="font-semibold">Start your impact</span>
       )}
     </button>
   );

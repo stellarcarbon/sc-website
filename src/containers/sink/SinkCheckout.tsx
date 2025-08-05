@@ -8,6 +8,7 @@ import CompletedSinking from "./steps/Completed";
 import ErrorSinking from "./steps/Error";
 import { useRouter } from "next/navigation";
 import ExpiredSinking from "./steps/Expired";
+import { useSinkFormContext } from "@/context/SinkFormContext";
 
 export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
   [CheckoutSteps.CREATING]: (
@@ -24,20 +25,21 @@ export const SinkStatusDetails: Record<CheckoutSteps, ReactNode> = {
 };
 
 export default function SinkCheckout() {
-  const { step, sinkRequest } = useSinkingContext();
+  const { formSinkRequest } = useSinkFormContext();
+  const { step } = useSinkingContext();
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!sinkRequest) {
+    if (!formSinkRequest) {
       router.push("/dashboard");
     }
-  }, [sinkRequest, router]);
+  }, [formSinkRequest, router]);
 
   return (
     <Modal>
       {SinkStatusDetails[step]}
-      {/* {SinkStatusDetails[CheckoutSteps.EXPIRED]} */}
+      {/* {SinkStatusDetails[CheckoutSteps.ERROR]} */}
     </Modal>
   );
 }

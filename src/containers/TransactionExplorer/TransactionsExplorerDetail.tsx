@@ -10,9 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
 import { formatDate } from "@/utils";
-import RetirementInformation from "./RetirementInformation/RetirementInformation";
-import Link from "next/link";
+import TxDetailRetirementInfo from "./RetirementInformation/TxDetailRetirementInfo";
 import SectionHeader from "@/components/SectionHeader";
+import TransactionExplorerHeader from "./TransactionExplorerHeader";
+import SCLink from "@/components/SCLink";
 
 export default function TransactionsExplorerDetail() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -55,13 +56,12 @@ export default function TransactionsExplorerDetail() {
     }
   }, [transaction]);
 
-  if (isLoading) {
+  if (isLoading)
     return (
-      <div className="md:min-h-[400px] flex items-center justify-center">
+      <div className="pt-12 md:mb-12 bg-darkest w-full flex-1 md:rounded md:border border-tertiary">
         <TransactionsLoading />
       </div>
     );
-  }
 
   if (transaction === undefined) return;
 
@@ -81,7 +81,8 @@ export default function TransactionsExplorerDetail() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center min-h-[calc(100dvh-64px)] md:min-h-0 bg-darker">
+    <div className="w-full flex flex-col items-center min-h-[calc(100dvh-64px)] md:min-h-0 bg-darkest md:rounded md:border border-tertiary md:mb-12 pt-2">
+      <TransactionExplorerHeader />
       <div className="grid grid-cols-5 w-full p-2 px-3 md:px-4">
         <PropertyKey>ID</PropertyKey>
         <PropertyValue>
@@ -146,23 +147,23 @@ export default function TransactionsExplorerDetail() {
           <TruncatedHash hash={transaction.recipient} uppercase />
         </PropertyValue>
 
-        <Link
+        <SCLink
           href={
             appConfig.network === WalletNetwork.PUBLIC
               ? `https://stellar.expert/explorer/public/tx/${transaction.id}`
               : `https://stellar.expert/explorer/testnet/tx/${transaction.id}`
           }
           target="_blank"
-          className="text-accentSecondary underline my-4 col-span-5 text-center"
+          className="my-4 col-span-5 text-center"
         >
           View this transaction on Stellar.expert
-        </Link>
+        </SCLink>
 
         {/* <hr className="col-span-5 my-3" /> */}
       </div>
 
       <SectionHeader>Retirement information</SectionHeader>
-      <RetirementInformation transaction={transaction} />
+      <TxDetailRetirementInfo transaction={transaction} />
     </div>
   );
 }

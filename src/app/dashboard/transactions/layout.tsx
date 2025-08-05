@@ -3,20 +3,28 @@
 import TransactionsNavBarItem, {
   TransactionsTabs,
 } from "@/components/dashboard/TransactionsNavBarItem";
+import { useAppContext } from "@/context/appContext";
+import { useEffect } from "react";
 
 export default function HistoryLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { refetchTransactions } = useAppContext();
+
+  useEffect(() => {
+    refetchTransactions();
+  }, [refetchTransactions]);
+
   return (
     <main className="flex flex-col items-center justify-start w-full flex-1">
-      <div className="h-12 w-full flex justify-around items-center bg-primary border-b border-b-secondary">
+      <div className="h-12 w-full flex justify-around items-center bg-darkest border-b border-b-secondary">
         <TransactionsNavBarItem item={TransactionsTabs.PENDING} />
         <TransactionsNavBarItem item={TransactionsTabs.HISTORY} />
       </div>
 
-      <div className="flex flex-col bg-primary md:rounded-b-md flex-1 md:min-h-[70vh]">
+      <div className="flex flex-col bg-darkest md:rounded-b-md flex-1 md:min-h-[70vh] w-full">
         {children}
       </div>
     </main>

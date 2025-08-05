@@ -14,16 +14,15 @@ import Link from "next/link";
 
 export default function SoftwarePage() {
   return (
-    <main className="flex flex-col items-center font-noto">
+    <main className="flex flex-col items-center font-noto bg-darkest">
       <Banner
         title="Software"
         subtitle="For integration partners"
         background="blockchain-bg"
       />
 
-      <div className="mt-12"></div>
-
       <ContentContainer>
+        <Header>Open source</Header>
         <Paragraph>
           At Stellarcarbon, we believe in transparency, accessibility, and
           innovation to fund nature-based solutions. Our open-source software
@@ -202,7 +201,7 @@ function GithubLink({ href }: { href: string }) {
     <div className="flex">
       <Link
         href={href}
-        className="ml-4 p-2 text-2xl flex items-center gap-2 hover:bg-tertiary rounded underline"
+        className="ml-4 p-2 text-2xl flex items-center gap-2 text-accent hover:text-accentSecondary rounded underline"
         target="_blank"
       >
         <FontAwesomeIcon icon={faGithub} />

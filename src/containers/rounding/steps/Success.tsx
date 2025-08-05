@@ -1,28 +1,33 @@
 import Button from "@/components/Button";
 import SuccessIcon from "@/components/icons/SuccessIcon";
-import SinkingStep from "@/containers/sink/steps/Step";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
+import ModalStep from "../../../components/ModalStep";
+import { useCallback } from "react";
 
 export default function RoundingSuccess() {
   const router = useRouter();
 
+  const onClick = useCallback(() => {
+    router.push("/dashboard/transactions");
+  }, [router]);
+
   return (
-    <SinkingStep title="Success">
-      <div className="font-semibold text-lg text-center">
+    <ModalStep title="Success">
+      <div className="text-center">
         Your certificate request was received in good order and will be created
         soon.
       </div>
       <div className="my-8 flex justify-center">
         <SuccessIcon />
       </div>
-      <div className="h-16 md:my-3 flex items-center justify-center">
-        <Button
-          className="h-10 !py-2"
-          onClick={() => router.push("/dashboard/transactions")}
-        >
-          Return to dashboard
+      <div className="flex items-center justify-center">
+        <Button onClick={onClick}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <div>Return to dashboard</div>
         </Button>
       </div>
-    </SinkingStep>
+    </ModalStep>
   );
 }

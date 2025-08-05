@@ -1,10 +1,3 @@
-import { SinkCarbonXdrPostRequest } from "@/app/types";
-import {
-  ApiError,
-  CarbonService,
-  PaymentAsset,
-  SinkingResponse,
-} from "@/client";
 import {
   createContext,
   Dispatch,
@@ -21,6 +14,12 @@ import { Transaction, TransactionBuilder } from "@stellar/stellar-sdk";
 import { useRouter } from "next/navigation";
 import appConfig from "@/config";
 import XLMConversionService from "@/services/XLMConversionService";
+import { useSinkFormContext } from "./SinkFormContext";
+import {
+  buildSinkCarbonXdr,
+  BuildSinkCarbonXdrData,
+  SinkingResponse,
+} from "@stellarcarbon/sc-sdk";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -33,11 +32,7 @@ export enum CheckoutSteps {
 }
 
 type SinkingContext = {
-  sinkRequest: SinkCarbonXdrPostRequest | undefined;
-  setSinkRequest: Dispatch<
-    SetStateAction<SinkCarbonXdrPostRequest | undefined>
-  >;
-
+  sinkRequest: BuildSinkCarbonXdrData | undefined;
   sinkResponse: SinkingResponse | undefined;
 
   step: CheckoutSteps;
@@ -63,8 +58,8 @@ export const useSinkingContext = () => {
 
 export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const { stellarWalletsKit, walletConnection } = useAppContext();
+  const { formSinkRequest } = useSinkFormContext();
 
-  const [sinkRequest, setSinkRequest] = useState<SinkCarbonXdrPostRequest>();
   const [sinkResponse, setSinkResponse] = useState<SinkingResponse>();
   const [submissionError, setSubmissionError] = useState<string>();
   const [step, setStep] = useState<CheckoutSteps>(CheckoutSteps.CREATING);
@@ -72,6 +67,8 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const [USDCPerXLM, setUSDCPerXLM] = useState<number>();
 
   const router = useRouter();
+
+  const [sinkRequest, setSinkRequest] = useState<BuildSinkCarbonXdrData>();
 
   useEffect(() => {
     if (submissionError) {
@@ -149,7 +146,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   const signTransaction = useCallback(async () => {
     // Sign the transaction using the Stellar Wallets Kit & submit it to Horizon.
     if (sinkResponse === undefined) {
-      setSubmissionError("Could find transaction to sign.");
+      setSubmissionError("Could not find transaction to sign.");
       return;
     }
 
@@ -183,17 +180,17 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   }, [sinkResponse, walletConnection, stellarWalletsKit, submitToHorizon]);
 
   const confirmSinkRequest = useCallback(
-    async (request: SinkCarbonXdrPostRequest) => {
+    async (request: BuildSinkCarbonXdrData) => {
       // Build the XDR with stellarcarbon API
       try {
-        const response = await CarbonService.buildSinkCarbonXdr(request);
-        setSinkResponse(response);
+        const response = await buildSinkCarbonXdr(request);
+
+        if (response.data === undefined) throw Error();
+
+        setSinkResponse(response.data);
         setStep(CheckoutSteps.CONFIRM);
       } catch (err: unknown) {
-        let message = "Unknown error occurred.";
-        if (err instanceof ApiError) {
-          message = err.body["detail"][0]["msg"];
-        }
+        let message = "Error occurred during XDR building.";
         setSubmissionError(message);
       }
     },
@@ -202,17 +199,17 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     // When the user completes the sink-form a sinkRequest is defined.
-    if (sinkRequest) {
+    if (formSinkRequest) {
       setSubmissionError(undefined);
-      confirmSinkRequest(sinkRequest);
+      setStep(CheckoutSteps.CREATING);
+      setSinkRequest(formSinkRequest);
+      confirmSinkRequest(formSinkRequest);
       router.push("/sink");
     }
-  }, [sinkRequest, router, confirmSinkRequest]);
+  }, [formSinkRequest, router, confirmSinkRequest, setSinkRequest]);
 
   const providerValue = useMemo(() => {
     return {
-      sinkRequest,
-      setSinkRequest,
       sinkResponse,
       step,
       setStep,
@@ -220,14 +217,15 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       setSubmissionError,
       signTransaction,
       USDCPerXLM,
+      sinkRequest,
     };
   }, [
-    sinkRequest,
     sinkResponse,
     step,
     submissionError,
     signTransaction,
     USDCPerXLM,
+    sinkRequest,
   ]);
 
   return (

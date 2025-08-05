@@ -9,27 +9,25 @@ export default function ConnectWalletCTA() {
   return (
     <div
       className="my-8 p-4 mx-4
-    bg-darkest text-white border border-accentSecondary rounded
- 
+    bg-secondary text-white border border-accentSecondary rounded
+      md:w-[80%]
     flex flex-col items-center justify-center gap-4"
     >
-      <div className="flex-1 flex items-center gap-2">
+      <div className="flex-1 flex items-center gap-2 w-full">
         <FontAwesomeIcon
           icon={faWarning}
           className="text-[36px] md:text-[56px]"
         />
-        <div className="text-center text-sm md:text-base">
-          No wallet connected! To sink CARBON please connect a wallet.
+
+        <div className="flex-1 text-center text-sm md:text-base px-2">
+          No wallet connected! {`Let's`} connect your wallet first to continue.
         </div>
       </div>
 
-      <button
-        onClick={() => router.push("/wallet/connect")}
-        className="text-sm bg-accent text-black px-4 rounded shadow h-8 flex items-center gap-1"
-      >
+      <Button onClick={() => router.push("/connect")}>
         <FontAwesomeIcon icon={faLink} />
-        Connect wallet
-      </button>
+        <div>Connect wallet</div>
+      </Button>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import Button from "@/components/Button";
-import RoundingStep from "./Step";
+import ModalStep from "../../../components/ModalStep";
 import { useRouter } from "next/navigation";
 import { useRoundingContext } from "@/context/RoundingContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWarning } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faWarning } from "@fortawesome/free-solid-svg-icons";
 
 export default function ErrorRounding() {
   const { error } = useRoundingContext();
@@ -11,9 +11,9 @@ export default function ErrorRounding() {
   const router = useRouter();
 
   return (
-    <RoundingStep title="Something went wrong">
+    <ModalStep title="Something went wrong">
       <div className="flex flex-col items-center">
-        <div className="text-lg font-semibold overflow-y-auto max-h-[200px]">
+        <div className="text-center text-lg font-semibold overflow-y-auto max-h-[200px]">
           {error ?? "Please try again."}
         </div>
         <div className="flex-1 flex justify-center items-center my-12">
@@ -26,10 +26,11 @@ export default function ErrorRounding() {
 
       <Button
         onClick={() => router.push("/dashboard/transactions")}
-        className="mx-auto text-base"
+        className="mx-auto text-base font-normal"
       >
-        Back to dashboard
+        <FontAwesomeIcon icon={faArrowLeft} />
+        <div>Back to dashboard</div>
       </Button>
-    </RoundingStep>
+    </ModalStep>
   );
 }

@@ -2,33 +2,66 @@
 
 import Button from "@/components/Button";
 import SelectWallet from "./SelectWallet";
-import ContactDetails from "./ContactDetails";
 import AcceptTnC from "./AcceptTnC";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
-import FormError from "@/components/FormError";
 import SectionHeader from "@/components/SectionHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLink, faWarning } from "@fortawesome/free-solid-svg-icons";
 
 export default function ConnectWalletForm() {
-  const { submitForm, connectionError } = useConnectWalletContext();
+  const { submitForm, walletsKitError, noWalletError } =
+    useConnectWalletContext();
 
   return (
     <>
-      <div className="md:hidden w-full">
+      <div>
         <SectionHeader>
           <div className="text-center text-2xl w-full">Connect wallet</div>
         </SectionHeader>
-      </div>
-      <div className="flex-1 lg:my-8 w-full md:max-w-[780px] p-3 py-6 pb-12 md:p-6 flex flex-col justify-between gap-9 bg-darker md:rounded md:border md:border-tertiary overflow-hidden">
-        <SelectWallet />
-        <ContactDetails />
-        <AcceptTnC />
+        <div className="p-3 py-6 pb-12 md:p-6 flex flex-col gap-8">
+          <SelectWallet />
+          <AcceptTnC />
 
-        {connectionError && <FormError>{connectionError}</FormError>}
+          {walletsKitError && (
+            <WalletsKitError message={walletsKitError}></WalletsKitError>
+          )}
 
-        <Button className="h-10 self-center" onClick={submitForm}>
-          Connect wallet
-        </Button>
+          {noWalletError && <NoWalletError />}
+
+          <Button className="self-center" onClick={submitForm}>
+            <FontAwesomeIcon icon={faLink} />
+            <div>Connect wallet</div>
+          </Button>
+        </div>
       </div>
     </>
   );
+}
+
+function WalletsKitError({ message }: { message: string }) {
+  return (
+    <div className="mx-auto max-w-lg p-4 bg-red-50 border border-red-200 rounded-lg">
+      <div className="flex items-center gap-1 justify-center">
+        <FontAwesomeIcon className="text-red-800" icon={faWarning} />
+        <div className="text-red-800 font-semibold text-center">
+          Something went wrong
+        </div>
+      </div>
+      <div className="mt-2 text-red-700 text-center text-sm">{message}</div>
+    </div>
+  );
+}
+
+function NoWalletError() {
+  return (
+    <div className="mx-auto max-w-lg p-4 bg-red-50 border border-red-200 rounded-lg">
+      <div className="flex items-center gap-1 justify-center text-red-800">
+        That wallet does not exist. Did you fund it yet?
+      </div>
+    </div>
+  );
+}
+
+export function ConnectWalletFormError({ message }: { message: string }) {
+  return <div className="text-red-500 text-sm">{message}</div>;
 }

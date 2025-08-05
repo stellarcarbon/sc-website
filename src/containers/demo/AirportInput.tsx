@@ -40,10 +40,31 @@ export default function AirportInput({
     () =>
       debounce(
         (inputValue: string, callback: (options: AirportOption[]) => void) => {
-          const filteredOptions = airportData.filter((option) =>
-            option.label.toLowerCase().includes(inputValue.toLowerCase())
+          const inputLower = inputValue.toLowerCase();
+
+          const filtered = airportData.filter((option) =>
+            option.label.toLowerCase().includes(inputLower)
           );
-          callback(filteredOptions);
+          // Find the exact matches on airport code and move them to the top of the list
+          // 2) Partition into exact‐value matches vs the rest
+          const [exactMatches, partialMatches] = filtered.reduce<
+            [AirportOption[], AirportOption[]]
+          >(
+            (acc, option) => {
+              if (option.value.toLowerCase() === inputLower) {
+                acc[0].push(option);
+              } else {
+                acc[1].push(option);
+              }
+              return acc;
+            },
+            [[], []]
+          );
+
+          // 3) Concat so exacts come first
+          const orderedOptions = [...exactMatches, ...partialMatches];
+
+          callback(orderedOptions);
         },
         300
       ), // 300ms debounce time
