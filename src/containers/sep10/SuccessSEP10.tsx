@@ -9,7 +9,7 @@ import { useAppContext } from "@/context/appContext";
 import { useSCAccount } from "@/hooks/useSCAccount";
 
 export default function SuccessSEP10() {
-  const { sep10Target } = useAppContext();
+  const { sep10Target, walletConnection } = useAppContext();
   const { isStale } = useSCAccount();
 
   const router = useRouter();
@@ -18,8 +18,12 @@ export default function SuccessSEP10() {
     let targetHref = "/dashboard";
 
     if (sep10Target === "register") {
-      if (isStale) {
-        targetHref = "/connect/update";
+      if (walletConnection?.recipient) {
+        if (isStale) {
+          targetHref = "/connect/update";
+        } else {
+          targetHref = "/dashboard";
+        }
       } else {
         targetHref = "/connect/account-registration";
       }
@@ -28,7 +32,7 @@ export default function SuccessSEP10() {
     }
 
     router.push(targetHref);
-  }, [router, sep10Target, isStale]);
+  }, [router, sep10Target, isStale, walletConnection]);
 
   return (
     <ModalStep title="Success">
@@ -40,7 +44,7 @@ export default function SuccessSEP10() {
       </div>
       <div className="my-2 flex items-center justify-center">
         <Button onClick={onClick}>
-          <FontAwesomeIcon icon={faForward} />
+          {/* <FontAwesomeIcon icon={faForward} /> */}
           <div>Continue</div>
         </Button>
       </div>

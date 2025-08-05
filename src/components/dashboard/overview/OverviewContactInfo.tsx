@@ -97,7 +97,9 @@ export default function OverviewContactInfo() {
                     <div className="">Name</div>
                     <div className="">
                       {walletConnection.recipient.name ?? (
-                        <div>Not specified</div>
+                        <div className="text-tertiary italic">
+                          Not specified
+                        </div>
                       )}
                     </div>
                   </div>

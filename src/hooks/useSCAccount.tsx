@@ -1,3 +1,4 @@
+import appConfig from "@/config";
 import { useAppContext } from "@/context/appContext";
 import {
   createRecipient,
@@ -7,7 +8,8 @@ import {
 import { useCallback, useEffect, useState } from "react";
 
 export function useSCAccount() {
-  const { walletConnection, updateWalletConnection, jwt } = useAppContext();
+  const { walletConnection, updateWalletConnection, jwt, retirementGraceDays } =
+    useAppContext();
 
   const [isStale, setIsStale] = useState<boolean>(false);
 
@@ -15,9 +17,12 @@ export function useSCAccount() {
     if (walletConnection?.recipient) {
       const modifiedAt = new Date(walletConnection.recipient.modified_at);
       const now = new Date();
-      const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
-      if (modifiedAt < thirtyDaysAgo) {
+      const cutoffDate = new Date(
+        now.getTime() - retirementGraceDays * 24 * 60 * 60 * 1000
+      );
+
+      if (modifiedAt < cutoffDate) {
         setIsStale(true);
       }
     }
@@ -50,8 +55,10 @@ export function useSCAccount() {
   );
 
   const updateAccount = useCallback(
-    async (email: string, name?: string) => {
+    async (email: string, name?: string | null) => {
       if (!walletConnection) return;
+
+      if (name === "") name = null;
 
       const res = await updateRecipient({
         body: { email, name },

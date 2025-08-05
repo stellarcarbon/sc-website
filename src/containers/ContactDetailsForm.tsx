@@ -159,7 +159,7 @@ export default function ContactDetailsForm() {
         </div>
       </div>
 
-      <div className="mb-2 flex justify-between">
+      <div className="mb-2 flex justify-between gap-2">
         {mode === "create" && (
           <>
             <SaveButton onClick={onSubmitRegistration} />
@@ -178,17 +178,16 @@ export default function ContactDetailsForm() {
 
         {mode === "overview" && (
           <>
-            {walletConnection?.recipient ? (
-              <UpdateButton small onClick={onSubmitInline} />
-            ) : (
-              <SaveButton small onClick={onSubmitInline} />
-            )}
-
             {walletConnection?.recipient && (
               <DeleteButton
                 small
                 onClick={() => setShowDeleteAccountDialog(true)}
               />
+            )}
+            {walletConnection?.recipient ? (
+              <UpdateButton small onClick={onSubmitInline} />
+            ) : (
+              <SaveButton small onClick={onSubmitInline} />
             )}
           </>
         )}
