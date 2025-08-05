@@ -5,6 +5,7 @@ import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react";
 import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import appConfig from "@/config";
+import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -24,7 +25,11 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    if (process.env.NODE_ENV !== "development") initPosthog();
+    if (
+      process.env.NODE_ENV !== "development" &&
+      appConfig.network !== WalletNetwork.PUBLIC
+    )
+      initPosthog();
   }, []);
 
   return (
