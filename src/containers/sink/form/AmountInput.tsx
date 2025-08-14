@@ -150,7 +150,7 @@ export default function AmountInput() {
   return (
     <>
       <SectionHeader icon={faTree}>Set the sink amount</SectionHeader>
-      <div className="p-3 py-6 md:p-6">
+      <div className="mx-3 py-6 md:p-6">
         <div className="flex flex-col">
           <div></div>
           <div className="">

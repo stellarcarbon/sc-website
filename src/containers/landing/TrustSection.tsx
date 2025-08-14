@@ -34,8 +34,14 @@ export default function WhySection() {
         Trust & Verification
       </div>
       <Paragraph>
-        Transparency is essential when it comes to online eco contributions.
-        That’s why we only work with projects issuing Verified Carbon Units
+        We believe transparency is essential when it comes to online eco
+        contributions. That’s why we only work with projects issuing{" "}
+        <SCLink
+          href="https://verra.org/programs/verified-carbon-standard/verified-carbon-units-vcus/"
+          target="_blank"
+        >
+          Verified Carbon Units
+        </SCLink>{" "}
         (VCUs) and use blockchain technology to ensure every transaction is
         transparent and traceable.
       </Paragraph>

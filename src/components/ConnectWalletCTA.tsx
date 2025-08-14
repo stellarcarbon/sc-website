@@ -20,14 +20,22 @@ export default function ConnectWalletCTA() {
         />
 
         <div className="flex-1 text-center text-sm md:text-base px-2">
-          No wallet connected! {`Let's`} connect your wallet first to continue.
+          Welcome to your Stellarcarbon dashboard. Connect a Stellar wallet to
+          sink carbon and view your transaction history.
         </div>
       </div>
 
-      <Button onClick={() => router.push("/connect")}>
-        <FontAwesomeIcon icon={faLink} />
-        <div>Connect wallet</div>
-      </Button>
+      <ConnectWalletButton />
     </div>
+  );
+}
+
+export function ConnectWalletButton() {
+  const router = useRouter();
+  return (
+    <Button onClick={() => router.push("/connect")}>
+      <FontAwesomeIcon icon={faLink} />
+      <div className="font-semibold">Connect wallet</div>
+    </Button>
   );
 }

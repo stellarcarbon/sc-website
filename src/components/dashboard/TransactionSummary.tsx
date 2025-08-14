@@ -40,8 +40,10 @@ export default function TransactionSummary() {
           {latestTransaction ? (
             <TransactionListItem transaction={latestTransaction} />
           ) : (
-            <div className="text-start">
-              You have not made any transactions yet.
+            <div className="text-start text-tertiary italic">
+              {walletConnection
+                ? "You have not made any transactions yet."
+                : "No wallet connected."}
             </div>
           )}
         </div>
@@ -65,28 +67,30 @@ export default function TransactionSummary() {
           </div>
         </div>
 
-        <div>
-          <DashboardHeader>Pending claims</DashboardHeader>
+        {totalPending > 0 && (
+          <div>
+            <DashboardHeader>Pending claims</DashboardHeader>
 
-          <div className="flex flex-col">
-            <div className="text-2xl flex gap-4 justify-center items-center">
-              <div className="flex gap-1 items-center mt-1 mb-4">
-                <span className="font-bold">
-                  {totalPending?.toFixed(3) ?? 0}
-                </span>
-                <CARBONCurrencyIcon width={iconSize} height={iconSize} />
+            <div className="flex flex-col">
+              <div className="text-2xl flex gap-4 justify-center items-center">
+                <div className="flex gap-1 items-center mt-1 mb-4">
+                  <span className="font-bold">
+                    {totalPending?.toFixed(3) ?? 0}
+                  </span>
+                  <CARBONCurrencyIcon width={iconSize} height={iconSize} />
+                </div>
               </div>
-            </div>
 
-            <span className="text-start">
-              The amount of fractional carbon certificates that are still
-              pending a certificate claim.{" "}
-              <SCLink href="/explain/how-it-works/retirement">
-                What does this mean?
-              </SCLink>
-            </span>
+              <span className="text-start">
+                The amount of fractional carbon certificates that are still
+                pending a certificate claim.{" "}
+                <SCLink href="/explain/how-it-works/retirement">
+                  What does this mean?
+                </SCLink>
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

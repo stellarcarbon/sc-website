@@ -8,34 +8,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LandingSection from "./LandingSection";
 import HowItWorksFlowChart from "./HowItWorksFlowChart";
 import SCLink from "@/components/SCLink";
+import Subheader from "@/components/Subheader";
+import CTAButton from "@/components/CTAButton";
+import { ConnectWalletButton } from "@/components/ConnectWalletCTA";
 
 export default function HowItWorksSection() {
   const first = (
     <div>
       <div className="px-4 text-4xl font-bold leading-tight tracking-light mb-2">
-        What we do
+        What is Stellarcarbon?
       </div>
       <Paragraph>
-        {`Supporting climate action shouldn't be complicated. With Stellarcarbon,
-        you can contribute to verified rainforest conservation project in just a
-        few clicks using your Stellar wallet.`}
+        {`Supporting nature projects shouldn't be complicated. With Stellarcarbon,
+        you can contribute to rainforest conservation projects in just a
+        few clicks. Contributions go towards supporting local communities in their efforts to
+        maintain & protect the forest.`}
       </Paragraph>
+      {/* <Paragraph>
+        We do this using by supporting local communities in their efforts to
+        maintain & protect the forest.{" "}
+      </Paragraph> */}
       <Paragraph>
-        {`Whether you're an individual or a small business, you can contribute
-        directly to protecting rainforests and natural ecosystems.`}
+        Our{" "}
+        <SCLink href={"/explain/how-it-works/sinking-process/"}>
+          sink CARBON process
+        </SCLink>
+        {` enables contribution to these goals in a convenient, traceable and secure manner.`}{" "}
       </Paragraph>
-      <Paragraph>
-        Just connect your wallet and start sinking{" "}
-        <SCLink href="/dashboard/sink">right now</SCLink>!
-        {/* <div className="w-full flex justify-center mt-8">
-          <CTAButton white />
-        </div> */}
-      </Paragraph>
-
-      <Paragraph>
-        We also offer API and Sorocarbon integration options for businesses on
-        Stellar.
-      </Paragraph>
+      <div className="flex justify-center w-full my-6">
+        {/* <CTAButton white text="Connect wallet" /> */}
+        <ConnectWalletButton />
+      </div>
+      {/* <Paragraph>
+        For businesses on Stellar we offer API and Sorocarbon integration
+        options.
+      </Paragraph> */}
     </div>
   );
   const second = <HowItWorksFlowChart />;

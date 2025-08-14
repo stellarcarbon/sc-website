@@ -13,20 +13,20 @@ export default function HowItWorksFlowChart() {
 
         <div className="w-[1.5px] bg-gray-500 self-stretch place-self-center"></div>
         <div className="pb-8">
-          <SCLink href="/connect">Connect</SCLink> your Stellar wallet to the
-          platform.
+          Using Stellarcarbon requires a Stellar wallet. Connect your wallet to
+          the platform and access your dashboard.
         </div>
 
         {/* <FontAwesomeIcon icon={faCalculator} className="place-self-center" /> */}
         <div className="flex items-center justify-center">
           <CARBONCurrencyIcon width={20} height={20} />
         </div>
-        <div className="text-xl font-bold">Determine contribution amount</div>
+        <div className="text-xl font-bold">Determine sink amount</div>
 
         <div className="w-[1.5px] bg-gray-500 self-stretch place-self-center"></div>
         <div className="pb-8">
-          Decide on a contribution amount, optionally using our emissions
-          estimator.
+          Decide on the amount to contribute! We offer an emissions estimator to
+          help you determine this.
         </div>
 
         <FontAwesomeIcon icon={faHandshake} className="place-self-center" />
@@ -34,8 +34,8 @@ export default function HowItWorksFlowChart() {
 
         <div></div>
         <div className="">
-          Finalize the transaction to support the{" "}
-          <SCLink href="/explain">rainforest project</SCLink>.
+          Finalize the transaction and optionally get a personalized
+          certificate.
         </div>
       </div>
     </div>
