@@ -150,7 +150,7 @@ export default function AmountInput() {
   return (
     <>
       <SectionHeader icon={faTree}>Set the sink amount</SectionHeader>
-      <div className="mx-3 py-6 md:p-6">
+      <div className="mx-3 py-6 md:mx-4">
         <div className="flex flex-col">
           <div></div>
           <div className="">
@@ -259,7 +259,7 @@ export default function AmountInput() {
             <div className="text-start font-semibold">Estimate emissions</div>
             <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
           </div>
-          <div className="flex flex-col gap-6 mt-4">
+          <div className="flex flex-col gap-6 mt-4 mb-2">
             <div>
               Optionally try out our emissions estimator to help you decide on
               the right amount.

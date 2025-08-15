@@ -29,12 +29,12 @@ export function useSCAccount() {
   }, [walletConnection]);
 
   const createAccount = useCallback(
-    async (address: string, email: string, name: string | undefined) => {
+    async (address: string, email: string, name: string) => {
       const res = await createRecipient({
         body: {
           address,
           email,
-          name,
+          name: name === "" ? null : name,
         },
         fetch: (request: Request) => {
           const authRequest = new Request(request, {

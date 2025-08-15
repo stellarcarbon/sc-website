@@ -9,6 +9,7 @@ import { useInlineContactInfoContext } from "@/context/InlineContactInfoContext"
 import { useSCAccount } from "@/hooks/useSCAccount";
 import {
   faCircleCheck,
+  faContactCard,
   faEdit,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -56,20 +57,22 @@ export default function OverviewContactInfo() {
 
   return (
     <div className="flex flex-col">
-      <SectionHeader>
+      <SectionHeader icon={faContactCard}>
         <div>{showForm ? "Update registration" : "Registration details"}</div>
 
         {showForm ? (
-          <div className="flex gap-2">
+          <div className="flex-1 flex justify-end">
             <Button onClick={onClickClose} className="h-8 w-8">
               <FontAwesomeIcon icon={faXmark} className="text-lg" />
             </Button>
           </div>
         ) : (
-          <Button onClick={onClickEdit} className="h-8 text-base">
-            <FontAwesomeIcon className="text-sm" icon={faEdit} />
-            <div className="font-normal text-sm">Edit</div>
-          </Button>
+          <div className="flex-1 flex justify-end">
+            <Button onClick={onClickEdit} className="h-8 text-base">
+              <FontAwesomeIcon className="text-sm" icon={faEdit} />
+              <div className="font-normal text-sm">Edit</div>
+            </Button>
+          </div>
         )}
       </SectionHeader>
 

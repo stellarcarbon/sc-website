@@ -21,12 +21,12 @@ export default function HowItWorksFlowChart() {
         <div className="flex items-center justify-center">
           <CARBONCurrencyIcon width={20} height={20} />
         </div>
-        <div className="text-xl font-bold">Determine sink amount</div>
+        <div className="text-xl font-bold">Determine contribution amount</div>
 
         <div className="w-[1.5px] bg-gray-500 self-stretch place-self-center"></div>
         <div className="pb-8">
-          Decide on the amount to contribute! We offer an emissions estimator to
-          help you determine this.
+          Decide on the amount of CARBON to sink! We offer an emissions
+          estimator to help you determine this.
         </div>
 
         <FontAwesomeIcon icon={faHandshake} className="place-self-center" />
