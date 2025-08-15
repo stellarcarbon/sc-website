@@ -4,7 +4,6 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useViewportWidth } from "@/utils";
 import { useMemo } from "react";
 import TransactionListItem from "./TransactionListItem";
-import DashboardHeader from "./DashboardHeader";
 import SCLink from "../SCLink";
 import TruncatedHash from "./TruncatedHash";
 
@@ -28,7 +27,7 @@ export default function TransactionSummary() {
   }
 
   return (
-    <div className="flex flex-col mb-16 md:mb-10 gap-12 mt-8">
+    <div className="flex flex-col mb-16 md:mb-24 gap-8 mt-4">
       {walletConnection && (
         <div className="flex flex-col w-full justify-start px-3 md:px-4">
           <div
@@ -76,7 +75,9 @@ export default function TransactionSummary() {
                   Pending claims
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-5xl font-bold">{"0.100" ?? 0}</span>
+                  <span className="text-5xl font-bold">
+                    {totalPending.toFixed(3) ?? 0}
+                  </span>
                   <CARBONCurrencyIcon width={44} height={44} />
                 </div>
                 <span className="text-sm text-gray-400">
@@ -91,22 +92,25 @@ export default function TransactionSummary() {
         </div>
       </div>
 
-      <div className="flex flex-col items-start gap-4 px-3 md:px-4">
-        {/* <DashboardHeader>Latest transaction</DashboardHeader> */}
+      {walletConnection && (
+        <div className="flex flex-col items-center gap-4 px-3 md:px-12">
+          {/* <DashboardHeader>Latest transaction</DashboardHeader> */}
 
-        <div className="text-xl font-medium uppercase tracking-widest text-gray-300">
-          Latest transaction
-        </div>
-        {latestTransaction ? (
-          <TransactionListItem transaction={latestTransaction} />
-        ) : (
-          <div className="text-start text-tertiary italic">
-            {walletConnection
-              ? "You have not made any transactions yet."
-              : "No wallet connected."}
+          <div className="text-xl font-medium uppercase tracking-widest text-gray-300">
+            Latest transaction
           </div>
-        )}
-      </div>
+
+          {latestTransaction ? (
+            <TransactionListItem transaction={latestTransaction} />
+          ) : (
+            <div className="text-start text-tertiary italic">
+              {walletConnection
+                ? "You have not made any transactions yet."
+                : "No wallet connected."}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import {
-  AlbedoModule,
   allowAllModules,
   ISupportedWallet,
   StellarWalletsKit,
   WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
+import { LedgerModule } from "@creit.tech/stellar-wallets-kit/modules/ledger.module";
 import { WalletConnection } from "@/app/types";
 
 export const walletConnectDialog = async (
@@ -21,10 +21,12 @@ export const walletConnectDialog = async (
     } as WalletConnection;
   } else {
     try {
+      const modules = allowAllModules();
+      modules.push(new LedgerModule());
       let kit = new StellarWalletsKit({
         selectedWalletId: wallet.id,
         network,
-        modules: allowAllModules(),
+        modules,
       });
 
       let addr = await kit.getAddress(); // will throw on error

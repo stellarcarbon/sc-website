@@ -29,7 +29,7 @@ export default function CurrencySelect() {
 
   return (
     <>
-      <SectionHeader icon={faDollar}>Choose preferred asset</SectionHeader>
+      <SectionHeader>Choose preferred asset</SectionHeader>
       <div className="mx-3 py-4 md:mx-4">
         {/* <DashboardHeader>Choose preferred asset</DashboardHeader> */}
 

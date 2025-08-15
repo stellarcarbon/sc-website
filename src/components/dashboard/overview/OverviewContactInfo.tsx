@@ -57,7 +57,7 @@ export default function OverviewContactInfo() {
 
   return (
     <div className="flex flex-col">
-      <SectionHeader icon={faContactCard}>
+      <SectionHeader>
         <div>{showForm ? "Update registration" : "Registration details"}</div>
 
         {showForm ? (

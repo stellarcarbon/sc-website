@@ -2,7 +2,6 @@
 
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -12,22 +11,18 @@ import {
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
 import {
   ISupportedWallet,
-  XBULL_ID,
-  allowAllModules,
   StellarWalletsKit,
 } from "@creit.tech/stellar-wallets-kit";
 import { MyTransactionRecord, WalletConnection } from "@/app/types";
-import { loadAvailableWalletsMock } from "./walletFunctions";
 
 import useIsMobile from "@/hooks/useIsMobile";
-import appConfig from "@/config";
+
 import { useTransactionHistory } from "@/hooks/useTransactionHistory";
 import { useWalletConnection } from "@/hooks/useWalletConnection";
-import { getRecipient, Recipient } from "@stellarcarbon/sc-sdk";
+import { Recipient } from "@stellarcarbon/sc-sdk";
 import { useSEP10JWT } from "@/hooks/useSEP10JWT";
 import { SEP10Target } from "./SEP10Context";
 import { useSWKInit } from "@/hooks/init/useSWKInit";
-import { useSupportedWalletsInit } from "@/hooks/init/useSupportedWalletsInit";
 import { useWalletConnectionInit } from "@/hooks/init/useWalletConnectionInit";
 import { useSCAccountInit } from "@/hooks/init/useSCAccountInit";
 
@@ -160,12 +155,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, [walletConnection, isWalletConnectionReady]);
 
-  useSWKInit({ ref: stellarWalletsKitRef, setIsKitReady });
-  useSupportedWalletsInit({
-    ref: stellarWalletsKitRef,
-    isKitReady,
-    setSupportedWallets,
-  });
+  useSWKInit({ ref: stellarWalletsKitRef, setIsKitReady, setSupportedWallets });
   useWalletConnectionInit({
     ref: stellarWalletsKitRef,
     isKitReady,

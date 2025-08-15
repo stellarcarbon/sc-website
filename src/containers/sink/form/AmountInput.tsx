@@ -4,6 +4,7 @@ import { debounce, useSCRouter } from "@/utils";
 import {
   faArrowRightArrowLeft,
   faCalculator,
+  faStopwatch,
   faTree,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -149,7 +150,7 @@ export default function AmountInput() {
 
   return (
     <>
-      <SectionHeader icon={faTree}>Set the sink amount</SectionHeader>
+      <SectionHeader>Set the sink amount</SectionHeader>
       <div className="mx-3 py-4 md:mx-4 mb-8">
         <div className="flex flex-col">
           <div></div>
@@ -255,9 +256,8 @@ export default function AmountInput() {
             </div>
           </div>
 
-          <div className="text-xl">
-            <div className="text-start font-semibold">Estimate emissions</div>
-            <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
+          <div className="text-2xl font-bold tracking-wider">
+            Estimate emissions
           </div>
           <div className="flex flex-col gap-6 mt-4 mb-2">
             <div>
