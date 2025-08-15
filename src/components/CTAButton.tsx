@@ -20,7 +20,11 @@ export default function CTAButton({
   const { walletConnection, isMobileDevice, closeDrawer } = useAppContext();
 
   const onClick = useCallback(() => {
-    router.push("/dashboard/sink");
+    if (walletConnection) {
+      router.push("/dashboard/sink");
+    } else {
+      router.push("/dashboard");
+    }
 
     if (isMobileDevice) closeDrawer();
   }, [router, isMobileDevice, closeDrawer]);

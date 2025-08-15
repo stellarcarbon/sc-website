@@ -50,7 +50,10 @@ export default function NavBarWallet() {
     }
   };
 
-  if (!walletConnection && pathname === "/") {
+  if (
+    !walletConnection &&
+    (pathname.includes("/dashboard") || pathname.includes("/connect"))
+  ) {
     return <div className="w-[175px] h-1"></div>;
   }
 

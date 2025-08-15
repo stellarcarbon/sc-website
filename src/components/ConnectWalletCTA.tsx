@@ -14,14 +14,10 @@ export default function ConnectWalletCTA() {
     flex flex-col items-center justify-center gap-4"
     >
       <div className="flex-1 flex items-center gap-2 w-full">
-        <FontAwesomeIcon
-          icon={faWarning}
-          className="text-[36px] md:text-[56px]"
-        />
+        {/* <FontAwesomeIcon icon={faLink} className="text-[36px] md:text-[56px]" /> */}
 
-        <div className="flex-1 text-center text-sm md:text-base px-2">
-          Welcome to your Stellarcarbon dashboard. Connect a Stellar wallet to
-          sink carbon and view your transaction history.
+        <div className="flex-1 text-center text-base px-2">
+          To start using Stellarcarbon, connect your Stellar wallet.
         </div>
       </div>
 
