@@ -58,7 +58,7 @@ export default function OverviewContactInfo() {
   return (
     <div className="flex flex-col">
       <SectionHeader>
-        <div>{showForm ? "Update registration" : "Registration details"}</div>
+        <div>Contact information</div>
 
         {showForm ? (
           <div className="flex-1 flex justify-end">
@@ -87,7 +87,8 @@ export default function OverviewContactInfo() {
           <div className="my-2">
             {!walletConnection?.recipient ? (
               <div className="text-center">
-                This account is anonymous. No PDF certificates will be emailed.
+                This account is anonymous. No personalized certificates can be
+                requested.
               </div>
             ) : (
               <>

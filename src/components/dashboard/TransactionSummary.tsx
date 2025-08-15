@@ -27,7 +27,7 @@ export default function TransactionSummary() {
   }
 
   return (
-    <div className="flex flex-col mb-16 md:mb-24 gap-8 mt-4">
+    <div className="flex flex-col mb-16 gap-8 mt-4">
       {walletConnection && (
         <div className="flex flex-col w-full justify-start px-3 md:px-4">
           <div
@@ -48,7 +48,7 @@ export default function TransactionSummary() {
       )}
 
       <div className="px-3 md:px-4">
-        <div className="rounded-2xl  border-tertiary backdrop-blur p-6 md:p-8 shadow-sm">
+        <div className="rounded-2xl  border-tertiary">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Carbon Sunk */}
             <div
@@ -56,7 +56,7 @@ export default function TransactionSummary() {
                 totalPending <= 0 && "md:col-span-2"
               } flex flex-col items-center text-center gap-3`}
             >
-              <div className="text-xl font-medium uppercase tracking-widest text-gray-300">
+              <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
                 Carbon Sunk
               </div>
               <div className="flex items-center text-5xl font-bold text-white gap-3">
@@ -71,7 +71,7 @@ export default function TransactionSummary() {
             {/* Pending Claims */}
             {totalPending > 0 && (
               <div className="flex flex-col items-center text-center gap-3">
-                <div className="text-sm font-medium uppercase tracking-widest text-gray-300">
+                <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
                   Pending claims
                 </div>
                 <div className="flex items-center gap-2">
@@ -95,10 +95,10 @@ export default function TransactionSummary() {
       </div>
 
       {walletConnection && (
-        <div className="flex flex-col items-center gap-4 px-3 md:px-12">
+        <div className="flex flex-col items-center gap-4 px-3 md:px-12 mt-4">
           {/* <DashboardHeader>Latest transaction</DashboardHeader> */}
 
-          <div className="text-xl font-medium uppercase tracking-widest text-gray-300">
+          <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
             Latest transaction
           </div>
 

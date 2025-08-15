@@ -17,7 +17,7 @@ export default function RequestCertificate() {
   const { step, setStep } = useRequestCertificateContext();
 
   return (
-    <div className="p-4 flex flex-col gap-4 items-center">
+    <div>
       {step !== RequestCertificateSteps.info && (
         <IconButton
           className="absolute top-[10px] left-[calc(100%-32px)] w-[24px] h-[24px] z-10"

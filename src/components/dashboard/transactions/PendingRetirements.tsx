@@ -8,6 +8,8 @@ import RoundingService from "@/services/RoundingService";
 import DashboardTitle from "../DashboardTitle";
 import PendingRetirementsInfo from "./PendingRetirementsInfo";
 import DashboardHeader from "../DashboardHeader";
+import SCLink from "@/components/SCLink";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function PendingRetirements() {
   const {
@@ -15,6 +17,7 @@ export default function PendingRetirements() {
     walletConnection,
     setHasPendingRounding,
     totalPending,
+    retirementGraceDays,
   } = useAppContext();
 
   const pendingTransactions = useMemo(() => {
@@ -49,28 +52,48 @@ export default function PendingRetirements() {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col px-4 w-full pt-12 pb-12">
+      <div className="flex-1 flex flex-col w-full pt-12 pb-12">
         {pendingTransactions?.length > 0 && (
-          <DashboardHeader>Your pending transactions</DashboardHeader>
+          <SectionHeader>Your pending transactions</SectionHeader>
         )}
-        <div className="flex-1 flex flex-col gap-1">
-          {pendingTransactions?.length ?? 0 > 0 ? (
-            <>
-              {pendingTransactions?.map((transaction, index) => {
-                return (
-                  <TransactionListItem
-                    key={transaction.id}
-                    transaction={transaction}
-                    showCountdown
-                  />
-                );
-              })}
-            </>
-          ) : (
-            <div className="flex-1 flex flex-col justify-center text-center text-sm">
-              No pending transactions found.
+        <div className="p-4 flex flex-col gap-8">
+          <div className="flex flex-col gap-4">
+            <div>
+              Any pending transactions will automatically retire into the
+              community pool after exactly{" "}
+              <div className="font-bold inline">{retirementGraceDays}</div>{" "}
+              days, which means you can no longer attain a personal certificate.
             </div>
-          )}
+
+            <div>
+              If you want to request a personal certificate you have to do so
+              before this period ends.
+            </div>
+
+            <div>
+              Read more about retirements & certificates{" "}
+              <SCLink href="/explain/how-it-works/retirement">here</SCLink>.
+            </div>
+          </div>
+          <div className="flex-1 flex flex-col gap-1">
+            {pendingTransactions?.length ?? 0 > 0 ? (
+              <>
+                {pendingTransactions?.map((transaction, index) => {
+                  return (
+                    <TransactionListItem
+                      key={transaction.id}
+                      transaction={transaction}
+                      showCountdown
+                    />
+                  );
+                })}
+              </>
+            ) : (
+              <div className="flex-1 flex flex-col justify-center text-center text-sm">
+                No pending transactions found.
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

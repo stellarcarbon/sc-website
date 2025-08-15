@@ -256,10 +256,10 @@ export default function AmountInput() {
             </div>
           </div>
 
-          <div className="text-2xl font-bold tracking-wider">
+          {/* <div className="text-2xl font-bold tracking-wider">
             Estimate emissions
-          </div>
-          <div className="flex flex-col gap-6 mt-4 mb-2">
+          </div> */}
+          <div className="flex flex-col gap-6 mb-2">
             <div>
               Optionally try out our emissions estimator to help you decide on
               the right amount.
