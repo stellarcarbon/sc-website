@@ -11,7 +11,7 @@ export default function SectionHeader({
 }) {
   if (icon) {
     return (
-      <div className="tracking-wider font-bold h-14 text-2xl flex items-center justify-between gap-2 w-full px-3 md:px-4 backdrop-blur border-b border-neutral-700 text-gray-100">
+      <div className="tracking-wide font-bold h-14 text-2xl flex items-center justify-between gap-2 w-full px-3 md:px-4 backdrop-blur border-b border-neutral-700 text-gray-100">
         <FontAwesomeIcon icon={icon} />
         {children}
       </div>
@@ -19,7 +19,7 @@ export default function SectionHeader({
   }
 
   return (
-    <div className="tracking-wider font-bold h-14 text-2xl flex items-center justify-between w-full px-3 md:px-4 backdrop-blur border-b border-neutral-700 text-gray-100">
+    <div className="tracking-wide font-bold h-14 text-2xl flex items-center justify-between w-full px-3 md:px-4 backdrop-blur border-b border-neutral-700 text-gray-100">
       {children}
     </div>
   );
