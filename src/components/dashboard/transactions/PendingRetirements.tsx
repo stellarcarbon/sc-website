@@ -37,10 +37,13 @@ export default function PendingRetirements() {
     <div className="bg-darkest w-full">
       <div className="px-4 flex flex-col">
         <div className="mt-12 md:mt-12 flex flex-col items-center">
-          <DashboardTitle>Pending retirements balance</DashboardTitle>
-          <div className="flex items-center justify-center gap-3 text-[48px] mb-8">
+          {/* <DashboardTitle>Pending retirements balance</DashboardTitle> */}
+          <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
+            Pending retirements balance
+          </div>
+          <div className="flex items-center justify-center gap-3 text-[48px] mb-8 font-bold">
             <span>{totalPending.toFixed(3)}</span>
-            <CARBONCurrencyIcon width={40} height={40} />
+            <CARBONCurrencyIcon width={44} height={44} />
           </div>
           <PendingRetirementsInfo />
         </div>

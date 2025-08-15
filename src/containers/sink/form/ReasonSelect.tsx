@@ -97,7 +97,7 @@ export default function ReasonSelect({ error }: ReasonSelectProps) {
   return (
     <>
       <SectionHeader icon={faTag}>Label your contribution</SectionHeader>
-      <div className="mx-3 md:mx-4 py-6">
+      <div className="mx-3 md:mx-4 py-4 mb-8">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
             Why are you making this contribution? Leave a public message and it

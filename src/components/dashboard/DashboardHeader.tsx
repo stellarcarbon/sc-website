@@ -2,9 +2,12 @@ import { PropsWithChildren } from "react";
 
 export default function DashboardHeader({ children }: PropsWithChildren) {
   return (
-    <div className="text-xl mb-3">
-      <div className="text-start font-semibold">{children}</div>
-      <hr className="mt-1 border-b border-accentSecondary  w-[50%]" />
-    </div>
+    <>
+      <div className="mb-4">
+        <div className="text-xl font-semibold tracking-wider">{children}</div>
+        {/* <div className="mt-1 h-0.5 w-1/2 bg-accentSecondary rounded-full" /> */}
+        <div className="mt-1 h-0.5 w-1/2 bg-accentSecondary rounded-full" />
+      </div>
+    </>
   );
 }

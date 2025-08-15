@@ -72,7 +72,7 @@ export default function NavBarWallet() {
       </div>
       {isDropdownOpen && (
         <div
-          className="absolute right-0 w-64 top-11 p-2 bg-darkest border rounded border-accentSecondary text-white flex flex-col gap-1"
+          className="absolute right-0 w-64 top-11 p-2 bg-darker border rounded border-tertiary text-white flex flex-col gap-1"
           ref={dropdownRef}
         >
           <NavbarDropdownLink href="/dashboard/sink">

@@ -150,7 +150,7 @@ export default function AmountInput() {
   return (
     <>
       <SectionHeader icon={faTree}>Set the sink amount</SectionHeader>
-      <div className="mx-3 py-6 md:mx-4">
+      <div className="mx-3 py-4 md:mx-4 mb-8">
         <div className="flex flex-col">
           <div></div>
           <div className="">
@@ -158,7 +158,7 @@ export default function AmountInput() {
             <CARBONCurrencyIcon className="inline" /> would let you claim the
             environmental benefit of reducing 1 tonne of CO2.
           </div>
-          <div className="flex flex-col gap-4 my-8">
+          <div className="flex flex-col gap-4 my-8 mb-12">
             <div className="flex justify-between items-center gap-2 mb-3 md:mb-6">
               <div className="w-[35%] flex flex-col items-start">
                 <div className="text-xs mb-1">Sink amount</div>

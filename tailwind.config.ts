@@ -43,6 +43,7 @@ const config: Config = {
         // primary: "#2D3250",
         // primary: "#282C47",
         primary: "#22263d",
+        header: "#323652",
         secondary: "#424769",
         tertiary: "#7077A1",
 

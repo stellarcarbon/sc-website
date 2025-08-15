@@ -9,13 +9,9 @@ import SCLink from "../SCLink";
 import TruncatedHash from "./TruncatedHash";
 
 export default function TransactionSummary() {
-  const { myTransactions, walletConnection, totalPending, totalSunk } =
+  const { myTransactions, walletConnection, totalSunk, totalPending } =
     useAppContext();
   const isWide = useViewportWidth();
-
-  const iconSize = useMemo(() => {
-    return isWide ? 20 : 20;
-  }, [isWide]);
 
   const latestTransaction = useMemo(() => {
     if (myTransactions !== null) {
@@ -32,12 +28,12 @@ export default function TransactionSummary() {
   }
 
   return (
-    <div className="flex flex-col mb-4">
+    <div className="flex flex-col mb-16 md:mb-10 gap-12 mt-8">
       {walletConnection && (
-        <div className="flex flex-col w-full justify-start px-3 md:px-6 my-6">
+        <div className="flex flex-col w-full justify-start px-3 md:px-4">
           <div
             className="flex items-center gap-2 p-2
-          bg-primary border rounded border-accentSecondary"
+           border rounded border-primary"
           >
             <div className="flex items-center gap-2">
               <img className="h-4 w-4" src={walletConnection.walletType.icon} />
@@ -52,54 +48,62 @@ export default function TransactionSummary() {
         </div>
       )}
 
-      <div className="flex flex-col items-center my-8 mb-12">
-        <div className="flex items-center text-5xl gap-1">
-          <span>{totalSunk?.toFixed(3) ?? 0}</span>
-          <CARBONCurrencyIcon width={36} height={36} />
-        </div>
-        <div className="mt-1">
-          The total carbon-sinking impact of this wallet
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <div className="flex flex-col gap-2 px-3 md:px-4 mb-8">
-          <DashboardHeader>Latest transaction</DashboardHeader>
-
-          {latestTransaction ? (
-            <TransactionListItem transaction={latestTransaction} />
-          ) : (
-            <div className="text-start text-tertiary italic">
-              {walletConnection
-                ? "You have not made any transactions yet."
-                : "No wallet connected."}
+      <div className="px-3 md:px-4">
+        <div className="rounded-2xl  border-tertiary backdrop-blur p-6 md:p-8 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Carbon Sunk */}
+            <div
+              className={`${
+                totalPending <= 0 && "md:col-span-2"
+              } flex flex-col items-center text-center gap-3`}
+            >
+              <div className="text-xl font-medium uppercase tracking-widest text-gray-300">
+                Carbon Sunk
+              </div>
+              <div className="flex items-center text-5xl font-bold text-white gap-3">
+                <span>{totalSunk?.toFixed(3) ?? 0}</span>
+                <CARBONCurrencyIcon width={44} height={44} />
+              </div>
+              <div className="text-sm text-gray-400">
+                The total impact of this wallet.
+              </div>
             </div>
-          )}
-        </div>
 
-        {walletConnection && (
-          <div className="px-3 md:px-4 my-6 flex flex-col gap-10">
-            <div>
-              <DashboardHeader>Pending claims</DashboardHeader>
-
-              <div className="flex flex-col">
-                <div className="text-2xl flex gap-4 justify-center items-center">
-                  <div className="flex gap-1 items-center mt-1 mb-4">
-                    <span className="font-bold">
-                      {totalPending?.toFixed(3) ?? 0}
-                    </span>
-                    <CARBONCurrencyIcon width={iconSize} height={iconSize} />
-                  </div>
+            {/* Pending Claims */}
+            {totalPending > 0 && (
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="text-sm font-medium uppercase tracking-widest text-gray-300">
+                  Pending claims
                 </div>
-
-                <span className="text-start">
-                  The amount of fractional carbon certificates that are still
-                  pending a certificate claim.{" "}
+                <div className="flex items-center gap-2">
+                  <span className="text-5xl font-bold">{"0.100" ?? 0}</span>
+                  <CARBONCurrencyIcon width={44} height={44} />
+                </div>
+                <span className="text-sm text-gray-400">
+                  You have pending claims.{" "}
                   <SCLink href="/explain/how-it-works/retirement">
                     What does this mean?
                   </SCLink>
                 </span>
               </div>
-            </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-start gap-4 px-3 md:px-4">
+        {/* <DashboardHeader>Latest transaction</DashboardHeader> */}
+
+        <div className="text-xl font-medium uppercase tracking-widest text-gray-300">
+          Latest transaction
+        </div>
+        {latestTransaction ? (
+          <TransactionListItem transaction={latestTransaction} />
+        ) : (
+          <div className="text-start text-tertiary italic">
+            {walletConnection
+              ? "You have not made any transactions yet."
+              : "No wallet connected."}
           </div>
         )}
       </div>
