@@ -2,7 +2,6 @@ import { useEffect, useState, useRef, RefObject } from "react";
 import { useRouter } from "next/navigation";
 import { NavigateOptions } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { isEmail } from "validator";
-import { RequestCertificateResponse } from "@stellarcarbon/sc-sdk";
 
 export function debounce<T extends (...args: any[]) => void>(
   func: T,
@@ -103,57 +102,6 @@ export const useViewportWidth = () => {
   }, []);
 
   return isWide;
-};
-
-/**
- * Had to recreate this function from the api client because we cannot inject headers.
- */
-export const mRequestCertificate = async ({
-  recipientAddress,
-  email,
-  jwt,
-}: {
-  /**
-   * the account for which a retirement certificate will be issued
-   */
-  recipientAddress: string;
-  /**
-   * email address that will receive the Verra certificate (also supports `Your Name <account@domain.xyz>` format)
-   */
-  email: string;
-  // jwt used to prove identity for this request
-  jwt: string;
-}): Promise<RequestCertificateResponse | undefined> => {
-  let baseUrl;
-  if (process.env.NEXT_PUBLIC_PRODUCTION === "development") {
-    baseUrl = "http://localhost:8000";
-    // OpenAPI.BASE = "https://api.stellarcarbon.io";
-  } else if (process.env.NEXT_PUBLIC_PRODUCTION === "production") {
-    baseUrl = "https://api.stellarcarbon.io";
-  } else {
-    baseUrl = "https://testnet-api.stellarcarbon.io";
-  }
-
-  const response = await fetch(
-    `${baseUrl}/recipients/${recipientAddress}/request-certificate?email=${email}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
-    }
-  );
-
-  if (response.ok) {
-    const body = await response.json();
-    const result: RequestCertificateResponse = {
-      account: body["account"],
-      certificate_amount: body["certificate_amount"],
-      pending_balance_after_retirement:
-        body["pending_balance_after_retirement"],
-    };
-    return result;
-  }
 };
 
 export const formatDate = (date: Date): string => {

@@ -8,7 +8,7 @@ import { useAppContext } from "@/context/appContext";
 
 export default function RequestRounding() {
   const { totalPending, walletConnection } = useAppContext();
-  const { requestCertificate } = useRoundingContext();
+  const { requestRoundDown } = useRoundingContext();
 
   if (!walletConnection?.recipient) return;
 
@@ -45,7 +45,7 @@ export default function RequestRounding() {
         </div>
       </div>
 
-      <Button onClick={requestCertificate} className="text-base font-normal">
+      <Button onClick={requestRoundDown} className="text-base font-normal">
         <FontAwesomeIcon icon={faFileLines} />
         <div>Request certificate</div>
       </Button>

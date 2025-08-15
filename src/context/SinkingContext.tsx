@@ -179,7 +179,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, [sinkResponse, walletConnection, stellarWalletsKit, submitToHorizon]);
 
-  const confirmSinkRequest = useCallback(
+  const buildSinkingTx = useCallback(
     async (request: BuildSinkCarbonXdrData) => {
       // Build the XDR with stellarcarbon API
       try {
@@ -198,15 +198,15 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
   );
 
   useEffect(() => {
-    // When the user completes the sink-form a sinkRequest is defined.
+    // When the user completes the sink-form we submit it and they are redirected.
     if (formSinkRequest) {
       setSubmissionError(undefined);
       setStep(CheckoutSteps.CREATING);
       setSinkRequest(formSinkRequest);
-      confirmSinkRequest(formSinkRequest);
+      buildSinkingTx(formSinkRequest);
       router.push("/sink");
     }
-  }, [formSinkRequest, router, confirmSinkRequest, setSinkRequest]);
+  }, [formSinkRequest, router, buildSinkingTx, setSinkRequest]);
 
   const providerValue = useMemo(() => {
     return {

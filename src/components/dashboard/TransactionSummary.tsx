@@ -81,10 +81,12 @@ export default function TransactionSummary() {
                   <CARBONCurrencyIcon width={44} height={44} />
                 </div>
                 <span className="text-sm text-gray-400">
-                  You have pending claims.{" "}
-                  <SCLink href="/explain/how-it-works/retirement">
-                    What does this mean?
+                  You have pending claims that can be added to a certificate.
+                  Check out your{" "}
+                  <SCLink href="/dashboard/transactions">
+                    pending balance
                   </SCLink>
+                  .
                 </span>
               </div>
             )}

@@ -10,8 +10,7 @@ import {
   useState,
 } from "react";
 import { useAppContext } from "./appContext";
-import RoundingService from "@/services/RoundingService";
-import { useSEP10Context } from "./SEP10Context";
+import { requestCertificate } from "@stellarcarbon/sc-sdk";
 
 export enum RoundDownSteps {
   requestCertificate = "Request certifcate",
@@ -22,7 +21,7 @@ export enum RoundDownSteps {
 type RoundingContext = {
   step: RoundDownSteps;
 
-  requestCertificate: () => Promise<void>;
+  requestRoundDown: () => Promise<void>;
 
   error: string | undefined;
   setError: Dispatch<SetStateAction<string | undefined>>;
@@ -52,10 +51,21 @@ export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, [error]);
 
-  const requestCertificate = useCallback(async () => {
+  const requestRoundDown = useCallback(async () => {
     if (walletConnection && jwt) {
       try {
-        await RoundingService.requestCertificate(walletConnection, jwt);
+        requestCertificate({
+          path: { recipient_address: walletConnection.stellarPubKey },
+          fetch: (request: Request) => {
+            const authRequest = new Request(request, {
+              headers: {
+                ...Object.fromEntries(request.headers.entries()),
+                Authorization: `Bearer ${jwt}`,
+              },
+            });
+            return fetch(authRequest);
+          },
+        });
       } catch (e) {
         setError("Something went wrong requesting your certificate.");
       }
@@ -67,11 +77,11 @@ export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
   const providerValue = useMemo(
     () => ({
       step,
-      requestCertificate,
+      requestRoundDown,
       error,
       setError,
     }),
-    [step, requestCertificate, error]
+    [step, requestRoundDown, error]
   );
 
   return (
