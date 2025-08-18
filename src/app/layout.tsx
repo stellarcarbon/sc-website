@@ -12,6 +12,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { SinkFormContextProvider } from "@/context/SinkFormContext";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
+import appConfig from "@/config";
+import Script from "next/script";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -27,13 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <script
-          defer
-          data-domain="test.stellarcarbon.io"
-          src="https://plausible.io/js/script.js"
-        ></script>
-      </head>
+      <head></head>
       <AppContextProvider>
         <SinkFormContextProvider>
           <body className={`${inter.className}`}>

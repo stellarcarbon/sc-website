@@ -69,12 +69,3 @@ export interface AccountBalance {
   xlm: number;
   usdc: number;
 }
-
-export interface AppConfiguration {
-  network: WalletNetwork;
-  server: StellarSdk.Horizon.Server;
-  demo: boolean;
-  apiBaseUrl: string;
-  usdcXlmLiquidityPoolId?: string;
-  usdcAssetCode?: string;
-}
