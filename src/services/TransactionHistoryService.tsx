@@ -4,6 +4,7 @@ import {
   RetirementStatus,
 } from "@/app/types";
 import appConfig from "@/config";
+import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 import { AccountResponse, Server } from "@stellar/stellar-sdk/lib/horizon";
 import {
   getSinkTxItem,
@@ -122,7 +123,7 @@ export default class TransactionHistoryService {
     )?.balance;
 
     const usdcBalance = response.balances.find((balance) => {
-      if (appConfig.nodeEnv === "production") {
+      if (appConfig.network === WalletNetwork.PUBLIC) {
         if (
           balance.asset_type === "credit_alphanum4" &&
           balance.asset_code === "USDC" &&
