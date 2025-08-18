@@ -30,7 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <PlausibleProvider domain={appConfig.plausibleDataDomain} />
+        <PlausibleProvider
+          domain={appConfig.plausibleDataDomain}
+          scriptProps={{
+            src: "/sessionvar/js/script.js",
+            ...({ "data-api": "/sessionvar/api/event" } as any),
+          }}
+        />
       </head>
       <AppContextProvider>
         <SinkFormContextProvider>

@@ -37,7 +37,7 @@ export default function PendingRetirements() {
   }, [setHasPendingRounding, walletConnection]);
 
   return (
-    <div className="bg-darkest w-full flex-1 flex flex-col">
+    <div className="bg-darkest w-full flex-1 flex flex-col gap-8">
       <div className="px-4 flex flex-col">
         <div className="mt-12 md:mt-12 flex flex-col items-center">
           {/* <DashboardTitle>Pending retirements balance</DashboardTitle> */}
@@ -77,7 +77,7 @@ export default function PendingRetirements() {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex flex-col gap-1">
+      <div className="flex-1 flex flex-col items-center gap-1 mb-12 md:px-4">
         {pendingTransactions?.length ?? 0 > 0 ? (
           <>
             {pendingTransactions?.map((transaction, index) => {
