@@ -17,17 +17,14 @@ export default function RequestCertificateContactDetailsForm() {
   }, [deleteAccount, setShowDeleteAccountDialog]);
 
   return (
-    <>
+    <div className="p-4 flex flex-col items-center gap-4">
       <h2 className="text-lg md:text-xl font-semibold">Account registration</h2>
       <span className="text-center">
-        You need to register your Stellar wallet to receive personal
-        certificates.
+        To receive a personal certificates, we have to register your contact
+        details with Stellarcarbon.
       </span>
 
       <form className="flex-1 flex flex-col justify-center gap-2 items-center w-full">
-        <span className="text-center">
-          Add your contact information to create a personal certificate.
-        </span>
         <div className="w-full">
           <ContactDetailsContextProvider mode="rounddown">
             <ContactDetailsForm />
@@ -43,6 +40,6 @@ export default function RequestCertificateContactDetailsForm() {
           onConfirm={handleDelete}
         />
       )}
-    </>
+    </div>
   );
 }

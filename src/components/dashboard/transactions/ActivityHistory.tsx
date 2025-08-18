@@ -27,14 +27,10 @@ export default function ActivityHistory() {
   } else {
     return (
       <div className="flex flex-col items-center flex-1">
-        <div className="my-12 mx-4 md:mx-8 flex flex-col items-center">
-          {/* <DashboardTitle>Retired transactions</DashboardTitle> */}
-
-          <span className="text-sm text-center md:w-[80%] bg-primary p-4 border rounded border-tertiary">
-            Here you can find the transactions that have been retired into one
-            or more certificates. Click on them to find out more details about
-            the transaction and its corresponding certificate(s).
-          </span>
+        <div className="text-center mx-3 md:mx-4 my-8">
+          These are your transactions that have been retired into one or more
+          certificates. Click on them to find out more details about the
+          transaction and its corresponding certificate(s).
         </div>
 
         {/* <Divider className="my-8 md:my-12" /> */}

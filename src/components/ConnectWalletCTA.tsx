@@ -9,25 +9,29 @@ export default function ConnectWalletCTA() {
   return (
     <div
       className="my-8 p-4 mx-4
-    bg-secondary text-white border border-accentSecondary rounded
+    bg-header text-white border border-accentSecondary rounded
       md:w-[80%]
     flex flex-col items-center justify-center gap-4"
     >
       <div className="flex-1 flex items-center gap-2 w-full">
-        <FontAwesomeIcon
-          icon={faWarning}
-          className="text-[36px] md:text-[56px]"
-        />
+        {/* <FontAwesomeIcon icon={faLink} className="text-[36px] md:text-[56px]" /> */}
 
-        <div className="flex-1 text-center text-sm md:text-base px-2">
-          No wallet connected! {`Let's`} connect your wallet first to continue.
+        <div className="flex-1 text-center text-base px-2">
+          To start using Stellarcarbon, connect your Stellar wallet.
         </div>
       </div>
 
-      <Button onClick={() => router.push("/connect")}>
-        <FontAwesomeIcon icon={faLink} />
-        <div>Connect wallet</div>
-      </Button>
+      <ConnectWalletButton />
     </div>
+  );
+}
+
+export function ConnectWalletButton() {
+  const router = useRouter();
+  return (
+    <Button onClick={() => router.push("/connect")}>
+      <FontAwesomeIcon icon={faLink} />
+      <div>Connect wallet</div>
+    </Button>
   );
 }

@@ -22,10 +22,10 @@ export default function TxExplorerHelpPage() {
   };
 
   return (
-    <div className="flex flex-col bg-darkest md:border border-tertiary md:rounded pt-2 pb-12 md:px-2 md:mb-8">
+    <div className="flex flex-col bg-darkest md:border border-tertiary md:rounded pb-12 md:px-2 md:mb-8">
       <TransactionExplorerHeader />
       <div className="px-3 my-1 mb-4 flex flex-col gap-4">
-        <div>
+        <div className="mt-4">
           Use this tool to browse historical contribution data. All
           Stellarcarbon transactions are completely publicly visible.
         </div>

@@ -7,16 +7,24 @@ export default function CTAButton({
   white,
   small,
   huge,
+  text,
+  logo = true,
 }: {
   white?: boolean;
   small?: boolean;
   huge?: boolean;
+  text?: string;
+  logo?: boolean;
 }) {
   const router = useSCRouter();
   const { walletConnection, isMobileDevice, closeDrawer } = useAppContext();
 
   const onClick = useCallback(() => {
-    router.push("/dashboard/sink");
+    if (walletConnection) {
+      router.push("/dashboard/sink");
+    } else {
+      router.push("/dashboard");
+    }
 
     if (isMobileDevice) closeDrawer();
   }, [router, isMobileDevice, closeDrawer]);
@@ -47,11 +55,13 @@ export default function CTAButton({
     >
       {/* <BuyStellarCarbonIcon /> */}
 
-      <CARBONCurrencyIcon width={small ? 18 : 28} height={small ? 18 : 28} />
+      {logo && (
+        <CARBONCurrencyIcon width={small ? 18 : 28} height={small ? 18 : 28} />
+      )}
       {walletConnection ? (
         <span className="font-semibold">Go to dashboard</span>
       ) : (
-        <span className="font-semibold">Start your impact</span>
+        <span className="font-semibold">{text ?? "Start your impact"}</span>
       )}
     </button>
   );

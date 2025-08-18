@@ -17,7 +17,7 @@ export default function RequestCertificateChoose() {
   }, [totalPending]);
 
   return (
-    <>
+    <div className="p-4 flex flex-col items-center gap-4">
       <div className="relative flex w-full justify-center">
         <h2 className="text-lg md:text-xl font-semibold">
           Requesting a certificate
@@ -106,6 +106,6 @@ export default function RequestCertificateChoose() {
           </div>
         </Button>
       </div>
-    </>
+    </div>
   );
 }

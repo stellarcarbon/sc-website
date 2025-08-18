@@ -9,8 +9,11 @@ export default function ActivityHistoryPage() {
   const { walletConnection } = useAppContext();
   return (
     <div className="flex-1 flex flex-col justify-start items-center bg-darkest">
-      {walletConnection === undefined && <ConnectWalletCTA />}
-      <ActivityHistory />
+      {walletConnection === undefined ? (
+        <ConnectWalletCTA />
+      ) : (
+        <ActivityHistory />
+      )}
     </div>
   );
 }

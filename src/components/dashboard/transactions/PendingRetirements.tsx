@@ -8,6 +8,8 @@ import RoundingService from "@/services/RoundingService";
 import DashboardTitle from "../DashboardTitle";
 import PendingRetirementsInfo from "./PendingRetirementsInfo";
 import DashboardHeader from "../DashboardHeader";
+import SCLink from "@/components/SCLink";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function PendingRetirements() {
   const {
@@ -15,6 +17,7 @@ export default function PendingRetirements() {
     walletConnection,
     setHasPendingRounding,
     totalPending,
+    retirementGraceDays,
   } = useAppContext();
 
   const pendingTransactions = useMemo(() => {
@@ -34,41 +37,64 @@ export default function PendingRetirements() {
   }, [setHasPendingRounding, walletConnection]);
 
   return (
-    <div className="bg-darkest w-full">
+    <div className="bg-darkest w-full flex-1 flex flex-col">
       <div className="px-4 flex flex-col">
         <div className="mt-12 md:mt-12 flex flex-col items-center">
-          <DashboardTitle>Pending retirements balance</DashboardTitle>
-          <div className="flex items-center justify-center gap-3 text-[48px] mb-8">
+          {/* <DashboardTitle>Pending retirements balance</DashboardTitle> */}
+          <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
+            Pending retirements balance
+          </div>
+          <div className="flex items-center justify-center gap-3 text-[48px] mb-8 font-bold">
             <span>{totalPending.toFixed(3)}</span>
-            <CARBONCurrencyIcon width={40} height={40} />
+            <CARBONCurrencyIcon width={44} height={44} />
           </div>
           <PendingRetirementsInfo />
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col px-4 w-full pt-12 pb-12">
+      <div className="flex flex-col w-full">
         {pendingTransactions?.length > 0 && (
-          <DashboardHeader>Your pending transactions</DashboardHeader>
+          <SectionHeader>Your pending transactions</SectionHeader>
         )}
-        <div className="flex-1 flex flex-col gap-1">
-          {pendingTransactions?.length ?? 0 > 0 ? (
-            <>
-              {pendingTransactions?.map((transaction, index) => {
-                return (
-                  <TransactionListItem
-                    key={transaction.id}
-                    transaction={transaction}
-                    showCountdown
-                  />
-                );
-              })}
-            </>
-          ) : (
-            <div className="flex-1 flex flex-col justify-center text-center text-sm">
-              No pending transactions found.
+        <div className="p-4 flex flex-col gap-8">
+          <div className="flex flex-col gap-4">
+            <div>
+              Any pending transactions will automatically retire into the
+              community pool after exactly{" "}
+              <div className="font-bold inline">{retirementGraceDays}</div>{" "}
+              days, which means you can no longer attain a personal certificate.
             </div>
-          )}
+
+            <div>
+              If you want to request a personal certificate you have to do so
+              before this period ends.
+            </div>
+
+            <div>
+              Read more about retirements & certificates{" "}
+              <SCLink href="/explain/how-it-works/retirement">here</SCLink>.
+            </div>
+          </div>
         </div>
+      </div>
+      <div className="flex-1 flex flex-col gap-1">
+        {pendingTransactions?.length ?? 0 > 0 ? (
+          <>
+            {pendingTransactions?.map((transaction, index) => {
+              return (
+                <TransactionListItem
+                  key={transaction.id}
+                  transaction={transaction}
+                  showCountdown
+                />
+              );
+            })}
+          </>
+        ) : (
+          <div className="flex-1 flex flex-col justify-center text-center text-sm">
+            No pending transactions found.
+          </div>
+        )}
       </div>
     </div>
   );

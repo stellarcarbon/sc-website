@@ -24,7 +24,7 @@ export default function LandingSection({
 `}
       >
         <div className="flex items-start justify-center">{first}</div>
-        <div className="flex items-center justify-center">{second}</div>
+        <div className="flex items-start justify-center">{second}</div>
       </div>
       {third && <div className="px-4">{third}</div>}
     </div>

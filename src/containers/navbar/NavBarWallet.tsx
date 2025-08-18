@@ -50,10 +50,18 @@ export default function NavBarWallet() {
     }
   };
 
-  if (!walletConnection && pathname === "/") {
+  if (
+    !walletConnection &&
+    (pathname.includes("/dashboard") || pathname.includes("/connect"))
+  ) {
     return <div className="w-[175px] h-1"></div>;
   }
-  if (!walletConnection) {
+
+  if (walletConnection === null) {
+    return null;
+  }
+
+  if (walletConnection === undefined) {
     return <CTAButton white small />;
   }
 
@@ -64,7 +72,7 @@ export default function NavBarWallet() {
       </div>
       {isDropdownOpen && (
         <div
-          className="absolute right-0 w-64 top-11 p-2 bg-darkest border rounded border-accentSecondary text-white"
+          className="absolute right-0 w-64 top-11 p-2 bg-darker border rounded border-tertiary text-white flex flex-col gap-1"
           ref={dropdownRef}
         >
           <NavbarDropdownLink href="/dashboard/sink">
@@ -79,6 +87,7 @@ export default function NavBarWallet() {
             <FontAwesomeIcon icon={faUser} width={18} />
             <span>My Stellarcarbon</span>
           </NavbarDropdownLink>
+          <div className="h-[1px] my-1 w-[90%] mx-auto bg-secondary" />
           <NavbarDropdownLink href="" disconnect>
             <FontAwesomeIcon icon={faRightFromBracket} width={18} />
             <span>Disconnect wallet</span>

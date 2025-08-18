@@ -4,18 +4,13 @@ import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import { useViewportWidth } from "@/utils";
 import { useMemo } from "react";
 import TransactionListItem from "./TransactionListItem";
-import DashboardHeader from "./DashboardHeader";
 import SCLink from "../SCLink";
-import SectionHeader from "../SectionHeader";
+import TruncatedHash from "./TruncatedHash";
 
 export default function TransactionSummary() {
-  const { myTransactions, walletConnection, totalPending, totalSunk } =
+  const { myTransactions, walletConnection, totalSunk, totalPending } =
     useAppContext();
   const isWide = useViewportWidth();
-
-  const iconSize = useMemo(() => {
-    return isWide ? 20 : 20;
-  }, [isWide]);
 
   const latestTransaction = useMemo(() => {
     if (myTransactions !== null) {
@@ -32,62 +27,92 @@ export default function TransactionSummary() {
   }
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-col gap-10 px-3 md:px-6 my-6">
-        <div>
-          <DashboardHeader>Latest transaction</DashboardHeader>
+    <div className="flex flex-col mb-16 gap-12 mt-4">
+      {walletConnection && (
+        <div className="flex flex-col w-full justify-start px-3 md:px-4">
+          <div
+            className="flex items-center gap-2 p-2
+           border rounded border-primary"
+          >
+            <div className="flex items-center gap-2">
+              <img className="h-4 w-4" src={walletConnection.walletType.icon} />
+
+              <div>{walletConnection.walletType.name}</div>
+            </div>
+
+            <div className="text-xs italic text-white break-all flex-1 text-end">
+              <TruncatedHash hash={walletConnection?.stellarPubKey} uppercase />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="px-3 md:px-4">
+        <div className="rounded-2xl  border-tertiary">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Carbon Sunk */}
+            <div
+              className={`${
+                totalPending <= 0 && "md:col-span-2"
+              } flex flex-col items-center text-center gap-3`}
+            >
+              <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
+                Carbon Sunk
+              </div>
+              <div className="flex items-center text-5xl font-bold text-white gap-3">
+                <span>{totalSunk?.toFixed(3) ?? 0}</span>
+                <CARBONCurrencyIcon width={44} height={44} />
+              </div>
+              <div className="text-sm text-gray-400">
+                The total impact of this wallet.
+              </div>
+            </div>
+
+            {/* Pending Claims */}
+            {totalPending > 0 && (
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
+                  Pending claims
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-5xl font-bold">
+                    {totalPending.toFixed(3) ?? 0}
+                  </span>
+                  <CARBONCurrencyIcon width={44} height={44} />
+                </div>
+                <span className="text-sm text-gray-400">
+                  You have pending claims that can be added to a certificate.
+                  Check out your{" "}
+                  <SCLink href="/dashboard/transactions">
+                    pending balance
+                  </SCLink>
+                  .
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {walletConnection && (
+        <div className="flex flex-col items-center gap-4 px-3 md:px-12">
+          {/* <DashboardHeader>Latest transaction</DashboardHeader> */}
+
+          <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
+            Latest transaction
+          </div>
 
           {latestTransaction ? (
             <TransactionListItem transaction={latestTransaction} />
           ) : (
-            <div className="text-start">
-              You have not made any transactions yet.
+            <div className="text-start text-tertiary italic">
+              {walletConnection
+                ? "You have not made any transactions yet."
+                : "No wallet connected."}
             </div>
           )}
         </div>
-      </div>
-      <SectionHeader>Sinking stats</SectionHeader>
-      <div className="px-3 md:px-6 my-6 flex flex-col gap-10">
-        <div>
-          <DashboardHeader>CARBON sunk</DashboardHeader>
-
-          <div className="flex flex-col">
-            <div className="text-2xl flex gap-4 justify-center items-center">
-              <div className="flex gap-1 items-center mt-1 mb-4">
-                <span className="font-bold">{totalSunk?.toFixed(3) ?? 0}</span>
-                <CARBONCurrencyIcon width={iconSize} height={iconSize} />
-              </div>
-            </div>
-
-            <span className="text-start">
-              The total amount of CARBON tokens sunk with this wallet.
-            </span>
-          </div>
-        </div>
-
-        <div>
-          <DashboardHeader>Pending claims</DashboardHeader>
-
-          <div className="flex flex-col">
-            <div className="text-2xl flex gap-4 justify-center items-center">
-              <div className="flex gap-1 items-center mt-1 mb-4">
-                <span className="font-bold">
-                  {totalPending?.toFixed(3) ?? 0}
-                </span>
-                <CARBONCurrencyIcon width={iconSize} height={iconSize} />
-              </div>
-            </div>
-
-            <span className="text-start">
-              The amount of fractional carbon certificates that are still
-              pending a certificate claim.{" "}
-              <SCLink href="/explain/how-it-works/retirement">
-                What does this mean?
-              </SCLink>
-            </span>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

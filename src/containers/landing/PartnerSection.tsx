@@ -16,7 +16,7 @@ export default function PartnerSection() {
       </Paragraph>
 
       <Paragraph>
-        <SCLink href="/explain/integration" className="text-sm">
+        <SCLink href="/explain/integration">
           Read about integration options here
         </SCLink>
       </Paragraph>

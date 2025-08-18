@@ -43,6 +43,7 @@ const config: Config = {
         // primary: "#2D3250",
         // primary: "#282C47",
         primary: "#22263d",
+        header: "#323652",
         secondary: "#424769",
         tertiary: "#7077A1",
 
@@ -51,7 +52,13 @@ const config: Config = {
         accent: "#d8def2",
         // accentSecondary: "#596FB7",
         accentSecondary: "#8b9dd9",
+        accentTertiary: "#bec8ed",
         textColor: "#ffffff",
+
+        alternateLight: "#fef08a",
+        alternateMedium: "#fde047",
+        alternateFull: "#facc15",
+        alternateGray: "#4f4b37",
       },
       fontFamily: {
         noto: ["Noto Sans", "sans-serif"],

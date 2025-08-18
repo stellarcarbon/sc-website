@@ -22,43 +22,6 @@ export default function Overview() {
           <OverviewContactInfo />
         </InlineContactInfoContextProvider>
       )}
-
-      {walletConnection && (
-        <>
-          <SectionHeader>
-            <div>Connected wallet</div>
-            <Button onClick={disconnectWallet} className="h-8 text-base">
-              <FontAwesomeIcon className="text-sm" icon={faRightFromBracket} />
-              <div className="font-normal text-sm">Disconnect</div>
-            </Button>
-          </SectionHeader>
-
-          <div className="flex flex-col w-full justify-start px-3 md:px-6 my-6">
-            {/* <DashboardHeader>Connected wallet</DashboardHeader> */}
-            <div
-              className="flex items-center justify-between p-2
-          bg-primary border rounded border-accentSecondary"
-            >
-              <div className="flex items-center gap-2">
-                <div className="p-1">
-                  <img
-                    className="h-6 w-6"
-                    src={walletConnection?.walletType.icon}
-                  />
-                </div>
-                <div>{walletConnection?.walletType.name}</div>
-              </div>
-
-              <div>
-                <TruncatedHash
-                  hash={walletConnection.stellarPubKey}
-                  uppercase
-                />
-              </div>
-            </div>
-          </div>
-        </>
-      )}
     </div>
   );
 }

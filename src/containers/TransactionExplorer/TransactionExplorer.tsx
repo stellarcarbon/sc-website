@@ -39,7 +39,7 @@ export default function TransactionExplorer({}) {
     <div
       className={`flex flex-col items-center
      h-full w-full flex-1 md:flex-none
-     pt-2 md:px-2 md:mb-12
+     md:px-2 md:mb-12
      bg-darkest md:bg-darkest md:rounded md:border border-secondary`}
     >
       {/* <div className="m-3 mb-0">
@@ -47,7 +47,7 @@ export default function TransactionExplorer({}) {
         transactions are completely publicly visible.
       </div> */}
       <TransactionExplorerHeader />
-      <div className="mx-4">
+      <div className="mx-4 mt-4">
         Use the controls to navigate the Stellarcarbon blockchain ledger. Click
         on a transaction to view its details.
       </div>

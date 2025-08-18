@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import CARBONCurrencyIcon from "@/components/icons/CARBONCurrencyIcon";
 import SCLink from "@/components/SCLink";
 import { useAppContext } from "@/context/appContext";
 import { useInlineContactInfoContext } from "@/context/InlineContactInfoContext";
@@ -6,39 +7,32 @@ import {
   RequestCertificateSteps,
   useRequestCertificateContext,
 } from "@/context/RequestCertificateContext";
+import { faFileLines } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 
-export default function RequestCertficateInfo() {
-  const { walletConnection, retirementGraceDays, jwt, setSep10Target } =
-    useAppContext();
+export default function RequestCertificateInfo() {
+  const {
+    walletConnection,
+    retirementGraceDays,
+    jwt,
+    setSep10Target,
+    totalPending,
+  } = useAppContext();
   const { setStep } = useRequestCertificateContext();
   const { setShowForm } = useInlineContactInfoContext();
 
   const router = useRouter();
 
   return (
-    <>
-      <h2 className="text-lg md:text-xl font-semibold">
-        Create a personal certificate
-      </h2>
-      <span className="text-center">
-        {`Any pending retirements will automatically retire into the community
-           pool after ${retirementGraceDays} days, which means you can no longer attain a personal
-           certificate.`}
-      </span>
-
-      <span className="text-center">
-        If you want to request a personal certificate you have to do so before
-        this period ends.
-      </span>
-
-      <span className="text-center">
-        Read more about retirements & certificates{" "}
-        <SCLink href="/explain/how-it-works/retirement">here</SCLink>.
-      </span>
+    <div className="p-4 flex flex-col gap-4">
+      <div className="text-center">
+        You have sufficient balance to create a personal certificate of{" "}
+        {Math.floor(totalPending)} <CARBONCurrencyIcon className="inline" />
+      </div>
 
       <Button
-        className="w-[250px]"
+        className="self-center"
         onClick={() => {
           if (jwt) {
             if (!walletConnection?.recipient) {
@@ -51,8 +45,9 @@ export default function RequestCertficateInfo() {
           }
         }}
       >
+        <FontAwesomeIcon icon={faFileLines} />
         Request certificate
       </Button>
-    </>
+    </div>
   );
 }

@@ -27,9 +27,9 @@ export default function SinkingForm() {
           Sink CARBON
         </div>
       )}
-      <form className="flex flex-col mb-12">
-        <div className="mx-3 md:mx-8">
-          <div className="my-3 text-base">
+      <form className="flex flex-col mt-4 mb-12">
+        <div className="mx-3 md:mx-12 text-center text-lg">
+          <div className="text-base mb-10">
             Use this form to specify how much{" "}
             <CARBONCurrencyIcon className="inline" /> to sink. Your contribution
             directly supports the rainforest conservation{" "}
@@ -47,7 +47,7 @@ export default function SinkingForm() {
 
         <CurrencySelect />
 
-        <div className="mt-8 mx-3 flex flex-col items-center">
+        <div className="mt-6 mx-3 flex flex-col items-center">
           <TransactionPreview />
         </div>
       </form>

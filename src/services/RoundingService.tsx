@@ -1,5 +1,3 @@
-import { WalletConnection } from "@/app/types";
-import { mRequestCertificate } from "@/utils";
 import {
   getRetirementsForBeneficiary,
   RetirementItem,
@@ -65,16 +63,5 @@ export default class RoundingService {
     }
 
     return true;
-  }
-
-  public static async requestCertificate(
-    walletConnection: WalletConnection,
-    token: string
-  ) {
-    return await mRequestCertificate({
-      recipientAddress: walletConnection.stellarPubKey,
-      email: walletConnection.recipient!.email,
-      jwt: token,
-    });
   }
 }

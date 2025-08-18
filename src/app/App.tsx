@@ -6,6 +6,8 @@ import NavBar from "@/containers/navbar/NavBar";
 import DemoApp from "../containers/demo/DemoApp";
 import { SinkingContextProvider } from "@/context/SinkingContext";
 import appConfig from "@/config";
+import Script from "next/script";
+import PlausibleProvider from "next-plausible";
 
 export default function App({ children }: { children: React.ReactNode }) {
   if (appConfig.demo) {

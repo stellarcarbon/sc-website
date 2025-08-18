@@ -55,7 +55,8 @@ export const useConnectWalletContext = () => {
 export const ConnectWalletContextProvider = ({
   children,
 }: PropsWithChildren) => {
-  const { setWalletConnection, setSep10Target } = useAppContext();
+  const { setWalletConnection, setSep10Target, stellarWalletsKit } =
+    useAppContext();
 
   const [selectedWallet, setSelectedWallet] = useState<ISupportedWallet>();
   const [username, setUsername] = useState<string>();

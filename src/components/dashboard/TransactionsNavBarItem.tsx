@@ -50,7 +50,7 @@ export default function TransactionsNavBarItem({
     <div
       onClick={() => router.push(p.route)}
       className={`relative cursor-pointer h-12 flex flex-col justify-center items-center py-3 text-center text-sm w-[50%] select-none
-        ${isSelected ? "text-accent" : "text-accent"}
+        ${isSelected ? "text-accent" : "text-tertiary"}
       `}
     >
       {p.label}
@@ -58,9 +58,9 @@ export default function TransactionsNavBarItem({
         <div
           className={`${
             isSelected
-              ? "animate-dashboardnavbarstart"
-              : "animate-dashboardnavbarend"
-          } absolute opacity-0 bottom-0 w-[80%] h-1 bg-accent`}
+              ? "animate-dashboardnavbarstart bg-accent"
+              : "animate-dashboardnavbarend bg-tertiary"
+          } absolute opacity-0 bottom-0 w-[80%] h-1 `}
         ></div>
       }
     </div>

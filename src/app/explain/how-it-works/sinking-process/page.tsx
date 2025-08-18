@@ -12,7 +12,7 @@ export default function ExplainSinkingProcessPage() {
       <Header>Sinking process</Header>
 
       <Paragraph>
-        Customers can sink <CARBONCurrencyIcon className="inline" /> tokens,
+        Our customers can sink <CARBONCurrencyIcon className="inline" /> tokens,
         meaning they buy the token and immediatly {`"lock it in"`}. This locking
         means the <CARBONCurrencyIcon className="inline" /> is no longer a
         tradeable object and the investment into the project is now funded.
