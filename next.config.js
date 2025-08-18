@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-const { withPlausibleProxy } = require("next-plausible");
-
 let output = "export";
 let trailingSlash = true;
 if (process.env.NODE_ENV === "test") {
@@ -21,4 +19,4 @@ const nextConfig = {
   // reactStrictMode: false,
 };
 
-module.exports = withPlausibleProxy(nextConfig);
+module.exports = nextConfig;

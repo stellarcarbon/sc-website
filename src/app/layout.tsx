@@ -32,6 +32,7 @@ export default function RootLayout({
       <head>
         <PlausibleProvider
           domain={appConfig.plausibleDataDomain}
+          customDomain="https://test.stellarcarbon.io"
           scriptProps={{
             src: "/sessionvar/js/script.js",
             ...({ "data-api": "/sessionvar/api/event" } as any),
