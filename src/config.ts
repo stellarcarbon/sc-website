@@ -1,3 +1,5 @@
+"use client";
+
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import { client } from "@stellarcarbon/sc-sdk";
