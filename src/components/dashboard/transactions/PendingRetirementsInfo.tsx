@@ -58,7 +58,7 @@ export default function PendingRetirementsInfo() {
 
   return (
     <div
-      className={`self-center relative md:max-w-[80%] text-sm md:text-base border border-tertiary rounded bg-header`}
+      className={`self-center relative md:max-w-[80%] border border-accentSecondary rounded bg-header`}
     >
       {body}
     </div>

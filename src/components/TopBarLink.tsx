@@ -24,8 +24,8 @@ export default function TopBarLink({ children, href }: TopBarLinkProps) {
 
   return (
     <Link
-      className={`hover:text-yellow-200 ${
-        isCurrentRoute() ? "text-yellow-400" : ""
+      className={`hover:text-alternateLight ${
+        isCurrentRoute() ? "text-alternateFull " : ""
       }`}
       href={href}
     >

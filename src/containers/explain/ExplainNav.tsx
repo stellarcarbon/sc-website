@@ -66,8 +66,8 @@ function Tier2Item({ route }: { route: Tier2NavRoutes }) {
     <li>
       <button
         onClick={onClick}
-        className={`flex items-center justify-between w-full text-left py-2 px-3 hover:bg-secondary hover:text-yellow-200 rounded-md ${
-          selectedTier2 === item ? "text-yellow-400 bg-secondary/50" : ""
+        className={`flex items-center justify-between w-full text-left py-2 px-3 hover:bg-secondary hover:text-alternateLight rounded-md ${
+          selectedTier2 === item ? "text-alternateFull bg-secondary/50" : ""
         }`}
       >
         <span>{item.label}</span>
@@ -115,8 +115,8 @@ function Tier3Item({ route }: { route: Tier3NavRoutes }) {
     <li>
       <button
         onClick={onClick}
-        className={`py-2 px-3 rounded w-full flex items-center gap-2 hover:text-yellow-200 ${
-          selected ? "text-yellow-400 bg-secondary/50" : ""
+        className={`py-2 px-3 rounded w-full flex items-center gap-2 hover:text-alternateLight ${
+          selected ? "text-alternateFull bg-secondary/50" : ""
         }`}
       >
         {item.label}

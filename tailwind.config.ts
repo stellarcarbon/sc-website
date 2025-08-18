@@ -52,7 +52,13 @@ const config: Config = {
         accent: "#d8def2",
         // accentSecondary: "#596FB7",
         accentSecondary: "#8b9dd9",
+        accentTertiary: "#bec8ed",
         textColor: "#ffffff",
+
+        alternateLight: "#fef08a",
+        alternateMedium: "#fde047",
+        alternateFull: "#facc15",
+        alternateGray: "#4f4b37",
       },
       fontFamily: {
         noto: ["Noto Sans", "sans-serif"],

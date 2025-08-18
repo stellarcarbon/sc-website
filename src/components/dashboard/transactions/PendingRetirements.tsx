@@ -37,7 +37,7 @@ export default function PendingRetirements() {
   }, [setHasPendingRounding, walletConnection]);
 
   return (
-    <div className="bg-darkest w-full">
+    <div className="bg-darkest w-full flex-1 flex flex-col">
       <div className="px-4 flex flex-col">
         <div className="mt-12 md:mt-12 flex flex-col items-center">
           {/* <DashboardTitle>Pending retirements balance</DashboardTitle> */}
@@ -52,7 +52,7 @@ export default function PendingRetirements() {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col w-full pt-12 pb-12">
+      <div className="flex flex-col w-full">
         {pendingTransactions?.length > 0 && (
           <SectionHeader>Your pending transactions</SectionHeader>
         )}
@@ -75,26 +75,26 @@ export default function PendingRetirements() {
               <SCLink href="/explain/how-it-works/retirement">here</SCLink>.
             </div>
           </div>
-          <div className="flex-1 flex flex-col gap-1">
-            {pendingTransactions?.length ?? 0 > 0 ? (
-              <>
-                {pendingTransactions?.map((transaction, index) => {
-                  return (
-                    <TransactionListItem
-                      key={transaction.id}
-                      transaction={transaction}
-                      showCountdown
-                    />
-                  );
-                })}
-              </>
-            ) : (
-              <div className="flex-1 flex flex-col justify-center text-center text-sm">
-                No pending transactions found.
-              </div>
-            )}
-          </div>
         </div>
+      </div>
+      <div className="flex-1 flex flex-col gap-1">
+        {pendingTransactions?.length ?? 0 > 0 ? (
+          <>
+            {pendingTransactions?.map((transaction, index) => {
+              return (
+                <TransactionListItem
+                  key={transaction.id}
+                  transaction={transaction}
+                  showCountdown
+                />
+              );
+            })}
+          </>
+        ) : (
+          <div className="flex-1 flex flex-col justify-center text-center text-sm">
+            No pending transactions found.
+          </div>
+        )}
       </div>
     </div>
   );

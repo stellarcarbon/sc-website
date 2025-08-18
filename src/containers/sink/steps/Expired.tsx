@@ -42,7 +42,7 @@ export default function ExpiredSinking() {
       </div>
       <FontAwesomeIcon
         icon={faTriangleExclamation}
-        className="text-[64px] my-4 text-yellow-500"
+        className="text-[64px] my-4 text-alternateFull"
       />
       <SinkingStepButtons>
         <Button onClick={returnToForm} className="mx-auto">

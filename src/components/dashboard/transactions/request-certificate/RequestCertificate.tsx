@@ -9,7 +9,7 @@ import {
   RequestCertificateSteps,
   useRequestCertificateContext,
 } from "@/context/RequestCertificateContext";
-import RequestCertficateInfo from "./RequestCertificateInfo";
+import RequestCertificateInfo from "./RequestCertificateInfo";
 import RequestCertificateChoose from "./RequestCertificateChoose";
 
 export default function RequestCertificate() {
@@ -33,7 +33,7 @@ export default function RequestCertificate() {
         <RequestCertificateContactDetailsForm />
       ) : (
         <>
-          {step === RequestCertificateSteps.info && <RequestCertficateInfo />}
+          {step === RequestCertificateSteps.info && <RequestCertificateInfo />}
           {step === RequestCertificateSteps.choose && (
             <RequestCertificateChoose />
           )}

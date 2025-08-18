@@ -33,7 +33,7 @@ export default function LastTransactionsSection() {
         <br /> Check out the most recent transactions on Stellarcarbon.
       </Paragraph>
       <Paragraph>
-        <SCLink href="/transactions" className="text-sm">
+        <SCLink href="/transactions">
           View the full list in our transaction explorer
         </SCLink>
       </Paragraph>

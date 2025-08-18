@@ -37,11 +37,11 @@ export default function NavbarDropdownLink({
     <div
       onClick={onClick}
       className={`py-3 px-2 
-        hover:bg-secondary active:text-yellow-100
+        hover:bg-secondary active:text-alternateLight
         active:bg-tertiary
         rounded cursor-pointer
         flex items-center gap-2
-        ${isCurrentRoute ? "text-yellow-400" : ""}`}
+        ${isCurrentRoute ? "text-alternateFull" : ""}`}
     >
       {children}
     </div>

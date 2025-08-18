@@ -13,9 +13,9 @@ export default function TransactionExplorerHeader() {
 
   return (
     <header
-      className={`w-full flex items-center gap-4 h-14 md:h-16 px-3 md:px-4 relative md:rounded-t`}
+      className={`w-full flex items-center gap-4 px-3 md:px-4 relative md:rounded-t border-b border-alternateGray py-2`}
     >
-      <h1 className="text-xl md:text-2xl font-semibold my-2 text-center ">
+      <h1 className="text-2xl font-semibold my-2 text-center ">
         {pathname.includes("detail")
           ? "Transaction details"
           : pathname.includes("help")

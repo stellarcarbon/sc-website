@@ -27,7 +27,7 @@ export default function TransactionSummary() {
   }
 
   return (
-    <div className="flex flex-col mb-16 gap-8 mt-4">
+    <div className="flex flex-col mb-16 gap-12 mt-4">
       {walletConnection && (
         <div className="flex flex-col w-full justify-start px-3 md:px-4">
           <div
@@ -95,7 +95,7 @@ export default function TransactionSummary() {
       </div>
 
       {walletConnection && (
-        <div className="flex flex-col items-center gap-4 px-3 md:px-12 mt-4">
+        <div className="flex flex-col items-center gap-4 px-3 md:px-12">
           {/* <DashboardHeader>Latest transaction</DashboardHeader> */}
 
           <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
