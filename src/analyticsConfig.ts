@@ -28,11 +28,6 @@ function buildAnalyticsConfig(): AnalyticsConfig {
     } as any),
   };
 
-  console.log({
-    plausibleDataDomain,
-    plausibleProps,
-  });
-
   return {
     plausibleDataDomain,
     plausibleProps,

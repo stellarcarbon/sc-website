@@ -39,7 +39,6 @@ export default function RootLayout({
           <body className={`${inter.className}`}>
             <PlausibleProvider
               domain={analyticsConfig.plausibleDataDomain}
-              customDomain={"https://test.stellarcarbon.io"}
               scriptProps={analyticsConfig.plausibleProps}
               enabled
               trackLocalhost
