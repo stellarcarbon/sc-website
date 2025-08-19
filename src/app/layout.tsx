@@ -27,6 +27,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log(appConfig.plausibleDataDomain);
+
   return (
     <html lang="en">
       <head></head>
@@ -35,11 +37,14 @@ export default function RootLayout({
           <body className={`${inter.className}`}>
             <PlausibleProvider
               domain={appConfig.plausibleDataDomain}
-              customDomain={appConfig.plausibleDataDomain}
+              // customDomain={appConfig.plausibleProxyDomain}
               scriptProps={{
-                src: "/sessionvar/js/script.js",
-                ...({ "data-api": "/sessionvar/api/event" } as any),
+                src: `/sessionvar/js/script.js`,
+                ...({
+                  "data-api": `/sessionvar/api/event`,
+                } as any),
               }}
+              enabled
             />
             <PostHogProvider>
               <AnalyticsConsent />

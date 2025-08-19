@@ -1,5 +1,3 @@
-"use client";
-
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import { client } from "@stellarcarbon/sc-sdk";
@@ -11,6 +9,7 @@ export interface AppConfiguration {
   apiBaseUrl: string;
   pubnetDeployment: boolean;
   plausibleDataDomain: string;
+  plausibleProxyDomain: string;
   usdcXlmLiquidityPoolId?: string;
   usdcAssetCode?: string;
 }
@@ -34,6 +33,7 @@ function buildConfig(): AppConfiguration {
   let plausibleDataDomain = pubnetDeployment
     ? "new.stellarcarbon.io"
     : "test.stellarcarbon.io";
+  let plausibleProxyDomain = `https://${plausibleDataDomain}`;
 
   if (
     process.env.NEXT_PUBLIC_USE_MAINNET === "true" &&
@@ -56,6 +56,7 @@ function buildConfig(): AppConfiguration {
     apiBaseUrl,
     demo,
     plausibleDataDomain,
+    plausibleProxyDomain,
     usdcXlmLiquidityPoolId,
     usdcAssetCode,
   };
