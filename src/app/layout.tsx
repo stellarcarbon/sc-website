@@ -29,19 +29,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <PlausibleProvider
-          domain={appConfig.plausibleDataDomain}
-          customDomain="https://test.stellarcarbon.io"
-          scriptProps={{
-            src: "/sessionvar/js/script.js",
-            ...({ "data-api": "/sessionvar/api/event" } as any),
-          }}
-        />
-      </head>
+      <head></head>
       <AppContextProvider>
         <SinkFormContextProvider>
           <body className={`${inter.className}`}>
+            <PlausibleProvider
+              domain={appConfig.plausibleDataDomain}
+              customDomain={appConfig.plausibleDataDomain}
+              scriptProps={{
+                src: "/sessionvar/js/script.js",
+                ...({ "data-api": "/sessionvar/api/event" } as any),
+              }}
+            />
             <PostHogProvider>
               <AnalyticsConsent />
 
