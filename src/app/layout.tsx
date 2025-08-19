@@ -12,8 +12,9 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { SinkFormContextProvider } from "@/context/SinkFormContext";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
-import appConfig from "@/config";
+
 import PlausibleProvider from "next-plausible";
+import analyticsConfig from "@/analyticsConfig";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -27,14 +28,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log(analyticsConfig.plausibleDataDomain);
+  console.log(analyticsConfig.plausibleProps);
+
   return (
     <html lang="en">
-      <head>
-        <PlausibleProvider domain={appConfig.plausibleDataDomain} />
-      </head>
+      <head></head>
       <AppContextProvider>
         <SinkFormContextProvider>
           <body className={`${inter.className}`}>
+            <PlausibleProvider
+              domain={analyticsConfig.plausibleDataDomain}
+              scriptProps={analyticsConfig.plausibleProps}
+              enabled
+              trackLocalhost
+            />
             <PostHogProvider>
               <AnalyticsConsent />
 

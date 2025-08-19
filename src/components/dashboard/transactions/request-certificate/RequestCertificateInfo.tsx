@@ -27,8 +27,8 @@ export default function RequestCertificateInfo() {
   return (
     <div className="p-4 flex flex-col gap-4">
       <div className="text-center">
-        You have sufficient balance to create a personal certificate of{" "}
-        {Math.floor(totalPending)} <CARBONCurrencyIcon className="inline" />
+        {/* You have sufficient balance to create a personal certificate. */}
+        You can request a certificate for your pending balance.
       </div>
 
       <Button

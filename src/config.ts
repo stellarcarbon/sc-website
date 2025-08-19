@@ -3,6 +3,7 @@
 import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import { client } from "@stellarcarbon/sc-sdk";
+import { DetailedHTMLProps, ScriptHTMLAttributes } from "react";
 
 export interface AppConfiguration {
   network: WalletNetwork;
@@ -10,7 +11,7 @@ export interface AppConfiguration {
   demo: boolean;
   apiBaseUrl: string;
   pubnetDeployment: boolean;
-  plausibleDataDomain: string;
+
   usdcXlmLiquidityPoolId?: string;
   usdcAssetCode?: string;
 }
@@ -30,10 +31,6 @@ function buildConfig(): AppConfiguration {
   let apiBaseUrl = pubnetDeployment
     ? "https://api.stellarcarbon.io"
     : "https://testnet-api.stellarcarbon.io";
-
-  let plausibleDataDomain = pubnetDeployment
-    ? "new.stellarcarbon.io"
-    : "test.stellarcarbon.io";
 
   if (
     process.env.NEXT_PUBLIC_USE_MAINNET === "true" &&
@@ -55,7 +52,6 @@ function buildConfig(): AppConfiguration {
     server,
     apiBaseUrl,
     demo,
-    plausibleDataDomain,
     usdcXlmLiquidityPoolId,
     usdcAssetCode,
   };
