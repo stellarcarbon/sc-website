@@ -12,8 +12,9 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { SinkFormContextProvider } from "@/context/SinkFormContext";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
-import appConfig from "@/config";
+
 import PlausibleProvider from "next-plausible";
+import analyticsConfig from "@/analyticsConfig";
 
 config.autoAddCss = false; /* eslint-disable import/first */
 
@@ -27,7 +28,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log(appConfig.plausibleDataDomain);
+  console.log(analyticsConfig.plausibleDataDomain);
+  console.log(analyticsConfig.plausibleProps);
 
   return (
     <html lang="en">
@@ -36,15 +38,11 @@ export default function RootLayout({
         <SinkFormContextProvider>
           <body className={`${inter.className}`}>
             <PlausibleProvider
-              domain={appConfig.plausibleDataDomain}
-              // customDomain={appConfig.plausibleProxyDomain}
-              scriptProps={{
-                src: `/sessionvar/js/script.js`,
-                ...({
-                  "data-api": `/sessionvar/api/event`,
-                } as any),
-              }}
+              domain={analyticsConfig.plausibleDataDomain}
+              customDomain={"https://test.stellarcarbon.io"}
+              scriptProps={analyticsConfig.plausibleProps}
               enabled
+              trackLocalhost
             />
             <PostHogProvider>
               <AnalyticsConsent />
