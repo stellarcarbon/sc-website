@@ -25,8 +25,8 @@ export default function HowItWorksFlowChart() {
 
         <div className="w-[1.5px] bg-gray-500 self-stretch place-self-center"></div>
         <div className="pb-8">
-          Decide on the amount of CARBON to sink! We offer an emissions
-          estimator to help you determine this.
+          Decide on the amount of CARBON to sink! Base the amount on your budget
+          or on your emissions, assisted by our emissions estimator.
         </div>
 
         <FontAwesomeIcon icon={faHandshake} className="place-self-center" />
