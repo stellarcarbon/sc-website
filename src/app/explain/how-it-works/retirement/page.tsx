@@ -20,8 +20,8 @@ export default function ExplainRetirementPage() {
       <Paragraph>
         Retiring a VCU permanently removes it from circulation, turning it from
         transferable inventory into an exclusive, claimable one-ton CO₂e
-        reduction on your balance sheet. Until it's retired, a VCU remains merely
-        a tradable instrument with no impact on anyone's carbon accounting.
+        reduction on your balance sheet. Until {`it's`} retired, a VCU remains merely
+        a tradable instrument with no impact on {`anyone's`} carbon accounting.
       </Paragraph>
       <Subheader>Fractional retirements</Subheader>
       <Paragraph>

@@ -27,7 +27,7 @@ export default function LastTransactionsSection() {
 
       <Paragraph>
         Every time you sink CARBON, your contribution is recorded on
-        Stellar's distributed ledger — transparent, permanent, and
+        {`Stellar's`} distributed ledger — transparent, permanent, and
         verifiable. The feed here shows the latest sinking transactions from
         contributors across the network, each one a step toward measurable
         climate impact.

@@ -23,7 +23,7 @@ export default function ExplainSinkingProcessPage() {
       <Paragraph>
         An essential part of the mechanism is that the input{" "}
         <CARBONCurrencyIcon className="inline" /> is permanently removed from
-        circulation. In cryptocurrency jargon this is also known as "token burning".
+        circulation. In cryptocurrency jargon this is also known as {`"token burning"`}.
         We avoid this phrase because sinking <CARBONCurrencyIcon className="inline" />
         {" "}causes a reduction of CO₂ in the atmosphere, and no combustion is 
         involved.

@@ -12,7 +12,7 @@ export default function ExplainHowItWorks() {
       <Paragraph>
         When you sink CARBON (<CARBONCurrencyIcon className="inline" />) tokens
         on Stellarcarbon — either through our dApp or via a single API
-        call — you're doing two things in one seamless transaction. First, the
+        call — {`you're`} doing two things in one seamless transaction. First, the
         CARBON token is removed from circulation on the Stellar ledger. At the
         same time, that very transaction creates an on-chain commitment for us
         to retire one Verified Carbon Unit (VCU) on the{" "}
