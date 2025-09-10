@@ -20,10 +20,10 @@ export default function ProjectsPage() {
       <div className="md:pt-10 lg:max-w-[900px] xl:max-w-[1200px]">
         <Header>Our project</Header>
         <Paragraph>
-          Our project supports real, on-the-ground rainforest conservation in
-          the Peruvian Amazon. By working directly with Indigenous communities,
+          The project we list supports real, on-the-ground rainforest conservation
+          in the Peruvian Amazon. By working directly with Indigenous communities,
           we help protect vital ecosystems, preserve endangered species, and
-          generate verified carbon credits. The project also creates local jobs
+          generate verified carbon credits. This project also creates local jobs
           and supports long-term livelihoods, delivering both environmental and
           humanitarian benefits with measurable, transparent impact.
         </Paragraph>
