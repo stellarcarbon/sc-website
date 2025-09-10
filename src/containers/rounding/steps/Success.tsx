@@ -16,8 +16,8 @@ export default function RoundingSuccess() {
   return (
     <ModalStep title="Success">
       <div className="text-center">
-        Your certificate request was received in good order and will be created
-        soon.
+        Your certificate request was received in good order and will be
+        processed shortly.
       </div>
       <div className="my-8 flex justify-center">
         <SuccessIcon />

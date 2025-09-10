@@ -31,11 +31,10 @@ export default function CurrencySelect() {
     <>
       <SectionHeader>Choose preferred asset</SectionHeader>
       <div className="mx-3 py-4 md:mx-4">
-        {/* <DashboardHeader>Choose preferred asset</DashboardHeader> */}
-
         <div className="flex flex-col gap-6">
           <span className="">
-            {`Choose a preferred payment asset to use or leave it on "No preference". Horizon will create the best offer available.`}
+            {`Choose a preferred payment asset to use or leave it on "No preference". `}
+            The next screen will show which asset has been selected.
           </span>
           <div>
             <select

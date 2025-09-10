@@ -87,8 +87,8 @@ export default function OverviewContactInfo() {
           <div className="my-2">
             {!walletConnection?.recipient ? (
               <div className="text-center">
-                This account is anonymous. No personalized certificates can be
-                requested.
+                This account is anonymous. Provide us with your details to
+                become eligible for personal certificates.
               </div>
             ) : (
               <>

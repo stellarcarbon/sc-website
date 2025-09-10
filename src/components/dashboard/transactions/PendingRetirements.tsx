@@ -40,7 +40,6 @@ export default function PendingRetirements() {
     <div className="bg-darkest w-full flex-1 flex flex-col gap-8">
       <div className="px-4 flex flex-col">
         <div className="mt-12 md:mt-12 flex flex-col items-center">
-          {/* <DashboardTitle>Pending retirements balance</DashboardTitle> */}
           <div className="text-lg font-medium uppercase tracking-widest text-gray-300">
             Pending retirements balance
           </div>
@@ -59,20 +58,20 @@ export default function PendingRetirements() {
         <div className="p-4 flex flex-col gap-8">
           <div className="flex flex-col gap-4">
             <div>
-              Any pending transactions will automatically retire into the
-              community pool after exactly{" "}
-              <div className="font-bold inline">{retirementGraceDays}</div>{" "}
-              days, which means you can no longer attain a personal certificate.
+              Any pending transactions will automatically <SCLink 
+                href="/explain/how-it-works/retirement">
+                retire
+              </SCLink> into the community pool
+              after <div className="font-bold inline">
+                {retirementGraceDays}
+              </div> days, which means you can no longer obtain a personal 
+              certificate. If you want to request a personal certificate you 
+              have to do so before this period ends.
             </div>
 
             <div>
-              If you want to request a personal certificate you have to do so
-              before this period ends.
-            </div>
-
-            <div>
-              Read more about retirements & certificates{" "}
-              <SCLink href="/explain/how-it-works/retirement">here</SCLink>.
+              The link between your transaction and its retirement is always
+              preserved, also for community certificates.
             </div>
           </div>
         </div>

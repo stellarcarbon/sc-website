@@ -30,9 +30,9 @@ export default function SinkingForm() {
       <form className="flex flex-col mt-4 mb-12">
         <div className="mx-3 md:mx-12 text-center text-lg">
           <div className="text-base mb-10">
-            Use this form to specify how much{" "}
-            <CARBONCurrencyIcon className="inline" /> to sink. Your contribution
-            directly supports the rainforest conservation{" "}
+            This is where you choose your impact: sink{" "}
+            <CARBONCurrencyIcon className="inline" />, support rainforests.
+            Your contribution directly supports the rainforest conservation{" "}
             <SCLink href="/projects">project</SCLink>.
           </div>
         </div>

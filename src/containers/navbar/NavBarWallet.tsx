@@ -81,7 +81,7 @@ export default function NavBarWallet() {
           </NavbarDropdownLink>
           <NavbarDropdownLink href="/estimator/flight">
             <FontAwesomeIcon icon={faCalculator} />
-            <span>Emission estimator</span>
+            <span>Emissions estimator</span>
           </NavbarDropdownLink>
           <NavbarDropdownLink href="/dashboard">
             <FontAwesomeIcon icon={faUser} width={18} />
