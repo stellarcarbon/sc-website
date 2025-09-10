@@ -12,8 +12,8 @@ export default function ExplainTrustPage() {
       <Subheader>Why Stellarcarbon?</Subheader>
       <Paragraph>
         Providing a trustworthy way to help reduce CO₂ is our top priority. We
-        support forest conservation projects around the world that have real,
-        measurable benefits—not just for the climate, but also for biodiversity
+        support landscape conservation projects around the world that have real,
+        measurable benefits — not just for the climate, but also for biodiversity
         and local communities. Our goal is to make sure every contribution has
         the greatest possible impact.
       </Paragraph>
@@ -25,12 +25,6 @@ export default function ExplainTrustPage() {
         studies and satellite data to verify that the impact is real and
         lasting.
       </Paragraph>
-
-      {/* <Paragraph>
-        We make it easy for Stellar wallet owners to make verifiable
-        contributions to sustainability projects. Think of it as a middleman
-        taking care of all the administration and verification work for you.
-      </Paragraph> */}
 
       <Subheader>REDD+ eco-credits</Subheader>
       <Paragraph>
@@ -68,9 +62,9 @@ export default function ExplainTrustPage() {
         voluntary carbon markets, thanks to its rigorous, science-based
         methodologies and multi-stage third-party validation process. By
         requiring each project to demonstrate clear baselines, additionality,
-        and permanence before credits are issued, Verra ensures that every tonne
+        and permanence before credits are issued, Verra ensures that every ton
         of CO₂ reduction is real and measurable. Its public registry offers full
-        transparency so anyone can audit our offsets at any time.{" "}
+        transparency so anyone can audit our balances and retirements at any time.
       </Paragraph>
     </div>
   );

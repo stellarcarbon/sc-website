@@ -49,7 +49,7 @@ export default function AmountInput() {
         setQuote(0);
         setHasError(false);
         setStatusMessage(
-          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO2 emitted."
+          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO₂ emitted."
         );
         return;
       }
@@ -92,7 +92,7 @@ export default function AmountInput() {
         // setCarbonAmount(0);
         setHasError(false);
         setStatusMessage(
-          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO2 emitted."
+          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO₂ emitted."
         );
         return;
       }
@@ -157,7 +157,7 @@ export default function AmountInput() {
           <div className="">
             Set the sink amount of your contribution. Sinking 1{" "}
             <CARBONCurrencyIcon className="inline" /> would let you claim the
-            environmental benefit of reducing 1 tonne of CO2.
+            environmental benefit of reducing 1 ton of CO₂.
           </div>
           <div className="flex flex-col gap-4 my-8 mb-12">
             <div className="flex justify-between items-center gap-2 mb-3 md:mb-6">

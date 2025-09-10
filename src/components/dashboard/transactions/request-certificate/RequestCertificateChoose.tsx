@@ -48,13 +48,13 @@ export default function RequestCertificateChoose() {
       <>
         <ul className="list-disc ml-4">
           {totalPending < 1 ? (
-            <li>Sink an additional {remainingFraction.toFixed(3)} tonnes.</li>
+            <li>Sink an additional {remainingFraction.toFixed(3)} tons.</li>
           ) : (
             <>
               <li>
                 Request a certificate for {Math.ceil(totalPending)}{" "}
                 <CARBONCurrencyIcon className="inline" /> by sinking an
-                additional {remainingFraction.toFixed(3)} tonnes.
+                additional {remainingFraction.toFixed(3)} tons.
               </li>
               <li>
                 {" "}

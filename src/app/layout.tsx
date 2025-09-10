@@ -20,7 +20,7 @@ config.autoAddCss = false; /* eslint-disable import/first */
 
 export const metadata: Metadata = {
   title: "Stellarcarbon",
-  description: "Stellarcarbon staging website",
+  description: "Protect the rainforest with Stellarcarbon",
 };
 
 export default function RootLayout({

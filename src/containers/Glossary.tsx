@@ -54,6 +54,16 @@ export default function Glossary() {
           "Additional benefits of REDD+ beyond reducing emissions. These can include biodiversity conservation, poverty reduction, better governance, and climate adaptation.",
       },
       {
+        concept: "Compensation claim",
+        definition:
+          "A claim that a company or individual has offset their own emissions by retiring carbon credits, effectively compensating for a specific footprint.",
+      },
+      {
+        concept: "Contribution claim",
+        definition:
+          "A claim that a company or individual has supported climate action through the purchase or funding of carbon credits, without directly offsetting their own emissions.",
+      },
+      {
         concept: "Deforestation",
         definition:
           "The permanent conversion of forest land to non-forest uses, typically driven by human activity. Definitions vary slightly, but all involve significant loss of forest cover.",
@@ -64,6 +74,16 @@ export default function Glossary() {
           "Degradation refers to a decline in forest health or productivity, reducing its carbon storage or ecological function, without converting it into another land use.",
       },
       {
+        concept: "Ex-ante carbon units",
+        definition:
+          "Credits issued for expected future emission reductions or removals, often based on projected performance of a project. They carry more uncertainty, since benefits are not yet verified.",
+      },
+      {
+        concept: "Ex-post carbon units",
+        definition:
+          "Credits issued only after emission reductions or removals have been measured and verified. They represent realized impact and are generally considered more reliable than ex-ante credits.",
+      },
+      {
         concept: "Forest",
         definition:
           "A forest is generally defined by a minimum area, tree height, and canopy cover, with no dominant agricultural land use. Definitions vary by organization and country.",
@@ -72,6 +92,16 @@ export default function Glossary() {
         concept: "Free, prior and informed consent (FPIC)",
         definition:
           "FPIC ensures that communities can accept or reject projects affecting their lands. It must be given freely, in advance, and with full understanding of the proposed activities.",
+      },
+      {
+        concept: "GHG Protocol",
+        definition:
+          "The Greenhouse Gas Protocol provides globally recognized standards for measuring, managing, and reporting greenhouse gas emissions across Scope 1, 2, and 3.",
+      },
+      {
+        concept: "Integrity Council for the Voluntary Carbon Market (ICVCM)",
+        definition:
+          "An independent governance body developing the Core Carbon Principles (CCPs) to define high-quality carbon credits and improve trust in voluntary markets.",
       },
       {
         concept: "Leakage",
@@ -112,17 +142,17 @@ export default function Glossary() {
       {
         concept: "Ton / tonne (t)",
         definition:
-          "One ton is equivalent to 1000 kg (also referred to as a metric ton).",
+          "One ton is equivalent to 1000 kg (also called a metric ton).",
       },
       {
-        concept: "tCO2e",
+        concept: "tCO₂e",
         definition:
-          "tCO2e stands for tonnes of carbon dioxide equivalent. It's a unit used to measure the global warming potential of different greenhouse gases, converting them to a common standard based on their warming effect relative to carbon dioxide (CO2). This allows for a standardized way to quantify and compare the impact of various greenhouse gases on climate change.",
+          "tCO₂e stands for tons of carbon dioxide equivalent. It's a unit used to measure the global warming potential of different greenhouse gases, converting them to a common standard based on their warming effect relative to carbon dioxide (CO₂). This allows for a standardized way to quantify and compare the impact of various greenhouse gases on climate change.",
       },
       {
         concept: "Validation",
         definition:
-          "The process where an independent organization reviews a project’s design before it starts, to ensure it meets specific standards such as those required for VCS or the Clean Development Mechanism (CDM).",
+          "The process where an independent organization reviews a project's design before it starts, to ensure it meets specific standards such as those required for VCS or the Clean Development Mechanism (CDM).",
       },
       {
         concept: "Verification",
@@ -133,6 +163,11 @@ export default function Glossary() {
         concept: "Verified Carbon Standard (VCS)",
         definition:
           "A leading certification system in the voluntary carbon market. Projects approved under VCS generate Verified Emission Reductions (VERs), which are recognized units of avoided or removed emissions.",
+      },
+      {
+        concept: "Voluntary Carbon Markets Integrity Initiative (VCMI)",
+        definition:
+          "An initiative that provides guidance on how companies can make credible claims about their use of carbon credits as part of broader climate strategies.",
       },
       {
         concept: "Voluntary market",
@@ -155,10 +190,15 @@ export default function Glossary() {
 }
 
 function GlossaryListItem({ item }: { item: GlossaryItem }) {
+  const anchorId = item.concept
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with hyphens
+    .replace(/^-+|-+$/g, '');    // Trim leading/trailing hyphens
+  
   return (
-    <li>
+    <li id={anchorId} className="scroll-mt-6">
       <div className="px-4 text-xl font-bold tracking-wide">
-        <SCLink href={`#${item.concept}`}>{item.concept}</SCLink>
+        <SCLink href={`#${anchorId}`}>{item.concept}</SCLink>
       </div>
       <Paragraph>{item.definition}</Paragraph>
     </li>
