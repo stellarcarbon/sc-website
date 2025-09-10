@@ -132,7 +132,7 @@ export default function SoftwarePage() {
             </li>
             <li className="mb-2">
               <b>Technology: </b>
-              <span>Soroban, Mercury Retroshades.</span>
+              <span>Soroban, Mercury Retroshades, Obsrvr Flow.</span>
             </li>
             <li className="mb-2">
               <b>Use case: </b>
