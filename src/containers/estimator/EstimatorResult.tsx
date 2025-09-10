@@ -45,10 +45,10 @@ export default function EstimatorResult({
           <div>kilometers</div>
         </div>
 
-        <div className="text-base">Estimated CO2 emissions</div>
+        <div className="text-base">Estimated CO₂ emissions</div>
         <div className="flex items-center gap-2 text-[32px] my-1">
           <div>{estimate.co2_tonnes}</div>
-          <div>tonnes</div>
+          <div>tons</div>
         </div>
 
         <div className="text-center">

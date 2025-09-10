@@ -49,7 +49,7 @@ export default function AmountInput() {
         setQuote(0);
         setHasError(false);
         setStatusMessage(
-          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO2 emitted."
+          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO₂ emitted."
         );
         return;
       }
@@ -92,7 +92,7 @@ export default function AmountInput() {
         // setCarbonAmount(0);
         setHasError(false);
         setStatusMessage(
-          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO2 emitted."
+          "Specify the amount of CARBON you want to sink. 1 CARBON is equivalent to 1 ton CO₂ emitted."
         );
         return;
       }
@@ -157,7 +157,7 @@ export default function AmountInput() {
           <div className="">
             Set the sink amount of your contribution. Sinking 1{" "}
             <CARBONCurrencyIcon className="inline" /> would let you claim the
-            environmental benefit of reducing 1 tonne of CO2.
+            environmental benefit of reducing 1 ton of CO₂.
           </div>
           <div className="flex flex-col gap-4 my-8 mb-12">
             <div className="flex justify-between items-center gap-2 mb-3 md:mb-6">
@@ -236,19 +236,15 @@ export default function AmountInput() {
                       <span>$</span>
                       <span className="ml-[1px]"> {quote.toFixed(2)}</span>
                     </div>
-                    {/* <div className="text-xs md:text-base flex items-center gap-1">
-                ({priceInXLM} <XLMIcon />)
-              </div> */}
                   </div>
                   {showFractionalWarning && (
                     <span className="md:mx-12 text-xs md:text-sm text-center">
                       If you sink a fractional amount of CARBON you cannot
-                      receive an indvidual certificate without either rounding
+                      receive a personal certificate without either rounding
                       down or up. Read more{" "}
-                      <Link href="/explain" className="underline">
+                      <Link href="/explain/how-it-works/retirement/" className="underline">
                         here
-                      </Link>
-                      .
+                      </Link>.
                     </span>
                   )}
                 </>
@@ -256,9 +252,6 @@ export default function AmountInput() {
             </div>
           </div>
 
-          {/* <div className="text-2xl font-bold tracking-wider">
-            Estimate emissions
-          </div> */}
           <div className="flex flex-col gap-6 mb-2">
             <div>
               Optionally try out our emissions estimator to help you decide on

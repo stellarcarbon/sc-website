@@ -59,7 +59,7 @@ export default function AuditTable() {
             label={"VCU pool on Verra"}
             unit={"VCU"}
             amount={carbonpoolVerra}
-            tooltip={"This is our current inventory of VCU's at Verra."}
+            tooltip={"This is our current inventory of VCUs at Verra."}
           />
           <div className="flex items-center justify-center font-bold">-</div>
           <TableStat
@@ -67,7 +67,7 @@ export default function AuditTable() {
             unit={"CARBON"}
             amount={carbonpoolStellar}
             tooltip={
-              "The amount CARBON currently for available for sale on the Stellar blockchain."
+              "The amount of CARBON currently in circulation on the Stellar network."
             }
           />
           <div className="flex items-center justify-center font-bold">=</div>
@@ -76,7 +76,7 @@ export default function AuditTable() {
             unit={"CarbonSINK"}
             amount={carbonsinkStellar}
             tooltip={
-              "When CARBON is sunk, CarbonSINK is created and the CARBON is destroyed, indicating this token can no longer be sold."
+              "When CARBON is sunk, CarbonSINK is created and the CARBON is destroyed, removing it from circulation."
             }
           />
           <div className="flex items-center justify-center font-bold">-</div>
@@ -95,7 +95,7 @@ export default function AuditTable() {
             unit="ton"
             amount={amountPendingPool}
             tooltip={
-              "The pending retirement amount declines as we retire Stellarcarbon transactions in the Verra Registry."
+              "The pending retirement amount declines as we retire sinking transactions in the Verra Registry."
             }
           />
           <TableStat
@@ -103,13 +103,13 @@ export default function AuditTable() {
             unit="ton"
             amount={amountPendingSink}
             tooltip={
-              "The pending retirement amount declines as we retire Stellarcarbon transactions in the Verra Registry."
+              "The pending retirement amount declines as we retire sinking transactions in the Verra Registry."
             }
           />
         </div>
       </div>
       <em className="block text-center text-sm text-tertiary mt-1">
-        {`1 tCO2e = 1 VCU = 1 CARBON = 1`}
+        {`1 tCO₂e = 1 VCU = 1 CARBON = 1`}
         <CARBONCurrencyIcon className="inline ml-1" />
         {` = 1 CarbonSINK`}
       </em>
