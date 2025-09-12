@@ -38,23 +38,20 @@ export default function RequestCertificateChoose() {
           </div>
         </div>
       </div>
-      <span className="">
-        To create a personalized certificate we have to submit a whole number of
-        CARBON (
-        <CARBONCurrencyIcon className="inline" />) to the Verra Registry. Your
-        options are the following:
+      <span>
+        To create a personalized certificate we have to retire a whole number of
+        VCUs in the Verra Registry on your behalf. Your options are the following:
       </span>
-      {/* <span className="self-start">Your options:</span> */}
       <>
         <ul className="list-disc ml-4">
           {totalPending < 1 ? (
-            <li>Sink an additional {remainingFraction.toFixed(3)} tonnes.</li>
+            <li>Sink an additional {remainingFraction.toFixed(3)} tons.</li>
           ) : (
             <>
               <li>
                 Request a certificate for {Math.ceil(totalPending)}{" "}
                 <CARBONCurrencyIcon className="inline" /> by sinking an
-                additional {remainingFraction.toFixed(3)} tonnes.
+                additional {remainingFraction.toFixed(3)} tons.
               </li>
               <li>
                 {" "}
@@ -72,13 +69,13 @@ export default function RequestCertificateChoose() {
           )}
           <li>
             {`Do nothing. Your transaction will be retired into a community
-                certificate within ${retirementGraceDays} days of the transaction date.`}
+              certificate ${retirementGraceDays} days after the transaction date.`}
           </li>
         </ul>
       </>
       <span className="">
         Creating a personal certificate at the Verra Registry is completely
-        optional. All CARBON transactions will eventually be retired using
+        optional. All sinking transactions will in time be retired into
         community certificates.
       </span>
       <div className="flex flex-wrap justify-around gap-4 w-full">

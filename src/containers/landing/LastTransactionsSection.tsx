@@ -26,15 +26,20 @@ export default function LastTransactionsSection() {
       </div>
 
       <Paragraph>
-        All sunk CARBON is accounted for by using the Stellar blockchain
-        technology, making it highly transparent that your contribution ends up
-        in the right place.
-        <br />
-        <br /> Check out the most recent transactions on Stellarcarbon.
+        Every time you sink CARBON, your contribution is recorded on
+        {` Stellar's`} distributed ledger — transparent, permanent, and
+        verifiable. The feed here shows the latest sinking transactions from
+        contributors across the network, each one a step toward measurable
+        climate impact.
+      </Paragraph>
+      <Paragraph>
+        Stellarcarbon then bundles these contributions into official
+        retirements in the Verra Registry. That means your action counts
+        immediately on Stellar, as it is backed by certified off-chain impact.
       </Paragraph>
       <Paragraph>
         <SCLink href="/transactions">
-          View the full list in our transaction explorer
+          Explore the full transaction history
         </SCLink>
       </Paragraph>
     </div>

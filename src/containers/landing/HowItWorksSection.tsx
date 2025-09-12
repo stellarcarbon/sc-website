@@ -23,29 +23,17 @@ export default function HowItWorksSection() {
         few clicks. Your contribution directly finances the supporting of local communities in their efforts to
         maintain & protect the forest.`}
       </Paragraph>
-      {/* <Paragraph>
-        We do this using by supporting local communities in their efforts to
-        maintain & protect the forest.{" "}
-      </Paragraph> */}
       <div className="ml-4 text-2xl font-bold leading-tight mb-2">
         Sink CARBON
       </div>
       <Paragraph>
-        {/* Stellarcarbon enables contribution to these goals in a convenient,
-        traceable and secure manner, via our blockchain inspired{" "}
-        <SCLink href="/">sinking process</SCLink>. */}
-        Stellarcarbon uses Stellar blockchain transactions to make your
-        contributions convenient, traceable and secure. A process we call
+        Stellarcarbon uses Stellar network transactions to make your
+        contributions convenient, traceable, and secure. A process we call
         sinking CARBON.
       </Paragraph>
       <div className="flex justify-center w-full mt-2 mb-6">
         <CTAButton white text="Start sinking" />
-        {/* <ConnectWalletButton /> */}
       </div>
-      {/* <Paragraph>
-        For businesses on Stellar we offer API and Sorocarbon integration
-        options.
-      </Paragraph> */}
     </div>
   );
   const second = <HowItWorksFlowChart />;

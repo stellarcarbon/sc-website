@@ -1,7 +1,8 @@
 export enum Partners {
-  MOJOFLOWER = "/mojoflower.png",
   PUBLICNODE = "/publicnode.png",
+  MOZART = "/mozart-pay.png",
   CFCE = "/cfce.jpeg",
+  MOJOFLOWER = "/mojoflower.png",
 }
 
 interface PartnerLogoProps {

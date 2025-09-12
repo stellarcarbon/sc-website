@@ -31,26 +31,25 @@ export default function WhySection() {
   const first = (
     <div>
       <div className="px-4 text-4xl font-bold leading-tight tracking-light mb-2">
-        Trust & Verification
+        Proven & Transparent
       </div>
       <Paragraph>
-        We believe transparency is essential when it comes to online eco
-        contributions. That’s why we only work with projects issuing{" "}
+        Transparency is at the heart of Stellarcarbon. Every project issues{" "}
         <SCLink
           href="https://verra.org/programs/verified-carbon-standard/verified-carbon-units-vcus/"
           target="_blank"
         >
           Verified Carbon Units
         </SCLink>{" "}
-        (VCUs) and use blockchain technology to ensure every transaction is
-        transparent and traceable.
+        (VCUs), that are retired in the Verra Registry and mirrored on Stellar 
+        for immutability and public auditability.
       </Paragraph>
       <Paragraph>
-        VCUs are issued through the Verra Registry, the world’s leading standard
-        for certifying voluntary carbon offset projects. Each VCU represents one
-        metric ton of CO₂ reduced or removed from the atmosphere. By supporting
-        only Verra-verified projects, we ensure your contribution goes to
-        initiatives with proven environmental benefits.
+        Each VCU represents one metric ton of CO₂ reduced or removed from the
+        atmosphere. Beyond that, Stellarcarbon vets projects for quality and
+        co-benefits — starting with a REDD+ initiative in Peru certified under VCS +
+        CCB-Gold — so your contribution is backed by registry standards, blockchain
+        integrity, and independent screening.
       </Paragraph>
     </div>
   );
@@ -99,10 +98,10 @@ export default function WhySection() {
       </div>
       <div className="bg-primary border border-accentSecondary rounded flex flex-col items-start p-4">
         <FontAwesomeIcon icon={faHandshake} className="text-xl mb-2" />
-        <h2 className="font-bold text-xl mb-2">Viewable transaction records</h2>
+        <h2 className="font-bold text-xl mb-2">Visible transaction records</h2>
         <div>
-          {`Access a comprehensive history of your contributions, including dates,
-          amounts and memo's, all verifiable on the Stellar blockchain.`}
+          Access a comprehensive history of your contributions, including dates,
+          amounts, and memos, all verifiable on the Stellar blockchain.
         </div>
       </div>
     </div>

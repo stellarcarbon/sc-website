@@ -32,7 +32,7 @@ export default function DrawerWallet() {
         </DrawerLinkConnected>
         <DrawerLinkConnected href="/estimator/flight">
           <FontAwesomeIcon icon={faCalculator} width={18} />
-          <span>Emission estimator</span>
+          <span>Emissions estimator</span>
         </DrawerLinkConnected>
         <DrawerLinkConnected href="/dashboard">
           <FontAwesomeIcon icon={faUser} width={18} />

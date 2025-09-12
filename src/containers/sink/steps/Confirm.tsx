@@ -24,7 +24,7 @@ export default function ConfirmSinking() {
       </div>
 
       <div className="flex w-full">
-        <div className="flex flex-col justify-center gap-8 bg-primary mx-4 md:mx-8 mb-8 my-4 p-4 rounded border border-tertiary w-full">
+        <div className="flex flex-col justify-center gap-8 bg-primary mx-4 md:mx-8 my-4 p-4 rounded border border-tertiary w-full">
           <div className="grid grid-cols-5 w-full">
             <ConfirmKey>Amount</ConfirmKey>
             <ConfirmValue>
@@ -66,6 +66,11 @@ export default function ConfirmSinking() {
           </div>
         </div>
       </div>
+
+      <span className="text-[12px] text-center mx-4">
+        By signing this purchase agreement you waive your right of withdrawal.
+        The CarbonSINK is immediately and fully delivered to your Stellar account.
+      </span>
 
       <SinkingStepButtons>
         <div className="flex justify-between mx-4 md:mx-8 w-full">

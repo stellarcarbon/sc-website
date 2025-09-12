@@ -27,7 +27,7 @@ export default function ExplainIntroductionPage() {
         </SCLink>{" "}
         to make sure the corresponding Verified Carbon Units (VCU) are retired
         on the Verra Registry in a transparent way. This makes it very easy for
-        Stellar users to compensate for their CO2 emissions or contribute to
+        Stellar users to compensate for their CO₂ emissions or contribute to
         nature conservation projects.
       </Paragraph>
       <Paragraph>
@@ -36,15 +36,9 @@ export default function ExplainIntroductionPage() {
         keep exploring!
       </Paragraph>
 
-      {/* <Paragraph>
-        Otherwise, have a look around on this explain page where we try be as
-        transparent as possible about the accounting mechanisms behind
-        Stellarcarbon.
-      </Paragraph> */}
-
       <Subheader>Why rainforest conservation matters</Subheader>
       <Paragraph>
-        Rainforests cover just 2 % of land yet hold 25 % of its land-based
+        Rainforests cover just 2% of land yet hold 25% of the land-based
         carbon and shelter over half of all land species. If the forests in
         Ucayali & Huánuco were to be removed it would be disastrous from an
         ecological viewpoint. Without protection, developers could clear them

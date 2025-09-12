@@ -9,7 +9,8 @@ export default function GlossaryPage() {
     <div className="flex flex-col">
       <Header>Glossary of key terms</Header>
       <Paragraph>
-        Here you can find explanation of the concepts used on this website.
+        Climate science and carbon accounting can be daunting at first.
+        Let this glossary be your guide.
       </Paragraph>
       <Glossary />
     </div>
