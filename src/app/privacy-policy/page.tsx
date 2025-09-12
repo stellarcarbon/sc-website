@@ -252,7 +252,7 @@ export default function PrivacyPolicyPage() {
         </SCLink>.
       </p>
 
-      <h2>Children's Data</h2>
+      <h2>Children’s Data</h2>
       <p>
         Our services are not directed to children under 13, and we do not knowingly collect their data. 
         Minors under 18 require parental consent.
