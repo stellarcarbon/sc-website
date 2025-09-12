@@ -1,4 +1,3 @@
-import FormError from "@/components/FormError";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import { ConnectWalletFormError } from "./ConnectWalletForm";
@@ -12,7 +11,7 @@ export default function AcceptTnC() {
       <div className="flex flex-col">
         <DashboardHeader>Fine print</DashboardHeader>
         <span>
-          Read our <Link href="#" className="underline">
+          Read our <Link href="/terms-of-use" target="_blank" className="underline">
             Terms of Use
           </Link> and <Link href="/privacy-policy" target="_blank" className="underline">
             Privacy Policy
@@ -22,7 +21,7 @@ export default function AcceptTnC() {
 
       {tncError && (
         <ConnectWalletFormError
-          message={"You have to accept the terms and conditions."}
+          message={"You have to accept the terms, as they are part of your contract with Stellarcarbon."}
         />
       )}
 
