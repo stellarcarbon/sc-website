@@ -43,10 +43,14 @@ export default function OverviewContactInfo() {
   }, [setShowForm]);
 
   const onClickConfirmRegistration = useCallback(() => {
-    updateAccount(
-      walletConnection!.recipient!.email,
-      walletConnection?.recipient?.name ?? undefined
-    );
+    if (jwt) {
+      updateAccount(
+        walletConnection!.recipient!.email,
+        walletConnection?.recipient?.name ?? undefined
+      );
+    } else {
+      router.push("/sep10");
+    }
   }, [walletConnection, updateAccount]);
 
   const handleDelete = useCallback(() => {

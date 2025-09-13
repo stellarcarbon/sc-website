@@ -37,11 +37,11 @@ const defaultData: TransactionHistoryData = {
 export function useTransactionHistory(
   account?: string
 ): UseMyTransactionsResult {
-  const [data, setData] = useState<TransactionHistoryData>(defaultData);
+  const [txData, setTxData] = useState<TransactionHistoryData>(defaultData);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const fetchData = useCallback(async () => {
-    if (!account) return;
+  const fetchTxData = useCallback(async (): Promise<TransactionHistoryData> => {
+    if (!account) return defaultData;
     setLoading(true);
 
     const response = await getSinkTxsForRecipient({
@@ -50,43 +50,41 @@ export function useTransactionHistory(
 
     if (response.data === undefined) {
       setLoading(false);
-      return;
+      return defaultData;
     }
 
     const serializedTransactions =
       TransactionHistoryService.serializeTxsResponse(response.data);
 
-    setData({
+    setLoading(false);
+
+    return {
       myTransactions: serializedTransactions,
       totalSunk: Number(response.data.total_carbon_sunk),
       totalPending: Number(response.data.total_carbon_pending),
       retirementGraceDays: response.data.retirement_grace_days,
-<<<<<<< Updated upstream
-    });
-
-    setLoading(false);
-=======
     };
->>>>>>> Stashed changes
   }, [account]);
 
   async function pollForNewTransaction(
     maxRetries: number = 5,
-    delay: number = 3000 // delay in milliseconds
+    delay: number = 800 // delay in milliseconds
   ): Promise<void> {
     if (!account) throw new Error("No account for polling");
 
     let retries = 0;
-    const oldTransactions = data.myTransactions;
+    const oldTransactions = txData.myTransactions;
 
     while (retries < maxRetries) {
-      const transactionRecords =
-        await TransactionHistoryService.fetchAccountHistory(account);
+      console.log("polling", retries);
+      const transactionRecords = await fetchTxData();
 
-      if (hasNewItem(transactionRecords)) {
-        setData((prev) => {
-          return { ...prev, myTransactions: transactionRecords };
-        });
+      if (hasNewItem(transactionRecords.myTransactions)) {
+        console.log(
+          transactionRecords.totalPending,
+          transactionRecords.totalSunk
+        );
+        setTxData(transactionRecords);
         return;
       }
 
@@ -111,21 +109,23 @@ export function useTransactionHistory(
 
   useEffect(() => {
     if (!account) {
-      setData(defaultData);
+      setTxData(defaultData);
     } else {
-      fetchData();
+      fetchTxData().then((txData) => {
+        setTxData(txData);
+      });
     }
-  }, [fetchData, account]);
+  }, [fetchTxData, account]);
 
   const refetch = useCallback(() => {
-    if (account) fetchData();
-  }, [account, fetchData]);
+    if (account) fetchTxData();
+  }, [account, fetchTxData]);
 
   return {
-    myTransactions: data.myTransactions,
-    totalSunk: data.totalSunk,
-    totalPending: data.totalPending,
-    retirementGraceDays: data.retirementGraceDays,
+    myTransactions: txData.myTransactions,
+    totalSunk: txData.totalSunk,
+    totalPending: txData.totalPending,
+    retirementGraceDays: txData.retirementGraceDays,
     loading,
     refetch,
     pollForNewTransaction,
