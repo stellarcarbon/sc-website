@@ -61,9 +61,13 @@ export function useTransactionHistory(
       totalSunk: Number(response.data.total_carbon_sunk),
       totalPending: Number(response.data.total_carbon_pending),
       retirementGraceDays: response.data.retirement_grace_days,
+<<<<<<< Updated upstream
     });
 
     setLoading(false);
+=======
+    };
+>>>>>>> Stashed changes
   }, [account]);
 
   async function pollForNewTransaction(
