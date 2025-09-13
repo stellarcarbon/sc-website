@@ -76,14 +76,9 @@ export function useTransactionHistory(
     const oldTransactions = txData.myTransactions;
 
     while (retries < maxRetries) {
-      console.log("polling", retries);
       const transactionRecords = await fetchTxData();
 
       if (hasNewItem(transactionRecords.myTransactions)) {
-        console.log(
-          transactionRecords.totalPending,
-          transactionRecords.totalSunk
-        );
         setTxData(transactionRecords);
         return;
       }

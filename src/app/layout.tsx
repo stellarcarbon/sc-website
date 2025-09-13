@@ -28,9 +28,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log(analyticsConfig.plausibleDataDomain);
-  console.log(analyticsConfig.plausibleProps);
-
   return (
     <html lang="en">
       <head></head>
