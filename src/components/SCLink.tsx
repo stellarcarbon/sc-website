@@ -12,7 +12,7 @@ export default function SCLink({
     <Link
       href={href}
       target={target}
-      className={`underline text-alternateMedium hover:text-alternateLight ${className}`}
+      className={`underline text-stellarYellow hover:text-alternateLight ${className}`}
     >
       {children}
     </Link>

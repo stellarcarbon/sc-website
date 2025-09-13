@@ -117,7 +117,10 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         const result = await server.submitTransaction(
           TransactionBuilder.fromXDR(signedTxXdr, appConfig.network)
         );
-        setStep(CheckoutSteps.COMPLETED);
+        setTimeout(() => {
+          // Let the user wait a bit so their dashboard can be updated
+          setStep(CheckoutSteps.COMPLETED);
+        }, 1000);
       } catch (error) {
         displayHorizonError(error);
       }

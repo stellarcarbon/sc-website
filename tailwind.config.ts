@@ -59,6 +59,8 @@ const config: Config = {
         alternateMedium: "#fde047",
         alternateFull: "#facc15",
         alternateGray: "#4f4b37",
+
+        stellarYellow: "rgb(253, 218, 36)",
       },
       fontFamily: {
         noto: ["Noto Sans", "sans-serif"],

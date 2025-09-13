@@ -10,18 +10,24 @@ export default function AcceptTnC() {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
         <DashboardHeader>Fine print</DashboardHeader>
-        <span>
-          Read our <Link href="/terms-of-use" target="_blank" className="underline">
+        <span className="mt-2">
+          Read our{" "}
+          <Link href="/terms-of-use" target="_blank" className="underline">
             Terms of Use
-          </Link> and <Link href="/privacy-policy" target="_blank" className="underline">
+          </Link>{" "}
+          and{" "}
+          <Link href="/privacy-policy" target="_blank" className="underline">
             Privacy Policy
-          </Link> before you continue.
+          </Link>{" "}
+          before you continue.
         </span>
       </div>
 
       {tncError && (
         <ConnectWalletFormError
-          message={"You have to accept the terms, as they are part of your contract with Stellarcarbon."}
+          message={
+            "You have to accept the terms, as they are part of your contract with Stellarcarbon."
+          }
         />
       )}
 
@@ -45,8 +51,7 @@ export default function AcceptTnC() {
           className="p-2 cursor-pointer text-sm "
           htmlFor="checkbox_policy"
         >
-          I have read and agree with the Terms of Use and the Privacy
-          Policy.
+          I have read and agree with the Terms of Use and the Privacy Policy.
         </label>
       </div>
     </div>
