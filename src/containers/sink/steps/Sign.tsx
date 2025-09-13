@@ -7,7 +7,7 @@ export default function SignSinking() {
       <span className="text-center">
         {"Sign the transaction using your wallet in the pop-up."}
       </span>
-      <div className="flex-1 flex items-center justify-center my-4">
+      <div className="flex-1 flex items-center justify-center my-12">
         <SignIcon />
       </div>
     </ModalStep>

@@ -5,11 +5,11 @@ export default function AwaitSinking({ message }: { message: string }) {
   return (
     <ModalStep title="Waiting for API">
       <span className="text-center">{message}</span>
-      <div className="flex-1 flex items-center justify-center my-4">
+      <div className="flex-1 flex items-center justify-center my-12">
         <Hourglass
           visible={true}
-          height="80"
-          width="80"
+          height="92"
+          width="92"
           ariaLabel="hourglass-loading"
           wrapperStyle={{}}
           wrapperClass=""

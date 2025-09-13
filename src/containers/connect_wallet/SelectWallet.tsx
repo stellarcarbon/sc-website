@@ -28,7 +28,7 @@ export default function SelectWallet() {
     <div ref={containerRef} className="flex flex-col gap-4">
       <div className="flex flex-col w-full">
         <DashboardHeader>Wallet selection</DashboardHeader>
-        <span className="hidden md:block">
+        <span className="hidden md:block mt-2">
           Select your wallet. You’ll connect it when you submit the form.
         </span>
 

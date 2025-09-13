@@ -76,6 +76,7 @@ export function useSCAccount() {
 
       if (res.response.status === 200 && res.data) {
         updateWalletConnection(res.data);
+        setIsStale(false);
       }
     },
     [jwt, walletConnection, updateWalletConnection]
