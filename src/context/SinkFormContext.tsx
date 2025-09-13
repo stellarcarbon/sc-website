@@ -28,7 +28,7 @@ import { BuildSinkCarbonXdrData, PaymentAsset } from "@stellarcarbon/sc-sdk";
 
 type SinkFormContext = {
   register: UseFormRegister<SinkingFormData>;
-  handleSubmit: UseFormHandleSubmit<SinkingFormData, undefined>;
+  handleSubmit: UseFormHandleSubmit<SinkingFormData>;
   watch: UseFormWatch<SinkingFormData>;
   setValue: UseFormSetValue<SinkingFormData>;
 

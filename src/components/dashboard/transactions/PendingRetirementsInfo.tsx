@@ -39,9 +39,9 @@ export default function PendingRetirementsInfo() {
   } else if (totalPending % 1 === 0) {
     body = (
       <div className="text-center p-4">
-        Your pending balance is a round number, so it is automatically
-        contributed to a personal certificate. This process should nevers take
-        more than a couple days.
+        Your pending balance is a whole number, so it will be automatically
+        retired into a personal certificate. This should be finalized within
+        an hour.
       </div>
     );
   } else {
