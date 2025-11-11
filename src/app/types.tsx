@@ -1,8 +1,6 @@
 import {
   ISupportedWallet,
-  WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
-import * as StellarSdk from "@stellar/stellar-sdk";
 import {
   PaymentAsset,
   Recipient,
@@ -43,7 +41,7 @@ export interface MyTransactionRecord {
   retirements: RetirementSummary[];
   recipient: string;
   funder: string;
-  pagingToken: string;
+  toid: string;
   finalized: boolean;
 }
 

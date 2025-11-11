@@ -98,13 +98,13 @@ export const TransactionExplorerContextProvider = ({
   }, [setIsLoading, cursor, limit, order]);
 
   const goToNextPage = useCallback(async () => {
-    const cursorNext = transactions[transactions.length - 1].pagingToken;
+    const cursorNext = transactions[transactions.length - 1].toid;
 
     updateSearchParams(cursorNext, "desc");
   }, [transactions, updateSearchParams]);
 
   const goToPreviousPage = useCallback(async () => {
-    const cursorPrev = transactions[0].pagingToken;
+    const cursorPrev = transactions[0].toid;
 
     updateSearchParams(cursorPrev, "asc");
   }, [transactions, updateSearchParams]);

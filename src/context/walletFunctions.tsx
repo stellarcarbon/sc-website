@@ -1,3 +1,4 @@
+import { WalletConnection } from "@/app/types";
 import {
   allowAllModules,
   ISupportedWallet,
@@ -5,7 +6,6 @@ import {
   WalletNetwork,
 } from "@creit.tech/stellar-wallets-kit";
 import { LedgerModule } from "@creit.tech/stellar-wallets-kit/modules/ledger.module";
-import { WalletConnection } from "@/app/types";
 
 export const walletConnectDialog = async (
   wallet: ISupportedWallet,
