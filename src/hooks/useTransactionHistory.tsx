@@ -92,7 +92,7 @@ export function useTransactionHistory(
       if (oldTransactions.length > 0) {
         const newerTx = records.find((tx) => {
           return (
-            Number(tx.pagingToken) > Number(oldTransactions[0].pagingToken)
+            Number(tx.toid) > Number(oldTransactions[0].toid)
           );
         });
 

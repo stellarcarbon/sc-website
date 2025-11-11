@@ -17,7 +17,7 @@ export default function TxExplorerHelpPage() {
     retirements: [],
     recipient: "recipient",
     funder: "funder",
-    pagingToken: "000",
+    toid: "000",
     finalized: false,
   };
 

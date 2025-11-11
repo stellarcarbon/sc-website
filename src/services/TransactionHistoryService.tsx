@@ -38,7 +38,7 @@ export default class TransactionHistoryService {
       sinkAmount: Number(txResponse.carbon_amount),
       retirementStatus,
       retirements: txResponse.retirements,
-      pagingToken: txResponse.paging_token,
+      toid: txResponse.toid,
       recipient: txResponse.recipient,
       funder: txResponse.funder,
       finalized: txResponse.retirement_finalized,
