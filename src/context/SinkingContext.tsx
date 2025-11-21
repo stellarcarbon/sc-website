@@ -20,6 +20,7 @@ import {
   BuildSinkCarbonXdrData,
   SinkingResponse,
 } from "@stellarcarbon/sc-sdk";
+import { SignTransactionOptions } from "@/app/types";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -166,7 +167,8 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         sinkResponse.tx_xdr,
         {
           address: walletConnection!.stellarPubKey,
-        }
+          nonBlindTx: true,
+        } as SignTransactionOptions
       );
 
       // Expiry check after signing

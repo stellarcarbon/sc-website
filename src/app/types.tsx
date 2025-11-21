@@ -67,3 +67,12 @@ export interface AccountBalance {
   xlm: number;
   usdc: number;
 }
+
+export interface SignTransactionOptions {
+  networkPassphrase?: string;
+  address?: string;
+  path?: string;
+  submit?: boolean;
+  submitUrl?: string;
+  nonBlindTx?: boolean;  // Added for Ledger module
+}

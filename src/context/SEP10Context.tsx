@@ -19,6 +19,7 @@ import {
   Sep10ChallengeResponse,
   validateSep10Challenge,
 } from "@stellarcarbon/sc-sdk";
+import { SignTransactionOptions } from "@/app/types";
 
 export type SEP10Target = "dashboard" | "register" | "update" | "rounding";
 
@@ -79,7 +80,8 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
           challenge?.transaction,
           {
             address: walletConnection.stellarPubKey,
-          }
+            nonBlindTx: true,
+          } as SignTransactionOptions
         );
         signedTxXdr = signed.signedTxXdr;
       } catch (e) {
