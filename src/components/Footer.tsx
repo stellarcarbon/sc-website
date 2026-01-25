@@ -3,10 +3,12 @@
 import Link from "next/link";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="w-full h-50 flex flex-col justify-center items-center shadow-md-inverted bg-darker text-accent border-t border-t-secondary">
       <div className="py-4 grow flex flex-wrap items-center justify-center gap-2 gap-x-8 md:gap-x-12">
-        <span className="text-gray-500">© 2025 Stellarcarbon</span>
+        <span className="text-gray-400">© {currentYear} Stellarcarbon</span>
 
         <Link href="/terms-of-use">Terms of Use</Link>
         <Link href="/privacy-policy">Privacy Policy</Link>
