@@ -156,12 +156,12 @@ export default function ProjectsPage() {
       <div className="max-w-[80%] my-12 flex flex-col md:flex-row justify-center">
         <CountUp
           value={1270}
-          unit={"Km2 Area"}
+          unit={"Km² Area"}
           subject={"Under better management of natural resources."}
         />
         <CountUp
           value={5.2}
-          unit={"Km2 Area"}
+          unit={"Km² Area"}
           subject={
             "Better biophysical conditions within the lands of indigenous communities."
           }
