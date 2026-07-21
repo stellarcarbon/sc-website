@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer components {
   a {
@@ -57,7 +55,7 @@ body {
 }
 
 .rainforest-bg {
-  background-image: 
+  background-image:
   /* linear-gradient(
       180deg,
       rgba(165, 206, 199, 0) 95%,
@@ -101,7 +99,7 @@ body {
 }
 
 .m-bg {
-  background-image: 
+  background-image:
   /* linear-gradient(
       180deg,
       rgba(165, 206, 199, 0) 95%,

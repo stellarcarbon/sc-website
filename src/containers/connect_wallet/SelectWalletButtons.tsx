@@ -2,7 +2,7 @@ import SelectWalletButton from "@/components/wallet/SelectWalletButton";
 import { useAppContext } from "@/context/appContext";
 import { useConnectWalletContext } from "../../context/ConnectWalletContext";
 import { useCallback } from "react";
-import { ISupportedWallet } from "@creit.tech/stellar-wallets-kit";
+import { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
 import SelectWalletButtonDesktop from "@/components/wallet/SelectWalletButtonDesktop";
 
 export default function SelectWalletButtons() {
@@ -17,7 +17,7 @@ export default function SelectWalletButtons() {
         setSelectedWallet(wallet);
       }
     },
-    [selectedWallet, setSelectedWallet]
+    [selectedWallet, setSelectedWallet],
   );
 
   return (

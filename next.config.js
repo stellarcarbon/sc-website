@@ -16,6 +16,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    useTypeScriptCli: true,
+  },
   // reactStrictMode: false,
 };
 

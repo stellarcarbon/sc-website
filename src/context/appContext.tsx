@@ -9,10 +9,8 @@ import {
   useState,
 } from "react";
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
-import {
-  ISupportedWallet,
-  StellarWalletsKit,
-} from "@creit.tech/stellar-wallets-kit";
+import { StellarWalletsKit } from "@creit-tech/stellar-wallets-kit/sdk";
+import { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
 import { MyTransactionRecord, WalletConnection } from "@/app/types";
 
 import useIsMobile from "@/hooks/useIsMobile";
@@ -59,7 +57,7 @@ type AppContext = {
   myTransactions: MyTransactionRecord[] | null;
   pollForNewTransaction: (
     maxRetries?: number,
-    delayMs?: number
+    delayMs?: number,
   ) => Promise<void>;
   refetchTransactions: () => void;
   totalPending: number;
@@ -100,7 +98,7 @@ export const useAppContext = () => {
 
 export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [supportedWallets, setSupportedWallets] = useState<ISupportedWallet[]>(
-    []
+    [],
   );
   const stellarWalletsKitRef = useRef<StellarWalletsKit | null>(null);
 
@@ -155,9 +153,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, [walletConnection, isWalletConnectionReady]);
 
-  useSWKInit({ ref: stellarWalletsKitRef, setIsKitReady, setSupportedWallets });
+  useSWKInit({ setIsKitReady, setSupportedWallets });
   useWalletConnectionInit({
-    ref: stellarWalletsKitRef,
     isKitReady,
     loadWalletConnection,
   });

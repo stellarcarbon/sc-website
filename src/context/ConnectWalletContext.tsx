@@ -3,7 +3,7 @@ import { useAppContext } from "@/context/appContext";
 import { walletConnectDialog } from "@/context/walletFunctions";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
-import { ISupportedWallet } from "@creit.tech/stellar-wallets-kit";
+import { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
 import {
   createContext,
   Dispatch,
@@ -89,7 +89,7 @@ export const ConnectWalletContextProvider = ({
         try {
           await TransactionHistoryService.fetchAccountBalance(
             appConfig.server,
-            newConn.stellarPubKey
+            newConn.stellarPubKey,
           );
         } catch (error: any) {
           setNoWalletError(true);
@@ -106,7 +106,7 @@ export const ConnectWalletContextProvider = ({
         return false;
       }
     },
-    [setWalletConnection]
+    [setWalletConnection],
   );
 
   const validateForm = useCallback(() => {
@@ -200,7 +200,7 @@ export const ConnectWalletContextProvider = ({
       walletsKitError,
       noWalletError,
       submitForm,
-    ]
+    ],
   );
 
   return (

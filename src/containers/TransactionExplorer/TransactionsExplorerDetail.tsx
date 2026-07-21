@@ -5,7 +5,7 @@ import TransactionHistoryService from "@/services/TransactionHistoryService";
 import { useSearchParams } from "next/navigation";
 import { ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import appConfig from "@/config";
-import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
+import { Networks } from "@creit-tech/stellar-wallets-kit/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import TransactionsLoading from "@/components/dashboard/transactions/TransactionsLoading";
@@ -149,7 +149,7 @@ export default function TransactionsExplorerDetail() {
 
         <SCLink
           href={
-            appConfig.network === WalletNetwork.PUBLIC
+            appConfig.network === Networks.PUBLIC
               ? `https://stellar.expert/explorer/public/tx/${transaction.id}`
               : `https://stellar.expert/explorer/testnet/tx/${transaction.id}`
           }

@@ -1,7 +1,7 @@
 "use client";
 
 import appConfig from "@/config";
-import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
+import { Networks } from "@creit-tech/stellar-wallets-kit/types";
 import posthog from "posthog-js";
 import { useState, useEffect } from "react";
 
@@ -30,7 +30,7 @@ export default function AnalyticsConsent() {
     }
   };
 
-  if (!visible || appConfig.network === WalletNetwork.PUBLIC) return null;
+  if (!visible || appConfig.network === Networks.PUBLIC) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

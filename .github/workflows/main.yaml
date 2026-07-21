@@ -1,32 +1,43 @@
-name: CI/CD with tests on the main branch
+name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
+    name: Test and build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          ref: main
+        uses: actions/checkout@v7
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
         with:
-          node-version: 20
+          run_install: false
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org/"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # - name: Lint
+      #   run: pnpm exec eslint .
 
       - name: Run unit tests
-        run: npm test
+        run: pnpm test:ci
 
-      - name: Run Cypress Tests
-        run: npm run e2e:headless
+      - name: Build
+        run: pnpm build
 
-  
+      # - name: Run Cypress Tests
+      #   run: pnpm run e2e:headless

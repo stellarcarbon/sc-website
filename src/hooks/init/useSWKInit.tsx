@@ -1,44 +1,37 @@
 import appConfig from "@/config";
-import {
-  allowAllModules,
-  ISupportedWallet,
-  StellarWalletsKit,
-  XBULL_ID,
-} from "@creit.tech/stellar-wallets-kit";
-import { LedgerModule } from "@creit.tech/stellar-wallets-kit/modules/ledger.module";
+import { StellarWalletsKit } from "@creit-tech/stellar-wallets-kit/sdk";
+import { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
+import { defaultModules } from "@creit-tech/stellar-wallets-kit/modules/utils";
+import { LedgerModule } from "@creit-tech/stellar-wallets-kit/modules/ledger";
+import { XBULL_ID } from "@creit-tech/stellar-wallets-kit/modules/xbull";
 import { Dispatch, SetStateAction, useEffect } from "react";
 
 type Props = {
-  ref: React.MutableRefObject<StellarWalletsKit | null>;
   setIsKitReady: (ready: boolean) => void;
   setSupportedWallets: Dispatch<SetStateAction<ISupportedWallet[]>>;
 };
 
-export function useSWKInit({ ref, setIsKitReady, setSupportedWallets }: Props) {
+export function useSWKInit({ setIsKitReady, setSupportedWallets }: Props) {
   useEffect(() => {
     const loadWalletsKit = async () => {
       if (typeof window !== "undefined") {
-        // This import makes sure assigning the kit to the ref happens client side.
-        const { StellarWalletsKit } = await import(
-          "@creit.tech/stellar-wallets-kit"
-        );
-        const modules = allowAllModules();
-        modules.push(new LedgerModule());
-        const newSwk = new StellarWalletsKit({
-          network: appConfig.network,
+        StellarWalletsKit.init({
+          modules: [...defaultModules(), new LedgerModule()],
           selectedWalletId: XBULL_ID,
-          modules,
+          network: appConfig.network,
         });
-        ref.current = newSwk;
 
-        // Load supported wallets
-        const wallets = await newSwk.getSupportedWallets();
-        setSupportedWallets(wallets);
+        // Load client-supported wallets
+        const wallets = await StellarWalletsKit.refreshSupportedWallets();
+        const availableWallets: ISupportedWallet[] = wallets.filter(
+          (wallet) => wallet.isAvailable,
+        );
+        setSupportedWallets(availableWallets);
 
         setIsKitReady(true);
       }
     };
 
     loadWalletsKit();
-  }, [setIsKitReady, ref]);
+  }, [setIsKitReady]);
 }
