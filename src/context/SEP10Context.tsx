@@ -20,6 +20,7 @@ import {
   validateSep10Challenge,
 } from "@stellarcarbon/sc-sdk";
 import { SignTransactionOptions } from "@/app/types";
+import { StellarWalletsKit } from "@creit-tech/stellar-wallets-kit/sdk";
 
 export type SEP10Target = "dashboard" | "register" | "update" | "rounding";
 
@@ -43,7 +44,7 @@ export const useSEP10Context = () => {
 };
 
 export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
-  const { jwt, setJwt, walletConnection, stellarWalletsKit } = useAppContext();
+  const { jwt, setJwt, walletConnection } = useAppContext();
 
   const [challenge, setChallenge] = useState<Sep10ChallengeResponse>();
   const [step, setStep] = useState<SEP10Steps>(SEP10Steps.fetchingChallenge);
@@ -71,12 +72,12 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
   }, [walletConnection, step]);
 
   const signChallenge = useCallback(async () => {
-    if (challenge && stellarWalletsKit && walletConnection) {
+    if (challenge && walletConnection) {
       setStep(SEP10Steps.signingChallenge);
 
       let signedTxXdr;
       try {
-        const signed = await stellarWalletsKit.signTransaction(
+        const signed = await StellarWalletsKit.signTransaction(
           challenge?.transaction,
           {
             address: walletConnection.stellarPubKey,
@@ -109,7 +110,7 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
         setError("SEP10 challenge not validated.");
       }
     }
-  }, [challenge, stellarWalletsKit, walletConnection, updateJwt]);
+  }, [challenge, walletConnection, updateJwt]);
 
   const providerValue = useMemo(
     () => ({

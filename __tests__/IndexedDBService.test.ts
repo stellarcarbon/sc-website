@@ -12,6 +12,10 @@ const makeTransactionRecord = (id: string): MyTransactionRecord => {
     sinkAmount: 1,
     retirementStatus: RetirementStatus.PENDING_USER,
     retirements: [],
+    recipient: "GRECIPIENTADDRESS",
+    funder: "GFUNDERADDRESS",
+    toid: "toid-1",
+    finalized: false,
   };
 };
 

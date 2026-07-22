@@ -19,7 +19,7 @@ export function useSCAccount() {
       const now = new Date();
 
       const cutoffDate = new Date(
-        now.getTime() - retirementGraceDays * 24 * 60 * 60 * 1000
+        now.getTime() - retirementGraceDays * 24 * 60 * 60 * 1000,
       );
 
       if (modifiedAt < cutoffDate) {
@@ -36,13 +36,9 @@ export function useSCAccount() {
           email,
           name: name === "" ? null : name,
         },
-        fetch: (request: Request) => {
-          const authRequest = new Request(request, {
-            headers: {
-              ...Object.fromEntries(request.headers.entries()),
-              Authorization: `Bearer ${jwt}`,
-            },
-          });
+        fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+          const authRequest = new Request(input, init);
+          authRequest.headers.set("Authorization", `Bearer ${jwt}`);
           return fetch(authRequest);
         },
       });
@@ -51,7 +47,7 @@ export function useSCAccount() {
         updateWalletConnection(res.data.recipient);
       }
     },
-    [jwt, updateWalletConnection]
+    [jwt, updateWalletConnection],
   );
 
   const updateAccount = useCallback(
@@ -63,13 +59,9 @@ export function useSCAccount() {
       const res = await updateRecipient({
         body: { email, name },
         path: { recipient_address: walletConnection.stellarPubKey },
-        fetch: (request: Request) => {
-          const authRequest = new Request(request, {
-            headers: {
-              ...Object.fromEntries(request.headers.entries()),
-              Authorization: `Bearer ${jwt}`,
-            },
-          });
+        fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+          const authRequest = new Request(input, init);
+          authRequest.headers.set("Authorization", `Bearer ${jwt}`);
           return fetch(authRequest);
         },
       });
@@ -79,7 +71,7 @@ export function useSCAccount() {
         setIsStale(false);
       }
     },
-    [jwt, walletConnection, updateWalletConnection]
+    [jwt, walletConnection, updateWalletConnection],
   );
 
   const deleteAccount = useCallback(async () => {
@@ -87,13 +79,9 @@ export function useSCAccount() {
 
     const res = await deleteRecipient({
       path: { recipient_address: walletConnection.stellarPubKey },
-      fetch: (request: Request) => {
-        const authRequest = new Request(request, {
-          headers: {
-            ...Object.fromEntries(request.headers.entries()),
-            Authorization: `Bearer ${jwt}`,
-          },
-        });
+      fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+        const authRequest = new Request(input, init);
+        authRequest.headers.set("Authorization", `Bearer ${jwt}`);
         return fetch(authRequest);
       },
     });

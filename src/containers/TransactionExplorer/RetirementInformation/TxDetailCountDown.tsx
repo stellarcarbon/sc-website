@@ -1,6 +1,12 @@
 import { MyTransactionRecord } from "@/app/types";
 import { useAppContext } from "@/context/appContext";
-import { useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
+
+type TimeLeft = {
+  days?: number;
+  hours?: number;
+  minutes?: number;
+};
 
 export default function TxDetailCountdown({
   transaction,
@@ -22,9 +28,9 @@ export default function TxDetailCountdown({
     }
   }, [transaction, retirementGraceDays]);
 
-  const calculateTimeLeft = (targetDate: Date) => {
+  const calculateTimeLeft = (targetDate: Date): TimeLeft => {
     const difference = +new Date(targetDate) - +new Date();
-    let timeLeft = {};
+    let timeLeft: TimeLeft = {};
 
     if (difference > 0) {
       timeLeft = {
@@ -54,19 +60,22 @@ export default function TxDetailCountdown({
     return () => clearTimeout(timer);
   }, [targetDate]);
 
-  const timerComponents: JSX.Element[] = [];
+  const timerComponents = Object.entries(timeLeft).reduce<ReactNode[]>(
+    (components, [interval, value]) => {
+      if (!value) {
+        return components;
+      }
 
-  Object.keys(timeLeft).forEach((interval) => {
-    if (!(timeLeft as any)[interval]) {
-      return;
-    }
+      components.push(
+        <span key={interval}>
+          {value} {interval}{" "}
+        </span>,
+      );
 
-    timerComponents.push(
-      <span key={interval}>
-        {(timeLeft as any)[interval]} {interval}{" "}
-      </span>
-    );
-  });
+      return components;
+    },
+    [],
+  );
 
   return <div>{timerComponents}</div>;
 }

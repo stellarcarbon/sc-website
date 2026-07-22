@@ -21,13 +21,9 @@ export function useSCAccountInit({
 
       const res = await getRecipient({
         path: { recipient_address: walletConnection.stellarPubKey },
-        fetch: (request: Request) => {
-          const authRequest = new Request(request, {
-            headers: {
-              ...Object.fromEntries(request.headers.entries()),
-              Authorization: `Bearer ${token}`,
-            },
-          });
+        fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+          const authRequest = new Request(input, init);
+          authRequest.headers.set("Authorization", `Bearer ${token}`);
           return fetch(authRequest);
         },
       });
@@ -40,7 +36,7 @@ export function useSCAccountInit({
         return res.data;
       }
     },
-    [walletConnection, updateWalletConnection]
+    [walletConnection, updateWalletConnection],
   );
 
   useEffect(() => {

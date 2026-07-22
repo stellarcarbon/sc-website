@@ -35,10 +35,10 @@ export default function RootLayout({
         <SinkFormContextProvider>
           <body className={`${inter.className}`}>
             <PlausibleProvider
-              domain={analyticsConfig.plausibleDataDomain}
+              src={analyticsConfig.plausibleProps.src as string}
               scriptProps={analyticsConfig.plausibleProps}
               enabled
-              trackLocalhost
+              init={{ captureOnLocalhost: true }}
             />
             <PostHogProvider>
               <AnalyticsConsent />
