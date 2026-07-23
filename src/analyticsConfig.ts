@@ -12,7 +12,7 @@ function buildAnalyticsConfig(): AnalyticsConfig {
   let pubnetDeployment = process.env.NEXT_PUBLIC_PRODUCTION === "pubnet";
 
   let plausibleDataDomain = pubnetDeployment
-    ? "new.stellarcarbon.io"
+    ? "stellarcarbon.io"
     : "test.stellarcarbon.io";
 
   let plausibleProps = {
