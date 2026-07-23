@@ -20,7 +20,6 @@ import {
   validateSep10Challenge,
 } from "@stellarcarbon/sc-sdk";
 import { SignTransactionOptions } from "@/app/types";
-import { StellarWalletsKit } from "@creit-tech/stellar-wallets-kit/sdk";
 
 export type SEP10Target = "dashboard" | "register" | "update" | "rounding";
 
@@ -77,13 +76,11 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
 
       let signedTxXdr;
       try {
-        const signed = await StellarWalletsKit.signTransaction(
-          challenge?.transaction,
-          {
-            address: walletConnection.stellarPubKey,
-            nonBlindTx: true,
-          } as SignTransactionOptions
-        );
+        const { signTransaction } = await import("@/lib/walletsKitRuntime");
+        const signed = await signTransaction(challenge?.transaction, {
+          address: walletConnection.stellarPubKey,
+          nonBlindTx: true,
+        } as SignTransactionOptions);
         signedTxXdr = signed.signedTxXdr;
       } catch (e) {
         setError("Signing was canceled or failed.");
@@ -121,7 +118,7 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
       error,
       signChallenge,
     }),
-    [challenge, jwt, step, error, signChallenge]
+    [challenge, jwt, step, error, signChallenge],
   );
 
   return (

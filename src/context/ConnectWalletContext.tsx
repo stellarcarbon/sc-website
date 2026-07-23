@@ -3,7 +3,7 @@ import { useAppContext } from "@/context/appContext";
 import { walletConnectDialog } from "@/context/walletFunctions";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
-import { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
+import type { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
 import {
   createContext,
   Dispatch,
@@ -55,8 +55,7 @@ export const useConnectWalletContext = () => {
 export const ConnectWalletContextProvider = ({
   children,
 }: PropsWithChildren) => {
-  const { setWalletConnection, setSep10Target, stellarWalletsKit } =
-    useAppContext();
+  const { setWalletConnection, setSep10Target } = useAppContext();
 
   const [selectedWallet, setSelectedWallet] = useState<ISupportedWallet>();
   const [username, setUsername] = useState<string>();

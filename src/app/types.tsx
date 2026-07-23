@@ -1,4 +1,4 @@
-import { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
+import type { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
 import {
   PaymentAsset,
   Recipient,

@@ -9,8 +9,7 @@ import {
   useState,
 } from "react";
 import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
-import { StellarWalletsKit } from "@creit-tech/stellar-wallets-kit/sdk";
-import { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
+import type { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
 import { MyTransactionRecord, WalletConnection } from "@/app/types";
 
 import useIsMobile from "@/hooks/useIsMobile";
@@ -70,8 +69,6 @@ type AppContext = {
   jwt: string | undefined;
   setJwt: Dispatch<SetStateAction<string | undefined>>;
 
-  stellarWalletsKit: StellarWalletsKit | null;
-
   xlmBalance: number | undefined;
   usdcBalance: number | undefined;
 
@@ -100,7 +97,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [supportedWallets, setSupportedWallets] = useState<ISupportedWallet[]>(
     [],
   );
-  const stellarWalletsKitRef = useRef<StellarWalletsKit | null>(null);
 
   const isMobileDevice = useIsMobile();
 
@@ -190,8 +186,6 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
 
       jwt,
       setJwt,
-
-      stellarWalletsKit: stellarWalletsKitRef.current,
 
       xlmBalance,
       usdcBalance,

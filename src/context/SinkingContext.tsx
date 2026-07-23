@@ -21,7 +21,6 @@ import {
   SinkingResponse,
 } from "@stellarcarbon/sc-sdk";
 import { SignTransactionOptions } from "@/app/types";
-import { StellarWalletsKit } from "@creit-tech/stellar-wallets-kit/sdk";
 
 export enum CheckoutSteps {
   CREATING = "creating",
@@ -164,13 +163,11 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     setStep(CheckoutSteps.AWAIT_SIGNING);
 
     try {
-      const signedTxResult = await StellarWalletsKit.signTransaction(
-        sinkResponse.tx_xdr,
-        {
-          address: walletConnection!.stellarPubKey,
-          nonBlindTx: true,
-        } as SignTransactionOptions,
-      );
+      const { signTransaction } = await import("@/lib/walletsKitRuntime");
+      const signedTxResult = await signTransaction(sinkResponse.tx_xdr, {
+        address: walletConnection!.stellarPubKey,
+        nonBlindTx: true,
+      } as SignTransactionOptions);
 
       // Expiry check after signing
       if (isExpired(signedTxResult.signedTxXdr)) {

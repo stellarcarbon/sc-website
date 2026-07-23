@@ -30,10 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head></head>
-      <AppContextProvider>
-        <SinkFormContextProvider>
-          <body className={`${inter.className}`}>
+      <body className={`${inter.className}`}>
+        <AppContextProvider>
+          <SinkFormContextProvider>
             <PlausibleProvider
               src={analyticsConfig.plausibleProps.src as string}
               scriptProps={analyticsConfig.plausibleProps}
@@ -45,9 +44,9 @@ export default function RootLayout({
 
               <App>{children}</App>
             </PostHogProvider>
-          </body>
-        </SinkFormContextProvider>
-      </AppContextProvider>
+          </SinkFormContextProvider>
+        </AppContextProvider>
+      </body>
     </html>
   );
 }

@@ -3,7 +3,6 @@ import appConfig from "@/config";
 import RoundingService from "@/services/RoundingService";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
-import { StellarWalletsKit } from "@creit-tech/stellar-wallets-kit/sdk";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { SEP10JWTService } from "./useSEP10JWT";
@@ -25,8 +24,9 @@ export function useWalletConnection() {
   const loadWalletConnection = useCallback(() => {
     const wc = WalletConnectionStorageService.loadWalletConnection();
     if (wc !== undefined) {
-      // SET WALLET: Directly invoke the static method on the imported class
-      StellarWalletsKit.setWallet(wc.walletType.id);
+      import("@/lib/walletsKitRuntime").then(async ({ setWallet }) => {
+        setWallet(wc.walletType.id);
+      });
     }
     setWalletConnection(wc);
 

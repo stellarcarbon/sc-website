@@ -1,5 +1,5 @@
 import { HTMLProps } from "react";
-import { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
+import type { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
 
 export interface SelectWalletButtonProps extends HTMLProps<HTMLButtonElement> {
   wallet: ISupportedWallet;

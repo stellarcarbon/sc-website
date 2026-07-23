@@ -1,12 +1,15 @@
 "use client";
 
-import { Networks } from "@creit-tech/stellar-wallets-kit/types";
+import {
+  STELLAR_NETWORKS,
+  StellarNetworkPassphrase,
+} from "@/constants/stellarNetwork";
 import * as StellarSdk from "@stellar/stellar-sdk";
 import { client } from "@stellarcarbon/sc-sdk";
 import { DetailedHTMLProps, ScriptHTMLAttributes } from "react";
 
 export interface AppConfiguration {
-  network: Networks;
+  network: StellarNetworkPassphrase;
   server: StellarSdk.Horizon.Server;
   demo: boolean;
   apiBaseUrl: string;
@@ -24,7 +27,9 @@ function buildConfig(): AppConfiguration {
   // Distinguish between prod & test deployments
   let pubnetDeployment = process.env.NEXT_PUBLIC_PRODUCTION === "pubnet";
 
-  let network = pubnetDeployment ? Networks.PUBLIC : Networks.TESTNET;
+  let network = pubnetDeployment
+    ? STELLAR_NETWORKS.PUBLIC
+    : STELLAR_NETWORKS.TESTNET;
   let server = pubnetDeployment
     ? new StellarSdk.Horizon.Server("https://horizon.stellar.org")
     : new StellarSdk.Horizon.Server("https://horizon-testnet.stellar.org");
@@ -37,7 +42,7 @@ function buildConfig(): AppConfiguration {
     process.env.NODE_ENV === "development"
   ) {
     // Connect to mainnet while developing
-    network = Networks.PUBLIC;
+    network = STELLAR_NETWORKS.PUBLIC;
     server = new StellarSdk.Horizon.Server("https://horizon.stellar.org");
     apiBaseUrl = "https://api.stellarcarbon.io";
   }
