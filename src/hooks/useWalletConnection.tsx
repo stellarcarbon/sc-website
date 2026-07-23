@@ -3,7 +3,6 @@ import appConfig from "@/config";
 import RoundingService from "@/services/RoundingService";
 import TransactionHistoryService from "@/services/TransactionHistoryService";
 import WalletConnectionStorageService from "@/services/WalletConnectionService";
-import { StellarWalletsKit } from "@creit.tech/stellar-wallets-kit";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { SEP10JWTService } from "./useSEP10JWT";
@@ -22,24 +21,26 @@ export function useWalletConnection() {
 
   const [hasPendingRounding, setHasPendingRounding] = useState<boolean>();
 
-  const loadWalletConnection = useCallback((swk: StellarWalletsKit) => {
+  const loadWalletConnection = useCallback(() => {
     const wc = WalletConnectionStorageService.loadWalletConnection();
     if (wc !== undefined) {
-      swk.setWallet(wc.walletType.id);
+      import("@/lib/walletsKitRuntime").then(async ({ setWallet }) => {
+        setWallet(wc.walletType.id);
+      });
     }
     setWalletConnection(wc);
 
     if (wc) {
       TransactionHistoryService.fetchAccountBalance(
         appConfig.server,
-        wc.stellarPubKey
+        wc.stellarPubKey,
       ).then((accountBalance) => {
         setXlmBalance(accountBalance.xlm);
         setUsdcBalance(accountBalance.usdc);
       });
 
       RoundingService.hasPendingRounding(wc.stellarPubKey).then((isPending) =>
-        setHasPendingRounding(isPending)
+        setHasPendingRounding(isPending),
       );
     }
   }, []);
@@ -54,7 +55,7 @@ export function useWalletConnection() {
       WalletConnectionStorageService.setWalletConnection(newWalletConnection);
       setWalletConnection(newWalletConnection);
     },
-    [walletConnection]
+    [walletConnection],
   );
 
   const disconnectWallet = useCallback(() => {

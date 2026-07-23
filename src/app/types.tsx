@@ -1,6 +1,4 @@
-import {
-  ISupportedWallet,
-} from "@creit.tech/stellar-wallets-kit";
+import type { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
 import {
   PaymentAsset,
   Recipient,
@@ -74,5 +72,5 @@ export interface SignTransactionOptions {
   path?: string;
   submit?: boolean;
   submitUrl?: string;
-  nonBlindTx?: boolean;  // Added for Ledger module
+  nonBlindTx?: boolean; // Added for Ledger module
 }

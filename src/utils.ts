@@ -5,7 +5,7 @@ import { isEmail } from "validator";
 
 export function debounce<T extends (...args: any[]) => void>(
   func: T,
-  wait: number
+  wait: number,
 ): { call: (...args: Parameters<T>) => void; cancel: () => void } {
   let timeout: NodeJS.Timeout | null = null;
 
@@ -34,8 +34,8 @@ export function debounce<T extends (...args: any[]) => void>(
 
 // Used for parallax scrolling behavior
 export const useIntersectionObserver = (
-  options: IntersectionObserverInit
-): [RefObject<HTMLDivElement>, boolean] => {
+  options: IntersectionObserverInit,
+): [RefObject<HTMLDivElement | null>, boolean] => {
   const [isIntersecting, setIntersecting] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
 

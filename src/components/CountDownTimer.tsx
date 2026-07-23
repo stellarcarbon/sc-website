@@ -1,8 +1,14 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface CountdownTimerProps {
   initialDuration: number; // duration in seconds
 }
+
+type TimeLeft = {
+  days?: number;
+  hours?: number;
+  minutes?: number;
+};
 
 export default function CountDownTimer({
   initialDuration,
@@ -13,9 +19,9 @@ export default function CountDownTimer({
     return target;
   };
 
-  const calculateTimeLeft = (targetDate: Date) => {
+  const calculateTimeLeft = (targetDate: Date): TimeLeft => {
     const difference = +new Date(targetDate) - +new Date();
-    let timeLeft = {};
+    let timeLeft: TimeLeft = {};
 
     if (difference > 0) {
       timeLeft = {
@@ -40,19 +46,22 @@ export default function CountDownTimer({
     return () => clearTimeout(timer);
   }, [targetDate]);
 
-  const timerComponents: JSX.Element[] = [];
+  const timerComponents = Object.entries(timeLeft).reduce<ReactNode[]>(
+    (components, [interval, value]) => {
+      if (!value) {
+        return components;
+      }
 
-  Object.keys(timeLeft).forEach((interval) => {
-    if (!(timeLeft as any)[interval]) {
-      return;
-    }
+      components.push(
+        <span key={interval}>
+          {value} {interval}{" "}
+        </span>
+      );
 
-    timerComponents.push(
-      <span key={interval}>
-        {(timeLeft as any)[interval]} {interval}{" "}
-      </span>
-    );
-  });
+      return components;
+    },
+    []
+  );
 
   return (
     <div className="flex flex-col items-center">

@@ -41,7 +41,7 @@ export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
   const { walletConnection } = useAppContext();
   const { jwt } = useAppContext();
   const [step, setStep] = useState<RoundDownSteps>(
-    RoundDownSteps.requestCertificate
+    RoundDownSteps.requestCertificate,
   );
   const [error, setError] = useState<string>();
 
@@ -54,15 +54,11 @@ export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
   const requestRoundDown = useCallback(async () => {
     if (walletConnection && jwt) {
       try {
-        requestCertificate({
+        await requestCertificate({
           path: { recipient_address: walletConnection.stellarPubKey },
-          fetch: (request: Request) => {
-            const authRequest = new Request(request, {
-              headers: {
-                ...Object.fromEntries(request.headers.entries()),
-                Authorization: `Bearer ${jwt}`,
-              },
-            });
+          fetch: (input: RequestInfo | URL, init?: RequestInit) => {
+            const authRequest = new Request(input, init);
+            authRequest.headers.set("Authorization", `Bearer ${jwt}`);
             return fetch(authRequest);
           },
         });
@@ -81,7 +77,7 @@ export const RoundingContextProvider = ({ children }: PropsWithChildren) => {
       error,
       setError,
     }),
-    [step, requestRoundDown, error]
+    [step, requestRoundDown, error],
   );
 
   return (

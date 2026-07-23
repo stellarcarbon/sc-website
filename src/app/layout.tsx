@@ -30,24 +30,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head></head>
-      <AppContextProvider>
-        <SinkFormContextProvider>
-          <body className={`${inter.className}`}>
+      <body className={`${inter.className}`}>
+        <AppContextProvider>
+          <SinkFormContextProvider>
             <PlausibleProvider
-              domain={analyticsConfig.plausibleDataDomain}
+              src={analyticsConfig.plausibleProps.src as string}
               scriptProps={analyticsConfig.plausibleProps}
               enabled
-              trackLocalhost
+              init={{ captureOnLocalhost: true }}
             />
             <PostHogProvider>
               <AnalyticsConsent />
 
               <App>{children}</App>
             </PostHogProvider>
-          </body>
-        </SinkFormContextProvider>
-      </AppContextProvider>
+          </SinkFormContextProvider>
+        </AppContextProvider>
+      </body>
     </html>
   );
 }

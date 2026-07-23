@@ -58,7 +58,7 @@ export const useSinkingContext = () => {
 };
 
 export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
-  const { stellarWalletsKit, walletConnection } = useAppContext();
+  const { walletConnection } = useAppContext();
   const { formSinkRequest } = useSinkFormContext();
 
   const [sinkResponse, setSinkResponse] = useState<SinkingResponse>();
@@ -116,7 +116,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
       try {
         const server = appConfig.server;
         const result = await server.submitTransaction(
-          TransactionBuilder.fromXDR(signedTxXdr, appConfig.network)
+          TransactionBuilder.fromXDR(signedTxXdr, appConfig.network),
         );
         setTimeout(() => {
           // Let the user wait a bit so their dashboard can be updated
@@ -126,13 +126,13 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         displayHorizonError(error);
       }
     },
-    [displayHorizonError, setStep]
+    [displayHorizonError, setStep],
   );
 
   const isExpired = (xdr: string): boolean => {
     const transaction = TransactionBuilder.fromXDR(
       xdr,
-      appConfig.network
+      appConfig.network,
     ) as Transaction;
 
     if (transaction.timeBounds) {
@@ -163,13 +163,11 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     setStep(CheckoutSteps.AWAIT_SIGNING);
 
     try {
-      const signedTxResult = await stellarWalletsKit!.signTransaction(
-        sinkResponse.tx_xdr,
-        {
-          address: walletConnection!.stellarPubKey,
-          nonBlindTx: true,
-        } as SignTransactionOptions
-      );
+      const { signTransaction } = await import("@/lib/walletsKitRuntime");
+      const signedTxResult = await signTransaction(sinkResponse.tx_xdr, {
+        address: walletConnection!.stellarPubKey,
+        nonBlindTx: true,
+      } as SignTransactionOptions);
 
       // Expiry check after signing
       if (isExpired(signedTxResult.signedTxXdr)) {
@@ -182,7 +180,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
     } catch (error) {
       setSubmissionError("Transaction signing failed.");
     }
-  }, [sinkResponse, walletConnection, stellarWalletsKit, submitToHorizon]);
+  }, [sinkResponse, walletConnection, submitToHorizon]);
 
   const buildSinkingTx = useCallback(
     async (request: BuildSinkCarbonXdrData) => {
@@ -199,7 +197,7 @@ export const SinkingContextProvider = ({ children }: PropsWithChildren) => {
         setSubmissionError(message);
       }
     },
-    []
+    [],
   );
 
   useEffect(() => {

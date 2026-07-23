@@ -4,8 +4,8 @@ import {
   RetirementStatus,
 } from "@/app/types";
 import appConfig from "@/config";
-import { WalletNetwork } from "@creit.tech/stellar-wallets-kit";
-import { AccountResponse, Server } from "@stellar/stellar-sdk/lib/horizon";
+import { isPublicNetwork } from "@/constants/stellarNetwork";
+import { Horizon } from "@stellar/stellar-sdk";
 import {
   getSinkTxItem,
   getSinkTxList,
@@ -16,7 +16,7 @@ import {
 
 export default class TransactionHistoryService {
   public static serializeTxResponse(
-    txResponse: SinkTxItem
+    txResponse: SinkTxItem,
   ): MyTransactionRecord {
     let retirementStatus = RetirementStatus.RETIRED;
     if (!txResponse.retirement_finalized) {
@@ -47,19 +47,19 @@ export default class TransactionHistoryService {
 
   public static serializeTxsResponse(
     txsResponse: SinkTxListResponse,
-    order: "asc" | "desc" = "desc"
+    order: "asc" | "desc" = "desc",
   ) {
     let transactions = txsResponse.transactions;
     if (order === "asc") {
       transactions.reverse();
     }
     return txsResponse.transactions.map((transaction) =>
-      this.serializeTxResponse(transaction)
+      this.serializeTxResponse(transaction),
     );
   }
 
   public static async fetchTransaction(
-    txHash: string
+    txHash: string,
   ): Promise<MyTransactionRecord | undefined> {
     const response = await getSinkTxItem({ path: { tx_hash: txHash } });
 
@@ -71,7 +71,7 @@ export default class TransactionHistoryService {
   public static async fetchLedger(
     cursor?: string,
     limit?: number,
-    order?: "asc" | "desc"
+    order?: "asc" | "desc",
   ): Promise<MyTransactionRecord[]> {
     const response = await getSinkTxList({
       query: {
@@ -87,7 +87,7 @@ export default class TransactionHistoryService {
   }
 
   public static async fetchAccountHistory(
-    account: string
+    account: string,
   ): Promise<MyTransactionRecord[]> {
     const response = await getSinkTxsForRecipient({
       path: {
@@ -113,17 +113,17 @@ export default class TransactionHistoryService {
   }
 
   public static async fetchAccountBalance(
-    server: Server,
-    account: string
+    server: Horizon.Server,
+    account: string,
   ): Promise<AccountBalance> {
-    const response: AccountResponse = await server.loadAccount(account);
+    const response: Horizon.AccountResponse = await server.loadAccount(account);
 
     const xlmBalance = response.balances.find(
-      (balance) => balance.asset_type === "native"
+      (balance) => balance.asset_type === "native",
     )?.balance;
 
     const usdcBalance = response.balances.find((balance) => {
-      if (appConfig.network === WalletNetwork.PUBLIC) {
+      if (isPublicNetwork(appConfig.network)) {
         if (
           balance.asset_type === "credit_alphanum4" &&
           balance.asset_code === "USDC" &&

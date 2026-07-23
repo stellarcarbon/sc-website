@@ -43,7 +43,7 @@ export const useSEP10Context = () => {
 };
 
 export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
-  const { jwt, setJwt, walletConnection, stellarWalletsKit } = useAppContext();
+  const { jwt, setJwt, walletConnection } = useAppContext();
 
   const [challenge, setChallenge] = useState<Sep10ChallengeResponse>();
   const [step, setStep] = useState<SEP10Steps>(SEP10Steps.fetchingChallenge);
@@ -71,18 +71,16 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
   }, [walletConnection, step]);
 
   const signChallenge = useCallback(async () => {
-    if (challenge && stellarWalletsKit && walletConnection) {
+    if (challenge && walletConnection) {
       setStep(SEP10Steps.signingChallenge);
 
       let signedTxXdr;
       try {
-        const signed = await stellarWalletsKit.signTransaction(
-          challenge?.transaction,
-          {
-            address: walletConnection.stellarPubKey,
-            nonBlindTx: true,
-          } as SignTransactionOptions
-        );
+        const { signTransaction } = await import("@/lib/walletsKitRuntime");
+        const signed = await signTransaction(challenge?.transaction, {
+          address: walletConnection.stellarPubKey,
+          nonBlindTx: true,
+        } as SignTransactionOptions);
         signedTxXdr = signed.signedTxXdr;
       } catch (e) {
         setError("Signing was canceled or failed.");
@@ -109,7 +107,7 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
         setError("SEP10 challenge not validated.");
       }
     }
-  }, [challenge, stellarWalletsKit, walletConnection, updateJwt]);
+  }, [challenge, walletConnection, updateJwt]);
 
   const providerValue = useMemo(
     () => ({
@@ -120,7 +118,7 @@ export const SEP10ContextProvider = ({ children }: PropsWithChildren) => {
       error,
       signChallenge,
     }),
-    [challenge, jwt, step, error, signChallenge]
+    [challenge, jwt, step, error, signChallenge],
   );
 
   return (

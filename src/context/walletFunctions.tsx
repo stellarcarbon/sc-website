@@ -1,15 +1,10 @@
 import { WalletConnection } from "@/app/types";
-import {
-  allowAllModules,
-  ISupportedWallet,
-  StellarWalletsKit,
-  WalletNetwork,
-} from "@creit.tech/stellar-wallets-kit";
-import { LedgerModule } from "@creit.tech/stellar-wallets-kit/modules/ledger.module";
+import type { ISupportedWallet } from "@creit-tech/stellar-wallets-kit/types";
+import type { StellarNetworkPassphrase } from "@/constants/stellarNetwork";
 
 export const walletConnectDialog = async (
   wallet: ISupportedWallet,
-  network: WalletNetwork
+  network: StellarNetworkPassphrase,
 ): Promise<WalletConnection> => {
   if (window.Cypress) {
     if (window.walletConnectDialogError) {
@@ -21,15 +16,15 @@ export const walletConnectDialog = async (
     } as WalletConnection;
   } else {
     try {
-      const modules = allowAllModules();
-      modules.push(new LedgerModule());
-      let kit = new StellarWalletsKit({
-        selectedWalletId: wallet.id,
+      const { initializeWalletsKit, getAddress } =
+        await import("@/lib/walletsKitRuntime");
+
+      initializeWalletsKit({
         network,
-        modules,
+        selectedWalletId: wallet.id,
       });
 
-      let addr = await kit.getAddress(); // will throw on error
+      let addr = await getAddress(); // will throw on error
       let pubKey = addr.address;
 
       return {

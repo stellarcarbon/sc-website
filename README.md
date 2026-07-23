@@ -11,29 +11,29 @@ This is a NextJS project.
 Install using
 
 ```sh
-npm install
+pnpm install
 ```
 
 Run locally
 
 ```sh
-npm run dev
+pnpm run dev
 ```
 
 Run unit tests
 
 ```sh
-npm test
+pnpm test
 ```
 
 Run e2e tests
 
 ```sh
-npm run e2e
+pnpm run e2e
 ```
 
 Run e2e headless
 
 ```sh
-npm run e2e:headless
+pnpm run e2e:headless
 ```

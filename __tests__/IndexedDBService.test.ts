@@ -5,13 +5,17 @@ import { describe, expect, test, beforeAll } from "vitest";
 const makeTransactionRecord = (id: string): MyTransactionRecord => {
   return {
     id,
-    createdAt: "datestring",
+    createdAt: new Date(2022, 11, 24),
     memo: "memo",
     assetAmount: 1,
     asset: "xlm",
     sinkAmount: 1,
     retirementStatus: RetirementStatus.PENDING_USER,
     retirements: [],
+    recipient: "GRECIPIENTADDRESS",
+    funder: "GFUNDERADDRESS",
+    toid: "toid-1",
+    finalized: false,
   };
 };
 
